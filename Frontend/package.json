@@ -12,9 +12,9 @@
     "@types/react-dom": "^18.2.11",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
+    "react-router-dom": "^6.16.0",
     "react-scripts": "5.0.1",
-    "typescript": "^4.9.5",
-    "web-vitals": "^2.1.4"
+    "typescript": "^4.9.5"
   },
   "scripts": {
     "start": "npm-run-all -p watch-sass-js start-js",
@@ -36,7 +36,8 @@
     "sass": "^1.69.0",
     "stylelint": "^15.10.3",
     "stylelint-config-prettier-scss": "^1.0.0",
-    "stylelint-config-standard-scss": "^11.0.0"
+    "stylelint-config-standard-scss": "^11.0.0",
+    "stylelint-selector-bem-pattern": "^3.0.1"
   },
   "browserslist": {
     "production": [

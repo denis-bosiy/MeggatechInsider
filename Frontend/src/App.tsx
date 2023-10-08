@@ -1,18 +1,18 @@
 import React from "react";
-import "./App.scss";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import SignInPage from "./pages/SignInPage/SignInPage";
+import ComponentsPage from "./pages/ComponentsPage/ComponentsPage";
 
 function App() {
   return (
-    <div className="app">
-      <header className="app-header">
-        <p>
-         Змінити <code>src/App.tsx</code> та зберегти для перезавантаження.
-        </p>
-        <a className="app-link" href="https://reactjs.org" target="_blank" rel="noopener noreferrer">
-          Вчити React
-        </a>
-      </header>
-    </div>
+    <>
+      <Router>
+        <Routes>
+          <Route path="/" element={<SignInPage />} />
+          <Route path="/components" element={<ComponentsPage />} />
+        </Routes>
+      </Router>
+    </>
   );
 }
 
