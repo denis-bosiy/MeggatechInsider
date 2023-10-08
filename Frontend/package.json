@@ -1,0 +1,62 @@
+{
+  "name": "meggatech-insider",
+  "version": "0.1.0",
+  "private": true,
+  "dependencies": {
+    "@testing-library/jest-dom": "^5.17.0",
+    "@testing-library/react": "^13.4.0",
+    "@testing-library/user-event": "^13.5.0",
+    "@types/jest": "^27.5.2",
+    "@types/node": "^16.18.58",
+    "@types/react": "^18.2.25",
+    "@types/react-dom": "^18.2.11",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "react-scripts": "5.0.1",
+    "typescript": "^4.9.5",
+    "web-vitals": "^2.1.4"
+  },
+  "scripts": {
+    "start": "npm-run-all -p watch-sass-js start-js",
+    "start-js": "react-scripts start",
+    "build": "npm run stylelint-build && react-scripts build",
+    "test": "react-scripts test",
+    "watch-sass-js": "npm-watch",
+    "stylelint-dev": "stylelint src/**/*.scss --cache --cache-location ./.stylelintcache ; exit 0",
+    "stylelint-build": "stylelint src/**/*.scss",
+    "stylelint-fix-sass": "stylelint --fix src/**/*.scss"
+  },
+  "devDependencies": {
+    "@babel/plugin-proposal-private-property-in-object": "^7.21.11",
+    "eslint-config-prettier": "^9.0.0",
+    "eslint-plugin-import": "^2.28.1",
+    "eslint-plugin-react-hooks": "^4.6.0",
+    "npm-run-all": "^4.1.5",
+    "npm-watch": "^0.11.0",
+    "prettier": "3.0.3",
+    "sass": "^1.69.0",
+    "stylelint": "^15.10.3",
+    "stylelint-config-prettier-scss": "^1.0.0",
+    "stylelint-config-standard-scss": "^11.0.0"
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
+  },
+  "watch": {
+    "stylelint-dev": {
+      "patterns": [
+        "/src/**/*.scss"
+      ],
+      "extensions": "scss"
+    }
+  }
+}
