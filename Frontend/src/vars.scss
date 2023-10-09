@@ -1,5 +1,19 @@
 // Типографика
-
 $default-text-size: 18px;
-$negative-color: red;
-$positive-color: green;
+
+// Палитра
+$main-color: #002974;
+$secondary-color: #008AE1;
+$background-color: #FFF;
+$error-color: #DC3545;
+$success-color: #218838;
+$warning-color: #FFF9E6;
+
+// Типографические цвета
+$link-color: #FD0;
+$text-color: #FFF;
+$alternative-text-color: #4A525A;
+
+// Darken values
+$hover-darken-value: 30%;
+$focus-darken-value: 70%;

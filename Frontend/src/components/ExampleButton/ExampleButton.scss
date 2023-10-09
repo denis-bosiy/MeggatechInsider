@@ -11,11 +11,11 @@
     cursor: pointer;
 
     &.-positive {
-        background-color: $positive-color;
+        background-color: $success-color;
     }
 
     &.-negative {
-        background-color: $negative-color;
+        background-color: $error-color;
     }
 
     &__content {
