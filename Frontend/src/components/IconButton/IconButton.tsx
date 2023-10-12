@@ -1,16 +1,19 @@
 import React from "react";
+
 import "./IconButton.scss";
+import { classNames } from "../../utils/classNames";
 
 interface Props {
-  size?: number;
-  color?: string;
   icon: React.ReactNode;
+  small?: boolean;
+  type?: "primary" | "secondary";
+  onClick?: () => void;
 }
 
-export const IconButton = ({ icon, size = 48, color = "#000" }: Props) => {
+export const IconButton = ({ icon, type, small, onClick }: Props) => {
   // TODO: Если размеров будет много - оставить пропс size, иначе создать пропс minimized?: boolean
   return (
-    <button className="icon-button" style={{ width: size, height: size, fill: color }}>
+    <button className={classNames("icon-button", small && "small", type)} onClick={onClick}>
       {icon}
     </button>
   );

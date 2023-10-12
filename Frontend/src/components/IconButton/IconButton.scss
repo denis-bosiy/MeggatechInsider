@@ -8,17 +8,47 @@
   box-sizing: border-box;
   border-radius: 6px;
   cursor: pointer;
-  fill: $link-color;
+  width: 48px;
+  height: 48px;
+  fill: $button-default;
 
-  // &.-positive {
-  //   background-color: $success-color;
-  // }
+  &.small {
+    width: 32px;
+    height: 32px;
+  }
 
-  // &.-negative {
-  //   background-color: $error-color;
-  // }
+  :hover {
+    fill: $button-default-hover;
+  }
 
-  // &__content {
-  //   // no styles
-  // }
+  :active,
+  :focus {
+    fill: $button-default-focus;
+  }
+
+  &.primary {
+    fill: $button-primary;
+
+    :hover {
+      fill: $button-primary-hover;
+    }
+
+    :active,
+    :focus {
+      fill: $button-primary-focus;
+    }
+  }
+
+  &.secondary {
+    fill: $button-secondary;
+
+    :hover {
+      fill: $button-secondary-hover;
+    }
+
+    :active,
+    :focus {
+      fill: $button-secondary-focus;
+    }
+  }
 }
