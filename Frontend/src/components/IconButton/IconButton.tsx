@@ -12,7 +12,6 @@ interface Props {
 }
 
 export const IconButton = ({ icon, type, small, className, onClick }: Props) => {
-  // TODO: Если размеров будет много - оставить пропс size, иначе создать пропс minimized?: boolean
   return (
     <button className={classNames("icon-button", className, small && "small", type)} onClick={onClick}>
       {icon}
