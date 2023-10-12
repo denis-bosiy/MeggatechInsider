@@ -7,13 +7,14 @@ interface Props {
   icon: React.ReactNode;
   small?: boolean;
   type?: "primary" | "secondary";
+  className?: string;
   onClick?: () => void;
 }
 
-export const IconButton = ({ icon, type, small, onClick }: Props) => {
+export const IconButton = ({ icon, type, small, className, onClick }: Props) => {
   // TODO: Если размеров будет много - оставить пропс size, иначе создать пропс minimized?: boolean
   return (
-    <button className={classNames("icon-button", small && "small", type)} onClick={onClick}>
+    <button className={classNames("icon-button", className, small && "small", type)} onClick={onClick}>
       {icon}
     </button>
   );
