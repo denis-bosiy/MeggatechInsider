@@ -1,0 +1,24 @@
+@import "../../vars";
+
+.icon-button {
+  padding: 0;
+  border: none;
+  background-color: transparent;
+  font-size: $default-text-size;
+  box-sizing: border-box;
+  border-radius: 6px;
+  cursor: pointer;
+  fill: $link-color;
+
+  // &.-positive {
+  //   background-color: $success-color;
+  // }
+
+  // &.-negative {
+  //   background-color: $error-color;
+  // }
+
+  // &__content {
+  //   // no styles
+  // }
+}

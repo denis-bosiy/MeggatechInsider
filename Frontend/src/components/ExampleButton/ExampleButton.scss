@@ -1,24 +1,24 @@
 @import "../../vars";
 
 .example-button {
-    padding: 10px 20px;
-    color: var(--color);
-    background-color: var(--background-color);
-    font-size: $default-text-size;
-    box-sizing: border-box;
-    border: 1px solid black;
-    border-radius: 5px;
-    cursor: pointer;
+  padding: 10px 20px;
+  color: var(--color);
+  background-color: var(--background-color);
+  font-size: $default-text-size;
+  box-sizing: border-box;
+  border: 1px solid black;
+  border-radius: 5px;
+  cursor: pointer;
 
-    &.-positive {
-        background-color: $success-color;
-    }
+  &.-positive {
+    background-color: $success-color;
+  }
 
-    &.-negative {
-        background-color: $error-color;
-    }
+  &.-negative {
+    background-color: $error-color;
+  }
 
-    &__content {
-        // no styles
-    }
+  &__content {
+    // no styles
+  }
 }
