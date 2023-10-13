@@ -4,7 +4,7 @@
 // Переменные темы
 :root {
   --main-color: #002974;
-  --secondary-color: #008AE1;
+  --secondary-color: #008ae1;
 }
 
 .icon {
@@ -21,4 +21,8 @@ body {
 
 code {
   font-family: monospace;
+}
+
+button {
+  font-family: inherit;
 }

@@ -1,7 +1,7 @@
 import React from "react";
+import { classNames } from "../../utils/classNames";
 
 import "./IconButton.scss";
-import { classNames } from "../../utils/classNames";
 
 interface Props {
   icon: React.ReactNode;
@@ -11,10 +11,12 @@ interface Props {
   onClick?: () => void;
 }
 
-export const IconButton = ({ icon, type, small, className, onClick }: Props) => {
+const IconButton = ({ icon, type, small, className, onClick }: Props) => {
   return (
     <button className={classNames("icon-button", className, small && "small", type)} onClick={onClick}>
       {icon}
     </button>
   );
 };
+
+export default IconButton;

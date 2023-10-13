@@ -1,19 +1,21 @@
 import React from "react";
+import { classNames } from "../../utils/classNames";
 
 import "./Button.scss";
 
 interface Props {
-  icon?: React.ReactNode;
   label: string;
   className?: string;
+  colorScheme?: "blue" | "dark-blue";
   onClick?: () => void;
 }
 
-export const Button = ({ icon, label, className, onClick }: Props) => {
+const Button = ({ label, className, colorScheme, onClick }: Props) => {
   return (
-    <button className={className} onClick={onClick}>
-      {icon}
+    <button className={classNames("button", className, colorScheme)} onClick={onClick}>
       {label}
     </button>
   );
 };
+
+export default Button;

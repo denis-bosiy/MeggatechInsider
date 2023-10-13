@@ -1,0 +1,50 @@
+@import "../../vars";
+
+.button {
+  border: none;
+  border-radius: 6px;
+  height: 48px;
+  display: flex;
+  align-items: center;
+  padding: 0 24px;
+  font-size: 18px;
+  gap: 6px;
+  cursor: pointer;
+  box-shadow: 0px 1px 4px 0px rgba(0, 0, 0, 0.25);
+  background-color: $grey-default;
+  color: $alternative-text-color;
+
+  &.blue {
+    background-color: $blue-default;
+    color: $background-color;
+
+    &:hover {
+      background-color: $blue-hover;
+    }
+
+    &:active {
+      background-color: $blue-focus;
+    }
+  }
+
+  &.dark-blue {
+    background-color: $dark-blue-default;
+    color: $background-color;
+
+    &:hover {
+      background-color: $dark-blue-hover;
+    }
+
+    &:active {
+      background-color: $dark-blue-focus;
+    }
+  }
+
+  &:hover {
+    background-color: $grey-hover;
+  }
+
+  &:active {
+    background-color: $grey-focus;
+  }
+}

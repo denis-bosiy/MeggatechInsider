@@ -17,24 +17,22 @@
     height: 32px;
   }
 
-  :hover {
+  &:hover {
     fill: $button-default-hover;
   }
 
-  :active,
-  :focus {
+  &:active {
     fill: $button-default-focus;
   }
 
   &.primary {
     fill: $button-primary;
 
-    :hover {
+    &:hover {
       fill: $button-primary-hover;
     }
 
-    :active,
-    :focus {
+    &:active {
       fill: $button-primary-focus;
     }
   }
@@ -42,12 +40,11 @@
   &.secondary {
     fill: $button-secondary;
 
-    :hover {
+    &:hover {
       fill: $button-secondary-hover;
     }
 
-    :active,
-    :focus {
+    &:active {
       fill: $button-secondary-focus;
     }
   }
