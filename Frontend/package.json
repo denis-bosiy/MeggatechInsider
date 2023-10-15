@@ -19,7 +19,8 @@
     "watch-sass-js": "npm-watch",
     "stylelint-dev": "stylelint src/**/*.scss --cache --cache-location ./.stylelintcache ; exit 0",
     "stylelint-build": "stylelint src/**/*.scss",
-    "stylelint-fix-sass": "stylelint --fix src/**/*.scss"
+    "stylelint-fix-sass": "stylelint --fix src/**/*.scss",
+    "eject": "react-scripts eject"
   },
   "devDependencies": {
     "@babel/plugin-proposal-private-property-in-object": "^7.21.11",
