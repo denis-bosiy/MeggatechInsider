@@ -2,7 +2,7 @@ namespace Domain.TeacherEntities
 {
     public class Teacher
     {
-        public string Name { get; init; }
+        public string TeacherName { get; init; }
         public TeacherCategory TeacherCategory { get; init; }
         public bool TeacherCategoryAffectsOnSalary { get; init; }
         public ContractType ContractType { get; init; }
@@ -16,7 +16,7 @@ namespace Domain.TeacherEntities
         public DateOnly BirthdayDate { get; init; }
 
         public Teacher( 
-            string name, 
+            string teacherName, 
             TeacherCategory teacherCategory, 
             bool teacherCategoryAffectsOnSalary, 
             ContractType contractType, 
@@ -29,7 +29,7 @@ namespace Domain.TeacherEntities
             int experienceInYearsOnEmploymentDate, 
             DateOnly birthdayDate )
         {
-            Name = name;
+            TeacherName = teacherName;
             TeacherCategory = teacherCategory;
             TeacherCategoryAffectsOnSalary = teacherCategoryAffectsOnSalary;
             ContractType = contractType;

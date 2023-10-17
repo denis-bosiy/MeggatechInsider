@@ -2,11 +2,11 @@ namespace Domain.TeacherEntities
 {
     public class Education
     {
-        public string Name { get; init; }
+        public string EducationName { get; init; }
 
-        public Education( string name )
+        public Education( string educationName )
         {
-            Name = name;
+            EducationName = educationName;
         }
     }
 }

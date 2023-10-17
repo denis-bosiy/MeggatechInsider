@@ -2,7 +2,7 @@ namespace Domain.SubjectEntities
 {
     public class Subject
     {
-        public string Name { get; init; }
+        public string SubjectName { get; init; }
         public PaymentType PaymentType { get; init; }
         public SubjectType SubjectType { get; init; }
         public SubjectCategory SubjectCategory { get; init; }
@@ -13,7 +13,7 @@ namespace Domain.SubjectEntities
         public int IsEge { get; init; }
 
         public Subject( 
-            string name, 
+            string subjectName, 
             PaymentType paymentType, 
             SubjectType subjectType, 
             SubjectCategory subjectCategory, 
@@ -23,7 +23,7 @@ namespace Domain.SubjectEntities
             int expectedHoursPerWeekForEleventhClasses, 
             int isEge )
         {
-            Name = name;
+            SubjectName = subjectName;
             PaymentType = paymentType;
             SubjectType = subjectType;
             SubjectCategory = subjectCategory;

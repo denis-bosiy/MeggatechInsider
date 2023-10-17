@@ -2,11 +2,11 @@ namespace Domain.TeacherEntities
 {
     public class ContractType
     {
-        public string Name { get; init; }
+        public string ContractTypeName { get; init; }
 
-        public ContractType( string name )
+        public ContractType( string contractTypeName )
         {
-            Name = name;
+            ContractTypeName = contractTypeName;
         }
     }
 }

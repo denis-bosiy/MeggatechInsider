@@ -2,11 +2,11 @@ namespace Domain.TeacherEntities
 {
     public class TeacherCategory
     {
-        public string Name { get; init; }
+        public string TeacherCategoryName { get; init; }
 
-        public TeacherCategory( string name )
+        public TeacherCategory( string teacherCategoryName )
         {
-            Name = name;
+            TeacherCategoryName = teacherCategoryName;
         }
     }
 }
