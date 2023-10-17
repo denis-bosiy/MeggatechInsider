@@ -6,7 +6,7 @@
         public TimeOnly StartTime { get; set; }
         public TimeOnly EndTime { get; set; }
 
-        public ParadeTime(DayOfWeek dayOfWeek, TimeOnly startTime, TimeOnly endTime)
+        public ParadeTime( DayOfWeek dayOfWeek, TimeOnly startTime, TimeOnly endTime )
         {
             DayOfWeek = dayOfWeek;
             StartTime = startTime;
