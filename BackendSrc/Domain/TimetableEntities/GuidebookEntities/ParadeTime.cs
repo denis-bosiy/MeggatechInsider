@@ -1,16 +1,16 @@
-﻿namespace Domain.TimetableEntities
+﻿namespace Domain.TimetableEntities.GuidebookEntities
 {
     public class ParadeTime
     {
         public DayOfWeek DayOfWeek { get; set; }
-        public TimeOnly ParadeStart { get; set; }
-        public TimeOnly ParadeEnd { get; set; }
+        public TimeOnly StartTime { get; set; }
+        public TimeOnly EndTime { get; set; }
 
-        public ParadeTime(DayOfWeek dayOfWeek, TimeOnly paradeStart, TimeOnly paradeEnd)
+        public ParadeTime(DayOfWeek dayOfWeek, TimeOnly startTime, TimeOnly endTime)
         {
             DayOfWeek = dayOfWeek;
-            ParadeStart = paradeStart;
-            ParadeEnd = paradeEnd;
+            StartTime = startTime;
+            EndTime = endTime;
         }
     }
 }

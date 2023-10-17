@@ -1,14 +1,14 @@
-﻿namespace Domain.TimetableEntities
+namespace Domain.TimetableEntities.GuidebookEntities
 {
     public class LessonTime
     {
-        public TimeOnly LessonStart { get; set; }
-        public TimeOnly LessonEnd { get; set; }
+        public TimeOnly StartTime { get; set; }
+        public TimeOnly EndTime { get; set; }
 
-        public LessonTime(TimeOnly lessonStart, TimeOnly lessonEnd)
+        public LessonTime(TimeOnly startTime, TimeOnly endTime)
         {
-            LessonStart = lessonStart;
-            LessonEnd = lessonEnd;
+            StartTime = startTime;
+            EndTime = endTime;
         }
     }
 }

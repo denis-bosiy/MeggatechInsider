@@ -1,14 +1,14 @@
-﻿namespace Domain.TimetableEntities
+﻿namespace Domain.TimetableEntities.GuidebookEntities
 {
     public class PairTime
     {
-        public TimeOnly PairStart { get; set; }
-        public TimeOnly PairEnd { get; set; }
+        public TimeOnly StartTime { get; set; }
+        public TimeOnly EndTime { get; set; }
 
-        public PairTime(TimeOnly pairStart, TimeOnly pairEnd)
+        public PairTime(TimeOnly startTime, TimeOnly endTime)
         {
-            PairStart = pairStart;
-            PairEnd = pairEnd;
+            StartTime = startTime;
+            EndTime = endTime;
         }
     }
 }
