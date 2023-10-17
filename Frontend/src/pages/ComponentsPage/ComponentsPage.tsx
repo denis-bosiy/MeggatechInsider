@@ -4,7 +4,10 @@ import ExampleButton from "../../components/ExampleButton/ExampleButton";
 import Input, { InputSize, InputType } from "../../components/Input/Input";
 import Select, { ISelectOption, SelectSize } from "../../components/Select/Select";
 import Notification from "../../components/Notification/Notification";
-
+import IconButton from "../../components/IconButton/IconButton";
+import { ArrowLeft } from "../../icons";
+import Button from "../../components/Button/Button";
+import ActionButton from "../../components/ActionButton/ActionButton";
 const ComponentsPage = () => {
   const [defaultInputValue, setDefaultInputValue] = useState<string>("");
   const [errorableInputValue, setErrorableInputValue] = useState<string>("");
@@ -38,6 +41,9 @@ const ComponentsPage = () => {
         <h2>Тестовая кнопка</h2>
 
         <ExampleButton />
+        <IconButton icon={<ArrowLeft />} />
+        <Button label="Hello" colorScheme="dark-blue" />
+        <ActionButton label="Hello" icon={<ArrowLeft />} />
 
         <div>
           <h3>Режим</h3>
