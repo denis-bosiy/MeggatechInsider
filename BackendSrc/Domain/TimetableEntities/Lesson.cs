@@ -1,4 +1,6 @@
-﻿using Domain.TimetableEntities.GuidebookEntities;
+using Domain.SubjectEntities;
+using Domain.TeacherEntities;
+using Domain.TimetableEntities.GuidebookEntities;
 using Domain.TimetableEntities.StudentGroupEntities;
 
 namespace Domain.TimetableEntities
@@ -7,14 +9,21 @@ namespace Domain.TimetableEntities
     {
         public LessonTime LessonTime { get; init; }
         public StudentGroup StudentGroup { get; init; }
-        // public препод
-        // public предмет
+        public Subject Subject { get; init; }
+        public Teacher Teacher { get; init; }
         public int Classroom { get; init; }
 
-        public Lesson( LessonTime lessonTime, StudentGroup studentGroup, int classroom )
+        public Lesson( 
+            LessonTime lessonTime, 
+            StudentGroup studentGroup, 
+            Subject subject, 
+            Teacher teacher, 
+            int classroom )
         {
             LessonTime = lessonTime;
             StudentGroup = studentGroup;
+            Subject = subject;
+            Teacher = teacher;
             Classroom = classroom;
         }
     }
