@@ -1,5 +1,16 @@
 @import "../../vars";
 
+.input {
+  width: 100%;
+  padding: 0;
+  margin: 0 6px 0 0;
+  color: $alternative-text-color;
+  font-size: $default-text-size;
+  line-height: $default-line-height;
+  border: none;
+  outline: none;
+}
+
 .input-container {
   display: flex;
   flex-direction: row;
@@ -56,15 +67,4 @@
     filter: drop-shadow(1px 1px 1px $error-color);
     border-bottom: 1px solid $error-color;
   }
-}
-
-.input {
-  width: 100%;
-  padding: 0;
-  margin: 0 6px 0 0;
-  color: $alternative-text-color;
-  font-size: $default-text-size;
-  line-height: $default-line-height;
-  border: none;
-  outline: none;
 }
