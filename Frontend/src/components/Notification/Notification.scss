@@ -1,0 +1,28 @@
+@import "../../vars";
+
+.notification {
+  padding: 16px 24px;
+  background-color: $warning-color;
+  color: $warning-text-color;
+  filter: drop-shadow(1px 1px 1px);
+  border-radius: 6px;
+  box-sizing: border-box;
+
+  &__header {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    margin-bottom: 16px;
+  }
+
+  &__heading {
+    margin: 0;
+    margin-left: 12px;
+  }
+
+  &__body {
+    font-size: 12px;
+    line-height: 15px;
+    opacity: 0.6;
+  }
+}

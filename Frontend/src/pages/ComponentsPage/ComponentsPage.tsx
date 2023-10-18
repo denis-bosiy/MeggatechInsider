@@ -3,6 +3,7 @@ import "./ComponentsPage.scss";
 import ExampleButton from "../../components/ExampleButton/ExampleButton";
 import Input, { InputSize, InputType } from "../../components/Input/Input";
 import Select, { ISelectOption, SelectSize } from "../../components/Select/Select";
+import Notification from "../../components/Notification/Notification";
 
 const ComponentsPage = () => {
   const [defaultInputValue, setDefaultInputValue] = useState<string>("");
@@ -164,6 +165,12 @@ const ComponentsPage = () => {
           />
           <br />
         </div>
+      </section>
+
+      <section className="section">
+        <h2>Уведомление</h2>
+
+        <Notification title="Ошибка" description="Cлишком много раз введён неверный пароль. Подождите 5 минут, прежде чем пробовать заново" />
       </section>
     </main>
   );
