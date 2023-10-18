@@ -1,7 +1,5 @@
 import React, { useLayoutEffect, useRef, useState } from "react";
-import { ReactComponent as HiddenEyeIcon } from "../../svg/hidden-eye.svg";
-import { ReactComponent as OpenedEyeIcon } from "../../svg/opened-eye.svg";
-import { ReactComponent as MagnifierIcon } from "../../svg/magnifier.svg";
+import { HiddenEyeIcon, OpenedEyeIcon, MagnifierIcon } from "../../icons";
 import "./Input.scss";
 
 export enum InputSize {

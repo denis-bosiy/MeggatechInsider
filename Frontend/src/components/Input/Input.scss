@@ -24,7 +24,8 @@
     }
   }
 
-  &:active {
+  &:active,
+  &:focus {
     background-color: #e8ebee;
     border-bottom: 1px solid $alternative-text-color;
 

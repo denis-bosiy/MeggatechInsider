@@ -68,17 +68,6 @@ const ComponentsPage = () => {
         <div>
           <h3>Виды</h3>
 
-          <div className="caption">С ошибкой</div>
-          <Input
-            value={errorableInputValue}
-            placeholder="Логин"
-            onValueChange={setErrorableInputValue}
-            isInvalidValue={true}
-          />
-          <br />
-
-          <hr />
-
           <div className="caption">Пароль</div>
           <Input
             value={passwordInputValue}
@@ -116,6 +105,19 @@ const ComponentsPage = () => {
             placeholder="Логин"
             onValueChange={setMicroInputValue}
             size={InputSize.Micro}
+          />
+          <br />
+        </div>
+
+        <div>
+          <h3>Состояния</h3>
+
+          <div className="caption">С ошибкой</div>
+          <Input
+            value={errorableInputValue}
+            placeholder="Логин"
+            onValueChange={setErrorableInputValue}
+            isInvalidValue={true}
           />
           <br />
         </div>
