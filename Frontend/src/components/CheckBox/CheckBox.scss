@@ -1,0 +1,59 @@
+@import "../../vars";
+
+.checkbox {
+  position: absolute;
+  opacity: 0;
+  height: 0;
+  width: 0;
+}
+
+.checkmark {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 20px;
+  width: 20px;
+  background-color: $background-color;
+  border-radius: 4px;
+}
+
+.label:hover .checkmark {
+  background-color: $active-checkbox;
+}
+
+.checkbox:checked ~ .checkmark {
+  background-color: $focus-checkbox;
+}
+
+.checkmark:after {
+  content: "";
+  position: absolute;
+  display: none;
+}
+
+.checkbox:checked ~ .checkmark:after {
+  display: block;
+}
+
+.checkbox:checked:hover ~ .checkmark:after {
+  border-color: lighten($alternative-text-color, $hover-darken-value);
+}
+
+.checkmark:after {
+  left: 8px;
+  top: 3px;
+  width: 4px;
+  height: 10px;
+  border: solid $alternative-text-color;
+  border-width: 0 2px 2px 0;
+  transform: rotate(45deg);
+}
+
+.label {
+  display: flex;
+  width: 20px;
+  height: 20px;
+  border-radius: 4px;
+  box-shadow: 0px 1px 4px 0px rgba(0, 0, 0, 0.25);
+  position: relative;
+}
