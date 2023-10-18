@@ -7,6 +7,7 @@ import IconButton from "../../components/IconButton/IconButton";
 import { ArrowLeft, GarbageIcon } from "../../icons";
 import Button from "../../components/Button/Button";
 import ActionButton, { ActionButtonType } from "../../components/ActionButton/ActionButton";
+import { Link } from "../../components/Link/Link";
 
 const ComponentsPage = () => {
   const [defaultInputValue, setDefaultInputValue] = useState<string>("");
