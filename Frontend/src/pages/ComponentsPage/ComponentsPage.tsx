@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import "./ComponentsPage.scss";
 import ExampleButton from "../../components/ExampleButton/ExampleButton";
 import Input, { InputSize, InputType } from "../../components/Input/Input";
+import Select, { ISelectOption, SelectSize } from "../../components/Select/Select";
 
 const ComponentsPage = () => {
   const [defaultInputValue, setDefaultInputValue] = useState<string>("");
@@ -10,6 +11,19 @@ const ComponentsPage = () => {
   const [searchInputValue, setSearchInputValue] = useState<string>("");
   const [miniInputValue, setMiniInputValue] = useState<string>("");
   const [microInputValue, setMicroInputValue] = useState<string>("");
+
+  const selectOptions: ISelectOption[] = [
+    { id: "monday", content: "Понедельник" },
+    { id: "tuesday", content: "Вторник" },
+    { id: "wednesday", content: "Среда" },
+    { id: "thursday", content: "Четверг" },
+    { id: "friday", content: "Пятница" },
+    { id: "saturday", content: "Суббота" },
+    { id: "sunday", content: "Воскресенье" }
+  ];
+  const [defaultSelectValue, setDefaultSelectValue] = useState<string>("");
+  const [miniSelectValue, setMiniSelectValue] = useState<string>("");
+  const [microSelectValue, setMicroSelectValue] = useState<string>("");
 
   const logSearchInputValue = () => {
     console.log(searchInputValue);
@@ -118,6 +132,35 @@ const ComponentsPage = () => {
             placeholder="Логин"
             onValueChange={setErrorableInputValue}
             isInvalidValue={true}
+          />
+          <br />
+        </div>
+      </section>
+
+      <section className="section">
+        <h2>Cелект</h2>
+
+        <Select options={selectOptions} onValueChange={setDefaultSelectValue} />
+        <p className="description">Дефолтное значение — первое значение в списке</p>
+
+        <div>
+          <h3>Размер</h3>
+
+          <div className="caption">Мини</div>
+          <Select
+            options={selectOptions}
+            onValueChange={setMiniSelectValue}
+            size={SelectSize.Mini}
+          />
+          <br />
+
+          <hr />
+
+          <div className="caption">Микро</div>
+          <Select
+            options={selectOptions}
+            onValueChange={setMicroSelectValue}
+            size={SelectSize.Micro}
           />
           <br />
         </div>
