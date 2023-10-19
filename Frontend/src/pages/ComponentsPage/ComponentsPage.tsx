@@ -9,6 +9,7 @@ import Button from "../../components/Button/Button";
 import ActionButton, { ActionButtonType } from "../../components/ActionButton/ActionButton";
 import { Link } from "../../components/Link/Link";
 import { CheckBox } from "../../components/CheckBox/CheckBox";
+import { RadioButton } from "../../components/RadioButton/RadioButton";
 
 const ComponentsPage = () => {
   const [defaultInputValue, setDefaultInputValue] = useState<string>("");
@@ -186,6 +187,12 @@ const ComponentsPage = () => {
         <h2>Чекбокс</h2>
 
         <CheckBox />
+      </section>
+
+      <section className="section">
+        <h2>Радио-кнопка</h2>
+
+        <RadioButton />
       </section>
 
       <section className="section">

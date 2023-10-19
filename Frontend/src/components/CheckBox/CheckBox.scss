@@ -26,7 +26,7 @@
   background-color: $background-color;
   border-radius: 4px;
 
-  &:after {
+  &::after {
     position: absolute;
     left: 8px;
     top: 3px;
@@ -50,11 +50,11 @@
   ~ .checkmark {
     background-color: $focus-checkbox;
 
-    &:after {
+    &::after {
       display: block;
     }
 
-    &:hover:after {
+    &:hover::after {
       border-color: lighten($alternative-text-color, $hover-darken-value);
     }
   }
