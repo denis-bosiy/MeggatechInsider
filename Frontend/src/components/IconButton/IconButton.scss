@@ -1,0 +1,51 @@
+@import "../../vars";
+
+.icon-button {
+  width: 48px;
+  height: 48px;
+  padding: 0;
+  color: $button-default;
+  font-size: $default-text-size;
+  background-color: transparent;
+  box-sizing: border-box;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+
+  &.-small {
+    width: 32px;
+    height: 32px;
+  }
+
+  &:hover {
+    color: $button-default-hover;
+  }
+
+  &:active {
+    color: $button-default-focus;
+  }
+
+  &.-primary {
+    color: $button-primary;
+
+    &:hover {
+      color: $button-primary-hover;
+    }
+
+    &:active {
+      color: $button-primary-focus;
+    }
+  }
+
+  &.-secondary {
+    color: $button-secondary;
+
+    &:hover {
+      color: $button-secondary-hover;
+    }
+
+    &:active {
+      color: $button-secondary-focus;
+    }
+  }
+}
