@@ -1,13 +1,13 @@
 import React, { useState } from "react";
 import "./ComponentsPage.scss";
-import ExampleButton from "../../components/ExampleButton/ExampleButton";
 import Input, { InputSize, InputType } from "../../components/Input/Input";
 import Select, { ISelectOption, SelectSize } from "../../components/Select/Select";
 import Notification from "../../components/Notification/Notification";
 import IconButton from "../../components/IconButton/IconButton";
-import { ArrowLeft } from "../../icons";
+import { ArrowLeft, GarbageIcon } from "../../icons";
 import Button from "../../components/Button/Button";
-import ActionButton from "../../components/ActionButton/ActionButton";
+import ActionButton, { ActionButtonType } from "../../components/ActionButton/ActionButton";
+
 const ComponentsPage = () => {
   const [defaultInputValue, setDefaultInputValue] = useState<string>("");
   const [errorableInputValue, setErrorableInputValue] = useState<string>("");
@@ -38,24 +38,108 @@ const ComponentsPage = () => {
       <h1>Страница компонентов</h1>
 
       <section className="section">
-        <h2>Тестовая кнопка</h2>
+        <h2>Кнопка</h2>
 
-        <ExampleButton />
-        <IconButton icon={<ArrowLeft />} />
-        <Button label="Hello" colorScheme="dark-blue" />
-        <ActionButton label="Hello" icon={<ArrowLeft />} />
+        {/* <IconButton icon={<ArrowLeft />} /> */}
+        <Button label="Войти в аккаунт" />
+        {/* <ActionButton label="Hello" icon={<ArrowLeft />} /> */}
 
         <div>
-          <h3>Режим</h3>
+          <h3>Цветовая схема</h3>
 
-          <div className="caption">positive</div>
-          <ExampleButton mode="positive" />
+          <span className="caption">blue</span>
+          <br />
+          <Button label="Войти в аккаунт" colorScheme="blue" />
           <br />
 
           <hr />
 
-          <div className="caption">negative</div>
-          <ExampleButton mode="negative" />
+          <span className="caption">dark-blue</span>
+          <br />
+          <Button label="Войти в аккаунт" colorScheme="dark-blue" />
+          <br />
+        </div>
+      </section>
+
+      <section className="section">
+        <h2>Кнопка действия</h2>
+
+        <ActionButton label="Перейти назад" icon={<ArrowLeft />} />
+
+        <div>
+          <h3>Тип</h3>
+
+          <span className="caption">Позитивная</span>
+          <br />
+          <ActionButton label="Сохранить" type={ActionButtonType.Positive} />
+          <br />
+
+          <hr />
+
+          <span className="caption">Негативная</span>
+          <br />
+          <ActionButton label="Отменить" type={ActionButtonType.Negative} />
+          <br />
+
+          <hr />
+
+          <span className="caption">Предупреждающая</span>
+          <br />
+          <ActionButton label="Удалить" type={ActionButtonType.Warning} icon={<GarbageIcon/>} />
+          <br />
+        </div>
+
+        <div>
+          <h3>Вид</h3>
+
+          <span className="caption">С иконкой</span>
+          <br />
+          <ActionButton label="Удалить" type={ActionButtonType.Warning} icon={<GarbageIcon/>} />
+          <br />
+
+          <hr />
+
+          <span className="caption">Без иконки</span>
+          <br />
+          <ActionButton label="Отменить" type={ActionButtonType.Negative} />
+          <br />
+        </div>
+      </section>
+
+      <section className="section">
+        <h2>Иконка-кнопка</h2>
+
+        <IconButton icon={<GarbageIcon />} />
+
+        <div>
+          <h3>Размер</h3>
+
+          <span className="caption">Малый</span>
+          <br />
+          <IconButton icon={<GarbageIcon />} small={true}/>
+          <br />
+
+          <hr />
+
+          <span className="caption">Обычный</span>
+          <br />
+          <IconButton icon={<GarbageIcon />} />
+          <br />
+        </div>
+
+        <div>
+          <h3>Тип</h3>
+
+          <span className="caption">primary</span>
+          <br />
+          <IconButton icon={<GarbageIcon />} type="primary" />
+          <br />
+
+          <hr />
+
+          <span className="caption">secondary</span>
+          <br />
+          <IconButton icon={<GarbageIcon />} type="secondary" />
           <br />
         </div>
       </section>
@@ -356,7 +440,9 @@ const ComponentsPage = () => {
               <td className="cell">12</td>
               <td className="cell">12</td>
               <td className="cell">12</td>
-              <td className="cell" title="Очистить четверть">del</td>
+              <td className="cell" title="Очистить четверть">
+                del
+              </td>
               <td className="cell">12</td>
               <td className="cell">12</td>
               <td className="cell">12</td>
@@ -365,7 +451,9 @@ const ComponentsPage = () => {
               <td className="cell">12</td>
               <td className="cell">12</td>
               <td className="cell">12</td>
-              <td className="cell" title="Очистить четверть">del</td>
+              <td className="cell" title="Очистить четверть">
+                del
+              </td>
               <td className="cell">12</td>
               <td className="cell">12</td>
               <td className="cell">12</td>
@@ -374,7 +462,9 @@ const ComponentsPage = () => {
               <td className="cell">12</td>
               <td className="cell">12</td>
               <td className="cell">12</td>
-              <td className="cell" title="Очистить четверть">del</td>
+              <td className="cell" title="Очистить четверть">
+                del
+              </td>
               <td className="cell">12</td>
               <td className="cell">12</td>
               <td className="cell">12</td>
@@ -384,10 +474,14 @@ const ComponentsPage = () => {
               <td className="cell">12</td>
               <td className="cell">12</td>
               <td className="cell">12</td>
-              <td className="cell" title="Очистить четверть">del</td>
+              <td className="cell" title="Очистить четверть">
+                del
+              </td>
               <td className="cell">1000</td>
               <td className="cell">5000</td>
-              <td className="cell"><button>Авто</button></td>
+              <td className="cell">
+                <button>Авто</button>
+              </td>
             </tr>
           </tbody>
         </table>

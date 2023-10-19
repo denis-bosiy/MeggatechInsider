@@ -13,7 +13,7 @@ interface Props {
 
 const IconButton = ({ icon, type, small, className, onClick }: Props) => {
   return (
-    <button className={classNames("icon-button", className, small && "small", type)} onClick={onClick}>
+    <button className={classNames("icon-button", className, small && "-small", "-" + type)} onClick={onClick}>
       {icon}
     </button>
   );

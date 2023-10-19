@@ -1,40 +1,66 @@
 @import "../../vars";
 
 .action-button {
-  border: none;
-  border-radius: 6px;
-  height: 48px;
   display: flex;
   align-items: center;
   padding: 0 16px 0 12px;
+  height: 48px;
+  border-radius: 6px;
   font-size: 18px;
-  color: #fff;
-  fill: #fff;
   gap: 6px;
   cursor: pointer;
-  box-shadow: 0px 1px 4px 0px rgba(0, 0, 0, 0.25);
-  border: 1px solid red;
-  background-color: $blue-default;
+  background-color: $grey-default;
+  color: $alternative-text-color;
+  border: none;
+  box-shadow: 0 1px 4px 0 rgb(0 0 0 / 25%);
 
   &:hover {
-    background-color: $blue-hover;
+    background-color: $grey-hover;
   }
 
   &:active {
-    background-color: $blue-focus;
+    background-color: $grey-focus;
   }
 
-  &.positive {
-    border: 1px solid green;
-    background-color: greenyellow;
+  &.-positive {
+    color: $success-color;
+    border: 1px solid $success-color;
+    background-color: $success-background-color;
+
+    &:hover {
+      background-color: darken($success-background-color, $hover-darken-value);
+    }
+
+    &:active {
+      background-color: darken($success-background-color, $focus-darken-value);
+    }
   }
 
-  &.negative {
-    border: 1px solid red;
-    background-color: lightcoral;
+  &.-negative {
+    color: $error-color;
+    border: 1px solid $error-color;
+    background-color: $error-background-color;
+
+    &:hover {
+      background-color: darken($error-background-color, $hover-darken-value);
+    }
+
+    &:active {
+      background-color: darken($error-background-color, $focus-darken-value);
+    }
   }
 
-  &.secondary {
-    border: 1px solid red;
+  &.-warning {
+    color: $warning-color;
+    border: 1px solid $warning-color;
+    background-color: $warning-background-color;
+
+    &:hover {
+      background-color: darken($warning-background-color, $hover-darken-value);
+    }
+
+    &:active {
+      background-color: darken($warning-background-color, $focus-darken-value);
+    }
   }
 }

@@ -12,7 +12,7 @@ interface Props {
 
 const Button = ({ label, className, colorScheme, onClick }: Props) => {
   return (
-    <button className={classNames("button", className, colorScheme)} onClick={onClick}>
+    <button className={classNames("button", className, "-" + colorScheme)} onClick={onClick}>
       {label}
     </button>
   );

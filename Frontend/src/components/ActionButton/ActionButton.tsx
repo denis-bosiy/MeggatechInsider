@@ -3,18 +3,28 @@ import { classNames } from "../../utils/classNames";
 
 import "./ActionButton.scss";
 
+export enum ActionButtonType {
+  Warning = "WARNING",
+  Default = "DEFAULT",
+  Positive = "POSITIVE",
+  Negative = "NEGATIVE"
+};
+
 interface Props {
-  icon?: React.ReactNode;
   label: string;
+  type?: ActionButtonType;
+  icon?: React.ReactNode;
   className?: string;
   onClick?: () => void;
-}
+};
 
-const ActionButton = ({ icon, label, className, onClick }: Props) => {
+const ActionButton = (props: Props) => {
+  const actionButtonType: ActionButtonType = props.type ?? ActionButtonType.Default;
+
   return (
-    <button className="action-button" onClick={onClick}>
-      {icon}
-      {label}
+    <button className={classNames("action-button", "-" + actionButtonType.toLowerCase())} onClick={props.onClick}>
+      {props.icon}
+      {props.label}
     </button>
   );
 };
