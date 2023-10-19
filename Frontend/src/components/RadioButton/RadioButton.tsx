@@ -13,8 +13,8 @@ export const RadioButton = ({ checked, onChange }: IRadioButtonProps) => {
 
   return (
     <label className="label">
-      <input className="checkbox" type="radio" checked={checked} onChange={handleCheck} />
-      <span className="checkmark"></span>
+      <input className="radio" type="radio" checked={checked} onChange={handleCheck} />
+      <span className="radiomark"></span>
     </label>
   );
 };

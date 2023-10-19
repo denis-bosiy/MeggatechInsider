@@ -1,27 +1,27 @@
 @import "../../vars";
 
-.checkbox {
+.radio {
   position: absolute;
   height: 0;
   width: 0;
   opacity: 0;
 
   &:checked {
-    ~ .checkmark {
+    ~ .radiomark {
       background-color: $focus-checkbox;
 
-      &:after {
+      &::after {
         display: block;
       }
 
-      &:hover:after {
+      &:hover::after {
         background-color: lighten($alternative-text-color, $hover-darken-value);
       }
     }
   }
 }
 
-.checkmark {
+.radiomark {
   position: absolute;
   top: 0;
   left: 0;
@@ -30,7 +30,7 @@
   background-color: $background-color;
   border-radius: 10px;
 
-  &:after {
+  &::after {
     position: absolute;
     left: 5px;
     top: 5px;
@@ -49,10 +49,10 @@
   height: 20px;
   position: relative;
   border-radius: 10px;
-  box-shadow: 0px 1px 4px 0px rgba(0, 0, 0, 0.25);
+  box-shadow: 0 1px 4px 0 rgba(0 0 0 / 25%);
 
   &:hover {
-    .checkmark {
+    .radiomark {
       background-color: $active-checkbox;
     }
   }

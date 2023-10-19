@@ -190,6 +190,12 @@ const ComponentsPage = () => {
       </section>
 
       <section className="section">
+        <h2>Радио-кнопка</h2>
+
+        <RadioButton />
+      </section>
+
+      <section className="section">
         <h2>Типография</h2>
 
         <span>Заголовки разного уровня</span>
