@@ -4,15 +4,19 @@ $default-line-height: 22px;
 
 // Палитра
 $background-color: #FFF;
-$error-color: #DC3545;
 $success-color: #218838;
-$warning-color: #FFF9E6;
+$success-background-color: #D3E7D7;
+$warning-color: #856404;
+$warning-background-color: #FFFAEB;
+$error-color: #DC3545;
+$error-background-color: #F8D7DA;
 
 // Типографические цвета
 $link-color: #FD0;
 $text-color: #FFF;
 $alternative-text-color: #4A525A;
 $warning-text-color: #856404;
+$table-color: #b9b9b9;
 
 // Darken values
 $hover-darken-value: 30%;

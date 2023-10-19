@@ -148,21 +148,15 @@ const ComponentsPage = () => {
           <h3>Размер</h3>
 
           <div className="caption">Мини</div>
-          <Select
-            options={selectOptions}
-            onValueChange={setMiniSelectValue}
-            size={SelectSize.Mini}
-          />
+          <Select options={selectOptions} onValueChange={setMiniSelectValue} size={SelectSize.Mini} />
           <br />
 
           <hr />
 
-          <div className="caption">Микро</div>
-          <Select
-            options={selectOptions}
-            onValueChange={setMicroSelectValue}
-            size={SelectSize.Micro}
-          />
+          <div className="caption" title="Удалить">
+            Микро
+          </div>
+          <Select options={selectOptions} onValueChange={setMicroSelectValue} size={SelectSize.Micro} />
           <br />
         </div>
       </section>
@@ -170,7 +164,227 @@ const ComponentsPage = () => {
       <section className="section">
         <h2>Уведомление</h2>
 
-        <Notification title="Ошибка" description="Cлишком много раз введён неверный пароль. Подождите 5 минут, прежде чем пробовать заново" />
+        <Notification
+          title="Ошибка"
+          description="Cлишком много раз введён неверный пароль. Подождите 5 минут, прежде чем пробовать заново"
+        />
+      </section>
+
+      <section className="section">
+        <h2>Таблица</h2>
+
+        <table className="table">
+          <thead className="header">
+            <tr className="row">
+              <td className="cell -filter" rowSpan={2}>
+                Предмет
+              </td>
+              <td className="cell" colSpan={4}>
+                10-1
+              </td>
+              <td className="cell" colSpan={4}>
+                10-2
+              </td>
+              <td className="cell" colSpan={4}>
+                10-3
+              </td>
+            </tr>
+            <tr className="row -filter">
+              <td className="cell">Часов в нед. распр-но</td>
+              <td className="cell">Часов в неделю по плану</td>
+              <td className="cell">Долг</td>
+              <td className="cell">Часов сверх плана</td>
+              <td className="cell">Часов в нед. распр-но</td>
+              <td className="cell">Часов в неделю по плану</td>
+              <td className="cell">Долг</td>
+              <td className="cell">Часов сверх плана</td>
+              <td className="cell">Часов в нед. распр-но</td>
+              <td className="cell">Часов в неделю по плану</td>
+              <td className="cell">Долг</td>
+              <td className="cell">Часов сверх плана</td>
+            </tr>
+          </thead>
+          <tbody>
+            <tr className="row">
+              <td className="cell">Физика</td>
+              <td className="cell -error">0</td>
+              <td className="cell">2</td>
+              <td className="cell">0</td>
+              <td className="cell">0</td>
+              <td className="cell">2</td>
+              <td className="cell">2</td>
+              <td className="cell">0</td>
+              <td className="cell">0</td>
+              <td className="cell">2</td>
+              <td className="cell">2</td>
+              <td className="cell">0</td>
+              <td className="cell">0</td>
+            </tr>
+            <tr className="row">
+              <td className="cell">История</td>
+              <td className="cell -error">0</td>
+              <td className="cell">2</td>
+              <td className="cell">0</td>
+              <td className="cell">0</td>
+              <td className="cell">3</td>
+              <td className="cell">2</td>
+              <td className="cell">0</td>
+              <td className="cell">0</td>
+              <td className="cell">2</td>
+              <td className="cell">2</td>
+              <td className="cell -error">1</td>
+              <td className="cell">0</td>
+            </tr>
+            <tr className="row">
+              <td className="cell">Java</td>
+              <td className="cell -warning">3</td>
+              <td className="cell">2</td>
+              <td className="cell">0</td>
+              <td className="cell">0</td>
+              <td className="cell">1</td>
+              <td className="cell">2</td>
+              <td className="cell">0</td>
+              <td className="cell">0</td>
+              <td className="cell">2</td>
+              <td className="cell">2</td>
+              <td className="cell">0</td>
+              <td className="cell -success">1</td>
+            </tr>
+          </tbody>
+        </table>
+        <br />
+
+        <hr />
+
+        <table className="table">
+          <thead className="header">
+            <tr className="row">
+              <td className="cell" colSpan={9}>
+                &nbsp;
+              </td>
+              <td className="cell" colSpan={11}>
+                1 четверть
+              </td>
+              <td className="cell" colSpan={9}>
+                2 четверть
+              </td>
+              <td className="cell" colSpan={9}>
+                3 четверть
+              </td>
+              <td className="cell" colSpan={13}>
+                4 четверть
+              </td>
+            </tr>
+            <tr className="row">
+              <td className="cell -filter">Предмет</td>
+              <td className="cell -filter">Б/Бв</td>
+              <td className="cell -filter">Тип</td>
+              <td className="cell -filter -vertical">Ч. групп</td>
+              <td className="cell -filter -vertical">Ср. в год</td>
+              <td className="cell -filter -vertical">Ср. в период</td>
+              <td className="cell -filter -vertical">Ч. всего</td>
+              <td className="cell -filter -vertical">Ч. ожидается</td>
+              <td className="cell -filter -vertical">Ч. по плану</td>
+              <td className="cell -vertical">7 сент. №1</td>
+              <td className="cell -vertical">14 сент. №2</td>
+              <td className="cell -vertical">21 сент. №3</td>
+              <td className="cell -vertical">№4</td>
+              <td className="cell -vertical">№4</td>
+              <td className="cell -vertical">№4</td>
+              <td className="cell -vertical">№4</td>
+              <td className="cell -vertical">№4</td>
+              <td className="cell -vertical">№4</td>
+              <td className="cell -vertical">№4</td>
+              <td className="cell">&nbsp;</td>
+              <td className="cell -vertical">№4</td>
+              <td className="cell -vertical">№4</td>
+              <td className="cell -vertical">№4</td>
+              <td className="cell -vertical">№4</td>
+              <td className="cell -vertical">№4</td>
+              <td className="cell -vertical">№4</td>
+              <td className="cell -vertical">№4</td>
+              <td className="cell -vertical">№4</td>
+              <td className="cell">&nbsp;</td>
+              <td className="cell -vertical">№4</td>
+              <td className="cell -vertical">№4</td>
+              <td className="cell -vertical">№4</td>
+              <td className="cell -vertical">№4</td>
+              <td className="cell -vertical">№4</td>
+              <td className="cell -vertical">№4</td>
+              <td className="cell -vertical">№4</td>
+              <td className="cell -vertical">№4</td>
+              <td className="cell">&nbsp;</td>
+              <td className="cell -vertical">№4</td>
+              <td className="cell -vertical">№4</td>
+              <td className="cell -vertical">№4</td>
+              <td className="cell -vertical">№4</td>
+              <td className="cell -vertical">№4</td>
+              <td className="cell -vertical">№4</td>
+              <td className="cell -vertical">№4</td>
+              <td className="cell -vertical">№4</td>
+              <td className="cell -vertical">24 мая №35</td>
+              <td className="cell">&nbsp;</td>
+              <td className="cell -filter">Ч. 1 пг.</td>
+              <td className="cell -filter">Ч. 2 пг.</td>
+              <td className="cell -vertical">Продолжить по первым 2 неделям</td>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td className="cell">Физика.Продолжение</td>
+              <td className="cell">Бюджет</td>
+              <td className="cell">Обязательный профильный</td>
+              <td className="cell">3</td>
+              <td className="cell">12</td>
+              <td className="cell">14</td>
+              <td className="cell -error">105</td>
+              <td className="cell">105</td>
+              <td className="cell">105</td>
+              <td className="cell">12</td>
+              <td className="cell">12</td>
+              <td className="cell">12</td>
+              <td className="cell">12</td>
+              <td className="cell">12</td>
+              <td className="cell">12</td>
+              <td className="cell">12</td>
+              <td className="cell">12</td>
+              <td className="cell">12</td>
+              <td className="cell">12</td>
+              <td className="cell" title="Очистить четверть">del</td>
+              <td className="cell">12</td>
+              <td className="cell">12</td>
+              <td className="cell">12</td>
+              <td className="cell">12</td>
+              <td className="cell">12</td>
+              <td className="cell">12</td>
+              <td className="cell">12</td>
+              <td className="cell">12</td>
+              <td className="cell" title="Очистить четверть">del</td>
+              <td className="cell">12</td>
+              <td className="cell">12</td>
+              <td className="cell">12</td>
+              <td className="cell">12</td>
+              <td className="cell">12</td>
+              <td className="cell">12</td>
+              <td className="cell">12</td>
+              <td className="cell">12</td>
+              <td className="cell" title="Очистить четверть">del</td>
+              <td className="cell">12</td>
+              <td className="cell">12</td>
+              <td className="cell">12</td>
+              <td className="cell">12</td>
+              <td className="cell">12</td>
+              <td className="cell">12</td>
+              <td className="cell">12</td>
+              <td className="cell">12</td>
+              <td className="cell">12</td>
+              <td className="cell" title="Очистить четверть">del</td>
+              <td className="cell">1000</td>
+              <td className="cell">5000</td>
+              <td className="cell"><button>Авто</button></td>
+            </tr>
+          </tbody>
+        </table>
       </section>
     </main>
   );
