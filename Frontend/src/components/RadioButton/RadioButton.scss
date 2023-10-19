@@ -1,25 +1,5 @@
+@use "sass:color";
 @import "../../vars";
-
-.radio {
-  position: absolute;
-  height: 0;
-  width: 0;
-  opacity: 0;
-
-  &:checked {
-    ~ .radiomark {
-      background-color: $focus-checkbox;
-
-      &::after {
-        display: block;
-      }
-
-      &:hover::after {
-        background-color: lighten($alternative-text-color, $hover-darken-value);
-      }
-    }
-  }
-}
 
 .radiomark {
   position: absolute;
@@ -40,6 +20,27 @@
     border-radius: 5px;
     content: "";
     display: none;
+  }
+}
+
+.radio {
+  position: absolute;
+  height: 0;
+  width: 0;
+  opacity: 0;
+
+  &:checked {
+    ~ .radiomark {
+      background-color: $focus-checkbox;
+
+      &::after {
+        display: block;
+      }
+
+      &:hover::after {
+        background-color: color.adjust($alternative-text-color, $lightness: $hover-darken-value);
+      }
+    }
   }
 }
 

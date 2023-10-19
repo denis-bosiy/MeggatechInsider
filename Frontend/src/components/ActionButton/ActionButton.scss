@@ -1,18 +1,24 @@
+@use "sass:color";
 @import "../../vars";
 
 .action-button {
   display: flex;
   align-items: center;
-  padding: 0 16px 0 12px;
-  height: 48px;
+  padding: 12.5px 15px;
   border-radius: 6px;
   font-size: 18px;
-  gap: 6px;
   cursor: pointer;
   background-color: $grey-default;
   color: $alternative-text-color;
   border: none;
   box-shadow: 0 1px 4px 0 rgb(0 0 0 / 25%);
+
+  &__icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-right: 15px;
+  }
 
   &:hover {
     background-color: $grey-hover;
@@ -28,11 +34,11 @@
     background-color: $success-background-color;
 
     &:hover {
-      background-color: darken($success-background-color, $hover-darken-value);
+      background-color: color.adjust($success-background-color, $lightness: -$hover-darken-value);
     }
 
     &:active {
-      background-color: darken($success-background-color, $focus-darken-value);
+      background-color: color.adjust($success-background-color, $lightness: -$focus-darken-value);
     }
   }
 
@@ -42,11 +48,11 @@
     background-color: $error-background-color;
 
     &:hover {
-      background-color: darken($error-background-color, $hover-darken-value);
+      background-color: color.adjust($error-background-color, $lightness: -$hover-darken-value);
     }
 
     &:active {
-      background-color: darken($error-background-color, $focus-darken-value);
+      background-color: color.adjust($error-background-color, $lightness: -$focus-darken-value);
     }
   }
 
@@ -56,11 +62,11 @@
     background-color: $warning-background-color;
 
     &:hover {
-      background-color: darken($warning-background-color, $hover-darken-value);
+      background-color: color.adjust($warning-background-color, $lightness: -$hover-darken-value);
     }
 
     &:active {
-      background-color: darken($warning-background-color, $focus-darken-value);
+      background-color: color.adjust($warning-background-color, $lightness: -$focus-darken-value);
     }
   }
 }

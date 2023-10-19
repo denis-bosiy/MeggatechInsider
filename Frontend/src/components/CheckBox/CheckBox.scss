@@ -1,3 +1,4 @@
+@use "sass:color";
 @import "../../vars";
 
 .checkbox {
@@ -13,7 +14,7 @@
   width: 20px;
   height: 20px;
   border-radius: 4px;
-  box-shadow: 0 1px 4px 0 rgb(0 0 0 / 25%);
+  box-shadow: 0 4px 4px 0 rgb(0 0 0 / 25%);
   cursor: pointer;
 }
 
@@ -55,7 +56,7 @@
     }
 
     &:hover::after {
-      border-color: lighten($alternative-text-color, $hover-darken-value);
+      border-color: color.adjust($alternative-text-color, $lightness: $hover-darken-value);
     }
   }
 }
