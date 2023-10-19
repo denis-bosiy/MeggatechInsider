@@ -86,7 +86,7 @@ const ComponentsPage = () => {
 
           <span className="caption">Предупреждающая</span>
           <br />
-          <ActionButton label="Удалить" type={ActionButtonType.Warning} icon={<GarbageIcon/>} />
+          <ActionButton label="Удалить" type={ActionButtonType.Warning} icon={<GarbageIcon />} />
           <br />
         </div>
 
@@ -95,7 +95,7 @@ const ComponentsPage = () => {
 
           <span className="caption">С иконкой</span>
           <br />
-          <ActionButton label="Удалить" type={ActionButtonType.Warning} icon={<GarbageIcon/>} />
+          <ActionButton label="Удалить" type={ActionButtonType.Warning} icon={<GarbageIcon />} />
           <br />
 
           <hr />
@@ -117,7 +117,7 @@ const ComponentsPage = () => {
 
           <span className="caption">Малый</span>
           <br />
-          <IconButton icon={<GarbageIcon />} small={true}/>
+          <IconButton icon={<GarbageIcon />} small={true} />
           <br />
 
           <hr />
@@ -141,6 +141,42 @@ const ComponentsPage = () => {
           <span className="caption">secondary</span>
           <br />
           <IconButton icon={<GarbageIcon />} type="secondary" />
+          <br />
+        </div>
+      </section>
+
+      <section className="section">
+        <h2>Ссылка</h2>
+
+        <div style={{ backgroundColor: "black" }}>
+          <Link path="/" label="На главную страницу" />
+        </div>
+        <p className="description"></p>
+
+        <div>
+          <h3>Режим</h3>
+
+          <span className="caption">Светлый</span>
+          <br />
+          <div style={{ backgroundColor: "black" }}>
+            <Link path="/" label="На главную страницу" mode="light" />
+          </div>
+          <br />
+
+          <hr />
+
+          <span className="caption">Тёмный</span>
+          <br />
+          <Link path="/" label="На главную страницу" mode="dark" />
+          <br />
+
+          <hr />
+
+          <span className="caption">Без режима</span>
+          <br />
+          <div style={{ backgroundColor: "black" }}>
+            <Link path="/" label="На главную страницу" />
+          </div>
           <br />
         </div>
       </section>
