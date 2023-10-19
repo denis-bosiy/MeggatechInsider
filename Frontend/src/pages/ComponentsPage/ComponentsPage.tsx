@@ -183,6 +183,12 @@ const ComponentsPage = () => {
       </section>
 
       <section className="section">
+        <h2>Чекбокс</h2>
+
+        <CheckBox />
+      </section>
+
+      <section className="section">
         <h2>Типография</h2>
 
         <span>Заголовки разного уровня</span>
