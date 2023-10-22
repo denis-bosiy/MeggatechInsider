@@ -1,0 +1,68 @@
+@import "../../vars";
+
+.select {
+  $module: ".select";
+
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  width: 100%;
+  padding: 13px 25px;
+  font-size: $default-text-size;
+  line-height: $default-line-height;
+  background-color: $background-color;
+  border-radius: 6px;
+  cursor: pointer;
+  filter: drop-shadow(1px 1px 1px);
+  box-sizing: border-box;
+  outline: none;
+
+  &__icon {
+    position: absolute;
+    top: 15.5px;
+    right: 18.5px;
+  }
+
+  &:hover {
+    background-color: #f2f4f6;
+  }
+
+  &:active,
+  &:focus {
+    background-color: #e8ebee;
+  }
+
+  &.-mini {
+    padding: 8.5px 10px;
+    font-size: 14px;
+    line-height: 17px;
+
+    & + #{$module}__icon {
+        top: 8.8px;
+        right: 7px;
+        width: 13px;
+    }
+  }
+
+  &.-micro {
+    padding: 3.5px 10px;
+    font-size: 14px;
+    line-height: 17px;
+
+    & + #{$module}__icon {
+        top: 3.8px;
+        right: 7px;
+        width: 13px;
+    }
+  }
+
+  // Удаление дефолтной стрелки у селекта
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  text-indent: 1px;
+  text-overflow: '';
+}
+
+.select-container {
+  position: relative;
+}

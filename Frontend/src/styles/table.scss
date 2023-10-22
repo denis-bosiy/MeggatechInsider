@@ -1,0 +1,62 @@
+@import "../vars";
+
+.table {
+  font-size: 14px;
+  line-height: 18px;
+  color: $alternative-text-color;
+  border-spacing: 0;
+  border-collapse: separate;
+}
+
+.row {
+  &.-success {
+    color: $success-color;
+    background-color: $success-background-color;
+  }
+
+  &.-warning {
+    color: $warning-color;
+    background-color: $warning-background-color;
+  }
+
+  &.-error {
+    color: $error-color;
+    background-color: $error-background-color;
+  }
+
+  &.-filter {
+    cursor: pointer;
+  }
+}
+
+.header {
+  font-weight: bold;
+}
+
+.cell {
+  border: 1px solid $table-color;
+
+  &.-success {
+    color: $success-color;
+    background-color: $success-background-color;
+  }
+
+  &.-warning {
+    color: $warning-color;
+    background-color: $warning-background-color;
+  }
+
+  &.-error {
+    color: $error-color;
+    background-color: $error-background-color;
+  }
+
+  &.-filter {
+    cursor: pointer;
+  }
+
+  &.-vertical {
+    writing-mode: tb-rl;
+    transform: rotate(-180deg);
+  }
+}
