@@ -8,7 +8,7 @@ public class SubjectConfiguration
 {
     public void Configure( EntityTypeBuilder<Subject> builder )
     {
-        builder.HasKey( s => s.Id );
+        builder.ToTable( "Subject" ).HasKey( s => s.Id );
 
         builder.Property( s => s.Name )
             .IsRequired()
@@ -26,12 +26,12 @@ public class SubjectConfiguration
             .OnDelete( DeleteBehavior.NoAction );
 
         builder.HasOne( s => s.Category )
-            .WithMany( c => c.Subjects)
+            .WithMany( c => c.Subjects )
             .HasForeignKey( s => s.CategoryId )
             .OnDelete( DeleteBehavior.NoAction );
-        
+
         builder.HasOne( s => s.Type )
-            .WithMany( t => t.Subjects)
+            .WithMany( t => t.Subjects )
             .HasForeignKey( s => s.TypeId )
             .OnDelete( DeleteBehavior.NoAction );
     }
