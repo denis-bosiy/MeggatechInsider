@@ -10,10 +10,7 @@ namespace Api.Controllers
         [HttpPost( "login" )]
         public IActionResult LoginUser( CredentialsDto credentials )
         {
-            if ( credentials == null || String.IsNullOrWhiteSpace( credentials.Password ) )
-            {
-                return BadRequest();
-            }
+            // TODO Check user password
 
             return Ok();
         }
