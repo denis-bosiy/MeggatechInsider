@@ -2,31 +2,37 @@
 @import "../../vars";
 
 .link {
-  font-size: 18px;
+  font-size: $default-text-size;
+  line-height: $default-line-height;
   text-decoration: none;
-  color: $link-color;
+  outline: none;
+  color: $alternative-text-color;
 
-  &:hover {
-    font-weight: bold;
+  &:hover,
+  &:focus {
+    // TODO: link-hover-color поменять
+    color: $link-hover-color;
   }
 
   &:active {
-    color: color.adjust($link-color, $lightness: $hover-darken-value);
-  }
-
-  &.-dark {
-    color: $alternative-text-color;
-
-    &:active {
-      color: color.adjust($alternative-text-color, $lightness: $hover-darken-value);
-    }
+    opacity: 0.3;
   }
 
   &.-light {
-    color: $background-color;
+    color: $text-color;
 
-    &:active {
-      color: color.adjust($background-color, $lightness: -$hover-darken-value);
+    &:hover,
+    &:focus {
+      color: $link-light-hover-color;
+    }
+  }
+
+  &.-important {
+    color: $link-important-color;
+
+    &:hover,
+    &:focus {
+      color: $link-important-hover-color;
     }
   }
 }

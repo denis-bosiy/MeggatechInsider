@@ -3,18 +3,27 @@ import { classNames } from "../../utils/classNames";
 
 import "./IconButton.scss";
 
+export enum IconButtonType {
+  Secondary = "SECONDARY",
+  Warning = "WARNING",
+  White = "WHITE",
+  Default = "DEFAULT"
+};
+
 interface Props {
   icon: React.ReactNode;
   small?: boolean;
-  type?: "primary" | "secondary";
+  type?: IconButtonType;
   className?: string;
   onClick?: () => void;
 }
 
-const IconButton = ({ icon, type, small, className, onClick }: Props) => {
+const IconButton = (props: Props) => {
+  const type: string = (props.type ?? IconButtonType.Default).toLowerCase();
+
   return (
-    <button className={classNames("icon-button", className, small && "-small", "-" + type)} onClick={onClick}>
-      {icon}
+    <button className={classNames("icon-button", props.className, props.small && "-small", "-" + type)} onClick={props.onClick}>
+      {props.icon}
     </button>
   );
 };

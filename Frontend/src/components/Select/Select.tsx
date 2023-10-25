@@ -4,8 +4,8 @@ import "./Select.scss";
 
 export enum SelectSize {
   Micro = "MICRO",
-  Mini = "MINI",
-  Medium = "MEDIUM"
+  Milli = "MILLI",
+  Default = "DEFAULT"
 }
 export interface ISelectOption {
   id: string;
@@ -25,8 +25,8 @@ const Select = (props: ISelectProps) => {
   const [isActive, setIsActive] = useState<boolean>(false);
 
   props.options.forEach((option: ISelectOption) => mapOfOptionsIdToContent.set(option.content, option.id));
-  const size: string = props.size ?? SelectSize.Medium;
-  const sizeModificator: string = size === SelectSize.Medium ? "" : "-" + size.toLowerCase();
+  const size: string = props.size ?? SelectSize.Default;
+  const sizeModificator: string = size === SelectSize.Default ? "" : "-" + size.toLowerCase();
 
   const onChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
     if (e.currentTarget) {

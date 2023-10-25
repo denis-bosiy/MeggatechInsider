@@ -10,10 +10,12 @@
   padding: 13px 25px;
   font-size: $default-text-size;
   line-height: $default-line-height;
+  color: $alternative-text-color;
   background-color: $background-color;
   border-radius: 6px;
+  border: none;
   cursor: pointer;
-  filter: drop-shadow(1px 1px 1px);
+  box-shadow: 0 1px 4px 0 rgb(0 0 0 / 25%);
   box-sizing: border-box;
   outline: none;
 
@@ -37,10 +39,10 @@
     font-size: 14px;
     line-height: 17px;
 
-    & + #{$module}__icon {
-        top: 8.8px;
-        right: 7px;
-        width: 13px;
+    &+#{$module}__icon {
+      top: 8.8px;
+      right: 7px;
+      width: 13px;
     }
   }
 
@@ -49,10 +51,10 @@
     font-size: 14px;
     line-height: 17px;
 
-    & + #{$module}__icon {
-        top: 3.8px;
-        right: 7px;
-        width: 13px;
+    &+#{$module}__icon {
+      top: 3.8px;
+      right: 7px;
+      width: 13px;
     }
   }
 
