@@ -15,18 +15,18 @@ namespace Domain.TeacherEntities
         public int ExperienceInYearsOnEmploymentDate { get; init; }
         public DateOnly BirthdayDate { get; init; }
 
-        public Teacher( 
-            string teacherName, 
-            TeacherCategory teacherCategory, 
-            bool teacherCategoryAffectsOnSalary, 
-            ContractType contractType, 
-            bool contractTypeAffectsOnSalary, 
-            Education education, 
-            bool isClassTeacher, 
-            bool advancedSubjectsAffectOnSalary, 
-            bool egeAffectsOnSalary, 
-            DateOnly employmentDate, 
-            int experienceInYearsOnEmploymentDate, 
+        public Teacher(
+            string teacherName,
+            TeacherCategory teacherCategory,
+            bool teacherCategoryAffectsOnSalary,
+            ContractType contractType,
+            bool contractTypeAffectsOnSalary,
+            Education education,
+            bool isClassTeacher,
+            bool advancedSubjectsAffectOnSalary,
+            bool egeAffectsOnSalary,
+            DateOnly employmentDate,
+            int experienceInYearsOnEmploymentDate,
             DateOnly birthdayDate )
         {
             TeacherName = teacherName;

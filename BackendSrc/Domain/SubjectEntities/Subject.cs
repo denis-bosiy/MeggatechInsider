@@ -7,20 +7,20 @@ namespace Domain.SubjectEntities
         public SubjectType SubjectType { get; init; }
         public SubjectCategory SubjectCategory { get; init; }
         public int NotebooksPaymentInPercents { get; init; }
-        public int ExpectedHoursPerWeekForTenthClasses {  get; init; }
+        public int ExpectedHoursPerWeekForTenthClasses { get; init; }
         public int ExpectedGroupsCountForTenthClasses { get; init; }
         public int ExpectedHoursPerWeekForEleventhClasses { get; init; }
         public int IsEge { get; init; }
 
-        public Subject( 
-            string subjectName, 
-            PaymentType paymentType, 
-            SubjectType subjectType, 
-            SubjectCategory subjectCategory, 
-            int notebooksPaymentInPercents, 
-            int expectedHoursPerWeekForTenthClasses, 
-            int expectedGroupsCountForTenthClasses, 
-            int expectedHoursPerWeekForEleventhClasses, 
+        public Subject(
+            string subjectName,
+            PaymentType paymentType,
+            SubjectType subjectType,
+            SubjectCategory subjectCategory,
+            int notebooksPaymentInPercents,
+            int expectedHoursPerWeekForTenthClasses,
+            int expectedGroupsCountForTenthClasses,
+            int expectedHoursPerWeekForEleventhClasses,
             int isEge )
         {
             SubjectName = subjectName;

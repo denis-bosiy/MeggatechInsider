@@ -5,7 +5,7 @@ namespace DatabaseProvider.Repositories.Implementations.SubjectEntities;
 
 public class SubjectCategoryRepository : Repository<SubjectCategory>, ISubjectCategoryRepository
 {
-    public SubjectCategoryRepository(ApplicationContext context) : base(context)
+    public SubjectCategoryRepository( ApplicationContext context ) : base( context )
     {
     }
 

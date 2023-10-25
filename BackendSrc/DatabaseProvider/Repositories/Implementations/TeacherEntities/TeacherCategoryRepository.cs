@@ -5,7 +5,7 @@ namespace DatabaseProvider.Repositories.Implementations.TeacherEntities;
 
 public class TeacherCategoryRepository : Repository<TeacherCategory>, ITeacherCategoryRepository
 {
-    public TeacherCategoryRepository(ApplicationContext context) : base(context)
+    public TeacherCategoryRepository( ApplicationContext context ) : base( context )
     {
     }
 

@@ -4,9 +4,9 @@ using Microsoft.EntityFrameworkCore;
 
 namespace DatabaseProvider.Repositories.Implementations.TeacherEntities;
 
-public class TeacherRepository : Repository<Teacher>,ITeacherRepository
+public class TeacherRepository : Repository<Teacher>, ITeacherRepository
 {
-    public TeacherRepository(ApplicationContext context) : base(context)
+    public TeacherRepository( ApplicationContext context ) : base( context )
     {
     }
 

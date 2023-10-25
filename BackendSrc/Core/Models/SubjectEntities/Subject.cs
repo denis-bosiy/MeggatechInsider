@@ -16,6 +16,6 @@ public class Subject : Entity
     public int ExpectedGroupsCountForTenthClasses { get; set; }
     public int ExpectedHoursPerWeekForEleventhClasses { get; set; }
     public int IsEge { get; set; }
-    
+
     public List<Lesson> Lessons { get; set; }
 }

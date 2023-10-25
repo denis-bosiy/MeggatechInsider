@@ -3,9 +3,9 @@ using DatabaseProvider.Repositories.Abstractions.TimetableEntities.StudentGroupE
 
 namespace DatabaseProvider.Repositories.Implementations.TimetableEntities.StudentGroupEntities;
 
-public class ClassStudentGroupRepository<T>: Repository<T>, IClassStudentGroupRepository<T> where T: StudentGroup
+public class ClassStudentGroupRepository<T> : Repository<T>, IClassStudentGroupRepository<T> where T : StudentGroup
 {
-    public ClassStudentGroupRepository(ApplicationContext context) : base(context)
+    public ClassStudentGroupRepository( ApplicationContext context ) : base( context )
     {
     }
 

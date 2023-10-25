@@ -3,9 +3,9 @@ using DatabaseProvider.Repositories.Abstractions.TeacherEntities;
 
 namespace DatabaseProvider.Repositories.Implementations.TeacherEntities;
 
-public class EducationRepository: Repository<Education>, IEducationRepository
+public class EducationRepository : Repository<Education>, IEducationRepository
 {
-    public EducationRepository(ApplicationContext context) : base(context)
+    public EducationRepository( ApplicationContext context ) : base( context )
     {
     }
 

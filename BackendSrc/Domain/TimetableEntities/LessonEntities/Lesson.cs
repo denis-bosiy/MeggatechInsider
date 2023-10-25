@@ -6,7 +6,7 @@ namespace Domain.TimetableEntities.LessonEntities
     {
         public LessonType LessonType { get; init; }
         public TimeOnly StartTime { get; init; }
-        public TimeOnly EndTime {  get; init; }
+        public TimeOnly EndTime { get; init; }
         public StudentGroup StudentGroup { get; init; }
         public int SubjectId { get; init; }
         public int TeacherId { get; init; }

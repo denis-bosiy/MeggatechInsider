@@ -10,32 +10,33 @@ namespace DatabaseProvider
     {
         private readonly string? _connectionString;
 
-        public ApplicationContext(DbContextOptions<ApplicationContext> options)
-            : base(options)
-        { }
+        public ApplicationContext( DbContextOptions<ApplicationContext> options )
+            : base( options )
+        {
+        }
 
-        public ApplicationContext(string connectionString)
+        public ApplicationContext( string connectionString )
         {
             _connectionString = connectionString;
         }
 
-        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        protected override void OnModelCreating( ModelBuilder modelBuilder )
         {
             //subjects
-            modelBuilder.ApplyConfiguration(new PaymentTypeConfiguration());
-            modelBuilder.ApplyConfiguration(new SubjectCategoryConfiguration());
-            modelBuilder.ApplyConfiguration(new SubjectConfiguration());
-            modelBuilder.ApplyConfiguration(new SubjectTypeConfiguration());
+            modelBuilder.ApplyConfiguration( new PaymentTypeConfiguration() );
+            modelBuilder.ApplyConfiguration( new SubjectCategoryConfiguration() );
+            modelBuilder.ApplyConfiguration( new SubjectConfiguration() );
+            modelBuilder.ApplyConfiguration( new SubjectTypeConfiguration() );
 
             //teachers
             modelBuilder.ApplyConfiguration( new ContractTypeConfiguration() );
             modelBuilder.ApplyConfiguration( new EducationConfiguration() );
             modelBuilder.ApplyConfiguration( new TeacherCategoryConfiguration() );
             modelBuilder.ApplyConfiguration( new TeacherConfiguration() );
-            
+
             //lessons
             modelBuilder.ApplyConfiguration( new LessonConfiguration() );
-            
+
             //student groups
             modelBuilder.ApplyConfiguration( new ClassStudentGroupConfiguration() );
             modelBuilder.ApplyConfiguration( new HorizontalSubgroupStudentGroupConfiguration() );
@@ -44,13 +45,14 @@ namespace DatabaseProvider
             modelBuilder.ApplyConfiguration( new VerticalSubgroupStudentGroupConfiguration() );
         }
 
-        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+        protected override void OnConfiguring( DbContextOptionsBuilder optionsBuilder )
         {
-            if (_connectionString == null)
+            if ( _connectionString == null )
             {
                 return;
             }
-            optionsBuilder.UseSqlServer(_connectionString);
+
+            optionsBuilder.UseSqlServer( _connectionString );
         }
     }
 }

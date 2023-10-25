@@ -5,7 +5,7 @@ namespace DatabaseProvider.Repositories.Implementations.TeacherEntities;
 
 public class ContractTypeRepository : Repository<ContractType>, IContractTypeRepository
 {
-    public ContractTypeRepository(ApplicationContext context) : base(context)
+    public ContractTypeRepository( ApplicationContext context ) : base( context )
     {
     }
 

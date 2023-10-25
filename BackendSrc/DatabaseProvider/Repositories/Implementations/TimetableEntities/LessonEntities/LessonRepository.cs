@@ -4,9 +4,9 @@ using Microsoft.EntityFrameworkCore;
 
 namespace DatabaseProvider.Repositories.Implementations.TimetableEntities.LessonEntities;
 
-public class LessonRepository: Repository<Lesson>, ILessonRepository
+public class LessonRepository : Repository<Lesson>, ILessonRepository
 {
-    public LessonRepository(ApplicationContext context) : base(context)
+    public LessonRepository( ApplicationContext context ) : base( context )
     {
     }
 

@@ -5,7 +5,7 @@ namespace DatabaseProvider.Repositories.Implementations.SubjectEntities;
 
 public class SubjectTypeRepository : Repository<SubjectType>, ISubjectTypeRepository
 {
-    public SubjectTypeRepository(ApplicationContext context) : base(context)
+    public SubjectTypeRepository( ApplicationContext context ) : base( context )
     {
     }
 
