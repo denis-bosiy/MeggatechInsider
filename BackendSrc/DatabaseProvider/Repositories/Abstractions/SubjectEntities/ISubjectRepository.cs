@@ -1,0 +1,12 @@
+using Core.Models.SubjectEntities;
+
+namespace DatabaseProvider.Repositories.Abstractions.SubjectEntities;
+
+public interface ISubjectRepository : IRepository<Subject>
+{
+    public List<Subject> GetAll();
+    public Subject GetById( int id );
+    public List<Subject> GetByPaymentTypeId( int id );
+    public List<Subject> GetByTypeId( int id );
+    public List<Subject> GetByCategoryId( int id );
+}
