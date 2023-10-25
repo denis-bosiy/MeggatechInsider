@@ -4,7 +4,7 @@ using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace DatabaseProvider.Configurations.SubjectEntitiesConfigurations;
 
-public class SubjectConfiguration
+public class SubjectConfiguration : IEntityTypeConfiguration<Subject>
 {
     public void Configure( EntityTypeBuilder<Subject> builder )
     {

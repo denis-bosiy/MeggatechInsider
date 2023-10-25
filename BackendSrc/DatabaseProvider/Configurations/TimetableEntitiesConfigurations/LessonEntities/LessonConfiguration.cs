@@ -4,7 +4,7 @@ using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace DatabaseProvider.Configurations.TimetableEntitiesConfigurations.LessonEntities;
 
-public class LessonConfiguration
+public class LessonConfiguration : IEntityTypeConfiguration<Lesson>
 {
     public void Configure( EntityTypeBuilder<Lesson> builder )
     {

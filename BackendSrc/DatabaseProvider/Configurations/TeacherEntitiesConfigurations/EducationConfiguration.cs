@@ -4,7 +4,7 @@ using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace DatabaseProvider.Configurations.TeacherEntitiesConfigurations;
 
-public class EducationConfiguration
+public class EducationConfiguration : IEntityTypeConfiguration<Education>
 {
     public void Configure( EntityTypeBuilder<Education> builder )
     {

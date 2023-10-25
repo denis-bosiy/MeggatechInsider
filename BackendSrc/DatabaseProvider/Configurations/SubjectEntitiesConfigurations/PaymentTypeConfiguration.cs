@@ -4,7 +4,7 @@ using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace DatabaseProvider.Configurations.SubjectEntitiesConfigurations;
 
-public class PaymentTypeConfiguration
+public class PaymentTypeConfiguration : IEntityTypeConfiguration<PaymentType>
 {
     public void Configure( EntityTypeBuilder<PaymentType> builder )
     {

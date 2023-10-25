@@ -4,7 +4,7 @@ using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace DatabaseProvider.Configurations.TeacherEntitiesConfigurations;
 
-public class ContractTypeConfiguration
+public class ContractTypeConfiguration : IEntityTypeConfiguration<ContractType>
 {
     public void Configure( EntityTypeBuilder<ContractType> builder )
     {
