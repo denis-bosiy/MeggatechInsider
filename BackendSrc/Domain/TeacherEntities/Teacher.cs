@@ -9,7 +9,7 @@ namespace Domain.TeacherEntities
         public bool ContractTypeAffectsOnSalary { get; init; }
         public Education Education { get; init; }
         public bool IsClassTeacher { get; init; }
-        public bool AdvancedSubjectsAffectOnSalary { get; init }
+        public bool AdvancedSubjectsAffectOnSalary { get; init; }
         public bool EgeAffectsOnSalary { get; init; }
         public DateOnly EmploymentDate { get; init; }
         public int ExperienceInYearsOnEmploymentDate { get; init; }
