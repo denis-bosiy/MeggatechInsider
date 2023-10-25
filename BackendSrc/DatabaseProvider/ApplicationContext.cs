@@ -47,7 +47,7 @@ namespace DatabaseProvider
 
         protected override void OnConfiguring( DbContextOptionsBuilder optionsBuilder )
         {
-            if ( _connectionString == null )
+            if ( String.IsNullOrEmpty( _connectionString ) )
             {
                 return;
             }
