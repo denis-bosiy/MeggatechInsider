@@ -12,13 +12,11 @@ namespace MegatechExcelReportGeneratorApi.Builders
             DocumentHandler = documentHandler;
         }
 
-        // TODO Подумать, как прокидывать модели.
-        // Либо заиспользовать один интерфейс, либо метод для установки состояния билдера, либо произвольные параметры (без абстрактного метода)
         public abstract BaseReportBuilder Build();
 
-        public ReportData GetResult()
+        public ReportResult GetResult()
         {
-            return new ReportData()
+            return new ReportResult()
             {
                 BytesData = DocumentHandler.GetDocumentBytes()
             };

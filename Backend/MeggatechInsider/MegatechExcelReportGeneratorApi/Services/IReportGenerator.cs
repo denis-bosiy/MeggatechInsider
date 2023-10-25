@@ -4,6 +4,6 @@ namespace MegatechExcelReportGeneratorApi.Services
 {
     public interface IReportGenerator
     {
-        ReportData GetFirstExcelReport();
+        ReportResult GetFirstExcelReport();
     }
 }

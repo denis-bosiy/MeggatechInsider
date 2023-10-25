@@ -24,7 +24,12 @@ namespace MegatechExcelReportGenerator.Handlers
 
         public ExcelWorksheet GetWorksheet( int worksheetIndex )
         {
-            return _document.Workbook.Worksheets.First();
+            return _document.Workbook.Worksheets[ worksheetIndex ];
+        }
+
+        public IEnumerable<ExcelWorksheet> GetWorksheets()
+        {
+            return _document.Workbook.Worksheets;
         }
 
         public byte[] GetDocumentBytes()

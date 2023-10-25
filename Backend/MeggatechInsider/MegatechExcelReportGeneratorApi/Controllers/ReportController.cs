@@ -18,7 +18,7 @@ namespace MegatechExcelReportGeneratorApi.Controllers
         [HttpGet( "first" )]
         public IActionResult GetFirstReport()
         {
-            ReportData result = _reportGenerator.GetFirstExcelReport();
+            ReportResult result = _reportGenerator.GetFirstExcelReport();
 
             return File( result.BytesData, result.ContentType );
         }

@@ -7,5 +7,6 @@ namespace MegatechExcelReportGenerator.Handlers
         ExcelWorksheet CreateWorksheet( string worksheetName );
         ExcelWorksheet GetWorksheet( int worksheetIndex );
         byte[] GetDocumentBytes();
+        IEnumerable<ExcelWorksheet> GetWorksheets();
     }
 }

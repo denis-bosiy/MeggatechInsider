@@ -6,27 +6,32 @@ namespace MegatechExcelReportGeneratorApi.Builders
 {
     public sealed class FirstReportBuilder : BaseReportBuilder
     {
-        private readonly bool _templatedReport;
+        private readonly bool _isTemplatedReport;
+        private readonly List<int> _templateWorksheetsIndexes;
 
-        // TODO Подумать над очисткой параметров при создании пользователем по этой схеме.
-        // Либо Factory для провайдера, либо Factory для билдеров (скорее второе)
         public FirstReportBuilder( IReportTemplateFileInfoProvider reportTemplateFileInfoProvider )
             : this( new ExcelDocumentHandler( reportTemplateFileInfoProvider.Get( ReportTemplateType.FirstReportTemplate ) ) )
         {
-            _templatedReport = true;
+            _isTemplatedReport = true;
+            // TODO Следить за их кол-вом, порядком
+            _templateWorksheetsIndexes = DocumentHandler
+                .GetWorksheets()
+                .Select( x => x.Index )
+                .ToList();
         }
 
         public FirstReportBuilder( IExcelDocumentHandler documentHandler )
             : base( documentHandler )
         {
-            _templatedReport = false;
+            _isTemplatedReport = false;
+            _templateWorksheetsIndexes = new List<int>();
         }
 
         public override FirstReportBuilder Build()
         {
-            if ( _templatedReport )
+            if ( _isTemplatedReport )
             {
-                BuildFirstWorksheet( DocumentHandler.GetWorksheet( 0 ) );
+                BuildFirstWorksheet( DocumentHandler.GetWorksheet( _templateWorksheetsIndexes[ 0 ] ) );
             }
             else
             {

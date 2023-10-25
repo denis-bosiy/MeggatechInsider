@@ -1,4 +1,5 @@
 using MegatechExcelReportGeneratorApi.Data;
+using MegatechExcelReportGeneratorApi.Factories;
 using MegatechExcelReportGeneratorApi.Services;
 
 namespace MegatechExcelReportGeneratorApi
@@ -12,6 +13,7 @@ namespace MegatechExcelReportGeneratorApi
             // Add services to the container.
 
             builder.Services.AddSingleton<IReportTemplateFileInfoProvider, ReportTemplateFileInfoProvider>();
+            builder.Services.AddSingleton<IReportBuilderFactory, ReportBuilderFactory>();
             builder.Services.AddSingleton<IReportGenerator, ReportGenerator>();
 
             builder.Services.AddControllers();

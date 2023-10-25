@@ -1,25 +1,26 @@
 using MegatechExcelReportGeneratorApi.Builders;
 using MegatechExcelReportGeneratorApi.Data;
+using MegatechExcelReportGeneratorApi.Factories;
 
 namespace MegatechExcelReportGeneratorApi.Services
 {
-    // Параметры фильтрации и поиска напрямую аргументами метода генерации
     public sealed class ReportGenerator : IReportGenerator
     {
-        private readonly IReportTemplateFileInfoProvider _reportTemplateFileInfoProvider;
+        private readonly IReportBuilderFactory _reportBuilderFactory;
 
-        public ReportGenerator( IReportTemplateFileInfoProvider reportTemplateFileInfoProvider )
+        public ReportGenerator( IReportBuilderFactory reportBuilderFactory )
         {
-            _reportTemplateFileInfoProvider = reportTemplateFileInfoProvider;
+            _reportBuilderFactory = reportBuilderFactory;
         }
 
-        public ReportData GetFirstExcelReport()
+        // Параметры фильтрации и поиска напрямую аргументами метода генерации, затем в Build()
+        public ReportResult GetFirstExcelReport()
         {
             // Call some DataPreparingService
             //
 
-            
-            FirstReportBuilder firstReportBuilder = new FirstReportBuilder( _reportTemplateFileInfoProvider );
+            // Данные через конструктор билдера (будут в приватном поле)
+            FirstReportBuilder firstReportBuilder = _reportBuilderFactory.GetFirstReportBuilder();
 
             return firstReportBuilder
                 .Build()
