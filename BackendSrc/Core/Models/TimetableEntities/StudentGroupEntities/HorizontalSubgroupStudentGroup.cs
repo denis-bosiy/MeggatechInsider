@@ -4,6 +4,6 @@ public class HorizontalSubgroupStudentGroup : StudentGroup
 {
     public override StudentGroupType Type => StudentGroupType.HorizontalSubgroup;
 
-    public GenericEntities.Parallel Parallel { get; set; }
+    public Domain.GenericEntities.Parallel Parallel { get; set; }
     public int SubgroupNumber { get; set; }
 }

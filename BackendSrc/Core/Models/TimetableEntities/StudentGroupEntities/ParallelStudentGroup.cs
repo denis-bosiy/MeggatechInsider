@@ -4,5 +4,5 @@ public class ParallelStudentGroup : StudentGroup
 {
     public override StudentGroupType Type => StudentGroupType.Parallel;
 
-    public GenericEntities.Parallel Parallel { get; set; }
+    public Domain.GenericEntities.Parallel Parallel { get; set; }
 }
