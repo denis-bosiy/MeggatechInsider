@@ -8,7 +8,7 @@ export enum ActionButtonType {
   Default = "DEFAULT",
   Positive = "POSITIVE",
   Negative = "NEGATIVE"
-};
+}
 
 interface Props {
   label: string;
@@ -16,15 +16,16 @@ interface Props {
   icon?: React.ReactNode;
   className?: string;
   onClick?: () => void;
-};
+}
 
 const ActionButton = (props: Props) => {
   const actionButtonType: ActionButtonType = props.type ?? ActionButtonType.Default;
 
   return (
     <button className={classNames("action-button", "-" + actionButtonType.toLowerCase())} onClick={props.onClick}>
-      {props.icon}
-      {props.label}
+      {props.icon && <div className="action-button__icon">{props.icon}</div>}
+
+      <span className="action-button__text">{props.label}</span>
     </button>
   );
 };

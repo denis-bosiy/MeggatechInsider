@@ -1,15 +1,10 @@
 @import "./vars";
-@import "./styles/table";
+@import "./styles/styles";
 
 // Переменные темы
 :root {
   --main-color: #002974;
   --secondary-color: #008ae1;
-}
-
-.icon {
-  padding: 3px;
-  cursor: pointer;
 }
 
 body {

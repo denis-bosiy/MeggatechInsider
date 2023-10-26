@@ -1,4 +1,28 @@
+@use "sass:color";
 @import "../../vars";
+@import "../../styles/mixins/square";
+
+.radiomark {
+  @include square(20px);
+
+  position: absolute;
+  top: 0;
+  left: 0;
+  background-color: $background-color;
+  border-radius: 10px;
+
+  &::after {
+    @include square(10px);
+
+    position: absolute;
+    left: 5px;
+    top: 5px;
+    background-color: $alternative-text-color;
+    border-radius: 5px;
+    content: "";
+    display: none;
+  }
+}
 
 .radio {
   position: absolute;
@@ -7,7 +31,7 @@
   opacity: 0;
 
   &:checked {
-    ~ .radiomark {
+    ~.radiomark {
       background-color: $focus-checkbox;
 
       &::after {
@@ -15,45 +39,31 @@
       }
 
       &:hover::after {
-        background-color: lighten($alternative-text-color, $hover-darken-value);
+        opacity: 0.3;
       }
     }
   }
 }
 
-.radiomark {
-  position: absolute;
-  top: 0;
-  left: 0;
-  height: 20px;
-  width: 20px;
-  background-color: $background-color;
-  border-radius: 10px;
+.radio-label {
+  @include square(20px);
 
-  &::after {
-    position: absolute;
-    left: 5px;
-    top: 5px;
-    width: 10px;
-    height: 10px;
-    background-color: $alternative-text-color;
-    border-radius: 5px;
-    content: "";
-    display: none;
-  }
-}
-
-.label {
   display: flex;
-  width: 20px;
-  height: 20px;
   position: relative;
-  border-radius: 10px;
-  box-shadow: 0 1px 4px 0 rgba(0 0 0 / 25%);
+  border-radius: 50%;
+  cursor: pointer;
+  outline: none;
+  box-shadow: 0 0 8px 0 rgba(0 0 0 / 25%);
 
   &:hover {
     .radiomark {
-      background-color: $active-checkbox;
+      background-color: $hover-checkbox;
+    }
+  }
+
+  &:focus {
+    .radiomark {
+      background-color: $focus-checkbox;
     }
   }
 }

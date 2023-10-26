@@ -3,11 +3,11 @@ import "./ComponentsPage.scss";
 import Input, { InputSize, InputType } from "../../components/Input/Input";
 import Select, { ISelectOption, SelectSize } from "../../components/Select/Select";
 import Notification from "../../components/Notification/Notification";
-import IconButton from "../../components/IconButton/IconButton";
+import IconButton, { IconButtonType } from "../../components/IconButton/IconButton";
 import { ArrowLeft, GarbageIcon } from "../../icons";
-import Button from "../../components/Button/Button";
+import Button, { ButtonSize, ButtonType } from "../../components/Button/Button";
 import ActionButton, { ActionButtonType } from "../../components/ActionButton/ActionButton";
-import { Link } from "../../components/Link/Link";
+import { Link, LinkType } from "../../components/Link/Link";
 import { CheckBox } from "../../components/CheckBox/CheckBox";
 import { RadioButton } from "../../components/RadioButton/RadioButton";
 
@@ -43,23 +43,44 @@ const ComponentsPage = () => {
       <section className="section">
         <h2>Кнопка</h2>
 
-        {/* <IconButton icon={<ArrowLeft />} /> */}
         <Button label="Войти в аккаунт" />
-        {/* <ActionButton label="Hello" icon={<ArrowLeft />} /> */}
 
         <div>
-          <h3>Цветовая схема</h3>
+          <h3>Тип</h3>
 
-          <span className="caption">blue</span>
+          <span className="caption">Primary</span>
           <br />
-          <Button label="Войти в аккаунт" colorScheme="blue" />
+          <Button label="Сделать отчёт" type={ButtonType.Primary} />
           <br />
 
           <hr />
 
-          <span className="caption">dark-blue</span>
+          <span className="caption">Secondary</span>
           <br />
-          <Button label="Войти в аккаунт" colorScheme="dark-blue" />
+          <Button label="Сохранить в Excel" type={ButtonType.Secondary} />
+          <br />
+
+          <hr />
+
+          <span className="caption">Default</span>
+          <br />
+          <Button label="Применить для текущей недели" type={ButtonType.Default} />
+          <br />
+        </div>
+
+        <div>
+          <h3>Размер</h3>
+
+          <span className="caption">Kilo</span>
+          <br />
+          <Button label="Сделать отчёт" size={ButtonSize.Kilo} />
+          <br />
+
+          <hr />
+
+          <span className="caption">Default</span>
+          <br />
+          <Button label="Сделать отчёт" />
           <br />
         </div>
       </section>
@@ -133,16 +154,38 @@ const ComponentsPage = () => {
         <div>
           <h3>Тип</h3>
 
-          <span className="caption">primary</span>
+          <span className="caption">secondary</span>
           <br />
-          <IconButton icon={<GarbageIcon />} type="primary" />
+          <div style={{ backgroundColor: "black" }}>
+            <IconButton icon={<GarbageIcon />} type={IconButtonType.Secondary} />
+          </div>
           <br />
 
           <hr />
 
-          <span className="caption">secondary</span>
+          <span className="caption">warning</span>
           <br />
-          <IconButton icon={<GarbageIcon />} type="secondary" />
+          <div style={{ backgroundColor: "black" }}>
+            <IconButton icon={<GarbageIcon />} type={IconButtonType.Warning} />
+          </div>
+          <br />
+
+          <hr />
+
+          <span className="caption">white</span>
+          <br />
+          <div style={{ backgroundColor: "black" }}>
+            <IconButton icon={<GarbageIcon />} type={IconButtonType.White} />
+          </div>
+          <br />
+
+          <hr />
+
+          <span className="caption">default</span>
+          <br />
+          <div>
+            <IconButton icon={<GarbageIcon />} />
+          </div>
           <br />
         </div>
       </section>
@@ -150,35 +193,35 @@ const ComponentsPage = () => {
       <section className="section">
         <h2>Ссылка</h2>
 
-        <div style={{ backgroundColor: "black" }}>
+        <div>
           <Link path="/" label="На главную страницу" />
         </div>
         <p className="description"></p>
 
         <div>
-          <h3>Режим</h3>
+          <h3>Тип</h3>
 
           <span className="caption">Светлый</span>
           <br />
           <div style={{ backgroundColor: "black" }}>
-            <Link path="/" label="На главную страницу" mode="light" />
+            <Link path="/" label="На главную страницу" type={LinkType.Light} />
           </div>
           <br />
 
           <hr />
 
-          <span className="caption">Тёмный</span>
-          <br />
-          <Link path="/" label="На главную страницу" mode="dark" />
-          <br />
-
-          <hr />
-
-          <span className="caption">Без режима</span>
+          <span className="caption">Важный</span>
           <br />
           <div style={{ backgroundColor: "black" }}>
-            <Link path="/" label="На главную страницу" />
+            <Link path="/" label="На главную страницу" type={LinkType.Important} />
           </div>
+          <br />
+
+          <hr />
+
+          <span className="caption">Стандартный</span>
+          <br />
+          <Link path="/" label="На главную страницу" />
           <br />
         </div>
       </section>
@@ -201,18 +244,9 @@ const ComponentsPage = () => {
         <span>Заголовки разного уровня</span>
 
         <div>
-          <h1>Илиада</h1>
-          <h2>Песнь первая</h2>
-          <h3>Язва.Гнев.</h3>
-          <h4>Гнев, боги­ня, вос­пой Ахил­ле­са, Пеле­е­ва сына</h4>
-          <h5>
-            Все изъ­яви­ли согла­сие кри­ком все­об­щим ахей­цы Честь жре­цу ока­зать и при­нять бли­ста­тель­ный выкуп
-          </h5>
-          <h6>
-            Ста­рец, чтоб я нико­гда тебя не видал пред суда­ми! Здесь и теперь ты не мед­ли и впредь не дер­зай
-            пока­зать­ся! Или тебя не изба­вит ни скиптр, ни венец Апол­ло­на. Деве сво­бо­ды не дам я; она обвет­ша­ет
-            в нево­ле
-          </h6>
+          <h1 className="h1">Илиада</h1>
+          <h2 className="h2">Песнь первая</h2>
+          <h3 className="h3">Язва.Гнев.</h3>
         </div>
       </section>
 
@@ -249,8 +283,8 @@ const ComponentsPage = () => {
         <div>
           <h3>Размер</h3>
 
-          <div className="caption">Мини</div>
-          <Input value={miniInputValue} placeholder="Логин" onValueChange={setMiniInputValue} size={InputSize.Mini} />
+          <div className="caption">Милли</div>
+          <Input value={miniInputValue} placeholder="Логин" onValueChange={setMiniInputValue} size={InputSize.Milli} />
           <br />
 
           <hr />
@@ -288,8 +322,8 @@ const ComponentsPage = () => {
         <div>
           <h3>Размер</h3>
 
-          <div className="caption">Мини</div>
-          <Select options={selectOptions} onValueChange={setMiniSelectValue} size={SelectSize.Mini} />
+          <div className="caption">Милли</div>
+          <Select options={selectOptions} onValueChange={setMiniSelectValue} size={SelectSize.Milli} />
           <br />
 
           <hr />

@@ -3,48 +3,70 @@
 .button {
   display: flex;
   align-items: center;
-  height: 48px;
-  padding: 0 24px;
-  border: none;
-  border-radius: 6px;
-  font-size: 18px;
-  gap: 6px;
-  cursor: pointer;
-  box-shadow: 0 1px 4px 0 rgb(0 0 0 / 25%);
-  background-color: $grey-default;
+  padding: 13px 25px;
   color: $alternative-text-color;
+  font-size: $default-text-size;
+  line-height: $default-line-height;
+  cursor: pointer;
+  outline: none;
+  border: 1px solid transparent;
+  border-radius: 6px;
+  box-shadow: 0 1px 4px 0 rgb(0 0 0 / 25%);
+  background-color: $default-button-background-color;
 
-  &.-blue {
-    background-color: $blue-default;
-    color: $background-color;
-
-    &:hover {
-      background-color: $blue-hover;
-    }
-
-    &:active {
-      background-color: $blue-focus;
-    }
+  &:hover,
+  &:focus {
+    background-color: $default-button-background-color-hover;
   }
 
-  &.-dark-blue {
-    background-color: $dark-blue-default;
-    color: $background-color;
-
-    &:hover {
-      background-color: $dark-blue-hover;
-    }
-
-    &:active {
-      background-color: $dark-blue-focus;
-    }
-  }
-
-  &:hover {
-    background-color: $grey-hover;
+  &:focus {
+    border: 1px solid $alternative-text-color;
+    box-shadow: 0 1px 4px 0 rgb(0 0 0 / 70%);
   }
 
   &:active {
-    background-color: $grey-focus;
+    color: rgba($alternative-text-color, 30%);
+    background-color: $default-button-background-color-active;
+  }
+
+  &.-primary {
+    color: $text-color;
+    background-color: $primary-button-background-color;
+
+    &:focus {
+      border: 1px solid #000;
+    }
+
+    &:hover,
+    &:focus {
+      background-color: $primary-button-background-color-hover;
+    }
+
+    &:active {
+      color: rgba($text-color, 30%);
+      background-color: $primary-button-background-color-active;
+    }
+  }
+
+  &.-secondary {
+    color: $text-color;
+    background-color: $secondary-button-background-color;
+
+    &:hover,
+    &:focus {
+      background-color: $secondary-button-background-color-hover;
+    }
+
+    &:active {
+      color: rgba($text-color, 30%);
+      background-color: $secondary-button-background-color-active;
+    }
+  }
+
+  &.-kilo {
+    width: 100%;
+    justify-content: center;
+    padding: 29px 20px;
+    font-weight: 600;
   }
 }
