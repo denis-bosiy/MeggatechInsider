@@ -10,8 +10,9 @@ import ActionButton, { ActionButtonType } from "../../components/ActionButton/Ac
 import { Link, LinkType } from "../../components/Link/Link";
 import { CheckBox } from "../../components/CheckBox/CheckBox";
 import { RadioButton } from "../../components/RadioButton/RadioButton";
+import { ModalManager, IModalSettings } from "../../utils/ModalManager";
 
-const ComponentsPage = () => {
+const ComponentsPage = ({modalSettings}: {modalSettings: IModalSettings}) => {
   const [defaultInputValue, setDefaultInputValue] = useState<string>("");
   const [errorableInputValue, setErrorableInputValue] = useState<string>("");
   const [passwordInputValue, setPasswordInputValue] = useState<string>("");
@@ -570,6 +571,12 @@ const ComponentsPage = () => {
             </tr>
           </tbody>
         </table>
+      </section>
+
+      <section className="section">
+        <h2>Модальное окно</h2>
+
+        <Button label="Открыть модальное окно" onClick={() => ModalManager.Open(modalSettings, "Комментарии")} />
       </section>
     </main>
   );
