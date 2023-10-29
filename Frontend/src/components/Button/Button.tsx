@@ -7,12 +7,12 @@ export enum ButtonType {
   Primary = "PRIMARY",
   Secondary = "SECONDARY",
   Default = "DEFAULT"
-};
+}
 
 export enum ButtonSize {
   Kilo = "KILO",
   Default = "DEFAULT"
-};
+}
 
 interface Props {
   label: string;
@@ -27,7 +27,10 @@ const Button = (props: Props) => {
   const size: ButtonSize = props.size ?? ButtonSize.Default;
 
   return (
-    <button className={classNames("button", props.className, "-" + type.toLowerCase(), "-" + size.toLowerCase())} onClick={props.onClick}>
+    <button
+      className={classNames("button", props.className, "-" + type.toLowerCase(), "-" + size.toLowerCase())}
+      onClick={props.onClick}
+    >
       {props.label}
     </button>
   );
