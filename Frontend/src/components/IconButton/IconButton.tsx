@@ -5,10 +5,10 @@ import "./IconButton.scss";
 
 export enum IconButtonType {
   Secondary = "SECONDARY",
-  Warning = "WARNING",
+  Important = "IMPORTANT",
   White = "WHITE",
   Default = "DEFAULT"
-};
+}
 
 interface Props {
   icon: React.ReactNode;
@@ -22,7 +22,10 @@ const IconButton = (props: Props) => {
   const type: string = (props.type ?? IconButtonType.Default).toLowerCase();
 
   return (
-    <button className={classNames("icon-button", props.className, props.small && "-small", "-" + type)} onClick={props.onClick}>
+    <button
+      className={classNames("icon-button", props.className, props.small && "-small", "-" + type)}
+      onClick={props.onClick}
+    >
       {props.icon}
     </button>
   );

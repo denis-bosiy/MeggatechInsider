@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import "./ComponentsPage.scss";
 import Input, { InputSize, InputType } from "../../components/Input/Input";
 import Select, { ISelectOption, SelectSize } from "../../components/Select/Select";
@@ -10,9 +10,13 @@ import ActionButton, { ActionButtonType } from "../../components/ActionButton/Ac
 import { Link, LinkType } from "../../components/Link/Link";
 import { CheckBox } from "../../components/CheckBox/CheckBox";
 import { RadioButton } from "../../components/RadioButton/RadioButton";
-import { ModalManager, IModalSettings } from "../../utils/ModalManager";
+import ModalSettingsContext from "../../utils/ModalSettingsContext";
+import AgreementModalView from "../../components/AgreementModalView/AgreementModalView";
+import CommentsModalView from "../../components/CommentsModalView/CommentsModalView";
 
-const ComponentsPage = ({modalSettings}: {modalSettings: IModalSettings}) => {
+const ComponentsPage = () => {
+  const { openModal } = useContext(ModalSettingsContext);
+
   const [defaultInputValue, setDefaultInputValue] = useState<string>("");
   const [errorableInputValue, setErrorableInputValue] = useState<string>("");
   const [passwordInputValue, setPasswordInputValue] = useState<string>("");
@@ -29,13 +33,20 @@ const ComponentsPage = ({modalSettings}: {modalSettings: IModalSettings}) => {
     { id: "saturday", content: "Суббота" },
     { id: "sunday", content: "Воскресенье" }
   ];
-  const [defaultSelectValue, setDefaultSelectValue] = useState<string>("");
-  const [miniSelectValue, setMiniSelectValue] = useState<string>("");
-  const [microSelectValue, setMicroSelectValue] = useState<string>("");
+  const setSelectValue = (val: string) => {
+    console.log(val);
+  };
 
   const logSearchInputValue = () => {
     console.log(searchInputValue);
   };
+
+  const modalComments: { text: string; deleteAction: () => void }[] = [
+    {
+      text: "Прогульщик. Вместо пары решил пойти в бар со своими школьными друзьями. Не видать ему своей зарплаты как и счастья",
+      deleteAction: () => alert("Комментарий удалён")
+    }
+  ];
 
   return (
     <main className="components-page">
@@ -164,10 +175,10 @@ const ComponentsPage = ({modalSettings}: {modalSettings: IModalSettings}) => {
 
           <hr />
 
-          <span className="caption">warning</span>
+          <span className="caption">important</span>
           <br />
           <div style={{ backgroundColor: "black" }}>
-            <IconButton icon={<GarbageIcon />} type={IconButtonType.Warning} />
+            <IconButton icon={<GarbageIcon />} type={IconButtonType.Important} />
           </div>
           <br />
 
@@ -317,14 +328,14 @@ const ComponentsPage = ({modalSettings}: {modalSettings: IModalSettings}) => {
       <section className="section">
         <h2>Cелект</h2>
 
-        <Select options={selectOptions} onValueChange={setDefaultSelectValue} />
+        <Select options={selectOptions} onValueChange={setSelectValue} />
         <p className="description">Дефолтное значение — первое значение в списке</p>
 
         <div>
           <h3>Размер</h3>
 
           <div className="caption">Милли</div>
-          <Select options={selectOptions} onValueChange={setMiniSelectValue} size={SelectSize.Milli} />
+          <Select options={selectOptions} onValueChange={setSelectValue} size={SelectSize.Milli} />
           <br />
 
           <hr />
@@ -332,7 +343,7 @@ const ComponentsPage = ({modalSettings}: {modalSettings: IModalSettings}) => {
           <div className="caption" title="Удалить">
             Микро
           </div>
-          <Select options={selectOptions} onValueChange={setMicroSelectValue} size={SelectSize.Micro} />
+          <Select options={selectOptions} onValueChange={setSelectValue} size={SelectSize.Micro} />
           <br />
         </div>
       </section>
@@ -576,7 +587,17 @@ const ComponentsPage = ({modalSettings}: {modalSettings: IModalSettings}) => {
       <section className="section">
         <h2>Модальное окно</h2>
 
-        <Button label="Открыть модальное окно" onClick={() => ModalManager.Open(modalSettings, "Комментарии")} />
+        <Button
+          label="Открыть модальное окно с подтверждением"
+          onClick={() => openModal("Удалить", <AgreementModalView proceedAction={() => alert("Объект удалён")} />)}
+        />
+
+        <Button
+          label="Открыть модальное окно с комментариями"
+          onClick={() =>
+            openModal("Комментарии", <CommentsModalView comments={modalComments} addAction={() => alert("Комментарий добавлен")} />)
+          }
+        />
       </section>
     </main>
   );

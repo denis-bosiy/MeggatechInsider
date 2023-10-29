@@ -31,7 +31,7 @@
   opacity: 0;
 
   &:checked {
-    ~.radiomark {
+    ~ .radiomark {
       background-color: $focus-checkbox;
 
       &::after {
