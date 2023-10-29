@@ -1,5 +1,4 @@
 import React from "react";
-import "./TestPage.scss";
 import {useDispatch, useSelector} from "react-redux";
 import {TestPageData} from "./model/types";
 import {ActionBuilder} from "./model/actions";
