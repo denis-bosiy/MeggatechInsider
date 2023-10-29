@@ -13,6 +13,7 @@ import { RadioButton } from "../../components/RadioButton/RadioButton";
 import ModalSettingsContext from "../../utils/ModalSettingsContext";
 import AgreementModalView from "../../components/AgreementModalView/AgreementModalView";
 import CommentsModalView from "../../components/CommentsModalView/CommentsModalView";
+import { ScheduleContainerComponent } from "../../components/Schedule/ScheduleContainer";
 
 const ComponentsPage = () => {
   const { openModal } = useContext(ModalSettingsContext);
@@ -363,32 +364,32 @@ const ComponentsPage = () => {
         <table className="table">
           <thead className="header">
             <tr className="row">
-              <td className="cell -filter" rowSpan={2}>
+              <th className="cell -filter" rowSpan={2}>
                 Предмет
-              </td>
-              <td className="cell" colSpan={4}>
+              </th>
+              <th className="cell" colSpan={4}>
                 10-1
-              </td>
-              <td className="cell" colSpan={4}>
+              </th>
+              <th className="cell" colSpan={4}>
                 10-2
-              </td>
-              <td className="cell" colSpan={4}>
+              </th>
+              <th className="cell" colSpan={4}>
                 10-3
-              </td>
+              </th>
             </tr>
             <tr className="row -filter">
-              <td className="cell">Часов в нед. распр-но</td>
-              <td className="cell">Часов в неделю по плану</td>
-              <td className="cell">Долг</td>
-              <td className="cell">Часов сверх плана</td>
-              <td className="cell">Часов в нед. распр-но</td>
-              <td className="cell">Часов в неделю по плану</td>
-              <td className="cell">Долг</td>
-              <td className="cell">Часов сверх плана</td>
-              <td className="cell">Часов в нед. распр-но</td>
-              <td className="cell">Часов в неделю по плану</td>
-              <td className="cell">Долг</td>
-              <td className="cell">Часов сверх плана</td>
+              <th className="cell">Часов в нед. распр-но</th>
+              <th className="cell">Часов в неделю по плану</th>
+              <th className="cell">Долг</th>
+              <th className="cell">Часов сверх плана</th>
+              <th className="cell">Часов в нед. распр-но</th>
+              <th className="cell">Часов в неделю по плану</th>
+              <th className="cell">Долг</th>
+              <th className="cell">Часов сверх плана</th>
+              <th className="cell">Часов в нед. распр-но</th>
+              <th className="cell">Часов в неделю по плану</th>
+              <th className="cell">Долг</th>
+              <th className="cell">Часов сверх плана</th>
             </tr>
           </thead>
           <tbody>
@@ -446,74 +447,74 @@ const ComponentsPage = () => {
         <table className="table">
           <thead className="header">
             <tr className="row">
-              <td className="cell" colSpan={9}>
+              <th className="cell" colSpan={9}>
                 &nbsp;
-              </td>
-              <td className="cell" colSpan={11}>
+              </th>
+              <th className="cell" colSpan={11}>
                 1 четверть
-              </td>
-              <td className="cell" colSpan={9}>
+              </th>
+              <th className="cell" colSpan={9}>
                 2 четверть
-              </td>
-              <td className="cell" colSpan={9}>
+              </th>
+              <th className="cell" colSpan={9}>
                 3 четверть
-              </td>
-              <td className="cell" colSpan={13}>
+              </th>
+              <th className="cell" colSpan={13}>
                 4 четверть
-              </td>
+              </th>
             </tr>
             <tr className="row">
-              <td className="cell -filter">Предмет</td>
-              <td className="cell -filter">Б/Бв</td>
-              <td className="cell -filter">Тип</td>
-              <td className="cell -filter -vertical">Ч. групп</td>
-              <td className="cell -filter -vertical">Ср. в год</td>
-              <td className="cell -filter -vertical">Ср. в период</td>
-              <td className="cell -filter -vertical">Ч. всего</td>
-              <td className="cell -filter -vertical">Ч. ожидается</td>
-              <td className="cell -filter -vertical">Ч. по плану</td>
-              <td className="cell -vertical">7 сент. №1</td>
-              <td className="cell -vertical">14 сент. №2</td>
-              <td className="cell -vertical">21 сент. №3</td>
-              <td className="cell -vertical">№4</td>
-              <td className="cell -vertical">№4</td>
-              <td className="cell -vertical">№4</td>
-              <td className="cell -vertical">№4</td>
-              <td className="cell -vertical">№4</td>
-              <td className="cell -vertical">№4</td>
-              <td className="cell -vertical">№4</td>
-              <td className="cell">&nbsp;</td>
-              <td className="cell -vertical">№4</td>
-              <td className="cell -vertical">№4</td>
-              <td className="cell -vertical">№4</td>
-              <td className="cell -vertical">№4</td>
-              <td className="cell -vertical">№4</td>
-              <td className="cell -vertical">№4</td>
-              <td className="cell -vertical">№4</td>
-              <td className="cell -vertical">№4</td>
-              <td className="cell">&nbsp;</td>
-              <td className="cell -vertical">№4</td>
-              <td className="cell -vertical">№4</td>
-              <td className="cell -vertical">№4</td>
-              <td className="cell -vertical">№4</td>
-              <td className="cell -vertical">№4</td>
-              <td className="cell -vertical">№4</td>
-              <td className="cell -vertical">№4</td>
-              <td className="cell -vertical">№4</td>
-              <td className="cell">&nbsp;</td>
-              <td className="cell -vertical">№4</td>
-              <td className="cell -vertical">№4</td>
-              <td className="cell -vertical">№4</td>
-              <td className="cell -vertical">№4</td>
-              <td className="cell -vertical">№4</td>
-              <td className="cell -vertical">№4</td>
-              <td className="cell -vertical">№4</td>
-              <td className="cell -vertical">№4</td>
-              <td className="cell -vertical">24 мая №35</td>
-              <td className="cell">&nbsp;</td>
-              <td className="cell -filter">Ч. 1 пг.</td>
-              <td className="cell -filter">Ч. 2 пг.</td>
-              <td className="cell -vertical">Продолжить по первым 2 неделям</td>
+              <th className="cell -filter">Предмет</th>
+              <th className="cell -filter">Б/Бв</th>
+              <th className="cell -filter">Тип</th>
+              <th className="cell -filter -vertical">Ч. групп</th>
+              <th className="cell -filter -vertical">Ср. в год</th>
+              <th className="cell -filter -vertical">Ср. в период</th>
+              <th className="cell -filter -vertical">Ч. всего</th>
+              <th className="cell -filter -vertical">Ч. ожидается</th>
+              <th className="cell -filter -vertical">Ч. по плану</th>
+              <th className="cell -vertical">7 сент. №1</th>
+              <th className="cell -vertical">14 сент. №2</th>
+              <th className="cell -vertical">21 сент. №3</th>
+              <th className="cell -vertical">№4</th>
+              <th className="cell -vertical">№4</th>
+              <th className="cell -vertical">№4</th>
+              <th className="cell -vertical">№4</th>
+              <th className="cell -vertical">№4</th>
+              <th className="cell -vertical">№4</th>
+              <th className="cell -vertical">№4</th>
+              <th className="cell">&nbsp;</th>
+              <th className="cell -vertical">№4</th>
+              <th className="cell -vertical">№4</th>
+              <th className="cell -vertical">№4</th>
+              <th className="cell -vertical">№4</th>
+              <th className="cell -vertical">№4</th>
+              <th className="cell -vertical">№4</th>
+              <th className="cell -vertical">№4</th>
+              <th className="cell -vertical">№4</th>
+              <th className="cell">&nbsp;</th>
+              <th className="cell -vertical">№4</th>
+              <th className="cell -vertical">№4</th>
+              <th className="cell -vertical">№4</th>
+              <th className="cell -vertical">№4</th>
+              <th className="cell -vertical">№4</th>
+              <th className="cell -vertical">№4</th>
+              <th className="cell -vertical">№4</th>
+              <th className="cell -vertical">№4</th>
+              <th className="cell">&nbsp;</th>
+              <th className="cell -vertical">№4</th>
+              <th className="cell -vertical">№4</th>
+              <th className="cell -vertical">№4</th>
+              <th className="cell -vertical">№4</th>
+              <th className="cell -vertical">№4</th>
+              <th className="cell -vertical">№4</th>
+              <th className="cell -vertical">№4</th>
+              <th className="cell -vertical">№4</th>
+              <th className="cell -vertical">24 мая №35</th>
+              <th className="cell">&nbsp;</th>
+              <th className="cell -filter">Ч. 1 пг.</th>
+              <th className="cell -filter">Ч. 2 пг.</th>
+              <th className="cell -vertical">Продолжить по первым 2 неделям</th>
             </tr>
           </thead>
           <tbody>
@@ -595,9 +596,18 @@ const ComponentsPage = () => {
         <Button
           label="Открыть модальное окно с комментариями"
           onClick={() =>
-            openModal("Комментарии", <CommentsModalView comments={modalComments} addAction={() => alert("Комментарий добавлен")} />)
+            openModal(
+              "Комментарии",
+              <CommentsModalView comments={modalComments} addAction={() => alert("Комментарий добавлен")} />
+            )
           }
         />
+      </section>
+
+      <section className="section">
+        <h2>Расписание</h2>
+
+        <ScheduleContainerComponent />
       </section>
     </main>
   );
