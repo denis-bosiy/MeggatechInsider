@@ -29,10 +29,11 @@
 
   &__header {
     position: relative;
-    background-color: $primary-button-background-color;
     height: 60px;
     width: 100%;
     padding: 15px 25px;
+    border-radius: 6px 6px 0 0;
+    background-color: $primary-button-background-color;
   }
 
   &__close-button {
@@ -45,5 +46,6 @@
     padding: 29px 25px;
     color: $alternative-text-color;
     background-color: $background-color;
+    border-radius: 0 0 6px 6px;
   }
 }
