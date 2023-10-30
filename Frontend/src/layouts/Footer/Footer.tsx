@@ -4,11 +4,11 @@ import "./Footer.scss";
 
 export const Footer = () => {
   return (
-    <div className="footer">
-      <div className="container">
-        <span className="logo">MeggАТЕХ</span>
-        <span className="text">© LiD Meggatech 2023</span>
+    <footer className="footer">
+      <div className="footer-container">
+        <span className="footer-container__logo">MeggАТЕХ</span>
+        <span className="footer-container__text">© LiD Meggatech 2023</span>
       </div>
-    </div>
+    </footer>
   );
 };

@@ -5,10 +5,10 @@ import { Logo } from "../../icons";
 
 export const Header = () => {
   return (
-    <div className="header">
-      <div className="container">
+    <header className="header">
+      <div className="header-container">
         <Logo />
       </div>
-    </div>
+    </header>
   );
 };

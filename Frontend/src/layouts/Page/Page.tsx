@@ -9,7 +9,7 @@ interface IPageProps {
 export const Page = ({ children }: IPageProps) => {
   return (
     <div className="page">
-      <div className="content">{children}</div>
+      <div className="page-content">{children}</div>
     </div>
   );
 };
