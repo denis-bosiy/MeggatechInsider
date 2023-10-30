@@ -12,4 +12,16 @@
   width: 100%;
   display: flex;
   align-items: center;
+  gap: 32px;
+
+  &__navigation {
+    display: flex;
+    gap: 36px;
+    flex: 1;
+  }
+}
+
+.header-actions {
+  display: flex;
+  gap: 32px;
 }

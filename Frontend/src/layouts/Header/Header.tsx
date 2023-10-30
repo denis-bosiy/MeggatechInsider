@@ -1,13 +1,22 @@
 import React from "react";
 
-import "./Header.scss";
-import { Logo } from "../../icons";
+import { Logo, Logout } from "../../icons";
+import IconButton from "../../components/IconButton/IconButton";
 
-export const Header = () => {
+import "./Header.scss";
+
+interface IHeaderProps {
+  children?: React.ReactNode;
+  onLogout?: () => void;
+}
+
+export const Header = ({ children, onLogout }: IHeaderProps) => {
   return (
     <header className="header">
       <div className="header-container">
         <Logo />
+        <nav className="header-container__navigation">{children}</nav>
+        <div className="header-actions">{onLogout && <IconButton icon={<Logout />} />}</div>
       </div>
     </header>
   );
