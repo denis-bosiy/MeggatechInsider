@@ -13,7 +13,7 @@ export const RadioButton = ({ checked, onChange }: IRadioButtonProps) => {
 
   return (
     <label className="radio-label" tabIndex={0}>
-      <input className="radio" type="radio" checked={checked} onChange={handleCheck} tabIndex={-1}/>
+      <input className="radio" type="radio" checked={checked} onChange={handleCheck} tabIndex={-1} />
       <span className="radiomark"></span>
     </label>
   );

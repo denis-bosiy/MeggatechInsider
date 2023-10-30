@@ -32,7 +32,7 @@
   opacity: 0;
 
   &:checked {
-    ~.checkmark {
+    ~ .checkmark {
       background-color: $focus-checkbox;
 
       &::after {

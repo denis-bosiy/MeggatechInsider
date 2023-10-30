@@ -34,12 +34,12 @@
     background-color: #e8ebee;
   }
 
-  &.-mini {
+  &.-milli {
     padding: 8.5px 10px;
     font-size: 14px;
     line-height: 17px;
 
-    &+#{$module}__icon {
+    & + #{$module}__icon {
       top: 8.8px;
       right: 7px;
       width: 13px;
@@ -51,7 +51,7 @@
     font-size: 14px;
     line-height: 17px;
 
-    &+#{$module}__icon {
+    & + #{$module}__icon {
       top: 3.8px;
       right: 7px;
       width: 13px;
@@ -59,10 +59,9 @@
   }
 
   // Удаление дефолтной стрелки у селекта
-  -webkit-appearance: none;
-  -moz-appearance: none;
+  appearance: none;
   text-indent: 1px;
-  text-overflow: '';
+  text-overflow: "";
 }
 
 .select-container {

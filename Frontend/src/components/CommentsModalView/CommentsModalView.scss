@@ -1,0 +1,11 @@
+.x-cmv {
+  display: flex;
+  flex-direction: row;
+  gap: 25px;
+
+  &__comments-list {
+    display: flex;
+    flex-direction: column;
+    gap: 25px;
+  }
+}
