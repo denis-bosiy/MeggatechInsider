@@ -1,0 +1,26 @@
+@import "../../vars";
+
+.footer {
+  display: flex;
+  justify-content: center;
+  background-color: $primary-button-background-color;
+  height: 90px;
+
+  .container {
+    max-width: 1280px;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    color: #ffffff;
+    justify-content: space-between;
+
+    .logo {
+      font-weight: bold;
+      font-size: 24px;
+    }
+
+    .text {
+      font-size: 20px;
+    }
+  }
+}
