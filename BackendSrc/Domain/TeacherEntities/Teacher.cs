@@ -1,6 +1,6 @@
 namespace Domain.TeacherEntities
 {
-    public class Teacher
+    public class Teacher : Entity
     {
         public string TeacherName { get; init; }
         public TeacherCategory TeacherCategory { get; init; }

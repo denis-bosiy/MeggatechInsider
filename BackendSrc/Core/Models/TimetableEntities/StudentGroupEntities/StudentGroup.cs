@@ -1,4 +1,5 @@
 ﻿using Core.Models.TimetableEntities.LessonEntities;
+using Domain;
 
 namespace Core.Models.TimetableEntities.StudentGroupEntities;
 

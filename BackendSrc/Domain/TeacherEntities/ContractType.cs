@@ -1,6 +1,6 @@
 namespace Domain.TeacherEntities
 {
-    public class ContractType
+    public class ContractType : Entity
     {
         public string ContractTypeName { get; init; }
 

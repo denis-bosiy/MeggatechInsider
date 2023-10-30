@@ -1,6 +1,7 @@
 using Core.Models.SubjectEntities;
 using Core.Models.TeacherEntities;
 using Core.Models.TimetableEntities.StudentGroupEntities;
+using Domain;
 using Domain.TimetableEntities.LessonEntities;
 
 namespace Core.Models.TimetableEntities.LessonEntities;

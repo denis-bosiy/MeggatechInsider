@@ -1,3 +1,5 @@
+using Domain;
+
 namespace Core.Models.TeacherEntities;
 
 public class Education : Entity
