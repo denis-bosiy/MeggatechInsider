@@ -12,7 +12,7 @@ interface IHeaderProps {
 
 export const Header = ({ children, onLogout }: IHeaderProps) => {
   return (
-    <header className="header">
+    <header className="app-header">
       <div className="header-container">
         <Logo />
         <nav className="header-container__navigation">{children}</nav>
