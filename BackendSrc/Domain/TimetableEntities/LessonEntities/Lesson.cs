@@ -1,3 +1,5 @@
+using Domain.SubjectEntities;
+using Domain.TeacherEntities;
 using Domain.TimetableEntities.StudentGroupEntities;
 
 namespace Domain.TimetableEntities.LessonEntities
@@ -8,8 +10,11 @@ namespace Domain.TimetableEntities.LessonEntities
         public TimeOnly StartTime { get; init; }
         public TimeOnly EndTime { get; init; }
         public StudentGroup StudentGroup { get; init; }
-        public int SubjectId { get; init; }
-        public int TeacherId { get; init; }
+        public int SubjectId => Subject.Id;
+
+        public Subject Subject { get; init; }
+        public int TeacherId => Teacher.Id;
+        public Teacher Teacher { get; init; }
 
         /*
          * -1 - удаленное занятие
@@ -23,16 +28,16 @@ namespace Domain.TimetableEntities.LessonEntities
             TimeOnly startTime,
             TimeOnly endTime,
             StudentGroup studentGroup,
-            int subjectId,
-            int teacherId,
+            Subject subject,
+            Teacher teacher,
             int classroom )
         {
             LessonType = lessonType;
             StartTime = startTime;
             EndTime = endTime;
             StudentGroup = studentGroup;
-            SubjectId = subjectId;
-            TeacherId = teacherId;
+            Subject = subject;
+            Teacher = teacher;
             Classroom = classroom;
         }
     }

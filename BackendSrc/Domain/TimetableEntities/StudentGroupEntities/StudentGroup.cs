@@ -1,6 +1,6 @@
 ﻿namespace Domain.TimetableEntities.StudentGroupEntities
 {
-    public abstract class StudentGroup
+    public abstract class StudentGroup : Entity
     {
         public abstract StudentGroupType Type { get; }
     }
