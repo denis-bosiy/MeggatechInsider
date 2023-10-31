@@ -1,4 +1,4 @@
-using Core.Models.TimetableEntities.StudentGroupEntities;
+using Domain.TimetableEntities.StudentGroupEntities;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 

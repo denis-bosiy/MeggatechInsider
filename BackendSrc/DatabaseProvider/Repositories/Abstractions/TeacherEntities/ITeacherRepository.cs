@@ -1,4 +1,4 @@
-using Core.Models.TeacherEntities;
+using Domain.TeacherEntities;
 
 namespace DatabaseProvider.Repositories.Abstractions.TeacherEntities;
 

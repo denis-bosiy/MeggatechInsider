@@ -1,5 +1,5 @@
-using Core.Models.TeacherEntities;
 using DatabaseProvider.Repositories.Abstractions.TeacherEntities;
+using Domain.TeacherEntities;
 
 namespace DatabaseProvider.Repositories.Implementations.TeacherEntities;
 
@@ -9,13 +9,8 @@ public class ContractTypeRepository : Repository<ContractType>, IContractTypeRep
     {
     }
 
-    public List<ContractType> GetAll()
-    {
-        return Entities.ToList();
-    }
+    public List<ContractType> GetAll() => Entities.ToList();
 
-    public ContractType GetById( int id )
-    {
-        return Entities.FirstOrDefault( ct => ct.Id == id ) ?? throw new InvalidOperationException();
-    }
+    public ContractType GetById( int id ) =>
+        Entities.FirstOrDefault( ct => ct.Id == id ) ?? throw new InvalidOperationException();
 }

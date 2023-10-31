@@ -1,5 +1,5 @@
-using Core.Models.TeacherEntities;
 using DatabaseProvider.Repositories.Abstractions.TeacherEntities;
+using Domain.TeacherEntities;
 
 namespace DatabaseProvider.Repositories.Implementations.TeacherEntities;
 
@@ -9,13 +9,8 @@ public class EducationRepository : Repository<Education>, IEducationRepository
     {
     }
 
-    public List<Education> GetAll()
-    {
-        return Entities.ToList();
-    }
+    public List<Education> GetAll() => Entities.ToList();
 
-    public Education GetById( int id )
-    {
-        return Entities.FirstOrDefault( e => e.Id == id ) ?? throw new InvalidOperationException();
-    }
+    public Education GetById( int id ) =>
+        Entities.FirstOrDefault( e => e.Id == id ) ?? throw new InvalidOperationException();
 }

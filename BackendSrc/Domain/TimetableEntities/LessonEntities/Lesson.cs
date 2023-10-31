@@ -4,11 +4,12 @@ using Domain.TimetableEntities.StudentGroupEntities;
 
 namespace Domain.TimetableEntities.LessonEntities
 {
-    public class Lesson
+    public class Lesson : Entity
     {
         public LessonType LessonType { get; init; }
         public TimeOnly StartTime { get; init; }
         public TimeOnly EndTime { get; init; }
+        public int StudentGroupId => StudentGroup.Id;
         public StudentGroup StudentGroup { get; init; }
         public int SubjectId => Subject.Id;
 

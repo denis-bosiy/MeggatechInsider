@@ -1,4 +1,4 @@
-using Core.Models.TeacherEntities;
+using Domain.TeacherEntities;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
@@ -10,8 +10,8 @@ public class TeacherConfiguration : IEntityTypeConfiguration<Teacher>
     {
         builder.ToTable( "Teacher" ).HasKey( t => t.Id );
 
-        builder.Property( t => t.Name ).IsRequired();
-        builder.Property( t => t.CategoryAffectsOnSalary ).IsRequired().HasDefaultValue( false );
+        builder.Property( t => t.TeacherName ).IsRequired();
+        builder.Property( t => t.TeacherCategoryAffectsOnSalary ).IsRequired().HasDefaultValue( false );
         builder.Property( t => t.ContractTypeAffectsOnSalary ).IsRequired().HasDefaultValue( false );
         builder.Property( t => t.IsClassTeacher ).IsRequired().HasDefaultValue( false );
         builder.Property( t => t.AdvancedSubjectsAffectOnSalary ).IsRequired().HasDefaultValue( false );
@@ -22,7 +22,7 @@ public class TeacherConfiguration : IEntityTypeConfiguration<Teacher>
 
         builder.HasOne( t => t.TeacherCategory )
             .WithMany( tc => tc.Teachers )
-            .HasForeignKey( t => t.CategoryId )
+            .HasForeignKey( t => t.TeacherCategoryId )
             .OnDelete( DeleteBehavior.NoAction );
 
         builder.HasOne( t => t.ContractType )

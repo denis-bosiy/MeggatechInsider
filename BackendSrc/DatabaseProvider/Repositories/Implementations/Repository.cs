@@ -1,43 +1,28 @@
 using DatabaseProvider.Repositories.Abstractions;
 using Microsoft.EntityFrameworkCore;
 
-namespace DatabaseProvider.Repositories.Implementations
+namespace DatabaseProvider.Repositories.Implementations;
+
+public class Repository<TEntity> : IRepository<TEntity>
+    where TEntity : class
 {
-    public class Repository<TEntity> : IRepository<TEntity>
-        where TEntity : class
+    private readonly ApplicationContext _context;
+
+    public Repository( ApplicationContext context )
     {
-        protected DbSet<TEntity> Entities { get; }
-        private readonly ApplicationContext _context;
-
-        public Repository( ApplicationContext context )
-        {
-            _context = context;
-            Entities = _context.Set<TEntity>();
-        }
-
-        public void Add( TEntity entity )
-        {
-            Entities.Add( entity );
-        }
-
-        public void Add( IEnumerable<TEntity> entities )
-        {
-            Entities.AddRange( entities );
-        }
-
-        public void Remove( TEntity entity )
-        {
-            Entities.Remove( entity );
-        }
-
-        public void Remove( IEnumerable<TEntity> entities )
-        {
-            Entities.RemoveRange( entities );
-        }
-
-        public void SaveChanges()
-        {
-            _context.SaveChanges();
-        }
+        _context = context;
+        Entities = _context.Set<TEntity>();
     }
+
+    protected DbSet<TEntity> Entities { get; }
+
+    public void Add( TEntity entity ) => Entities.Add( entity );
+
+    public void Add( IEnumerable<TEntity> entities ) => Entities.AddRange( entities );
+
+    public void Remove( TEntity entity ) => Entities.Remove( entity );
+
+    public void Remove( IEnumerable<TEntity> entities ) => Entities.RemoveRange( entities );
+
+    public void SaveChanges() => _context.SaveChanges();
 }

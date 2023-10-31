@@ -1,4 +1,4 @@
-using Core.Models.TimetableEntities.LessonEntities;
+using Domain.TimetableEntities.LessonEntities;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 

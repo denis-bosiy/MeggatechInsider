@@ -1,5 +1,5 @@
-using Core.Models.TeacherEntities;
 using DatabaseProvider.Repositories.Abstractions.TeacherEntities;
+using Domain.TeacherEntities;
 
 namespace DatabaseProvider.Repositories.Implementations.TeacherEntities;
 
@@ -9,13 +9,8 @@ public class TeacherCategoryRepository : Repository<TeacherCategory>, ITeacherCa
     {
     }
 
-    public List<TeacherCategory> GetAll()
-    {
-        return Entities.ToList();
-    }
+    public List<TeacherCategory> GetAll() => Entities.ToList();
 
-    public TeacherCategory GetById( int id )
-    {
-        return Entities.FirstOrDefault( tc => tc.Id == id ) ?? throw new InvalidOperationException();
-    }
+    public TeacherCategory GetById( int id ) =>
+        Entities.FirstOrDefault( tc => tc.Id == id ) ?? throw new InvalidOperationException();
 }

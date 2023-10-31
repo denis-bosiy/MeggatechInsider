@@ -1,4 +1,4 @@
-using Core.Models.SubjectEntities;
+using Domain.SubjectEntities;
 
 namespace DatabaseProvider.Repositories.Abstractions.SubjectEntities;
 

@@ -1,4 +1,4 @@
-using Core.Models.TimetableEntities.LessonEntities;
+using Domain.TimetableEntities.LessonEntities;
 
 namespace DatabaseProvider.Repositories.Abstractions.TimetableEntities.LessonEntities;
 

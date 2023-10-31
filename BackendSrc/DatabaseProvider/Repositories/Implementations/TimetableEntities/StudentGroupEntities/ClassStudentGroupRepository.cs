@@ -1,5 +1,5 @@
-using Core.Models.TimetableEntities.StudentGroupEntities;
 using DatabaseProvider.Repositories.Abstractions.TimetableEntities.StudentGroupEntities;
+using Domain.TimetableEntities.StudentGroupEntities;
 
 namespace DatabaseProvider.Repositories.Implementations.TimetableEntities.StudentGroupEntities;
 
@@ -9,13 +9,7 @@ public class ClassStudentGroupRepository<T> : Repository<T>, IClassStudentGroupR
     {
     }
 
-    public List<T> GetAll()
-    {
-        return Entities.ToList();
-    }
+    public List<T> GetAll() => Entities.ToList();
 
-    public T GetById( int id )
-    {
-        return Entities.FirstOrDefault( sg => sg.Id == id ) ?? throw new InvalidOperationException();
-    }
+    public T GetById( int id ) => Entities.FirstOrDefault( sg => sg.Id == id ) ?? throw new InvalidOperationException();
 }
