@@ -1,0 +1,15 @@
+@import "../../vars";
+
+.page-navigation {
+  background-color: #003fb3cc;
+  display: flex;
+  justify-content: center;
+
+  &__container {
+    display: flex;
+    max-width: $page-width;
+    width: 100%;
+    flex-direction: column;
+    padding: 24px 0;
+  }
+}

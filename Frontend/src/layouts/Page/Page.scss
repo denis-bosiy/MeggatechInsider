@@ -1,0 +1,12 @@
+@import "../../vars";
+
+.page {
+  display: flex;
+  justify-content: center;
+  flex: 1;
+}
+
+.page-content {
+  max-width: 1280px;
+  width: 100%;
+}

@@ -8,3 +8,5 @@ export { ReactComponent as MagnifierIcon } from "./magnifier.svg";
 export { ReactComponent as OpenedEyeIcon } from "./opened-eye.svg";
 export { ReactComponent as PenIcon } from "./pen.svg";
 export { ReactComponent as WarningIcon } from "./warning.svg";
+export { ReactComponent as Logo } from "./logo.svg";
+export { ReactComponent as Logout } from "./logout.svg";
