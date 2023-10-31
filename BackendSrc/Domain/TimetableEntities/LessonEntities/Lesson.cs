@@ -6,23 +6,23 @@ namespace Domain.TimetableEntities.LessonEntities
 {
     public class Lesson : Entity
     {
-        public LessonType LessonType { get; init; }
-        public TimeOnly StartTime { get; init; }
-        public TimeOnly EndTime { get; init; }
+        public LessonType LessonType { get; set; }
+        public TimeOnly StartTime { get; set; }
+        public TimeOnly EndTime { get; set; }
         public int StudentGroupId => StudentGroup.Id;
-        public StudentGroup StudentGroup { get; init; }
+        public StudentGroup StudentGroup { get; set; }
         public int SubjectId => Subject.Id;
 
-        public Subject Subject { get; init; }
+        public Subject Subject { get; set; }
         public int TeacherId => Teacher.Id;
-        public Teacher Teacher { get; init; }
+        public Teacher Teacher { get; set; }
 
         /*
          * -1 - удаленное занятие
          * 0 - кабинет не нужен/не указан
          * любое число > 0 - номер кабинета
          */
-        public int Classroom { get; init; }
+        public int Classroom { get; set; }
 
         public Lesson(
             LessonType lessonType,

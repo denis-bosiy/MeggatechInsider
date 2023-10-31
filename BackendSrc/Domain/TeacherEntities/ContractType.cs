@@ -2,7 +2,7 @@ namespace Domain.TeacherEntities
 {
     public class ContractType : Entity
     {
-        public string ContractTypeName { get; init; }
+        public string ContractTypeName { get; set; }
 
         public List<Teacher> Teachers { get; set; }
 

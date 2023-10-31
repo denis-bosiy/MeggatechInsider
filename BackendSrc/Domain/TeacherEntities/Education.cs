@@ -2,7 +2,7 @@ namespace Domain.TeacherEntities
 {
     public class Education : Entity
     {
-        public string EducationName { get; init; }
+        public string EducationName { get; set; }
 
         public List<Teacher> Teachers { get; set; }
 

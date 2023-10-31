@@ -2,9 +2,9 @@ namespace Domain.SubjectEntities
 {
     public class PaymentType : Entity
     {
-        public string PaymentTypeName { get; init; }
-        
-        public List<Subject> Subjects { get; set; } = new();
+        public string PaymentTypeName { get; set; }
+
+        public List<Subject> Subjects { get; set; }
 
         public PaymentType( string paymentTypeName )
         {

@@ -2,7 +2,7 @@ namespace Domain.SubjectEntities
 {
     public class SubjectCategory : Entity
     {
-        public string SubjectCategoryName { get; init; }
+        public string SubjectCategoryName { get; set; }
 
         public List<Subject> Subjects { get; set; } = new();
 
