@@ -6,7 +6,7 @@
 
         public GenericEntities.Parallel Parallel { get; init; }
 
-        public ParallelStudentGroup( GenericEntities.Parallel parallel ) 
+        public ParallelStudentGroup( GenericEntities.Parallel parallel )
         {
             Parallel = parallel;
         }
