@@ -3,55 +3,61 @@ $default-text-size: 18px;
 $default-line-height: 22px;
 
 // Палитра
-$background-color: #FFF;
+$background-color: #fff;
 $success-color: #218838;
-$success-background-color: #D3E7D7;
+$success-border-focus-color: #19692b;
+$success-background-color: #edf5ef;
+$success-background-color-hover: #d3e7d7;
+$success-background-color-active: #bcdbc3;
 $warning-color: #856404;
-$warning-background-color: #FFFAEB;
-$error-color: #DC3545;
-$error-background-color: #F8D7DA;
+$warning-border-focus-color: #533e00;
+$warning-background-color: #fffaeb;
+$warning-background-color-hover: #fff6da;
+$warning-background-color-active: #fff8e1;
+$error-color: #dc3545;
+$error-border-focus-color: #a0202c;
+$error-background-color: #fceff0;
+$error-background-color-hover: #f8d7da;
+$error-background-color-active: #f5c2c7;
 
 // Кнопки
-$button-secondary: #fd0c;
-$button-secondary-hover: #fd0;
-$button-secondary-focus: #fd08;
 
 // Primary
-$button-primary: #fffc;
-$button-primary-hover: #fff;
-$button-primary-focus: #fff8;
+$primary-button-background-color: #003fb3;
+$primary-button-background-color-hover: #002974;
+$primary-button-background-color-active: #001e56;
+
+// Secondary
+$secondary-button-background-color: #008ae1;
+$secondary-button-background-color-hover: #1d6fc4;
+$secondary-button-background-color-active: #1965b4;
 
 // Default
-$button-default: #9196a183;
-$button-default-hover: #9196a1b6;
-$button-default-focus: #9196a152;
+$default-button-background-color: #fff;
+$default-button-background-color-hover: #e8ebee;
+$default-button-background-color-active: #dbe0e4;
 
-// Blue
-$blue-default: #008ae1;
-$blue-hover: #1d6fc4;
-$blue-focus: #1965b4;
-
-// Dark blue
-$dark-blue-default: #003fb3;
-$dark-blue-hover: #002974;
-$dark-blue-focus: #001e56;
-
-// Grey
-$grey-default: #fff;
-$grey-hover: #e8ebee;
-$grey-focus: #dbe0e4;
+// Icon
+$icon-color: #9196a1;
+$icon-default-opacity: 60%;
+$icon-hover-opacity: 100%;
+$icon-focus-opacity: 20%;
 
 // Типографические цвета
-$link-color: #FD0;
-$text-color: #FFF;
-$alternative-text-color: #4A525A;
+$text-color: #fff;
+$alternative-text-color: #4a525a;
 $warning-text-color: #856404;
 $table-color: #b9b9b9;
+$placeholder-text-color: #979898;
 
-// Darken values
-$hover-darken-value: 10%;
-$focus-darken-value: 20%;
+// Ссылка
+$link-hover-color: #000;
+$link-light-hover-color: #a5b4ce;
+$link-important-color: #fd0;
+$link-important-hover-color: #ffb800;
 
-// Checkbox styles
-$active-checkbox: #dbe0e4;
+// Checkbox, radio стили
+$hover-checkbox: #dbe0e4;
 $focus-checkbox: #e8ebee;
+
+$page-width: 1280px;

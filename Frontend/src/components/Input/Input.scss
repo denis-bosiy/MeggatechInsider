@@ -1,4 +1,5 @@
 @import "../../vars";
+@import "../../styles/mixins/square";
 
 .input {
   width: 100%;
@@ -9,6 +10,10 @@
   line-height: $default-line-height;
   border: none;
   outline: none;
+}
+
+::placeholder {
+  color: $placeholder-text-color;
 }
 
 .input-container {
@@ -23,9 +28,15 @@
   border-bottom: 1px solid transparent;
   border-radius: 6px;
   cursor: text;
-  filter: drop-shadow(1px 1px 1px);
+  box-shadow: 0 1px 4px 0 rgb(0 0 0 / 25%);
   box-sizing: border-box;
   outline: none;
+
+  &__icon {
+    @include square(22px);
+
+    padding: 0;
+  }
 
   &:hover {
     background-color: #f2f4f6;
@@ -45,7 +56,7 @@
     }
   }
 
-  &.-mini {
+  &.-milli {
     padding: 8.5px 10px;
 
     & .input {
@@ -64,7 +75,7 @@
   }
 
   &.-error {
-    filter: drop-shadow(1px 1px 1px $error-color);
+    box-shadow: 0 1px 4px 0 rgb(0 0 0 / 25%);
     border-bottom: 1px solid $error-color;
   }
 }

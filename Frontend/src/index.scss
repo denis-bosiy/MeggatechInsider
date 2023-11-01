@@ -1,5 +1,6 @@
+@import-normalize;
 @import "./vars";
-@import "./styles/table";
+@import "./styles/styles";
 
 // Переменные темы
 :root {
@@ -7,9 +8,10 @@
   --secondary-color: #008ae1;
 }
 
-.icon {
-  padding: 3px;
-  cursor: pointer;
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
 
 body {

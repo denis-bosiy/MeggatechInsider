@@ -1,25 +1,62 @@
+@use "sass:color";
 @import "../../vars";
+@import "../../styles/mixins/square";
 
 .action-button {
+  $module: ".action-button";
+
   display: flex;
   align-items: center;
-  padding: 0 16px 0 12px;
-  height: 48px;
+  padding: 12.5px 15px;
   border-radius: 6px;
-  font-size: 18px;
-  gap: 6px;
+  font-size: $default-text-size;
+  line-height: $default-line-height;
   cursor: pointer;
-  background-color: $grey-default;
+  background-color: $default-button-background-color;
   color: $alternative-text-color;
-  border: none;
+  outline: none;
+  border: 1px solid transparent;
   box-shadow: 0 1px 4px 0 rgb(0 0 0 / 25%);
 
-  &:hover {
-    background-color: $grey-hover;
+  &__icon {
+    @include square(18px);
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-right: 15px;
+    opacity: 0.4;
+
+    &:focus {
+      opacity: 0.2;
+    }
+  }
+
+  &:hover,
+  &:focus {
+    background-color: $default-button-background-color-hover;
+  }
+
+  &:focus {
+    border: 1px solid $alternative-text-color;
+    box-shadow: 0 1px 4px 0 rgb(0 0 0 / 70%);
   }
 
   &:active {
-    background-color: $grey-focus;
+    color: rgba($alternative-text-color, 30%);
+    background-color: $default-button-background-color-active;
+
+    & > #{$module}__icon {
+      opacity: 0.2;
+    }
+  }
+
+  &.-positive,
+  &.-negative,
+  &.-warning {
+    & > #{$module}__icon {
+      opacity: 1;
+    }
   }
 
   &.-positive {
@@ -27,12 +64,23 @@
     border: 1px solid $success-color;
     background-color: $success-background-color;
 
-    &:hover {
-      background-color: darken($success-background-color, $hover-darken-value);
+    &:hover,
+    &:focus {
+      background-color: $success-background-color-hover;
+    }
+
+    &:focus {
+      border: 1px solid $success-border-focus-color;
     }
 
     &:active {
-      background-color: darken($success-background-color, $focus-darken-value);
+      color: rgba($success-color, 30%);
+      border-color: rgba($success-color, 50%);
+      background-color: $success-background-color-active;
+
+      & > #{$module}__icon {
+        opacity: 1;
+      }
     }
   }
 
@@ -41,12 +89,23 @@
     border: 1px solid $error-color;
     background-color: $error-background-color;
 
-    &:hover {
-      background-color: darken($error-background-color, $hover-darken-value);
+    &:hover,
+    &:focus {
+      background-color: $error-background-color-hover;
+    }
+
+    &:focus {
+      border: 1px solid $error-border-focus-color;
     }
 
     &:active {
-      background-color: darken($error-background-color, $focus-darken-value);
+      color: rgba($error-color, 30%);
+      border-color: rgba($error-color, 50%);
+      background-color: $error-background-color-active;
+
+      & > #{$module}__icon {
+        opacity: 1;
+      }
     }
   }
 
@@ -55,12 +114,23 @@
     border: 1px solid $warning-color;
     background-color: $warning-background-color;
 
-    &:hover {
-      background-color: darken($warning-background-color, $hover-darken-value);
+    &:hover,
+    &:focus {
+      background-color: $warning-background-color-hover;
+    }
+
+    &:focus {
+      border: 1px solid $warning-border-focus-color;
     }
 
     &:active {
-      background-color: darken($warning-background-color, $focus-darken-value);
+      color: rgba($warning-color, 30%);
+      border-color: rgba($warning-color, 50%);
+      background-color: $warning-background-color-active;
+
+      & > #{$module}__icon {
+        opacity: 1;
+      }
     }
   }
 }

@@ -1,17 +1,23 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import "./ComponentsPage.scss";
 import Input, { InputSize, InputType } from "../../components/Input/Input";
 import Select, { ISelectOption, SelectSize } from "../../components/Select/Select";
 import Notification from "../../components/Notification/Notification";
-import IconButton from "../../components/IconButton/IconButton";
+import IconButton, { IconButtonType } from "../../components/IconButton/IconButton";
 import { ArrowLeft, GarbageIcon } from "../../icons";
-import Button from "../../components/Button/Button";
+import Button, { ButtonSize, ButtonType } from "../../components/Button/Button";
 import ActionButton, { ActionButtonType } from "../../components/ActionButton/ActionButton";
-import { Link } from "../../components/Link/Link";
+import { Link, LinkType } from "../../components/Link/Link";
 import { CheckBox } from "../../components/CheckBox/CheckBox";
 import { RadioButton } from "../../components/RadioButton/RadioButton";
+import ModalSettingsContext from "../../utils/ModalSettingsContext";
+import AgreementModalView from "../../components/AgreementModalView/AgreementModalView";
+import CommentsModalView from "../../components/CommentsModalView/CommentsModalView";
+import { ScheduleContainerComponent } from "../../components/Schedule/ScheduleContainer";
 
 const ComponentsPage = () => {
+  const { openModal } = useContext(ModalSettingsContext);
+
   const [defaultInputValue, setDefaultInputValue] = useState<string>("");
   const [errorableInputValue, setErrorableInputValue] = useState<string>("");
   const [passwordInputValue, setPasswordInputValue] = useState<string>("");
@@ -28,13 +34,20 @@ const ComponentsPage = () => {
     { id: "saturday", content: "Суббота" },
     { id: "sunday", content: "Воскресенье" }
   ];
-  const [defaultSelectValue, setDefaultSelectValue] = useState<string>("");
-  const [miniSelectValue, setMiniSelectValue] = useState<string>("");
-  const [microSelectValue, setMicroSelectValue] = useState<string>("");
+  const setSelectValue = (val: string) => {
+    console.log(val);
+  };
 
   const logSearchInputValue = () => {
     console.log(searchInputValue);
   };
+
+  const modalComments: { text: string; deleteAction: () => void }[] = [
+    {
+      text: "Прогульщик. Вместо пары решил пойти в бар со своими школьными друзьями. Не видать ему своей зарплаты как и счастья",
+      deleteAction: () => alert("Комментарий удалён")
+    }
+  ];
 
   return (
     <main className="components-page">
@@ -43,23 +56,44 @@ const ComponentsPage = () => {
       <section className="section">
         <h2>Кнопка</h2>
 
-        {/* <IconButton icon={<ArrowLeft />} /> */}
         <Button label="Войти в аккаунт" />
-        {/* <ActionButton label="Hello" icon={<ArrowLeft />} /> */}
 
         <div>
-          <h3>Цветовая схема</h3>
+          <h3>Тип</h3>
 
-          <span className="caption">blue</span>
+          <span className="caption">Primary</span>
           <br />
-          <Button label="Войти в аккаунт" colorScheme="blue" />
+          <Button label="Сделать отчёт" type={ButtonType.Primary} />
           <br />
 
           <hr />
 
-          <span className="caption">dark-blue</span>
+          <span className="caption">Secondary</span>
           <br />
-          <Button label="Войти в аккаунт" colorScheme="dark-blue" />
+          <Button label="Сохранить в Excel" type={ButtonType.Secondary} />
+          <br />
+
+          <hr />
+
+          <span className="caption">Default</span>
+          <br />
+          <Button label="Применить для текущей недели" type={ButtonType.Default} />
+          <br />
+        </div>
+
+        <div>
+          <h3>Размер</h3>
+
+          <span className="caption">Kilo</span>
+          <br />
+          <Button label="Сделать отчёт" size={ButtonSize.Kilo} />
+          <br />
+
+          <hr />
+
+          <span className="caption">Default</span>
+          <br />
+          <Button label="Сделать отчёт" />
           <br />
         </div>
       </section>
@@ -133,16 +167,38 @@ const ComponentsPage = () => {
         <div>
           <h3>Тип</h3>
 
-          <span className="caption">primary</span>
+          <span className="caption">secondary</span>
           <br />
-          <IconButton icon={<GarbageIcon />} type="primary" />
+          <div style={{ backgroundColor: "black" }}>
+            <IconButton icon={<GarbageIcon />} type={IconButtonType.Secondary} />
+          </div>
           <br />
 
           <hr />
 
-          <span className="caption">secondary</span>
+          <span className="caption">important</span>
           <br />
-          <IconButton icon={<GarbageIcon />} type="secondary" />
+          <div style={{ backgroundColor: "black" }}>
+            <IconButton icon={<GarbageIcon />} type={IconButtonType.Important} />
+          </div>
+          <br />
+
+          <hr />
+
+          <span className="caption">white</span>
+          <br />
+          <div style={{ backgroundColor: "black" }}>
+            <IconButton icon={<GarbageIcon />} type={IconButtonType.White} />
+          </div>
+          <br />
+
+          <hr />
+
+          <span className="caption">default</span>
+          <br />
+          <div>
+            <IconButton icon={<GarbageIcon />} />
+          </div>
           <br />
         </div>
       </section>
@@ -150,35 +206,35 @@ const ComponentsPage = () => {
       <section className="section">
         <h2>Ссылка</h2>
 
-        <div style={{ backgroundColor: "black" }}>
+        <div>
           <Link path="/" label="На главную страницу" />
         </div>
         <p className="description"></p>
 
         <div>
-          <h3>Режим</h3>
+          <h3>Тип</h3>
 
           <span className="caption">Светлый</span>
           <br />
           <div style={{ backgroundColor: "black" }}>
-            <Link path="/" label="На главную страницу" mode="light" />
+            <Link path="/" label="На главную страницу" type={LinkType.Light} />
           </div>
           <br />
 
           <hr />
 
-          <span className="caption">Тёмный</span>
-          <br />
-          <Link path="/" label="На главную страницу" mode="dark" />
-          <br />
-
-          <hr />
-
-          <span className="caption">Без режима</span>
+          <span className="caption">Важный</span>
           <br />
           <div style={{ backgroundColor: "black" }}>
-            <Link path="/" label="На главную страницу" />
+            <Link path="/" label="На главную страницу" type={LinkType.Important} />
           </div>
+          <br />
+
+          <hr />
+
+          <span className="caption">Стандартный</span>
+          <br />
+          <Link path="/" label="На главную страницу" />
           <br />
         </div>
       </section>
@@ -201,18 +257,9 @@ const ComponentsPage = () => {
         <span>Заголовки разного уровня</span>
 
         <div>
-          <h1>Илиада</h1>
-          <h2>Песнь первая</h2>
-          <h3>Язва.Гнев.</h3>
-          <h4>Гнев, боги­ня, вос­пой Ахил­ле­са, Пеле­е­ва сына</h4>
-          <h5>
-            Все изъ­яви­ли согла­сие кри­ком все­об­щим ахей­цы Честь жре­цу ока­зать и при­нять бли­ста­тель­ный выкуп
-          </h5>
-          <h6>
-            Ста­рец, чтоб я нико­гда тебя не видал пред суда­ми! Здесь и теперь ты не мед­ли и впредь не дер­зай
-            пока­зать­ся! Или тебя не изба­вит ни скиптр, ни венец Апол­ло­на. Деве сво­бо­ды не дам я; она обвет­ша­ет
-            в нево­ле
-          </h6>
+          <h1 className="h1">Илиада</h1>
+          <h2 className="h2">Песнь первая</h2>
+          <h3 className="h3">Язва.Гнев.</h3>
         </div>
       </section>
 
@@ -249,8 +296,8 @@ const ComponentsPage = () => {
         <div>
           <h3>Размер</h3>
 
-          <div className="caption">Мини</div>
-          <Input value={miniInputValue} placeholder="Логин" onValueChange={setMiniInputValue} size={InputSize.Mini} />
+          <div className="caption">Милли</div>
+          <Input value={miniInputValue} placeholder="Логин" onValueChange={setMiniInputValue} size={InputSize.Milli} />
           <br />
 
           <hr />
@@ -282,14 +329,14 @@ const ComponentsPage = () => {
       <section className="section">
         <h2>Cелект</h2>
 
-        <Select options={selectOptions} onValueChange={setDefaultSelectValue} />
+        <Select options={selectOptions} onValueChange={setSelectValue} />
         <p className="description">Дефолтное значение — первое значение в списке</p>
 
         <div>
           <h3>Размер</h3>
 
-          <div className="caption">Мини</div>
-          <Select options={selectOptions} onValueChange={setMiniSelectValue} size={SelectSize.Mini} />
+          <div className="caption">Милли</div>
+          <Select options={selectOptions} onValueChange={setSelectValue} size={SelectSize.Milli} />
           <br />
 
           <hr />
@@ -297,7 +344,7 @@ const ComponentsPage = () => {
           <div className="caption" title="Удалить">
             Микро
           </div>
-          <Select options={selectOptions} onValueChange={setMicroSelectValue} size={SelectSize.Micro} />
+          <Select options={selectOptions} onValueChange={setSelectValue} size={SelectSize.Micro} />
           <br />
         </div>
       </section>
@@ -317,32 +364,32 @@ const ComponentsPage = () => {
         <table className="table">
           <thead className="header">
             <tr className="row">
-              <td className="cell -filter" rowSpan={2}>
+              <th className="cell -filter" rowSpan={2}>
                 Предмет
-              </td>
-              <td className="cell" colSpan={4}>
+              </th>
+              <th className="cell" colSpan={4}>
                 10-1
-              </td>
-              <td className="cell" colSpan={4}>
+              </th>
+              <th className="cell" colSpan={4}>
                 10-2
-              </td>
-              <td className="cell" colSpan={4}>
+              </th>
+              <th className="cell" colSpan={4}>
                 10-3
-              </td>
+              </th>
             </tr>
             <tr className="row -filter">
-              <td className="cell">Часов в нед. распр-но</td>
-              <td className="cell">Часов в неделю по плану</td>
-              <td className="cell">Долг</td>
-              <td className="cell">Часов сверх плана</td>
-              <td className="cell">Часов в нед. распр-но</td>
-              <td className="cell">Часов в неделю по плану</td>
-              <td className="cell">Долг</td>
-              <td className="cell">Часов сверх плана</td>
-              <td className="cell">Часов в нед. распр-но</td>
-              <td className="cell">Часов в неделю по плану</td>
-              <td className="cell">Долг</td>
-              <td className="cell">Часов сверх плана</td>
+              <th className="cell">Часов в нед. распр-но</th>
+              <th className="cell">Часов в неделю по плану</th>
+              <th className="cell">Долг</th>
+              <th className="cell">Часов сверх плана</th>
+              <th className="cell">Часов в нед. распр-но</th>
+              <th className="cell">Часов в неделю по плану</th>
+              <th className="cell">Долг</th>
+              <th className="cell">Часов сверх плана</th>
+              <th className="cell">Часов в нед. распр-но</th>
+              <th className="cell">Часов в неделю по плану</th>
+              <th className="cell">Долг</th>
+              <th className="cell">Часов сверх плана</th>
             </tr>
           </thead>
           <tbody>
@@ -400,74 +447,74 @@ const ComponentsPage = () => {
         <table className="table">
           <thead className="header">
             <tr className="row">
-              <td className="cell" colSpan={9}>
+              <th className="cell" colSpan={9}>
                 &nbsp;
-              </td>
-              <td className="cell" colSpan={11}>
+              </th>
+              <th className="cell" colSpan={11}>
                 1 четверть
-              </td>
-              <td className="cell" colSpan={9}>
+              </th>
+              <th className="cell" colSpan={9}>
                 2 четверть
-              </td>
-              <td className="cell" colSpan={9}>
+              </th>
+              <th className="cell" colSpan={9}>
                 3 четверть
-              </td>
-              <td className="cell" colSpan={13}>
+              </th>
+              <th className="cell" colSpan={13}>
                 4 четверть
-              </td>
+              </th>
             </tr>
             <tr className="row">
-              <td className="cell -filter">Предмет</td>
-              <td className="cell -filter">Б/Бв</td>
-              <td className="cell -filter">Тип</td>
-              <td className="cell -filter -vertical">Ч. групп</td>
-              <td className="cell -filter -vertical">Ср. в год</td>
-              <td className="cell -filter -vertical">Ср. в период</td>
-              <td className="cell -filter -vertical">Ч. всего</td>
-              <td className="cell -filter -vertical">Ч. ожидается</td>
-              <td className="cell -filter -vertical">Ч. по плану</td>
-              <td className="cell -vertical">7 сент. №1</td>
-              <td className="cell -vertical">14 сент. №2</td>
-              <td className="cell -vertical">21 сент. №3</td>
-              <td className="cell -vertical">№4</td>
-              <td className="cell -vertical">№4</td>
-              <td className="cell -vertical">№4</td>
-              <td className="cell -vertical">№4</td>
-              <td className="cell -vertical">№4</td>
-              <td className="cell -vertical">№4</td>
-              <td className="cell -vertical">№4</td>
-              <td className="cell">&nbsp;</td>
-              <td className="cell -vertical">№4</td>
-              <td className="cell -vertical">№4</td>
-              <td className="cell -vertical">№4</td>
-              <td className="cell -vertical">№4</td>
-              <td className="cell -vertical">№4</td>
-              <td className="cell -vertical">№4</td>
-              <td className="cell -vertical">№4</td>
-              <td className="cell -vertical">№4</td>
-              <td className="cell">&nbsp;</td>
-              <td className="cell -vertical">№4</td>
-              <td className="cell -vertical">№4</td>
-              <td className="cell -vertical">№4</td>
-              <td className="cell -vertical">№4</td>
-              <td className="cell -vertical">№4</td>
-              <td className="cell -vertical">№4</td>
-              <td className="cell -vertical">№4</td>
-              <td className="cell -vertical">№4</td>
-              <td className="cell">&nbsp;</td>
-              <td className="cell -vertical">№4</td>
-              <td className="cell -vertical">№4</td>
-              <td className="cell -vertical">№4</td>
-              <td className="cell -vertical">№4</td>
-              <td className="cell -vertical">№4</td>
-              <td className="cell -vertical">№4</td>
-              <td className="cell -vertical">№4</td>
-              <td className="cell -vertical">№4</td>
-              <td className="cell -vertical">24 мая №35</td>
-              <td className="cell">&nbsp;</td>
-              <td className="cell -filter">Ч. 1 пг.</td>
-              <td className="cell -filter">Ч. 2 пг.</td>
-              <td className="cell -vertical">Продолжить по первым 2 неделям</td>
+              <th className="cell -filter">Предмет</th>
+              <th className="cell -filter">Б/Бв</th>
+              <th className="cell -filter">Тип</th>
+              <th className="cell -filter -vertical">Ч. групп</th>
+              <th className="cell -filter -vertical">Ср. в год</th>
+              <th className="cell -filter -vertical">Ср. в период</th>
+              <th className="cell -filter -vertical">Ч. всего</th>
+              <th className="cell -filter -vertical">Ч. ожидается</th>
+              <th className="cell -filter -vertical">Ч. по плану</th>
+              <th className="cell -vertical">7 сент. №1</th>
+              <th className="cell -vertical">14 сент. №2</th>
+              <th className="cell -vertical">21 сент. №3</th>
+              <th className="cell -vertical">№4</th>
+              <th className="cell -vertical">№4</th>
+              <th className="cell -vertical">№4</th>
+              <th className="cell -vertical">№4</th>
+              <th className="cell -vertical">№4</th>
+              <th className="cell -vertical">№4</th>
+              <th className="cell -vertical">№4</th>
+              <th className="cell">&nbsp;</th>
+              <th className="cell -vertical">№4</th>
+              <th className="cell -vertical">№4</th>
+              <th className="cell -vertical">№4</th>
+              <th className="cell -vertical">№4</th>
+              <th className="cell -vertical">№4</th>
+              <th className="cell -vertical">№4</th>
+              <th className="cell -vertical">№4</th>
+              <th className="cell -vertical">№4</th>
+              <th className="cell">&nbsp;</th>
+              <th className="cell -vertical">№4</th>
+              <th className="cell -vertical">№4</th>
+              <th className="cell -vertical">№4</th>
+              <th className="cell -vertical">№4</th>
+              <th className="cell -vertical">№4</th>
+              <th className="cell -vertical">№4</th>
+              <th className="cell -vertical">№4</th>
+              <th className="cell -vertical">№4</th>
+              <th className="cell">&nbsp;</th>
+              <th className="cell -vertical">№4</th>
+              <th className="cell -vertical">№4</th>
+              <th className="cell -vertical">№4</th>
+              <th className="cell -vertical">№4</th>
+              <th className="cell -vertical">№4</th>
+              <th className="cell -vertical">№4</th>
+              <th className="cell -vertical">№4</th>
+              <th className="cell -vertical">№4</th>
+              <th className="cell -vertical">24 мая №35</th>
+              <th className="cell">&nbsp;</th>
+              <th className="cell -filter">Ч. 1 пг.</th>
+              <th className="cell -filter">Ч. 2 пг.</th>
+              <th className="cell -vertical">Продолжить по первым 2 неделям</th>
             </tr>
           </thead>
           <tbody>
@@ -536,6 +583,31 @@ const ComponentsPage = () => {
             </tr>
           </tbody>
         </table>
+      </section>
+
+      <section className="section">
+        <h2>Модальное окно</h2>
+
+        <Button
+          label="Открыть модальное окно с подтверждением"
+          onClick={() => openModal("Удалить", <AgreementModalView proceedAction={() => alert("Объект удалён")} />)}
+        />
+
+        <Button
+          label="Открыть модальное окно с комментариями"
+          onClick={() =>
+            openModal(
+              "Комментарии",
+              <CommentsModalView comments={modalComments} addAction={() => alert("Комментарий добавлен")} />
+            )
+          }
+        />
+      </section>
+
+      <section className="section">
+        <h2>Расписание</h2>
+
+        <ScheduleContainerComponent />
       </section>
     </main>
   );

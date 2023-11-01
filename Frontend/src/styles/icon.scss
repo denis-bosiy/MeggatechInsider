@@ -1,0 +1,8 @@
+@import "../vars";
+
+.icon {
+  padding: 3px;
+  color: $icon-color;
+  opacity: $icon-default-opacity;
+  cursor: pointer;
+}
