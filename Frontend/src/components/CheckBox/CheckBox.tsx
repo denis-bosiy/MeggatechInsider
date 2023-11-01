@@ -12,8 +12,8 @@ export const CheckBox = ({ checked, onChange }: ICheckBoxProps) => {
   };
 
   return (
-    <label className="label">
-      <input className="checkbox" type="checkbox" checked={checked} onChange={handleCheck} />
+    <label className="checkbox-label" tabIndex={0}>
+      <input className="checkbox" type="checkbox" checked={checked} onChange={handleCheck} tabIndex={-1} />
       <span className="checkmark"></span>
     </label>
   );

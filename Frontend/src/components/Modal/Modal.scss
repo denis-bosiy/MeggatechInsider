@@ -1,0 +1,51 @@
+@import "../../vars";
+@import "../../styles/mixins/square";
+
+.overlay {
+  @include square(100%);
+
+  position: fixed;
+  top: 0;
+  left: 0;
+  background-color: rgba(#000, 0.5);
+  z-index: 1000;
+
+  &.-hidden {
+    display: none;
+  }
+}
+
+.modal {
+  position: fixed;
+  top: 33%;
+  left: 50%;
+  transform: translate(calc(-50% - 60px), -33%);
+  width: calc(100% - 120px);
+  margin: 60px;
+  max-width: 800px;
+  color: $text-color;
+  border-radius: 6px;
+  z-index: 1001;
+
+  &__header {
+    position: relative;
+    height: 60px;
+    width: 100%;
+    padding: 15px 25px;
+    border-radius: 6px 6px 0 0;
+    background-color: $primary-button-background-color;
+  }
+
+  &__close-button {
+    position: absolute;
+    top: 7.5px;
+    right: 15px;
+  }
+
+  &__content {
+    padding: 29px 25px;
+    color: $alternative-text-color;
+    background-color: $background-color;
+    border-radius: 0 0 6px 6px;
+  }
+}
