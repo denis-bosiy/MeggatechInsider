@@ -1,4 +1,4 @@
-using Core.Models.TeacherEntities;
+using Domain.TeacherEntities;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
@@ -10,6 +10,6 @@ public class TeacherCategoryConfiguration : IEntityTypeConfiguration<TeacherCate
     {
         builder.ToTable( "TeacherCategory" ).HasKey( tc => tc.Id );
 
-        builder.Property( tc => tc.Name );
+        builder.Property( tc => tc.TeacherCategoryName );
     }
 }

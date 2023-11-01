@@ -1,21 +1,16 @@
-using Core.Models.SubjectEntities;
 using DatabaseProvider.Repositories.Abstractions.SubjectEntities;
+using Domain.SubjectEntities;
 
 namespace DatabaseProvider.Repositories.Implementations.SubjectEntities;
 
 public class SubjectTypeRepository : Repository<SubjectType>, ISubjectTypeRepository
 {
-    public SubjectTypeRepository(ApplicationContext context) : base(context)
+    public SubjectTypeRepository( ApplicationContext context ) : base( context )
     {
     }
 
-    public List<SubjectType> GetAll()
-    {
-        return Entities.ToList();
-    }
+    public List<SubjectType> GetAll() => Entities.ToList();
 
-    public SubjectType GetById( int id )
-    {
-        return Entities.FirstOrDefault( st => st.Id == id ) ?? throw new InvalidOperationException();
-    }
+    public SubjectType GetById( int id ) =>
+        Entities.FirstOrDefault( st => st.Id == id ) ?? throw new InvalidOperationException();
 }

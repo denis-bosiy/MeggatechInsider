@@ -1,4 +1,4 @@
-using Core.Models.SubjectEntities;
+using Domain.SubjectEntities;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
@@ -10,7 +10,7 @@ public class SubjectConfiguration : IEntityTypeConfiguration<Subject>
     {
         builder.ToTable( "Subject" ).HasKey( s => s.Id );
 
-        builder.Property( s => s.Name )
+        builder.Property( s => s.SubjectName )
             .IsRequired()
             .HasMaxLength( 128 );
 
@@ -25,14 +25,14 @@ public class SubjectConfiguration : IEntityTypeConfiguration<Subject>
             .HasForeignKey( s => s.PaymentTypeId )
             .OnDelete( DeleteBehavior.NoAction );
 
-        builder.HasOne( s => s.Category )
+        builder.HasOne( s => s.SubjectCategory )
             .WithMany( c => c.Subjects )
-            .HasForeignKey( s => s.CategoryId )
+            .HasForeignKey( s => s.SubjectCategoryId )
             .OnDelete( DeleteBehavior.NoAction );
 
-        builder.HasOne( s => s.Type )
+        builder.HasOne( s => s.SubjectType )
             .WithMany( t => t.Subjects )
-            .HasForeignKey( s => s.TypeId )
+            .HasForeignKey( s => s.SubjectTypeId )
             .OnDelete( DeleteBehavior.NoAction );
     }
 }

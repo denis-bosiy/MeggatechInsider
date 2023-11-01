@@ -1,4 +1,4 @@
-using Core.Models.SubjectEntities;
+using Domain.SubjectEntities;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
@@ -10,6 +10,6 @@ public class SubjectCategoryConfiguration : IEntityTypeConfiguration<SubjectCate
     {
         builder.ToTable( "SubjectCategory" ).HasKey( s => s.Id );
 
-        builder.Property( s => s.Name ).IsRequired().HasMaxLength( 50 );
+        builder.Property( s => s.SubjectCategoryName ).IsRequired().HasMaxLength( 50 );
     }
 }

@@ -1,32 +1,39 @@
+using Domain.TimetableEntities.LessonEntities;
+
 namespace Domain.TeacherEntities
 {
-    public class Teacher
+    public class Teacher : Entity
     {
-        public string TeacherName { get; init; }
-        public TeacherCategory TeacherCategory { get; init; }
-        public bool TeacherCategoryAffectsOnSalary { get; init; }
-        public ContractType ContractType { get; init; }
-        public bool ContractTypeAffectsOnSalary { get; init; }
-        public Education Education { get; init; }
-        public bool IsClassTeacher { get; init; }
-        public bool AdvancedSubjectsAffectOnSalary { get; init; }
-        public bool EgeAffectsOnSalary { get; init; }
-        public DateOnly EmploymentDate { get; init; }
-        public int ExperienceInYearsOnEmploymentDate { get; init; }
-        public DateOnly BirthdayDate { get; init; }
+        public string TeacherName { get; set; }
+        public int TeacherCategoryId => TeacherCategory.Id;
+        public TeacherCategory TeacherCategory { get; set; }
+        public bool TeacherCategoryAffectsOnSalary { get; set; }
+        public int ContractTypeId => ContractType.Id;
+        public ContractType ContractType { get; set; }
+        public bool ContractTypeAffectsOnSalary { get; set; }
+        public int EducationId => Education.Id;
+        public Education Education { get; set; }
+        public bool IsClassTeacher { get; set; }
+        public bool AdvancedSubjectsAffectOnSalary { get; set; }
+        public bool EgeAffectsOnSalary { get; set; }
+        public DateOnly EmploymentDate { get; set; }
+        public int ExperienceInYearsOnEmploymentDate { get; set; }
+        public DateOnly BirthdayDate { get; set; }
 
-        public Teacher( 
-            string teacherName, 
-            TeacherCategory teacherCategory, 
-            bool teacherCategoryAffectsOnSalary, 
-            ContractType contractType, 
-            bool contractTypeAffectsOnSalary, 
-            Education education, 
-            bool isClassTeacher, 
-            bool advancedSubjectsAffectOnSalary, 
-            bool egeAffectsOnSalary, 
-            DateOnly employmentDate, 
-            int experienceInYearsOnEmploymentDate, 
+        public List<Lesson> Lessons { get; set; }
+
+        public Teacher(
+            string teacherName,
+            TeacherCategory teacherCategory,
+            bool teacherCategoryAffectsOnSalary,
+            ContractType contractType,
+            bool contractTypeAffectsOnSalary,
+            Education education,
+            bool isClassTeacher,
+            bool advancedSubjectsAffectOnSalary,
+            bool egeAffectsOnSalary,
+            DateOnly employmentDate,
+            int experienceInYearsOnEmploymentDate,
             DateOnly birthdayDate )
         {
             TeacherName = teacherName;

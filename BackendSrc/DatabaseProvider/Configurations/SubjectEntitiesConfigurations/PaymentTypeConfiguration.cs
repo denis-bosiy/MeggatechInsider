@@ -1,4 +1,4 @@
-using Core.Models.SubjectEntities;
+using Domain.SubjectEntities;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
@@ -10,6 +10,6 @@ public class PaymentTypeConfiguration : IEntityTypeConfiguration<PaymentType>
     {
         builder.ToTable( "PaymentType" ).HasKey( b => b.Id );
 
-        builder.Property( b => b.Name ).IsRequired().HasMaxLength( 50 );
+        builder.Property( b => b.PaymentTypeName ).IsRequired().HasMaxLength( 50 );
     }
 }

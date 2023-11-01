@@ -1,4 +1,4 @@
-using Core.Models.TeacherEntities;
+using Domain.TeacherEntities;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
@@ -10,6 +10,6 @@ public class EducationConfiguration : IEntityTypeConfiguration<Education>
     {
         builder.ToTable( "TeacherEducation" ).HasKey( e => e.Id );
 
-        builder.Property( e => e.Name ).IsRequired();
+        builder.Property( e => e.EducationName ).IsRequired();
     }
 }

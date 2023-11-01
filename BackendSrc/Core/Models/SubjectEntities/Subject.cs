@@ -1,4 +1,5 @@
 using Core.Models.TimetableEntities.LessonEntities;
+using Domain;
 
 namespace Core.Models.SubjectEntities;
 
@@ -16,6 +17,6 @@ public class Subject : Entity
     public int ExpectedGroupsCountForTenthClasses { get; set; }
     public int ExpectedHoursPerWeekForEleventhClasses { get; set; }
     public int IsEge { get; set; }
-    
+
     public List<Lesson> Lessons { get; set; }
 }
