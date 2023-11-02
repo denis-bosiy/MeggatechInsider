@@ -78,6 +78,12 @@
       background-color: rgba($table-color, 0.6);
     }
   }
+
+  &:last-child {
+    .cell {
+      border-bottom: 0;
+    }
+  }
 }
 
 .header {
