@@ -1,11 +1,11 @@
 using System.Runtime.Serialization;
 
-namespace Api.Dto.SearchResponse;
+namespace Api.Models.EducationalPlan;
 
 [DataContract]
-public class TeachersResponseDto
+public class TeacherDto
 {
-    public TeachersResponseDto(
+    public TeacherDto(
         string teacherName,
         string teacherCategoryName,
         bool teacherCategoryAffectsOnSalary,

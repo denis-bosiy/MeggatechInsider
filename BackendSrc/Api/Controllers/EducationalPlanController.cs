@@ -1,4 +1,3 @@
-using Api.Dto.SearchRequest;
 using Api.Mappers;
 using Domain.TeacherEntities;
 using Microsoft.AspNetCore.Mvc;
@@ -10,7 +9,7 @@ namespace Api.Controllers;
 public class EducationalPlanController : ControllerBase
 {
     [HttpGet( "teachers" )]
-    public IActionResult SearchTeachers( TeachersDto teachersDto )
+    public IActionResult SearchTeachers( [FromQuery] string year )
     {
         // работаем с сервисом, который нам найдет учителей по переданной Dto
 

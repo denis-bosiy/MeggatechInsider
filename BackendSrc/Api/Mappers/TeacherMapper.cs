@@ -1,11 +1,11 @@
-using Api.Dto.SearchResponse;
+using Api.Models.EducationalPlan;
 using Domain.TeacherEntities;
 
 namespace Api.Mappers;
 
-public static class TeachersResponseMapper
+public static class TeacherMapper
 {
-    private static TeachersResponseDto Map( this Teacher teacher ) =>
+    private static TeacherDto Map( this Teacher teacher ) =>
         new(
             teacher.TeacherName,
             teacher.TeacherCategory.TeacherCategoryName,
@@ -21,6 +21,6 @@ public static class TeachersResponseMapper
             teacher.ExperienceInYearsOnEmploymentDate, // TODO: нужно ли здесь учитывать суммарный опыт?
             teacher.ExperienceInYearsOnEmploymentDate);
 
-    public static IReadOnlyList<TeachersResponseDto> Map( this IEnumerable<Teacher> teachers ) =>
+    public static IReadOnlyList<TeacherDto> Map( this IEnumerable<Teacher> teachers ) =>
         teachers.Select( Map ).ToList();
 }
