@@ -4,6 +4,7 @@ import SignInPage from "./pages/SignInPage/SignInPage";
 import { ModalSettingsProvider } from "./utils/ModalSettingsContext";
 import Modal from "./components/Modal/Modal";
 import ComponentsPage from "./pages/ComponentsPage/ComponentsPage";
+import BasicSettingsPage from "./pages/SettingsPage/BasicSettingsPage";
 import Root from "./pages/Root";
 import TestPage from "./pages/TestPage/TestPage";
 import { Provider } from "react-redux";
@@ -19,6 +20,7 @@ const App = (): React.JSX.Element => {
               <Route path="login" element={<SignInPage />} />
               <Route path="components" element={<ComponentsPage />} />
               <Route path="test-redux" element={<TestPage />} />
+              <Route path="settings" element={<BasicSettingsPage />} />
             </Route>
           </Routes>
         </Router>
