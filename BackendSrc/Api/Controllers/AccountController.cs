@@ -1,4 +1,4 @@
-using Api.Models;
+using Api.Models.Account;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Api.Controllers
@@ -8,8 +8,9 @@ namespace Api.Controllers
     public class AccountController : ControllerBase
     {
         [HttpPost( "login" )]
-        public IActionResult LoginUser( CredentialsDto credentials )
+        public IActionResult LoginUser( [FromBody] CredentialsDto credentials )
         {
+            // mock
             // TODO Check user password
 
             return Ok();
