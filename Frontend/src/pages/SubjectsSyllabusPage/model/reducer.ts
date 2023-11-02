@@ -31,19 +31,13 @@ const initData: SubjectsSyllabusPageData = [
 ];
 
 const subjectsSyllabusPageReducer = (state = initData, action: Action) => {
-  console.log("reducer", action.payload);
-  console.log("state", state);
   switch (action.type) {
     case SUBJECTS_SYLLABUS_PAGE_ACTIONS.SUBJECTS_SYLLABUS_PAGE_SET_IS_FINAL_EXAM:
-      return {
-        ...state,
-        isFinalExam: action.payload.isFinalExam
-      };
+      return state.map((item) =>
+        item.id === action.payload.subjectId ? { ...item, isFinalExam: action.payload.isFinalExam } : item
+      );
     case SUBJECTS_SYLLABUS_PAGE_ACTIONS.SUBJECTS_SYLLABUS_PAGE_DELETE_SUBJECT:
-      return {
-        ...state,
-        id: action.payload
-      };
+      return state.filter((item) => item.id !== action.payload);
     default:
       return state;
   }

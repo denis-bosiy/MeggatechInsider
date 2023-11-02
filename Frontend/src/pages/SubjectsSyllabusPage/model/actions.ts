@@ -5,7 +5,7 @@ enum SUBJECTS_SYLLABUS_PAGE_ACTIONS {
 
 type ActionSetIsFinalExam = {
   type: SUBJECTS_SYLLABUS_PAGE_ACTIONS.SUBJECTS_SYLLABUS_PAGE_SET_IS_FINAL_EXAM,
-  payload: boolean,
+  payload: {subjectId: number, isFinalExam: boolean},
 }
 
 type ActionDeleteSubject = {
@@ -20,9 +20,9 @@ const ActionBuilder = {
     type: SUBJECTS_SYLLABUS_PAGE_ACTIONS.SUBJECTS_SYLLABUS_PAGE_SET_IS_FINAL_EXAM,
     payload: {subjectId, isFinalExam},
   }),
-  deleteSubject: (id: number) => ({
+  deleteSubject: (subjectId: number) => ({
     type: SUBJECTS_SYLLABUS_PAGE_ACTIONS.SUBJECTS_SYLLABUS_PAGE_DELETE_SUBJECT,
-    payload: id,
+    payload: subjectId,
   }),
 };
 

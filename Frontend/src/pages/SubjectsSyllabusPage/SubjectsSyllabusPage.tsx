@@ -82,14 +82,14 @@ const SubjectsSyllabusPage = () => {
               <td className="cell">
                 <CheckBox
                   checked={subject.isFinalExam}
-                  onChange={event => {
-                    console.log("checkbox", event);
-                    dispatch(ActionBuilder.setIsFinalExam(subject.id, event));
-                  }}
+                  onChange={(event) => dispatch(ActionBuilder.setIsFinalExam(subject.id, event))}
                 />
               </td>
               <td className="cell">
-                <IconButton icon={<GarbageIcon />} onClick={() => alert("Удалить")} />
+                <IconButton
+                  icon={<GarbageIcon />}
+                  onClick={() => dispatch(ActionBuilder.deleteSubject(subject.id))}
+                />
               </td>
             </tr>
           ))}
