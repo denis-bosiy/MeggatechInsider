@@ -28,7 +28,7 @@ public class EducationalPlanController : ControllerBase
             2,
             new DateOnly( 1980, 5, 10 )
         );
-        List<Teacher> mockTeachers = new() { mockTeacher };
+        List<Teacher> mockTeachers = new List<Teacher>() { mockTeacher };
 
         return Ok( mockTeachers.Map() );
     }
