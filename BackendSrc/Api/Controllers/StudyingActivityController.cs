@@ -13,7 +13,7 @@ namespace Api.Controllers
         public List<PairTimeDto> GetPairTime( [FromQuery] int year )
         {
             // mock
-            var mock = new PairTimeDto
+            PairTimeDto mock = new PairTimeDto
             {
                 Id = 1,
                 StartTime = new TimeOnly( hour: 8, minute: 0 ),
@@ -37,15 +37,16 @@ namespace Api.Controllers
         }
 
         [HttpGet( "lesson" )]
-        public LessonTimeDto GetLessonTime( [FromQuery] int year ) 
+        public List<LessonTimeDto> GetLessonTime( [FromQuery] int year ) 
         {
             // mock
-            return new LessonTimeDto
+            LessonTimeDto mock = new LessonTimeDto
             {
                 Id = 1,
                 StartTime = new TimeOnly( hour: 8, minute: 0 ),
                 EndTime = new TimeOnly( hour: 8, minute: 40 )
             };
+            return new List<LessonTimeDto> { mock };
         }
 
         [HttpPost( "lesson" )]
@@ -66,7 +67,7 @@ namespace Api.Controllers
         public List<ParadeTimeDto> GetParadeTime( [FromQuery] int year )
         {
             // mock
-            var mock = new ParadeTimeDto
+            ParadeTimeDto mock = new ParadeTimeDto
             {
                 WeekDay = DayOfWeek.Monday,
                 StartTime = new TimeOnly( hour: 8, minute: 0 ),
@@ -92,7 +93,7 @@ namespace Api.Controllers
         [HttpGet( "days-of-week" )]
         public List<WeekDayDto> GetDaysOfWeek()
         {
-            var days = new List<WeekDayDto>
+            List<WeekDayDto> days = new List<WeekDayDto>
             {
                 new WeekDayDto { WeekDay = DayOfWeek.Sunday, Text = "Воскресенье" },
                 new WeekDayDto { WeekDay = DayOfWeek.Monday, Text = "Понедельник" },
