@@ -1,4 +1,5 @@
 using Api.Mappers;
+using Api.Models.EducationalPlan;
 using Domain.TeacherEntities;
 using Microsoft.AspNetCore.Mvc;
 
@@ -9,7 +10,7 @@ namespace Api.Controllers;
 public class EducationalPlanController : ControllerBase
 {
     [HttpGet( "teachers" )]
-    public IActionResult SearchTeachers( [FromQuery] string year )
+    public IActionResult SearchTeachers( [FromQuery] TeacherRequestDto teacherRequestDto )
     {
         // mock
         // работаем с сервисом, который нам найдет учителей по переданной Dto

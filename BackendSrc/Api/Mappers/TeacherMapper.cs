@@ -5,7 +5,7 @@ namespace Api.Mappers;
 
 public static class TeacherMapper
 {
-    private static TeacherDto Map( this Teacher teacher ) =>
+    private static TeacherResponseDto Map( this Teacher teacher ) =>
         new(
             teacher.TeacherName,
             teacher.TeacherCategory.TeacherCategoryName,
@@ -22,6 +22,6 @@ public static class TeacherMapper
                 + teacher.ExperienceInYearsOnEmploymentDate, // TODO: нужно ли здесь учитывать суммарный опыт?
             teacher.ExperienceInYearsOnEmploymentDate);
 
-    public static IReadOnlyList<TeacherDto> Map( this IEnumerable<Teacher> teachers ) =>
+    public static IReadOnlyList<TeacherResponseDto> Map( this IEnumerable<Teacher> teachers ) =>
         teachers.Select( Map ).ToList();
 }

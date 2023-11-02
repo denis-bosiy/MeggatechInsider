@@ -2,9 +2,9 @@ using System.Text.Json.Serialization;
 
 namespace Api.Models.EducationalPlan;
 
-public class TeacherDto
+public class TeacherResponseDto
 {
-    public TeacherDto(
+    public TeacherResponseDto(
         string teacherName,
         string teacherCategoryName,
         bool teacherCategoryAffectsOnSalary,
