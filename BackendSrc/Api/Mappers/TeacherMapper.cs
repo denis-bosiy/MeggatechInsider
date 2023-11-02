@@ -17,7 +17,7 @@ public static class TeacherMapper
             teacher.AdvancedSubjectsAffectOnSalary,
             teacher.EgeAffectsOnSalary,
             teacher.EmploymentDate,
-            DateOnly.FromDateTime( DateTime.Today ).Year - teacher.EmploymentDate.Year +
+            DateOnly.FromDateTime( DateTime.Today ).Year     - teacher.EmploymentDate.Year     +
             teacher.ExperienceInYearsOnEmploymentDate, // TODO: нужно ли здесь учитывать суммарный опыт?
             teacher.ExperienceInYearsOnEmploymentDate);
 

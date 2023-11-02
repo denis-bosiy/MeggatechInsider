@@ -1,8 +1,7 @@
-using System.Runtime.Serialization;
+using System.Text.Json.Serialization;
 
 namespace Api.Models.EducationalPlan;
 
-[DataContract]
 public class TeacherDto
 {
     public TeacherDto(
@@ -33,39 +32,39 @@ public class TeacherDto
         ExperienceInYearsOnEmploymentDate = experienceInYearsOnEmploymentDate;
     }
 
-    [DataMember( Name = "name" )]
+    [JsonPropertyName( "name" )]
     public string TeacherName { get; set; }
 
-    [DataMember( Name = "category" )]
+    [JsonPropertyName( "category" )]
     public string TeacherCategoryName { get; set; }
 
-    [DataMember( Name = "category_payroll_accounting" )]
+    [JsonPropertyName( "category_payroll_accounting" )]
     public bool TeacherCategoryAffectsOnSalary { get; set; }
 
-    [DataMember( Name = "working_contract" )]
+    [JsonPropertyName( "working_contract" )]
     public string ContractTypeName { get; set; }
 
-    [DataMember( Name = "working_contract_payroll_accounting" )]
+    [JsonPropertyName( "working_contract_payroll_accounting" )]
     public bool ContractTypeAffectsOnSalary { get; set; }
 
-    [DataMember( Name = "education" )]
+    [JsonPropertyName( "education" )]
     public string EducationName { get; set; }
 
-    [DataMember( Name = "is_classroom_teacher" )]
+    [JsonPropertyName( "is_classroom_teacher" )]
     public bool IsClassTeacher { get; set; }
 
-    [DataMember( Name = "in_depth_subject_payroll_accounting" )]
+    [JsonPropertyName( "in_depth_subject_payroll_accounting" )]
     public bool AdvancedSubjectsAffectOnSalary { get; set; }
 
-    [DataMember( Name = "final_exam_payroll_accounting" )]
+    [JsonPropertyName( "final_exam_payroll_accounting" )]
     public bool EgeAffectsOnSalary { get; set; }
 
-    [DataMember( Name = "working_start_date" )]
+    [JsonPropertyName( "working_start_date" )]
     public DateOnly EmploymentDate { get; set; }
 
-    [DataMember( Name = "work_experience" )]
+    [JsonPropertyName( "work_experience" )]
     public int ExperienceInYears { get; set; }
 
-    [DataMember( Name = "work_experience_at_the_time_of_the_employment" )]
+    [JsonPropertyName( "work_experience_at_the_time_of_the_employment" )]
     public int ExperienceInYearsOnEmploymentDate { get; set; }
 }

@@ -11,6 +11,7 @@ public class EducationalPlanController : ControllerBase
     [HttpGet( "teachers" )]
     public IActionResult SearchTeachers( [FromQuery] string year )
     {
+        // mock
         // работаем с сервисом, который нам найдет учителей по переданной Dto
 
         Teacher mockTeacher = new(
