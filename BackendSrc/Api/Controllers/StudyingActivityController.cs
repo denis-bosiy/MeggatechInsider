@@ -1,6 +1,6 @@
-using Api.Models.StudyingActivityTimeModels.LessonTimeModels;
-using Api.Models.StudyingActivityTimeModels.PairTimeModels;
-using Api.Models.StudyingActivityTimeModels.ParadeTimeModels;
+using Api.Models.StudyingActivityTimeModels.LessonTime;
+using Api.Models.StudyingActivityTimeModels.PairTime;
+using Api.Models.StudyingActivityTimeModels.ParadeTime;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Api.Controllers
@@ -23,7 +23,7 @@ namespace Api.Controllers
         }
 
         [HttpPost( "pair" )]
-        public IActionResult AddPairTime( CreatePairTimeDto dto )
+        public IActionResult AddPairTime( [FromBody] CreatePairTimeDto dto )
         {
             // mock
             return Ok();
@@ -49,7 +49,7 @@ namespace Api.Controllers
         }
 
         [HttpPost( "lesson" )]
-        public IActionResult AddLessonTime( CreateLessonTimeDto dto )
+        public IActionResult AddLessonTime( [FromBody] CreateLessonTimeDto dto )
         {
             // mock
             return Ok();
@@ -76,21 +76,21 @@ namespace Api.Controllers
         }
 
         [HttpPost( "parade" )]
-        public IActionResult SetParadeTime( SetParadeTimeDto dto )
+        public IActionResult SetParadeTime( [FromBody] SetParadeTimeDto dto )
         {
             // mock
             return Ok();
         }
 
         [HttpPut( "parade" )]
-        public IActionResult UpdateParadeTime( SetParadeTimeDto dto )
+        public IActionResult UpdateParadeTime( [FromBody] SetParadeTimeDto dto )
         {
             // mock
             return Ok();
         }
 
         [HttpGet( "days-of-week" )]
-        public List<WeekDayDto> GetAllParadeTimes()
+        public List<WeekDayDto> GetDaysOfWeek()
         {
             var days = new List<WeekDayDto>
             {

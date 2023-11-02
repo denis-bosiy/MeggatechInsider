@@ -7,11 +7,14 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Swashbuckle.AspNetCore" Version="6.2.3" />
+    <Compile Remove="Models\StudyingActivityTimeModels\ParadeModels\**" />
+    <Content Remove="Models\StudyingActivityTimeModels\ParadeModels\**" />
+    <EmbeddedResource Remove="Models\StudyingActivityTimeModels\ParadeModels\**" />
+    <None Remove="Models\StudyingActivityTimeModels\ParadeModels\**" />
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Models\StudyingActivityTimeModels\ParadeModels\" />
+    <PackageReference Include="Swashbuckle.AspNetCore" Version="6.2.3" />
   </ItemGroup>
 
 </Project>
