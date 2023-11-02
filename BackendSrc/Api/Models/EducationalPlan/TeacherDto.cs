@@ -33,9 +33,11 @@ public class TeacherDto
         ExperienceInYearsOnEmploymentDate = experienceInYearsOnEmploymentDate;
     }
 
-    [DataMember( Name = "name" )] public string TeacherName { get; set; }
+    [DataMember( Name = "name" )]
+    public string TeacherName { get; set; }
 
-    [DataMember( Name = "category" )] public string TeacherCategoryName { get; set; }
+    [DataMember( Name = "category" )]
+    public string TeacherCategoryName { get; set; }
 
     [DataMember( Name = "category_payroll_accounting" )]
     public bool TeacherCategoryAffectsOnSalary { get; set; }
@@ -46,7 +48,8 @@ public class TeacherDto
     [DataMember( Name = "working_contract_payroll_accounting" )]
     public bool ContractTypeAffectsOnSalary { get; set; }
 
-    [DataMember( Name = "education" )] public string EducationName { get; set; }
+    [DataMember( Name = "education" )]
+    public string EducationName { get; set; }
 
     [DataMember( Name = "is_classroom_teacher" )]
     public bool IsClassTeacher { get; set; }
