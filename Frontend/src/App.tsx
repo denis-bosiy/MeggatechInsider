@@ -7,6 +7,7 @@ import ComponentsPage from "./pages/ComponentsPage/ComponentsPage";
 import Root from "./pages/Root";
 import TestPage from "./pages/TestPage/TestPage";
 import SubjectsSyllabusPage from "./pages/SubjectsSyllabusPage/SubjectsSyllabusPage";
+import AssigningSyllabusPage from "./pages/AssigningSyllabusPage/AssigningSyllabusPage";
 import { Provider } from "react-redux";
 import { store } from "./redux/store";
 
@@ -20,6 +21,7 @@ const App = (): React.JSX.Element => {
               <Route path="login" element={<SignInPage />} />
               <Route path="syllabus">
                 <Route path="subjects" element={<SubjectsSyllabusPage />} />
+                <Route path="assigning" element={<AssigningSyllabusPage />} />
               </Route>
               <Route path="components" element={<ComponentsPage />} />
               <Route path="test-redux" element={<TestPage />} />
