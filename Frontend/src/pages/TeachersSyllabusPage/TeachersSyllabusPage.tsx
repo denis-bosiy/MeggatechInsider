@@ -176,6 +176,7 @@ const TeachersSyllabusPage = () => {
                 onValueChange={setDefaultInputValue}
               />
             </td>
+            <td className="cell"></td>
             <td className="cell">
               <Input
                 value={defaultInputValue}
@@ -192,22 +193,7 @@ const TeachersSyllabusPage = () => {
                 onValueChange={setDefaultInputValue}
               />
             </td>
-            <td className="cell">
-              <Input
-                value={defaultInputValue}
-                size={InputSize.Micro}
-                placeholder="Текст"
-                onValueChange={setDefaultInputValue}
-              />
-            </td>
-            <td className="cell">
-              <Input
-                value={defaultInputValue}
-                size={InputSize.Micro}
-                placeholder="Текст"
-                onValueChange={setDefaultInputValue}
-              />
-            </td>
+            <td className="cell"></td>
             <td className="cell">
               <IconButton icon={<CheckMarkIcon />} type={IconButtonType.Secondary} />
             </td>
