@@ -21,7 +21,9 @@ const App = (): React.JSX.Element => {
               <Route path="login" element={<SignInPage />} />
               <Route path="components" element={<ComponentsPage />} />
               <Route path="test-redux" element={<TestPage />} />
-              <Route path="timetable-settings" element={<TimetableSettingsPage />} />
+              <Route path="settings">
+                <Route path="timetable" element={<TimetableSettingsPage />} />
+              </Route>
             </Route>
           </Routes>
         </Router>
