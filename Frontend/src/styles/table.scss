@@ -11,6 +11,7 @@
 .cell {
   padding: 6px;
   border: 1px solid $table-color;
+  text-align: left;
 
   &.-success {
     color: $success-color;
