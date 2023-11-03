@@ -55,7 +55,10 @@ const initData: AssigningSyllabusPageData = {
 const assigningSyllabusPageReducer = (state = initData, action: Action) => {
   switch (action.type) {
     case ASSIGNING_SYLLABUS_PAGE_ACTIONS.ASSIGNING_SYLLABUS_PAGE_DELETE_ASSIGNING:
-      return state.assignings.filter((item) => item.id !== action.payload);
+      return {
+        ...state,
+        assignings: state.assignings.filter((item) => item.id !== action.payload),
+      };
     default:
       return state;
   }
