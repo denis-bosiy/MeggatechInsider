@@ -1,7 +1,10 @@
 import React from "react";
 import IconButton from "../../../../../components/IconButton/IconButton";
-import {GarbageIcon} from "../../../../../icons";
 import "./TypesContractsTable.scss";
+import {useDispatch, useSelector} from "react-redux";
+import {GarbageIcon} from "../../../../../icons";
+import {TypesContractsItem} from "../model/types";
+import {TypesContractsActionBuilder} from "../model/actions";
 
 interface TypesContractsCellProps {
   label: string,
@@ -18,27 +21,31 @@ const TypesContractsCell = ({
 };
 
 const TypesContractsTable = () => {
+  const items = useSelector(
+    (state: { typesContractsStore: TypesContractsItem[] }) => state.typesContractsStore
+  );
+  const dispatch = useDispatch();
+
   return <table className="table">
     <thead className="header">
       <tr className="row">
         <th className="cell">Типы договоров</th>
       </tr>
-      <tr className="row -filter">
-        <td className="cell">
-          <TypesContractsCell label={"ГПХ"} icon={<IconButton icon={<GarbageIcon />} small={true}/>}/>
-        </td>
-      </tr>
-      <tr className="row -filter">
-        <td className="cell">
-          <TypesContractsCell label={"Основной"} icon={<IconButton icon={<GarbageIcon />} small={true}/>}/>
-        </td>
-      </tr>
-      <tr className="row -filter">
-        <td className="cell">
-          <TypesContractsCell label={"Совместитель"} icon={<IconButton icon={<GarbageIcon />} small={true}/>}/>
-        </td>
-      </tr>
     </thead>
+    <tbody>
+      {items.map(item => <tr className="row" key={item.id}>
+        <td className="cell">
+          <TypesContractsCell
+            label={item.name}
+            icon={<IconButton
+              icon={<GarbageIcon />}
+              small={true}
+              onClick={() => dispatch(TypesContractsActionBuilder.deleteItem(item.id))}
+            />}
+          />
+        </td>
+      </tr>)}
+    </tbody>
   </table>;
 };
 

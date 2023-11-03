@@ -2,6 +2,9 @@ import React from "react";
 import IconButton from "../../../../../components/IconButton/IconButton";
 import {GarbageIcon} from "../../../../../icons";
 import "./CategoriesTeachersTable.scss";
+import {useDispatch, useSelector} from "react-redux";
+import {CategoriesTeachersItem} from "../model/types";
+import {CategoriesTeachersActionBuilder} from "../model/actions";
 
 interface CategoriesTeachersCategoriesCellProps {
   label: string,
@@ -29,6 +32,11 @@ const CategoriesTeachersCoefficientCell = ({
 };
 
 const CategoriesTeachersTable = () => {
+  const items = useSelector(
+    (state: { categoriesTeachersStore: CategoriesTeachersItem[] }) => state.categoriesTeachersStore
+  );
+  const dispatch = useDispatch();
+
   return <table className="table">
     <thead className="header">
       <tr className="row">
@@ -37,24 +45,19 @@ const CategoriesTeachersTable = () => {
       </tr>
     </thead>
     <tbody>
-      <tr className="row">
-        <td className="cell"><CategoriesTeachersCategoriesCell label={"Высшая категория"}/></td>
+      {items.map((item, index) => <tr className="row" key={`${item.id}-${index}`}>
+        <td className="cell"><CategoriesTeachersCategoriesCell label={item.category}/></td>
         <td className="cell">
           <CategoriesTeachersCoefficientCell
-            coefficient={0.3}
-            icon={<IconButton icon={<GarbageIcon />} small={true}/>}
+            coefficient={item.coefficient}
+            icon={<IconButton
+              icon={<GarbageIcon />}
+              small={true}
+              onClick={() => dispatch(CategoriesTeachersActionBuilder.deleteItem(item.id))}
+            />}
           />
         </td>
-      </tr>
-      <tr className="row">
-        <td className="cell"><CategoriesTeachersCategoriesCell label={"Высшая категория"}/></td>
-        <td className="cell">
-          <CategoriesTeachersCoefficientCell
-            coefficient={0.3}
-            icon={<IconButton icon={<GarbageIcon />} small={true}/>}
-          />
-        </td>
-      </tr>
+      </tr>)}
     </tbody>
   </table>;
 };

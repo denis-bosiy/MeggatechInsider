@@ -2,6 +2,9 @@ import React from "react";
 import IconButton from "../../../../../components/IconButton/IconButton";
 import {GarbageIcon} from "../../../../../icons";
 import "./TeacherEducationTable.scss";
+import {useDispatch, useSelector} from "react-redux";
+import {TeacherEducationItem} from "../model/types";
+import {TeacherEducationActionBuilder} from "../model/actions";
 
 interface TeacherEducationEducationCellProps {
   label: string,
@@ -29,6 +32,11 @@ const TeacherEducationCoefficientCell = ({
 };
 
 const TeacherEducationTable = () => {
+  const items = useSelector(
+    (state: { teacherEducationStore: TeacherEducationItem[] }) => state.teacherEducationStore
+  );
+  const dispatch = useDispatch();
+
   return <table className="table">
     <thead className="header">
       <tr className="row">
@@ -37,42 +45,19 @@ const TeacherEducationTable = () => {
       </tr>
     </thead>
     <tbody>
-      <tr className="row">
-        <td className="cell"><TeacherEducationEducationCell label={"Среднее образование"}/></td>
+      {items.map((item, index) => <tr className="row" key={`${item.id}-${index}`}>
+        <td className="cell"><TeacherEducationEducationCell label={item.education}/></td>
         <td className="cell">
           <TeacherEducationCoefficientCell
-            coefficient={0.3}
-            icon={<IconButton icon={<GarbageIcon />} small={true}/>}
+            coefficient={item.coefficient}
+            icon={<IconButton
+              icon={<GarbageIcon />}
+              small={true}
+              onClick={() => dispatch(TeacherEducationActionBuilder.deleteItem(item.id))}
+            />}
           />
         </td>
-      </tr>
-      <tr className="row">
-        <td className="cell"><TeacherEducationEducationCell label={"Высшее образование"}/></td>
-        <td className="cell">
-          <TeacherEducationCoefficientCell
-            coefficient={0.3}
-            icon={<IconButton icon={<GarbageIcon />} small={true}/>}
-          />
-        </td>
-      </tr>
-      <tr className="row">
-        <td className="cell"><TeacherEducationEducationCell label={"Степень к.н."}/></td>
-        <td className="cell">
-          <TeacherEducationCoefficientCell
-            coefficient={0.3}
-            icon={<IconButton icon={<GarbageIcon />} small={true}/>}
-          />
-        </td>
-      </tr>
-      <tr className="row">
-        <td className="cell"><TeacherEducationEducationCell label={"Степень д.н."}/></td>
-        <td className="cell">
-          <TeacherEducationCoefficientCell
-            coefficient={0.3}
-            icon={<IconButton icon={<GarbageIcon />} small={true}/>}
-          />
-        </td>
-      </tr>
+      </tr>)}
     </tbody>
   </table>;
 };
