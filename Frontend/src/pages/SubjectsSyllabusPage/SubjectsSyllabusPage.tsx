@@ -10,10 +10,40 @@ import Select, {ISelectOption, SelectSize} from "../../components/Select/Select"
 import {CheckBox} from "../../components/CheckBox/CheckBox";
 import IconButton, {IconButtonType} from "../../components/IconButton/IconButton";
 
-const SubjectsSyllabusPage = () => {
+const SubjectsSyllabus = () => {
   const subjects = useSelector((state: {subjectsSyllabusPageStore: SubjectsSyllabusPageData}) => state.subjectsSyllabusPageStore);
   const dispatch = useDispatch();
 
+  return (
+    subjects.map((subject) => (
+      <tr className="row" key={subject.id}>
+        <td className="cell">{subject.subjectName}</td>
+        <td className="cell">{subject.financing}</td>
+        <td className="cell">{subject.type}</td>
+        <td className="cell">{subject.category}</td>
+        <td className="cell">{subject.surchargeForNotebooks}%</td>
+        <td className="cell">{subject.numberOf10}</td>
+        <td className="cell">{subject.numberOfGroupsIn10}</td>
+        <td className="cell">{subject.numberOf11}</td>
+        <td className="cell">{subject.numberOfGroupsIn11}</td>
+        <td className="cell">
+          <CheckBox
+            checked={subject.isFinalExam}
+            onChange={(event) => dispatch(ActionBuilder.setIsFinalExam(subject.id, event))}
+          />
+        </td>
+        <td className="cell">
+          <IconButton
+            icon={<GarbageIcon />}
+            onClick={() => dispatch(ActionBuilder.deleteSubject(subject.id))}
+          />
+        </td>
+      </tr>
+    ))
+  );
+};
+
+const SubjectsSyllabusPage = () => {
   const isAddition = true;
   const [searchValue, setSearchValue] = useState<string>("");
   const [defaultInputValue, setDefaultInputValue] = useState<string>("");
@@ -68,31 +98,7 @@ const SubjectsSyllabusPage = () => {
           </tr>
         </thead>
         <tbody>
-          {subjects.map((subject) => (
-            <tr className="row" key={subject.id}>
-              <td className="cell">{subject.subjectName}</td>
-              <td className="cell">{subject.financing}</td>
-              <td className="cell">{subject.type}</td>
-              <td className="cell">{subject.category}</td>
-              <td className="cell">{subject.surchargeForNotebooks}%</td>
-              <td className="cell">{subject.numberOf10}</td>
-              <td className="cell">{subject.numberOfGroupsIn10}</td>
-              <td className="cell">{subject.numberOf11}</td>
-              <td className="cell">{subject.numberOfGroupsIn11}</td>
-              <td className="cell">
-                <CheckBox
-                  checked={subject.isFinalExam}
-                  onChange={(event) => dispatch(ActionBuilder.setIsFinalExam(subject.id, event))}
-                />
-              </td>
-              <td className="cell">
-                <IconButton
-                  icon={<GarbageIcon />}
-                  onClick={() => dispatch(ActionBuilder.deleteSubject(subject.id))}
-                />
-              </td>
-            </tr>
-          ))}
+          {SubjectsSyllabus()}
           {isAddition &&
           <tr className="row">
             <td className="cell">

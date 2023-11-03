@@ -9,12 +9,64 @@ import {CheckMarkIcon, GarbageIcon, PenIcon, PlusIcon} from "../../icons";
 import Select, {ISelectOption, SelectSize} from "../../components/Select/Select";
 import {CheckBox} from "../../components/CheckBox/CheckBox";
 import IconButton, {IconButtonType} from "../../components/IconButton/IconButton";
-import {SubjectsSyllabusPageData} from "../SubjectsSyllabusPage/model/types";
 
-const TeachersSyllabusPage = () => {
+const TeachersSyllabus = () => {
   const teachers = useSelector((state: {teachersSyllabusPageStore: TeachersSyllabusPageData}) => state.teachersSyllabusPageStore);
   const dispatch = useDispatch();
 
+  return (
+    teachers.map((teacher) => (
+      <tr className="row" key={teacher.id}>
+        <td className="cell">{teacher.name}</td>
+        <td className="cell">{teacher.category}</td>
+        <td className="cell">
+          <CheckBox
+            checked={teacher.categoryPayrollAccounting}
+            onChange={(event) => dispatch(ActionBuilder.setCategoryPayrollAccounting(teacher.id, event))}
+          />
+        </td>
+        <td className="cell">{teacher.workingContract}</td>
+        <td className="cell">
+          <CheckBox
+            checked={teacher.workingContractPayrollAccounting}
+            onChange={(event) => dispatch(ActionBuilder.setWorkingContractPayrollAccounting(teacher.id, event))}
+          />
+        </td>
+        <td className="cell">{teacher.education}</td>
+        <td className="cell">
+          <CheckBox
+            checked={teacher.isClassroomTeacher}
+            onChange={(event) => dispatch(ActionBuilder.setIsClassroomTeacher(teacher.id, event))}
+          />
+        </td>
+        <td className="cell">
+          <CheckBox
+            checked={teacher.inDepthSubjectPayrollAccounting}
+            onChange={(event) => dispatch(ActionBuilder.setInDepthSubjectPayrollAccounting(teacher.id, event))}
+          />
+        </td>
+        <td className="cell">
+          <CheckBox
+            checked={teacher.finalExamPayrollAccounting}
+            onChange={(event) => dispatch(ActionBuilder.setFinalExamPayrollAccounting(teacher.id, event))}
+          />
+        </td>
+        <td className="cell">{teacher.workingStartDate}</td>
+        <td className="cell">{teacher.workExperience}</td>
+        <td className="cell">{teacher.workExperienceAtTheTimeOfTheEmployment}</td>
+        <td className="cell">{teacher.birthDay}</td>
+        <td className="cell">{teacher.age}</td>
+        <td className="cell">
+          <IconButton
+            icon={<GarbageIcon />}
+            onClick={() => dispatch(ActionBuilder.deleteTeacher(teacher.id))}
+          />
+        </td>
+      </tr>))
+  );
+};
+
+const TeachersSyllabusPage = () => {
   const isAddition = true;
   const [searchValue, setSearchValue] = useState<string>("");
   const [defaultInputValue, setDefaultInputValue] = useState<string>("");
@@ -73,55 +125,7 @@ const TeachersSyllabusPage = () => {
           </tr>
         </thead>
         <tbody>
-          {teachers.map((teacher) => (
-            <tr className="row" key={teacher.id}>
-              <td className="cell">{teacher.name}</td>
-              <td className="cell">{teacher.category}</td>
-              <td className="cell">
-                <CheckBox
-                  checked={teacher.categoryPayrollAccounting}
-                  onChange={(event) => dispatch(ActionBuilder.setCategoryPayrollAccounting(teacher.id, event))}
-                />
-              </td>
-              <td className="cell">{teacher.workingContract}</td>
-              <td className="cell">
-                <CheckBox
-                  checked={teacher.workingContractPayrollAccounting}
-                  onChange={(event) => dispatch(ActionBuilder.setWorkingContractPayrollAccounting(teacher.id, event))}
-                />
-              </td>
-              <td className="cell">{teacher.education}</td>
-              <td className="cell">
-                <CheckBox
-                  checked={teacher.isClassroomTeacher}
-                  onChange={(event) => dispatch(ActionBuilder.setIsClassroomTeacher(teacher.id, event))}
-                />
-              </td>
-              <td className="cell">
-                <CheckBox
-                  checked={teacher.inDepthSubjectPayrollAccounting}
-                  onChange={(event) => dispatch(ActionBuilder.setInDepthSubjectPayrollAccounting(teacher.id, event))}
-                />
-              </td>
-              <td className="cell">
-                <CheckBox
-                  checked={teacher.finalExamPayrollAccounting}
-                  onChange={(event) => dispatch(ActionBuilder.setFinalExamPayrollAccounting(teacher.id, event))}
-                />
-              </td>
-              <td className="cell">{teacher.workingStartDate}</td>
-              <td className="cell">{teacher.workExperience}</td>
-              <td className="cell">{teacher.workExperienceAtTheTimeOfTheEmployment}</td>
-              <td className="cell">{teacher.birthDay}</td>
-              <td className="cell">{teacher.age}</td>
-              <td className="cell">
-                <IconButton
-                  icon={<GarbageIcon />}
-                  onClick={() => dispatch(ActionBuilder.deleteTeacher(teacher.id))}
-                />
-              </td>
-            </tr>
-          ))}
+          {TeachersSyllabus()}
           {isAddition &&
           <tr className="row">
             <td className="cell">
