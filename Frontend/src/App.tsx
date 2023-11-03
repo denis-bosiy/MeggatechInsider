@@ -8,6 +8,7 @@ import Root from "./pages/Root";
 import TestPage from "./pages/TestPage/TestPage";
 import { Provider } from "react-redux";
 import { store } from "./redux/store";
+import TeacherSettingsPage from "./pages/TeacherSettingsPage/TeacherSettingsPage";
 
 const App = (): React.JSX.Element => {
   return (
@@ -19,6 +20,7 @@ const App = (): React.JSX.Element => {
               <Route path="login" element={<SignInPage />} />
               <Route path="components" element={<ComponentsPage />} />
               <Route path="test-redux" element={<TestPage />} />
+              <Route path="settings/teacher" element={<TeacherSettingsPage />} />
             </Route>
           </Routes>
         </Router>
