@@ -109,10 +109,10 @@ const TeachersSyllabusPage = () => {
                   onChange={(event) => dispatch(ActionBuilder.setFinalExamPayrollAccounting(teacher.id, event))}
                 />
               </td>
-              <td className="cell">{teacher.workingStartDate.toString()}</td>
+              <td className="cell">{teacher.workingStartDate}</td>
               <td className="cell">{teacher.workExperience}</td>
               <td className="cell">{teacher.workExperienceAtTheTimeOfTheEmployment}</td>
-              <td className="cell">{teacher.birthDay.toString()}</td>
+              <td className="cell">{teacher.birthDay}</td>
               <td className="cell">{teacher.age}</td>
               <td className="cell">
                 <IconButton

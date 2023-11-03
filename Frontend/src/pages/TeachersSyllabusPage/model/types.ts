@@ -11,10 +11,10 @@ type TeacherSyllabusData = {
   isClassroomTeacher: boolean,
   inDepthSubjectPayrollAccounting: boolean,
   finalExamPayrollAccounting: boolean,
-  workingStartDate: Date,
+  workingStartDate: string,
   workExperience: number,
   workExperienceAtTheTimeOfTheEmployment: number,
-  birthDay: Date,
+  birthDay: string,
   age: number
 }
 

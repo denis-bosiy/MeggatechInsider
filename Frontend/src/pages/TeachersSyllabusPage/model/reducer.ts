@@ -13,10 +13,10 @@ const initData: TeachersSyllabusPageData = [
     isClassroomTeacher: false,
     inDepthSubjectPayrollAccounting: false,
     finalExamPayrollAccounting: false,
-    workingStartDate: new Date(),
+    workingStartDate: "08.10.2023",
     workExperience: 15,
     workExperienceAtTheTimeOfTheEmployment: 2,
-    birthDay: new Date(),
+    birthDay: "11.07.1992",
     age: 45
   },
   {
@@ -30,10 +30,10 @@ const initData: TeachersSyllabusPageData = [
     isClassroomTeacher: false,
     inDepthSubjectPayrollAccounting: true,
     finalExamPayrollAccounting: false,
-    workingStartDate: new Date(),
+    workingStartDate: "18.01.2023",
     workExperience: 7,
     workExperienceAtTheTimeOfTheEmployment: 2,
-    birthDay: new Date(),
+    birthDay: "11.07.2002",
     age: 30
   },
 ];
