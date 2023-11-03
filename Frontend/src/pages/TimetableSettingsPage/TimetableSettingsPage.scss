@@ -22,9 +22,10 @@
 
   &__box-button {
     flex-direction: row;
+    justify-content: space-between;
     max-width: 285px;
     width: 100%;
-    gap: 10px;
+    gap: 30px;
   }
 }
 
