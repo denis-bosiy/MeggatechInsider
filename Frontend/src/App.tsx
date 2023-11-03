@@ -9,6 +9,7 @@ import TestPage from "./pages/TestPage/TestPage";
 import SubjectsSyllabusPage from "./pages/SubjectsSyllabusPage/SubjectsSyllabusPage";
 import { Provider } from "react-redux";
 import { store } from "./redux/store";
+import TeacherGuidebookTimetablePage from "./pages/TeacherGuidebookTimetablePage/TeacherGuidebookTimetablePage";
 
 const App = (): React.JSX.Element => {
   return (
@@ -20,6 +21,9 @@ const App = (): React.JSX.Element => {
               <Route path="login" element={<SignInPage />} />
               <Route path="syllabus">
                 <Route path="subjects" element={<SubjectsSyllabusPage />} />
+              </Route>
+              <Route path="timetable">
+                <Route path="teacher-guidebook" element={<TeacherGuidebookTimetablePage />} />
               </Route>
               <Route path="components" element={<ComponentsPage />} />
               <Route path="test-redux" element={<TestPage />} />
