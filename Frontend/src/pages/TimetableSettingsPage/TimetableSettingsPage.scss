@@ -19,6 +19,13 @@
   &__box-p {
     gap: 10px;
   }
+
+  &__box-button {
+    flex-direction: row;
+    max-width: 285px;
+    width: 100%;
+    gap: 10px;
+  }
 }
 
   

@@ -7,7 +7,7 @@ import Input, {InputSize} from "../../components/Input/Input";
 import ActionButton, {ActionButtonType} from "../../components/ActionButton/ActionButton";
 import {CheckMarkIcon, GarbageIcon, PenIcon, PlusIcon} from "../../icons";
 import IconButton, { IconButtonType } from "../../components/IconButton/IconButton";
-
+import Select, { ISelectOption, SelectSize } from "../../components/Select/Select";
 
 const TimetableSettingsPage = () => {
 
@@ -19,16 +19,21 @@ const TimetableSettingsPage = () => {
   const parade = data.parade;
 
   const isAddition = true;
+  const isAdditionParade = true;
 
   const [defaultInputValue, setDefaultInputValue] = useState<string>("");
 
+  const selectOptions: ISelectOption[] = [
+    { id: "1", content: "Понедельник" },
+    { id: "2", content: "Вторник" },
+    { id: "3", content: "Среда" },
+  ];
+  const setSelectValue = (val: string) => {
+    console.log(val);
+  };
+
   return (
     <>
-      <div className="toolbar">
-
-        <div className="toolbar__buttons-wrapper">
-        </div>
-      </div>
       <div className="timetable-settings-page__container">
         <div className="timetable-settings-page__box">
           <h2 className="h2">Время проведения пар</h2>
@@ -148,6 +153,7 @@ const TimetableSettingsPage = () => {
             </tbody>
           </table>
         </div>
+        {!isAdditionParade &&
         <div className="timetable-settings-page__box">
           <h2 className="h2">Проведение линейки</h2>
           <ActionButton
@@ -160,14 +166,49 @@ const TimetableSettingsPage = () => {
             <p className="p">{parade.week_day}</p>
             <p className="p">{parade.start_time} - {parade.end_time}</p>
           </div>
-        </div>
+        </div>}
+        {isAdditionParade &&
+        <div className="timetable-settings-page__box">
+          <h2 className="h2">Проведение линейки</h2>
+          <div className="timetable-settings-page__box timetable-settings-page__box-button">
+            <ActionButton
+              label="Сохранить"
+              type={ActionButtonType.Positive}
+              onClick={() => alert("Cохранить")}
+            />
+            <ActionButton
+              label="Отменить"
+              type={ActionButtonType.Negative}
+              onClick={() => alert("Отменить")}
+            />
+          </div>
+            
+          <Select
+            options={selectOptions}
+            onValueChange={setSelectValue}
+            size={SelectSize.Default}
+          />
+
+          <div className="timetable-settings-page__box timetable-settings-page__box-button">
+            <Input
+              value={defaultInputValue}
+              size={InputSize.Default}
+              placeholder="Время"
+              onValueChange={setDefaultInputValue}
+            />
+            <Input
+              value={defaultInputValue}
+              size={InputSize.Default}
+              placeholder="Время"
+              onValueChange={setDefaultInputValue}
+            />
+          </div>
+        </div>}
       </div>
     </>
 
   );
 
 };
-
-
 
 export default TimetableSettingsPage;
