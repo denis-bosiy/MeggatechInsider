@@ -1,12 +1,8 @@
-@import "../../vars";
-
 .timetable-settings-page {
   &__container {
     display: flex;
-    max-width: $page-width;
-    width: 100%;
     justify-content: space-between;
-    align-items: flex-start;
+    gap: 25px;
   }
 
   &__box {
@@ -24,8 +20,11 @@
     flex-direction: row;
     justify-content: space-between;
     max-width: 285px;
-    width: 100%;
     gap: 30px;
+  }
+
+  &__box-table {
+    max-width: 347px;
   }
 }
 

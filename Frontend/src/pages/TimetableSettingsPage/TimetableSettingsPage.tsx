@@ -19,7 +19,7 @@ const TimetableSettingsPage = () => {
   const parade = data.parade;
 
   const isAddition = true;
-  const isAdditionParade = true;
+  const isAdditionParade = false;
 
   const [defaultInputValue, setDefaultInputValue] = useState<string>("");
 
@@ -35,7 +35,7 @@ const TimetableSettingsPage = () => {
   return (
     <>
       <div className="timetable-settings-page__container">
-        <div className="timetable-settings-page__box">
+        <div className="timetable-settings-page__box timetable-settings-page__box-table">
           <h2 className="h2">Время проведения пар</h2>
           <ActionButton
             label="Добавить"
@@ -94,7 +94,7 @@ const TimetableSettingsPage = () => {
           </table>
         </div>
 
-        <div className="timetable-settings-page__box">
+        <div className="timetable-settings-page__box timetable-settings-page__box-table">
           <h2 className="h2">Время проведения пар</h2>
           <ActionButton
             label="Добавить"
