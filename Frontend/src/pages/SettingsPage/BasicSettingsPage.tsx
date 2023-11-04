@@ -23,7 +23,7 @@ const BasicSettingsPage = () => {
   const { basicSettings, salarySettings } = useSelector(
     (state: { basicSettingsStore: BasicSettingsData }) => state.basicSettingsStore
   );
-  const { control, handleSubmit, reset } = useForm<BasicSettingsForm>({
+  const { control, handleSubmit, reset, resetField } = useForm<BasicSettingsForm>({
     defaultValues: {
       study: basicSettings,
       salary: salarySettings,
@@ -49,6 +49,7 @@ const BasicSettingsPage = () => {
 
   const handleNewCoefficient = () => {
     handleSubmit(saveCoefficient)();
+    resetField("coefficient");
   };
 
   const handleResetSettings = () => {
