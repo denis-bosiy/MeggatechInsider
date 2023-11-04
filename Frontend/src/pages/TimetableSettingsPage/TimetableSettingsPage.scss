@@ -1,0 +1,31 @@
+.timetable-settings-page {
+  &__container {
+    display: flex;
+    justify-content: space-between;
+    gap: 25px;
+  }
+
+  &__box {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 25px;
+  }
+  
+  &__box-p {
+    gap: 10px;
+  }
+
+  &__box-button {
+    flex-direction: row;
+    justify-content: space-between;
+    max-width: 285px;
+    gap: 30px;
+  }
+
+  &__box-table {
+    max-width: 347px;
+  }
+}
+
+  

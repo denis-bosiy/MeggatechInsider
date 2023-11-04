@@ -12,6 +12,8 @@ import AssigningSyllabusPage from "./pages/AssigningSyllabusPage/AssigningSyllab
 import TeacherGuidebookTimetablePage from "./pages/TeacherGuidebookTimetablePage/TeacherGuidebookTimetablePage";
 import { Provider } from "react-redux";
 import { store } from "./redux/store";
+import TimetableSettingsPage from "./pages/TimetableSettingsPage/TimetableSettingsPage";
+
 
 const App = (): React.JSX.Element => {
   return (
@@ -31,6 +33,9 @@ const App = (): React.JSX.Element => {
               </Route>
               <Route path="components" element={<ComponentsPage />} />
               <Route path="test-redux" element={<TestPage />} />
+              <Route path="settings">
+                <Route path="timetable" element={<TimetableSettingsPage />} />
+              </Route>
             </Route>
           </Routes>
         </Router>

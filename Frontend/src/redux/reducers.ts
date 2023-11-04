@@ -4,6 +4,7 @@ import {subjectsSyllabusPageReducer} from "../pages/SubjectsSyllabusPage/model/r
 import {teachersSyllabusPageReducer} from "../pages/TeachersSyllabusPage/model/reducer";
 import {assigningSyllabusPageReducer} from "../pages/AssigningSyllabusPage/model/reducer";
 import {teacherGuidebookTimetablePageReducer} from "../pages/TeacherGuidebookTimetablePage/model/reducer";
+import {timetableSettingsPageReducer} from "../pages/TimetableSettingsPage/model/reducer";
 
 export default combineReducers({
   testPageStore: testPageReducer,
@@ -11,4 +12,5 @@ export default combineReducers({
   teachersSyllabusPageStore: teachersSyllabusPageReducer,
   assigningSyllabusPageStore: assigningSyllabusPageReducer,
   teacherGuidebookTimetablePageStore: teacherGuidebookTimetablePageReducer,
+  timetableSettingsPageStore: timetableSettingsPageReducer,
 });
