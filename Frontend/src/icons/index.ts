@@ -13,3 +13,4 @@ export { ReactComponent as Logout } from "./logout.svg";
 export { ReactComponent as PlusIcon } from "./plus.svg";
 export { ReactComponent as TrashIcon } from "./trash.svg";
 export { ReactComponent as CheckIcon } from "./check.svg";
+export { ReactComponent as CheckMarkIcon } from "./check-mark.svg";
