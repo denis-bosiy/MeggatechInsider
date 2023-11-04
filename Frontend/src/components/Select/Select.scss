@@ -7,7 +7,7 @@
   flex-direction: row;
   align-items: center;
   width: 100%;
-  padding: 13px 25px;
+  padding: 13px 50px 13px 25px;
   font-size: $default-text-size;
   line-height: $default-line-height;
   color: $alternative-text-color;
@@ -35,24 +35,24 @@
   }
 
   &.-milli {
-    padding: 8.5px 10px;
+    padding: 8.5px 25px 8.5px 10px;
     font-size: 14px;
     line-height: 17px;
 
     & + #{$module}__icon {
-      top: 8.8px;
+      top: 10.8px;
       right: 7px;
       width: 13px;
     }
   }
 
   &.-micro {
-    padding: 3.5px 10px;
+    padding: 3.5px 25px 3.5px 10px;
     font-size: 14px;
     line-height: 17px;
 
     & + #{$module}__icon {
-      top: 3.8px;
+      top: 6.8px;
       right: 7px;
       width: 13px;
     }

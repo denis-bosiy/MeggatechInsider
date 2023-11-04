@@ -6,6 +6,7 @@ import Modal from "./components/Modal/Modal";
 import ComponentsPage from "./pages/ComponentsPage/ComponentsPage";
 import Root from "./pages/Root";
 import TestPage from "./pages/TestPage/TestPage";
+import SubjectsSyllabusPage from "./pages/SubjectsSyllabusPage/SubjectsSyllabusPage";
 import { Provider } from "react-redux";
 import { store } from "./redux/store";
 
@@ -17,6 +18,9 @@ const App = (): React.JSX.Element => {
           <Routes>
             <Route path="/" element={<Root />}>
               <Route path="login" element={<SignInPage />} />
+              <Route path="syllabus">
+                <Route path="subjects" element={<SubjectsSyllabusPage />} />
+              </Route>
               <Route path="components" element={<ComponentsPage />} />
               <Route path="test-redux" element={<TestPage />} />
             </Route>
