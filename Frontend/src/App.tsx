@@ -8,6 +8,7 @@ import Root from "./pages/Root";
 import TestPage from "./pages/TestPage/TestPage";
 import SubjectsSyllabusPage from "./pages/SubjectsSyllabusPage/SubjectsSyllabusPage";
 import AssigningSyllabusPage from "./pages/AssigningSyllabusPage/AssigningSyllabusPage";
+import TeacherGuidebookTimetablePage from "./pages/TeacherGuidebookTimetablePage/TeacherGuidebookTimetablePage";
 import { Provider } from "react-redux";
 import { store } from "./redux/store";
 
@@ -22,6 +23,9 @@ const App = (): React.JSX.Element => {
               <Route path="syllabus">
                 <Route path="subjects" element={<SubjectsSyllabusPage />} />
                 <Route path="assigning" element={<AssigningSyllabusPage />} />
+              </Route>
+              <Route path="timetable">
+                <Route path="teacher-guidebook" element={<TeacherGuidebookTimetablePage />} />
               </Route>
               <Route path="components" element={<ComponentsPage />} />
               <Route path="test-redux" element={<TestPage />} />
