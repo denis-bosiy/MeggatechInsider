@@ -7,9 +7,9 @@ import ComponentsPage from "./pages/ComponentsPage/ComponentsPage";
 import Root from "./pages/Root";
 import TestPage from "./pages/TestPage/TestPage";
 import SubjectsSyllabusPage from "./pages/SubjectsSyllabusPage/SubjectsSyllabusPage";
+import TeacherGuidebookTimetablePage from "./pages/TeacherGuidebookTimetablePage/TeacherGuidebookTimetablePage";
 import { Provider } from "react-redux";
 import { store } from "./redux/store";
-import TeacherGuidebookTimetablePage from "./pages/TeacherGuidebookTimetablePage/TeacherGuidebookTimetablePage";
 
 const App = (): React.JSX.Element => {
   return (
