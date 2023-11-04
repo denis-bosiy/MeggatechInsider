@@ -1,6 +1,8 @@
-import {combineReducers} from "redux";
-import {testPageReducer} from "../pages/TestPage/model/reducer";
+import { combineReducers } from "redux";
+import { testPageReducer } from "../pages/TestPage/model/reducer";
+import { basicSettingsReducer } from "../pages/SettingsPage/model/reducer";
 
 export default combineReducers({
   testPageStore: testPageReducer,
+  basicSettingsStore: basicSettingsReducer
 });

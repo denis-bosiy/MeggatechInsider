@@ -1,61 +1,72 @@
-import React from "react";
+import React, { useState } from "react";
 import { useForm, Controller } from "react-hook-form";
-import Input, { InputSize } from "../../components/Input/Input";
+import { useDispatch, useSelector } from "react-redux";
+import Input, { InputSize, InputType } from "../../components/Input/Input";
 import IconButton from "../../components/IconButton/IconButton";
-import { CheckIcon, PenIcon, PlusIcon, TrashIcon } from "../../icons";
 import ActionButton, { ActionButtonType } from "../../components/ActionButton/ActionButton";
-
+import { BasicSettingsData, TSetting } from "./model/types";
+import { BasicSettingsActionBuilder } from "./model/actions";
+import { CheckIcon, PenIcon, PlusIcon, TrashIcon } from "../../icons";
 import "./SettingsPage.scss";
 
-export type TSetting = {
-  name: string;
-  label: string;
+type BasicSettingsForm = {
+  study: { [name: string]: TSetting };
+  salary: TSetting[];
+  coefficient: {
+    name: string;
+    value: string;
+  };
 };
-
-const BASIC_SETTINGS_STUDY: TSetting[] = [
-  { name: "count10", label: "Число 10-ых классов" },
-  { name: "count11", label: "Число 11-ых классов" },
-  { name: "weeksIn1", label: "Недель в 1 четверти" },
-  { name: "start1", label: "Начало 1 четверти" },
-  { name: "weeksIn2", label: "Недель во 2 четверти" },
-  { name: "start2", label: "Начало 2 четверти" },
-  { name: "weeksIn3", label: "Недель в 3 четверти" },
-  { name: "start3", label: "Начало 3 четверти" },
-  { name: "weeksIn4", label: "Недель в 4 четверти" },
-  { name: "start4", label: "Начало 4 четверти" }
-];
-
-// TODO: Это уберется когда будет импорт динамических таблиц или как там оно было названо
-export type TField = {
-  label: string;
-  value: string;
-};
-
-const SALARY_SETTINGS_STUB: TField[] = [
-  { label: "Базовый оклад", value: "1000" },
-  { label: "Доплата за литературу", value: "7000" },
-  { label: "Коэф. за высшее образование", value: "0,5" },
-  { label: "Коэф. за ученую степень к.н.", value: "0,6" },
-  { label: "Коэф. за ученую степень д.н.", value: "0,7" },
-  { label: "Коэф. за первую категорию", value: "0,4" },
-  { label: "Коэф. за высшую категорию", value: "0,7" },
-  { label: "Коэф. за углубленную категорию", value: "0,4" }
-];
 
 const BasicSettingsPage = () => {
-  const { control } = useForm();
+  const dispatch = useDispatch();
+  const { basicSettings, salarySettings } = useSelector(
+    (state: { basicSettingsStore: BasicSettingsData }) => state.basicSettingsStore
+  );
+  const { control, handleSubmit, reset } = useForm<BasicSettingsForm>({
+    defaultValues: {
+      study: basicSettings,
+      salary: salarySettings,
+      coefficient: {
+        name: "",
+        value: ""
+      }
+    }
+  });
+  const [searchQuery, setSearchQuery] = useState("");
+
+  const saveStudySettings = ({ study }: BasicSettingsForm) => {
+    dispatch(BasicSettingsActionBuilder.saveSettings(study));
+  };
+
+  const saveCoefficient = ({ coefficient }: BasicSettingsForm) => {
+    dispatch(BasicSettingsActionBuilder.newCoefficient(coefficient.name, coefficient.value));
+  };
+
+  const handleSave = () => {
+    handleSubmit(saveStudySettings)();
+  };
+
+  const handleNewCoefficient = () => {
+    handleSubmit(saveCoefficient)();
+  };
+
+  const handleResetSettings = () => {
+    reset();
+  };
 
   return (
     <div className="settings-page">
       <div className="settings-section">
         <h2>Настройка учебного плана</h2>
         <div className="settings-actions">
-          <ActionButton label="Сохранить" type={ActionButtonType.Positive} />
-          <ActionButton label="Отменить" type={ActionButtonType.Negative} />
+          <ActionButton label="Сохранить" type={ActionButtonType.Positive} onClick={handleSave} />
+          <ActionButton label="Отменить" type={ActionButtonType.Negative} onClick={handleResetSettings} />
         </div>
         <table className="table -fill -list">
           <tbody>
-            {BASIC_SETTINGS_STUDY.map((field, id) => {
+            {Object.keys(basicSettings).map((fieldKey, id) => {
+              const field = basicSettings[fieldKey];
               return (
                 <tr key={id} className="row">
                   <td className="cell">{field.label}</td>
@@ -65,19 +76,23 @@ const BasicSettingsPage = () => {
                       render={({ field }) => {
                         return (
                           <Input
-                            value={field.value}
                             placeholder=""
+                            value={field.value || ""}
                             onValueChange={field.onChange}
                             size={InputSize.Micro}
                           />
                         );
                       }}
-                      name={`study[${id}][${field.name}]`}
+                      name={`study.${fieldKey}.value`}
                     />
                   </td>
                 </tr>
               );
             })}
+            <tr className="row">
+              <td className="cell">Всего недель</td>
+              <td className="cell">8</td>
+            </tr>
           </tbody>
         </table>
       </div>
@@ -91,42 +106,67 @@ const BasicSettingsPage = () => {
           />
           <ActionButton label="Добавить" icon={<PlusIcon />} type={ActionButtonType.Warning} />
         </div>
+        <Input
+          placeholder="Поиск"
+          value={searchQuery}
+          onValueChange={setSearchQuery}
+          size={InputSize.Default}
+          type={InputType.Search}
+        />
         <table className="table -fill -list">
           <tbody>
-            {SALARY_SETTINGS_STUB.map((coefficient, id) => {
+            {salarySettings.map((coefficient, id) => {
               return (
                 <tr className="row" key={id}>
                   <td className="cell">{coefficient.label}</td>
                   <td className="cell">{coefficient.value}</td>
                   <td className="cell">
-                    <IconButton icon={<TrashIcon />} small />
+                    <IconButton
+                      icon={<TrashIcon />}
+                      small
+                      onClick={() => {
+                        dispatch(BasicSettingsActionBuilder.deleteCoefficient(coefficient.label));
+                      }}
+                    />
                   </td>
                 </tr>
               );
             })}
             <tr className="row">
               <td className="cell">
-                <Input
-                  value="2"
-                  placeholder="2"
-                  onValueChange={() => {
-                    // ...
+                <Controller
+                  control={control}
+                  render={({ field }) => {
+                    return (
+                      <Input
+                        value={field.value || ""}
+                        placeholder="Название"
+                        onValueChange={field.onChange}
+                        size={InputSize.Micro}
+                      />
+                    );
                   }}
-                  size={InputSize.Micro}
+                  name="coefficient.name"
                 />
               </td>
               <td className="cell">
-                <Input
-                  value="2"
-                  placeholder="2"
-                  onValueChange={() => {
-                    // ...
+                <Controller
+                  control={control}
+                  render={({ field }) => {
+                    return (
+                      <Input
+                        value={field.value || ""}
+                        placeholder="Название"
+                        onValueChange={field.onChange}
+                        size={InputSize.Micro}
+                      />
+                    );
                   }}
-                  size={InputSize.Micro}
+                  name="coefficient.value"
                 />
               </td>
               <td className="cell">
-                <IconButton icon={<CheckIcon />} />
+                <IconButton icon={<CheckIcon />} onClick={handleNewCoefficient} />
               </td>
             </tr>
           </tbody>

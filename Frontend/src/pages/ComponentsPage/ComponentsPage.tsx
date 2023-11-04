@@ -441,6 +441,33 @@ const ComponentsPage = () => {
           </tbody>
         </table>
         <br />
+        <br />
+        <br />
+
+        <hr />
+
+        <table className="table -fill -list">
+          <tbody>
+            <tr className="row">
+              <td className="cell">coefficient.label</td>
+              <td className="cell">coefficient.value</td>
+            </tr>
+            <tr className="row">
+              <td className="cell">coefficient.label</td>
+              <td className="cell">coefficient.value</td>
+            </tr>
+            <tr className="row">
+              <td className="cell">coefficient.label</td>
+              <td className="cell">coefficient.value</td>
+            </tr>
+            <tr className="row">
+              <td className="cell">coefficient.label</td>
+              <td className="cell">coefficient.value</td>
+            </tr>
+          </tbody>
+        </table>
+        <br />
+        <br />
 
         <hr />
 
