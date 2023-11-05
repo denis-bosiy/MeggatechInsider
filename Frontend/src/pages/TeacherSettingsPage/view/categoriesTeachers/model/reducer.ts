@@ -5,10 +5,6 @@ const defaultData: CategoriesTeachersItem[] = [{
   id: "Высшая категория",
   category: "Высшая категория",
   coefficient: 0.3,
-}, {
-  id: "Высшая категория",
-  category: "Высшая категория",
-  coefficient: 0.3,
 }];
 
 const categoriesTeachersReducer = (state: CategoriesTeachersItem[] = defaultData, action: Action) => {
