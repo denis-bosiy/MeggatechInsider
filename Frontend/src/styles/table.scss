@@ -1,6 +1,8 @@
 @import "../vars";
 
 .table {
+  width: 100%;
+
   font-size: 14px;
   line-height: 18px;
   color: $alternative-text-color;
@@ -11,6 +13,7 @@
 .cell {
   padding: 6px;
   border: 1px solid $table-color;
+  text-align: left;
 
   &.-success {
     color: $success-color;

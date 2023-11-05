@@ -1,5 +1,6 @@
 import React, { useLayoutEffect, useRef, useState } from "react";
 import { HiddenEyeIcon, OpenedEyeIcon, MagnifierIcon } from "../../icons";
+import { classNames } from "../../utils/classNames";
 import "./Input.scss";
 
 export enum InputSize {
@@ -21,6 +22,7 @@ interface IInputProps {
   type?: InputType;
   isInvalidValue?: boolean;
   onSearch?: () => void;
+  className?: string;
 }
 
 const Input = (props: IInputProps) => {
@@ -70,7 +72,7 @@ const Input = (props: IInputProps) => {
 
   return (
     <div
-      className={"input-container" + (isInvalidValue ? " -error" : "") + (sizeModificator ? " " + sizeModificator : "")}
+      className={classNames(props.className, "input-container" + (isInvalidValue ? " -error" : "") + (sizeModificator ? " " + sizeModificator : ""))}
       onFocus={onContainerInteract}
       tabIndex={0}
     >

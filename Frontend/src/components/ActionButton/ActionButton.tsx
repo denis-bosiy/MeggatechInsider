@@ -22,7 +22,7 @@ const ActionButton = (props: Props) => {
   const actionButtonType: ActionButtonType = props.type ?? ActionButtonType.Default;
 
   return (
-    <button className={classNames("action-button", "-" + actionButtonType.toLowerCase())} onClick={props.onClick}>
+    <button className={classNames(props.className, "action-button", "-" + actionButtonType.toLowerCase())} onClick={props.onClick}>
       {props.icon && <div className="action-button__icon">{props.icon}</div>}
 
       <span className="action-button__text">{props.label}</span>
