@@ -1,6 +1,6 @@
 import React from "react";
 import ActionButton, {ActionButtonType} from "../../../../components/ActionButton/ActionButton";
-import {Plus} from "../../../../icons";
+import {PlusIcon} from "../../../../icons";
 import CommonContent from "../common/CommonContent";
 import TypesContractsTable from "./table/TypesContractsTable";
 import {useDispatch} from "react-redux";
@@ -13,7 +13,7 @@ const TypesContracts = () => {
     button={<ActionButton
       label="Добавить"
       type={ActionButtonType.Warning}
-      icon={<Plus />}
+      icon={<PlusIcon />}
       onClick={() => dispatch(TypesContractsActionBuilder.addItem("New"))}
     />}
     table={<TypesContractsTable/>}

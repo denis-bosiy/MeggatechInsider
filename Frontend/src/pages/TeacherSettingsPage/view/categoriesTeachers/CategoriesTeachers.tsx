@@ -1,6 +1,6 @@
 import React from "react";
 import ActionButton, {ActionButtonType} from "../../../../components/ActionButton/ActionButton";
-import {Plus} from "../../../../icons";
+import {PlusIcon} from "../../../../icons";
 import CategoriesTeachersTable from "./table/CategoriesTeachersTable";
 import CommonContent from "../common/CommonContent";
 import {useDispatch} from "react-redux";
@@ -13,7 +13,7 @@ const CategoriesTeachers = () => {
     button={<ActionButton
       label="Добавить"
       type={ActionButtonType.Warning}
-      icon={<Plus />}
+      icon={<PlusIcon />}
       onClick={() => dispatch(CategoriesTeachersActionBuilder.addItem("New", 0.3))}
     />}
     table={<CategoriesTeachersTable/>}
