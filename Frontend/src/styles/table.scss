@@ -1,15 +1,5 @@
 @import "../vars";
 
-.table {
-  width: 100%;
-
-  font-size: 14px;
-  line-height: 18px;
-  color: $alternative-text-color;
-  border-spacing: 0;
-  border-collapse: separate;
-}
-
 .cell {
   padding: 6px;
   border: 1px solid $table-color;
@@ -44,6 +34,27 @@
   }
 }
 
+.table {
+  width: 100%;
+  font-size: 14px;
+  line-height: 18px;
+  color: $alternative-text-color;
+  border-spacing: 0;
+  border-collapse: separate;
+  
+  &.-fill {
+    width: 100%;
+  }
+
+  &.-list {
+    .cell {
+      border-right: 0;
+      border-left: 0;
+      border-top: 0;
+    }
+  }
+}
+
 .row {
   &.-success {
     color: $success-color;
@@ -67,6 +78,12 @@
   &:hover {
     .cell {
       background-color: rgba($table-color, 0.6);
+    }
+  }
+
+  &:last-child {
+    .cell {
+      border-bottom: 0;
     }
   }
 }

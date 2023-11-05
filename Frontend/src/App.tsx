@@ -4,6 +4,7 @@ import SignInPage from "./pages/SignInPage/SignInPage";
 import { ModalSettingsProvider } from "./utils/ModalSettingsContext";
 import Modal from "./components/Modal/Modal";
 import ComponentsPage from "./pages/ComponentsPage/ComponentsPage";
+import BasicSettingsPage from "./pages/SettingsPage/BasicSettingsPage";
 import Root from "./pages/Root";
 import TestPage from "./pages/TestPage/TestPage";
 import SubjectsSyllabusPage from "./pages/SubjectsSyllabusPage/SubjectsSyllabusPage";
@@ -34,6 +35,7 @@ const App = (): React.JSX.Element => {
               <Route path="components" element={<ComponentsPage />} />
               <Route path="test-redux" element={<TestPage />} />
               <Route path="settings">
+                <Route path="basic" element={<BasicSettingsPage />} />
                 <Route path="timetable" element={<TimetableSettingsPage />} />
               </Route>
             </Route>
