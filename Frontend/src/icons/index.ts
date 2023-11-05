@@ -10,4 +10,4 @@ export { ReactComponent as PenIcon } from "./pen.svg";
 export { ReactComponent as WarningIcon } from "./warning.svg";
 export { ReactComponent as Logo } from "./logo.svg";
 export { ReactComponent as Logout } from "./logout.svg";
-export { ReactComponent as Pluse } from "./pluse.svg";
+export { ReactComponent as Plus } from "./plus.svg";
