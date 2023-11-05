@@ -37,6 +37,20 @@ const TeacherEducationTable = () => {
   );
   const dispatch = useDispatch();
 
+  const rows = items.map((item, index) => <tr className="row" key={`${item.id}-${index}`}>
+    <td className="cell"><TeacherEducationEducationCell label={item.education}/></td>
+    <td className="cell">
+      <TeacherEducationCoefficientCell
+        coefficient={item.coefficient}
+        icon={<IconButton
+          icon={<GarbageIcon />}
+          small={true}
+          onClick={() => dispatch(TeacherEducationActionBuilder.deleteItem(item.id))}
+        />}
+      />
+    </td>
+  </tr>);
+
   return <table className="table">
     <thead className="header">
       <tr className="row">
@@ -45,19 +59,7 @@ const TeacherEducationTable = () => {
       </tr>
     </thead>
     <tbody>
-      {items.map((item, index) => <tr className="row" key={`${item.id}-${index}`}>
-        <td className="cell"><TeacherEducationEducationCell label={item.education}/></td>
-        <td className="cell">
-          <TeacherEducationCoefficientCell
-            coefficient={item.coefficient}
-            icon={<IconButton
-              icon={<GarbageIcon />}
-              small={true}
-              onClick={() => dispatch(TeacherEducationActionBuilder.deleteItem(item.id))}
-            />}
-          />
-        </td>
-      </tr>)}
+      {rows}
     </tbody>
   </table>;
 };

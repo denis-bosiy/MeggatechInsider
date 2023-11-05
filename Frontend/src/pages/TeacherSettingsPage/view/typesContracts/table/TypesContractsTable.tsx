@@ -26,6 +26,19 @@ const TypesContractsTable = () => {
   );
   const dispatch = useDispatch();
 
+  const rows = items.map((item, index) => <tr className="row" key={`${item.id}-${index}`}>
+    <td className="cell">
+      <TypesContractsCell
+        label={item.name}
+        icon={<IconButton
+          icon={<GarbageIcon />}
+          small={true}
+          onClick={() => dispatch(TypesContractsActionBuilder.deleteItem(item.id))}
+        />}
+      />
+    </td>
+  </tr>);
+
   return <table className="table">
     <thead className="header">
       <tr className="row">
@@ -33,18 +46,7 @@ const TypesContractsTable = () => {
       </tr>
     </thead>
     <tbody>
-      {items.map(item => <tr className="row" key={item.id}>
-        <td className="cell">
-          <TypesContractsCell
-            label={item.name}
-            icon={<IconButton
-              icon={<GarbageIcon />}
-              small={true}
-              onClick={() => dispatch(TypesContractsActionBuilder.deleteItem(item.id))}
-            />}
-          />
-        </td>
-      </tr>)}
+      {rows}
     </tbody>
   </table>;
 };
