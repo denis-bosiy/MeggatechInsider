@@ -1,0 +1,67 @@
+import { Action, ASSIGNING_COURSES_SYLLABUS_PAGE_ACTIONS } from "./actions";
+import {AssigningsCoursesSyllabusData, DiscrepanciesCoursesSyllabusData, AssigningCoursesSyllabusPageData} from "./types";
+
+const initAssigningData: AssigningsCoursesSyllabusData = [
+  {
+    id: 0,
+    name: "JavaScript",
+    teacher: "Иванов Иван Иванович",
+    groupCount: 3,
+    hoursByPlanOnClassOfTheStudents: 5,
+    hoursOnWeekForTheClassOfTheStudents: 4.2,
+    hoursOnWeekOnYearOnTheTeacher: 4.2,
+    hoursOnWeekOnPeriodOnTheTeacher: 0.23,
+    hoursIn1Subgroup: 105,
+    hoursIn2Subgroup: 91,
+    totalInYear: 134,
+    bidShare: 0.5
+  },
+  {
+    id: 1,
+    name: "История",
+    teacher: "Петров Иван Иванович",
+    groupCount: 2,
+    hoursByPlanOnClassOfTheStudents: 4,
+    hoursOnWeekForTheClassOfTheStudents: 6.2,
+    hoursOnWeekOnYearOnTheTeacher: 4.2,
+    hoursOnWeekOnPeriodOnTheTeacher: 0.23,
+    hoursIn1Subgroup: 105,
+    hoursIn2Subgroup: 91,
+    totalInYear: 128,
+    bidShare: 0.5
+  },
+];
+
+const initDiscrepanciesData: DiscrepanciesCoursesSyllabusData = [
+  {
+    id: 0,
+    name: "Физика",
+    groupCount: 1,
+    groupCountByPlan: 2
+  },
+  {
+    id: 1,
+    name: "История",
+    groupCount: 3,
+    groupCountByPlan: 2
+  },
+];
+
+const initData: AssigningCoursesSyllabusPageData = {
+  assignings: initAssigningData,
+  discrepancies: initDiscrepanciesData,
+};
+
+const assigningCoursesSyllabusPageReducer = (state = initData, action: Action) => {
+  switch (action.type) {
+    case ASSIGNING_COURSES_SYLLABUS_PAGE_ACTIONS.ASSIGNING_COURSES_SYLLABUS_PAGE_DELETE_ASSIGNING:
+      return {
+        ...state,
+        assignings: state.assignings.filter((item) => item.id !== action.payload),
+      };
+    default:
+      return state;
+  }
+};
+
+export { assigningCoursesSyllabusPageReducer };
