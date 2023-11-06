@@ -9,6 +9,9 @@ import SignInPage from "./pages/SignInPage/SignInPage";
 import SubjectsSyllabusPage from "./pages/Syllabus/SubjectsSyllabusPage/SubjectsSyllabusPage";
 import TeachersSyllabusPage from "./pages/Syllabus/TeachersSyllabusPage/TeachersSyllabusPage";
 import AssigningSyllabusPage from "./pages/Syllabus/AssigningSyllabusPage/AssigningSyllabusPage";
+import SubjectsCoursesSyllabusPage from "./pages/СourseSyllabus/SubjectsCoursesSyllabusPage/SubjectsCoursesSyllabusPage";
+import TeachersCoursesSyllabusPage from "./pages/СourseSyllabus/TeachersCoursesSyllabusPage/TeachersCoursesSyllabusPage";
+import AssigningCoursesSyllabusPage from "./pages/СourseSyllabus/AssigningCoursesSyllabusPage/AssigningCoursesSyllabusPage";
 import TeacherGuidebookTimetablePage from "./pages/Timetable/TeacherGuidebookTimetablePage/TeacherGuidebookTimetablePage";
 import TimetableSettingsPage from "./pages/Settings/TimetableSettingsPage/TimetableSettingsPage";
 import { Provider } from "react-redux";
@@ -26,6 +29,11 @@ const App = (): React.JSX.Element => {
                 <Route path="subjects" element={<SubjectsSyllabusPage />} />
                 <Route path="teachers" element={<TeachersSyllabusPage />} />
                 <Route path="assigning" element={<AssigningSyllabusPage />} />
+              </Route>
+              <Route path="courses-syllabus">
+                <Route path="subjects" element={<SubjectsCoursesSyllabusPage />} />
+                <Route path="teachers" element={<TeachersCoursesSyllabusPage />} />
+                <Route path="assigning" element={<AssigningCoursesSyllabusPage />} />
               </Route>
               <Route path="timetable">
                 <Route path="teacher-guidebook" element={<TeacherGuidebookTimetablePage />} />
