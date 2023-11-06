@@ -1,6 +1,6 @@
 using System.Text.Json.Serialization;
 
-namespace Api.Models.EducationalPlan;
+namespace Api.Models.EducationalPlan.Teacher;
 
 public class TeacherResponseDto
 {
