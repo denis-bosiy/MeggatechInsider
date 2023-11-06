@@ -1,5 +1,5 @@
 import React from "react";
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import {BrowserRouter as Router, Routes, Route, Navigate} from "react-router-dom";
 import SignInPage from "./pages/SignInPage/SignInPage";
 import { ModalSettingsProvider } from "./utils/ModalSettingsContext";
 import Modal from "./components/Modal/Modal";
@@ -7,6 +7,7 @@ import ComponentsPage from "./pages/ComponentsPage/ComponentsPage";
 import BasicSettingsPage from "./pages/SettingsPage/BasicSettingsPage";
 import Root from "./pages/Root";
 import TestPage from "./pages/TestPage/TestPage";
+import MenuPage from "./pages/MenuPage/MenuPage";
 import SubjectsSyllabusPage from "./pages/SubjectsSyllabusPage/SubjectsSyllabusPage";
 import TeachersSyllabusPage from "./pages/TeachersSyllabusPage/TeachersSyllabusPage";
 import AssigningSyllabusPage from "./pages/AssigningSyllabusPage/AssigningSyllabusPage";
@@ -15,6 +16,19 @@ import { Provider } from "react-redux";
 import { store } from "./redux/store";
 import TimetableSettingsPage from "./pages/TimetableSettingsPage/TimetableSettingsPage";
 
+export const AppRouter = {
+  Main: "/",
+  Login: "login",
+  Syllabus: "syllabus",
+  Subjects: "subjects",
+  Teachers: "teachers",
+  Assigning: "assigning",
+  Timetable: "timetable",
+  TeacherGuidebook: "teacher-guidebook",
+  Settings: "settings",
+  Basic: "basic",
+  NotFound: "*",
+};
 
 const App = (): React.JSX.Element => {
   return (
@@ -22,22 +36,25 @@ const App = (): React.JSX.Element => {
       <Provider store={store}>
         <Router>
           <Routes>
-            <Route path="/" element={<Root />}>
-              <Route path="login" element={<SignInPage />} />
-              <Route path="syllabus">
-                <Route path="subjects" element={<SubjectsSyllabusPage />} />
-                <Route path="teachers" element={<TeachersSyllabusPage />} />
-                <Route path="assigning" element={<AssigningSyllabusPage />} />
+            <Route element={<Root />}>
+              <Route path={AppRouter.Main} element={<MenuPage />} />
+              <Route path={AppRouter.Login} element={<SignInPage />} />
+              <Route path={AppRouter.Syllabus}>
+                <Route index element={<Navigate to={AppRouter.Subjects} />} />
+                <Route path={AppRouter.Subjects} element={<SubjectsSyllabusPage />} />
+                <Route path={AppRouter.Teachers} element={<TeachersSyllabusPage />} />
+                <Route path={AppRouter.Assigning} element={<AssigningSyllabusPage />} />
               </Route>
-              <Route path="timetable">
-                <Route path="teacher-guidebook" element={<TeacherGuidebookTimetablePage />} />
+              <Route path={AppRouter.Timetable}>
+                <Route path={AppRouter.TeacherGuidebook} element={<TeacherGuidebookTimetablePage />} />
               </Route>
               <Route path="components" element={<ComponentsPage />} />
               <Route path="test-redux" element={<TestPage />} />
-              <Route path="settings">
-                <Route path="basic" element={<BasicSettingsPage />} />
-                <Route path="timetable" element={<TimetableSettingsPage />} />
+              <Route path={AppRouter.Settings}>
+                <Route path={AppRouter.Basic} element={<BasicSettingsPage />} />
+                <Route path={AppRouter.Timetable} element={<TimetableSettingsPage />} />
               </Route>
+              <Route path={AppRouter.NotFound} element={<Navigate to={AppRouter.Main} />} />
             </Route>
           </Routes>
         </Router>
