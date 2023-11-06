@@ -1,4 +1,4 @@
-using Api.Models.EducationalPlan;
+using Api.Models.EducationalPlan.Teacher;
 using Domain.TeacherEntities;
 
 namespace Api.Mappers;
