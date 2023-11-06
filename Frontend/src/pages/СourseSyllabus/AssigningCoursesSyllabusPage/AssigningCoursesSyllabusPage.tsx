@@ -100,7 +100,7 @@ const AssigningCoursesSyllabusPage = () => {
           <table className="table">
             <thead className="header">
               <tr className="row">
-                <th className="cell">Предмет</th>
+                <th className="cell">Курс</th>
                 <th className="cell">Преподаватель</th>
                 <th className="cell">Число<br />групп</th>
                 <th className="cell">Часов по плану на<br />класс</th>
@@ -164,7 +164,7 @@ const AssigningCoursesSyllabusPage = () => {
           <table className="table">
             <thead className="header">
               <tr className="row">
-                <th className="cell">Предмет</th>
+                <th className="cell">Курс</th>
                 <th className="cell">Число групп</th>
               </tr>
             </thead>
