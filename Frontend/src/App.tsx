@@ -1,19 +1,18 @@
 import React from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import SignInPage from "./pages/SignInPage/SignInPage";
 import { ModalSettingsProvider } from "./utils/ModalSettingsContext";
 import Modal from "./components/Modal/Modal";
 import ComponentsPage from "./pages/ComponentsPage/ComponentsPage";
 import Root from "./pages/Root";
 import TestPage from "./pages/TestPage/TestPage";
-import SubjectsSyllabusPage from "./pages/SubjectsSyllabusPage/SubjectsSyllabusPage";
-import TeachersSyllabusPage from "./pages/TeachersSyllabusPage/TeachersSyllabusPage";
-import AssigningSyllabusPage from "./pages/AssigningSyllabusPage/AssigningSyllabusPage";
-import TeacherGuidebookTimetablePage from "./pages/TeacherGuidebookTimetablePage/TeacherGuidebookTimetablePage";
+import SignInPage from "./pages/SignInPage/SignInPage";
+import SubjectsSyllabusPage from "./pages/Syllabus/SubjectsSyllabusPage/SubjectsSyllabusPage";
+import TeachersSyllabusPage from "./pages/Syllabus/TeachersSyllabusPage/TeachersSyllabusPage";
+import AssigningSyllabusPage from "./pages/Syllabus/AssigningSyllabusPage/AssigningSyllabusPage";
+import TeacherGuidebookTimetablePage from "./pages/Timetable/TeacherGuidebookTimetablePage/TeacherGuidebookTimetablePage";
+import TimetableSettingsPage from "./pages/Settings/TimetableSettingsPage/TimetableSettingsPage";
 import { Provider } from "react-redux";
 import { store } from "./redux/store";
-import TimetableSettingsPage from "./pages/TimetableSettingsPage/TimetableSettingsPage";
-
 
 const App = (): React.JSX.Element => {
   return (

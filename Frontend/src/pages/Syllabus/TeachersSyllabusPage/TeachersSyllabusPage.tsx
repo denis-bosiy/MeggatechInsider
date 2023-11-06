@@ -3,12 +3,12 @@ import {useDispatch, useSelector} from "react-redux";
 import {TeachersSyllabusPageData} from "./model/types";
 import {ActionBuilder} from "./model/actions";
 import "./TeachersSyllabusPage.scss";
-import Input, {InputSize, InputType} from "../../components/Input/Input";
-import ActionButton, {ActionButtonType} from "../../components/ActionButton/ActionButton";
-import {CheckMarkIcon, GarbageIcon, PenIcon, PlusIcon} from "../../icons";
-import Select, {ISelectOption, SelectSize} from "../../components/Select/Select";
-import {CheckBox} from "../../components/CheckBox/CheckBox";
-import IconButton, {IconButtonType} from "../../components/IconButton/IconButton";
+import Input, {InputSize, InputType} from "../../../components/Input/Input";
+import ActionButton, {ActionButtonType} from "../../../components/ActionButton/ActionButton";
+import {CheckMarkIcon, GarbageIcon, PenIcon, PlusIcon} from "../../../icons";
+import Select, {ISelectOption, SelectSize} from "../../../components/Select/Select";
+import {CheckBox} from "../../../components/CheckBox/CheckBox";
+import IconButton, {IconButtonType} from "../../../components/IconButton/IconButton";
 
 const TeachersSyllabus = () => {
   const teachers = useSelector((state: {teachersSyllabusPageStore: TeachersSyllabusPageData}) => state.teachersSyllabusPageStore);

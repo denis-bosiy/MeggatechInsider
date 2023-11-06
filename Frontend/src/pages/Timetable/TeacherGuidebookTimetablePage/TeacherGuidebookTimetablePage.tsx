@@ -2,10 +2,10 @@ import React, {useState} from "react";
 import {useSelector} from "react-redux";
 import {TeacherGuidebookTimetablePageData} from "./model/types";
 import "./TeacherGuidebookTimetablePage.scss";
-import Input, {InputType} from "../../components/Input/Input";
-import ActionButton, { ActionButtonType } from "../../components/ActionButton/ActionButton";
-import {PenIcon} from "../../icons";
-import { classNames } from "../../utils/classNames";
+import Input, {InputType} from "../../../components/Input/Input";
+import ActionButton, { ActionButtonType } from "../../../components/ActionButton/ActionButton";
+import {PenIcon} from "../../../icons";
+import { classNames } from "../../../utils/classNames";
 
 const Guidebook = () => {
   const guidebook = useSelector((state: { teacherGuidebookTimetablePageStore: TeacherGuidebookTimetablePageData }) => state.teacherGuidebookTimetablePageStore);

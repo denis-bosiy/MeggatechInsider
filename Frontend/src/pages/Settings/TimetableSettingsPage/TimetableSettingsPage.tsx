@@ -3,11 +3,11 @@ import {useDispatch, useSelector} from "react-redux";
 import {ActionBuilder} from "./model/actions";
 import {TimetableSettingsPageData, TimetableSettingsPageParadeData, TimetableSettingsPageTimeData} from "./model/types";
 import "./TimetableSettingsPage.scss";
-import Input, {InputSize} from "../../components/Input/Input";
-import ActionButton, {ActionButtonType} from "../../components/ActionButton/ActionButton";
-import {CheckMarkIcon, GarbageIcon, PenIcon, PlusIcon} from "../../icons";
-import IconButton, { IconButtonType } from "../../components/IconButton/IconButton";
-import Select, { ISelectOption, SelectSize } from "../../components/Select/Select";
+import Input, {InputSize} from "../../../components/Input/Input";
+import ActionButton, {ActionButtonType} from "../../../components/ActionButton/ActionButton";
+import {CheckMarkIcon, GarbageIcon, PenIcon, PlusIcon} from "../../../icons";
+import IconButton, { IconButtonType } from "../../../components/IconButton/IconButton";
+import Select, { ISelectOption, SelectSize } from "../../../components/Select/Select";
 
 const TimeSettings = (time: TimetableSettingsPageTimeData, isAddition: boolean) => {
   const dispatch = useDispatch();
@@ -99,7 +99,7 @@ const EditedParadeBox = () => {
           onClick={() => alert("Отменить")}
         />
       </div>
-            
+
       <Select
         options={selectOptions}
         onValueChange={setSelectValue}

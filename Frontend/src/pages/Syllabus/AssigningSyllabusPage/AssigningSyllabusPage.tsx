@@ -2,13 +2,13 @@ import React, {useState} from "react";
 import {useDispatch, useSelector} from "react-redux";
 import {AssigningSyllabusPageData} from "./model/types";
 import {ActionBuilder} from "./model/actions";
-import { classNames } from "../../utils/classNames";
+import { classNames } from "../../../utils/classNames";
 import "./AssigningSyllabusPage.scss";
-import Input, {InputSize, InputType} from "../../components/Input/Input";
-import ActionButton, {ActionButtonType} from "../../components/ActionButton/ActionButton";
-import {CheckMarkIcon, GarbageIcon, PenIcon, PlusIcon} from "../../icons";
-import Select, {ISelectOption, SelectSize} from "../../components/Select/Select";
-import IconButton, {IconButtonType} from "../../components/IconButton/IconButton";
+import Input, {InputSize, InputType} from "../../../components/Input/Input";
+import ActionButton, {ActionButtonType} from "../../../components/ActionButton/ActionButton";
+import {CheckMarkIcon, GarbageIcon, PenIcon, PlusIcon} from "../../../icons";
+import Select, {ISelectOption, SelectSize} from "../../../components/Select/Select";
+import IconButton, {IconButtonType} from "../../../components/IconButton/IconButton";
 
 const AssigningSyllabus = () => {
   const data = useSelector((state: {assigningSyllabusPageStore: AssigningSyllabusPageData}) => state.assigningSyllabusPageStore);
