@@ -1,7 +1,7 @@
-using Application.StudyingActivityServices.Abstractions;
+using Application.Abstractions.StudyingActivityServices;
 using Domain.TimetableEntities.GuidebookEntities;
 
-namespace Application.StudyingActivityServices.Implementations
+namespace Application.Implementations.StudyingActivityServices
 {
     public class PairTimeService : IPairTimeService
     {

@@ -2,9 +2,10 @@ using Api.Mappers.StudyuingActivity;
 using Api.Models.StudyingActivityTimeModels.LessonTime;
 using Api.Models.StudyingActivityTimeModels.PairTime;
 using Api.Models.StudyingActivityTimeModels.ParadeTime;
-using Application.StudyingActivityServices.Abstractions;
+using Application.Abstractions.StudyingActivityServices;
 using Domain.TimetableEntities.GuidebookEntities;
 using Microsoft.AspNetCore.Mvc;
+using System.Web.Http.Description;
 
 namespace Api.Controllers
 {
@@ -20,6 +21,7 @@ namespace Api.Controllers
         }
 
         [HttpGet( "pair" )]
+        [ResponseType( typeof( PairTimeDto ) )]
         public IActionResult GetPairTime( [FromQuery] int year )
         {
             List<PairTime> pairTimes = _pairTimeService.GetPairTimes( year );

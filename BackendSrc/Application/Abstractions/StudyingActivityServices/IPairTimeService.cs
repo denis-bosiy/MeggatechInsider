@@ -1,6 +1,6 @@
 using Domain.TimetableEntities.GuidebookEntities;
 
-namespace Application.StudyingActivityServices.Abstractions
+namespace Application.Abstractions.StudyingActivityServices
 {
     public interface IPairTimeService
     {

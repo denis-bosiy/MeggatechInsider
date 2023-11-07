@@ -1,8 +1,7 @@
-using Application.StudyingActivityServices.Abstractions;
-using Application.StudyingActivityServices.Implementations;
+using Application.Abstractions.StudyingActivityServices;
 using Microsoft.Extensions.DependencyInjection;
 
-namespace Application.StudyingActivityServices
+namespace Application.Implementations.StudyingActivityServices
 {
     public static class StuduingActivityBindings
     {
