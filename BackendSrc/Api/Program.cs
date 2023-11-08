@@ -1,4 +1,5 @@
 using Api.JsonConverters;
+using Application;
 
 namespace Api
 {
@@ -18,6 +19,7 @@ namespace Api
             // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen();
+            builder.Services.AddApplication();
 
             WebApplication app = builder.Build();
 
