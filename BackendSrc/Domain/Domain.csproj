@@ -7,8 +7,13 @@
     </PropertyGroup>
 
     <ItemGroup>
-        <Folder Include="GuidebookEntities\"/>
-        <Folder Include="GenericEntities\"/>
+      <Compile Remove="GuidebookEntities\**" />
+      <EmbeddedResource Remove="GuidebookEntities\**" />
+      <None Remove="GuidebookEntities\**" />
+    </ItemGroup>
+
+    <ItemGroup>
+        <Folder Include="GenericEntities\" />
     </ItemGroup>
 
 </Project>
