@@ -1,3 +1,4 @@
+using System.Web.Http.Description;
 using Api.Models.Timetable;
 using Microsoft.AspNetCore.Mvc;
 
@@ -7,7 +8,8 @@ namespace Api.Controllers;
 [Route( "api/timetable" )]
 public class TimetableController : ControllerBase
 {
-    [HttpGet( "timetable" )]
+    [HttpGet]
+    [ResponseType( typeof(TimetableResponseDto) )]
     public IActionResult SearchTimetable( [FromQuery] TimetableRequestDto timetableRequestDto )
     {
         // mock
@@ -31,7 +33,7 @@ public class TimetableController : ControllerBase
                 WeekDay = DayOfWeek.Monday,
                 StartTime = new TimeOnly( 8, 0, 0 ),
                 EndTime = new TimeOnly( 9, 30, 0 ),
-                Class = new List<ShortClassInfo> { new ShortClassInfo { ClassId = 1 } },
+                Class = new List<ShortClassInfoDto> { new ShortClassInfoDto { ClassId = 1 } },
                 NumberOfGroup = 2,
                 CurrentGroup = 1,
                 Subject =
@@ -48,7 +50,7 @@ public class TimetableController : ControllerBase
                 WeekDay = DayOfWeek.Monday,
                 StartTime = new TimeOnly( 9, 50, 0 ),
                 EndTime = new TimeOnly( 11, 20, 0 ),
-                Class = new List<ShortClassInfo> { new ShortClassInfo { ClassId = 1 } },
+                Class = new List<ShortClassInfoDto> { new ShortClassInfoDto { ClassId = 1 } },
                 NumberOfGroup = 1,
                 CurrentGroup = 1,
                 Subject = new Subject { SubjectId = 302, TeacherName = "Аристотель", SubjectName = "Физика" },
@@ -64,7 +66,7 @@ public class TimetableController : ControllerBase
                 WeekDay = DayOfWeek.Monday,
                 StartTime = new TimeOnly( 11, 40, 0 ),
                 EndTime = new TimeOnly( 13, 10, 0 ),
-                Class = new List<ShortClassInfo> { new ShortClassInfo { ClassId = 1 } },
+                Class = new List<ShortClassInfoDto> { new ShortClassInfoDto { ClassId = 1 } },
                 NumberOfGroup = 1,
                 CurrentGroup = 1,
                 Subject = new Subject { SubjectId = 303, TeacherName = "Птолемей", SubjectName = "Геометрия" },
@@ -80,7 +82,7 @@ public class TimetableController : ControllerBase
                 WeekDay = DayOfWeek.Monday,
                 StartTime = new TimeOnly( 13, 20, 0 ),
                 EndTime = new TimeOnly( 14, 50, 0 ),
-                Class = new List<ShortClassInfo> { new ShortClassInfo { ClassId = 1 } },
+                Class = new List<ShortClassInfoDto> { new ShortClassInfoDto { ClassId = 1 } },
                 NumberOfGroup = 1,
                 CurrentGroup = 1,
                 Subject = new Subject { SubjectId = 304, TeacherName = "Плутарх", SubjectName = "Философия" },
@@ -96,7 +98,7 @@ public class TimetableController : ControllerBase
                 WeekDay = DayOfWeek.Tuesday,
                 StartTime = new TimeOnly( 8, 0, 0 ),
                 EndTime = new TimeOnly( 9, 30, 0 ),
-                Class = new List<ShortClassInfo> { new ShortClassInfo { ClassId = 2 } },
+                Class = new List<ShortClassInfoDto> { new ShortClassInfoDto { ClassId = 2 } },
                 NumberOfGroup = 3,
                 CurrentGroup = 2,
                 Subject =
@@ -118,7 +120,7 @@ public class TimetableController : ControllerBase
                 WeekDay = DayOfWeek.Tuesday,
                 StartTime = new TimeOnly( 9, 50, 0 ),
                 EndTime = new TimeOnly( 11, 20, 0 ),
-                Class = new List<ShortClassInfo> { new ShortClassInfo { ClassId = 2 } },
+                Class = new List<ShortClassInfoDto> { new ShortClassInfoDto { ClassId = 2 } },
                 NumberOfGroup = 2,
                 CurrentGroup = 2,
                 Subject = new Subject { SubjectId = 14, TeacherName = "Охотников С.А.", SubjectName = "АиП" },
@@ -134,7 +136,7 @@ public class TimetableController : ControllerBase
                 WeekDay = DayOfWeek.Tuesday,
                 StartTime = new TimeOnly( 11, 40, 0 ),
                 EndTime = new TimeOnly( 13, 10, 0 ),
-                Class = new List<ShortClassInfo> { new ShortClassInfo { ClassId = 2 } },
+                Class = new List<ShortClassInfoDto> { new ShortClassInfoDto { ClassId = 2 } },
                 NumberOfGroup = 3,
                 CurrentGroup = 2,
                 Subject =
@@ -154,7 +156,7 @@ public class TimetableController : ControllerBase
                 WeekDay = DayOfWeek.Tuesday,
                 StartTime = new TimeOnly( 13, 20, 0 ),
                 EndTime = new TimeOnly( 14, 50, 0 ),
-                Class = new List<ShortClassInfo> { new ShortClassInfo { ClassId = 16 } },
+                Class = new List<ShortClassInfoDto> { new ShortClassInfoDto { ClassId = 16 } },
                 NumberOfGroup = 2,
                 CurrentGroup = 3,
                 Subject =
@@ -186,7 +188,7 @@ public class TimetableController : ControllerBase
         return Ok( timetableResponse );
     }
 
-    [HttpPut( "update" )]
+    [HttpPut]
     public IActionResult UpdateTimetable( [FromBody] TimetableUpdateRequestDto timetableUpdateRequestDto )
     {
         // mock
@@ -201,9 +203,9 @@ public class TimetableController : ControllerBase
     }
 
 
-    // TODO: как лучше роут назвать?
-    [HttpPut( "cell-deletion" )]
-    public IActionResult DeleteTimetableCell( [FromBody] TimetableDeleteCellRequestDto timetableDeleteCellRequestDto )
+    [HttpDelete( "cell" )]
+    public IActionResult DeleteTimetableLesson(
+        [FromBody] TimetableDeleteLessonRequestDto timetableDeleteLessonRequestDto )
     {
         // mock
 
@@ -216,7 +218,7 @@ public class TimetableController : ControllerBase
         return Ok();
     }
 
-    [HttpPost( "application" )]
+    [HttpPost( "apply" )]
     public IActionResult ApplyTimetable( [FromBody] TimetableApplyRequestDto timetableApplyRequestDto )
     {
         // mock
@@ -234,8 +236,8 @@ public class TimetableController : ControllerBase
         return Ok();
     }
 
-    [HttpPost( "excel-saving" )]
-    public IActionResult SaveExcelTimetable( [FromBody] TimetableSaveExcelRequestDto timetableSaveExcelRequestDto )
+    [HttpPost( "save-to-excel" )]
+    public IActionResult SaveExcelFromTimetable( [FromBody] TimetableSaveExcelRequestDto timetableSaveExcelRequestDto )
     {
         // mock
 
@@ -252,8 +254,8 @@ public class TimetableController : ControllerBase
         return Ok();
     }
 
-    [HttpPost( "report-card-saving" )]
-    public IActionResult SaveReportCardTimetable(
+    [HttpPost( "save-to-report-card" )]
+    public IActionResult SaveReportCardFromTimetable(
         [FromBody] TimetableSaveReportCardRequestDto timetableSaveReportCardRequestDto )
     {
         // mock
@@ -271,20 +273,12 @@ public class TimetableController : ControllerBase
         return Ok();
     }
 
-    [HttpGet( "days-of-week" )]
-    public IActionResult GetDaysOfWeek()
-    {
-        // TODO: у нас есть точно такой же по смыслу запрос для styding activity; может оставить один из?
-        // TODO: вообще вроде как договорились не делать вообще этот запрос, а фронту дать заранее маппинг с enum на дни недели
-        // mock
-
-        return Ok();
-    }
-
     [HttpGet( "weeks" )]
+    [ResponseType( typeof(TimetableWeeksResponseDto) )]
     public IActionResult GetTimetableWeeks( [FromQuery] TimetableWeeksRequestDto timetableWeeksRequestDto )
     {
         // mock
+
         if ( false )
         {
             return NotFound( "Не найдено такого года" );
@@ -300,9 +294,11 @@ public class TimetableController : ControllerBase
     }
 
     [HttpGet( "classes" )]
+    [ResponseType( typeof(TimetableClassesResponseDto) )]
     public IActionResult GetTimetableClasses( [FromQuery] TimetableClassesResponseDto timetableClassesResponseDto )
     {
         // mock
+
         if ( false )
         {
             return NotFound( "Не найдено такого года" );
@@ -321,9 +317,11 @@ public class TimetableController : ControllerBase
     }
 
     [HttpGet( "subjects" )]
+    [ResponseType( typeof(TimetableSubjectsResponseDto) )]
     public IActionResult GetTimetableSubjects( [FromQuery] TimetableSubjectsRequestDto timetableSubjectsRequestDto )
     {
         // mock
+
         if ( false )
         {
             return NotFound( "Не найдено такого года" );
@@ -348,10 +346,12 @@ public class TimetableController : ControllerBase
     }
 
     [HttpGet( "pair-time-ranges" )]
+    [ResponseType( typeof(TimetablePairTimeRangesResponseDto) )]
     public IActionResult GetTimetablePairTimeRanges(
         [FromQuery] TimetablePairTimeRangesRequestDto timetablePairTimeRangesRequestDto )
     {
         // mock
+
         if ( false )
         {
             return NotFound( "Не найдено такого года" );
@@ -370,12 +370,14 @@ public class TimetableController : ControllerBase
 
         return Ok( responseDto );
     }
-    
+
     [HttpGet( "lesson-time-ranges" )]
+    [ResponseType( typeof(TimetableLessonTimeRangesResponseDto) )]
     public IActionResult GetTimetableLessonTimeRanges(
         [FromQuery] TimetableLessonTimeRangesRequestDto timetableLessonTimeRangesRequestDto )
     {
         // mock
+
         if ( false )
         {
             return NotFound( "Не найдено такого года" );
