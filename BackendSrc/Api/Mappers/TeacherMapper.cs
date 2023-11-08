@@ -18,10 +18,10 @@ public static class TeacherMapper
             teacher.EgeAffectsOnSalary,
             teacher.EmploymentDate,
             DateOnly.FromDateTime( DateTime.Today ).Year
-                - teacher.EmploymentDate.Year
-                + teacher.ExperienceInYearsOnEmploymentDate, // TODO: нужно ли здесь учитывать суммарный опыт?
+            - teacher.EmploymentDate.Year
+            + teacher.ExperienceInYearsOnEmploymentDate, // TODO: нужно ли здесь учитывать суммарный опыт?
             teacher.ExperienceInYearsOnEmploymentDate);
 
-    public static IReadOnlyList<TeacherResponseDto> Map( this IEnumerable<Teacher> teachers ) =>
-        teachers.Select( Map ).ToList();
+    public static TeachersResponseDto Map( this IEnumerable<Teacher> teachers ) =>
+        new() { Teachers = teachers.Select( Map ).ToList() };
 }

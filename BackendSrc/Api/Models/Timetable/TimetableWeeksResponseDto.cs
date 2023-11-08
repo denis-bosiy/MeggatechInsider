@@ -4,15 +4,15 @@ namespace Api.Models.Timetable;
 
 public class TimetableWeeksResponseDto
 {
-    [JsonPropertyName("weeks")]
+    [JsonPropertyName( "weeks" )]
     public List<WeekInfo> Weeks { get; set; }
 }
 
 public class WeekInfo
 {
-    [JsonPropertyName("week")]
+    [JsonPropertyName( "week" )]
     public int Week { get; set; }
-    
-    [JsonPropertyName("content")]
+
+    [JsonPropertyName( "content" )]
     public string Content { get; set; }
 }

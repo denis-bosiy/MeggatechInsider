@@ -4,78 +4,78 @@ namespace Api.Models.Timetable;
 
 public class TimetableResponseDto
 {
-    [JsonPropertyName("cells")]
+    [JsonPropertyName( "cells" )]
     public List<Cell> Cells { get; set; }
 
-    [JsonPropertyName("schoolMeeting")]
+    [JsonPropertyName( "schoolMeeting" )]
     public SchoolMeeting SchoolMeeting { get; set; }
 }
 
 public class Cell
 {
-    [JsonPropertyName("cellId")]
+    [JsonPropertyName( "cellId" )]
     public int CellId { get; set; }
 
-    [JsonPropertyName("weekDay")]
+    [JsonPropertyName( "weekDay" )]
     public DayOfWeek WeekDay { get; set; }
 
-    [JsonPropertyName("startTime")]
+    [JsonPropertyName( "startTime" )]
     public TimeOnly StartTime { get; set; }
 
-    [JsonPropertyName("endTime")]
+    [JsonPropertyName( "endTime" )]
     public TimeOnly EndTime { get; set; }
 
-    [JsonPropertyName("class")]
-    public List<ShortClassInfo> Class { get; set; }
+    [JsonPropertyName( "class" )]
+    public List<ShortClassInfoDto> Class { get; set; }
 
-    [JsonPropertyName("numberOfGroup")]
+    [JsonPropertyName( "numberOfGroup" )]
     public int NumberOfGroup { get; set; }
 
-    [JsonPropertyName("currentGroup")]
+    [JsonPropertyName( "currentGroup" )]
     public int CurrentGroup { get; set; }
 
-    [JsonPropertyName("subject")]
+    [JsonPropertyName( "subject" )]
     public Subject Subject { get; set; }
 
-    [JsonPropertyName("classroom")]
+    [JsonPropertyName( "classroom" )]
     public int Classroom { get; set; }
 
-    [JsonPropertyName("isOnline")]
+    [JsonPropertyName( "isOnline" )]
     public bool IsOnline { get; set; }
 
-    [JsonPropertyName("isParallel")]
+    [JsonPropertyName( "isParallel" )]
     public bool IsParallel { get; set; }
 
-    [JsonPropertyName("isClass")]
+    [JsonPropertyName( "isClass" )]
     public bool IsClass { get; set; }
 
-    [JsonPropertyName("isGroup")]
+    [JsonPropertyName( "isGroup" )]
     public bool IsGroup { get; set; }
 }
 
 public class Subject
 {
-    [JsonPropertyName("subjectId")]
+    [JsonPropertyName( "subjectId" )]
     public int SubjectId { get; set; }
 
-    [JsonPropertyName("teacherName")]
+    [JsonPropertyName( "teacherName" )]
     public string TeacherName { get; set; }
 
-    [JsonPropertyName("subjectName")]
+    [JsonPropertyName( "subjectName" )]
     public string SubjectName { get; set; }
 }
 
 public class SchoolMeeting
 {
-    [JsonPropertyName("text")]
+    [JsonPropertyName( "text" )]
     public string Text { get; set; }
 
-    [JsonPropertyName("weekDay")]
+    [JsonPropertyName( "weekDay" )]
     public DayOfWeek WeekDay { get; set; }
 
-    [JsonPropertyName("startTime")]
+    [JsonPropertyName( "startTime" )]
     public TimeOnly StartTime { get; set; }
 
-    [JsonPropertyName("endTime")]
+    [JsonPropertyName( "endTime" )]
     public TimeOnly EndTime { get; set; }
 }

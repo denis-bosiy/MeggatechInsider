@@ -1,3 +1,4 @@
+using System.Web.Http.Description;
 using Api.Mappers;
 using Api.Models.EducationalPlan.Appointment;
 using Api.Models.EducationalPlan.Difference;
@@ -13,6 +14,7 @@ namespace Api.Controllers;
 public sealed class EducationalPlanController : ControllerBase
 {
     [HttpGet( "teachers" )]
+    [ResponseType( typeof(TeachersResponseDto) )]
     public IActionResult SearchTeachers( [FromQuery] TeacherRequestDto teacherRequestDto )
     {
         // mock
@@ -103,12 +105,7 @@ public sealed class EducationalPlanController : ControllerBase
         {
             Differences = new List<DifferenceDto>()
             {
-                new DifferenceDto()
-                {
-                    Name = "Расхождение 1",
-                    GroupsCount = 2,
-                    PlanGroupsCount = 2
-                }
+                new DifferenceDto() { Name = "Расхождение 1", GroupsCount = 2, PlanGroupsCount = 2 }
             }
         };
     }
