@@ -4,10 +4,10 @@ namespace Api.Models.Timetable;
 
 public class TimetableLessonTimeRangesResponseDto
 {
-    public List<LessonTimeRange> LessonTimeRanges { get; set; }
+    public List<LessonTimeRangeDto> LessonTimeRanges { get; set; }
 }
 
-public class LessonTimeRange
+public class LessonTimeRangeDto
 {
     [JsonPropertyName( "id" )]
     public int Id { get; set; }

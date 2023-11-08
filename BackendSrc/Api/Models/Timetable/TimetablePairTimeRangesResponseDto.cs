@@ -5,10 +5,10 @@ namespace Api.Models.Timetable;
 public class TimetablePairTimeRangesResponseDto
 {
     [JsonPropertyName( "pairTimeRanges" )]
-    public List<PairTimeRange> PairTimeRanges { get; set; }
+    public List<PairTimeRangeDto> PairTimeRanges { get; set; }
 }
 
-public class PairTimeRange
+public class PairTimeRangeDto
 {
     [JsonPropertyName( "id" )]
     public int Id { get; set; }

@@ -25,9 +25,9 @@ public class TimetableController : ControllerBase
             return NotFound( "Не найдено такой недели" );
         }
 
-        List<Cell> cells = new List<Cell>
+        List<CellDto> cells = new List<CellDto>
         {
-            new Cell
+            new CellDto
             {
                 CellId = 1,
                 WeekDay = DayOfWeek.Monday,
@@ -37,14 +37,14 @@ public class TimetableController : ControllerBase
                 NumberOfGroup = 2,
                 CurrentGroup = 1,
                 Subject =
-                    new Subject { SubjectId = 1, TeacherName = "Павел Ермаков", SubjectName = "Обществознание" },
+                    new SubjectDto { SubjectId = 1, TeacherName = "Павел Ермаков", SubjectName = "Обществознание" },
                 Classroom = 402,
                 IsOnline = true,
                 IsParallel = false,
                 IsClass = true,
                 IsGroup = false
             },
-            new Cell
+            new CellDto
             {
                 CellId = 2,
                 WeekDay = DayOfWeek.Monday,
@@ -53,14 +53,14 @@ public class TimetableController : ControllerBase
                 Class = new List<ShortClassInfoDto> { new ShortClassInfoDto { ClassId = 1 } },
                 NumberOfGroup = 1,
                 CurrentGroup = 1,
-                Subject = new Subject { SubjectId = 302, TeacherName = "Аристотель", SubjectName = "Физика" },
+                Subject = new SubjectDto { SubjectId = 302, TeacherName = "Аристотель", SubjectName = "Физика" },
                 Classroom = 404,
                 IsOnline = false,
                 IsParallel = false,
                 IsClass = true,
                 IsGroup = false
             },
-            new Cell
+            new CellDto
             {
                 CellId = 3,
                 WeekDay = DayOfWeek.Monday,
@@ -69,14 +69,14 @@ public class TimetableController : ControllerBase
                 Class = new List<ShortClassInfoDto> { new ShortClassInfoDto { ClassId = 1 } },
                 NumberOfGroup = 1,
                 CurrentGroup = 1,
-                Subject = new Subject { SubjectId = 303, TeacherName = "Птолемей", SubjectName = "Геометрия" },
+                Subject = new SubjectDto { SubjectId = 303, TeacherName = "Птолемей", SubjectName = "Геометрия" },
                 Classroom = 500,
                 IsOnline = false,
                 IsParallel = false,
                 IsClass = true,
                 IsGroup = false
             },
-            new Cell
+            new CellDto
             {
                 CellId = 4,
                 WeekDay = DayOfWeek.Monday,
@@ -85,14 +85,14 @@ public class TimetableController : ControllerBase
                 Class = new List<ShortClassInfoDto> { new ShortClassInfoDto { ClassId = 1 } },
                 NumberOfGroup = 1,
                 CurrentGroup = 1,
-                Subject = new Subject { SubjectId = 304, TeacherName = "Плутарх", SubjectName = "Философия" },
+                Subject = new SubjectDto { SubjectId = 304, TeacherName = "Плутарх", SubjectName = "Философия" },
                 Classroom = 404,
                 IsOnline = false,
                 IsParallel = true,
                 IsClass = true,
                 IsGroup = true
             },
-            new Cell
+            new CellDto
             {
                 CellId = 5,
                 WeekDay = DayOfWeek.Tuesday,
@@ -102,7 +102,7 @@ public class TimetableController : ControllerBase
                 NumberOfGroup = 3,
                 CurrentGroup = 2,
                 Subject =
-                    new Subject
+                    new SubjectDto
                     {
                         SubjectId = 13,
                         TeacherName = "Хабибрахманова А.З.",
@@ -114,7 +114,7 @@ public class TimetableController : ControllerBase
                 IsClass = true,
                 IsGroup = false
             },
-            new Cell
+            new CellDto
             {
                 CellId = 6,
                 WeekDay = DayOfWeek.Tuesday,
@@ -123,14 +123,14 @@ public class TimetableController : ControllerBase
                 Class = new List<ShortClassInfoDto> { new ShortClassInfoDto { ClassId = 2 } },
                 NumberOfGroup = 2,
                 CurrentGroup = 2,
-                Subject = new Subject { SubjectId = 14, TeacherName = "Охотников С.А.", SubjectName = "АиП" },
+                Subject = new SubjectDto { SubjectId = 14, TeacherName = "Охотников С.А.", SubjectName = "АиП" },
                 Classroom = 405,
                 IsOnline = true,
                 IsParallel = false,
                 IsClass = true,
                 IsGroup = false
             },
-            new Cell
+            new CellDto
             {
                 CellId = 7,
                 WeekDay = DayOfWeek.Tuesday,
@@ -140,7 +140,7 @@ public class TimetableController : ControllerBase
                 NumberOfGroup = 3,
                 CurrentGroup = 2,
                 Subject =
-                    new Subject
+                    new SubjectDto
                     {
                         SubjectId = 15, TeacherName = "Гусарова Л.Г.", SubjectName = "Теор. вер. и статистика"
                     },
@@ -150,7 +150,7 @@ public class TimetableController : ControllerBase
                 IsClass = true,
                 IsGroup = false
             },
-            new Cell
+            new CellDto
             {
                 CellId = 8,
                 WeekDay = DayOfWeek.Tuesday,
@@ -160,7 +160,7 @@ public class TimetableController : ControllerBase
                 NumberOfGroup = 2,
                 CurrentGroup = 3,
                 Subject =
-                    new Subject
+                    new SubjectDto
                     {
                         SubjectId = 16, TeacherName = "Старикова Т.Л.", SubjectName = "Родной (русский) язык"
                     },
@@ -172,7 +172,7 @@ public class TimetableController : ControllerBase
             },
         };
 
-        SchoolMeeting schoolMeeting = new SchoolMeeting
+        SchoolMeetingDto schoolMeetingDto = new SchoolMeetingDto
         {
             Text = "Общелицейская линейка",
             WeekDay = DayOfWeek.Wednesday,
@@ -182,7 +182,7 @@ public class TimetableController : ControllerBase
 
         TimetableResponseDto timetableResponse = new TimetableResponseDto
         {
-            Cells = cells, SchoolMeeting = schoolMeeting
+            Cells = cells, SchoolMeeting = schoolMeetingDto
         };
 
         return Ok( timetableResponse );
@@ -287,7 +287,7 @@ public class TimetableController : ControllerBase
         TimetableWeeksResponseDto responseDto = new TimetableWeeksResponseDto
         {
             Weeks =
-                new List<WeekInfo>() { new WeekInfo { Week = 1, Content = "Неделя 1 01.01.2023 - 07.01.2023" } },
+                new List<WeekInfoDto>() { new WeekInfoDto { Week = 1, Content = "Неделя 1 01.01.2023 - 07.01.2023" } },
         };
 
         return Ok( responseDto );
@@ -334,11 +334,11 @@ public class TimetableController : ControllerBase
 
         TimetableSubjectsResponseDto responseDto = new TimetableSubjectsResponseDto
         {
-            Subjects = new List<SubjectInfo>()
+            Subjects = new List<SubjectInfoDto>()
             {
-                new SubjectInfo() { SubjectId = 1, TeacherName = "Архимед", SubjectName = "Физика" },
-                new SubjectInfo() { SubjectId = 2, TeacherName = "Плутарх", SubjectName = "Философия" },
-                new SubjectInfo() { SubjectId = 3, TeacherName = "Ньютон", SubjectName = "Механика" },
+                new SubjectInfoDto() { SubjectId = 1, TeacherName = "Архимед", SubjectName = "Физика" },
+                new SubjectInfoDto() { SubjectId = 2, TeacherName = "Плутарх", SubjectName = "Философия" },
+                new SubjectInfoDto() { SubjectId = 3, TeacherName = "Ньютон", SubjectName = "Механика" },
             }
         };
 
@@ -359,9 +359,9 @@ public class TimetableController : ControllerBase
 
         TimetablePairTimeRangesResponseDto responseDto = new TimetablePairTimeRangesResponseDto
         {
-            PairTimeRanges = new List<PairTimeRange>()
+            PairTimeRanges = new List<PairTimeRangeDto>()
             {
-                new PairTimeRange()
+                new PairTimeRangeDto()
                 {
                     StartTime = new TimeOnly( 8, 0, 0 ), EndTime = new TimeOnly( 9, 50, 0 ), Id = 1
                 },
@@ -385,9 +385,9 @@ public class TimetableController : ControllerBase
 
         TimetableLessonTimeRangesResponseDto responseDto = new TimetableLessonTimeRangesResponseDto
         {
-            LessonTimeRanges = new List<LessonTimeRange>()
+            LessonTimeRanges = new List<LessonTimeRangeDto>()
             {
-                new LessonTimeRange()
+                new LessonTimeRangeDto()
                 {
                     StartTime = new TimeOnly( 8, 0, 0 ), EndTime = new TimeOnly( 8, 40, 0 ), Id = 1
                 },
