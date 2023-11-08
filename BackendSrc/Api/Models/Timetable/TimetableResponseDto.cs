@@ -5,13 +5,13 @@ namespace Api.Models.Timetable;
 public class TimetableResponseDto
 {
     [JsonPropertyName( "cells" )]
-    public List<Cell> Cells { get; set; }
+    public List<CellDto> Cells { get; set; }
 
     [JsonPropertyName( "schoolMeeting" )]
-    public SchoolMeeting SchoolMeeting { get; set; }
+    public SchoolMeetingDto SchoolMeeting { get; set; }
 }
 
-public class Cell
+public class CellDto
 {
     [JsonPropertyName( "cellId" )]
     public int CellId { get; set; }
@@ -35,7 +35,7 @@ public class Cell
     public int CurrentGroup { get; set; }
 
     [JsonPropertyName( "subject" )]
-    public Subject Subject { get; set; }
+    public SubjectDto Subject { get; set; }
 
     [JsonPropertyName( "classroom" )]
     public int Classroom { get; set; }
@@ -53,7 +53,7 @@ public class Cell
     public bool IsGroup { get; set; }
 }
 
-public class Subject
+public class SubjectDto
 {
     [JsonPropertyName( "subjectId" )]
     public int SubjectId { get; set; }
@@ -65,7 +65,7 @@ public class Subject
     public string SubjectName { get; set; }
 }
 
-public class SchoolMeeting
+public class SchoolMeetingDto
 {
     [JsonPropertyName( "text" )]
     public string Text { get; set; }

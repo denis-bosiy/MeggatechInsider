@@ -34,7 +34,7 @@ public class TimetableUpdateRequestDto
     [Required]
     [DisplayName( "subject" )]
     [JsonPropertyName( "subject" )]
-    public ShortSubjectInfo Subject { get; set; }
+    public ShortSubjectInfoDto Subject { get; set; }
 
     [Required]
     [DisplayName( "classroom" )]
@@ -62,7 +62,7 @@ public class TimetableUpdateRequestDto
     public bool IsGroup { get; set; }
 }
 
-public class ShortSubjectInfo
+public class ShortSubjectInfoDto
 {
     [Required]
     [DisplayName( "teacher" )]
