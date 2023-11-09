@@ -1,6 +1,7 @@
 using Api.Models.TeacherTimetable.AvailableHours;
 using Api.Models.TeacherTimetable.TeacherTimetable;
 using Microsoft.AspNetCore.Mvc;
+using System.Web.Http.Description;
 
 namespace Api.Controllers;
 
@@ -9,6 +10,7 @@ namespace Api.Controllers;
 public class TeacherTimetableController : ControllerBase
 {
     [HttpGet( "teachers" )]
+    [ResponseType( typeof( TeacherTimetableResponseDto ) )]
     public IActionResult GetTeachers( [FromQuery] TeacherTimetableRequestDto teacherTimetableRequest )
     {
         // mock
@@ -67,6 +69,7 @@ public class TeacherTimetableController : ControllerBase
     }
 
     [HttpGet( "available-hours" )]
+    [ResponseType( typeof( AvailableHoursResponseDto ) )]
     public IActionResult GetAvailableHours ()
     {
         // mock
