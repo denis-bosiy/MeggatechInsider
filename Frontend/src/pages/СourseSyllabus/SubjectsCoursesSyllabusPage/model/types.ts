@@ -2,16 +2,10 @@ type SubjectsCoursesSyllabusPageData = Array<SubjectCoursesSyllabusData>
 
 type SubjectCoursesSyllabusData = {
   id: number,
-  subjectName: string,
-  financing: string,
+  name: string,
   type: string,
-  category: string,
-  surchargeForNotebooks: number,
-  numberOf10: number,
-  numberOfGroupsIn10: number,
-  numberOf11: number,
-  numberOfGroupsIn11: number,
-  isFinalExam: boolean,
+  hoursByPlan: number,
+  numberOfGroups: number
 }
 
 export {

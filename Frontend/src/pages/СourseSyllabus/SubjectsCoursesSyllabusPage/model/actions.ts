@@ -1,11 +1,5 @@
 enum SUBJECTS_COURSES_SYLLABUS_PAGE_ACTIONS {
-  SUBJECTS_COURSES_SYLLABUS_PAGE_SET_IS_FINAL_EXAM = "SUBJECTS_COURSES_SYLLABUS_PAGE_SET_IS_FINAL_EXAM",
   SUBJECTS_COURSES_SYLLABUS_PAGE_DELETE_SUBJECT = "SUBJECTS_COURSES_SYLLABUS_PAGE_DELETE_SUBJECT",
-}
-
-type ActionSetIsFinalExam = {
-  type: SUBJECTS_COURSES_SYLLABUS_PAGE_ACTIONS.SUBJECTS_COURSES_SYLLABUS_PAGE_SET_IS_FINAL_EXAM,
-  payload: {subjectId: number, isFinalExam: boolean},
 }
 
 type ActionDeleteSubject = {
@@ -13,13 +7,9 @@ type ActionDeleteSubject = {
   payload: number,
 }
 
-type Action = ActionSetIsFinalExam | ActionDeleteSubject
+type Action = ActionDeleteSubject
 
 const ActionBuilder = {
-  setIsFinalExam: (subjectId: number, isFinalExam: boolean) => ({
-    type: SUBJECTS_COURSES_SYLLABUS_PAGE_ACTIONS.SUBJECTS_COURSES_SYLLABUS_PAGE_SET_IS_FINAL_EXAM,
-    payload: {subjectId, isFinalExam},
-  }),
   deleteSubject: (subjectId: number) => ({
     type: SUBJECTS_COURSES_SYLLABUS_PAGE_ACTIONS.SUBJECTS_COURSES_SYLLABUS_PAGE_DELETE_SUBJECT,
     payload: subjectId,

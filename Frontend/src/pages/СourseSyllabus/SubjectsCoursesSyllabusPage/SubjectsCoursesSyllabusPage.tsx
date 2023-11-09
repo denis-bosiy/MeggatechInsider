@@ -17,21 +17,10 @@ const SubjectsCoursesSyllabus = () => {
   return (
     subjects.map((subject) => (
       <tr className="row" key={subject.id}>
-        <td className="cell">{subject.subjectName}</td>
-        <td className="cell">{subject.financing}</td>
+        <td className="cell">{subject.name}</td>
         <td className="cell">{subject.type}</td>
-        <td className="cell">{subject.category}</td>
-        <td className="cell">{subject.surchargeForNotebooks}%</td>
-        <td className="cell">{subject.numberOf10}</td>
-        <td className="cell">{subject.numberOfGroupsIn10}</td>
-        <td className="cell">{subject.numberOf11}</td>
-        <td className="cell">{subject.numberOfGroupsIn11}</td>
-        <td className="cell">
-          <CheckBox
-            checked={subject.isFinalExam}
-            onChange={(event) => dispatch(ActionBuilder.setIsFinalExam(subject.id, event))}
-          />
-        </td>
+        <td className="cell">{subject.hoursByPlan}</td>
+        <td className="cell">{subject.numberOfGroups}</td>
         <td className="cell">
           <IconButton
             icon={<GarbageIcon />}
@@ -86,15 +75,9 @@ const SubjectsCoursesSyllabusPage = () => {
         <thead className="header">
           <tr className="row">
             <th className="cell">Курс</th>
-            <th className="cell">Б/Бв</th>
             <th className="cell">Тип</th>
-            <th className="cell">Категория</th>
-            <th className="cell">Доплата за тетради, %</th>
-            <th className="cell">Планируемое<br />кол-во<br />часов 10 кл.</th>
-            <th className="cell">Число<br />групп<br />10 кл.</th>
-            <th className="cell">Планируемое<br />кол-во<br />часов 11 кл.</th>
-            <th className="cell">Число<br />групп<br />11 кл.</th>
-            <th className="cell">ЕГЭ</th>
+            <th className="cell">Планируемое кол-во часов</th>
+            <th className="cell">Число групп</th>
           </tr>
         </thead>
         <tbody>
@@ -117,24 +100,10 @@ const SubjectsCoursesSyllabusPage = () => {
               />
             </td>
             <td className="cell">
-              <Select
-                options={selectOptions}
-                onValueChange={setSelectValue}
-                size={SelectSize.Micro}
-              />
-            </td>
-            <td className="cell">
-              <Select
-                options={selectOptions}
-                onValueChange={setSelectValue}
-                size={SelectSize.Micro}
-              />
-            </td>
-            <td className="cell">
               <Input
                 value={defaultInputValue}
                 size={InputSize.Micro}
-                placeholder="0%"
+                placeholder="0"
                 onValueChange={setDefaultInputValue}
               />
             </td>
@@ -142,36 +111,9 @@ const SubjectsCoursesSyllabusPage = () => {
               <Input
                 value={defaultInputValue}
                 size={InputSize.Micro}
-                placeholder="Текст"
+                placeholder="0"
                 onValueChange={setDefaultInputValue}
               />
-            </td>
-            <td className="cell">
-              <Input
-                value={defaultInputValue}
-                size={InputSize.Micro}
-                placeholder="Текст"
-                onValueChange={setDefaultInputValue}
-              />
-            </td>
-            <td className="cell">
-              <Input
-                value={defaultInputValue}
-                size={InputSize.Micro}
-                placeholder="Текст"
-                onValueChange={setDefaultInputValue}
-              />
-            </td>
-            <td className="cell">
-              <Input
-                value={defaultInputValue}
-                size={InputSize.Micro}
-                placeholder="Текст"
-                onValueChange={setDefaultInputValue}
-              />
-            </td>
-            <td className="cell">
-              <CheckBox />
             </td>
             <td className="cell">
               <IconButton

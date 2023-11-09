@@ -18,39 +18,7 @@ const TeachersCoursesSyllabus = () => {
     teachers.map((teacher) => (
       <tr className="row" key={teacher.id}>
         <td className="cell">{teacher.name}</td>
-        <td className="cell">{teacher.category}</td>
-        <td className="cell">
-          <CheckBox
-            checked={teacher.categoryPayrollAccounting}
-            onChange={(event) => dispatch(ActionBuilder.setCategoryPayrollAccounting(teacher.id, event))}
-          />
-        </td>
         <td className="cell">{teacher.workingContract}</td>
-        <td className="cell">
-          <CheckBox
-            checked={teacher.workingContractPayrollAccounting}
-            onChange={(event) => dispatch(ActionBuilder.setWorkingContractPayrollAccounting(teacher.id, event))}
-          />
-        </td>
-        <td className="cell">{teacher.education}</td>
-        <td className="cell">
-          <CheckBox
-            checked={teacher.isClassroomTeacher}
-            onChange={(event) => dispatch(ActionBuilder.setIsClassroomTeacher(teacher.id, event))}
-          />
-        </td>
-        <td className="cell">
-          <CheckBox
-            checked={teacher.inDepthSubjectPayrollAccounting}
-            onChange={(event) => dispatch(ActionBuilder.setInDepthSubjectPayrollAccounting(teacher.id, event))}
-          />
-        </td>
-        <td className="cell">
-          <CheckBox
-            checked={teacher.finalExamPayrollAccounting}
-            onChange={(event) => dispatch(ActionBuilder.setFinalExamPayrollAccounting(teacher.id, event))}
-          />
-        </td>
         <td className="cell">{teacher.workingStartDate}</td>
         <td className="cell">{teacher.workExperience}</td>
         <td className="cell">{teacher.workExperienceAtTheTimeOfTheEmployment}</td>
@@ -109,18 +77,11 @@ const TeachersCoursesSyllabusPage = () => {
         <thead className="header">
           <tr className="row">
             <th className="cell">ФИО</th>
-            <th className="cell">Категория</th>
-            <th className="cell">Учет в зп</th>
             <th className="cell">Договор</th>
-            <th className="cell">Учет в зп</th>
-            <th className="cell">Образование</th>
-            <th className="cell">Класс.<br />рук-во</th>
-            <th className="cell">Учет углуб. в зп</th>
-            <th className="cell">Учет ЕГЭ в зп</th>
-            <th className="cell">Дата<br />начала<br />работы</th>
+            <th className="cell">Дата начала работы</th>
             <th className="cell">Стаж, лет</th>
             <th className="cell">Стаж на момент устр-ва</th>
-            <th className="cell">Дата<br />рождения</th>
+            <th className="cell">Дата рождения</th>
             <th className="cell">Возраст, лет</th>
           </tr>
         </thead>
@@ -142,35 +103,6 @@ const TeachersCoursesSyllabusPage = () => {
                 onValueChange={setSelectValue}
                 size={SelectSize.Micro}
               />
-            </td>
-            <td className="cell">
-              <CheckBox />
-            </td>
-            <td className="cell">
-              <Select
-                options={selectOptions}
-                onValueChange={setSelectValue}
-                size={SelectSize.Micro}
-              />
-            </td>
-            <td className="cell">
-              <CheckBox />
-            </td>
-            <td className="cell">
-              <Select
-                options={selectOptions}
-                onValueChange={setSelectValue}
-                size={SelectSize.Micro}
-              />
-            </td>
-            <td className="cell">
-              <CheckBox />
-            </td>
-            <td className="cell">
-              <CheckBox />
-            </td>
-            <td className="cell">
-              <CheckBox />
             </td>
             <td className="cell">
               <Input

@@ -21,14 +21,9 @@ const AssigningCoursesSyllabus = () => {
         <td className="cell">{assigning.name}</td>
         <td className="cell">{assigning.teacher}</td>
         <td className="cell">{assigning.groupCount}</td>
-        <td className="cell">{assigning.hoursByPlanOnClassOfTheStudents}</td>
-        <td className="cell">{assigning.hoursOnWeekForTheClassOfTheStudents}</td>
-        <td className="cell">{assigning.hoursOnWeekOnYearOnTheTeacher}</td>
-        <td className="cell">{assigning.hoursOnWeekOnPeriodOnTheTeacher}</td>
-        <td className="cell">{assigning.hoursIn1Subgroup}</td>
-        <td className="cell">{assigning.hoursIn2Subgroup}</td>
-        <td className="cell">{assigning.totalInYear}</td>
-        <td className="cell">{assigning.bidShare}</td>
+        <td className="cell">{assigning.hoursOnWeek}</td>
+        <td className="cell">{assigning.hoursOnYear}</td>
+        <td className="cell">{assigning.costPerHour}</td>
         <td className="cell">
           <IconButton
             icon={<GarbageIcon />}
@@ -102,15 +97,10 @@ const AssigningCoursesSyllabusPage = () => {
               <tr className="row">
                 <th className="cell">Курс</th>
                 <th className="cell">Преподаватель</th>
-                <th className="cell">Число<br />групп</th>
-                <th className="cell">Часов по плану на<br />класс</th>
-                <th className="cell">Часов в неделю на класс</th>
-                <th className="cell">Часов в неделю в<br />год на<br />препод-я</th>
-                <th className="cell">Часов в неделю в<br />период на<br />препод-я</th>
-                <th className="cell">Часов в 1 пг.</th>
-                <th className="cell">Часов во 2 пг.</th>
-                <th className="cell">Всего<br />в год</th>
-                <th className="cell">Доля ставки</th>
+                <th className="cell">Число групп</th>
+                <th className="cell">Часов в неделю</th>
+                <th className="cell">Часов всего</th>
+                <th className="cell">Стоимость часа</th>
               </tr>
             </thead>
             <tbody>
@@ -142,12 +132,15 @@ const AssigningCoursesSyllabusPage = () => {
                 </td>
                 <td className="cell"></td>
                 <td className="cell"></td>
-                <td className="cell"></td>
-                <td className="cell"></td>
-                <td className="cell"></td>
-                <td className="cell"></td>
-                <td className="cell"></td>
-                <td className="cell"></td>
+                <td className="cell">
+                  <Input
+                    className="sign-in__input"
+                    value={defaultInputValue}
+                    size={InputSize.Micro}
+                    placeholder="0"
+                    onValueChange={setDefaultInputValue}
+                  />
+                </td>
                 <td className="cell">
                   <IconButton
                     icon={<CheckMarkIcon />}

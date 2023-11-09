@@ -6,14 +6,9 @@ type AssigningCoursesSyllabusData = {
   name: string,
   teacher: string,
   groupCount: number,
-  hoursByPlanOnClassOfTheStudents: number,
-  hoursOnWeekForTheClassOfTheStudents: number,
-  hoursOnWeekOnYearOnTheTeacher: number,
-  hoursOnWeekOnPeriodOnTheTeacher: number,
-  hoursIn1Subgroup: number,
-  hoursIn2Subgroup: number,
-  totalInYear: number,
-  bidShare: number
+  hoursOnWeek: number,
+  hoursOnYear: number,
+  costPerHour: number,
 }
 
 type DiscrepancyCoursesSyllabusData = {
