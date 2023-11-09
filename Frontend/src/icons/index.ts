@@ -1,8 +1,16 @@
 export { ReactComponent as ArrowDownIcon } from "./arrow-down.svg";
 export { ReactComponent as ArrowLeft } from "./arrow-left.svg";
 export { ReactComponent as ArrowUpIcon } from "./arrow-up.svg";
+export { ReactComponent as CrossIcon } from "./cross.svg";
 export { ReactComponent as GarbageIcon } from "./garbage.svg";
 export { ReactComponent as HiddenEyeIcon } from "./hidden-eye.svg";
 export { ReactComponent as MagnifierIcon } from "./magnifier.svg";
 export { ReactComponent as OpenedEyeIcon } from "./opened-eye.svg";
+export { ReactComponent as PenIcon } from "./pen.svg";
 export { ReactComponent as WarningIcon } from "./warning.svg";
+export { ReactComponent as Logo } from "./logo.svg";
+export { ReactComponent as Logout } from "./logout.svg";
+export { ReactComponent as PlusIcon } from "./plus.svg";
+export { ReactComponent as TrashIcon } from "./trash.svg";
+export { ReactComponent as CheckIcon } from "./check.svg";
+export { ReactComponent as CheckMarkIcon } from "./check-mark.svg";

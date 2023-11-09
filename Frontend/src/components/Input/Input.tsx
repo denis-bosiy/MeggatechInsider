@@ -1,11 +1,12 @@
 import React, { useLayoutEffect, useRef, useState } from "react";
 import { HiddenEyeIcon, OpenedEyeIcon, MagnifierIcon } from "../../icons";
+import { classNames } from "../../utils/classNames";
 import "./Input.scss";
 
 export enum InputSize {
   Micro = "MICRO",
-  Mini = "MINI",
-  Medium = "MEDIUM"
+  Milli = "MILLI",
+  Default = "DEFAULT"
 }
 export enum InputType {
   Text = "TEXT",
@@ -21,6 +22,7 @@ interface IInputProps {
   type?: InputType;
   isInvalidValue?: boolean;
   onSearch?: () => void;
+  className?: string;
 }
 
 const Input = (props: IInputProps) => {
@@ -29,10 +31,10 @@ const Input = (props: IInputProps) => {
   const [isPasswordHidden, setIsPasswordHidden] = useState<boolean>(true);
   const [inputType, setInputType] = useState<string>(props.type ?? InputType.Text);
 
-  const size: string = props.size ?? InputSize.Medium;
+  const size: string = props.size ?? InputSize.Default;
   const isInvalidValue: boolean = props.isInvalidValue ?? false;
 
-  const sizeModificator: string = size === InputSize.Medium ? "" : "-" + size.toLowerCase();
+  const sizeModificator: string = size === InputSize.Default ? "" : "-" + size.toLowerCase();
 
   const onChange = (e: React.ChangeEvent<HTMLInputElement>) => props.onValueChange(e.currentTarget?.value);
   const onContainerInteract = () => {
@@ -58,11 +60,11 @@ const Input = (props: IInputProps) => {
 
   useLayoutEffect(() => {
     if (inputType === InputType.Password) {
-      setIcon(<HiddenEyeIcon className="icon" onClick={togglePasswordVisibility} />);
+      setIcon(<HiddenEyeIcon className="input-container__icon icon" onClick={togglePasswordVisibility} />);
     } else if (inputType === InputType.Search) {
-      setIcon(<MagnifierIcon className="icon" onClick={props.onSearch} />);
+      setIcon(<MagnifierIcon className="input-container__icon icon" onClick={props.onSearch} />);
     } else if (inputType === InputType.Text && !isPasswordHidden) {
-      setIcon(<OpenedEyeIcon className="icon" onClick={togglePasswordVisibility} />);
+      setIcon(<OpenedEyeIcon className="input-container__icon icon" onClick={togglePasswordVisibility} />);
     } else {
       setIcon(null);
     }
@@ -70,7 +72,7 @@ const Input = (props: IInputProps) => {
 
   return (
     <div
-      className={"input-container" + (isInvalidValue ? " -error" : "") + (sizeModificator ? " " + sizeModificator : "")}
+      className={classNames(props.className, "input-container" + (isInvalidValue ? " -error" : "") + (sizeModificator ? " " + sizeModificator : ""))}
       onFocus={onContainerInteract}
       tabIndex={0}
     >

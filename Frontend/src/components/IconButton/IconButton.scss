@@ -1,51 +1,42 @@
 @import "../../vars";
+@import "../../styles/mixins/square";
 
 .icon-button {
-  width: 48px;
-  height: 48px;
+  @include square(48px);
+
   padding: 0;
-  color: $button-default;
+  color: $icon-color;
   font-size: $default-text-size;
   background-color: transparent;
   box-sizing: border-box;
+  outline: none;
   border: none;
   border-radius: 6px;
+  opacity: $icon-default-opacity;
   cursor: pointer;
 
-  &.-small {
-    width: 32px;
-    height: 32px;
-  }
-
-  &:hover {
-    color: $button-default-hover;
-  }
-
+  &:hover,
   &:active {
-    color: $button-default-focus;
+    opacity: $icon-hover-opacity;
   }
 
-  &.-primary {
-    color: $button-primary;
+  &.-small {
+    @include square(32px);
+  }
 
-    &:hover {
-      color: $button-primary-hover;
-    }
-
-    &:active {
-      color: $button-primary-focus;
-    }
+  &:focus {
+    opacity: $icon-focus-opacity;
   }
 
   &.-secondary {
-    color: $button-secondary;
+    color: $secondary-button-background-color;
+  }
 
-    &:hover {
-      color: $button-secondary-hover;
-    }
+  &.-important {
+    color: $link-important-color;
+  }
 
-    &:active {
-      color: $button-secondary-focus;
-    }
+  &.-white {
+    color: #fff;
   }
 }

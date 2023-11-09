@@ -1,40 +1,9 @@
 @import "../vars";
 
-.table {
-  font-size: 14px;
-  line-height: 18px;
-  color: $alternative-text-color;
-  border-spacing: 0;
-  border-collapse: separate;
-}
-
-.row {
-  &.-success {
-    color: $success-color;
-    background-color: $success-background-color;
-  }
-
-  &.-warning {
-    color: $warning-color;
-    background-color: $warning-background-color;
-  }
-
-  &.-error {
-    color: $error-color;
-    background-color: $error-background-color;
-  }
-
-  &.-filter {
-    cursor: pointer;
-  }
-}
-
-.header {
-  font-weight: bold;
-}
-
 .cell {
+  padding: 6px;
   border: 1px solid $table-color;
+  text-align: left;
 
   &.-success {
     color: $success-color;
@@ -58,5 +27,67 @@
   &.-vertical {
     writing-mode: tb-rl;
     transform: rotate(-180deg);
+
+    &.-from-top {
+      text-align: right;
+    }
   }
+}
+
+.table {
+  width: 100%;
+  font-size: 14px;
+  line-height: 18px;
+  color: $alternative-text-color;
+  border-spacing: 0;
+  border-collapse: separate;
+  
+  &.-fill {
+    width: 100%;
+  }
+
+  &.-list {
+    .cell {
+      border-right: 0;
+      border-left: 0;
+      border-top: 0;
+    }
+  }
+}
+
+.row {
+  &.-success {
+    color: $success-color;
+    background-color: $success-background-color;
+  }
+
+  &.-warning {
+    color: $warning-color;
+    background-color: $warning-background-color;
+  }
+
+  &.-error {
+    color: $error-color;
+    background-color: $error-background-color;
+  }
+
+  &.-filter {
+    cursor: pointer;
+  }
+
+  &:hover {
+    .cell {
+      background-color: rgba($table-color, 0.6);
+    }
+  }
+
+  &:last-child {
+    .cell {
+      border-bottom: 0;
+    }
+  }
+}
+
+.header {
+  font-weight: bold;
 }
