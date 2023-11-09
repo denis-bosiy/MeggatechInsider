@@ -1,21 +1,12 @@
 .menu-wrapper {
-  display: flex;
+  display: grid;
+  grid-template-columns: repeat(2, 50%);
   gap: 25px;
-
-  &__column {
-    display: flex;
-    flex-direction: column;
-    gap: 25px;
-    width: 50%;
-  }
+  width: 100%;
 }
 
-@media screen and (max-width: 860px) {
+@media screen and (width <= 860px) {
   .menu-wrapper {
-    flex-direction: column;
-
-    &__column {
-      width: 100%;
-    }
+    grid-template-columns: repeat(1, 100%);
   }
 }

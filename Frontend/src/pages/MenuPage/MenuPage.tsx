@@ -2,43 +2,33 @@ import React from "react";
 import {Link} from "react-router-dom";
 import "./MenuPage.scss";
 import Button, {ButtonSize} from "../../components/Button/Button";
-import {AppRouter} from "../../App";
+import {AppRouter} from "../../router";
+
+interface MenuItem {
+  url: string
+  label: string
+}
+const Menu: MenuItem[] = [
+  { url: AppRouter.Settings, label: "Вводные данные" },
+  { url: AppRouter.Timetable, label: "Расписание занятий" },
+  { url: AppRouter.Syllabus, label: "Учебный план" },
+  { url: "#", label: "Расписание курсов" },
+  { url: "#", label: "План курсов" },
+  { url: "#", label: "Контроль учебного плана за месяц" },
+  { url: "#", label: "Финансовый отчет" },
+  { url: "#", label: "Контроль учебного плана за год" },
+  { url: "#", label: "Статистика" },
+];
 
 const MenuPage = () => {
   return (
     <>
       <div className="menu-wrapper">
-        <div className="menu-wrapper__column">
-          <Link to={AppRouter.Settings}>
-            <Button label="Вводные данные" size={ButtonSize.Kilo} />
+        {Menu.map((item) => (
+          <Link to={item.url} key={item.label}>
+            <Button label={item.label} size={ButtonSize.Kilo} />
           </Link>
-          <Link to={AppRouter.Syllabus}>
-            <Button label="Учебный план" size={ButtonSize.Kilo} />
-          </Link>
-          <Link to="#">
-            <Button label="План курсов" size={ButtonSize.Kilo} />
-          </Link>
-          <Link to="#">
-            <Button label="Финансовый отчет" size={ButtonSize.Kilo} />
-          </Link>
-          <Link to="#">
-            <Button label="Статистика" size={ButtonSize.Kilo} />
-          </Link>
-        </div>
-        <div className="menu-wrapper__column">
-          <Link to="#">
-            <Button label="Расписание занятий" size={ButtonSize.Kilo} />
-          </Link>
-          <Link to="#">
-            <Button label="Расписание курсов" size={ButtonSize.Kilo} />
-          </Link>
-          <Link to="#">
-            <Button label="Контроль учебного плана за месяц " size={ButtonSize.Kilo} />
-          </Link>
-          <Link to="#">
-            <Button label="Контроль учебного плана за год" size={ButtonSize.Kilo} />
-          </Link>
-        </div>
+        ))}
       </div>
     </>
   );

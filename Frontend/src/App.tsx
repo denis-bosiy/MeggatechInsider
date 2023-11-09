@@ -15,20 +15,7 @@ import TeacherGuidebookTimetablePage from "./pages/TeacherGuidebookTimetablePage
 import { Provider } from "react-redux";
 import { store } from "./redux/store";
 import TimetableSettingsPage from "./pages/TimetableSettingsPage/TimetableSettingsPage";
-
-export const AppRouter = {
-  Main: "/",
-  Login: "login",
-  Syllabus: "syllabus",
-  Subjects: "subjects",
-  Teachers: "teachers",
-  Assigning: "assigning",
-  Timetable: "timetable",
-  TeacherGuidebook: "teacher-guidebook",
-  Settings: "settings",
-  Basic: "basic",
-  NotFound: "*",
-};
+import {AppRouter} from "./router";
 
 const App = (): React.JSX.Element => {
   return (
