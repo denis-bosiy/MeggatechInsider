@@ -1,6 +1,6 @@
 namespace Domain.TimetableEntities.GuidebookEntities
 {
-    public class LessonTime
+    public class LessonTime : Entity
     {
         public TimeOnly StartTime { get; set; }
         public TimeOnly EndTime { get; set; }

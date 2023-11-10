@@ -3,6 +3,7 @@ import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import { ModalSettingsProvider } from "./utils/ModalSettingsContext";
 import Modal from "./components/Modal/Modal";
 import ComponentsPage from "./pages/ComponentsPage/ComponentsPage";
+import BasicSettingsPage from "./pages/SettingsPage/BasicSettingsPage";
 import Root from "./pages/Root";
 import TestPage from "./pages/TestPage/TestPage";
 import SignInPage from "./pages/SignInPage/SignInPage";
@@ -14,6 +15,7 @@ import TeachersCoursesSyllabusPage from "./pages/СourseSyllabus/TeachersCourses
 import AssigningCoursesSyllabusPage from "./pages/СourseSyllabus/AssigningCoursesSyllabusPage/AssigningCoursesSyllabusPage";
 import TeacherGuidebookTimetablePage from "./pages/Timetable/TeacherGuidebookTimetablePage/TeacherGuidebookTimetablePage";
 import TimetableSettingsPage from "./pages/Settings/TimetableSettingsPage/TimetableSettingsPage";
+import TeacherSettingsPage from "./pages/TeacherSettingsPage/TeacherSettingsPage";
 import { Provider } from "react-redux";
 import { store } from "./redux/store";
 
@@ -41,7 +43,9 @@ const App = (): React.JSX.Element => {
               <Route path="components" element={<ComponentsPage />} />
               <Route path="test-redux" element={<TestPage />} />
               <Route path="settings">
+                <Route path="basic" element={<BasicSettingsPage />} />
                 <Route path="timetable" element={<TimetableSettingsPage />} />
+                <Route path="teacher" element={<TeacherSettingsPage />} />
               </Route>
             </Route>
           </Routes>

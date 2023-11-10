@@ -1,0 +1,17 @@
+.settings-page {
+  display: flex;
+  gap: 198px;
+  align-items: baseline;
+}
+
+.settings-section {
+  flex: 1;
+  display: flex;
+  gap: 25px;
+  flex-direction: column;
+}
+
+.settings-actions {
+  display: flex;
+  gap: 25px;
+}
