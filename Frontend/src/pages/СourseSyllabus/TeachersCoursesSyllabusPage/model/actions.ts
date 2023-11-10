@@ -1,0 +1,23 @@
+enum TEACHERS_COURSES_SYLLABUS_PAGE_ACTIONS {
+  TEACHERS_COURSES_SYLLABUS_PAGE_DELETE_TEACHER = "TEACHERS_COURSES_SYLLABUS_PAGE_DELETE_TEACHER",
+}
+
+type ActionDeleteTeacher = {
+  type: TEACHERS_COURSES_SYLLABUS_PAGE_ACTIONS.TEACHERS_COURSES_SYLLABUS_PAGE_DELETE_TEACHER,
+  payload: number,
+}
+
+type Action = ActionDeleteTeacher
+
+const ActionBuilder = {
+  deleteTeacher: (teacherId: number) => ({
+    type: TEACHERS_COURSES_SYLLABUS_PAGE_ACTIONS.TEACHERS_COURSES_SYLLABUS_PAGE_DELETE_TEACHER,
+    payload: teacherId,
+  }),
+};
+
+export {
+  TEACHERS_COURSES_SYLLABUS_PAGE_ACTIONS,
+  type Action,
+  ActionBuilder,
+};
