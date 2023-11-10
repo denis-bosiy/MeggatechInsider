@@ -7,7 +7,6 @@ import Input, {InputSize, InputType} from "../../../components/Input/Input";
 import ActionButton, {ActionButtonType} from "../../../components/ActionButton/ActionButton";
 import {CheckMarkIcon, GarbageIcon, PenIcon, PlusIcon} from "../../../icons";
 import Select, {ISelectOption, SelectSize} from "../../../components/Select/Select";
-import {CheckBox} from "../../../components/CheckBox/CheckBox";
 import IconButton, {IconButtonType} from "../../../components/IconButton/IconButton";
 
 const SubjectsCoursesSyllabus = () => {

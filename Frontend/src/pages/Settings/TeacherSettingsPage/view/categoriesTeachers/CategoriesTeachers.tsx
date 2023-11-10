@@ -1,6 +1,6 @@
 import React from "react";
-import ActionButton, {ActionButtonType} from "../../../../components/ActionButton/ActionButton";
-import {PlusIcon} from "../../../../icons";
+import ActionButton, {ActionButtonType} from "../../../../../components/ActionButton/ActionButton";
+import {PlusIcon} from "../../../../../icons";
 import CategoriesTeachersTable from "./table/CategoriesTeachersTable";
 import CommonContent from "../common/CommonContent";
 import {useDispatch} from "react-redux";

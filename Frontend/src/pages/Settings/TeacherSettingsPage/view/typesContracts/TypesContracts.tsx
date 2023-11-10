@@ -1,6 +1,6 @@
 import React from "react";
-import ActionButton, {ActionButtonType} from "../../../../components/ActionButton/ActionButton";
-import {PlusIcon} from "../../../../icons";
+import ActionButton, {ActionButtonType} from "../../../../../components/ActionButton/ActionButton";
+import {PlusIcon} from "../../../../../icons";
 import CommonContent from "../common/CommonContent";
 import TypesContractsTable from "./table/TypesContractsTable";
 import {useDispatch} from "react-redux";

@@ -1,6 +1,6 @@
 import React from "react";
-import IconButton from "../../../../../components/IconButton/IconButton";
-import {GarbageIcon} from "../../../../../icons";
+import IconButton from "../../../../../../components/IconButton/IconButton";
+import {GarbageIcon} from "../../../../../../icons";
 import "./CategoriesTeachersTable.scss";
 import {useDispatch, useSelector} from "react-redux";
 import {CategoriesTeachersItem} from "../model/types";

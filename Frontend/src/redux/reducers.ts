@@ -8,10 +8,10 @@ import {teachersCoursesSyllabusPageReducer} from "../pages/СourseSyllabus/Teach
 import {assigningCoursesSyllabusPageReducer} from "../pages/СourseSyllabus/AssigningCoursesSyllabusPage/model/reducer";
 import {teacherGuidebookTimetablePageReducer} from "../pages/Timetable/TeacherGuidebookTimetablePage/model/reducer";
 import {timetableSettingsPageReducer} from "../pages/Settings/TimetableSettingsPage/model/reducer";
-import {basicSettingsReducer} from "../pages/SettingsPage/model/reducer";
-import {typesContractsReducer} from "../pages/TeacherSettingsPage/view/typesContracts/model/reducer";
-import {categoriesTeachersReducer} from "../pages/TeacherSettingsPage/view/categoriesTeachers/model/reducer";
-import {teacherEducationReducer} from "../pages/TeacherSettingsPage/view/teacherEducation/model/reducer";
+import {basicSettingsReducer} from "../pages/Settings/BasicSettingsPage/model/reducer";
+import {typesContractsReducer} from "../pages/Settings/TeacherSettingsPage/view/typesContracts/model/reducer";
+import {categoriesTeachersReducer} from "../pages/Settings/TeacherSettingsPage/view/categoriesTeachers/model/reducer";
+import {teacherEducationReducer} from "../pages/Settings/TeacherSettingsPage/view/teacherEducation/model/reducer";
 
 export default combineReducers({
   testPageStore: testPageReducer,

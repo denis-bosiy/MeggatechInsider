@@ -1,13 +1,13 @@
 import React, { useState } from "react";
 import { useForm, Controller } from "react-hook-form";
 import { useDispatch, useSelector } from "react-redux";
-import Input, { InputSize, InputType } from "../../components/Input/Input";
-import IconButton from "../../components/IconButton/IconButton";
-import ActionButton, { ActionButtonType } from "../../components/ActionButton/ActionButton";
+import Input, { InputSize, InputType } from "../../../components/Input/Input";
+import IconButton from "../../../components/IconButton/IconButton";
+import ActionButton, { ActionButtonType } from "../../../components/ActionButton/ActionButton";
 import { BasicSettingsData, TSetting } from "./model/types";
 import { BasicSettingsActionBuilder } from "./model/actions";
-import { CheckIcon, PenIcon, PlusIcon, TrashIcon } from "../../icons";
-import "./SettingsPage.scss";
+import { CheckIcon, PenIcon, PlusIcon, TrashIcon } from "../../../icons";
+import "./BasicSettingsPage.scss";
 
 type BasicSettingsForm = {
   study: { [name: string]: TSetting };

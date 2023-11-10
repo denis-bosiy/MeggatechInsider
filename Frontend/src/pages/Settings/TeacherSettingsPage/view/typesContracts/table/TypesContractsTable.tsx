@@ -1,8 +1,8 @@
 import React from "react";
-import IconButton from "../../../../../components/IconButton/IconButton";
+import IconButton from "../../../../../../components/IconButton/IconButton";
 import "./TypesContractsTable.scss";
 import {useDispatch, useSelector} from "react-redux";
-import {GarbageIcon} from "../../../../../icons";
+import {GarbageIcon} from "../../../../../../icons";
 import {TypesContractsItem} from "../model/types";
 import {TypesContractsActionBuilder} from "../model/actions";
 
