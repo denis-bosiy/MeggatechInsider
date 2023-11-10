@@ -9,7 +9,7 @@ namespace Api.Controllers;
 public class TimetableController : ControllerBase
 {
     [HttpGet]
-    [ResponseType( typeof(TimetableResponseDto) )]
+    [ResponseType( typeof( TimetableResponseDto ) )]
     public IActionResult SearchTimetable( [FromQuery] TimetableRequestDto timetableRequestDto )
     {
         // mock
@@ -274,7 +274,7 @@ public class TimetableController : ControllerBase
     }
 
     [HttpGet( "weeks" )]
-    [ResponseType( typeof(TimetableWeeksResponseDto) )]
+    [ResponseType( typeof( TimetableWeeksResponseDto ) )]
     public IActionResult GetTimetableWeeks( [FromQuery] TimetableWeeksRequestDto timetableWeeksRequestDto )
     {
         // mock
@@ -294,7 +294,7 @@ public class TimetableController : ControllerBase
     }
 
     [HttpGet( "classes" )]
-    [ResponseType( typeof(TimetableClassesResponseDto) )]
+    [ResponseType( typeof( TimetableClassesResponseDto ) )]
     public IActionResult GetTimetableClasses( [FromQuery] TimetableClassesResponseDto timetableClassesResponseDto )
     {
         // mock
@@ -317,7 +317,7 @@ public class TimetableController : ControllerBase
     }
 
     [HttpGet( "subjects" )]
-    [ResponseType( typeof(TimetableSubjectsResponseDto) )]
+    [ResponseType( typeof( TimetableSubjectsResponseDto ) )]
     public IActionResult GetTimetableSubjects( [FromQuery] TimetableSubjectsRequestDto timetableSubjectsRequestDto )
     {
         // mock
@@ -346,7 +346,7 @@ public class TimetableController : ControllerBase
     }
 
     [HttpGet( "pair-time-ranges" )]
-    [ResponseType( typeof(TimetablePairTimeRangesResponseDto) )]
+    [ResponseType( typeof( TimetablePairTimeRangesResponseDto ) )]
     public IActionResult GetTimetablePairTimeRanges(
         [FromQuery] TimetablePairTimeRangesRequestDto timetablePairTimeRangesRequestDto )
     {
@@ -372,7 +372,7 @@ public class TimetableController : ControllerBase
     }
 
     [HttpGet( "lesson-time-ranges" )]
-    [ResponseType( typeof(TimetableLessonTimeRangesResponseDto) )]
+    [ResponseType( typeof( TimetableLessonTimeRangesResponseDto ) )]
     public IActionResult GetTimetableLessonTimeRanges(
         [FromQuery] TimetableLessonTimeRangesRequestDto timetableLessonTimeRangesRequestDto )
     {
