@@ -14,7 +14,7 @@ namespace Api.Controllers;
 public sealed class EducationalPlanController : ControllerBase
 {
     [HttpGet( "teachers" )]
-    [ResponseType( typeof(TeachersResponseDto) )]
+    [ResponseType( typeof( TeachersResponseDto ) )]
     public IActionResult SearchTeachers( [FromQuery] TeacherRequestDto teacherRequestDto )
     {
         // mock
