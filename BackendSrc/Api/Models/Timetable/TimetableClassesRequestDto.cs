@@ -4,7 +4,7 @@ using System.Text.Json.Serialization;
 
 namespace Api.Models.Timetable;
 
-public class TImetableClassesRequestDto
+public class TimetableClassesRequestDto
 {
     [Required]
     [DisplayName( "year" )]

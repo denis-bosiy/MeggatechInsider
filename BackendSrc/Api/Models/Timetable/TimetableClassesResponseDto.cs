@@ -5,10 +5,10 @@ namespace Api.Models.Timetable;
 public class TimetableClassesResponseDto
 {
     [JsonPropertyName( "classes" )]
-    public List<ClassInfo> Classes { get; set; }
+    public List<ClassInfoDto> Classes { get; set; }
 }
 
-public class ClassInfo
+public class ClassInfoDto
 {
     [JsonPropertyName( "classId" )]
     public int ClassId { get; set; }

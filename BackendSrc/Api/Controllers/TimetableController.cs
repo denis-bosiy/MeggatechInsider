@@ -306,10 +306,10 @@ public class TimetableController : ControllerBase
 
         TimetableClassesResponseDto responseDto = new TimetableClassesResponseDto
         {
-            Classes = new List<ClassInfo>()
+            Classes = new List<ClassInfoDto>()
             {
-                new ClassInfo() { ClassId = 1, ClassName = "10-1" },
-                new ClassInfo() { ClassId = 2, ClassName = "10-2" },
+                new ClassInfoDto() { ClassId = 1, ClassName = "10-1" },
+                new ClassInfoDto() { ClassId = 2, ClassName = "10-2" },
             }
         };
 
