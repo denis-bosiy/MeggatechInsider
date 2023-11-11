@@ -1,3 +1,5 @@
+@import "../vars";
+
 .h1 {
     font-size: 36px;
     line-height: 62px;
@@ -6,9 +8,16 @@
 .h2 {
     font-size: 24px;
     line-height: 30px;
+    font-weight: 400;
 }
 
 .h3 {
     font-size: 20px;
     line-height: 24px;
+    font-weight: 400;
+}
+
+.p {
+    color: $alternative-text-color;
+    font-size: $default-text-size;
 }

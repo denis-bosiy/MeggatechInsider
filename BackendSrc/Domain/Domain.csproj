@@ -1,14 +1,19 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
-  <PropertyGroup>
-    <TargetFramework>net6.0</TargetFramework>
-    <ImplicitUsings>enable</ImplicitUsings>
-    <Nullable>enable</Nullable>
-  </PropertyGroup>
+    <PropertyGroup>
+        <TargetFramework>net6.0</TargetFramework>
+        <ImplicitUsings>enable</ImplicitUsings>
+        <Nullable>enable</Nullable>
+    </PropertyGroup>
 
-  <ItemGroup>
-    <Folder Include="GuidebookEntities\" />
-    <Folder Include="GenericEntities\" />
-  </ItemGroup>
+    <ItemGroup>
+      <Compile Remove="GuidebookEntities\**" />
+      <EmbeddedResource Remove="GuidebookEntities\**" />
+      <None Remove="GuidebookEntities\**" />
+    </ItemGroup>
+
+    <ItemGroup>
+        <Folder Include="GenericEntities\" />
+    </ItemGroup>
 
 </Project>

@@ -1,0 +1,21 @@
+.menu-wrapper {
+  display: flex;
+  gap: 25px;
+
+  &__column {
+    display: flex;
+    flex-direction: column;
+    gap: 25px;
+    width: 50%;
+  }
+}
+
+@media screen and (width <= 860px) {
+  .menu-wrapper {
+    flex-direction: column;
+
+    &__column {
+      width: 100%;
+    }
+  }
+}

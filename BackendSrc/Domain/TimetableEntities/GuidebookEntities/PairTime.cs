@@ -1,6 +1,6 @@
-﻿namespace Domain.TimetableEntities.GuidebookEntities
+namespace Domain.TimetableEntities.GuidebookEntities
 {
-    public class PairTime
+    public class PairTime : Entity
     {
         public TimeOnly StartTime { get; set; }
         public TimeOnly EndTime { get; set; }

@@ -7,10 +7,15 @@
   text-decoration: none;
   outline: none;
   color: $alternative-text-color;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  fill: $alternative-text-color;
 
   &:hover,
   &:focus {
     color: $link-hover-color;
+    fill: $link-hover-color;
   }
 
   &:active {
@@ -19,19 +24,23 @@
 
   &.-light {
     color: $text-color;
+    fill: $text-color;
 
     &:hover,
     &:focus {
       color: $link-light-hover-color;
+      fill: $link-light-hover-color;
     }
   }
 
   &.-important {
     color: $link-important-color;
+    fill: $link-important-color;
 
     &:hover,
     &:focus {
       color: $link-important-hover-color;
+      fill: $link-important-hover-color;
     }
   }
 }

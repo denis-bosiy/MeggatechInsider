@@ -12,6 +12,7 @@ interface ILinkProps {
   path: string;
   label: string;
   type?: LinkType;
+  icon?: React.ReactNode;
 }
 
 export const Link = (props: ILinkProps) => {
@@ -19,6 +20,7 @@ export const Link = (props: ILinkProps) => {
 
   return (
     <RouterLink to={props.path} className={`link -${linkType.toLowerCase()}`}>
+      {props.icon}
       {props.label}
     </RouterLink>
   );
