@@ -31,9 +31,10 @@ const App = (): React.JSX.Element => {
               <Route path={AppRouter.Main} element={<MenuPage />} />
               <Route path={AppRouter.Login} element={<SignInPage />} />
               <Route path={AppRouter.Settings}>
+                <Route index element={<Navigate to={AppRouter.Basic} />} />
                 <Route path={AppRouter.Basic} element={<BasicSettingsPage />} />
                 <Route path={AppRouter.Timetable} element={<TimetableSettingsPage />} />
-                <Route path="teacher" element={<TeacherSettingsPage />} />
+                <Route path={AppRouter.Teachers} element={<TeacherSettingsPage />} />
               </Route>
               <Route path={AppRouter.Syllabus}>
                 <Route index element={<Navigate to={AppRouter.Subjects} />} />
@@ -41,10 +42,11 @@ const App = (): React.JSX.Element => {
                 <Route path={AppRouter.Teachers} element={<TeachersSyllabusPage />} />
                 <Route path={AppRouter.Assigning} element={<AssigningSyllabusPage />} />
               </Route>
-              <Route path="courses-syllabus">
-                <Route path="subjects" element={<SubjectsCoursesSyllabusPage />} />
-                <Route path="teachers" element={<TeachersCoursesSyllabusPage />} />
-                <Route path="assigning" element={<AssigningCoursesSyllabusPage />} />
+              <Route path={AppRouter.CoursesSyllabus}>
+                <Route index element={<Navigate to={AppRouter.Subjects} />} />
+                <Route path={AppRouter.Subjects} element={<SubjectsCoursesSyllabusPage />} />
+                <Route path={AppRouter.Teachers} element={<TeachersCoursesSyllabusPage />} />
+                <Route path={AppRouter.Assigning} element={<AssigningCoursesSyllabusPage />} />
               </Route>
               <Route path={AppRouter.Timetable}>
                 <Route path={AppRouter.TeacherGuidebook} element={<TeacherGuidebookTimetablePage />} />
