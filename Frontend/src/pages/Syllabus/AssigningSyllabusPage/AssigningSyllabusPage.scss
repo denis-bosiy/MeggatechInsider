@@ -1,0 +1,30 @@
+.toolbar {
+  margin-bottom: 25px;
+  width: fit-content;
+
+  &__buttons-wrapper {
+    display: flex;
+    flex-direction: row;
+    margin-bottom: 25px;
+  }
+
+  &__button {
+    margin-right: 25px;
+  }
+
+  &__search {
+    max-width: 385px;
+  }
+}
+
+.wrapper {
+  display: flex;
+  flex-direction: row;
+  gap: 25px;
+}
+
+.table-wrapper {
+  &__title {
+    margin-bottom: 25px;
+  }
+}

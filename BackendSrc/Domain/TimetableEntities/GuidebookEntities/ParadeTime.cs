@@ -1,6 +1,6 @@
-﻿namespace Domain.TimetableEntities.GuidebookEntities
+namespace Domain.TimetableEntities.GuidebookEntities
 {
-    public class ParadeTime
+    public class ParadeTime : Entity
     {
         public DayOfWeek DayOfWeek { get; set; }
         public TimeOnly StartTime { get; set; }

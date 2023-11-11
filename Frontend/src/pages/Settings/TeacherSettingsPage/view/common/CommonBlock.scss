@@ -1,0 +1,11 @@
+.teacher-settings-common-block {
+  display: flex;
+  flex-direction: column;
+  gap: 25px;
+}
+
+.teacher-settings-common-title {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}

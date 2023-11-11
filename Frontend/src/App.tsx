@@ -1,21 +1,25 @@
 import React from "react";
-import {BrowserRouter as Router, Routes, Route, Navigate} from "react-router-dom";
-import SignInPage from "./pages/SignInPage/SignInPage";
+import { BrowserRouter as Router, Routes, Route, Navigate } from "react-router-dom";
 import { ModalSettingsProvider } from "./utils/ModalSettingsContext";
 import Modal from "./components/Modal/Modal";
 import ComponentsPage from "./pages/ComponentsPage/ComponentsPage";
-import BasicSettingsPage from "./pages/SettingsPage/BasicSettingsPage";
+import BasicSettingsPage from "./pages/Settings/BasicSettingsPage/BasicSettingsPage";
 import Root from "./pages/Root";
 import TestPage from "./pages/TestPage/TestPage";
 import MenuPage from "./pages/MenuPage/MenuPage";
-import SubjectsSyllabusPage from "./pages/SubjectsSyllabusPage/SubjectsSyllabusPage";
-import TeachersSyllabusPage from "./pages/TeachersSyllabusPage/TeachersSyllabusPage";
-import AssigningSyllabusPage from "./pages/AssigningSyllabusPage/AssigningSyllabusPage";
-import TeacherGuidebookTimetablePage from "./pages/TeacherGuidebookTimetablePage/TeacherGuidebookTimetablePage";
+import SignInPage from "./pages/SignInPage/SignInPage";
+import SubjectsSyllabusPage from "./pages/Syllabus/SubjectsSyllabusPage/SubjectsSyllabusPage";
+import TeachersSyllabusPage from "./pages/Syllabus/TeachersSyllabusPage/TeachersSyllabusPage";
+import AssigningSyllabusPage from "./pages/Syllabus/AssigningSyllabusPage/AssigningSyllabusPage";
+import SubjectsCoursesSyllabusPage from "./pages/СourseSyllabus/SubjectsCoursesSyllabusPage/SubjectsCoursesSyllabusPage";
+import TeachersCoursesSyllabusPage from "./pages/СourseSyllabus/TeachersCoursesSyllabusPage/TeachersCoursesSyllabusPage";
+import AssigningCoursesSyllabusPage from "./pages/СourseSyllabus/AssigningCoursesSyllabusPage/AssigningCoursesSyllabusPage";
+import TeacherGuidebookTimetablePage from "./pages/Timetable/TeacherGuidebookTimetablePage/TeacherGuidebookTimetablePage";
+import TimetableSettingsPage from "./pages/Settings/TimetableSettingsPage/TimetableSettingsPage";
+import TeacherSettingsPage from "./pages/Settings/TeacherSettingsPage/TeacherSettingsPage";
 import { Provider } from "react-redux";
 import { store } from "./redux/store";
-import TimetableSettingsPage from "./pages/TimetableSettingsPage/TimetableSettingsPage";
-import {AppRouter} from "./router";
+import { AppRouter } from "./router";
 
 const App = (): React.JSX.Element => {
   return (
@@ -26,21 +30,27 @@ const App = (): React.JSX.Element => {
             <Route element={<Root />}>
               <Route path={AppRouter.Main} element={<MenuPage />} />
               <Route path={AppRouter.Login} element={<SignInPage />} />
+              <Route path={AppRouter.Settings}>
+                <Route path={AppRouter.Basic} element={<BasicSettingsPage />} />
+                <Route path={AppRouter.Timetable} element={<TimetableSettingsPage />} />
+                <Route path="teacher" element={<TeacherSettingsPage />} />
+              </Route>
               <Route path={AppRouter.Syllabus}>
                 <Route index element={<Navigate to={AppRouter.Subjects} />} />
                 <Route path={AppRouter.Subjects} element={<SubjectsSyllabusPage />} />
                 <Route path={AppRouter.Teachers} element={<TeachersSyllabusPage />} />
                 <Route path={AppRouter.Assigning} element={<AssigningSyllabusPage />} />
               </Route>
+              <Route path="courses-syllabus">
+                <Route path="subjects" element={<SubjectsCoursesSyllabusPage />} />
+                <Route path="teachers" element={<TeachersCoursesSyllabusPage />} />
+                <Route path="assigning" element={<AssigningCoursesSyllabusPage />} />
+              </Route>
               <Route path={AppRouter.Timetable}>
                 <Route path={AppRouter.TeacherGuidebook} element={<TeacherGuidebookTimetablePage />} />
               </Route>
               <Route path="components" element={<ComponentsPage />} />
               <Route path="test-redux" element={<TestPage />} />
-              <Route path={AppRouter.Settings}>
-                <Route path={AppRouter.Basic} element={<BasicSettingsPage />} />
-                <Route path={AppRouter.Timetable} element={<TimetableSettingsPage />} />
-              </Route>
               <Route path={AppRouter.NotFound} element={<Navigate to={AppRouter.Main} />} />
             </Route>
           </Routes>

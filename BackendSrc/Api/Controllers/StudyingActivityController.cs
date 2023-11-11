@@ -1,7 +1,11 @@
+using Api.Mappers.StudyuingActivity;
 using Api.Models.StudyingActivityTimeModels.LessonTime;
 using Api.Models.StudyingActivityTimeModels.PairTime;
 using Api.Models.StudyingActivityTimeModels.ParadeTime;
+using Application.Abstractions.StudyingActivityServices;
+using Domain.TimetableEntities.GuidebookEntities;
 using Microsoft.AspNetCore.Mvc;
+using System.Web.Http.Description;
 
 namespace Api.Controllers
 {
@@ -9,17 +13,27 @@ namespace Api.Controllers
     [Route( "api/studying-activity" )]
     public class StudyingActivityController : ControllerBase
     {
+        private readonly IPairTimeService _pairTimeService;
+
+        public StudyingActivityController( IPairTimeService pairTimeService ) 
+        { 
+            _pairTimeService = pairTimeService;
+        }
+
         [HttpGet( "pair" )]
-        public List<PairTimeDto> GetPairTime( [FromQuery] int year )
+        [ResponseType( typeof( PairTimeDto ) )]
+        public IActionResult GetPairTime( [FromQuery] int year )
         {
-            // mock
-            PairTimeDto mock = new PairTimeDto
+            List<PairTime> pairTimes = _pairTimeService.GetPairTimes( year );
+
+            if ( !pairTimes.Any() )
             {
-                Id = 1,
-                StartTime = new TimeOnly( hour: 8, minute: 0 ),
-                EndTime = new TimeOnly( hour: 9, minute: 45 )
-            };
-            return new List<PairTimeDto> { mock };
+                return NotFound();
+            }
+
+            List<PairTimeDto> pairTimeDtos = pairTimes.MapToDtos();
+
+            return Ok( pairTimeDtos );
         }
 
         [HttpPost( "pair" )]
