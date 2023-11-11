@@ -1,11 +1,12 @@
 import React from "react";
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import { BrowserRouter as Router, Routes, Route, Navigate } from "react-router-dom";
 import { ModalSettingsProvider } from "./utils/ModalSettingsContext";
 import Modal from "./components/Modal/Modal";
 import ComponentsPage from "./pages/ComponentsPage/ComponentsPage";
 import BasicSettingsPage from "./pages/Settings/BasicSettingsPage/BasicSettingsPage";
 import Root from "./pages/Root";
 import TestPage from "./pages/TestPage/TestPage";
+import MenuPage from "./pages/MenuPage/MenuPage";
 import SignInPage from "./pages/SignInPage/SignInPage";
 import SubjectsSyllabusPage from "./pages/Syllabus/SubjectsSyllabusPage/SubjectsSyllabusPage";
 import TeachersSyllabusPage from "./pages/Syllabus/TeachersSyllabusPage/TeachersSyllabusPage";
@@ -18,6 +19,7 @@ import TimetableSettingsPage from "./pages/Settings/TimetableSettingsPage/Timeta
 import TeacherSettingsPage from "./pages/Settings/TeacherSettingsPage/TeacherSettingsPage";
 import { Provider } from "react-redux";
 import { store } from "./redux/store";
+import { AppRouter } from "./router";
 
 const App = (): React.JSX.Element => {
   return (
@@ -25,28 +27,33 @@ const App = (): React.JSX.Element => {
       <Provider store={store}>
         <Router>
           <Routes>
-            <Route path="/" element={<Root />}>
-              <Route path="login" element={<SignInPage />} />
-              <Route path="syllabus">
-                <Route path="subjects" element={<SubjectsSyllabusPage />} />
-                <Route path="teachers" element={<TeachersSyllabusPage />} />
-                <Route path="assigning" element={<AssigningSyllabusPage />} />
+            <Route element={<Root />}>
+              <Route path={AppRouter.Main} element={<MenuPage />} />
+              <Route path={AppRouter.Login} element={<SignInPage />} />
+              <Route path={AppRouter.Settings}>
+                <Route index element={<Navigate to={AppRouter.Basic} />} />
+                <Route path={AppRouter.Basic} element={<BasicSettingsPage />} />
+                <Route path={AppRouter.Timetable} element={<TimetableSettingsPage />} />
+                <Route path={AppRouter.Teachers} element={<TeacherSettingsPage />} />
               </Route>
-              <Route path="courses-syllabus">
-                <Route path="subjects" element={<SubjectsCoursesSyllabusPage />} />
-                <Route path="teachers" element={<TeachersCoursesSyllabusPage />} />
-                <Route path="assigning" element={<AssigningCoursesSyllabusPage />} />
+              <Route path={AppRouter.Syllabus}>
+                <Route index element={<Navigate to={AppRouter.Subjects} />} />
+                <Route path={AppRouter.Subjects} element={<SubjectsSyllabusPage />} />
+                <Route path={AppRouter.Teachers} element={<TeachersSyllabusPage />} />
+                <Route path={AppRouter.Assigning} element={<AssigningSyllabusPage />} />
               </Route>
-              <Route path="timetable">
-                <Route path="teacher-guidebook" element={<TeacherGuidebookTimetablePage />} />
+              <Route path={AppRouter.CoursesSyllabus}>
+                <Route index element={<Navigate to={AppRouter.Subjects} />} />
+                <Route path={AppRouter.Subjects} element={<SubjectsCoursesSyllabusPage />} />
+                <Route path={AppRouter.Teachers} element={<TeachersCoursesSyllabusPage />} />
+                <Route path={AppRouter.Assigning} element={<AssigningCoursesSyllabusPage />} />
+              </Route>
+              <Route path={AppRouter.Timetable}>
+                <Route path={AppRouter.TeacherGuidebook} element={<TeacherGuidebookTimetablePage />} />
               </Route>
               <Route path="components" element={<ComponentsPage />} />
               <Route path="test-redux" element={<TestPage />} />
-              <Route path="settings">
-                <Route path="basic" element={<BasicSettingsPage />} />
-                <Route path="timetable" element={<TimetableSettingsPage />} />
-                <Route path="teacher" element={<TeacherSettingsPage />} />
-              </Route>
+              <Route path={AppRouter.NotFound} element={<Navigate to={AppRouter.Main} />} />
             </Route>
           </Routes>
         </Router>
