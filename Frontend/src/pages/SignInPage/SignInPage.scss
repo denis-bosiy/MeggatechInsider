@@ -1,10 +1,11 @@
 @import '../../vars';
 
-.wrapper {
+.sign-in-wrapper {
+  position: relative;
   display: flex;
   align-items: center;
   justify-content: center;
-  height: 100vh;
+  height: 100%;
 }
 
 .sign-in {
@@ -12,13 +13,13 @@
   max-height: fit-content;
   padding: 18px 25px 25px;
   border-radius: 16px;
-  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.25);
+  box-shadow: 0 1px 4px rgba(#000, 25%);
 
   &__title {
+    margin-bottom: 15px;
     font-size: $default-text-size;
     font-weight: 400;
     line-height: $default-line-height;
-    margin-bottom: 15px;
     text-align: center;
     color: $alternative-text-color;
   }
@@ -34,15 +35,8 @@
 
   &__notification {
     position: absolute;
-    top: 20%;
-    display: none;
-    align-items: center;
-    flex-direction: column;
+    top: 9%;
     min-width: 395px;
     min-height: 100px;
-
-    &.show {
-      display: flex;
-    }
   }
 }
