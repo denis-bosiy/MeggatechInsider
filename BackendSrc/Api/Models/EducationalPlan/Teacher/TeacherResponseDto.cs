@@ -2,6 +2,12 @@ using System.Text.Json.Serialization;
 
 namespace Api.Models.EducationalPlan.Teacher;
 
+public class TeachersResponseDto
+{
+    [JsonPropertyName( "teachers" )]
+    public List<TeacherResponseDto> Teachers { get; set; }
+}
+
 public class TeacherResponseDto
 {
     public TeacherResponseDto(

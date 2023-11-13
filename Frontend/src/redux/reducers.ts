@@ -1,11 +1,17 @@
 import {combineReducers} from "redux";
 import {testPageReducer} from "../pages/TestPage/model/reducer";
-import {basicSettingsReducer} from "../pages/SettingsPage/model/reducer";
-import {subjectsSyllabusPageReducer} from "../pages/SubjectsSyllabusPage/model/reducer";
-import {teachersSyllabusPageReducer} from "../pages/TeachersSyllabusPage/model/reducer";
-import {assigningSyllabusPageReducer} from "../pages/AssigningSyllabusPage/model/reducer";
-import {teacherGuidebookTimetablePageReducer} from "../pages/TeacherGuidebookTimetablePage/model/reducer";
-import {timetableSettingsPageReducer} from "../pages/TimetableSettingsPage/model/reducer";
+import {subjectsSyllabusPageReducer} from "../pages/Syllabus/SubjectsSyllabusPage/model/reducer";
+import {teachersSyllabusPageReducer} from "../pages/Syllabus/TeachersSyllabusPage/model/reducer";
+import {assigningSyllabusPageReducer} from "../pages/Syllabus/AssigningSyllabusPage/model/reducer";
+import {subjectsCoursesSyllabusPageReducer} from "../pages/СourseSyllabus/SubjectsCoursesSyllabusPage/model/reducer";
+import {teachersCoursesSyllabusPageReducer} from "../pages/СourseSyllabus/TeachersCoursesSyllabusPage/model/reducer";
+import {assigningCoursesSyllabusPageReducer} from "../pages/СourseSyllabus/AssigningCoursesSyllabusPage/model/reducer";
+import {teacherGuidebookTimetablePageReducer} from "../pages/Timetable/TeacherGuidebookTimetablePage/model/reducer";
+import {timetableSettingsPageReducer} from "../pages/Settings/TimetableSettingsPage/model/reducer";
+import {basicSettingsReducer} from "../pages/Settings/BasicSettingsPage/model/reducer";
+import {typesContractsReducer} from "../pages/Settings/TeacherSettingsPage/view/typesContracts/model/reducer";
+import {categoriesTeachersReducer} from "../pages/Settings/TeacherSettingsPage/view/categoriesTeachers/model/reducer";
+import {teacherEducationReducer} from "../pages/Settings/TeacherSettingsPage/view/teacherEducation/model/reducer";
 
 export default combineReducers({
   testPageStore: testPageReducer,
@@ -13,6 +19,12 @@ export default combineReducers({
   subjectsSyllabusPageStore: subjectsSyllabusPageReducer,
   teachersSyllabusPageStore: teachersSyllabusPageReducer,
   assigningSyllabusPageStore: assigningSyllabusPageReducer,
+  subjectsCoursesSyllabusPageStore: subjectsCoursesSyllabusPageReducer,
+  teachersCoursesSyllabusPageStore: teachersCoursesSyllabusPageReducer,
+  assigningCoursesSyllabusPageStore: assigningCoursesSyllabusPageReducer,
   teacherGuidebookTimetablePageStore: teacherGuidebookTimetablePageReducer,
   timetableSettingsPageStore: timetableSettingsPageReducer,
+  typesContractsStore: typesContractsReducer,
+  categoriesTeachersStore: categoriesTeachersReducer,
+  teacherEducationStore: teacherEducationReducer,
 });

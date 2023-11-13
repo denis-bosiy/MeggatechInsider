@@ -2,9 +2,9 @@ using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.Text.Json.Serialization;
 
-namespace Api.Models.EducationalPlan.Teacher;
+namespace Api.Models.Timetable;
 
-public class TeacherRequestDto
+public class TimetablePairTimeRangesRequestDto
 {
     [Required]
     [DisplayName( "year" )]

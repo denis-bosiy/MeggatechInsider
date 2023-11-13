@@ -1,0 +1,23 @@
+enum ASSIGNING_COURSES_SYLLABUS_PAGE_ACTIONS {
+  ASSIGNING_COURSES_SYLLABUS_PAGE_DELETE_ASSIGNING = "ASSIGNING_COURSES_SYLLABUS_PAGE_DELETE_ASSIGNING",
+}
+
+type ActionDeleteAssigning = {
+  type: ASSIGNING_COURSES_SYLLABUS_PAGE_ACTIONS.ASSIGNING_COURSES_SYLLABUS_PAGE_DELETE_ASSIGNING,
+  payload: number,
+}
+
+type Action = ActionDeleteAssigning
+
+const ActionBuilder = {
+  deleteAssigning: (assigningId: number) => ({
+    type: ASSIGNING_COURSES_SYLLABUS_PAGE_ACTIONS.ASSIGNING_COURSES_SYLLABUS_PAGE_DELETE_ASSIGNING,
+    payload: assigningId,
+  }),
+};
+
+export {
+  ASSIGNING_COURSES_SYLLABUS_PAGE_ACTIONS,
+  type Action,
+  ActionBuilder,
+};

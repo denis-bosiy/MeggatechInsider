@@ -1,0 +1,23 @@
+enum SUBJECTS_COURSES_SYLLABUS_PAGE_ACTIONS {
+  SUBJECTS_COURSES_SYLLABUS_PAGE_DELETE_SUBJECT = "SUBJECTS_COURSES_SYLLABUS_PAGE_DELETE_SUBJECT",
+}
+
+type ActionDeleteSubject = {
+  type: SUBJECTS_COURSES_SYLLABUS_PAGE_ACTIONS.SUBJECTS_COURSES_SYLLABUS_PAGE_DELETE_SUBJECT,
+  payload: number,
+}
+
+type Action = ActionDeleteSubject
+
+const ActionBuilder = {
+  deleteSubject: (subjectId: number) => ({
+    type: SUBJECTS_COURSES_SYLLABUS_PAGE_ACTIONS.SUBJECTS_COURSES_SYLLABUS_PAGE_DELETE_SUBJECT,
+    payload: subjectId,
+  }),
+};
+
+export {
+  SUBJECTS_COURSES_SYLLABUS_PAGE_ACTIONS,
+  type Action,
+  ActionBuilder,
+};
