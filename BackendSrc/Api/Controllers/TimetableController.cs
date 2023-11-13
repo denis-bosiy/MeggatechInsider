@@ -1,4 +1,5 @@
 using System.Web.Http.Description;
+using Api.Models.TeacherTimetable;
 using Api.Models.Timetable;
 using Microsoft.AspNetCore.Mvc;
 
@@ -449,7 +450,7 @@ public class TimetableController : ControllerBase
     }
 
     [HttpPatch( "set-hours" )]
-    public IActionResult SetAvailableHours( TeacherTimetableSaveRequestDto teacherTimetableRequest )
+    public IActionResult SetAvailableHours( [FromBody] TeacherTimetableSaveRequestDto teacherTimetableRequest )
     {
         // mock
         // Вызываем сервис для сохранения изменений
@@ -458,7 +459,7 @@ public class TimetableController : ControllerBase
 
     [HttpGet( "available-hours" )]
     [ResponseType( typeof( AvailableHoursResponseListDto ) )]
-    public IActionResult GetAvailableHours ()
+    public IActionResult GetAvailableHours()
     {
         // mock
         // Вызываем сервис для получения времени
