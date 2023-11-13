@@ -1,5 +1,5 @@
 export type BasicSettingsData = {
-  basicSettings: { [name: string]: TSetting };
+  basicSettings: TSetting[];
   salarySettings: TSetting[];
 };
 

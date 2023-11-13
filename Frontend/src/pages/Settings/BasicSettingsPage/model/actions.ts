@@ -32,7 +32,7 @@ export const BasicSettingsActionBuilder = {
     type: BASIC_SETTINGS_PAGE_ACTIONS.DELETE_COEFFICIENT,
     payload: { name }
   }),
-  saveSettings: (values: { [name: string]: TSetting }) => ({
+  saveSettings: (values: TSetting[]) => ({
     type: BASIC_SETTINGS_PAGE_ACTIONS.SAVE_SETTINGS,
     payload: { values }
   })

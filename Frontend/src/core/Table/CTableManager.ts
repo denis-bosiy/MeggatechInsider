@@ -9,10 +9,22 @@ export class CTableManager {
   }
 
   public invokeFunction(name: string, type: TableType, params: any[]): void {
-    while(this._table.type !== type) {
-      // this._table = this._table.table;
+    const tables: Array<CTable | undefined> = [this._table];
+
+    while (tables[tables.length - 1]?.type !== type && tables[tables.length - 1]) {
+      const nextTable: CTable | undefined = tables[tables.length - 1]?.table;
+
+      tables.push(nextTable);
     }
-    this._table[name]?.(params);
+
+    if (tables[tables.length - 1] !== undefined) {
+      //console.log(this._table);
+      (this._table as any)[name].apply(this, params);
+    }
+    console.log(this._table);
   }
-  public changeValue(key: string, name: string): void {}
+
+  public changeValue(key: string, value: string): void {
+    // make shit
+  }
 }

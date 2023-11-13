@@ -2,9 +2,20 @@ import { CTable } from "./CTable";
 import { TableType } from "./TableType";
 
 export class CAcademicQuartersTable extends CTable {
-  constructor(_table: CTable, _data: any[], _type: TableType) {
-    super(_table, _data, _type);
+  constructor(_table: CTable | undefined, _data: any[], _setData: (data: any[]) => void, _type: TableType) {
+    super(_table, _data, _setData, _type);
   }
 
-  public clearQuarter(id: string, quarterNumber: number): void {}
+  public clearQuarter(id: string, quarterNumber: number): void {
+    // TODO: При реализации учебного плана добавить очистку четверти
+  }
+
+  public clone(): CAcademicQuartersTable {
+    return new CAcademicQuartersTable(
+      this.table ? this.table.clone() : undefined,
+      structuredClone(this.data),
+      this.setData,
+      this.type
+    );
+  }
 }

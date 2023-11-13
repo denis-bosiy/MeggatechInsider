@@ -2,18 +2,18 @@ import { BASIC_SETTINGS_PAGE_ACTIONS, BasicSettingsAction } from "./actions";
 import { BasicSettingsData } from "./types";
 
 const initData: BasicSettingsData = {
-  basicSettings: {
-    count10: { label: "Число 10-ых классов", value: "" },
-    count11: { label: "Число 11-ых классов", value: "" },
-    weeksIn1: { label: "Недель в 1 четверти", value: "" },
-    start1: { label: "Начало 1 четверти", value: "" },
-    weeksIn2: { label: "Недель во 2 четверти", value: "" },
-    start2: { label: "Начало 2 четверти", value: "" },
-    weeksIn3: { label: "Недель в 3 четверти", value: "" },
-    start3: { label: "Начало 3 четверти", value: "" },
-    weeksIn4: { label: "Недель в 4 четверти", value: "" },
-    start4: { label: "Начало 4 четверти", value: "" }
-  },
+  basicSettings: [
+    { label: "Число 10-ых классов", value: "" },
+    { label: "Число 11-ых классов", value: "" },
+    { label: "Недель в 1 четверти", value: "" },
+    { label: "Начало 1 четверти", value: "" },
+    { label: "Недель во 2 четверти", value: "" },
+    { label: "Начало 2 четверти", value: "" },
+    { label: "Недель в 3 четверти", value: "" },
+    { label: "Начало 3 четверти", value: "" },
+    { label: "Недель в 4 четверти", value: "" },
+    { label: "Начало 4 четверти", value: "" }
+  ],
   salarySettings: [
     { label: "Базовый оклад", value: "1000" },
     { label: "Доплата за литературу", value: "7000" },

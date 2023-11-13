@@ -8,9 +8,13 @@ import { BasicSettingsData, TSetting } from "./model/types";
 import { BasicSettingsActionBuilder } from "./model/actions";
 import { CheckIcon, PenIcon, PlusIcon, TrashIcon } from "../../../icons";
 import "./BasicSettingsPage.scss";
+import { CTable } from "../../../core/Table/CTable";
+import { CTableBuilder } from "../../../core/Table/CTableBuilder";
+import { TableType } from "../../../core/Table/TableType";
+import { CTableManager } from "../../../core/Table/CTableManager";
 
 type BasicSettingsForm = {
-  study: { [name: string]: TSetting };
+  study: TSetting[];
   salary: TSetting[];
   coefficient: {
     name: string;
@@ -23,6 +27,12 @@ const BasicSettingsPage = () => {
   const { basicSettings, salarySettings } = useSelector(
     (state: { basicSettingsStore: BasicSettingsData }) => state.basicSettingsStore
   );
+  const [isBasicSettingsEditing, setIsBasicSettingsEditing] = useState<boolean>(false);
+  const [basicSettingsTableData, setBasicSettingsTableData] = useState<TSetting[]>(structuredClone(basicSettings));
+  const basicSettingsTable: CTable = CTableBuilder.GetTable(basicSettingsTableData, setBasicSettingsTableData, [
+    TableType.Editable
+  ]);
+  const basicSettingsTableManager: CTableManager = new CTableManager(basicSettingsTable);
   const { control, handleSubmit, reset, resetField } = useForm<BasicSettingsForm>({
     defaultValues: {
       study: basicSettings,
@@ -35,16 +45,15 @@ const BasicSettingsPage = () => {
   });
   const [searchQuery, setSearchQuery] = useState("");
 
-  const saveStudySettings = ({ study }: BasicSettingsForm) => {
-    dispatch(BasicSettingsActionBuilder.saveSettings(study));
-  };
-
   const saveCoefficient = ({ coefficient }: BasicSettingsForm) => {
     dispatch(BasicSettingsActionBuilder.newCoefficient(coefficient.name, coefficient.value));
   };
 
-  const handleSave = () => {
-    handleSubmit(saveStudySettings)();
+  const handleSaveBasicSettings = () => {
+    basicSettingsTableManager.invokeFunction("apply", TableType.Editable, [
+      (data: any[]) => dispatch(BasicSettingsActionBuilder.saveSettings(data))
+    ]);
+    setIsBasicSettingsEditing(false);
   };
 
   const handleNewCoefficient = () => {
@@ -52,8 +61,14 @@ const BasicSettingsPage = () => {
     resetField("coefficient");
   };
 
-  const handleResetSettings = () => {
-    reset();
+  const handleResetBasicSettings = () => {
+    basicSettingsTableManager.invokeFunction("cancel", TableType.Editable, [basicSettings]);
+    setIsBasicSettingsEditing(false);
+  };
+
+  const editBasicSettings = (): void => {
+    basicSettingsTableManager.invokeFunction("edit", TableType.Editable, []);
+    setIsBasicSettingsEditing(true);
   };
 
   return (
@@ -61,31 +76,43 @@ const BasicSettingsPage = () => {
       <div className="settings-section">
         <h2>Настройка учебного плана</h2>
         <div className="settings-actions">
-          <ActionButton label="Сохранить" type={ActionButtonType.Positive} onClick={handleSave} />
-          <ActionButton label="Отменить" type={ActionButtonType.Negative} onClick={handleResetSettings} />
+          {isBasicSettingsEditing ? (
+            <>
+              <ActionButton label="Сохранить" type={ActionButtonType.Positive} onClick={handleSaveBasicSettings} />
+              <ActionButton label="Отменить" type={ActionButtonType.Negative} onClick={handleResetBasicSettings} />
+            </>
+          ) : (
+            <ActionButton
+              label="Редактировать"
+              icon={<PenIcon width={18} height={18} />}
+              type={ActionButtonType.Default}
+              onClick={editBasicSettings}
+            />
+          )}
         </div>
         <table className="table -fill -list">
           <tbody>
-            {Object.keys(basicSettings).map((fieldKey, id) => {
-              const field = basicSettings[fieldKey];
+            {Object.values(basicSettingsTableData).map((value: any, index) => {
               return (
-                <tr key={id} className="row">
-                  <td className="cell">{field.label}</td>
+                <tr key={index} className="row">
+                  <td className="cell">{value.label}</td>
                   <td className="cell">
-                    <Controller
-                      control={control}
-                      render={({ field }) => {
-                        return (
-                          <Input
-                            placeholder=""
-                            value={field.value || ""}
-                            onValueChange={field.onChange}
-                            size={InputSize.Micro}
-                          />
-                        );
-                      }}
-                      name={`study.${fieldKey}.value`}
-                    />
+                    {isBasicSettingsEditing ? (
+                      <Input
+                        placeholder=""
+                        value={value.value}
+                        onValueChange={(newValue: string) =>
+                          setBasicSettingsTableData(
+                            basicSettingsTableData.map((data: TSetting) =>
+                              data.label === value.label ? { label: data.label, value: newValue } : data
+                            )
+                          )
+                        }
+                        size={InputSize.Micro}
+                      />
+                    ) : (
+                      value.value
+                    )}
                   </td>
                 </tr>
               );

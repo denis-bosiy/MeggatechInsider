@@ -41,8 +41,6 @@ const initData: TimetableSettingsPageData = {
 };
 
 const timetableSettingsPageReducer = (state = initData, action: Action) => {
-  console.log("reducerPair", action.payload);
-  console.log("statePair", state);
   switch (action.type) {
     case TIMETABLE_SETTINGS_PAGE_ACTIONS.TIMETABLE_SETTINGS_PAGE_DELETE_PAIR:
       return {
