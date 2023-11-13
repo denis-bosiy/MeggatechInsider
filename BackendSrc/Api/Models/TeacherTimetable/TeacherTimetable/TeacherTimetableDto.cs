@@ -1,7 +1,6 @@
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel;
 using System.Text.Json.Serialization;
-using Api.Models.TeacherTimetable.AvailableHours;
 
 namespace Api.Models.TeacherTimetable.TeacherTimetable
 {

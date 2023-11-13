@@ -1,4 +1,3 @@
-using Api.Models.TeacherTimetable.AvailableHours;
 using Api.Models.TeacherTimetable.TeacherTimetable;
 using Microsoft.AspNetCore.Mvc;
 using System.Web.Http.Description;
@@ -10,13 +9,13 @@ namespace Api.Controllers;
 public class TeacherTimetableController : ControllerBase
 {
     [HttpGet( "teachers" )]
-    [ResponseType( typeof( TeacherTimetableResponseDto ) )]
-    public IActionResult GetTeachers( [FromQuery] TeacherTimetableRequestDto teacherTimetableRequest )
+    [ResponseType( typeof( TeacherTimetableListResponseDto ) )]
+    public IActionResult GetTeachers( [FromQuery] TeacherTimetableListRequestDto teacherTimetableRequest )
     {
         // mock
         // Вызываем сервис для получения преподавателей
 
-        return Ok( new TeacherTimetableResponseDto()
+        return Ok( new TeacherTimetableListResponseDto()
         {
             Teachers = new List<TeacherTimetableDto>
             {
@@ -60,8 +59,8 @@ public class TeacherTimetableController : ControllerBase
         } );
     }
 
-    [HttpPatch( "save" )]
-    public IActionResult Save( TeacherTimetableSaveRequestDto teacherTimetableRequest )
+    [HttpPatch( "set-hours" )]
+    public IActionResult SetAvailableHours( TeacherTimetableSaveRequestDto teacherTimetableRequest )
     {
         // mock
         // Вызываем сервис для сохранения изменений
@@ -69,31 +68,37 @@ public class TeacherTimetableController : ControllerBase
     }
 
     [HttpGet( "available-hours" )]
-    [ResponseType( typeof( AvailableHoursResponseDto ) )]
+    [ResponseType( typeof( AvailableHoursResponseListDto ) )]
     public IActionResult GetAvailableHours ()
     {
         // mock
         // Вызываем сервис для получения времени
-        return Ok( new List<AvailableHoursResponseDto>()
-        { 
-            new AvailableHoursResponseDto
-            {
-                WeekDay = DayOfWeek.Sunday,
-                StartTime = new TimeOnly(09, 00),
-                EndTime = new TimeOnly(09, 45)
-            },
-            new AvailableHoursResponseDto()
-            {
-                WeekDay = DayOfWeek.Sunday,
-                StartTime = new TimeOnly(10, 00),
-                EndTime = new TimeOnly(10, 45)
-            },
-            new AvailableHoursResponseDto()
-            {
-                WeekDay = DayOfWeek.Sunday,
-                StartTime = new TimeOnly(11, 00),
-                EndTime = new TimeOnly(11, 45)
-            }
+        return Ok( new AvailableHoursResponseListDto()
+        {
+            AvailableHours = new List<AvailableHoursDto>()
+                    {
+                        new AvailableHoursDto()
+                        {
+                            Id = 1,
+                            WeekDay = DayOfWeek.Sunday,
+                            StartTime = new TimeOnly(09, 00),
+                            EndTime = new TimeOnly(09, 45)
+                        },
+                        new AvailableHoursDto()
+                        {
+                            Id = 2,
+                            WeekDay = DayOfWeek.Sunday,
+                            StartTime = new TimeOnly(10, 00),
+                            EndTime = new TimeOnly(10, 45)
+                        },
+                        new AvailableHoursDto()
+                        {
+                            Id = 3,
+                            WeekDay = DayOfWeek.Sunday,
+                            StartTime = new TimeOnly(11, 00),
+                            EndTime = new TimeOnly(11, 45)
+                        }
+                    },
         } ); 
     }
 }
