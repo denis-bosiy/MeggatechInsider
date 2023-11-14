@@ -29,19 +29,6 @@ const initData: BasicSettingsData = {
 
 export const basicSettingsReducer = (state = initData, action: BasicSettingsAction) => {
   switch (action.type) {
-    case BASIC_SETTINGS_PAGE_ACTIONS.NEW_COEFFICIENT:
-      return {
-        ...state,
-        salarySettings: [
-          ...state.salarySettings,
-          { id: guidGenerator(), label: action.payload.label, value: action.payload.value }
-        ]
-      };
-    case BASIC_SETTINGS_PAGE_ACTIONS.DELETE_SALARY_SETTING:
-      return {
-        ...state,
-        salarySettings: state.salarySettings.filter((salary) => salary.id !== action.payload.id)
-      };
     case BASIC_SETTINGS_PAGE_ACTIONS.SAVE_BASIC_SETTINGS:
       return {
         ...state,

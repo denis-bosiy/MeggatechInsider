@@ -22,12 +22,12 @@ export class CEditableTable extends CTable {
     this._setIsEditing({ ...this._isEditing, value: true });
   }
 
-  public apply(saveToStore: (data: any[]) => void): void {
+  public apply(saveToStore: (data: any[]) => void, url = ""): void {
     if (!this._isEditing.value) {
       return;
     }
     saveToStore(this.data);
-    console.log("Отправка запроса на бэкенд");
+    console.log("Отправка запроса на бэкенд = " + url);
     // Использование RequestBuilder-a(прокидывается this.data)
     this._setIsEditing({ ...this._isEditing, value: false });
   }

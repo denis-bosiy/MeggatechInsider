@@ -1,6 +1,5 @@
 import { TableType } from "./TableType";
 import { SortingOrder } from "./SortingOrder";
-import { IPrototype } from "../IPrototype";
 
 export class CTable {
   public table?: CTable;

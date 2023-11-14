@@ -28,12 +28,12 @@ export class CManagableTable extends CTable {
     this.setData([...this.data, valueToAdd]);
   }
 
-  public applyAdding(saveToStore: (data: any[]) => void): void {
+  public applyAdding(saveToStore: (data: any[]) => void, url = ""): void {
     if (!this._isAdding.value) {
       return;
     }
     saveToStore(this.data);
-    console.log("Отправка запроса на бэкенд");
+    console.log("Отправка запроса на бэкенд по url = " + url);
     // Использование RequestBuilder-a(прокидывается this.data)
     this._setIsAdding({ ...this._isAdding, value: false });
   }
@@ -41,12 +41,13 @@ export class CManagableTable extends CTable {
   public delete(
     id: string,
     saveToStore: (data: any[]) => void,
-    openModal: (heading: string, content: React.ReactNode) => void
+    openModal: (heading: string, content: React.ReactNode) => void,
+    url = ""
   ): void {
     const proceedAction = (): void => {
       this.setData(this.data.filter((value: any) => value.id !== id));
       saveToStore(this.data);
-      console.log("Отправка запроса на бэкенд");
+      console.log("Отправка запроса на бэкенд = " + url);
       // Использование RequestBuilder-a(прокидывается id. id на бэкенде и id на фронте должны быть одними и теми же)
     };
     openModal("Удалить", <AgreementModalView proceedAction={proceedAction} />);
