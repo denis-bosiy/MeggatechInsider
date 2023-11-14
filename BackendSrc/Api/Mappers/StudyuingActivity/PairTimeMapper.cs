@@ -9,7 +9,7 @@ namespace Api.Mappers.StudyuingActivity
         {
             return new PairTimeDto
             {
-                Id = 0, // idшник к сущности не прикручен, так как сущности справочников почему-то не добавили в бд. можно пренебречь на этапе написания каркаса
+                Id = pairTime.Id,
                 StartTime = pairTime.StartTime,
                 EndTime = pairTime.EndTime
             };

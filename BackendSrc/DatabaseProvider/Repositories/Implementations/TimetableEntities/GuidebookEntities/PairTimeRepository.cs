@@ -13,5 +13,7 @@ namespace DatabaseProvider.Repositories.Implementations.TimetableEntities.Guideb
         public List<PairTime> GetAll() => Entities.ToList();
 
         public PairTime GetById( int id ) => Entities.Where( e => e.Id == id ).FirstOrDefault();
+
+        public List<PairTime> GetByYear( int year ) => Entities.Where( e => e.Year == year ).ToList();
     }
 }

@@ -1,5 +1,6 @@
 using Api.JsonConverters;
 using Application;
+using DatabaseProvider.Repositories.Implementations;
 
 namespace Api
 {
@@ -19,6 +20,7 @@ namespace Api
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen();
             builder.Services.AddApplication();
+            builder.Services.AddDatabaseRepositories();
 
             WebApplication app = builder.Build();
 

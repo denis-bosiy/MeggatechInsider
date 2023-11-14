@@ -10,6 +10,7 @@ namespace DatabaseProvider.Configurations.TimetableEntitiesConfigurations.Guideb
         {
             builder.ToTable( "LessonTime" ).HasKey( lt =>  lt.Id );
 
+            builder.Property( lt => lt.Year ).IsRequired();
             builder.Property( lt => lt.StartTime ).IsRequired();
             builder.Property( lt => lt.EndTime ).IsRequired();
         }

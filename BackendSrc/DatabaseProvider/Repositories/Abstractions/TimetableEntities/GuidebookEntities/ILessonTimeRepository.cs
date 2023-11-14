@@ -6,5 +6,6 @@ namespace DatabaseProvider.Repositories.Abstractions.TimetableEntities.Guidebook
     {
         public List<LessonTime> GetAll();
         public LessonTime GetById( int id );
+        List<LessonTime> GetByYear( int year );
     }
 }
