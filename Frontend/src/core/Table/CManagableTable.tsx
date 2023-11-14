@@ -51,15 +51,4 @@ export class CManagableTable extends CTable {
     };
     openModal("Удалить", <AgreementModalView proceedAction={proceedAction} />);
   }
-
-  public clone(): CManagableTable {
-    return new CManagableTable(
-      this.table ? this.table.clone() : undefined,
-      structuredClone(this.data),
-      this.setData,
-      this.type,
-      this._isAdding,
-      this._setIsAdding
-    );
-  }
 }

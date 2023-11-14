@@ -9,13 +9,4 @@ export class CSyllabusContinuableTable extends CTable {
   public continueSyllabusByWeekNumber(id: string, weekNumber: number): void {
     //
   }
-
-  public clone(): CSyllabusContinuableTable {
-    return new CSyllabusContinuableTable(
-      this.table ? this.table.clone() : undefined,
-      structuredClone(this.data),
-      this.setData,
-      this.type
-    );
-  }
 }

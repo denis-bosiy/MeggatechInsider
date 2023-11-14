@@ -2,7 +2,7 @@ import { TableType } from "./TableType";
 import { SortingOrder } from "./SortingOrder";
 import { IPrototype } from "../IPrototype";
 
-export class CTable implements IPrototype {
+export class CTable {
   public table?: CTable;
   public type: TableType;
   public data: any[];
@@ -31,9 +31,5 @@ export class CTable implements IPrototype {
     }
 
     this.setData([...this.data]);
-  }
-
-  public clone(): CTable {
-    return new CTable(this.table ? this.table.clone() : undefined, structuredClone(this.data), this.setData, this.type);
   }
 }

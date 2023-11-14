@@ -9,13 +9,4 @@ export class CExportableTable extends CTable {
   public export(): void {
     //
   }
-
-  public clone(): CExportableTable {
-    return new CExportableTable(
-      this.table ? this.table.clone() : undefined,
-      structuredClone(this.data),
-      this.setData,
-      this.type
-    );
-  }
 }

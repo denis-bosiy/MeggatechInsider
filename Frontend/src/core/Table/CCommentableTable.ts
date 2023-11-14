@@ -9,13 +9,4 @@ export class CCommentableTable extends CTable {
   public addComment(teacherId: string): void {
     // TODO: При реализации добаваления комментариев добавить функциональность
   }
-
-  public clone(): CCommentableTable {
-    return new CCommentableTable(
-      this.table ? this.table.clone() : undefined,
-      structuredClone(this.data),
-      this.setData,
-      this.type
-    );
-  }
 }

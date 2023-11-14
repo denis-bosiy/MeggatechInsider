@@ -9,8 +9,4 @@ export class CAdditionalLoadedTable extends CTable {
   public addAdditionalLoaded(teacherId: string): void {
     // TODO: При реализации добавления доп. нагрузки добавить функциональность
   }
-
-  public clone(): CAdditionalLoadedTable {
-    return new CAdditionalLoadedTable(this.table ? this.table.clone() : undefined, this.data, this.setData, this.type);
-  }
 }

@@ -39,15 +39,4 @@ export class CEditableTable extends CTable {
     this.setData(storeData);
     this._setIsEditing({ ...this._isEditing, value: false });
   }
-
-  public clone(): CEditableTable {
-    return new CEditableTable(
-      this.table ? this.table.clone() : undefined,
-      structuredClone(this.data),
-      this.setData,
-      this.type,
-      this._isEditing,
-      this._setIsEditing
-    );
-  }
 }

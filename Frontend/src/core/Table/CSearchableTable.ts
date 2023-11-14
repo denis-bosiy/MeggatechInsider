@@ -16,13 +16,4 @@ export class CSearchableTable extends CTable {
       );
     }
   }
-
-  public clone(): CSearchableTable {
-    return new CSearchableTable(
-      this.table ? this.table.clone() : undefined,
-      structuredClone(this.data),
-      this.setData,
-      this.type
-    );
-  }
 }

@@ -9,13 +9,4 @@ export class CAcademicQuartersTable extends CTable {
   public clearQuarter(id: string, quarterNumber: number): void {
     // TODO: При реализации учебного плана добавить очистку четверти
   }
-
-  public clone(): CAcademicQuartersTable {
-    return new CAcademicQuartersTable(
-      this.table ? this.table.clone() : undefined,
-      structuredClone(this.data),
-      this.setData,
-      this.type
-    );
-  }
 }
