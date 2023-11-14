@@ -1,24 +1,18 @@
 version: '3'
 
 services:
-  # backend:
-  #   build:
-  #     context: .
-  #     dockerfile: BackendSrc/Dockerfile
-  #   container_name: backend
-  #   restart: always
-  #   networks:
-  #     - app
-
   frontend:
-    build:
-        context: .
-        dockerfile: Frontend/Dockerfile
+    build: 
+      context: frontend/
     container_name: frontend
     restart: always
-    volumes:
-      - ./src:/app/src
     ports:
       - "2000:3000"
-    networks:
-      - app
+
+  backend:
+    build: 
+      context: BackendSrc/
+    container_name: backend
+    restart: always
+    ports:
+      - "81:80"
