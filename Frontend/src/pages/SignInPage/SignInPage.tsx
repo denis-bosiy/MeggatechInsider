@@ -24,12 +24,12 @@ const SignInPage = () => {
 
   return (
     <>
-      <div className='sign-in-wrapper'>
+      <div className="sign-in-wrapper">
         {isError &&
         <Notification
-          className='sign-in__notification'
-          title='Ошибка'
-          description='Введен неправильный пароль'
+          className="sign-in__notification"
+          title="Ошибка"
+          description="Введен неправильный пароль"
         />}
         <div className="sign-in">
           <h1 className="sign-in__title">
@@ -40,7 +40,7 @@ const SignInPage = () => {
               control={control}
               render={({field }) =>
                 <Input
-                  className='sign-in__input'
+                  className="sign-in__input"
                   type={InputType.Password}
                   placeholder="Введите пароль"
                   value={field.value || ""}
@@ -49,10 +49,10 @@ const SignInPage = () => {
               name="password"
             />
             <Button
-              className='sign-in__button'
+              className="sign-in__button"
               type={ButtonType.Primary}
               size={ButtonSize.Default}
-              label='Войти'
+              label="Войти"
             />
           </form>
         </div>
