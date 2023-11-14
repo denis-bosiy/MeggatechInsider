@@ -28,10 +28,11 @@ namespace Application.Implementations.StudyingActivityServices
         public void DeletePairTime( int id )
         {
             PairTime existingPairTime = _pairTimeRepository.GetById( id );
-            if ( existingPairTime != null )
+            if ( existingPairTime == null )
             {
-                _pairTimeRepository.Remove( existingPairTime );
+                return;
             }
+            _pairTimeRepository.Remove( existingPairTime );
             _pairTimeRepository.SaveChanges();
         }
 

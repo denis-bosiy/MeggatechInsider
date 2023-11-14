@@ -6,6 +6,6 @@ namespace Application.Abstractions.StudyingActivityServices
     {
         ParadeTime GetParadeTimeByYear( int year );
         void CreateParadeTime( int year, DayOfWeek dayOfWeek, TimeOnly startTime, TimeOnly endTime );
-        void SetParadeTime( int id, int year, DayOfWeek dayOfWeek, TimeOnly startTime, TimeOnly endTime );
+        void UpdateParadeTime( int id, int year, DayOfWeek dayOfWeek, TimeOnly startTime, TimeOnly endTime );
     }
 }

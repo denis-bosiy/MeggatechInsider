@@ -28,10 +28,11 @@ namespace Application.Implementations.StudyingActivityServices
         public void DeleteLessonTime( int id )
         {
             LessonTime existingLessonTime = _lessonTimeRepository.GetById( id );
-            if ( existingLessonTime != null )
+            if ( existingLessonTime == null )
             {
-                _lessonTimeRepository.Remove( existingLessonTime );
+                return;
             }
+            _lessonTimeRepository.Remove( existingLessonTime );
             _lessonTimeRepository.SaveChanges();
         }
 

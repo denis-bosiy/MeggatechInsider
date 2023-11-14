@@ -30,7 +30,7 @@ namespace Api.Controllers
         }
 
         [HttpGet( "pair" )]
-        [ResponseType( typeof( List<PairTimeDto> ) )]
+        [ResponseType( typeof( PairTimesDto ) )]
         public IActionResult GetPairTime( [FromQuery] int year )
         {
             List<PairTime> pairTimes = _pairTimeService.GetPairTimesByYear( year );
@@ -42,7 +42,12 @@ namespace Api.Controllers
 
             List<PairTimeDto> pairTimeDtos = pairTimes.MapToDtos();
 
-            return Ok( pairTimeDtos );
+            PairTimesDto pairTimesDto = new PairTimesDto
+            {
+                PairTimes = pairTimeDtos
+            };
+
+            return Ok( pairTimesDto );
         }
 
         [HttpPost( "pair" )]
@@ -60,7 +65,7 @@ namespace Api.Controllers
         [HttpDelete( "pair" )]
         public IActionResult DeletePairTime( [FromQuery] int id ) 
         {
-            if ( _pairTimeService.PairTimeExists( id ) )
+            if ( !_pairTimeService.PairTimeExists( id ) )
             {
                 return StatusCode( 409, "Нет заведённого времени для пары" );
             }
@@ -69,7 +74,7 @@ namespace Api.Controllers
         }
 
         [HttpGet( "lesson" )]
-        [ResponseType( typeof( List<LessonTimeDto> ) )]
+        [ResponseType( typeof( LessonTimesDto ) )]
         public IActionResult GetLessonTime( [FromQuery] int year ) 
         {
             List<LessonTime> lessonTimes = _lessonTimeService.GetLessonTimesByYear( year );
@@ -79,9 +84,14 @@ namespace Api.Controllers
                 return NotFound();
             }
 
-            List<LessonTimeDto> pairTimeDtos = lessonTimes.MapToDtos();
+            List<LessonTimeDto> lessonTimeDtos = lessonTimes.MapToDtos();
 
-            return Ok( pairTimeDtos );
+            LessonTimesDto lessonTimesDto = new LessonTimesDto
+            {
+                LessonTimes = lessonTimeDtos
+            };
+
+            return Ok( lessonTimesDto );
         }
 
         [HttpPost( "lesson" )]
@@ -100,12 +110,12 @@ namespace Api.Controllers
         [HttpDelete( "lesson" )]
         public IActionResult DeleteLessonTime( [FromQuery] int id ) 
         {
-            if ( _lessonTimeService.LessonTimeExists( id ) )
+            if ( !_lessonTimeService.LessonTimeExists( id ) )
             {
                 return StatusCode( 409, "Нет заведённого времени для урока" );
             }
             _lessonTimeService.DeleteLessonTime( id );
-            return Ok(); ;
+            return Ok();
         }
 
         [HttpGet( "parade" )]
@@ -122,7 +132,7 @@ namespace Api.Controllers
         }
 
         [HttpPost( "parade" )]
-        public IActionResult SetParadeTime( [FromBody] SetParadeTimeDto dto )
+        public IActionResult CreateParadeTime( [FromBody] SetParadeTimeDto dto )
         {
             if ( dto.Year < LiceumFoundationYear || dto.Year > DateTime.Now.Year + 1 )
             {
@@ -147,7 +157,7 @@ namespace Api.Controllers
                 return BadRequest( "Не найдено такого года" );
             }
 
-            _paradeTimeService.SetParadeTime( 
+            _paradeTimeService.UpdateParadeTime( 
                 paradeTimeForRequestedYear.Id, dto.Year, dto.WeekDay, dto.StartTime, dto.EndTime );
             return Ok();
         }

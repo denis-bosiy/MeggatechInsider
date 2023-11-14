@@ -25,13 +25,14 @@ namespace Application.Implementations.StudyingActivityServices
             _paradeTimeRepository.SaveChanges();
         }
 
-        public void SetParadeTime( int id, int year, DayOfWeek dayOfWeek, TimeOnly startTime, TimeOnly endTime )
+        public void UpdateParadeTime( int id, int year, DayOfWeek dayOfWeek, TimeOnly startTime, TimeOnly endTime )
         {
             ParadeTime paradeTime = _paradeTimeRepository.GetById( id );
             paradeTime.Year = year;
             paradeTime.DayOfWeek = dayOfWeek;
             paradeTime.StartTime = startTime;
             paradeTime.EndTime = endTime;
+            _paradeTimeRepository.Update( paradeTime );
             _paradeTimeRepository.SaveChanges();
         }
     }
