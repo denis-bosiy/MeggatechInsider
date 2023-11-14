@@ -7,23 +7,15 @@ namespace Api.Models.TeacherTimetable
 {
     public class AvailableHoursDto
     {
-        [Required]
-        [DisplayName( "id" )]
         [JsonPropertyName( "id" )]
         public int Id { get; set; }
 
-        [Required]
-        [DisplayName( "weekDay" )]
         [JsonPropertyName( "weekDay" )]
         public DayOfWeek WeekDay { get; set; }
 
-        [Required]
-        [DisplayName( "startTime" )]
         [JsonPropertyName( "startTime" )]
         public TimeOnly StartTime { get; set; }
 
-        [Required]
-        [DisplayName( "endTime" )]
         [JsonPropertyName( "endTime" )]
         public TimeOnly EndTime { get; set; }
     }

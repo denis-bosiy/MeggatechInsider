@@ -466,29 +466,29 @@ public class TimetableController : ControllerBase
         return Ok( new AvailableHoursResponseListDto()
         {
             AvailableHours = new List<AvailableHoursDto>()
-                    {
-                        new AvailableHoursDto()
-                        {
-                            Id = 1,
-                            WeekDay = DayOfWeek.Sunday,
-                            StartTime = new TimeOnly(09, 00),
-                            EndTime = new TimeOnly(09, 45)
-                        },
-                        new AvailableHoursDto()
-                        {
-                            Id = 2,
-                            WeekDay = DayOfWeek.Sunday,
-                            StartTime = new TimeOnly(10, 00),
-                            EndTime = new TimeOnly(10, 45)
-                        },
-                        new AvailableHoursDto()
-                        {
-                            Id = 3,
-                            WeekDay = DayOfWeek.Sunday,
-                            StartTime = new TimeOnly(11, 00),
-                            EndTime = new TimeOnly(11, 45)
-                        }
-                    },
+            {
+                new AvailableHoursDto()
+                {
+                    Id = 1,
+                    WeekDay = DayOfWeek.Sunday,
+                    StartTime = new TimeOnly(09, 00),
+                    EndTime = new TimeOnly(09, 45)
+                },
+                new AvailableHoursDto()
+                {
+                    Id = 2,
+                    WeekDay = DayOfWeek.Sunday,
+                    StartTime = new TimeOnly(10, 00),
+                    EndTime = new TimeOnly(10, 45)
+                },
+                new AvailableHoursDto()
+                {
+                    Id = 3,
+                    WeekDay = DayOfWeek.Sunday,
+                    StartTime = new TimeOnly(11, 00),
+                    EndTime = new TimeOnly(11, 45)
+                }
+            },
         } ); 
     }
 }
