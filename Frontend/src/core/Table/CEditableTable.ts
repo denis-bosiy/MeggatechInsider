@@ -2,38 +2,42 @@ import { CTable } from "./CTable";
 import { TableType } from "./TableType";
 
 export class CEditableTable extends CTable {
-  private _isEditing: boolean;
+  private _isEditing: { value: boolean };
+  private _setIsEditing: ({ value }: { value: boolean }) => void;
 
   constructor(
     _table: CTable | undefined,
     _data: any[],
     _setData: (data: any[]) => void,
     _type: TableType,
-    __isEditing = false
+    __isEditing: { value: boolean },
+    __setIsEditing: ({ value }: { value: boolean }) => void
   ) {
     super(_table, _data, _setData, _type);
     this._isEditing = __isEditing;
+    this._setIsEditing = __setIsEditing;
   }
 
   public edit(): void {
-    this._isEditing = true;
+    this._setIsEditing({ ...this._isEditing, value: true });
   }
 
   public apply(saveToStore: (data: any[]) => void): void {
-    if (!this._isEditing) {
+    if (!this._isEditing.value) {
       return;
     }
     saveToStore(this.data);
     console.log("Отправка запроса на бэкенд");
-    this._isEditing = false;
+    // Использование RequestBuilder-a(прокидывается this.data)
+    this._setIsEditing({ ...this._isEditing, value: false });
   }
 
   public cancel(storeData: any[]): void {
-    if (!this._isEditing) {
+    if (!this._isEditing.value) {
       return;
     }
     this.setData(storeData);
-    this._isEditing = false;
+    this._setIsEditing({ ...this._isEditing, value: false });
   }
 
   public clone(): CEditableTable {
@@ -42,7 +46,8 @@ export class CEditableTable extends CTable {
       structuredClone(this.data),
       this.setData,
       this.type,
-      this._isEditing
+      this._isEditing,
+      this._setIsEditing
     );
   }
 }

@@ -51,7 +51,7 @@ const TeacherEducationTable = () => {
     </td>
   </tr>);
 
-  return <table className="table">
+  return <table className="table -fill -list">
     <thead className="header">
       <tr className="row">
         <th className="cell -filter">Образование преподавателей</th>

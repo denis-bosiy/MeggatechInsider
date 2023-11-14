@@ -1,10 +1,11 @@
+import { guidGenerator } from "../../../../../../utils/guidGenerator";
 import {Action, CATEGORIES_TEACHERS_ACTIONS} from "./actions";
 import {CategoriesTeachersItem} from "./types";
 
 const defaultData: CategoriesTeachersItem[] = [{
-  id: "Высшая категория",
+  id: guidGenerator(),
   category: "Высшая категория",
-  coefficient: 0.3,
+  coefficient: "0.3",
 }];
 
 const categoriesTeachersReducer = (state: CategoriesTeachersItem[] = defaultData, action: Action) => {

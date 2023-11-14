@@ -18,13 +18,7 @@ export class CTableManager {
     }
 
     if (tables[tables.length - 1] !== undefined) {
-      //console.log(this._table);
-      (this._table as any)[name].apply(this, params);
+      (tables[tables.length - 1] as any)[name].apply(tables[tables.length - 1], params);
     }
-    console.log(this._table);
-  }
-
-  public changeValue(key: string, value: string): void {
-    // make shit
   }
 }

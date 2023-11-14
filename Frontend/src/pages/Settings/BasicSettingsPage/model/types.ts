@@ -4,6 +4,7 @@ export type BasicSettingsData = {
 };
 
 export type TSetting = {
+  id: string;
   label: string;
   value: string;
 };

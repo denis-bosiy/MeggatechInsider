@@ -10,40 +10,74 @@ import { CSyllabusContinuableTable } from "./CSyllabusContinuableTable";
 import { CSearchableTable } from "./CSearchableTable";
 
 export class CTableBuilder {
-  static GetTable(data: any[], setData: (data: any[]) => void, types: TableType[]): CTable {
-    let table: CTable = new CTable(undefined, data, setData);
+  private _table: CTable;
 
-    types.forEach((tableType: TableType) => {
-      switch (tableType) {
-        case TableType.AcademicQuarters:
-          table = new CAcademicQuartersTable(table, data, setData, TableType.AcademicQuarters);
-          break;
-        case TableType.AdditionalLoaded:
-          table = new CAdditionalLoadedTable(table, data, setData, TableType.AdditionalLoaded);
-          break;
-        case TableType.Commentable:
-          table = new CCommentableTable(table, data, setData, TableType.Commentable);
-          break;
-        case TableType.Editable:
-          table = new CEditableTable(table, data, setData, TableType.Editable);
-          break;
-        case TableType.Exportable:
-          table = new CExportableTable(table, data, setData, TableType.Exportable);
-          break;
-        case TableType.Managable:
-          table = new CManagableTable(table, data, setData, TableType.Managable);
-          break;
-        case TableType.Searchable:
-          table = new CSearchableTable(table, data, setData, TableType.Searchable);
-          break;
-        case TableType.SyllabusContinuable:
-          table = new CSyllabusContinuableTable(table, data, setData, TableType.SyllabusContinuable);
-          break;
-        default:
-          break;
-      }
-    });
+  constructor(data: any[], setData: (data: any[]) => void) {
+    this._table = new CTable(undefined, data, setData);
+  }
 
-    return table;
+  public addAcademicQuartersFeature(): void {
+    this._table = new CAcademicQuartersTable(
+      this._table,
+      this._table.data,
+      this._table.setData,
+      TableType.AcademicQuarters
+    );
+  }
+
+  public addAdditionalLoadFeature(): void {
+    this._table = new CAdditionalLoadedTable(
+      this._table,
+      this._table.data,
+      this._table.setData,
+      TableType.AdditionalLoaded
+    );
+  }
+
+  public addCommentFeature(): void {
+    this._table = new CCommentableTable(this._table, this._table.data, this._table.setData, TableType.Commentable);
+  }
+
+  public addEditFeature(isEditing: { value: boolean }, setIsEditing: ({ value }: { value: boolean }) => void): void {
+    this._table = new CEditableTable(
+      this._table,
+      this._table.data,
+      this._table.setData,
+      TableType.Editable,
+      isEditing,
+      setIsEditing
+    );
+  }
+
+  public addExportFeature(): void {
+    this._table = new CExportableTable(this._table, this._table.data, this._table.setData, TableType.Exportable);
+  }
+
+  public addManageFeature(isAdding: { value: boolean }, setIsAdding: ({ value }: { value: boolean }) => void): void {
+    this._table = new CManagableTable(
+      this._table,
+      this._table.data,
+      this._table.setData,
+      TableType.Managable,
+      isAdding,
+      setIsAdding
+    );
+  }
+
+  public addSearchFeature(): void {
+    this._table = new CSearchableTable(this._table, this._table.data, this._table.setData, TableType.Searchable);
+  }
+
+  public addSyllabusContinueFeature(): void {
+    this._table = new CSyllabusContinuableTable(
+      this._table,
+      this._table.data,
+      this._table.setData,
+      TableType.SyllabusContinuable
+    );
+  }
+
+  public getTable(): CTable {
+    return this._table;
   }
 }
