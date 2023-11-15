@@ -11,7 +11,7 @@ namespace Api.Models.EducationalPlan.Subject
         public string Name { get; set; }
 
         [JsonPropertyName( "financing" )]
-        public string Financing { get; set; }
+        public string PaymentType { get; set; }
 
         [JsonPropertyName( "type" )]
         public string Type { get; set; }
@@ -19,22 +19,22 @@ namespace Api.Models.EducationalPlan.Subject
         [JsonPropertyName( "category" )]
         public string Category { get; set; }
 
-        [JsonPropertyName( "surcharge_for_notebooks" )]
+        [JsonPropertyName( "surchargeForNotebooks" )]
         public int NotebooksSurcharge { get; set; }
 
-        [JsonPropertyName( "number_of_10" )]
+        [JsonPropertyName( "numberOf10" )]
         public int TenthCount { get; set; }
 
-        [JsonPropertyName( "number_of_groups_in_10" )]
+        [JsonPropertyName( "numberOfGroupsIn10" )]
         public int TenthGroupsCount { get; set; }
 
-        [JsonPropertyName( "number_of_11" )]
+        [JsonPropertyName( "numberOf11" )]
         public int EleventhNumber { get; set; }
 
-        [JsonPropertyName( "number_of_groups_in_11" )]
+        [JsonPropertyName( "numberOfGroupsIn11" )]
         public int EleventhGroupsCount { get; set; }
 
-        [JsonPropertyName( "is_final_exam" )]
+        [JsonPropertyName( "isFinalExam" )]
         public bool IsFinalExam { get; set; }
     }
 }

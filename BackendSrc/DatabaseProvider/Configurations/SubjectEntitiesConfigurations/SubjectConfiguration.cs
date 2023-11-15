@@ -18,7 +18,9 @@ public class SubjectConfiguration : IEntityTypeConfiguration<Subject>
         builder.Property( s => s.ExpectedHoursPerWeekForTenthClasses ).IsRequired();
         builder.Property( s => s.ExpectedGroupsCountForTenthClasses ).IsRequired();
         builder.Property( s => s.ExpectedHoursPerWeekForEleventhClasses ).IsRequired();
+        builder.Property( s => s.ExpectedGroupsCountForEleventhClasses ).IsRequired();
         builder.Property( s => s.IsEge ).IsRequired();
+        builder.Property( s => s.Year ).IsRequired();
 
         builder.HasOne( s => s.PaymentType )
             .WithMany( p => p.Subjects )

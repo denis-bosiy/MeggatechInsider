@@ -2,39 +2,42 @@ using System.Text.Json.Serialization;
 
 namespace Api.Models.EducationalPlan.Appointment
 {
-    public sealed class AppointmentDto
+    public sealed class AssignmentDto
     {
+        [JsonPropertyName( "id" )]
+        public int Id { get; set; }
+
         [JsonPropertyName( "name" )]
         public string Name { get; set; }
 
         [JsonPropertyName( "teacher" )]
         public string TeacherName { get; set; }
 
-        [JsonPropertyName( "group_count" )]
+        [JsonPropertyName( "groupCount" )]
         public int GroupsCount { get; set; }
 
-        [JsonPropertyName( "hours_by_plan_on_class_of_the_students" )]
+        [JsonPropertyName( "hoursByPlanOnClassOfTheStudents" )]
         public int StudentClassAllHours { get; set; }
 
-        [JsonPropertyName( "hours_on_week_for_the_class_of_the_students" )]
+        [JsonPropertyName( "hoursOnWeekForTheClassOfTheStudents" )]
         public int StudentClassWeekHours { get; set; }
 
-        [JsonPropertyName( "hours_on_week_on_year_on_the_teacher" )]
+        [JsonPropertyName( "hoursOnWeekOnYearOnTheTeacher" )]
         public int TeacherWeekYearHours { get; set; }
 
-        [JsonPropertyName( "hours_on_week_on_period_on_the_teacher" )]
+        [JsonPropertyName( "hoursOnWeekOnPeriodOnTheTeacher" )]
         public int TeacherWeekPeriodHours { get; set; }
 
-        [JsonPropertyName( "hours_in_1_subgroup" )]
+        [JsonPropertyName( "hoursIn1Subgroup" )]
         public int FirstSubgroupHours { get; set; }
 
-        [JsonPropertyName( "hours_in_2_subgroup" )]
+        [JsonPropertyName( "hoursIn2Subgroup" )]
         public int SecondSubgroupHours { get; set; }
 
-        [JsonPropertyName( "total_in_year" )]
+        [JsonPropertyName( "totalInYear" )]
         public int YearTotalHours { get; set; }
 
-        [JsonPropertyName( "bid_share" )]
+        [JsonPropertyName( "bidShare" )]
         public int BidShare { get; set; }
     }
 }

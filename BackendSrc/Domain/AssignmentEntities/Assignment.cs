@@ -12,5 +12,7 @@ namespace Domain.AssignmentEntities
         public int SubjectId => Subject.Id;
 
         public int GroupCount { get; set; }
+
+        public int Year { get; set; }
     }
 }
