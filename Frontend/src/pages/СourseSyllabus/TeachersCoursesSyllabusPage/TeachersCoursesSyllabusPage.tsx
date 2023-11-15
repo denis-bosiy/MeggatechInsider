@@ -2,7 +2,6 @@ import React, {useState} from "react";
 import {useDispatch, useSelector} from "react-redux";
 import {TeachersCoursesSyllabusPageData} from "./model/types";
 import {ActionBuilder} from "./model/actions";
-import "./TeachersCoursesSyllabusPage.scss";
 import Input, {InputSize, InputType} from "../../../components/Input/Input";
 import ActionButton, {ActionButtonType} from "../../../components/ActionButton/ActionButton";
 import {CheckMarkIcon, GarbageIcon, PenIcon, PlusIcon} from "../../../icons";

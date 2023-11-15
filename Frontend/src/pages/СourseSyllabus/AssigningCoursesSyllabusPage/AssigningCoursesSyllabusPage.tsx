@@ -3,7 +3,6 @@ import {useDispatch, useSelector} from "react-redux";
 import {AssigningCoursesSyllabusPageData} from "./model/types";
 import {ActionBuilder} from "./model/actions";
 import { classNames } from "../../../utils/classNames";
-import "./AssigningCoursesSyllabusPage.scss";
 import Input, {InputSize, InputType} from "../../../components/Input/Input";
 import ActionButton, {ActionButtonType} from "../../../components/ActionButton/ActionButton";
 import {CheckMarkIcon, GarbageIcon, PenIcon, PlusIcon} from "../../../icons";
@@ -89,7 +88,7 @@ const AssigningCoursesSyllabusPage = () => {
           onValueChange={setSearchValue}
         />
       </div>
-      <div className="wrapper">
+      <div className="tables-wrapper">
         <div className="table-wrapper">
           <h2 className="h2 table-wrapper__title">Назначение</h2>
           <table className="table">
@@ -152,6 +151,7 @@ const AssigningCoursesSyllabusPage = () => {
             </tbody>
           </table>
         </div>
+
         <div className="table-wrapper">
           <h2 className="h2 table-wrapper__title">Расхождения</h2>
           <table className="table">

@@ -1,7 +1,6 @@
 import React, {useState} from "react";
 import {useSelector} from "react-redux";
 import {TeacherGuidebookTimetablePageData} from "./model/types";
-import "./TeacherGuidebookTimetablePage.scss";
 import Input, {InputType} from "../../../components/Input/Input";
 import ActionButton, { ActionButtonType } from "../../../components/ActionButton/ActionButton";
 import {PenIcon} from "../../../icons";
