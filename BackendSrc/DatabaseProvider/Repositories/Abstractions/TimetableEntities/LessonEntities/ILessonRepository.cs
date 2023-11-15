@@ -9,4 +9,5 @@ public interface ILessonRepository : IRepository<Lesson>
     public List<Lesson> GetByStudentGroup( int id );
     public List<Lesson> GetBySubjectId( int id );
     public List<Lesson> GetByTeacherId( int id );
+    List<Lesson> GetByWeekStartingDate( DateOnly startingDate );
 }

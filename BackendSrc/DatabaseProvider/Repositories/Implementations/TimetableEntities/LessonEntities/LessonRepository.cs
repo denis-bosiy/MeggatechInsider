@@ -23,4 +23,10 @@ public class LessonRepository : Repository<Lesson>, ILessonRepository
     public List<Lesson> GetBySubjectId( int id ) => Entities.Where( l => l.SubjectId == id ).ToList();
 
     public List<Lesson> GetByTeacherId( int id ) => Entities.Where( l => l.TeacherId == id ).ToList();
+
+    public List<Lesson> GetByWeekStartingDate( DateOnly startingDate )
+    {
+        DateOnly finishingDate = startingDate.AddDays( 7 );
+        return Entities.Where( l => l.Date >= startingDate && l.Date <= finishingDate ).ToList();
+    }
 }

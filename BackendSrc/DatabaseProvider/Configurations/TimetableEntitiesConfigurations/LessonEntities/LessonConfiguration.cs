@@ -10,6 +10,7 @@ public class LessonConfiguration : IEntityTypeConfiguration<Lesson>
     {
         builder.ToTable( "Lesson" ).HasKey( l => l.Id );
 
+        builder.Property( l => l.Date ).IsRequired();
         builder.Property( l => l.StartTime ).IsRequired();
         builder.Property( l => l.EndTime ).IsRequired();
         builder.Property( l => l.Classroom ).IsRequired();
