@@ -4,7 +4,7 @@ using System.Text.Json.Serialization;
 
 namespace Api.Models.EducationalPlan.Teacher;
 
-public class TeacherRequestDto
+public class TeachersRequestDto
 {
     [Required]
     [DisplayName( "year" )]

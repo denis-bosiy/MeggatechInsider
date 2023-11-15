@@ -1,11 +1,11 @@
-using System.Web.Http.Description;
-using Api.Mappers;
+using Api.Mappers.EducationalPlan;
 using Api.Models.EducationalPlan.Appointment;
 using Api.Models.EducationalPlan.Difference;
 using Api.Models.EducationalPlan.Subject;
 using Api.Models.EducationalPlan.Teacher;
-using Domain.TeacherEntities;
+using Application.Abstractions.EductionalPlan;
 using Microsoft.AspNetCore.Mvc;
+using System.Web.Http.Description;
 
 namespace Api.Controllers;
 
@@ -13,100 +13,79 @@ namespace Api.Controllers;
 [Route( "api/educational-plan" )]
 public sealed class EducationalPlanController : ControllerBase
 {
+    private readonly ITeacherService _teacherService;
+    private readonly ISubjectService _subjectService;
+    private readonly IAssignmentService _assignmentService;
+
+    public EducationalPlanController(
+        ITeacherService teacherService,
+        ISubjectService subjectService,
+        IAssignmentService assignmentService )
+    {
+        _teacherService = teacherService;
+        _subjectService = subjectService;
+        _assignmentService = assignmentService;
+    }
+
     [HttpGet( "teachers" )]
     [ResponseType( typeof( TeachersResponseDto ) )]
-    public IActionResult SearchTeachers( [FromQuery] TeacherRequestDto teacherRequestDto )
+    public IActionResult GetTeachers( [FromQuery] TeachersRequestDto teachersRequest )
     {
-        // mock
-        // работаем с сервисом, который нам найдет учителей по переданной Dto
+        if ( !IsValidYear( teachersRequest.Year ) )
+        {
+            return NotFound( "Не найдено такого года" );
+        }
 
-        Teacher mockTeacher = new(
-            "Павел Ермаков",
-            new TeacherCategory( "Высшая категория" ),
-            true,
-            new ContractType( "ГПХ" ),
-            true,
-            new Education( "Степень кандидата наук" ),
-            true,
-            true,
-            false,
-            new DateOnly( 2022, 3, 15 ),
-            2,
-            new DateOnly( 1980, 5, 10 )
-        );
-        List<Teacher> mockTeachers = new List<Teacher>() { mockTeacher };
-
-        return Ok( mockTeachers.Map() );
+        return Ok( _teacherService
+            .GetTeachersByYear( teachersRequest.Year )
+            .Map() );
     }
 
     [HttpGet( "subjects" )]
-    public SubjectsResponseDto GetSubjects( [FromQuery] SubjectsRequestDto subjectsRequestDto )
+    [ResponseType( typeof( SubjectsResponseDto ) )]
+    public IActionResult GetSubjects( [FromQuery] SubjectsRequestDto subjectsRequest )
     {
-        // mock
-        // Call some service to get Subjects
-
-        return new SubjectsResponseDto()
+        if ( !IsValidYear( subjectsRequest.Year ) )
         {
-            Subjects = new List<SubjectDto>()
-            {
-                new SubjectDto()
-                {
-                    Id = 1,
-                    Name = "Русский язык",
-                    Financing = "some_financing",
-                    Type = "some_type",
-                    Category = "some_category",
-                    NotebooksSurcharge = 12,
-                    TenthCount = 2,
-                    TenthGroupsCount = 2,
-                    EleventhNumber = 2,
-                    EleventhGroupsCount = 3,
-                    IsFinalExam = true
-                }
-            }
-        };
+            return NotFound( "Не найдено такого года" );
+        }
+
+        return Ok( _subjectService
+            .GetSubjectsByYear( subjectsRequest.Year )
+            .Map() );
     }
 
-    [HttpGet( "appointments" )]
-    public AppointmentsResponseDto GetAppointments( [FromQuery] AppointmentsRequestDto appointmentsRequest )
+    [HttpGet( "assignments" )]
+    [ResponseType( typeof( AssignmentsResponseDto ) )]
+    public IActionResult GetAssignments( [FromQuery] AssignmentsRequestDto assignmentsRequest )
     {
-        // mock
-        // Call some service to get Appointments
-
-        return new AppointmentsResponseDto()
+        if ( !IsValidYear( assignmentsRequest.Year ) )
         {
-            Appointments = new List<AppointmentDto>()
-            {
-                new AppointmentDto()
-                {
-                    Name = "Назначение 1",
-                    TeacherName = "Ермаков Павел",
-                    GroupsCount = 1,
-                    StudentClassAllHours = 5,
-                    StudentClassWeekHours = 5,
-                    TeacherWeekYearHours = 3,
-                    TeacherWeekPeriodHours = 3,
-                    FirstSubgroupHours = 2,
-                    SecondSubgroupHours = 2,
-                    YearTotalHours = 10,
-                    BidShare = 13
-                }
-            }
-        };
+            return NotFound( "Не найдено такого года" );
+        }
+
+        return Ok( _assignmentService
+            .GetAssignmentsByYear( assignmentsRequest.Year )
+            .Map() );
     }
 
     [HttpGet( "differences" )]
-    public DifferencesResponseDto GetDifferences( [FromQuery] DifferencesRequestDto differencesRequestDto )
+    [ResponseType( typeof( DifferencesResponseDto ) )]
+    public IActionResult GetDifferences( [FromQuery] DifferencesRequestDto differencesRequest )
     {
-        // mock
-        // Call some service to get Differences
-
-        return new DifferencesResponseDto()
+        if ( !IsValidYear( differencesRequest.Year ) )
         {
-            Differences = new List<DifferenceDto>()
-            {
-                new DifferenceDto() { Name = "Расхождение 1", GroupsCount = 2, PlanGroupsCount = 2 }
-            }
-        };
+            return NotFound( "Не найдено такого года" );
+        }
+
+        return Ok( _assignmentService
+            .GetDifferencesByYear( differencesRequest.Year )
+            .Map() );
+    }
+
+    private bool IsValidYear( int year )
+    {
+        // TODO Определить границы лет
+        return true;
     }
 }

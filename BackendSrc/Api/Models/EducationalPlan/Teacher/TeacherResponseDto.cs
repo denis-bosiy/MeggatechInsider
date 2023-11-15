@@ -11,6 +11,7 @@ public class TeachersResponseDto
 public class TeacherResponseDto
 {
     public TeacherResponseDto(
+        int id,
         string teacherName,
         string teacherCategoryName,
         bool teacherCategoryAffectsOnSalary,
@@ -24,6 +25,7 @@ public class TeacherResponseDto
         int experienceInYears,
         int experienceInYearsOnEmploymentDate )
     {
+        Id = id;
         TeacherName = teacherName;
         TeacherCategoryName = teacherCategoryName;
         TeacherCategoryAffectsOnSalary = teacherCategoryAffectsOnSalary;
@@ -38,39 +40,42 @@ public class TeacherResponseDto
         ExperienceInYearsOnEmploymentDate = experienceInYearsOnEmploymentDate;
     }
 
+    [JsonPropertyName( "id" )]
+    public int Id { get; set; }
+
     [JsonPropertyName( "name" )]
     public string TeacherName { get; set; }
 
     [JsonPropertyName( "category" )]
     public string TeacherCategoryName { get; set; }
 
-    [JsonPropertyName( "category_payroll_accounting" )]
+    [JsonPropertyName( "categoryPayrollAccounting" )]
     public bool TeacherCategoryAffectsOnSalary { get; set; }
 
-    [JsonPropertyName( "working_contract" )]
+    [JsonPropertyName( "workingContract" )]
     public string ContractTypeName { get; set; }
 
-    [JsonPropertyName( "working_contract_payroll_accounting" )]
+    [JsonPropertyName( "workingContractPayrollAccounting" )]
     public bool ContractTypeAffectsOnSalary { get; set; }
 
     [JsonPropertyName( "education" )]
     public string EducationName { get; set; }
 
-    [JsonPropertyName( "is_classroom_teacher" )]
+    [JsonPropertyName( "isClassroomTeacher" )]
     public bool IsClassTeacher { get; set; }
 
-    [JsonPropertyName( "in_depth_subject_payroll_accounting" )]
+    [JsonPropertyName( "inDepthSubjectPayrollAccounting" )]
     public bool AdvancedSubjectsAffectOnSalary { get; set; }
 
-    [JsonPropertyName( "final_exam_payroll_accounting" )]
+    [JsonPropertyName( "finalExamPayrollAccounting" )]
     public bool EgeAffectsOnSalary { get; set; }
 
-    [JsonPropertyName( "working_start_date" )]
+    [JsonPropertyName( "workingStartDate" )]
     public DateOnly EmploymentDate { get; set; }
 
-    [JsonPropertyName( "work_experience" )]
+    [JsonPropertyName( "workExperience" )]
     public int ExperienceInYears { get; set; }
 
-    [JsonPropertyName( "work_experience_at_the_time_of_the_employment" )]
+    [JsonPropertyName( "workExperienceAtTheTimeOfTheEmployment" )]
     public int ExperienceInYearsOnEmploymentDate { get; set; }
 }

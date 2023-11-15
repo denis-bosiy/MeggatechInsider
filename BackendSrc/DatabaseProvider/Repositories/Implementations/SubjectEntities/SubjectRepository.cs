@@ -6,12 +6,13 @@ namespace DatabaseProvider.Repositories.Implementations.SubjectEntities;
 
 public class SubjectRepository : Repository<Subject>, ISubjectRepository
 {
-    public SubjectRepository( ApplicationContext context ) : base( context )
-    {
-    }
+    public SubjectRepository( ApplicationContext context )
+        : base( context ) { }
 
-    public List<Subject> GetAll() =>
-        Entities.Include( s => s.PaymentType )
+    public List<Subject> GetBatchByYear( int year ) =>
+        Entities
+            .Where( t => t.Year == year )
+            .Include( s => s.PaymentType )
             .Include( s => s.SubjectType )
             .Include( s => s.SubjectCategory )
             .ToList();

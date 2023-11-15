@@ -19,6 +19,7 @@ namespace Domain.TeacherEntities
         public DateOnly EmploymentDate { get; set; }
         public int ExperienceInYearsOnEmploymentDate { get; set; }
         public DateOnly BirthdayDate { get; set; }
+        public int Year { get; set; }
 
         public List<Lesson> Lessons { get; set; }
 
@@ -34,7 +35,8 @@ namespace Domain.TeacherEntities
             bool egeAffectsOnSalary,
             DateOnly employmentDate,
             int experienceInYearsOnEmploymentDate,
-            DateOnly birthdayDate )
+            DateOnly birthdayDate,
+            int year )
         {
             TeacherName = teacherName;
             TeacherCategory = teacherCategory;
@@ -48,6 +50,7 @@ namespace Domain.TeacherEntities
             EmploymentDate = employmentDate;
             ExperienceInYearsOnEmploymentDate = experienceInYearsOnEmploymentDate;
             BirthdayDate = birthdayDate;
+            Year = year;
         }
     }
 }

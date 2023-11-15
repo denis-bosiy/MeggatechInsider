@@ -4,7 +4,7 @@ namespace DatabaseProvider.Repositories.Abstractions.SubjectEntities;
 
 public interface ISubjectRepository : IRepository<Subject>
 {
-    public List<Subject> GetAll();
+    public List<Subject> GetBatchByYear( int year );
     public Subject GetById( int id );
     public List<Subject> GetByPaymentTypeId( int id );
     public List<Subject> GetByTypeId( int id );
