@@ -14,10 +14,15 @@ namespace Api
             builder.Services.AddControllers().AddJsonOptions(options =>
             {
                 options.JsonSerializerOptions.Converters.Add(new DateOnlyJsonConverter());
+                options.JsonSerializerOptions.Converters.Add(new TimeOnlyJsonConverter());
             });;
             // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen();
+            builder.Services.AddCors( p => p.AddPolicy( "cors_allowany", builder =>
+            {
+                builder.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader();
+            } ) );
             builder.Services.AddApplication();
 
             WebApplication app = builder.Build();
@@ -31,6 +36,7 @@ namespace Api
 
             app.UseAuthorization();
 
+            app.UseCors( "cors_allowany" );
 
             app.MapControllers();
 
