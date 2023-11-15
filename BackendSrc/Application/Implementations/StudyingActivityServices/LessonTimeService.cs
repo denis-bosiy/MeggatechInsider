@@ -28,7 +28,7 @@ namespace Application.Implementations.StudyingActivityServices
         public void DeleteLessonTime( int id )
         {
             LessonTime existingLessonTime = _lessonTimeRepository.GetById( id );
-            if ( existingLessonTime == null )
+            if ( existingLessonTime is null )
             {
                 return;
             }
@@ -38,7 +38,7 @@ namespace Application.Implementations.StudyingActivityServices
 
         public bool LessonTimeExists( int id )
         {
-            return _lessonTimeRepository.GetById( id ) != null;
+            return !( _lessonTimeRepository.GetById( id ) is null );
         }
     }
 }

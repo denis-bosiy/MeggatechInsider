@@ -1,6 +1,6 @@
 using Api.JsonConverters;
 using Application;
-using DatabaseProvider.Repositories.Implementations;
+using DatabaseProvider.Repositories;
 
 namespace Api
 {

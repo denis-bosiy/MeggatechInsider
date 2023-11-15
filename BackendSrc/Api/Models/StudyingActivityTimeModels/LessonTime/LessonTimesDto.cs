@@ -5,8 +5,7 @@ namespace Api.Models.StudyingActivityTimeModels.LessonTime
 {
     public class LessonTimesDto
     {
-        [Required]
-        [JsonPropertyName( "lesson_times" )]
+        [JsonPropertyName( "lessonTimes" )]
         public List<LessonTimeDto> LessonTimes { get; set; }
     }
 }

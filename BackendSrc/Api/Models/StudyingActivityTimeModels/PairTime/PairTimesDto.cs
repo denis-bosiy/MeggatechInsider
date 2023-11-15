@@ -5,8 +5,7 @@ namespace Api.Models.StudyingActivityTimeModels.PairTime
 {
     public class PairTimesDto
     {
-        [Required]
-        [JsonPropertyName( "pair_times" )]
+        [JsonPropertyName( "pairTimes" )]
         public List<PairTimeDto> PairTimes { get; set; }
     }
 }

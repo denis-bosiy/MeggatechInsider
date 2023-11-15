@@ -28,7 +28,7 @@ namespace Application.Implementations.StudyingActivityServices
         public void DeletePairTime( int id )
         {
             PairTime existingPairTime = _pairTimeRepository.GetById( id );
-            if ( existingPairTime == null )
+            if ( existingPairTime is null )
             {
                 return;
             }
@@ -38,7 +38,7 @@ namespace Application.Implementations.StudyingActivityServices
 
         public bool PairTimeExists( int id )
         {
-            return _pairTimeRepository.GetById( id ) != null;
+            return !( _pairTimeRepository.GetById( id ) is null );
         }
     }
 }

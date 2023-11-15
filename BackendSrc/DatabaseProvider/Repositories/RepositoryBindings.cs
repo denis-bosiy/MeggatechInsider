@@ -3,7 +3,7 @@ using DatabaseProvider.Repositories.Implementations.TeacherEntities;
 using DatabaseProvider.Repositories.Implementations.TimetableEntities;
 using Microsoft.Extensions.DependencyInjection;
 
-namespace DatabaseProvider.Repositories.Implementations
+namespace DatabaseProvider.Repositories
 {
     public static class RepositoryBindings
     {
