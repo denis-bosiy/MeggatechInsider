@@ -7,6 +7,7 @@ export enum AppRouter {
   Teachers = "teachers",
   Assigning = "assigning",
   Timetable = "timetable",
+  LessonsSchedule = "lessons-schedule",
   TeacherGuidebook = "teacher-guidebook",
   Settings = "settings",
   Basic = "basic",
@@ -17,9 +18,10 @@ interface MockupItem {
   url: string
   label: string
 }
+
 export const Mockup: MockupItem[] = [
   { url: AppRouter.Settings, label: "Вводные данные" },
-  { url: AppRouter.Timetable, label: "Расписание занятий" },
+  { url: AppRouter.LessonsSchedule, label: "Расписание занятий" },
   { url: AppRouter.Syllabus, label: "Учебный план" },
   { url: "#", label: "Расписание курсов" },
   { url: AppRouter.CoursesSyllabus, label: "План курсов" },
