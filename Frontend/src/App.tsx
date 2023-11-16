@@ -67,6 +67,9 @@ const App = (): React.JSX.Element => {
                 <Route path="test-redux" element={<TestPage />} />
                 <Route path={AppRouter.NotFound} element={<Navigate to={AppRouter.Main} />} />
               </Route>
+              <Route path={AppRouter.Statistics}>
+                <Route path={AppRouter.BudgetStatistics} element={<TeacherGuidebookTimetablePage />} />
+              </Route>
             </Routes>
           </Router>
         </Provider>

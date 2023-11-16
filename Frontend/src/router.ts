@@ -134,10 +134,10 @@ export const Menu: MenuItem[] = [
     label: "Контроль учебного плана за год"
   },
   {
-    url: "#",
+    url: AppRouter.Statistic,
     label: "Статистика",
     navigation: [
-      { label: "Статистика бюджетов", url: "#" },
+      { label: "Статистика бюджетов", url: AppRouter.BudgetStatistic },
       { label: "Статистика категорий", url: "#" },
       { label: "Статистика преподавателей", url: "#" }
     ]
