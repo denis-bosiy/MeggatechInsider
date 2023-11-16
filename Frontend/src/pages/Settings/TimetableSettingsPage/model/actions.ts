@@ -5,22 +5,22 @@ enum TIMETABLE_SETTINGS_PAGE_ACTIONS {
   
   type ActionDeletePair= {
     type: TIMETABLE_SETTINGS_PAGE_ACTIONS.TIMETABLE_SETTINGS_PAGE_DELETE_PAIR,
-    payload: number,
+    payload: string,
   }
 
   type ActionDeleteLesson= {
     type: TIMETABLE_SETTINGS_PAGE_ACTIONS.TIMETABLE_SETTINGS_PAGE_DELETE_LESSON,
-    payload: number,
+    payload: string,
   }
   
   type Action = ActionDeletePair | ActionDeleteLesson
   
 const ActionBuilder = {
-  deletePair: (pairId: number) => ({
+  deletePair: (pairId: string) => ({
     type: TIMETABLE_SETTINGS_PAGE_ACTIONS.TIMETABLE_SETTINGS_PAGE_DELETE_PAIR,
     payload: pairId,
   }),
-  deleteLesson: (lessonId: number) => ({
+  deleteLesson: (lessonId: string) => ({
     type: TIMETABLE_SETTINGS_PAGE_ACTIONS.TIMETABLE_SETTINGS_PAGE_DELETE_LESSON,
     payload: lessonId,
   }),

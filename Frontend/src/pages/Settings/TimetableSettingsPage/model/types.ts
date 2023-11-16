@@ -13,7 +13,7 @@ type TimetableSettingsPageParadeData = {
 }
 
 type TimeData = {
-  id: number,
+  id: string,
   start_time: string,
   end_time: string,
 }

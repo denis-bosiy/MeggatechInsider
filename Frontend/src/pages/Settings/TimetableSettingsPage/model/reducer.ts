@@ -3,41 +3,42 @@ import { TimetableSettingsPageData, TimetableSettingsPageParadeData, TimetableSe
 
 const initPairData: TimetableSettingsPageTimeData = [
   {
-    "id": 0,
-    "start_time": "12.00",
-    "end_time": "13.30"
+    id: "0",
+    start_time: "12.00",
+    end_time: "13.30"
   },
 
   {
-    "id": 1,
-    "start_time": "10.30",
-    "end_time": "12.00"
+    id: "1",
+    start_time: "10.30",
+    end_time: "12.00"
   },
 ];
 
 const initLessonData: TimetableSettingsPageTimeData = [
   {
-    "id": 0,
-    "start_time": "8.00",
-    "end_time": "8.45"
+    id: "3",
+    start_time: "8.00",
+    end_time: "8.45"
   },
 
-  {"id": 1,
-    "start_time": "9.00",
-    "end_time": "9.45"
+  {
+    id: "4",
+    start_time: "9.00",
+    end_time: "9.45"
   },
 ];
 
 const initParadeData: TimetableSettingsPageParadeData = {
-  "week_day": "Понедельник",
-  "start_time": "8.00",
-  "end_time": "8.45"
+  week_day: "Понедельник",
+  start_time: "8.00",
+  end_time: "8.45"
 };
 
 const initData: TimetableSettingsPageData = {
-  "pairs": initPairData,
-  "lessons": initLessonData,
-  "parade": initParadeData,
+  pairs: initPairData,
+  lessons: initLessonData,
+  parade: initParadeData,
 };
 
 const timetableSettingsPageReducer = (state = initData, action: Action) => {
