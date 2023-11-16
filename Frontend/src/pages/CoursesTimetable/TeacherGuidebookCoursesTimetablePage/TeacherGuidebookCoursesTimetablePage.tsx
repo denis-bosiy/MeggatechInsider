@@ -2,7 +2,7 @@ import {TeacherGuidebookCoursesTimetablePageData} from "./model/types";
 import {classNames} from "../../../utils/classNames";
 import ActionButton, {ActionButtonType} from "../../../components/ActionButton/ActionButton";
 import {PenIcon} from "../../../icons/index";
-import React, {useState} from "react";
+import React from "react";
 import Input, {InputType} from "../../../components/Input/Input";
 import {useTableData} from "./useTableData";
 
@@ -124,8 +124,6 @@ const TeacherGuidebookTimetableButton = (isEdited: boolean, changeIsEdited: () =
 };
 
 const TeacherGuidebookCoursesTimetablePage = () => {
-  const [searchValue, setSearchValue] = useState("");
-
   const {
     state,
     actions,
@@ -138,11 +136,11 @@ const TeacherGuidebookCoursesTimetablePage = () => {
           {TeacherGuidebookTimetableButton(state.isEdited, () => actions.setIsEdited(!state.isEdited))}
           <Input
             className="toolbar__search"
-            value={searchValue}
+            value={state.searchValue}
             type={InputType.Search}
             placeholder="Поиск"
-            onValueChange={setSearchValue}
-            onSearch={() => actions.handleSearch(searchValue)}
+            onValueChange={actions.setSearchValue}
+            onSearch={actions.handleSearch}
           />
         </div>
       </div>
