@@ -1,4 +1,5 @@
 import { TeacherGuidebookCoursesTimetablePageData } from "./types.js";
+import {TEACHER_GUIDEBOOK_COURSES_TIMETABLE_PAGE_ACTIONS, TeacherGuidebookCoursesTimetableAction} from "./actions";
 
 const initData: TeacherGuidebookCoursesTimetablePageData = [
   {
@@ -75,8 +76,16 @@ const initData: TeacherGuidebookCoursesTimetablePageData = [
   }
 ];
 
-const teacherGuidebookCoursesTimetablePageReducer = (state = initData) => {
-  return state;
+const teacherGuidebookCoursesTimetablePageReducer = (
+  state = initData,
+  action: TeacherGuidebookCoursesTimetableAction,
+) => {
+  switch (action.type) {
+    case TEACHER_GUIDEBOOK_COURSES_TIMETABLE_PAGE_ACTIONS.SAVE_DATA:
+      return [...action.payload];
+    default:
+      return state;
+  }
 };
 
 export { teacherGuidebookCoursesTimetablePageReducer };
