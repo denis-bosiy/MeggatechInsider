@@ -88,14 +88,26 @@ const Table = ({
   </>;
 };
 
-const TeacherGuidebookTimetableButton = (isEdited: boolean, changeIsEdited: () => void) => {
+interface TeacherGuidebookTimetableButtonProps {
+  isEdited: boolean,
+  handleEdit: () => void,
+  handleSave: () => void,
+  handleReset: () => void,
+}
+
+const TeacherGuidebookTimetableButton = ({
+  isEdited,
+  handleEdit,
+  handleSave,
+  handleReset,
+}: TeacherGuidebookTimetableButtonProps) => {
   if (!isEdited) {
     return (
       <ActionButton
         className="toolbar__button"
         label="Редактировать"
         icon={<PenIcon/>}
-        onClick={changeIsEdited}
+        onClick={handleEdit}
       />
     );
   }
@@ -105,19 +117,13 @@ const TeacherGuidebookTimetableButton = (isEdited: boolean, changeIsEdited: () =
         className="toolbar__button"
         type={ActionButtonType.Positive}
         label="Сохранить"
-        onClick={() => {
-          alert("Сохранить");
-          changeIsEdited();
-        }}
+        onClick={handleSave}
       />
       <ActionButton
         className="toolbar__button"
         type={ActionButtonType.Negative}
         label="Отменить"
-        onClick={() => {
-          alert("Отменить");
-          changeIsEdited();
-        }}
+        onClick={handleReset}
       />
     </div>
   );
@@ -133,7 +139,12 @@ const TeacherGuidebookCoursesTimetablePage = () => {
     <>
       <div className="toolbar">
         <div className="toolbar__buttons-wrapper">
-          {TeacherGuidebookTimetableButton(state.isEdited, () => actions.setIsEdited(!state.isEdited))}
+          <TeacherGuidebookTimetableButton
+            isEdited={state.isEdited}
+            handleEdit={actions.handleEdit}
+            handleSave={actions.handleSave}
+            handleReset={actions.handleReset}
+          />
           <Input
             className="toolbar__search"
             value={state.searchValue}

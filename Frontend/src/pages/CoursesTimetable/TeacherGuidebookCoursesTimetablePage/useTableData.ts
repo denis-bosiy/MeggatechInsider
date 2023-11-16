@@ -1,4 +1,4 @@
-import {useSelector} from "react-redux";
+import {useDispatch, useSelector} from "react-redux";
 import {TeacherGuidebookCoursesTimetablePageData} from "./model/types";
 import {useCallback, useMemo, useState} from "react";
 import {CTableBuilder} from "../../../core/Table/CTableBuilder";
@@ -6,6 +6,7 @@ import {CTable} from "../../../core/Table/CTable";
 import {CTableManager} from "../../../core/Table/CTableManager";
 import {TableType} from "../../../core/Table/TableType";
 import {SortingOrder} from "../../../core/Table/SortingOrder";
+import {TeacherGuidebookCoursesTimetableActionBuilder} from "./model/actions";
 
 function useTableData() {
   const data = useSelector((state: {
@@ -44,13 +45,30 @@ function useTableData() {
       TableType.Default,
       [columnName, SortingOrder.Ascending],
     );
-  }, []);
+  }, [teacherGuidebookCoursesTimetableTableManager]);
 
   const handleSearch = useCallback((searchValue: string) => {
     teacherGuidebookCoursesTimetableTableManager.invokeFunction(
       "search",
       TableType.Searchable,
       [searchValue, data]);
+  }, [teacherGuidebookCoursesTimetableTableManager, data]);
+
+  const dispatch = useDispatch();
+  const handleSave = useCallback(() => {
+    teacherGuidebookCoursesTimetableTableManager.invokeFunction("apply", TableType.Editable, [
+      (data: any[]) => dispatch(TeacherGuidebookCoursesTimetableActionBuilder.saveData(data)),
+    ]);
+  }, [teacherGuidebookCoursesTimetableTableManager, dispatch, TeacherGuidebookCoursesTimetableActionBuilder]);
+  const handleReset = useCallback(() => {
+    teacherGuidebookCoursesTimetableTableManager.invokeFunction(
+      "cancel",
+      TableType.Editable,
+      [data],
+    );
+  }, [teacherGuidebookCoursesTimetableTableManager]);
+  const handleEdit = useCallback((): void => {
+    teacherGuidebookCoursesTimetableTableManager.invokeFunction("edit", TableType.Editable, []);
   }, []);
 
   return {
@@ -62,7 +80,9 @@ function useTableData() {
     actions: {
       handleSort,
       handleSearch: () => handleSearch(searchValue),
-      setIsEdited: (isEdited: boolean) => setIsEdited({value: isEdited}),
+      handleSave,
+      handleReset,
+      handleEdit,
       setSearchValue,
     },
   };
