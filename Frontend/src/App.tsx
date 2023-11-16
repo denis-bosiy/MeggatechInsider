@@ -21,6 +21,7 @@ import TeacherSettingsPage from "./pages/Settings/TeacherSettingsPage/TeacherSet
 import { Provider } from "react-redux";
 import { store } from "./redux/store";
 import { AppRouter } from "./router";
+import TeacherGuidebookCoursesTimetablePage from "./pages/CoursesTimetable/TeacherGuidebookCoursesTimetablePage/TeacherGuidebookCoursesTimetablePage";
 
 const queryClient = new QueryClient();
 const App = (): React.JSX.Element => {
@@ -53,6 +54,9 @@ const App = (): React.JSX.Element => {
                 </Route>
                 <Route path={AppRouter.Timetable}>
                   <Route path={AppRouter.TeacherGuidebook} element={<TeacherGuidebookTimetablePage />} />
+                </Route>
+                <Route path={AppRouter.CoursesTimetable}>
+                  <Route path={AppRouter.TeacherGuidebook} element={<TeacherGuidebookCoursesTimetablePage/>} />
                 </Route>
                 <Route path="components" element={<ComponentsPage />} />
                 <Route path="test-redux" element={<TestPage />} />

@@ -7,6 +7,7 @@ export enum AppRouter {
   Teachers = "teachers",
   Assigning = "assigning",
   Timetable = "timetable",
+  CoursesTimetable = "courses-timetable",
   TeacherGuidebook = "teacher-guidebook",
   Settings = "settings",
   Basic = "basic",
