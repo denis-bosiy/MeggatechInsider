@@ -15,6 +15,7 @@ import { GarbageIcon, PenIcon } from "../../icons";
 
 interface IScheduleProps {
   schedule: ISchedule;
+  handleDeleteLesson: (lessonId: string) => void;
 }
 
 export const ScheduleComponent = (props: IScheduleProps) => {
@@ -115,7 +116,6 @@ export const ScheduleComponent = (props: IScheduleProps) => {
                       ) !== -1;
                   if (lessonIndex !== -1) {
                     const lesson: ScheduleLesson = props.schedule.getLessons()[lessonIndex];
-                    console.log(lesson);
                     const data: string =
                       lesson.lessonName + (lesson.lessonTeacher ? "( " + lesson.lessonTeacher + " )" : "");
                     const colspan: number =
@@ -146,7 +146,11 @@ export const ScheduleComponent = (props: IScheduleProps) => {
                           <></>
                         )}
                         <div className="schedule__cell-controls">
-                          <IconButton icon={<GarbageIcon />} small={true} onClick={() => alert("Очистка урока")} />
+                          <IconButton
+                            icon={<GarbageIcon />}
+                            small={true}
+                            onClick={() => props.handleDeleteLesson(lesson.id)}
+                          />
                           <IconButton icon={<PenIcon />} small={true} onClick={() => alert("Редактирование урока")} />
                         </div>
                       </td>
