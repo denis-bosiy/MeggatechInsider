@@ -35,7 +35,6 @@ const Table = ({isEdited, setIsEdited}: TableProps) => {
   const teacherGuidebookCoursesTimetableTableManager: CTableManager = new CTableManager(teacherGuidebookCoursesTimetableTable);
 
   const handleSort = (columnName: string): void => {
-    console.log(123);
     teacherGuidebookCoursesTimetableTableManager.invokeFunction(
       "sort",
       TableType.Default,
@@ -68,7 +67,7 @@ const Table = ({isEdited, setIsEdited}: TableProps) => {
       <tr className="row">
         <th
           className="cell -filter"
-          onClick={() => handleSort("course")}
+          onClick={() => handleSort(  "course")}
         >
           Курс
         </th>
