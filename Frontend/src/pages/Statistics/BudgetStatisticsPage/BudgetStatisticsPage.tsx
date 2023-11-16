@@ -3,7 +3,7 @@ import {useSelector} from "react-redux";
 import {BudgetStatisticsPageData, BudgetStatisticsData} from "./model/types";
 import "./BudgetStatisticsPage.scss";
 import Input, {InputType} from "../../../components/Input/Input";
-import { classNames } from "../../../utils/classNames";
+//import { classNames } from "../../../utils/classNames";
 
 const BudgetTable = (bugetTable: BudgetStatisticsData) => {
   const [searchValue, setSearchValue] = useState<string>("");
@@ -42,8 +42,8 @@ const BudgetTable = (bugetTable: BudgetStatisticsData) => {
 const BudgetStatisticsPage = () => {
   const data = useSelector((state: {budgetStatisticsPageStore: BudgetStatisticsPageData}) => state.budgetStatisticsPageStore);
   const class10 = data.class10;
-  const class11 = data.class11;
-  const total = data.total;
+  //const class11 = data.class11;
+  //const total = data.total;
   
   return (
     <>

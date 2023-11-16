@@ -34,5 +34,5 @@ export default combineReducers({
   lessonsScheduleStore: lessonsSchedulePageReducer,
   headerStore: headerReducer,
   classGuidebookTimetableStore: classGuidebookTimetablePageReducer,
-  budgetStatistics: budgetStatisticsPageReducer,
+  budgetStatisticsPageStore: budgetStatisticsPageReducer,
 });

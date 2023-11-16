@@ -24,6 +24,7 @@ import ProtectedRoot from "./pages/ProtectedRoot";
 import LessonsSchedulePage from "./pages/LessonsSchedulePage/LessonsSchedulePage";
 import { QueryClient, QueryClientProvider } from "react-query";
 import ClassGuidebookPage from "./pages/Timetable/ClassGuidebookPage/ClassGuidebookPage";
+import BudgetStatisticsPage from "./pages/Statistics/BudgetStatisticsPage/BudgetStatisticsPage";
 
 const queryClient = new QueryClient();
 const App = (): React.JSX.Element => {
@@ -68,7 +69,7 @@ const App = (): React.JSX.Element => {
                 <Route path={AppRouter.NotFound} element={<Navigate to={AppRouter.Main} />} />
               </Route>
               <Route path={AppRouter.Statistics}>
-                <Route path={AppRouter.BudgetStatistics} element={<TeacherGuidebookTimetablePage />} />
+                <Route path={AppRouter.BudgetStatistics} element={<BudgetStatisticsPage />} />
               </Route>
             </Routes>
           </Router>
