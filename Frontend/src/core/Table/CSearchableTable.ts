@@ -12,12 +12,9 @@ export class CSearchableTable extends CTable {
     } else {
       const lowerCasedSearchQuery: string = searchQuery.toLowerCase();
       this.setData(
-        dataFromStore.filter(
-          (row: any) =>
-            Object.values(row).findIndex(
-              (value: any) => typeof value === "string" && value.toLowerCase().includes(lowerCasedSearchQuery)
-            ) !== -1
-        )
+        dataFromStore.filter((row: any) => Object.values(row)
+          .filter(value => typeof value === "string")
+          .findIndex((value: any) => value.toLowerCase().includes(lowerCasedSearchQuery)) !== -1)
       );
     }
   }

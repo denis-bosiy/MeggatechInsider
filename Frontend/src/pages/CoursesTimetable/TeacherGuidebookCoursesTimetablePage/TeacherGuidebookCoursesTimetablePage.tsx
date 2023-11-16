@@ -1,47 +1,20 @@
-import {useSelector} from "react-redux";
 import {TeacherGuidebookCoursesTimetablePageData} from "./model/types";
 import {classNames} from "../../../utils/classNames";
 import ActionButton, {ActionButtonType} from "../../../components/ActionButton/ActionButton";
 import {PenIcon} from "../../../icons/index";
 import React, {useState} from "react";
 import Input, {InputType} from "../../../components/Input/Input";
-import {CTableBuilder} from "../../../core/Table/CTableBuilder";
-import {CTable} from "../../../core/Table/CTable";
-import {CTableManager} from "../../../core/Table/CTableManager";
-import {TableType} from "../../../core/Table/TableType";
-import {SortingOrder} from "../../../core/Table/SortingOrder";
+import {useTableData} from "./useTableData";
 
 interface TableProps {
-  isEdited: boolean;
-  setIsEdited: (isEdited: boolean) => void;
+  data: TeacherGuidebookCoursesTimetablePageData,
+  handleSort: (columnName: string) => void,
 }
 
-const Table = ({isEdited, setIsEdited}: TableProps) => {
-  const data = useSelector((state: {
-    teacherGuidebookCoursesTimetablePageStore: TeacherGuidebookCoursesTimetablePageData
-  }) => state.teacherGuidebookCoursesTimetablePageStore);
-
-  const [tableData, setTableData] = useState(structuredClone(data));
-  const teacherGuidebookCoursesTimetableTableBuilder: CTableBuilder = new CTableBuilder(
-    tableData,
-    setTableData
-  );
-  teacherGuidebookCoursesTimetableTableBuilder.addSearchFeature();
-  teacherGuidebookCoursesTimetableTableBuilder.addEditFeature({
-    value: isEdited,
-  }, ({value}) => setIsEdited(value));
-
-  const teacherGuidebookCoursesTimetableTable: CTable = teacherGuidebookCoursesTimetableTableBuilder.getTable();
-  const teacherGuidebookCoursesTimetableTableManager: CTableManager = new CTableManager(teacherGuidebookCoursesTimetableTable);
-
-  const handleSort = (columnName: string): void => {
-    teacherGuidebookCoursesTimetableTableManager.invokeFunction(
-      "sort",
-      TableType.Default,
-      [columnName, SortingOrder.Ascending],
-    );
-  };
-
+const Table = ({
+  data,
+  handleSort,
+}: TableProps) => {
   const rows = data.map((item) => (
     <tr className="row" key={item.id}>
       <td className="cell">
@@ -67,7 +40,7 @@ const Table = ({isEdited, setIsEdited}: TableProps) => {
       <tr className="row">
         <th
           className="cell -filter"
-          onClick={() => handleSort(  "course")}
+          onClick={() => handleSort("course")}
         >
           Курс
         </th>
@@ -152,26 +125,31 @@ const TeacherGuidebookTimetableButton = (isEdited: boolean, changeIsEdited: () =
 
 const TeacherGuidebookCoursesTimetablePage = () => {
   const [searchValue, setSearchValue] = useState("");
-  const [isEdited, setIsEdited] = useState(false);
+
+  const {
+    state,
+    actions,
+  } = useTableData();
 
   return (
     <>
       <div className="toolbar">
         <div className="toolbar__buttons-wrapper">
-          {TeacherGuidebookTimetableButton(isEdited, () => setIsEdited(!isEdited))}
+          {TeacherGuidebookTimetableButton(state.isEdited, () => actions.setIsEdited(!state.isEdited))}
           <Input
             className="toolbar__search"
             value={searchValue}
             type={InputType.Search}
             placeholder="Поиск"
             onValueChange={setSearchValue}
+            onSearch={() => actions.handleSearch(searchValue)}
           />
         </div>
       </div>
       <table className="table">
         <Table
-          isEdited={isEdited}
-          setIsEdited={setIsEdited}
+          data={state.data}
+          handleSort={actions.handleSort}
         />
       </table>
     </>
