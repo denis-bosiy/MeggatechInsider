@@ -19,6 +19,7 @@ namespace Api.Controllers
 
             return Ok( new TeacherListResponseDto()
             {
+                //При написании сервисов дату преобразовывать в iso-формат
                 Teachers = new List<TeacherDto>
                 {
                     new TeacherDto
