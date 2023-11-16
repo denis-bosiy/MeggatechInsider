@@ -3,7 +3,7 @@ import { SubjectsSyllabusPageData } from "./types";
 
 const initData: SubjectsSyllabusPageData = [
   {
-    id: 0,
+    id: "0",
     subjectName: "Физика",
     financing: "Бюджет",
     type: "Обязательный проф.",
@@ -16,7 +16,7 @@ const initData: SubjectsSyllabusPageData = [
     isFinalExam: false
   },
   {
-    id: 1,
+    id: "1",
     subjectName: "История",
     financing: "Бюджет",
     type: "Обязательный проф.",
