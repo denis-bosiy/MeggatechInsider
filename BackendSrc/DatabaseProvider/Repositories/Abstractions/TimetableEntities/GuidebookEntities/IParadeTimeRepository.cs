@@ -6,5 +6,7 @@ namespace DatabaseProvider.Repositories.Abstractions.TimetableEntities.Guidebook
     {
         public List<ParadeTime> GetAll();
         public ParadeTime GetById( int id );
+        ParadeTime GetByYear( int year );
+        void Update( ParadeTime paradeTime );
     }
 }

@@ -13,18 +13,27 @@ namespace Api.Controllers
     [Route( "api/studying-activity" )]
     public class StudyingActivityController : ControllerBase
     {
-        private readonly IPairTimeService _pairTimeService;
+        private const int LiceumFoundationYear = 2022; // надо узнать точную дату, пока стоит заглушка
 
-        public StudyingActivityController( IPairTimeService pairTimeService ) 
+        private readonly IPairTimeService _pairTimeService;
+        private readonly ILessonTimeService _lessonTimeService;
+        private readonly IParadeTimeService _paradeTimeService;
+
+        public StudyingActivityController( 
+            IPairTimeService pairTimeService,
+            ILessonTimeService lessonTimeService,
+            IParadeTimeService paradeTimeService ) 
         { 
             _pairTimeService = pairTimeService;
+            _lessonTimeService = lessonTimeService;
+            _paradeTimeService = paradeTimeService;
         }
 
         [HttpGet( "pair" )]
-        [ResponseType( typeof( PairTimeDto ) )]
+        [ResponseType( typeof( PairTimesDto ) )]
         public IActionResult GetPairTime( [FromQuery] int year )
         {
-            List<PairTime> pairTimes = _pairTimeService.GetPairTimes( year );
+            List<PairTime> pairTimes = _pairTimeService.GetPairTimesByYear( year );
 
             if ( !pairTimes.Any() )
             {
@@ -33,74 +42,123 @@ namespace Api.Controllers
 
             List<PairTimeDto> pairTimeDtos = pairTimes.MapToDtos();
 
-            return Ok( pairTimeDtos );
+            PairTimesDto pairTimesDto = new PairTimesDto
+            {
+                PairTimes = pairTimeDtos
+            };
+
+            return Ok( pairTimesDto );
         }
 
         [HttpPost( "pair" )]
         public IActionResult AddPairTime( [FromBody] CreatePairTimeDto dto )
         {
-            // mock
+            if ( dto.Year < LiceumFoundationYear || dto.Year > DateTime.Now.Year + 1 )
+            {
+                return BadRequest( "Не найдено такого года" );
+            }
+
+            _pairTimeService.AddPair( dto.Year, dto.StartTime, dto.EndTime );
             return Ok();
         }
 
         [HttpDelete( "pair" )]
         public IActionResult DeletePairTime( [FromQuery] int id ) 
         {
-            // mock
+            if ( !_pairTimeService.PairTimeExists( id ) )
+            {
+                return StatusCode( 409, "Нет заведённого времени для пары" );
+            }
+            _pairTimeService.DeletePairTime( id );
             return Ok();
         }
 
         [HttpGet( "lesson" )]
-        public List<LessonTimeDto> GetLessonTime( [FromQuery] int year ) 
+        [ResponseType( typeof( LessonTimesDto ) )]
+        public IActionResult GetLessonTime( [FromQuery] int year ) 
         {
-            // mock
-            LessonTimeDto mock = new LessonTimeDto
+            List<LessonTime> lessonTimes = _lessonTimeService.GetLessonTimesByYear( year );
+
+            if ( !lessonTimes.Any() )
             {
-                Id = 1,
-                StartTime = new TimeOnly( hour: 8, minute: 0 ),
-                EndTime = new TimeOnly( hour: 8, minute: 40 )
+                return NotFound();
+            }
+
+            List<LessonTimeDto> lessonTimeDtos = lessonTimes.MapToDtos();
+
+            LessonTimesDto lessonTimesDto = new LessonTimesDto
+            {
+                LessonTimes = lessonTimeDtos
             };
-            return new List<LessonTimeDto> { mock };
+
+            return Ok( lessonTimesDto );
         }
 
         [HttpPost( "lesson" )]
         public IActionResult AddLessonTime( [FromBody] CreateLessonTimeDto dto )
         {
-            // mock
+            
+            if ( dto.Year < LiceumFoundationYear || dto.Year > DateTime.Now.Year + 1 )
+            {
+                return BadRequest( "Не найдено такого года" );
+            }
+
+            _lessonTimeService.AddLesson( dto.Year, dto.StartTime, dto.EndTime );
             return Ok();
         }
 
         [HttpDelete( "lesson" )]
         public IActionResult DeleteLessonTime( [FromQuery] int id ) 
         {
-            // mock
+            if ( !_lessonTimeService.LessonTimeExists( id ) )
+            {
+                return StatusCode( 409, "Нет заведённого времени для урока" );
+            }
+            _lessonTimeService.DeleteLessonTime( id );
             return Ok();
         }
 
         [HttpGet( "parade" )]
-        public List<ParadeTimeDto> GetParadeTime( [FromQuery] int year )
+        [ResponseType( typeof( ParadeTimeDto ) )]
+        public IActionResult GetParadeTime( [FromQuery] int year )
         {
-            // mock
-            ParadeTimeDto mock = new ParadeTimeDto
+            ParadeTime paradeTime = _paradeTimeService.GetParadeTimeByYear( year );
+            if ( paradeTime == null )
             {
-                WeekDay = DayOfWeek.Monday,
-                StartTime = new TimeOnly( hour: 8, minute: 0 ),
-                EndTime = new TimeOnly( hour: 8, minute: 20 )
-            };
-            return new List<ParadeTimeDto> { mock };
+                return NotFound();
+            }
+
+            return Ok( paradeTime.MapToDto() );
         }
 
         [HttpPost( "parade" )]
-        public IActionResult SetParadeTime( [FromBody] SetParadeTimeDto dto )
+        public IActionResult CreateParadeTime( [FromBody] SetParadeTimeDto dto )
         {
-            // mock
+            if ( dto.Year < LiceumFoundationYear || dto.Year > DateTime.Now.Year + 1 )
+            {
+                return BadRequest( "Не найдено такого года" );
+            }
+
+            _paradeTimeService.CreateParadeTime( dto.Year, dto.WeekDay, dto.StartTime, dto.EndTime );
             return Ok();
         }
 
         [HttpPut( "parade" )]
         public IActionResult UpdateParadeTime( [FromBody] SetParadeTimeDto dto )
         {
-            // mock
+            if ( dto.Year < LiceumFoundationYear || dto.Year > DateTime.Now.Year + 1 )
+            {
+                return BadRequest( "Не найдено такого года" );
+            }
+
+            ParadeTime paradeTimeForRequestedYear = _paradeTimeService.GetParadeTimeByYear( dto.Year );
+            if ( paradeTimeForRequestedYear == null )
+            {
+                return BadRequest( "Не найдено такого года" );
+            }
+
+            _paradeTimeService.UpdateParadeTime( 
+                paradeTimeForRequestedYear.Id, dto.Year, dto.WeekDay, dto.StartTime, dto.EndTime );
             return Ok();
         }
 

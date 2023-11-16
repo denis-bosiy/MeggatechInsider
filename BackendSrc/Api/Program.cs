@@ -1,5 +1,6 @@
 using Api.JsonConverters;
 using Application;
+using DatabaseProvider.Repositories;
 
 namespace Api
 {
@@ -24,6 +25,7 @@ namespace Api
                 builder.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader();
             } ) );
             builder.Services.AddApplication();
+            builder.Services.AddDatabaseRepositories();
 
             WebApplication app = builder.Build();
 

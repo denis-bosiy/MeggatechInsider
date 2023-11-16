@@ -6,5 +6,6 @@ namespace DatabaseProvider.Repositories.Abstractions.TimetableEntities.Guidebook
     {
         public List<PairTime> GetAll();
         public PairTime GetById( int id );
+        public List<PairTime> GetByYear( int year );
     }
 }

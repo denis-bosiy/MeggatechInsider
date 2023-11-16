@@ -1,10 +1,5 @@
 using DatabaseProvider.Repositories.Abstractions.TimetableEntities.GuidebookEntities;
 using Domain.TimetableEntities.GuidebookEntities;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace DatabaseProvider.Repositories.Implementations.TimetableEntities.GuidebookEntities
 {
@@ -18,5 +13,7 @@ namespace DatabaseProvider.Repositories.Implementations.TimetableEntities.Guideb
         public List<LessonTime> GetAll() => Entities.ToList();
 
         public LessonTime GetById( int id ) => Entities.Where( e => e.Id == id ).FirstOrDefault();
+
+        public List<LessonTime> GetByYear( int year ) => Entities.Where( e => e.Year == year ).ToList();
     }
 }
