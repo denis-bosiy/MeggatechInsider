@@ -66,8 +66,8 @@ export const Menu: MenuItem[] = [
     label: "Учебный план",
     navigation: [
       { label: "Предметы", url: AppRouter.Subjects },
-      { label: "Преподаватели", url: "#" },
-      { label: "Учебный план", url: AppRouter.Syllabus },
+      { label: "Преподаватели", url: AppRouter.Teachers },
+      { label: "Учебный план", url: AppRouter.Assigning },
       { label: "Назначение", url: "#" }
     ]
   },
@@ -90,8 +90,8 @@ export const Menu: MenuItem[] = [
         label: "План",
         url: AppRouter.Assigning,
         tabs: {
-          courses: "Подготовиительные курсы",
-          expressCourses: "Подготовиительные экспресс курсы",
+          courses: "Подготовительные курсы",
+          expressCourses: "Подготовительные экспресс курсы",
           shup: "ШЮП"
         }
       },

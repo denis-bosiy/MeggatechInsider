@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import { Outlet, useLocation, useSearchParams } from "react-router-dom";
+import { Outlet, useLocation, useNavigate, useSearchParams } from "react-router-dom";
 
 import { Header } from "../layouts/Header/Header";
 import { Footer } from "../layouts/Footer/Footer";
@@ -13,6 +13,7 @@ import "./Root.scss";
 const ProtectedRoot = () => {
   const { pathname } = useLocation();
   const locations = pathname.split("/").filter(String);
+  const navigate = useNavigate();
 
   const route = Menu.find((element) => locations.includes(element.url));
   const navigation = (route && route.navigation) || [];
@@ -24,6 +25,10 @@ const ProtectedRoot = () => {
   const tabValue = tabParams.get("tab");
   const currentTab = (page && page.tabs && tabValue && page.tabs[tabValue]) || null;
 
+  const logout = () => {
+    navigate("/login");
+  };
+
   useEffect(() => {
     if (page && page.tabs) {
       setTabParams({ tab: tabs[0] });
@@ -32,7 +37,7 @@ const ProtectedRoot = () => {
 
   return (
     <div className="root">
-      <Header>
+      <Header onLogout={logout}>
         {route &&
           navigation.map((item, index) => (
             <Link key={index} type={LinkType.Light} label={item.label} path={`${route.url}/${item.url}`} />
