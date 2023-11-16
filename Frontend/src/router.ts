@@ -2,12 +2,15 @@ export enum AppRouter {
   Main = "/",
   Login = "login",
   Syllabus = "syllabus",
-  CoursesSyllabus = "courses_syllabus",
+  SyllabusTable = "syllabus-table",
+  CoursesSyllabus = "courses-syllabus",
+  CoursesSyllabusTable = "courses-syllabus-table",
   Subjects = "subjects",
   Teachers = "teachers",
   Assigning = "assigning",
   Timetable = "timetable",
   LessonsSchedule = "lessons-schedule",
+  LessonsGuidebook = "lessons-guidebook",
   TeacherGuidebook = "teacher-guidebook",
   Settings = "settings",
   Basic = "basic",
@@ -57,7 +60,7 @@ export const Menu: MenuItem[] = [
     label: "Расписание занятий",
     navigation: [
       { label: "Справочник по преподавателям", url: AppRouter.TeacherGuidebook },
-      { label: "Справочник по классам", url: "#" },
+      { label: "Справочник по классам", url: AppRouter.LessonsGuidebook },
       { label: "Расписание", url: AppRouter.LessonsSchedule }
     ]
   },
@@ -67,8 +70,8 @@ export const Menu: MenuItem[] = [
     navigation: [
       { label: "Предметы", url: AppRouter.Subjects },
       { label: "Преподаватели", url: AppRouter.Teachers },
-      { label: "Учебный план", url: AppRouter.Assigning },
-      { label: "Назначение", url: "#" }
+      { label: "Учебный план", url: AppRouter.SyllabusTable },
+      { label: "Назначение", url: AppRouter.Assigning }
     ]
   },
   {
@@ -88,14 +91,17 @@ export const Menu: MenuItem[] = [
       { label: "Преподаватели", url: AppRouter.Teachers },
       {
         label: "План",
+        url: AppRouter.CoursesSyllabusTable
+      },
+      {
+        label: "Назначение",
         url: AppRouter.Assigning,
         tabs: {
           courses: "Подготовительные курсы",
           expressCourses: "Подготовительные экспресс курсы",
           shup: "ШЮП"
         }
-      },
-      { label: "Назначение", url: "#" }
+      }
     ]
   },
   {
