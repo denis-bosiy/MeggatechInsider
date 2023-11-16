@@ -49,7 +49,7 @@ const initGuidebookData: Guidebook = [
       },
     ],*/
     availableHours: {
-      id: "3",
+      id: "1",
       weekDay: "пн",
       startTime: "8.00",
       endTime: "9.00",
