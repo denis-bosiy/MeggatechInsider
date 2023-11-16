@@ -15,7 +15,6 @@ const LessonsSchedulePage = (): JSX.Element => {
     openModal("Удалить", <AgreementModalView proceedAction={() => dispatch(ActionBuilder.deleteLesson(lessonId))} />);
   };
 
-  console.log(schedule);
   return (
     <>
       <ScheduleComponent schedule={schedule} handleDeleteLesson={handleDeleteLesson} />
