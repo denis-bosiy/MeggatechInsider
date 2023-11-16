@@ -11,10 +11,14 @@ import SignInPage from "./pages/SignInPage/SignInPage";
 import SubjectsSyllabusPage from "./pages/Syllabus/SubjectsSyllabusPage/SubjectsSyllabusPage";
 import TeachersSyllabusPage from "./pages/Syllabus/TeachersSyllabusPage/TeachersSyllabusPage";
 import AssigningSyllabusPage from "./pages/Syllabus/AssigningSyllabusPage/AssigningSyllabusPage";
-import SubjectsCoursesSyllabusPage from "./pages/СourseSyllabus/SubjectsCoursesSyllabusPage/SubjectsCoursesSyllabusPage";
-import TeachersCoursesSyllabusPage from "./pages/СourseSyllabus/TeachersCoursesSyllabusPage/TeachersCoursesSyllabusPage";
-import AssigningCoursesSyllabusPage from "./pages/СourseSyllabus/AssigningCoursesSyllabusPage/AssigningCoursesSyllabusPage";
-import TeacherGuidebookTimetablePage from "./pages/Timetable/TeacherGuidebookTimetablePage/TeacherGuidebookTimetablePage";
+import SubjectsCoursesSyllabusPage
+  from "./pages/CourseSyllabus/SubjectsCoursesSyllabusPage/SubjectsCoursesSyllabusPage";
+import TeachersCoursesSyllabusPage
+  from "./pages/CourseSyllabus/TeachersCoursesSyllabusPage/TeachersCoursesSyllabusPage";
+import AssigningCoursesSyllabusPage
+  from "./pages/CourseSyllabus/AssigningCoursesSyllabusPage/AssigningCoursesSyllabusPage";
+import TeacherGuidebookTimetablePage
+  from "./pages/Timetable/TeacherGuidebookTimetablePage/TeacherGuidebookTimetablePage";
 import TimetableSettingsPage from "./pages/Settings/TimetableSettingsPage/TimetableSettingsPage";
 import TeacherSettingsPage from "./pages/Settings/TeacherSettingsPage/TeacherSettingsPage";
 import { Provider } from "react-redux";
