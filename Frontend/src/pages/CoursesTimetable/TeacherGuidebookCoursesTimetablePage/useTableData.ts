@@ -1,6 +1,6 @@
 import {useDispatch, useSelector} from "react-redux";
 import {TeacherGuidebookCoursesTimetablePageData} from "./model/types";
-import {useCallback, useMemo, useState} from "react";
+import {useState} from "react";
 import {CTableBuilder} from "../../../core/Table/CTableBuilder";
 import {CTable} from "../../../core/Table/CTable";
 import {CTableManager} from "../../../core/Table/CTableManager";
@@ -17,59 +17,47 @@ function useTableData() {
   const [searchValue, setSearchValue] = useState("");
   const [isEdited, setIsEdited] = useState<{ value: boolean }>({ value: false });
 
-  const teacherGuidebookCoursesTimetableTableBuilder: CTableBuilder = useMemo(
-    () => {
-      const builder = new CTableBuilder(
-        tableData,
-        setTableData
-      );
-      builder.addSearchFeature();
-      builder.addEditFeature(isEdited, setIsEdited);
-      return builder;
-    },
-    [],
+  const teacherGuidebookCoursesTimetableTableBuilder: CTableBuilder = new CTableBuilder(
+    tableData,
+    setTableData
   );
+  teacherGuidebookCoursesTimetableTableBuilder.addSearchFeature();
+  teacherGuidebookCoursesTimetableTableBuilder.addEditFeature(isEdited, setIsEdited);
 
-  const teacherGuidebookCoursesTimetableTable: CTable = useMemo(
-    () => teacherGuidebookCoursesTimetableTableBuilder.getTable(),
-    [teacherGuidebookCoursesTimetableTableBuilder],
-  );
-  const teacherGuidebookCoursesTimetableTableManager: CTableManager = useMemo(
-    () => new CTableManager(teacherGuidebookCoursesTimetableTable),
-    [teacherGuidebookCoursesTimetableTable],
-  );
+  const teacherGuidebookCoursesTimetableTable: CTable = teacherGuidebookCoursesTimetableTableBuilder.getTable();
+  const teacherGuidebookCoursesTimetableTableManager: CTableManager = new CTableManager(teacherGuidebookCoursesTimetableTable);
 
-  const handleSort = useCallback((columnName: string) => {
+  const handleSort = (columnName: string) => {
     teacherGuidebookCoursesTimetableTableManager.invokeFunction(
       "sort",
       TableType.Default,
       [columnName, SortingOrder.Ascending],
     );
-  }, [teacherGuidebookCoursesTimetableTableManager]);
+  };
 
-  const handleSearch = useCallback((searchValue: string) => {
+  const handleSearch = (searchValue: string) => {
     teacherGuidebookCoursesTimetableTableManager.invokeFunction(
       "search",
       TableType.Searchable,
       [searchValue, data]);
-  }, [teacherGuidebookCoursesTimetableTableManager, data]);
+  };
 
   const dispatch = useDispatch();
-  const handleSave = useCallback(() => {
+  const handleSave = () => {
     teacherGuidebookCoursesTimetableTableManager.invokeFunction("apply", TableType.Editable, [
       (data: any[]) => dispatch(TeacherGuidebookCoursesTimetableActionBuilder.saveData(data)),
     ]);
-  }, [teacherGuidebookCoursesTimetableTableManager, dispatch, TeacherGuidebookCoursesTimetableActionBuilder]);
-  const handleReset = useCallback(() => {
+  };
+  const handleReset = () => {
     teacherGuidebookCoursesTimetableTableManager.invokeFunction(
       "cancel",
       TableType.Editable,
       [data],
     );
-  }, [teacherGuidebookCoursesTimetableTableManager]);
-  const handleEdit = useCallback((): void => {
+  };
+  const handleEdit = () => {
     teacherGuidebookCoursesTimetableTableManager.invokeFunction("edit", TableType.Editable, []);
-  }, []);
+  };
 
   return {
     state: {
