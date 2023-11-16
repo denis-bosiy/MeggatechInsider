@@ -76,6 +76,23 @@ const initGuidebookData: Guidebook = [
     creditHours: 2,
     workedOverPlan: 20,
   },
+  {
+    id: "3",
+    subjectName: "Java",
+    subjectId: "2",
+    teacherName: "Алена Борисовна Щук",
+    teacherId: "2",
+    availableHours: {
+      id: "4",
+      weekDay: "вт",
+      startTime: "9.00",
+      endTime: "10.00",
+    },
+    distributedHoursToPlan: 17,
+    hoursToPlan: 15,
+    creditHours: 0,
+    workedOverPlan: 20,
+  },
 ];
 
 const initData: TeacherGuidebookTimetablePageData = {

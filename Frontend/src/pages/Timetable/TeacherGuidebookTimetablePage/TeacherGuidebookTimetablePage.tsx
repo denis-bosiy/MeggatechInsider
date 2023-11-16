@@ -22,6 +22,7 @@ const TeacherGuidebookTimetablePage = () => {
   const [guidebookSearchQuery, setGuidebookSearchQuery] = useState<string>("");
   const guidebookTableBuilder: CTableBuilder = new CTableBuilder(guidebookTableData, setGuidebookTableData);
   guidebookTableBuilder.addEditFeature(isGuidebookEditing, setIGuidebookEditing);
+  guidebookTableBuilder.addSearchFeature();
   const guidebookTable: CTable = guidebookTableBuilder.getTable();
   const guidebookTableManager: CTableManager = new CTableManager(guidebookTable);
 
@@ -90,8 +91,8 @@ const TeacherGuidebookTimetablePage = () => {
       <table className="table -fill -list">
         <thead className="header">
           <tr className="row">
-            <th className="cell -filter" onClick={() => handleSort("teacherName")}>Преподаватель</th>
             <th className="cell -filter" onClick={() => handleSort("subjectName")}>Предмет</th>
+            <th className="cell -filter" onClick={() => handleSort("teacherName")}>Преподаватель</th> 
             <th className="cell">Доступные<br />часы</th>
             <th className="cell -filter" onClick={() => handleSort("distributedHoursToPlan")}>Кол-во распределенных<br />часов в неделю по плану</th>
             <th className="cell -filter" onClick={() => handleSort("hoursToPlan")}>Кол-во часов<br />в неделю по плану</th>
