@@ -1,5 +1,3 @@
-type TeacherGuidebookTimetablePageData = Array<TeacherGuidebookTimetableData>
-
 type AvailableHours = {
   id: number,
   weekDay: string,
@@ -7,19 +5,20 @@ type AvailableHours = {
   endTime: string,
 }
 
-type TeacherGuidebookTimetableData = {
-    id: number,
-    subjectName: string,
-    subjectId: number,
-    teacherName: string,
-    teacherId: number, 
-    availableHours: Array<AvailableHours>,
-    distributedHoursToPlan: number,
-    hoursToPlan: number,
-    creditHours: number,
-    workedOverPlan: number,
+type TeacherGuidebookCoursesTimetableData = {
+  id: number,
+  course: string,
+  type: string,
+  teacherName: string,
+  teacherId: number,
+  availableHours: Array<AvailableHours>,
+  distributedHoursToPlan: number,
+  hoursToPlan: number,
+  creditHours: number,
 }
 
+type TeacherGuidebookCoursesTimetablePageData = Array<TeacherGuidebookCoursesTimetableData>
+
 export {
-  type TeacherGuidebookTimetablePageData,
+  type TeacherGuidebookCoursesTimetablePageData,
 };
