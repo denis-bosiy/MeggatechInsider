@@ -1,6 +1,6 @@
 import {useSelector} from "react-redux";
 import {TeacherGuidebookCoursesTimetablePageData} from "./model/types";
-import {useState} from "react";
+import {useCallback, useMemo, useState} from "react";
 import {CTableBuilder} from "../../../core/Table/CTableBuilder";
 import {CTable} from "../../../core/Table/CTable";
 import {CTableManager} from "../../../core/Table/CTableManager";
@@ -13,44 +13,57 @@ function useTableData() {
   }) => state.teacherGuidebookCoursesTimetablePageStore);
 
   const [tableData, setTableData] = useState(structuredClone(data));
-  const [isEdited, setIsEdited] = useState(false);
+  const [searchValue, setSearchValue] = useState("");
+  const [isEdited, setIsEdited] = useState<{ value: boolean }>({ value: false });
 
-  const teacherGuidebookCoursesTimetableTableBuilder: CTableBuilder = new CTableBuilder(
-    tableData,
-    setTableData
+  const teacherGuidebookCoursesTimetableTableBuilder: CTableBuilder = useMemo(
+    () => {
+      const builder = new CTableBuilder(
+        tableData,
+        setTableData
+      );
+      builder.addSearchFeature();
+      builder.addEditFeature(isEdited, setIsEdited);
+      return builder;
+    },
+    [],
   );
-  teacherGuidebookCoursesTimetableTableBuilder.addSearchFeature();
-  teacherGuidebookCoursesTimetableTableBuilder.addEditFeature({
-    value: isEdited,
-  }, ({value}) => setIsEdited(value));
 
-  const teacherGuidebookCoursesTimetableTable: CTable = teacherGuidebookCoursesTimetableTableBuilder.getTable();
-  const teacherGuidebookCoursesTimetableTableManager: CTableManager = new CTableManager(teacherGuidebookCoursesTimetableTable);
+  const teacherGuidebookCoursesTimetableTable: CTable = useMemo(
+    () => teacherGuidebookCoursesTimetableTableBuilder.getTable(),
+    [teacherGuidebookCoursesTimetableTableBuilder],
+  );
+  const teacherGuidebookCoursesTimetableTableManager: CTableManager = useMemo(
+    () => new CTableManager(teacherGuidebookCoursesTimetableTable),
+    [teacherGuidebookCoursesTimetableTable],
+  );
 
-  const handleSort = (columnName: string): void => {
+  const handleSort = useCallback((columnName: string) => {
     teacherGuidebookCoursesTimetableTableManager.invokeFunction(
       "sort",
       TableType.Default,
       [columnName, SortingOrder.Ascending],
     );
-  };
+  }, []);
 
-  const handleSearch = (searchValue: string): void => {
+  const handleSearch = useCallback((searchValue: string) => {
     teacherGuidebookCoursesTimetableTableManager.invokeFunction(
       "search",
       TableType.Searchable,
       [searchValue, data]);
-  };
+  }, []);
 
   return {
     state: {
       data: tableData,
-      isEdited,
+      isEdited: isEdited.value,
+      searchValue,
     },
     actions: {
       handleSort,
-      handleSearch,
-      setIsEdited,
+      handleSearch: () => handleSearch(searchValue),
+      setIsEdited: (isEdited: boolean) => setIsEdited({value: isEdited}),
+      setSearchValue,
     },
   };
 }
