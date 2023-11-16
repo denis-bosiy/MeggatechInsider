@@ -11,13 +11,13 @@ type TeacherGuidebookCoursesTimetableData = {
   type: string,
   teacherName: string,
   teacherId: number,
-  availableHours: Array<AvailableHours>,
+  availableHours: AvailableHours[],
   distributedHoursToPlan: number,
   hoursToPlan: number,
   creditHours: number,
 }
 
-type TeacherGuidebookCoursesTimetablePageData = Array<TeacherGuidebookCoursesTimetableData>
+type TeacherGuidebookCoursesTimetablePageData = TeacherGuidebookCoursesTimetableData[]
 
 export {
   type TeacherGuidebookCoursesTimetablePageData,
