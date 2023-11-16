@@ -122,8 +122,8 @@ const TeacherGuidebookTimetablePage = () => {
                                 availableHours: {
                                   id: selectedOption.id,
                                   weekDay: selectedOption.content.substring(0, 2),
-                                  startTime: selectedOption.content.substring(3, 8),
-                                  endTime: selectedOption.content.substring(9),
+                                  startTime: selectedOption.content.substring(3, 7),
+                                  endTime: selectedOption.content.substring(8),
                                 }
                               } : data
                             )
