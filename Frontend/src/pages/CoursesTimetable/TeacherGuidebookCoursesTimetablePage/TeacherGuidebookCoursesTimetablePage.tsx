@@ -113,26 +113,6 @@ const Table = ({isEdited, setIsEdited}: TableProps) => {
       {rows}
     </tbody>
   </>;
-
-  // return (
-  //   guidebook.map((teacher) => (
-  //     <tr className="row" key={teacher.id}>
-  //       <td className="cell">{teacher.course}</td>
-  //       <td className="cell">{teacher.type}</td>
-  //       <td className="cell">{teacher.teacherName}</td>
-  //       <td className="cell">
-  //         {teacher.availableHours.map((time) => (
-  //           <p key={time.id}>{time.weekDay} {time.startTime} - {time.endTime}</p>))}
-  //       </td>
-  //       <td className={classNames("cell" + (teacher.distributedHoursToPlan < teacher.hoursToPlan ? " -error" : "")
-  //         + (teacher.distributedHoursToPlan > teacher.hoursToPlan ? " -warning" : ""))}>
-  //         {teacher.distributedHoursToPlan}
-  //       </td>
-  //       <td className="cell">{teacher.hoursToPlan}</td>
-  //       <td className="cell">{teacher.creditHours}</td>
-  //     </tr>
-  //   ))
-  // );
 };
 
 const TeacherGuidebookTimetableButton = (isEdited: boolean, changeIsEdited: () => void) => {
