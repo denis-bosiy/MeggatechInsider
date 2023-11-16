@@ -8,6 +8,11 @@ export class CTableManager {
     this._table = table;
   }
 
+  /*
+   * name: 'clearQuarter', 'addAdditionalLoaded', 'addComment', 'edit', 'apply', 'cancel',
+   * 'export', 'add', 'applyAdding', 'delete', 'search', 'continueSyllabusByWeekNumber',
+   * 'sort'
+   */
   public invokeFunction(name: string, type: TableType, params: any[]): void {
     const tables: Array<CTable | undefined> = [this._table];
 
