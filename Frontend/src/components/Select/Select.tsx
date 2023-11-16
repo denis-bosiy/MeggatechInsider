@@ -16,6 +16,7 @@ interface ISelectProps {
   options: ISelectOption[];
   onValueChange: (id: string) => void;
   size?: SelectSize;
+  currentValue?: ISelectOption;
 }
 
 const Select = (props: ISelectProps) => {
@@ -64,6 +65,7 @@ const Select = (props: ISelectProps) => {
   return (
     <div className="select-container">
       <select
+        value={props.currentValue?.content}
         ref={selectRef}
         className={"select" + (sizeModificator ? " " + sizeModificator : "")}
         onChange={onChange}

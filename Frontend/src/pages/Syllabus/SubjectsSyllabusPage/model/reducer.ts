@@ -32,12 +32,8 @@ const initData: SubjectsSyllabusPageData = [
 
 const subjectsSyllabusPageReducer = (state = initData, action: Action) => {
   switch (action.type) {
-    case SUBJECTS_SYLLABUS_PAGE_ACTIONS.SUBJECTS_SYLLABUS_PAGE_SET_IS_FINAL_EXAM:
-      return state.map((item) =>
-        item.id === action.payload.subjectId ? { ...item, isFinalExam: action.payload.isFinalExam } : item
-      );
-    case SUBJECTS_SYLLABUS_PAGE_ACTIONS.SUBJECTS_SYLLABUS_PAGE_DELETE_SUBJECT:
-      return state.filter((item) => item.id !== action.payload);
+    case SUBJECTS_SYLLABUS_PAGE_ACTIONS.SAVE_SUBJECTS:
+      return action.payload.values;
     default:
       return state;
   }

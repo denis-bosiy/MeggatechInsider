@@ -16,4 +16,5 @@ type SubjectSyllabusData = {
 
 export {
   type SubjectsSyllabusPageData,
+  type SubjectSyllabusData
 };
