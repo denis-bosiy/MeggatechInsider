@@ -20,6 +20,7 @@ import TeacherSettingsPage from "./pages/Settings/TeacherSettingsPage/TeacherSet
 import { Provider } from "react-redux";
 import { store } from "./redux/store";
 import { AppRouter } from "./router";
+import BudgetStatisticsPage from "./pages/Statistics/BudgetStatisticsPage/BudgetStatisticsPage";
 
 const App = (): React.JSX.Element => {
   return (
@@ -52,7 +53,7 @@ const App = (): React.JSX.Element => {
                 <Route path={AppRouter.TeacherGuidebook} element={<TeacherGuidebookTimetablePage />} />
               </Route>
               <Route path={AppRouter.Statistics}>
-                <Route path={AppRouter.BudgetStatistics} element={<TeacherGuidebookTimetablePage />} />
+                <Route path={AppRouter.BudgetStatistics} element={<BudgetStatisticsPage />} />
               </Route>
               <Route path="components" element={<ComponentsPage />} />
               <Route path="test-redux" element={<TestPage />} />

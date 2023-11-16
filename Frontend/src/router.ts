@@ -29,4 +29,5 @@ export const Mockup: MockupItem[] = [
   { url: "#", label: "Финансовый отчет" },
   { url: "#", label: "Контроль учебного плана за год" },
   { url: AppRouter.Statistics, label: "Статистика" },
+  { url: AppRouter.BudgetStatistics, label: "Статистика бюджетов" },
 ];
