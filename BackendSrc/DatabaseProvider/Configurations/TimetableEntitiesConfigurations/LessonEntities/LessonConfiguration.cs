@@ -21,10 +21,10 @@ public class LessonConfiguration : IEntityTypeConfiguration<Lesson>
 
         builder.Property( l => l.LessonType ).HasConversion<int>();
 
-        builder.HasOne( l => l.StudentGroup )
-            .WithMany( sg => sg.Lessons )
-            .HasForeignKey( l => l.StudentGroupId )
-            .OnDelete( DeleteBehavior.NoAction );
+        //builder.HasOne( l => l.StudentGroup )
+        //    .WithMany( sg => sg.Lessons )
+        //    .HasForeignKey( l => l.StudentGroupId )
+        //    .OnDelete( DeleteBehavior.NoAction );
 
         builder.HasOne( l => l.Teacher )
             .WithMany( t => t.Lessons )

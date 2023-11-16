@@ -8,7 +8,7 @@ public class HorizontalSubgroupStudentGroupConfiguration : IEntityTypeConfigurat
 {
     public void Configure( EntityTypeBuilder<HorizontalSubgroupStudentGroup> builder )
     {
-        builder.ToTable( "HorizontalSubgroupStudentGroup" ).HasKey( sg => sg.Id );
+        builder.ToTable( "HorizontalSubgroupStudentGroup" );
 
         builder.Property( sg => sg.Parallel ).HasConversion<int>().IsRequired();
         builder.Property( sg => sg.SubgroupNumber ).IsRequired();

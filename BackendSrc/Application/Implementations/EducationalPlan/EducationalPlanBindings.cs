@@ -3,7 +3,7 @@ using Microsoft.Extensions.DependencyInjection;
 
 namespace Application.Implementations.EducationalPlan
 {
-    internal static class EducationalPlanBindings
+    public static class EducationalPlanBindings
     {
         public static IServiceCollection AddEducationalPlanServices( this IServiceCollection services )
         {

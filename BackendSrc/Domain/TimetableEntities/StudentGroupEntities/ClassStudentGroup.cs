@@ -1,4 +1,4 @@
-﻿namespace Domain.TimetableEntities.StudentGroupEntities
+namespace Domain.TimetableEntities.StudentGroupEntities
 {
     public class ClassStudentGroup : StudentGroup
     {
@@ -6,6 +6,10 @@
 
         public GenericEntities.Parallel Parallel { get; init; }
         public int ClassNumber { get; init; }
+
+        public ClassStudentGroup()
+        {
+        }
 
         public ClassStudentGroup( GenericEntities.Parallel parallel, int classNumber )
         {

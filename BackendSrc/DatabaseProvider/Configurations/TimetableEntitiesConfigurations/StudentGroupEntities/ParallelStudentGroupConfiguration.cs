@@ -8,7 +8,7 @@ public class ParallelStudentGroupConfiguration : IEntityTypeConfiguration<Parall
 {
     public void Configure( EntityTypeBuilder<ParallelStudentGroup> builder )
     {
-        builder.ToTable( "ParallelStudentGroup" ).HasKey( sg => sg.Id );
+        builder.ToTable( "ParallelStudentGroup" );
 
         builder.Property( sg => sg.Parallel ).HasConversion<int>().IsRequired();
     }

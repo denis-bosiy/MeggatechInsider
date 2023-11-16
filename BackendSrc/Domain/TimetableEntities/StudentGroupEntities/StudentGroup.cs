@@ -1,4 +1,4 @@
-﻿using Domain.TimetableEntities.LessonEntities;
+using Domain.TimetableEntities.LessonEntities;
 
 namespace Domain.TimetableEntities.StudentGroupEntities
 {

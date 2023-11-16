@@ -6,6 +6,8 @@ namespace DatabaseProvider.Configurations.TimetableEntitiesConfigurations.Studen
 
 public class LiceumStudentGroupConfiguration : IEntityTypeConfiguration<LiceumStudentGroup>
 {
-    public void Configure( EntityTypeBuilder<LiceumStudentGroup> builder ) =>
-        builder.ToTable( "LiceumStudentGroup" ).HasKey( sg => sg.Id );
+    public void Configure( EntityTypeBuilder<LiceumStudentGroup> builder )
+    {
+        builder.ToTable( "LiceumStudentGroup" );
+    }
 }

@@ -11,8 +11,7 @@ public class LessonRepository : Repository<Lesson>, ILessonRepository
     }
 
     public List<Lesson> GetAll() =>
-        Entities.Include( l => l.StudentGroup )
-            .Include( l => l.Subject )
+        Entities.Include( l => l.Subject )
             .Include( l => l.Teacher )
             .ToList();
 

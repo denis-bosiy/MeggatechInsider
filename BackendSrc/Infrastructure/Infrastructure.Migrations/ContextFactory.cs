@@ -1,18 +1,19 @@
 using DatabaseProvider;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Design;
 
 namespace Infrastructure.Migrations;
 
-public class ContextFactory
+public class ContextFactory : IDesignTimeDbContextFactory<ApplicationContext>
 {
     public ApplicationContext CreateDbContext(string[] args)
     {
-        string connectionString = 
-            "Data Source=(localdb)\\MSSQLLocalDB;Initial Catalog=Books;Pooling=true;Integrated Security=SSPI";
-        var optionalBuilder = new DbContextOptionsBuilder<ApplicationContext>();
+        string connectionString =
+            "Data Source=LAPTOP-TTKQ5B2C;Initial Catalog=MeggatechInsider;Pooling=true;Integrated Security=SSPI;Encrypt=True;TrustServerCertificate=True";
+        DbContextOptionsBuilder<ApplicationContext> optionalBuilder = new DbContextOptionsBuilder<ApplicationContext>();
 
         optionalBuilder.UseSqlServer( connectionString, 
-            assembly => assembly.MigrationsAssembly( "MeggatechInsiderMigrations" ) );
+            assembly => assembly.MigrationsAssembly( "Infrastructure.Migrations" ) );
 
         return new ApplicationContext(optionalBuilder.Options);
     }

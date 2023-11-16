@@ -6,6 +6,10 @@ namespace Domain.TeacherEntities
 
         public List<Teacher> Teachers { get; set; }
 
+        public Education()
+        {
+        }
+
         public Education( string educationName )
         {
             EducationName = educationName;

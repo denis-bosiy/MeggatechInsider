@@ -24,11 +24,8 @@ namespace Domain.SubjectEntities
         public Subject(
             string subjectName,
             int paymentTypeId,
-            PaymentType paymentType,
             int subjectTypeId,
-            SubjectType subjectType,
             int subjectCategoryId,
-            SubjectCategory subjectCategory,
             int notebooksPaymentInPercents,
             int expectedHoursPerWeekForTenthClasses,
             int expectedGroupsCountForTenthClasses,
@@ -39,9 +36,6 @@ namespace Domain.SubjectEntities
         )
         {
             SubjectName = subjectName;
-            PaymentType = paymentType;
-            SubjectType = subjectType;
-            SubjectCategory = subjectCategory;
             NotebooksPaymentInPercents = notebooksPaymentInPercents;
             ExpectedHoursPerWeekForTenthClasses = expectedHoursPerWeekForTenthClasses;
             ExpectedGroupsCountForTenthClasses = expectedGroupsCountForTenthClasses;
