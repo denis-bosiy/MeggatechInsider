@@ -69,10 +69,10 @@ const TeachersSyllabusPage = () => {
         isClassroomTeacher: false,
         inDepthSubjectPayrollAccounting: false,
         finalExamPayrollAccounting: false,
-        workingStartDate: "01.09.2023",
+        workingStartDate: "",
         workExperience: 0,
         workExperienceAtTheTimeOfTheEmployment: 0,
-        birthDay: "01.09.2023",
+        birthDay: "",
         age: 0
       }
     ]);

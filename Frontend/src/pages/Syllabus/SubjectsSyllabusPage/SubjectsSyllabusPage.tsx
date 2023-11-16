@@ -383,7 +383,6 @@ const SubjectsSyllabusPage = () => {
                       )
                     );
                   }
-                  console.log(selectedOption);
                 }}
                 size={SelectSize.Micro}
               />
