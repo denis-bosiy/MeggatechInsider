@@ -1,7 +1,7 @@
 type TeachersSyllabusPageData = Array<TeacherSyllabusData>
 
 type TeacherSyllabusData = {
-  id: number,
+  id: string,
   name: string,
   category: string,
   categoryPayrollAccounting: boolean,
@@ -20,4 +20,5 @@ type TeacherSyllabusData = {
 
 export {
   type TeachersSyllabusPageData,
+  type TeacherSyllabusData
 };

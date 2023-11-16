@@ -3,7 +3,7 @@ import {AssigningsSyllabusData, DiscrepanciesSyllabusData, AssigningSyllabusPage
 
 const initAssigningData: AssigningsSyllabusData = [
   {
-    id: 0,
+    id: "0",
     name: "JavaScript",
     teacher: "Иванов Иван Иванович",
     groupCount: 3,
@@ -17,7 +17,7 @@ const initAssigningData: AssigningsSyllabusData = [
     bidShare: 0.5
   },
   {
-    id: 1,
+    id: "1",
     name: "История",
     teacher: "Петров Иван Иванович",
     groupCount: 2,
@@ -34,13 +34,13 @@ const initAssigningData: AssigningsSyllabusData = [
 
 const initDiscrepanciesData: DiscrepanciesSyllabusData = [
   {
-    id: 0,
+    id: "0",
     name: "Физика",
     groupCount: 1,
     groupCountByPlan: 2
   },
   {
-    id: 1,
+    id: "1",
     name: "История",
     groupCount: 3,
     groupCountByPlan: 2
@@ -54,10 +54,10 @@ const initData: AssigningSyllabusPageData = {
 
 const assigningSyllabusPageReducer = (state = initData, action: Action) => {
   switch (action.type) {
-    case ASSIGNING_SYLLABUS_PAGE_ACTIONS.ASSIGNING_SYLLABUS_PAGE_DELETE_ASSIGNING:
+    case ASSIGNING_SYLLABUS_PAGE_ACTIONS.SAVE_ASSIGNING:
       return {
         ...state,
-        assignings: state.assignings.filter((item) => item.id !== action.payload),
+        assignings: action.payload.values
       };
     default:
       return state;

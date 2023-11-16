@@ -1,28 +1,20 @@
+import {SubjectsSyllabusPageData} from "./types";
+
 enum SUBJECTS_SYLLABUS_PAGE_ACTIONS {
-  SUBJECTS_SYLLABUS_PAGE_SET_IS_FINAL_EXAM = "SUBJECTS_SYLLABUS_PAGE_SET_IS_FINAL_EXAM",
-  SUBJECTS_SYLLABUS_PAGE_DELETE_SUBJECT = "SUBJECTS_SYLLABUS_PAGE_DELETE_SUBJECT",
+  SAVE_SUBJECTS = "SAVE_SUBJECTS",
 }
 
-type ActionSetIsFinalExam = {
-  type: SUBJECTS_SYLLABUS_PAGE_ACTIONS.SUBJECTS_SYLLABUS_PAGE_SET_IS_FINAL_EXAM,
-  payload: {subjectId: number, isFinalExam: boolean},
+type ActionSaveSubjects = {
+  type: SUBJECTS_SYLLABUS_PAGE_ACTIONS.SAVE_SUBJECTS,
+  payload: SubjectsSyllabusPageData,
 }
 
-type ActionDeleteSubject = {
-  type: SUBJECTS_SYLLABUS_PAGE_ACTIONS.SUBJECTS_SYLLABUS_PAGE_DELETE_SUBJECT,
-  payload: number,
-}
-
-type Action = ActionSetIsFinalExam | ActionDeleteSubject
+type Action = ActionSaveSubjects
 
 const ActionBuilder = {
-  setIsFinalExam: (subjectId: number, isFinalExam: boolean) => ({
-    type: SUBJECTS_SYLLABUS_PAGE_ACTIONS.SUBJECTS_SYLLABUS_PAGE_SET_IS_FINAL_EXAM,
-    payload: {subjectId, isFinalExam},
-  }),
-  deleteSubject: (subjectId: number) => ({
-    type: SUBJECTS_SYLLABUS_PAGE_ACTIONS.SUBJECTS_SYLLABUS_PAGE_DELETE_SUBJECT,
-    payload: subjectId,
+  saveSubjects: (values: SubjectsSyllabusPageData) => ({
+    type: SUBJECTS_SYLLABUS_PAGE_ACTIONS.SAVE_SUBJECTS,
+    payload: { values }
   }),
 };
 

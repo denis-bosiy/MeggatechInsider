@@ -3,7 +3,7 @@ import { SubjectsSyllabusPageData } from "./types";
 
 const initData: SubjectsSyllabusPageData = [
   {
-    id: 0,
+    id: "0",
     subjectName: "Физика",
     financing: "Бюджет",
     type: "Обязательный проф.",
@@ -16,7 +16,7 @@ const initData: SubjectsSyllabusPageData = [
     isFinalExam: false
   },
   {
-    id: 1,
+    id: "1",
     subjectName: "История",
     financing: "Бюджет",
     type: "Обязательный проф.",
@@ -32,12 +32,8 @@ const initData: SubjectsSyllabusPageData = [
 
 const subjectsSyllabusPageReducer = (state = initData, action: Action) => {
   switch (action.type) {
-    case SUBJECTS_SYLLABUS_PAGE_ACTIONS.SUBJECTS_SYLLABUS_PAGE_SET_IS_FINAL_EXAM:
-      return state.map((item) =>
-        item.id === action.payload.subjectId ? { ...item, isFinalExam: action.payload.isFinalExam } : item
-      );
-    case SUBJECTS_SYLLABUS_PAGE_ACTIONS.SUBJECTS_SYLLABUS_PAGE_DELETE_SUBJECT:
-      return state.filter((item) => item.id !== action.payload);
+    case SUBJECTS_SYLLABUS_PAGE_ACTIONS.SAVE_SUBJECTS:
+      return action.payload.values;
     default:
       return state;
   }
