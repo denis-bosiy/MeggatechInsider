@@ -1,18 +1,18 @@
-import { TeacherGuidebookTimetablePageData } from "./types.js";
+import { TeacherGuidebookCoursesTimetablePageData } from "./types.js";
 
-const initData: TeacherGuidebookTimetablePageData = [
+const initData: TeacherGuidebookCoursesTimetablePageData = [
   {
     id: 1,
-    subjectName: "Физика",
-    subjectId: 1,
-    teacherName: "Константин Борисович Щуков",
+    course: "Курс 1",
+    type: "ШЮП",
+    teacherName: "Леонид Хорошавин",
     teacherId: 1,
     availableHours: [
       {
         id: 1,
         weekDay: "пн",
-        startTime: "13.00",
-        endTime: "13.45"
+        startTime: "08.20",
+        endTime: "09.50"
       },
       {
         id: 2,
@@ -21,27 +21,62 @@ const initData: TeacherGuidebookTimetablePageData = [
         endTime: "13.45"
       },
     ],
-    distributedHoursToPlan: 16,
-    hoursToPlan: 15,
-    creditHours: 2,
-    workedOverPlan: 20,
+    distributedHoursToPlan: 8,
+    hoursToPlan: 8,
+    creditHours: 0,
   },
   {
     id: 2,
-    subjectName: "Java",
-    subjectId: 2,
-    teacherName: "Елена Борисовна Щук",
+    course: "Курс 1",
+    type: "Подготовительные",
+    teacherName: "Александр Мушкин",
     teacherId: 2,
-    availableHours: [],
+    availableHours: [
+      {
+        id: 1,
+        weekDay: "пн",
+        startTime: "08.20",
+        endTime: "09.50"
+      },
+      {
+        id: 2,
+        weekDay: "вт",
+        startTime: "13.00",
+        endTime: "13.45"
+      },
+    ],
     distributedHoursToPlan: 10,
-    hoursToPlan: 15,
-    creditHours: 2,
-    workedOverPlan: 20,
+    hoursToPlan: 12,
+    creditHours: 0,
   },
+  {
+    id: 3,
+    course: "Курс 1",
+    type: "Экспресс",
+    teacherName: "Валентина Смирнова",
+    teacherId: 2,
+    availableHours: [
+      {
+        id: 1,
+        weekDay: "пн",
+        startTime: "08.20",
+        endTime: "09.50"
+      },
+      {
+        id: 2,
+        weekDay: "вт",
+        startTime: "13.00",
+        endTime: "13.45"
+      },
+    ],
+    distributedHoursToPlan: 8,
+    hoursToPlan: 6,
+    creditHours: 2,
+  }
 ];
 
-const teacherGuidebookTimetablePageReducer = (state = initData) => {
+const teacherGuidebookCoursesTimetablePageReducer = (state = initData) => {
   return state;
 };
 
-export { teacherGuidebookTimetablePageReducer };
+export { teacherGuidebookCoursesTimetablePageReducer };
