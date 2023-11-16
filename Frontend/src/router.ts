@@ -9,6 +9,8 @@ export enum AppRouter {
   Timetable = "timetable",
   TeacherGuidebook = "teacher-guidebook",
   Settings = "settings",
+  Statistics = "statistics",
+  BudgetStatistics = "budget-statistics",
   Basic = "basic",
   NotFound = "*",
 }
@@ -26,5 +28,5 @@ export const Mockup: MockupItem[] = [
   { url: "#", label: "Контроль учебного плана за месяц" },
   { url: "#", label: "Финансовый отчет" },
   { url: "#", label: "Контроль учебного плана за год" },
-  { url: "#", label: "Статистика" },
+  { url: AppRouter.Statistics, label: "Статистика" },
 ];
