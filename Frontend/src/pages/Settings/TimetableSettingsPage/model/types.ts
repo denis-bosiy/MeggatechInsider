@@ -7,19 +7,20 @@ type TimetableSettingsPageData = {
 type TimetableSettingsPageTimeData = Array<TimeData>
 
 type TimetableSettingsPageParadeData = {
-    week_day: string,
-    start_time: string,
-    end_time: string,
+    weekDay: string,
+    startTime: string,
+    endTime: string,
 }
 
 type TimeData = {
   id: string,
-  start_time: string,
-  end_time: string,
+  startTime: string,
+  endTime: string,
 }
 
 export {
   type TimetableSettingsPageData,
   type TimetableSettingsPageParadeData,
   type TimetableSettingsPageTimeData,
+  type TimeData,
 };

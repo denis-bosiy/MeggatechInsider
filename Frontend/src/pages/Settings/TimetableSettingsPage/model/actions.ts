@@ -1,33 +1,45 @@
+import { TimetableSettingsPageParadeData, TimetableSettingsPageTimeData } from "./types";
+
 enum TIMETABLE_SETTINGS_PAGE_ACTIONS {
-    TIMETABLE_SETTINGS_PAGE_DELETE_LESSON = "TIMETABLE_SETTINGS_PAGE_DELETE_LESSON",
-    TIMETABLE_SETTINGS_PAGE_DELETE_PAIR = "TIMETABLE_SETTINGS_PAGE_DELETE_PAIR",
+    TIMETABLE_SETTINGS_PAGE_SAVE_LESSONS = "TIMETABLE_SETTINGS_PAGE_SAVE_LESSON",
+    TIMETABLE_SETTINGS_PAGE_SAVE_PAIRS = "TIMETABLE_SETTINGS_PAGE_SAVE_PAIR",
+    TIMETABLE_SETTINGS_PAGE_SAVE_PARADE = "TIMETABLE_SETTINGS_PAGE_SAVE_PARADE",
   }
   
-  type ActionDeletePair= {
-    type: TIMETABLE_SETTINGS_PAGE_ACTIONS.TIMETABLE_SETTINGS_PAGE_DELETE_PAIR,
-    payload: string,
+  type ActionSavePairs= {
+    type: TIMETABLE_SETTINGS_PAGE_ACTIONS.TIMETABLE_SETTINGS_PAGE_SAVE_PAIRS,
+    payload: TimetableSettingsPageTimeData,
   }
 
-  type ActionDeleteLesson= {
-    type: TIMETABLE_SETTINGS_PAGE_ACTIONS.TIMETABLE_SETTINGS_PAGE_DELETE_LESSON,
-    payload: string,
+  type ActionSaveLessons= {
+    type: TIMETABLE_SETTINGS_PAGE_ACTIONS.TIMETABLE_SETTINGS_PAGE_SAVE_LESSONS,
+    payload: TimetableSettingsPageTimeData,
+}
+  
+  type ActionSaveParade= {
+    type: TIMETABLE_SETTINGS_PAGE_ACTIONS.TIMETABLE_SETTINGS_PAGE_SAVE_PARADE,
+    payload: TimetableSettingsPageParadeData,
   }
   
-  type Action = ActionDeletePair | ActionDeleteLesson
+  type Action = ActionSavePairs | ActionSaveLessons | ActionSaveParade
   
-const ActionBuilder = {
-  deletePair: (pairId: string) => ({
-    type: TIMETABLE_SETTINGS_PAGE_ACTIONS.TIMETABLE_SETTINGS_PAGE_DELETE_PAIR,
-    payload: pairId,
+const TimetableSettingsPageActionBuilder = {
+  savePairs: (values: TimetableSettingsPageTimeData) => ({
+    type: TIMETABLE_SETTINGS_PAGE_ACTIONS.TIMETABLE_SETTINGS_PAGE_SAVE_PAIRS,
+    payload: values,
   }),
-  deleteLesson: (lessonId: string) => ({
-    type: TIMETABLE_SETTINGS_PAGE_ACTIONS.TIMETABLE_SETTINGS_PAGE_DELETE_LESSON,
-    payload: lessonId,
+  saveLessons: (values: TimetableSettingsPageTimeData) => ({
+    type: TIMETABLE_SETTINGS_PAGE_ACTIONS.TIMETABLE_SETTINGS_PAGE_SAVE_LESSONS,
+    payload: values,
   }),
+  saveParade: (values: TimetableSettingsPageParadeData) => ({
+    type: TIMETABLE_SETTINGS_PAGE_ACTIONS.TIMETABLE_SETTINGS_PAGE_SAVE_PARADE,
+    payload: values,
+  }), 
 };
   
 export{
   TIMETABLE_SETTINGS_PAGE_ACTIONS,
   type Action,
-  ActionBuilder,
+  TimetableSettingsPageActionBuilder,
 };
