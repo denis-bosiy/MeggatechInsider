@@ -3,54 +3,60 @@ import { TimetableSettingsPageData, TimetableSettingsPageParadeData, TimetableSe
 
 const initPairData: TimetableSettingsPageTimeData = [
   {
-    "id": 0,
-    "start_time": "12.00",
-    "end_time": "13.30"
+    id: "0",
+    startTime: "12.00",
+    endTime: "13.30"
   },
 
   {
-    "id": 1,
-    "start_time": "10.30",
-    "end_time": "12.00"
+    id: "1",
+    startTime: "10.30",
+    endTime: "12.00"
   },
 ];
 
 const initLessonData: TimetableSettingsPageTimeData = [
   {
-    "id": 0,
-    "start_time": "8.00",
-    "end_time": "8.45"
+    id: "3",
+    startTime: "8.00",
+    endTime: "8.45"
   },
 
-  {"id": 1,
-    "start_time": "9.00",
-    "end_time": "9.45"
+  {
+    id: "4",
+    startTime: "9.00",
+    endTime: "9.45"
   },
 ];
 
 const initParadeData: TimetableSettingsPageParadeData = {
-  "week_day": "Понедельник",
-  "start_time": "8.00",
-  "end_time": "8.45"
+  weekDay: "Понедельник",
+  startTime: "8.00",
+  endTime: "8.45"
 };
 
 const initData: TimetableSettingsPageData = {
-  "pairs": initPairData,
-  "lessons": initLessonData,
-  "parade": initParadeData,
+  pairs: initPairData,
+  lessons: initLessonData,
+  parade: initParadeData,
 };
 
 const timetableSettingsPageReducer = (state = initData, action: Action) => {
   switch (action.type) {
-    case TIMETABLE_SETTINGS_PAGE_ACTIONS.TIMETABLE_SETTINGS_PAGE_DELETE_PAIR:
+    case TIMETABLE_SETTINGS_PAGE_ACTIONS.TIMETABLE_SETTINGS_PAGE_SAVE_PAIRS:
       return {
         ...state,
-        pairs: state.pairs.filter((item) => item.id !== action.payload),
+        pairs: action.payload,
       };
-    case TIMETABLE_SETTINGS_PAGE_ACTIONS.TIMETABLE_SETTINGS_PAGE_DELETE_LESSON:
+    case TIMETABLE_SETTINGS_PAGE_ACTIONS.TIMETABLE_SETTINGS_PAGE_SAVE_LESSONS:
       return {
         ...state,
-        lessons: state.lessons.filter((item) => item.id !== action.payload),
+        lessons: action.payload,
+      };
+    case TIMETABLE_SETTINGS_PAGE_ACTIONS.TIMETABLE_SETTINGS_PAGE_SAVE_PARADE:
+      return {
+        ...state,
+        parade: action.payload,
       };
     default:
       return state;
