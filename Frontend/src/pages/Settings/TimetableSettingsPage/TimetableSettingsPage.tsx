@@ -33,9 +33,14 @@ const TimetableSettingsPage = () => {
 
   const handleAddingPairs = (): void => {
     pairsTableManager.invokeFunction("add", TableType.Managable, [
-      { id: guidGenerator(), label: "", value: "" }
+      {
+        id: guidGenerator(),
+        startTime: "",
+        endTime: "",
+      }
     ]);
   };
+
   const handleDeleteRowInPairs = (id: string): void => {
     pairsTableManager.invokeFunction("delete", TableType.Managable, [
       id,
@@ -62,11 +67,6 @@ const TimetableSettingsPage = () => {
   const lessonsTable: CTable = lessonsTableBuilder.getTable();
   const lessonsTableManager: CTableManager = new CTableManager(lessonsTable);
 
-  const handleAddingLessons = (): void => {
-    lessonsTableManager.invokeFunction("add", TableType.Managable, [
-      { id: guidGenerator(), label: "", value: "" }
-    ]);
-  };
   const handleDeleteRowInLessons = (id: string): void => {
     lessonsTableManager.invokeFunction("delete", TableType.Managable, [
       id,
@@ -74,6 +74,17 @@ const TimetableSettingsPage = () => {
       openModal
     ]);
   };
+
+  const handleAddingLessons = (): void => {
+    lessonsTableManager.invokeFunction("add", TableType.Managable, [
+      {
+        id: guidGenerator(),
+        startTime: "",
+        endTime: "",
+      }
+    ]);
+  };
+
   const handleApplyingNewLesson = (): void => {
     lessonsTableManager.invokeFunction("applyAdding", TableType.Managable, [
       (data: any[]) => dispatch(TimetableSettingsPageActionBuilder.saveLessons(data))
