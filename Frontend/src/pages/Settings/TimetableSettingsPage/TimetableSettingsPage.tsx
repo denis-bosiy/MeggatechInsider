@@ -16,75 +16,6 @@ import { TableType } from "../../../core/Table/TableType";
 import { guidGenerator } from "../../../utils/guidGenerator";
 import { SortingOrder } from "../../../core/Table/SortingOrder";
 
-const EditedParadeBox = () => {
-  const selectOptions: ISelectOption[] = [
-    { id: "1", content: "Понедельник" },
-    { id: "2", content: "Вторник" },
-    { id: "3", content: "Среда" },
-    { id: "4", content: "Четверг" },
-    { id: "5", content: "Пятница" },
-    { id: "6", content: "Суббота" },
-  ];
-  const setSelectValue = (val: string) => {
-    console.log(val);
-  };
-  const [defaultInputValue, setDefaultInputValue] = useState<string>("");
-  return (
-    <>
-      <div className="timetable-settings-page__box timetable-settings-page__box-button">
-        <ActionButton
-          label="Сохранить"
-          type={ActionButtonType.Positive}
-          onClick={() => alert("Cохранить")}
-        />
-        <ActionButton
-          label="Отменить"
-          type={ActionButtonType.Negative}
-          onClick={() => alert("Отменить")}
-        />
-      </div>
-
-      <Select
-        options={selectOptions}
-        onValueChange={setSelectValue}
-        size={SelectSize.Default}
-      />
-
-      <div className="timetable-settings-page__box timetable-settings-page__box-button">
-        <Input
-          value={defaultInputValue}
-          size={InputSize.Default}
-          placeholder="Время"
-          onValueChange={setDefaultInputValue}
-        />
-        <Input
-          value={defaultInputValue}
-          size={InputSize.Default}
-          placeholder="Время"
-          onValueChange={setDefaultInputValue}
-        />
-      </div>
-    </>
-  );
-};
-
-const NotEditedParadeBox = (parade: TimetableSettingsPageParadeData) => {
-  return (
-    <>
-      <ActionButton
-        className="toolbar__button"
-        label="Редактировать"
-        icon={<PenIcon />}
-        onClick={() => alert("Редактировать")}
-      />
-      <div className="timetable-settings-page__box timetable-settings-page__box-p">
-        <p className="p">{parade.weekDay}</p>
-        <p className="p">{parade.startTime} - {parade.endTime}</p>
-      </div>
-    </>
-  );
-};
-
 const TimetableSettingsPage = () => {
   const { pairs, lessons, parade } = useSelector((state: { timetableSettingsPageStore: TimetableSettingsPageData }) => state.timetableSettingsPageStore);
   const { openModal } = useContext(ModalSettingsContext);
@@ -153,8 +84,29 @@ const TimetableSettingsPage = () => {
     lessonsTableManager.invokeFunction("sort", TableType.Default, [columnName, SortingOrder.Ascending]);
   };
 
-  const isEditedParade = true;
-  const paradeBox: JSX.Element = isEditedParade ? EditedParadeBox() : NotEditedParadeBox(parade);
+  const [isParadeEditing, setIsParadeEditing] = useState<{ value: boolean }>({ value: false });
+  const [paradeData, setParadeData] = useState<TimetableSettingsPageParadeData>(structuredClone(parade));
+
+  const editParade = (): void => {
+    setIsParadeEditing({ value: true });
+  };
+  const resetEditParade = (): void => {
+    setParadeData(parade);
+    setIsParadeEditing({ value: false });
+  };
+  const saveParade = (): void => {
+    () => dispatch(TimetableSettingsPageActionBuilder.saveParade(paradeData));
+    setIsParadeEditing({ value: false });
+  };
+
+  const weekOptions: ISelectOption[] = [
+    { id: "1", content: "Понедельник" },
+    { id: "2", content: "Вторник" },
+    { id: "3", content: "Среда" },
+    { id: "4", content: "Четверг" },
+    { id: "5", content: "Пятница" },
+    { id: "6", content: "Суббота" },
+  ];
 
   return (
     <>
@@ -311,7 +263,62 @@ const TimetableSettingsPage = () => {
 
         <div className="timetable-settings-page__box">
           <h2 className="h2">Проведение линейки</h2>
-          {paradeBox}
+          {isParadeEditing.value &&
+            <>
+              <div className="timetable-settings-page__box timetable-settings-page__box-button">
+                <ActionButton
+                  label="Сохранить"
+                  type={ActionButtonType.Positive}
+                  onClick={saveParade}
+                />
+                <ActionButton
+                  label="Отменить"
+                  type={ActionButtonType.Negative}
+                  onClick={resetEditParade}
+                />
+              </div>
+              <Select
+                currentValue={weekOptions.find(e => e.content === paradeData.weekDay)}
+                options={weekOptions}
+                onValueChange={(newValue: string) => {
+                  const selectedOption = weekOptions.find(e => e.id === newValue);
+                  if (selectedOption) { 
+                    setParadeData({ ...paradeData, weekDay: selectedOption.content});
+                  }
+                }}
+                size={SelectSize.Default}
+              />
+
+              <div className="timetable-settings-page__box timetable-settings-page__box-button">
+                <Input
+                  placeholder="Время"
+                  value={paradeData.startTime}
+                  onValueChange={(newValue: string) =>
+                    setParadeData({ ...paradeData, startTime: newValue })}
+                  size={InputSize.Default}
+                />
+                <Input
+                  placeholder="Время"
+                  value={paradeData.endTime}
+                  onValueChange={(newValue: string) =>
+                    setParadeData({ ...paradeData, endTime: newValue })}
+                  size={InputSize.Default}
+                />
+              </div>
+            </>}
+          {!isParadeEditing.value &&
+          <>
+            <ActionButton
+              className="toolbar__button"
+              label="Редактировать"
+              icon={<PenIcon />}
+              onClick={editParade}
+            />
+            <div className="timetable-settings-page__box timetable-settings-page__box-p">
+              <p className="p">{paradeData.weekDay}</p>
+              <p className="p">{paradeData.startTime} - {paradeData.endTime}</p>
+            </div>
+          </>}
         </div>
       </div>
     </>
