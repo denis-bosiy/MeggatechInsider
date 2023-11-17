@@ -95,7 +95,7 @@ const TimetableSettingsPage = () => {
     setIsParadeEditing({ value: false });
   };
   const saveParade = (): void => {
-    () => dispatch(TimetableSettingsPageActionBuilder.saveParade(paradeData));
+    dispatch(TimetableSettingsPageActionBuilder.saveParade(paradeData));
     setIsParadeEditing({ value: false });
   };
 
