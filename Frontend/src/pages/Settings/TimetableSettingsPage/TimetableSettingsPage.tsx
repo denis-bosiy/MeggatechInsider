@@ -140,7 +140,7 @@ const TimetableSettingsPage = () => {
             </thead>
             <tbody>
               {pairsTableData.filter((data: TimeData, index: number) =>
-                index !== pairsTableData.length).map((lesson: TimeData) => {
+                !isPairsAdding.value || index !== pairsTableData.length - 1).map((lesson: TimeData) => {
                 return (
                   <tr className="row" key={lesson.id}>
                     <td className="cell">{lesson.startTime}</td>
@@ -215,7 +215,7 @@ const TimetableSettingsPage = () => {
             </thead>
             <tbody>
               {lessonsTableData.filter((data: TimeData, index: number) =>
-                index !== lessonsTableData.length).map((lesson: TimeData) => {
+                !isLessonsAdding.value || index !== lessonsTableData.length - 1).map((lesson: TimeData) => {
                 return (
                   <tr className="row" key={lesson.id}>
                     <td className="cell">{lesson.startTime}</td>
