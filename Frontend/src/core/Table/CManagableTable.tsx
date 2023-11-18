@@ -2,10 +2,12 @@ import React from "react";
 import AgreementModalView from "../../components/AgreementModalView/AgreementModalView";
 import { CTable } from "./CTable";
 import { TableType } from "./TableType";
+import { HttpService } from "../../api/http.service";
 
 export class CManagableTable extends CTable {
   private _isAdding: { value: boolean };
   private _setIsAdding: ({ value }: { value: boolean }) => void;
+  private _httpService = new HttpService();
 
   constructor(
     _table: CTable | undefined,
@@ -32,9 +34,12 @@ export class CManagableTable extends CTable {
     if (!this._isAdding.value) {
       return;
     }
-    saveToStore(this.data);
-    console.log("Отправка запроса на бэкенд по url = " + url);
-    // Использование RequestBuilder-a(прокидывается this.data)
+    // TODO: Создать какой-то билдер для дто
+    this._httpService.postByArbitraryUrl(url, { ...this.data[this.data.length - 1], year: 2023 });
+    this._httpService.getByArbitraryUrl(url, new Map<string, string>()).then((data: any) => {
+      saveToStore(data);
+      this.setData(data);
+    });
     this._setIsAdding({ ...this._isAdding, value: false });
   }
 
@@ -47,8 +52,7 @@ export class CManagableTable extends CTable {
     const proceedAction = (): void => {
       this.setData(this.data.filter((value: any) => value.id !== id));
       saveToStore(this.data);
-      console.log("Отправка запроса на бэкенд = " + url);
-      // Использование RequestBuilder-a(прокидывается id. id на бэкенде и id на фронте должны быть одними и теми же)
+      this._httpService.deleteByArbitraryUrl(url, { id: id });
     };
     openModal("Удалить", <AgreementModalView proceedAction={proceedAction} />);
   }
