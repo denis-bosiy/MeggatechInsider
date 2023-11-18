@@ -1,6 +1,8 @@
 using Api.JsonConverters;
 using Application;
+using DatabaseProvider;
 using DatabaseProvider.Repositories;
+using Microsoft.EntityFrameworkCore;
 
 namespace Api
 {
@@ -17,6 +19,7 @@ namespace Api
                 options.JsonSerializerOptions.Converters.Add(new DateOnlyJsonConverter());
                 options.JsonSerializerOptions.Converters.Add(new TimeOnlyJsonConverter());
             });;
+            builder.Services.AddDbContext<ApplicationContext>( opts => opts.UseSqlServer( "Data Source=LAPTOP-TTKQ5B2C;Initial Catalog=MeggatechInsider;Pooling=true;Integrated Security=SSPI;Encrypt=True;TrustServerCertificate=True" ) );
             // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen();
@@ -26,6 +29,7 @@ namespace Api
             } ) );
             builder.Services.AddApplication();
             builder.Services.AddDatabaseRepositories();
+
 
             WebApplication app = builder.Build();
 

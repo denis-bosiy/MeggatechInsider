@@ -1,4 +1,4 @@
-﻿using Domain.TimetableEntities.LessonEntities;
+using Domain.TimetableEntities.LessonEntities;
 
 namespace Domain.TimetableEntities.StudentGroupEntities
 {
@@ -6,6 +6,6 @@ namespace Domain.TimetableEntities.StudentGroupEntities
     {
         public abstract StudentGroupType Type { get; }
 
-        public List<Lesson> Lessons { get; set; }
+        public List<Lesson> Lessons { get; } = new List<Lesson>();
     }
 }

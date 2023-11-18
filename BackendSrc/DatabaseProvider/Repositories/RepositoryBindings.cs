@@ -1,3 +1,4 @@
+using DatabaseProvider.Repositories.Implementations.AssignmentEntities;
 using DatabaseProvider.Repositories.Implementations.SubjectEntities;
 using DatabaseProvider.Repositories.Implementations.TeacherEntities;
 using DatabaseProvider.Repositories.Implementations.TimetableEntities;
@@ -12,6 +13,7 @@ namespace DatabaseProvider.Repositories
             services.AddSubjectRepositories();
             services.AddTeacherRepositories();
             services.AddTimetableRepositories();
+            services.AddAssignmentRepositories();
 
             return services;
         }
