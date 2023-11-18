@@ -19,7 +19,7 @@ namespace Domain.SubjectEntities
         public bool IsEge { get; set; }
         public int Year { get; set; }
 
-        public List<Lesson> Lessons { get; set; }
+        public List<Lesson> Lessons { get; } = new List<Lesson>();
 
         public Subject(
             string subjectName,

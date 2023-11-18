@@ -4,7 +4,7 @@ namespace Domain.SubjectEntities
     {
         public string PaymentTypeName { get; set; }
 
-        public List<Subject> Subjects { get; set; }
+        public List<Subject> Subjects { get; } = new List<Subject>();
 
         public PaymentType( string paymentTypeName )
         {

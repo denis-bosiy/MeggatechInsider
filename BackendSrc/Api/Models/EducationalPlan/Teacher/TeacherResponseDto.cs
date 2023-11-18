@@ -21,7 +21,7 @@ public class TeacherResponseDto
         bool isClassTeacher,
         bool advancedSubjectsAffectOnSalary,
         bool egeAffectsOnSalary,
-        DateTime employmentDate,
+        DateOnly employmentDate,
         int experienceInYears,
         int experienceInYearsOnEmploymentDate )
     {
@@ -71,7 +71,7 @@ public class TeacherResponseDto
     public bool EgeAffectsOnSalary { get; set; }
 
     [JsonPropertyName( "workingStartDate" )]
-    public DateTime EmploymentDate { get; set; }
+    public DateOnly EmploymentDate { get; set; }
 
     [JsonPropertyName( "workExperience" )]
     public int ExperienceInYears { get; set; }

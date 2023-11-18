@@ -4,11 +4,7 @@ namespace Domain.TeacherEntities
     {
         public string TeacherCategoryName { get; set; }
 
-        public List<Teacher> Teachers { get; set; }
-
-        public TeacherCategory()
-        {
-        }
+        public List<Teacher> Teachers { get; } = new List<Teacher>();
 
         public TeacherCategory( string teacherCategoryName )
         {

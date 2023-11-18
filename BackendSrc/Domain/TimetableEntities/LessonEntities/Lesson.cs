@@ -1,29 +1,18 @@
 using Domain.SubjectEntities;
 using Domain.TeacherEntities;
-using Domain.TimetableEntities.StudentGroupEntities;
 
 namespace Domain.TimetableEntities.LessonEntities
 {
     public class Lesson : Entity
     {
         public LessonType LessonType { get; set; }
-        public DateTime StartTime { get; set; }
-        public DateTime EndTime { get; set; }
+        public TimeOnly StartTime { get; set; }
+        public TimeOnly EndTime { get; set; }
         public int StudentGroupId { get; set; }
-        //public StudentGroup StudentGroup { get; set; }
         public int StudentGroupType { get; set; }
-        public int SubjectId
-        {
-            get => Subject.Id;
-            set => SubjectId = value;
-        }
-
+        public int SubjectId { get; set; }
         public Subject Subject { get; set; }
-        public int TeacherId
-        {
-            get => Teacher.Id;
-            set => TeacherId = value;
-        }
+        public int TeacherId { get; set; }
         public Teacher Teacher { get; set; }
 
         /*
@@ -33,14 +22,10 @@ namespace Domain.TimetableEntities.LessonEntities
          */
         public int Classroom { get; set; }
 
-        public Lesson()
-        {
-        }
-
         public Lesson(
             LessonType lessonType,
-            DateTime startTime,
-            DateTime endTime,
+            TimeOnly startTime,
+            TimeOnly endTime,
             int studentGroupId,
             int studentGroupType,
             int classroom )
