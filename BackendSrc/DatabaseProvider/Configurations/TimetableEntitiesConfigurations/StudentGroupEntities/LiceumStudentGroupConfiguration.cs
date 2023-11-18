@@ -4,10 +4,11 @@ using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace DatabaseProvider.Configurations.TimetableEntitiesConfigurations.StudentGroupEntities;
 
-public class LiceumStudentGroupConfiguration : IEntityTypeConfiguration<LiceumStudentGroup>
+public class LiceumStudentGroupConfiguration : StudentGroupConfiguration<LiceumStudentGroup>
 {
-    public void Configure( EntityTypeBuilder<LiceumStudentGroup> builder )
+    public new void Configure( EntityTypeBuilder<LiceumStudentGroup> builder )
     {
+        base.Configure( builder );
         builder.ToTable( "LiceumStudentGroup" );
     }
 }

@@ -6,10 +6,10 @@ namespace DatabaseProvider.Configurations.TimetableEntitiesConfigurations.Studen
 
 public class ClassStudentGroupConfiguration : StudentGroupConfiguration<ClassStudentGroup>
 {
-    public void Configure( EntityTypeBuilder<ClassStudentGroup> builder )
+    public new void Configure( EntityTypeBuilder<ClassStudentGroup> builder )
     {
-        base.Configure(builder);
-        builder.UseTpcMappingStrategy().ToTable( "ClassStudentGroup" );
+        base.Configure( builder );
+        builder.ToTable( "ClassStudentGroup" );
 
         builder.Property( csg => csg.Parallel ).HasConversion<int>().IsRequired();
         builder.Property( csg => csg.ClassNumber ).IsRequired();

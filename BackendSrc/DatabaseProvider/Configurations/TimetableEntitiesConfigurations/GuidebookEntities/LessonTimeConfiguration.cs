@@ -8,7 +8,7 @@ namespace DatabaseProvider.Configurations.TimetableEntitiesConfigurations.Guideb
     {
         public void Configure( EntityTypeBuilder<LessonTime> builder )
         {
-            builder.ToTable( "LessonTime" ).HasKey( lt =>  lt.Id );
+            builder.ToTable( "LessonTime" ).HasKey( lt => lt.Id );
 
             builder.Property( lt => lt.Year ).IsRequired();
             builder.Property( lt => lt.StartTime ).IsRequired();
