@@ -1,9 +1,11 @@
 using DatabaseProvider.Repositories.Abstractions.TimetableEntities.GuidebookEntities;
 using DatabaseProvider.Repositories.Abstractions.TimetableEntities.LessonEntities;
 using DatabaseProvider.Repositories.Abstractions.TimetableEntities.StudentGroupEntities;
+using DatabaseProvider.Repositories.Abstractions.TimetableEntities.TeacherEntities;
 using DatabaseProvider.Repositories.Implementations.TimetableEntities.GuidebookEntities;
 using DatabaseProvider.Repositories.Implementations.TimetableEntities.LessonEntities;
 using DatabaseProvider.Repositories.Implementations.TimetableEntities.StudentGroupEntities;
+using DatabaseProvider.Repositories.Implementations.TimetableEntities.TeacherEntitites;
 using Domain.TimetableEntities.StudentGroupEntities;
 using Microsoft.Extensions.DependencyInjection;
 
@@ -26,6 +28,7 @@ namespace DatabaseProvider.Repositories.Implementations.TimetableEntities
                 ClassStudentGroupRepository<VerticalSubgroupStudentGroup>>();
             services.AddScoped<IClassStudentGroupRepository<HorizontalSubgroupStudentGroup>, 
                 ClassStudentGroupRepository<HorizontalSubgroupStudentGroup>>();
+            services.AddScoped<ITeacherTimetableRepository, TeacherTimetableRepository>();
 
             return services;
         }

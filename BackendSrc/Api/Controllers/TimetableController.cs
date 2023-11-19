@@ -1,6 +1,8 @@
 using System.Web.Http.Description;
 using Api.Models.TeacherTimetable;
 using Api.Models.Timetable;
+using Application.Abstractions.TImetableServices;
+using Domain.TimetableEntities.TeacherEntities;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Api.Controllers;
@@ -9,6 +11,13 @@ namespace Api.Controllers;
 [Route( "api/timetable" )]
 public class TimetableController : ControllerBase
 {
+    private readonly ITeacherTimetableService _teacherTimetableService;
+
+    public TimetableController( ITeacherTimetableService teacherTimetableService )
+    {
+        _teacherTimetableService = teacherTimetableService;
+    }
+
     [HttpGet]
     [ResponseType( typeof( TimetableResponseDto ) )]
     public IActionResult SearchTimetable( [FromQuery] TimetableRequestDto timetableRequestDto )
@@ -402,8 +411,9 @@ public class TimetableController : ControllerBase
     [ResponseType( typeof( TeacherTimetableListResponseDto ) )]
     public IActionResult GetTeachers( [FromQuery] TeacherTimetableListRequestDto teacherTimetableRequest )
     {
-        // mock
-        // Вызываем сервис для получения преподавателей
+        List<TeacherTimetable> teacherTimetableList =
+            _teacherTimetableService.GetTeacherTimetableByYearAndWeek( teacherTimetableRequest.Year,
+                teacherTimetableRequest.Week );
 
         return Ok( new TeacherTimetableListResponseDto()
         {

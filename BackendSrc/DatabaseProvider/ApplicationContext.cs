@@ -2,6 +2,7 @@ using DatabaseProvider.Configurations.SubjectEntitiesConfigurations;
 using DatabaseProvider.Configurations.TeacherEntitiesConfigurations;
 using DatabaseProvider.Configurations.TimetableEntitiesConfigurations.LessonEntities;
 using DatabaseProvider.Configurations.TimetableEntitiesConfigurations.StudentGroupEntities;
+using DatabaseProvider.Configurations.TimetableEntitiesConfigurations.TeacherEntities;
 using Microsoft.EntityFrameworkCore;
 
 namespace DatabaseProvider;
@@ -43,6 +44,9 @@ public class ApplicationContext : DbContext
         modelBuilder.ApplyConfiguration( new LiceumStudentGroupConfiguration() );
         modelBuilder.ApplyConfiguration( new ParallelStudentGroupConfiguration() );
         modelBuilder.ApplyConfiguration( new VerticalSubgroupStudentGroupConfiguration() );
+
+        //timetable
+        modelBuilder.ApplyConfiguration( new TeacherTimetableConfiguration() );
     }
 
     protected override void OnConfiguring( DbContextOptionsBuilder optionsBuilder )
