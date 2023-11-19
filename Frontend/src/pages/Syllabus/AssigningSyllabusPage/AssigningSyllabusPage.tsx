@@ -15,7 +15,6 @@ import {CTableManager} from "../../../core/Table/CTableManager";
 import {TableType} from "../../../core/Table/TableType";
 import {guidGenerator} from "../../../utils/guidGenerator";
 import {SortingOrder} from "../../../core/Table/SortingOrder";
-import {SubjectSyllabusData} from "../SubjectsSyllabusPage/model/types";
 
 const DiscrepanciesSyllabus = () => {
   const data = useSelector((state: {assigningSyllabusPageStore: AssigningSyllabusPageData}) => state.assigningSyllabusPageStore);
