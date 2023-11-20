@@ -17,7 +17,7 @@ public class TeacherTimetableConfiguration : IEntityTypeConfiguration<TeacherTim
 
         builder.HasMany( t => t.AvailableHours ).WithMany();
 
-        builder.HasOne<Subject>().WithMany().HasForeignKey( t => t.SubjectId );
-        builder.HasOne<Teacher>().WithMany().HasForeignKey( t => t.TeacherId );
+        builder.HasOne( t => t.Subject ).WithMany().HasForeignKey( t => t.SubjectId );
+        builder.HasOne( t => t.Teacher ).WithMany().HasForeignKey( t => t.TeacherId );
     }
 }
