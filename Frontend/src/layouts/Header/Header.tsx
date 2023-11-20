@@ -13,18 +13,19 @@ import { AppRouter } from "../../router";
 
 interface IHeaderProps {
   children?: React.ReactNode;
-  pageUrl?: string;
+  pageRoute?: string;
   onLogout?: () => void;
 }
 
-export const Header = ({ children, pageUrl, onLogout }: IHeaderProps) => {
-  const getIsOnSchedulePage = (url?: string): boolean => (url ? url === AppRouter.LessonsSchedule : false);
+export const Header = ({ children, pageRoute, onLogout }: IHeaderProps) => {
+  // TODO: Добавить route === AppRouter.CoursesTimetable, когда будет доступен блок с настройками расписания курсов
+  const getIsOnSchedule = (route?: string): boolean => (route ? route === AppRouter.Timetable : false);
 
   const dispatch = useDispatch();
   const { years, currentYear, weeks, currentWeek, isLogedIn } = useSelector(
     (state: { headerStore: HeaderData }) => state.headerStore
   );
-  const [isOnSchedulePage, setIsOnSchedulePage] = useState<boolean>(getIsOnSchedulePage(pageUrl));
+  const [isOnSchedule, setIsOnSchedule] = useState<boolean>(getIsOnSchedule(pageRoute));
 
   useEffect(() => {
     // TODO: Добавить запрос на получение учебных лет
@@ -32,8 +33,8 @@ export const Header = ({ children, pageUrl, onLogout }: IHeaderProps) => {
   }, []);
 
   useEffect(() => {
-    setIsOnSchedulePage(getIsOnSchedulePage(pageUrl));
-  }, [pageUrl]);
+    setIsOnSchedule(getIsOnSchedule(pageRoute));
+  }, [pageRoute]);
 
   const handleYearChanging = (id: string): void => {
     dispatch(HeaderActionBuilder.chooseYear(id));
@@ -53,13 +54,11 @@ export const Header = ({ children, pageUrl, onLogout }: IHeaderProps) => {
           <Logo />
         </Link>
         <div className="header-actions">
-          {isOnSchedulePage && <Select onValueChange={handleWeekChanging} options={weeks} currentValue={currentWeek} />}
+          {isOnSchedule && <Select onValueChange={handleWeekChanging} options={weeks} currentValue={currentWeek} />}
         </div>
         <nav className="header-container__navigation">{children}</nav>
         <div className="header-actions">
-          {!isOnSchedulePage && (
-            <Select onValueChange={handleYearChanging} options={years} currentValue={currentYear} />
-          )}
+          <Select onValueChange={handleYearChanging} options={years} currentValue={currentYear} />
           {isLogedIn && <IconButton icon={<Logout />} onClick={handleLogOut} />}
         </div>
       </div>

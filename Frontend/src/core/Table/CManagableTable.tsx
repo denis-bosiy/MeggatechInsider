@@ -51,13 +51,15 @@ export class CManagableTable extends CTable {
     id: string,
     saveToStore: (data: any[]) => void,
     openModal: (heading: string, content: React.ReactNode) => void,
-    url = ""
+    url?: string
   ): void {
     const proceedAction = (): void => {
       this.setData(this.data.filter((value: any) => value.id !== id));
-      const params: Map<string, string> = new Map<string, string>();
-      params.set("id", id);
-      this._httpService.deleteByArbitraryUrl(url, params).then(() => saveToStore(this.data));
+      if (url) {
+        const params: Map<string, string> = new Map<string, string>();
+        params.set("id", id);
+        this._httpService.deleteByArbitraryUrl(url, params).then(() => saveToStore(this.data));
+      }
     };
     openModal("Удалить", <AgreementModalView proceedAction={proceedAction} />);
   }

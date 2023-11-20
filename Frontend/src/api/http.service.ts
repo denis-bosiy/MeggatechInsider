@@ -29,7 +29,7 @@ export class HttpService {
       if (params.size !== 0) {
         resultUrl += "?";
       }
-      params.forEach((value: string, key: string) => (resultUrl += key + "=" + value));
+      params.forEach((value: string, key: string) => (resultUrl += key + "=" + value + "&"));
       return await this.api.delete(resultUrl);
     } catch (error) {
       if (axios.isAxiosError(error)) {
@@ -45,7 +45,7 @@ export class HttpService {
       if (params.size !== 0) {
         resultUrl += "?";
       }
-      params.forEach((value: string, key: string) => (resultUrl += key + "=" + value));
+      params.forEach((value: string, key: string) => (resultUrl += key + "=" + value + "&"));
       return await this.api.get(resultUrl);
     } catch (error: any) {
       if (error.response.status === 404) {

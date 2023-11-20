@@ -37,7 +37,7 @@ const ProtectedRoot = () => {
 
   return (
     <div className="root">
-      <Header onLogout={logout} pageUrl={page?.url}>
+      <Header onLogout={logout} pageRoute={route?.url}>
         {route &&
           navigation.map((item, index) => (
             <Link key={index} type={LinkType.Light} label={item.label} path={`${route.url}/${item.url}`} />

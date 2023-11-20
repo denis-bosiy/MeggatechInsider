@@ -1,6 +1,8 @@
 import { TimetableLessonTimeSettingResponse } from "./TimetableLessonTimeSettingResponse";
 import { TimetablePairTimeSettingResponse } from "./TimetablePairTimeSettingResponse";
 import { TimetableParadeTimeSettingResponse } from "./TimetableParadeTimeSettingResponse";
+import { TimetableTeacherResponse } from "./TimetableTeacherResponse";
+import { AvailableHourResponse } from "./AvailableHourResponse";
 
 export class ResponseBuilder {
   public static BuildTimetablePairTimeSettingsResponse(data: any): TimetablePairTimeSettingResponse {
@@ -33,5 +35,32 @@ export class ResponseBuilder {
 
   public static BuildTimetableParadeTimeSettingResponse(data: any): TimetableParadeTimeSettingResponse {
     return new TimetableParadeTimeSettingResponse(data.data.weekDay, data.data.startTime, data.data.endTime);
+  }
+
+  public static BuildAvailableHourResponse(data: any): AvailableHourResponse {
+    return new AvailableHourResponse(data.id, data.weekDay, data.startTime, data.endTime);
+  }
+
+  public static BuildTimetableTeacherResponse(data: any): TimetableTeacherResponse {
+    return new TimetableTeacherResponse(
+      data.id,
+      data.subjectName,
+      data.subjectId,
+      data.teacherName,
+      data.teacherId,
+      data.availableHours.map((availableHour: any) => ResponseBuilder.BuildAvailableHourResponse(availableHour)),
+      data.distributedHoursToPlan,
+      data.hoursToPlan,
+      data.creditHours,
+      data.workedOverPlan
+    );
+  }
+
+  public static BuildTimetableTeacherResponses(data: any): TimetableTeacherResponse[] {
+    let responses: TimetableTeacherResponse[] = [];
+
+    responses = data.data.teachers.map((teacher: any) => ResponseBuilder.BuildTimetableTeacherResponse(teacher));
+
+    return responses;
   }
 }

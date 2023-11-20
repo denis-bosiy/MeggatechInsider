@@ -1,5 +1,5 @@
 import { HEADER_ACTIONS, HeaderAction } from "./actions";
-import { HeaderData, YearSelectOption } from "./types";
+import { HeaderData, YearSelectOption, WeekSelectOption } from "./types";
 
 const initData: HeaderData = {
   years: [
@@ -31,6 +31,11 @@ const initData: HeaderData = {
     year: 2022,
     content: "Учебный год 2022/2023"
   },
+  currentWeek: {
+    id: "1",
+    week: 5,
+    content: "01.10.2023 - 07.10.2023(неделя 5)"
+  },
   isLogedIn: false
 };
 
@@ -45,6 +50,11 @@ export const headerReducer = (state = initData, action: HeaderAction) => {
       return {
         ...state,
         currentYear: state.years.find((year: YearSelectOption) => year.id === action.payload)
+      };
+    case HEADER_ACTIONS.CHOOSE_WEEK:
+      return {
+        ...state,
+        currentWeek: state.weeks.find((week: WeekSelectOption) => week.id === action.payload)
       };
     case HEADER_ACTIONS.LOG_IN:
       return {
