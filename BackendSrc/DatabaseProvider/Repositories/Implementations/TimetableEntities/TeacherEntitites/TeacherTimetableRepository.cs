@@ -22,9 +22,6 @@ public class TeacherTimetableRepository : Repository<TeacherTimetable>, ITeacher
 
     public List<TeacherTimetable> GetByWeek( int week ) => Entities.Where( t => t.Week == week ).ToList();
 
-    public List<TeacherTimetable> GetByDayOfWeek( DayOfWeek dayOfWeek ) =>
-        Entities.Where( t => t.DayOfWeek == dayOfWeek ).ToList();
-
     public List<TeacherTimetable> GetByYearAndWeek( int year, int week ) =>
         Entities.Where( t => t.Year == year ).Where( t => t.Week == week ).ToList();
 }

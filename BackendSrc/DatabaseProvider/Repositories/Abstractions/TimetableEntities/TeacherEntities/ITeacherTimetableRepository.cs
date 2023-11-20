@@ -8,6 +8,5 @@ public interface ITeacherTimetableRepository : IRepository<TeacherTimetable>
     public TeacherTimetable GetById( int id );
     public List<TeacherTimetable> GetByYear( int year );
     public List<TeacherTimetable> GetByWeek( int week );
-    public List<TeacherTimetable> GetByDayOfWeek( DayOfWeek dayOfWeek );
     public List<TeacherTimetable> GetByYearAndWeek( int year, int week );
 }

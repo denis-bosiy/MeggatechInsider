@@ -14,7 +14,6 @@ public class TeacherTimetableConfiguration : IEntityTypeConfiguration<TeacherTim
 
         builder.Property( t => t.Year ).IsRequired();
         builder.Property( t => t.Week ).IsRequired();
-        builder.Property( t => t.DayOfWeek ).IsRequired();
 
         builder.HasMany( t => t.AvailableHours ).WithMany();
 

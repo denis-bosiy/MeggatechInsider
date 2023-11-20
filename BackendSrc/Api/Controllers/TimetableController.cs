@@ -1,4 +1,5 @@
 using System.Web.Http.Description;
+using Api.Mappers.Timetable;
 using Api.Models.TeacherTimetable;
 using Api.Models.Timetable;
 using Application.Abstractions.TImetableServices;
@@ -19,7 +20,7 @@ public class TimetableController : ControllerBase
     }
 
     [HttpGet]
-    [ResponseType( typeof( TimetableResponseDto ) )]
+    [ResponseType( typeof(TimetableResponseDto) )]
     public IActionResult SearchTimetable( [FromQuery] TimetableRequestDto timetableRequestDto )
     {
         // mock
@@ -284,7 +285,7 @@ public class TimetableController : ControllerBase
     }
 
     [HttpGet( "weeks" )]
-    [ResponseType( typeof( TimetableWeeksResponseDto ) )]
+    [ResponseType( typeof(TimetableWeeksResponseDto) )]
     public IActionResult GetTimetableWeeks( [FromQuery] TimetableWeeksRequestDto timetableWeeksRequestDto )
     {
         // mock
@@ -304,7 +305,7 @@ public class TimetableController : ControllerBase
     }
 
     [HttpGet( "classes" )]
-    [ResponseType( typeof( TimetableClassesResponseDto ) )]
+    [ResponseType( typeof(TimetableClassesResponseDto) )]
     public IActionResult GetTimetableClasses( [FromQuery] TimetableClassesResponseDto timetableClassesResponseDto )
     {
         // mock
@@ -327,7 +328,7 @@ public class TimetableController : ControllerBase
     }
 
     [HttpGet( "subjects" )]
-    [ResponseType( typeof( TimetableSubjectsResponseDto ) )]
+    [ResponseType( typeof(TimetableSubjectsResponseDto) )]
     public IActionResult GetTimetableSubjects( [FromQuery] TimetableSubjectsRequestDto timetableSubjectsRequestDto )
     {
         // mock
@@ -356,7 +357,7 @@ public class TimetableController : ControllerBase
     }
 
     [HttpGet( "pair-time-ranges" )]
-    [ResponseType( typeof( TimetablePairTimeRangesResponseDto ) )]
+    [ResponseType( typeof(TimetablePairTimeRangesResponseDto) )]
     public IActionResult GetTimetablePairTimeRanges(
         [FromQuery] TimetablePairTimeRangesRequestDto timetablePairTimeRangesRequestDto )
     {
@@ -382,7 +383,7 @@ public class TimetableController : ControllerBase
     }
 
     [HttpGet( "lesson-time-ranges" )]
-    [ResponseType( typeof( TimetableLessonTimeRangesResponseDto ) )]
+    [ResponseType( typeof(TimetableLessonTimeRangesResponseDto) )]
     public IActionResult GetTimetableLessonTimeRanges(
         [FromQuery] TimetableLessonTimeRangesRequestDto timetableLessonTimeRangesRequestDto )
     {
@@ -408,55 +409,14 @@ public class TimetableController : ControllerBase
     }
 
     [HttpGet( "teachers" )]
-    [ResponseType( typeof( TeacherTimetableListResponseDto ) )]
+    [ResponseType( typeof(TeacherTimetableListResponseDto) )]
     public IActionResult GetTeachers( [FromQuery] TeacherTimetableListRequestDto teacherTimetableRequest )
     {
         List<TeacherTimetable> teacherTimetableList =
             _teacherTimetableService.GetTeacherTimetableByYearAndWeek( teacherTimetableRequest.Year,
                 teacherTimetableRequest.Week );
 
-        return Ok( new TeacherTimetableListResponseDto()
-        {
-            Teachers = new List<TeacherTimetableDto>
-            {
-                new TeacherTimetableDto()
-                {
-                    Id = 1,
-                    SubjectName = "Физика",
-                    SubjectId = 1,
-                    TeacherName = "Prozorov Maxim Andreevich",
-                    TeacherId = 1,
-                    AvailableHours = new List<AvailableHoursDto>()
-                    {
-                        new AvailableHoursDto()
-                        {
-                            Id = 1,
-                            WeekDay = DayOfWeek.Sunday,
-                            StartTime = new TimeOnly(09, 00),
-                            EndTime = new TimeOnly(09, 45)
-                        },
-                        new AvailableHoursDto()
-                        {
-                            Id = 2,
-                            WeekDay = DayOfWeek.Sunday,
-                            StartTime = new TimeOnly(10, 00),
-                            EndTime = new TimeOnly(10, 45)
-                        },
-                        new AvailableHoursDto()
-                        {
-                            Id = 3,
-                            WeekDay = DayOfWeek.Sunday,
-                            StartTime = new TimeOnly(11, 00),
-                            EndTime = new TimeOnly(11, 45)
-                        }
-                    },
-                    DistributedHoursToPlan = 10,
-                    HoursToPlan = 11,
-                    CreditHours = 12,
-                    WorkedOverPlan = 13
-                }
-            }
-        } );
+        return Ok( new TeacherTimetableListResponseDto() { TeachersTimetables = teacherTimetableList.Map() } );
     }
 
     [HttpPatch( "set-hours" )]
@@ -468,7 +428,7 @@ public class TimetableController : ControllerBase
     }
 
     [HttpGet( "available-hours" )]
-    [ResponseType( typeof( AvailableHoursResponseListDto ) )]
+    [ResponseType( typeof(AvailableHoursResponseListDto) )]
     public IActionResult GetAvailableHours()
     {
         // mock
@@ -481,24 +441,24 @@ public class TimetableController : ControllerBase
                 {
                     Id = 1,
                     WeekDay = DayOfWeek.Sunday,
-                    StartTime = new TimeOnly(09, 00),
-                    EndTime = new TimeOnly(09, 45)
+                    StartTime = new TimeOnly( 09, 00 ),
+                    EndTime = new TimeOnly( 09, 45 )
                 },
                 new AvailableHoursDto()
                 {
                     Id = 2,
                     WeekDay = DayOfWeek.Sunday,
-                    StartTime = new TimeOnly(10, 00),
-                    EndTime = new TimeOnly(10, 45)
+                    StartTime = new TimeOnly( 10, 00 ),
+                    EndTime = new TimeOnly( 10, 45 )
                 },
                 new AvailableHoursDto()
                 {
                     Id = 3,
                     WeekDay = DayOfWeek.Sunday,
-                    StartTime = new TimeOnly(11, 00),
-                    EndTime = new TimeOnly(11, 45)
+                    StartTime = new TimeOnly( 11, 00 ),
+                    EndTime = new TimeOnly( 11, 45 )
                 }
             },
-        } ); 
+        } );
     }
 }
