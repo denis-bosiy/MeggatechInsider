@@ -3,7 +3,7 @@ import { TeachersSyllabusPageData } from "./types";
 
 const initData: TeachersSyllabusPageData = [
   {
-    id: 0,
+    id: "0",
     name: "Иванов Иван Иванович",
     category: "Высшая категория",
     categoryPayrollAccounting: true,
@@ -20,7 +20,7 @@ const initData: TeachersSyllabusPageData = [
     age: 45
   },
   {
-    id: 1,
+    id: "1",
     name: "Петров Иван Сергеевич",
     category: "Высшая категория",
     categoryPayrollAccounting: false,
@@ -40,28 +40,8 @@ const initData: TeachersSyllabusPageData = [
 
 const teachersSyllabusPageReducer = (state = initData, action: Action) => {
   switch (action.type) {
-    case TEACHERS_SYLLABUS_PAGE_ACTIONS.TEACHERS_SYLLABUS_PAGE_SET_CATEGORY_PAYROLL_ACCOUNTING:
-      return state.map((item) =>
-        item.id === action.payload.teacherId ? { ...item, categoryPayrollAccounting: action.payload.categoryPayrollAccounting } : item
-      );
-    case TEACHERS_SYLLABUS_PAGE_ACTIONS.TEACHERS_SYLLABUS_PAGE_SET_WORKING_CONTRACT_PAYROLL_ACCOUNTING:
-      return state.map((item) =>
-        item.id === action.payload.teacherId ? { ...item, workingContractPayrollAccounting: action.payload.workingContractPayrollAccounting } : item
-      );
-    case TEACHERS_SYLLABUS_PAGE_ACTIONS.TEACHERS_SYLLABUS_PAGE_SET_IS_CLASSROOM_TEACHER:
-      return state.map((item) =>
-        item.id === action.payload.teacherId ? { ...item, isClassroomTeacher: action.payload.isClassroomTeacher } : item
-      );
-    case TEACHERS_SYLLABUS_PAGE_ACTIONS.TEACHERS_SYLLABUS_PAGE_SET_IN_DEPTH_SUBJECT_PAYROLL_ACCOUNTING:
-      return state.map((item) =>
-        item.id === action.payload.teacherId ? { ...item, inDepthSubjectPayrollAccounting: action.payload.inDepthSubjectPayrollAccounting } : item
-      );
-    case TEACHERS_SYLLABUS_PAGE_ACTIONS.TEACHERS_SYLLABUS_PAGE_SET_FINAL_EXAM_PAYROLL_ACCOUNTING:
-      return state.map((item) =>
-        item.id === action.payload.teacherId ? { ...item, finalExamPayrollAccounting: action.payload.finalExamPayrollAccounting } : item
-      );
-    case TEACHERS_SYLLABUS_PAGE_ACTIONS.TEACHERS_SYLLABUS_PAGE_DELETE_TEACHER:
-      return state.filter((item) => item.id !== action.payload);
+    case TEACHERS_SYLLABUS_PAGE_ACTIONS.SAVE_SUBJECTS:
+      return action.payload.values;
     default:
       return state;
   }

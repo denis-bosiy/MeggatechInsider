@@ -1,19 +1,27 @@
-type TeacherGuidebookTimetablePageData = Array<TeacherGuidebookTimetableData>
+type TeacherGuidebookTimetablePageData = {
+  guidebook: Guidebook,
+  availableHours: AvailableHours,
+}
 
-type AvailableHours = {
-  id: number,
+type AvailableHours = Array<AvailableHour>
+
+type Guidebook = Array<TeacherGuidebookTimetableData>
+
+type AvailableHour = {
+  id: string,
   weekDay: string,
   startTime: string,
   endTime: string,
 }
 
 type TeacherGuidebookTimetableData = {
-    id: number,
+    id: string,
     subjectName: string,
-    subjectId: number,
+    subjectId: string,
     teacherName: string,
-    teacherId: number, 
-    availableHours: Array<AvailableHours>,
+    teacherId: string, 
+  //availableHours: AvailableHours,
+    availableHours: AvailableHour,
     distributedHoursToPlan: number,
     hoursToPlan: number,
     creditHours: number,
@@ -22,4 +30,7 @@ type TeacherGuidebookTimetableData = {
 
 export {
   type TeacherGuidebookTimetablePageData,
+  type AvailableHours,
+  type Guidebook,
+  type TeacherGuidebookTimetableData,
 };

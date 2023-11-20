@@ -1,5 +1,5 @@
 import React from "react";
-import { Link as RouterLink } from "react-router-dom";
+import { Link as RouterLink, To } from "react-router-dom";
 import "./Link.scss";
 
 export enum LinkType {
@@ -9,7 +9,7 @@ export enum LinkType {
 }
 
 interface ILinkProps {
-  path: string;
+  path: string | number;
   label: string;
   type?: LinkType;
   icon?: React.ReactNode;
@@ -19,7 +19,7 @@ export const Link = (props: ILinkProps) => {
   const linkType: LinkType = props.type ?? LinkType.Default;
 
   return (
-    <RouterLink to={props.path} className={`link -${linkType.toLowerCase()}`}>
+    <RouterLink to={props.path as To} className={`link -${linkType.toLowerCase()}`}>
       {props.icon}
       {props.label}
     </RouterLink>

@@ -2,7 +2,7 @@ type AssigningsSyllabusData = Array<AssigningSyllabusData>
 type DiscrepanciesSyllabusData = Array<DiscrepancySyllabusData>
 
 type AssigningSyllabusData = {
-  id: number,
+  id: string,
   name: string,
   teacher: string,
   groupCount: number,
@@ -17,7 +17,7 @@ type AssigningSyllabusData = {
 }
 
 type DiscrepancySyllabusData = {
-  id: number,
+  id: string,
   name: string,
   groupCount: number,
   groupCountByPlan: number
@@ -31,5 +31,6 @@ type AssigningSyllabusPageData = {
 export {
   type AssigningsSyllabusData,
   type DiscrepanciesSyllabusData,
-  type AssigningSyllabusPageData
+  type AssigningSyllabusPageData,
+  type AssigningSyllabusData
 };
