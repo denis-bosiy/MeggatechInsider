@@ -1,3 +1,4 @@
+using Api.Models.EducationalPlan.Teacher;
 using Api.Models.EducationPlanCourses.Teacher;
 using Microsoft.AspNetCore.Mvc;
 using System.Web.Http.Description;
@@ -9,7 +10,8 @@ namespace Api.Controllers
     public class EducationPlanCoursesController : Controller
     {
         [HttpGet( "teachers" )]
-        [ResponseType( typeof( TeacherListResponseDto ) )]
+        [ProducesResponseType<TeachersResponseDto>( StatusCodes.Status200OK )]
+        [ProducesResponseType( StatusCodes.Status404NotFound )]
         public IActionResult GetTeachers( [FromQuery] TeachersRequestDto teachersRequest )
         {
             if ( !IsValidYear( teachersRequest.Year ) )
@@ -57,6 +59,36 @@ namespace Api.Controllers
                     }
                 }
             });
+        }
+
+        [HttpPut("teacher")]
+        [ProducesResponseType( StatusCodes.Status200OK )]
+        [ProducesResponseType( StatusCodes.Status404NotFound )]
+        public IActionResult UpdateTeacher(TeacherUpdateRequestDto teacherUpdateRequestDto)
+        {
+            if ( !IsValidYear( teacherUpdateRequestDto.Year ) )
+            {
+                return NotFound( "Не найдено такого года" );
+            }
+
+            //обновление данных преподавателя
+
+            return ( Ok() );
+        }
+
+        [HttpPost( "teacher" )]
+        [ProducesResponseType( StatusCodes.Status200OK )]
+        [ProducesResponseType( StatusCodes.Status404NotFound )]
+        public IActionResult CreateTeacher( TeacherCreateRequestDto teacherCreateRequestDto )
+        {
+            if ( !IsValidYear( teacherCreateRequestDto.Year ) )
+            {
+                return NotFound( "Не найдено такого года" );
+            }
+
+            //создание данных преподавателя
+
+            return ( Ok() );
         }
 
         private bool IsValidYear( int year )
