@@ -30,16 +30,20 @@ export class CManagableTable extends CTable {
     this.setData([...this.data, valueToAdd]);
   }
 
-  public applyAdding(saveToStore: (data: any[]) => void, url = ""): void {
+  public applyAdding(
+    saveToStore: (data: any[]) => void,
+    url?: string,
+    buildRequestClass?: (data: any, year: number) => any,
+    year?: number
+  ): void {
     if (!this._isAdding.value) {
       return;
     }
-    // TODO: Создать какой-то билдер для дто
-    this._httpService.postByArbitraryUrl(url, { ...this.data[this.data.length - 1], year: 2023 });
-    this._httpService.getByArbitraryUrl(url, new Map<string, string>()).then((data: any) => {
-      saveToStore(data);
-      this.setData(data);
-    });
+    if (url && buildRequestClass && year) {
+      this._httpService
+        .postByArbitraryUrl(url, buildRequestClass(this.data[this.data.length - 1], year))
+        .then(() => saveToStore(this.data));
+    }
     this._setIsAdding({ ...this._isAdding, value: false });
   }
 
@@ -51,8 +55,9 @@ export class CManagableTable extends CTable {
   ): void {
     const proceedAction = (): void => {
       this.setData(this.data.filter((value: any) => value.id !== id));
-      saveToStore(this.data);
-      this._httpService.deleteByArbitraryUrl(url, { id: id });
+      const params: Map<string, string> = new Map<string, string>();
+      params.set("id", id);
+      this._httpService.deleteByArbitraryUrl(url, params).then(() => saveToStore(this.data));
     };
     openModal("Удалить", <AgreementModalView proceedAction={proceedAction} />);
   }

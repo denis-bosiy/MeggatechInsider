@@ -22,30 +22,102 @@ import { guidGenerator } from "../../../utils/guidGenerator";
 import { SortingOrder } from "../../../core/Table/SortingOrder";
 import { HttpService } from "../../../api/http.service";
 import { Endpoint } from "../../../api/endpoints";
+import { HeaderData } from "../../../layouts/Header/model/types";
+import { RequestBuilder } from "../../../api/Requests/RequestBuilder";
+import { TimetablePairTimeSettingResponse } from "../../../api/Responses/TimetablePairTimeSettingResponse";
+import { ResponseBuilder } from "../../../api/Responses/ResponseBuilder";
+import { TimetableLessonTimeSettingResponse } from "../../../api/Responses/TimetableLessonTimeSettingResponse";
+import { TimetableParadeTimeSettingResponse } from "../../../api/Responses/TimetableParadeTimeSettingResponse";
 
 const TimetableSettingsPage = () => {
   const httpService = new HttpService();
   const { pairs, lessons, parade } = useSelector(
     (state: { timetableSettingsPageStore: TimetableSettingsPageData }) => state.timetableSettingsPageStore
   );
+  const { currentYear } = useSelector((state: { headerStore: HeaderData }) => state.headerStore);
   const { openModal } = useContext(ModalSettingsContext);
   const dispatch = useDispatch();
 
-  // TODO: Добавить год в redux store
+  const makeGetPairsRequest = (params: Map<string, string>): void => {
+    httpService
+      .getByArbitraryUrl(Endpoint.Pair, params)
+      .then((data: any) => {
+        const pairTimesResponse: TimetablePairTimeSettingResponse[] =
+          ResponseBuilder.BuildTimetablePairTimeSettingsResponses(data);
+        const pairTimes: TimetableSettingsPageTimeData = pairTimesResponse.map(
+          (pairTime: TimetablePairTimeSettingResponse) => {
+            return { id: pairTime.id, startTime: pairTime.startTime, endTime: pairTime.endTime };
+          }
+        );
+        dispatch(TimetableSettingsPageActionBuilder.savePairs(pairTimes));
+        setPairsTableData(structuredClone(pairTimes));
+      })
+      .catch((e: any) => {
+        dispatch(TimetableSettingsPageActionBuilder.savePairs([]));
+        setPairsTableData(structuredClone([]));
+      });
+  };
+  const makeGetLessonsRequest = (params: Map<string, string>): void => {
+    httpService
+      .getByArbitraryUrl(Endpoint.Lesson, params)
+      .then((data: any) => {
+        const lessonTimesResponse: TimetableLessonTimeSettingResponse[] =
+          ResponseBuilder.BuildTimetableLessonTimeSettingsResponses(data);
+        const lessonTimes: TimetableSettingsPageTimeData = lessonTimesResponse.map(
+          (lessonTime: TimetableLessonTimeSettingResponse) => {
+            return { id: lessonTime.id, startTime: lessonTime.startTime, endTime: lessonTime.endTime };
+          }
+        );
+        dispatch(TimetableSettingsPageActionBuilder.saveLessons(lessonTimes));
+        setLessonsTableData(structuredClone(lessonTimes));
+      })
+      .catch((e: any) => {
+        dispatch(TimetableSettingsPageActionBuilder.saveLessons([]));
+        setLessonsTableData(structuredClone([]));
+      });
+  };
+  const makeGetParadeRequest = (params: Map<string, string>): void => {
+    httpService
+      .getByArbitraryUrl(Endpoint.Parade, params)
+      .then((data: any) => {
+        const paradeResponse: TimetableParadeTimeSettingResponse =
+          ResponseBuilder.BuildTimetableParadeTimeSettingResponse(data);
+        const parade: TimetableSettingsPageParadeData = {
+          weekDayCode: paradeResponse.weekDay,
+          startTime: paradeResponse.startTime,
+          endTime: paradeResponse.endTime
+        };
+        console.log(paradeResponse);
+        console.log(parade);
+        dispatch(TimetableSettingsPageActionBuilder.saveParade(parade));
+        setParadeData(structuredClone(parade));
+      })
+      .catch((e: any) => {
+        dispatch(
+          TimetableSettingsPageActionBuilder.saveParade({
+            weekDayCode: 0,
+            startTime: "08:00",
+            endTime: "08:45"
+          })
+        );
+        setParadeData({
+          weekDayCode: 0,
+          startTime: "08:00",
+          endTime: "08:45"
+        });
+      });
+  };
+
   useEffect(() => {
     const params: Map<string, string> = new Map<string, string>();
-    params.set("year", "2023");
+    if (currentYear) {
+      params.set("year", currentYear.year.toString());
+    }
 
-    httpService.getByArbitraryUrl(Endpoint.Pair, params).then((data: any) => {
-      dispatch(TimetableSettingsPageActionBuilder.savePairs(data));
-      setPairsTableData(data);
-    });
-
-    httpService.getByArbitraryUrl(Endpoint.Lesson, params).then((data: any) => {
-      dispatch(TimetableSettingsPageActionBuilder.saveLessons(data));
-      setLessonsTableData(data);
-    });
-  }, []);
+    makeGetPairsRequest(params);
+    makeGetLessonsRequest(params);
+    makeGetParadeRequest(params);
+  }, [currentYear?.id]);
 
   const [isPairsAdding, setIsPairsAdding] = useState<{ value: boolean }>({ value: false });
   const [pairsTableData, setPairsTableData] = useState<TimetableSettingsPageTimeData>(structuredClone(pairs));
@@ -53,6 +125,23 @@ const TimetableSettingsPage = () => {
   pairsTableBuilder.addManageFeature(isPairsAdding, setIsPairsAdding);
   const pairsTable: CTable = pairsTableBuilder.getTable();
   const pairsTableManager: CTableManager = new CTableManager(pairsTable);
+
+  useEffect(() => {
+    const params: Map<string, string> = new Map<string, string>();
+    if (currentYear) {
+      params.set("year", currentYear.year.toString());
+    }
+
+    makeGetPairsRequest(params);
+  }, [pairs.length]);
+  useEffect(() => {
+    const params: Map<string, string> = new Map<string, string>();
+    if (currentYear) {
+      params.set("year", currentYear.year.toString());
+    }
+
+    makeGetLessonsRequest(params);
+  }, [lessons.length]);
 
   const handleAddingPairs = (): void => {
     pairsTableManager.invokeFunction("add", TableType.Managable, [
@@ -75,7 +164,9 @@ const TimetableSettingsPage = () => {
   const handleApplyingNewPair = (): void => {
     pairsTableManager.invokeFunction("applyAdding", TableType.Managable, [
       (data: any[]) => dispatch(TimetableSettingsPageActionBuilder.savePairs(data)),
-      Endpoint.Pair
+      Endpoint.Pair,
+      RequestBuilder.BuildTimetablePairTimeSettingRequest,
+      currentYear?.year
     ]);
   };
   const handleSortPairs = (columnName: string): void => {
@@ -109,7 +200,9 @@ const TimetableSettingsPage = () => {
   const handleApplyingNewLesson = (): void => {
     lessonsTableManager.invokeFunction("applyAdding", TableType.Managable, [
       (data: any[]) => dispatch(TimetableSettingsPageActionBuilder.saveLessons(data)),
-      Endpoint.Lesson
+      Endpoint.Lesson,
+      RequestBuilder.BuildTimetableLessonTimeSettingRequest,
+      currentYear?.year
     ]);
   };
 
@@ -128,18 +221,23 @@ const TimetableSettingsPage = () => {
     setIsParadeEditing({ value: false });
   };
   const saveParade = (): void => {
+    if (currentYear) {
+      httpService.putByArbitraryUrl(
+        Endpoint.Parade,
+        RequestBuilder.BuildTimetableParadeTimeSettingRequest(paradeData, currentYear.year)
+      );
+    }
     dispatch(TimetableSettingsPageActionBuilder.saveParade(paradeData));
     setIsParadeEditing({ value: false });
   };
-  // TODO: Добавить мягкую интеграцию к линейке
 
   const weekOptions: ISelectOption[] = [
-    { id: "1", content: "Понедельник" },
-    { id: "2", content: "Вторник" },
-    { id: "3", content: "Среда" },
-    { id: "4", content: "Четверг" },
-    { id: "5", content: "Пятница" },
-    { id: "6", content: "Суббота" }
+    { id: "0", content: "Понедельник" },
+    { id: "1", content: "Вторник" },
+    { id: "2", content: "Среда" },
+    { id: "3", content: "Четверг" },
+    { id: "4", content: "Пятница" },
+    { id: "5", content: "Суббота" }
   ];
 
   return (
@@ -318,12 +416,12 @@ const TimetableSettingsPage = () => {
                 <ActionButton label="Отменить" type={ActionButtonType.Negative} onClick={resetEditParade} />
               </div>
               <Select
-                currentValue={weekOptions.find((e) => e.content === paradeData.weekDay)}
+                currentValue={weekOptions.find((e) => e.id === paradeData.weekDayCode.toString())}
                 options={weekOptions}
                 onValueChange={(newValue: string) => {
                   const selectedOption = weekOptions.find((e) => e.id === newValue);
                   if (selectedOption) {
-                    setParadeData({ ...paradeData, weekDay: selectedOption.content });
+                    setParadeData({ ...paradeData, weekDayCode: parseFloat(selectedOption.id) });
                   }
                 }}
                 size={SelectSize.Default}
@@ -349,7 +447,7 @@ const TimetableSettingsPage = () => {
             <>
               <ActionButton className="toolbar__button" label="Редактировать" icon={<PenIcon />} onClick={editParade} />
               <div className="timetable-settings-page__box timetable-settings-page__box-p">
-                <p className="p">{paradeData.weekDay}</p>
+                <p className="p">{weekOptions.find((e) => e.id === paradeData.weekDayCode?.toString())?.content}</p>
                 <p className="p">
                   {paradeData.startTime} - {paradeData.endTime}
                 </p>

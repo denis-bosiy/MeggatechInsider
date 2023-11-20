@@ -1,4 +1,4 @@
-import axios, { AxiosInstance } from "axios";
+import axios, { AxiosError, AxiosInstance } from "axios";
 import { LoginCredentials } from "./models";
 import { Endpoint } from "./endpoints";
 
@@ -23,9 +23,14 @@ export class HttpService {
     }
   }
 
-  public async deleteByArbitraryUrl(url: string, data: any) {
+  public async deleteByArbitraryUrl(url: string, params: Map<string, string>) {
     try {
-      return await this.api.delete(url, data);
+      let resultUrl: string = url;
+      if (params.size !== 0) {
+        resultUrl += "?";
+      }
+      params.forEach((value: string, key: string) => (resultUrl += key + "=" + value));
+      return await this.api.delete(resultUrl);
     } catch (error) {
       if (axios.isAxiosError(error)) {
         throw Error("refresh - ошибка");
@@ -40,9 +45,12 @@ export class HttpService {
       if (params.size !== 0) {
         resultUrl += "?";
       }
-      params.forEach((value: string, key: string) => resultUrl += key + "=" + value);
+      params.forEach((value: string, key: string) => (resultUrl += key + "=" + value));
       return await this.api.get(resultUrl);
-    } catch (error) {
+    } catch (error: any) {
+      if (error.response.status === 404) {
+        throw Error("Не найдено");
+      }
       if (axios.isAxiosError(error)) {
         throw Error("refresh - ошибка");
       }
@@ -53,6 +61,17 @@ export class HttpService {
   public async postByArbitraryUrl(url: string, data: any) {
     try {
       return await this.api.post(url, data);
+    } catch (error) {
+      if (axios.isAxiosError(error)) {
+        throw Error("refresh - ошибка");
+      }
+      throw Error("Ошибка на стороне сервера");
+    }
+  }
+
+  public async putByArbitraryUrl(url: string, data: any) {
+    try {
+      return await this.api.put(url, data);
     } catch (error) {
       if (axios.isAxiosError(error)) {
         throw Error("refresh - ошибка");
