@@ -28,7 +28,7 @@ import { shortenWorkday } from "../../../utils/workdayShortener";
 const TeacherGuidebookTimetablePage = () => {
   const httpService: HttpService = new HttpService();
 
-  const guidebook = useSelector(
+  const { guidebook, totalAvailableHours } = useSelector(
     (state: { teacherGuidebookTimetablePageStore: TeacherGuidebookTimetablePageData }) =>
       state.teacherGuidebookTimetablePageStore
   );
@@ -109,16 +109,16 @@ const TeacherGuidebookTimetablePage = () => {
     setGuidebookTableData(
       guidebookTableData.map((teacher: TeacherGuidebookTimetableData) => {
         if (teacher.id === teacherId) {
-          const foundAvailablePickedHour: AvailableHour | undefined = teacher.availableHours.find(
-            (availableHour: AvailableHour) => availableHour.id === availableHourId
-          );
+          // const foundAvailablePickedHour: AvailableHour | undefined = teacher.availableHours.find(
+          //   (availableHour: AvailableHour) => availableHour.id === availableHourId
+          // );
 
-          if (foundAvailablePickedHour) {
-            return {
-              ...teacher,
-              pickedHours: [...teacher.pickedHours, foundAvailablePickedHour]
-            };
-          }
+          // if (foundAvailablePickedHour) {
+          //   return {
+          //     ...teacher,
+          //     availableHours: [...teacher.pickedHours, foundAvailablePickedHour]
+          //   };
+          // }
         }
         return teacher;
       })
@@ -217,7 +217,6 @@ const TeacherGuidebookTimetablePage = () => {
           {guidebookTableData
             .filter((data: TeacherGuidebookTimetableData, index: number) => index !== guidebookTableData.length)
             .map((teacher: TeacherGuidebookTimetableData) => {
-              console.log(teacher.pickedHours);
               return (
                 <tr className="row" key={teacher.id}>
                   <td className="cell">{teacher.subjectName}</td>
@@ -226,7 +225,7 @@ const TeacherGuidebookTimetablePage = () => {
                     {isGuidebookEditing.value ? (
                       <Select
                         currentValue={getHoursOptions(teacher.availableHours).find((e) =>
-                          teacher.pickedHours.find((pickedHour: AvailableHour) => pickedHour.id === e.id)
+                          teacher.availableHours.find((pickedHour: AvailableHour) => pickedHour.id === e.id)
                         )}
                         options={getHoursOptions(teacher.availableHours)}
                         onValueChange={(newValue: string) => {
@@ -239,8 +238,8 @@ const TeacherGuidebookTimetablePage = () => {
                       />
                     ) : (
                       <p>
-                        {shortenWorkday(getWorkdayByCode(teacher.pickedHours[0]?.weekDayCode))}{" "}
-                        {teacher.pickedHours[0]?.startTime}-{teacher.pickedHours[0]?.endTime}
+                        {shortenWorkday(getWorkdayByCode(teacher.availableHours[0]?.weekDayCode))}{" "}
+                        {teacher.availableHours[0]?.startTime}-{teacher.availableHours[0]?.endTime}
                       </p>
                     )}
                   </td>

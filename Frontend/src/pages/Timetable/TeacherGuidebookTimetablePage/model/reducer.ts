@@ -1,8 +1,6 @@
 import {
   AvailableHours,
   Guidebook,
-  TeacherGuidebookTimetableData,
-  AvailableHour,
   TeacherGuidebookTimetablePageData
 } from "./types";
 import { TEACHER_GUIDEBOOK_TIMETABLE_PAGE_ACTIONS, Action } from "./actions";
@@ -74,7 +72,7 @@ const initGuidebookData: Guidebook = [
 ];
 
 const initData: TeacherGuidebookTimetablePageData = {
-  availableHours: initHoursData,
+  totalAvailableHours: initHoursData,
   guidebook: initGuidebookData
 };
 
@@ -83,7 +81,7 @@ const teacherGuidebookTimetablePageReducer = (state: TeacherGuidebookTimetablePa
     case TEACHER_GUIDEBOOK_TIMETABLE_PAGE_ACTIONS.SET_TEACHERS:
       return { ...state, guidebook: action.payload.values };
     case TEACHER_GUIDEBOOK_TIMETABLE_PAGE_ACTIONS.SET_AVAILABLE_HOURS:
-      return { ...state, availableHours: action.payload };
+      return { ...state, totalAvailableHours: action.payload };
     default:
       return state;
   }

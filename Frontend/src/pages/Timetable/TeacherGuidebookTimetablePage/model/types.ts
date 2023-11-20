@@ -1,5 +1,5 @@
 type TeacherGuidebookTimetablePageData = {
-  availableHours: AvailableHours,
+  totalAvailableHours: AvailableHours,
   guidebook: Guidebook
 }
 

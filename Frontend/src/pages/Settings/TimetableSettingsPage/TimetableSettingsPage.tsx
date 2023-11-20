@@ -87,8 +87,6 @@ const TimetableSettingsPage = () => {
           startTime: paradeResponse.startTime,
           endTime: paradeResponse.endTime
         };
-        console.log(paradeResponse);
-        console.log(parade);
         dispatch(TimetableSettingsPageActionBuilder.saveParade(parade));
         setParadeData(structuredClone(parade));
       })
