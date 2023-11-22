@@ -1,4 +1,4 @@
-using Api.Models.EducationalPlan.Teacher;
+using Api.Models.EducationPlanCourses.Courses;
 using Api.Models.EducationPlanCourses.Teacher;
 using Microsoft.AspNetCore.Mvc;
 using System.Web.Http.Description;
@@ -10,7 +10,7 @@ namespace Api.Controllers
     public class EducationPlanCoursesController : Controller
     {
         [HttpGet( "teachers" )]
-        [ProducesResponseType<TeachersResponseDto>( StatusCodes.Status200OK )]
+        [ProducesResponseType<TeacherListResponseDto>( StatusCodes.Status200OK )]
         [ProducesResponseType( StatusCodes.Status404NotFound )]
         public IActionResult GetTeachers( [FromQuery] TeachersRequestDto teachersRequest )
         {
@@ -73,7 +73,7 @@ namespace Api.Controllers
 
             //обновление данных преподавателя
 
-            return ( Ok() );
+            return Ok();
         }
 
         [HttpPost( "teacher" )]
@@ -88,7 +88,89 @@ namespace Api.Controllers
 
             //создание данных преподавателя
 
-            return ( Ok() );
+            return Ok();
+        }
+
+        [HttpGet( "courses" )]
+        [ProducesResponseType<CoursesListResponseDto>( StatusCodes.Status200OK )]
+        [ProducesResponseType( StatusCodes.Status404NotFound )]
+        public IActionResult GetCourses( [FromQuery] CoursesRequestDto coursesRequestDto )
+        {
+            if ( !IsValidYear( coursesRequestDto.Year ) )
+            {
+                return NotFound( "Не найдено такого года" );
+            }
+
+            return Ok( new CoursesListResponseDto 
+            {
+                Courses = new List<CourseDto> {
+                    new CourseDto()
+                    {
+                        Id = 1,
+                        Name = "Математика",
+                        Type = "шюп",
+                        HoursByPlan = 40,
+                        NumberOfGroups = 3
+                    },
+                    new CourseDto()
+                    {
+                        Id = 2,
+                        Name = "Физика",
+                        Type = "подготовительные-экспресс",
+                        HoursByPlan = 30,
+                        NumberOfGroups = 2
+                    },
+                    new CourseDto()
+                    {
+                        Id = 3,
+                        Name = "Информатика",
+                        Type = "шюп",
+                        HoursByPlan = 60,
+                        NumberOfGroups = 4
+                    }
+                }
+            } );
+        }
+
+        [HttpPut( "courses" )]
+        [ProducesResponseType( StatusCodes.Status200OK )]
+        [ProducesResponseType( StatusCodes.Status404NotFound )]
+        public IActionResult UpdateTeacher( CoursesUpdateRequestDto coursesUpdateRequestDto )
+        {
+            if ( !IsValidYear( coursesUpdateRequestDto.Year ) )
+            {
+                return NotFound( "Не найдено такого года" );
+            }
+
+            //обновление данных преподавателя
+
+            return Ok();
+        }
+
+        [HttpPost( "courses" )]
+        [ProducesResponseType( StatusCodes.Status200OK )]
+        [ProducesResponseType( StatusCodes.Status404NotFound )]
+        public IActionResult CreateCourse( CoursesCreateRequestDto coursesCreateRequestDto )
+        {
+            if ( !IsValidYear( coursesCreateRequestDto.Year ) )
+            {
+                return NotFound( "Не найдено такого года" );
+            }
+
+            //создание данных преподавателя
+
+            return Ok();
+        }
+
+        [HttpDelete( "courses" )]
+        [ProducesResponseType( StatusCodes.Status200OK )]
+        [ProducesResponseType( StatusCodes.Status404NotFound )]
+        public IActionResult DeleteCourse( CoursesDeleteRequestDto coursesDeleteRequestDto )
+        {
+
+            //Удаление данных преподавателя по id
+
+            return Ok() ;
         }
 
         private bool IsValidYear( int year )
