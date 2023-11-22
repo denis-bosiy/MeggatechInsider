@@ -10,7 +10,7 @@ export enum AppRouter {
   Assigning = "assigning",
   Timetable = "timetable",
   LessonsSchedule = "lessons-schedule",
-  LessonsGuidebook = "lessons-guidebook",
+  ClassesGuidebook = "classes-guidebook",
   TeacherGuidebook = "teacher-guidebook",
   Settings = "settings",
   Basic = "basic",
@@ -60,7 +60,14 @@ export const Menu: MenuItem[] = [
     label: "Расписание занятий",
     navigation: [
       { label: "Справочник по преподавателям", url: AppRouter.TeacherGuidebook },
-      { label: "Справочник по классам", url: AppRouter.LessonsGuidebook },
+      {
+        label: "Справочник по классам",
+        url: AppRouter.ClassesGuidebook,
+        tabs: {
+          class10: "10 класс",
+          class11: "11 класс"
+        }
+      },
       { label: "Расписание", url: AppRouter.LessonsSchedule }
     ]
   },
