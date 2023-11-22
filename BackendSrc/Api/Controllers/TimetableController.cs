@@ -428,7 +428,8 @@ public class TimetableController : ControllerBase
     {
         List<Assignment> assignments = _assignmentService.GetAssignmentsByYear( teacherTimetableRequest.Year );
 
-        DateOnly weekStartDate = _teacherTimetableService.GetWeekStartDate( teacherTimetableRequest.Year, teacherTimetableRequest.Week );
+        DateOnly weekStartDate =
+            _teacherTimetableService.GetWeekStartDate( teacherTimetableRequest.Year, teacherTimetableRequest.Week );
 
         List<TeacherAvailableHours> teachersAvailableHours =
             _teacherTimetableService.GetAvailableHoursByWeekStartDate( weekStartDate );
@@ -461,6 +462,7 @@ public class TimetableController : ControllerBase
     }
 
     [HttpPatch( "set-available-hours" )]
+    [ProducesResponseType( StatusCodes.Status200OK )]
     [ProducesResponseType( StatusCodes.Status400BadRequest )]
     public IActionResult SetAvailableHours( [FromBody] TeacherTimetableSaveRequestDto teacherTimetableRequest )
     {
