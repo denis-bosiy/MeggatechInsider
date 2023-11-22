@@ -329,22 +329,7 @@ const TeachersSyllabusPage = () => {
                   )}
                 </td>
                 <td className="cell">
-                  {isTeachersEditing.value ? (
-                    <Input
-                      placeholder=""
-                      value={value.workExperience.toString()}
-                      onValueChange={(newValue: string) =>
-                        setTeachersTableData(
-                          teachersTableData.map((data: TeacherSyllabusData) =>
-                            data.id === value.id ? { ...data, workExperience: Number(newValue) } : data
-                          )
-                        )
-                      }
-                      size={InputSize.Micro}
-                    />
-                  ) : (
-                    value.workExperience
-                  )}
+                  {value.workExperience}
                 </td>
                 <td className="cell">
                   {isTeachersEditing.value ? (
@@ -383,22 +368,7 @@ const TeachersSyllabusPage = () => {
                   )}
                 </td>
                 <td className="cell">
-                  {isTeachersEditing.value ? (
-                    <Input
-                      placeholder=""
-                      value={value.age.toString()}
-                      onValueChange={(newValue: string) =>
-                        setTeachersTableData(
-                          teachersTableData.map((data: TeacherSyllabusData) =>
-                            data.id === value.id ? { ...data, age: Number(newValue) } : data
-                          )
-                        )
-                      }
-                      size={InputSize.Micro}
-                    />
-                  ) : (
-                    value.age
-                  )}
+                  {value.age}
                 </td>
                 <td className="cell">
                   <IconButton
