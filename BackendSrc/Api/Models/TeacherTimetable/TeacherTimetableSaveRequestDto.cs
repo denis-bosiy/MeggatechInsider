@@ -9,7 +9,7 @@ namespace Api.Models.TeacherTimetable
         [Required]
         [DisplayName( "year" )]
         [JsonPropertyName( "year" )]
-        public int Year {  get; set; }
+        public int Year { get; set; }
 
         [Required]
         [DisplayName( "week" )]
@@ -17,8 +17,14 @@ namespace Api.Models.TeacherTimetable
         public int Week { get; set; }
 
         [Required]
-        [DisplayName( "teacherTime" )]
-        [JsonPropertyName( "teacherTime" )]
-        public List<TeacherTimeDto> TeacherTime {  get; set; } 
+        [DisplayName( "teacherId" )]
+        [JsonPropertyName( "teacherId" )]
+        public int TeacherId { get; set; }
+
+        [Required]
+        [DisplayName( "availableHoursByWeekDay" )]
+        [JsonPropertyName( "availableHoursByWeekDay" )]
+        public List<AvailableHoursByWeekDayDto> AvailableHoursByWeekDay { get; set; } =
+            new List<AvailableHoursByWeekDayDto>();
     }
 }

@@ -12,6 +12,32 @@ namespace Infrastructure.Migrations.Migrations
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.CreateTable(
+                name: "Assignment",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    TeacherId = table.Column<int>(type: "int", nullable: false),
+                    SubjectId = table.Column<int>(type: "int", nullable: false),
+                    GroupCount = table.Column<int>(type: "int", nullable: false),
+                    Year = table.Column<int>(type: "int", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Assignment", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Assignment_Subject_SubjectId",
+                        column: x => x.SubjectId,
+                        principalTable: "Subject",
+                        principalColumn: "Id");
+                    table.ForeignKey(
+                        name: "FK_Assignment_Teacher_TeacherId",
+                        column: x => x.TeacherId,
+                        principalTable: "Teacher",
+                        principalColumn: "Id");
+                });
+
+            migrationBuilder.CreateTable(
                 name: "LessonTime",
                 columns: table => new
                 {
@@ -58,27 +84,20 @@ namespace Infrastructure.Migrations.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "TeacherTimetable",
+                name: "TeacherAvailableHours",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     TeacherId = table.Column<int>(type: "int", nullable: false),
-                    SubjectId = table.Column<int>(type: "int", nullable: false),
-                    Year = table.Column<int>(type: "int", nullable: false),
-                    Week = table.Column<int>(type: "int", nullable: false)
+                    WeekDay = table.Column<int>(type: "int", nullable: false),
+                    StartDate = table.Column<DateOnly>(type: "date", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_TeacherTimetable", x => x.Id);
+                    table.PrimaryKey("PK_TeacherAvailableHours", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_TeacherTimetable_Subject_SubjectId",
-                        column: x => x.SubjectId,
-                        principalTable: "Subject",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
-                        name: "FK_TeacherTimetable_Teacher_TeacherId",
+                        name: "FK_TeacherAvailableHours_Teacher_TeacherId",
                         column: x => x.TeacherId,
                         principalTable: "Teacher",
                         principalColumn: "Id",
@@ -86,67 +105,76 @@ namespace Infrastructure.Migrations.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "AvailableHours",
+                name: "LessonTimeTeacherAvailableHours",
                 columns: table => new
                 {
-                    Id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    DayOfWeek = table.Column<int>(type: "int", nullable: false),
-                    LessonTimeId = table.Column<int>(type: "int", nullable: false)
+                    AvailableLessonTimesId = table.Column<int>(type: "int", nullable: false),
+                    TeacherAvailableHoursId = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_AvailableHours", x => x.Id);
+                    table.PrimaryKey("PK_LessonTimeTeacherAvailableHours", x => new { x.AvailableLessonTimesId, x.TeacherAvailableHoursId });
                     table.ForeignKey(
-                        name: "FK_AvailableHours_LessonTime_LessonTimeId",
-                        column: x => x.LessonTimeId,
+                        name: "FK_LessonTimeTeacherAvailableHours_LessonTime_AvailableLessonTimesId",
+                        column: x => x.AvailableLessonTimesId,
                         principalTable: "LessonTime",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_LessonTimeTeacherAvailableHours_TeacherAvailableHours_TeacherAvailableHoursId",
+                        column: x => x.TeacherAvailableHoursId,
+                        principalTable: "TeacherAvailableHours",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
-                name: "AvailableHoursTeacherTimetable",
+                name: "PairTimeTeacherAvailableHours",
                 columns: table => new
                 {
-                    AvailableHoursId = table.Column<int>(type: "int", nullable: false),
-                    TeacherTimetableId = table.Column<int>(type: "int", nullable: false)
+                    AvailablePairTimesId = table.Column<int>(type: "int", nullable: false),
+                    TeacherAvailableHoursId = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_AvailableHoursTeacherTimetable", x => new { x.AvailableHoursId, x.TeacherTimetableId });
+                    table.PrimaryKey("PK_PairTimeTeacherAvailableHours", x => new { x.AvailablePairTimesId, x.TeacherAvailableHoursId });
                     table.ForeignKey(
-                        name: "FK_AvailableHoursTeacherTimetable_AvailableHours_AvailableHoursId",
-                        column: x => x.AvailableHoursId,
-                        principalTable: "AvailableHours",
+                        name: "FK_PairTimeTeacherAvailableHours_PairTime_AvailablePairTimesId",
+                        column: x => x.AvailablePairTimesId,
+                        principalTable: "PairTime",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_AvailableHoursTeacherTimetable_TeacherTimetable_TeacherTimetableId",
-                        column: x => x.TeacherTimetableId,
-                        principalTable: "TeacherTimetable",
+                        name: "FK_PairTimeTeacherAvailableHours_TeacherAvailableHours_TeacherAvailableHoursId",
+                        column: x => x.TeacherAvailableHoursId,
+                        principalTable: "TeacherAvailableHours",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateIndex(
-                name: "IX_AvailableHours_LessonTimeId",
-                table: "AvailableHours",
-                column: "LessonTimeId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_AvailableHoursTeacherTimetable_TeacherTimetableId",
-                table: "AvailableHoursTeacherTimetable",
-                column: "TeacherTimetableId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_TeacherTimetable_SubjectId",
-                table: "TeacherTimetable",
+                name: "IX_Assignment_SubjectId",
+                table: "Assignment",
                 column: "SubjectId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_TeacherTimetable_TeacherId",
-                table: "TeacherTimetable",
+                name: "IX_Assignment_TeacherId",
+                table: "Assignment",
+                column: "TeacherId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_LessonTimeTeacherAvailableHours_TeacherAvailableHoursId",
+                table: "LessonTimeTeacherAvailableHours",
+                column: "TeacherAvailableHoursId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_PairTimeTeacherAvailableHours_TeacherAvailableHoursId",
+                table: "PairTimeTeacherAvailableHours",
+                column: "TeacherAvailableHoursId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_TeacherAvailableHours_TeacherId",
+                table: "TeacherAvailableHours",
                 column: "TeacherId");
         }
 
@@ -154,22 +182,25 @@ namespace Infrastructure.Migrations.Migrations
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
-                name: "AvailableHoursTeacherTimetable");
+                name: "Assignment");
 
             migrationBuilder.DropTable(
-                name: "PairTime");
+                name: "LessonTimeTeacherAvailableHours");
+
+            migrationBuilder.DropTable(
+                name: "PairTimeTeacherAvailableHours");
 
             migrationBuilder.DropTable(
                 name: "ParadeTime");
 
             migrationBuilder.DropTable(
-                name: "AvailableHours");
-
-            migrationBuilder.DropTable(
-                name: "TeacherTimetable");
-
-            migrationBuilder.DropTable(
                 name: "LessonTime");
+
+            migrationBuilder.DropTable(
+                name: "PairTime");
+
+            migrationBuilder.DropTable(
+                name: "TeacherAvailableHours");
         }
     }
 }

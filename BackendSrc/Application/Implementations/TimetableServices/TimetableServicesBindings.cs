@@ -1,4 +1,4 @@
-using Application.Abstractions.TImetableServices;
+using Application.Abstractions.TimetableServices;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace Application.Implementations.TimetableServices;

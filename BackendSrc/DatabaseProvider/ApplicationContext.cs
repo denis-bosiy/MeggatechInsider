@@ -1,3 +1,4 @@
+using DatabaseProvider.Configurations.AssignmentEntitiesConfiguration;
 using DatabaseProvider.Configurations.SubjectEntitiesConfigurations;
 using DatabaseProvider.Configurations.TeacherEntitiesConfigurations;
 using DatabaseProvider.Configurations.TimetableEntitiesConfigurations.GuidebookEntities;
@@ -24,6 +25,9 @@ public class ApplicationContext : DbContext
 
     protected override void OnModelCreating( ModelBuilder modelBuilder )
     {
+        //assignment
+        modelBuilder.ApplyConfiguration( new AssignmentConfiguration() );
+        
         //subjects
         modelBuilder.ApplyConfiguration( new PaymentTypeConfiguration() );
         modelBuilder.ApplyConfiguration( new SubjectCategoryConfiguration() );
@@ -52,7 +56,7 @@ public class ApplicationContext : DbContext
         modelBuilder.ApplyConfiguration( new VerticalSubgroupStudentGroupConfiguration() );
 
         //timetable
-        modelBuilder.ApplyConfiguration( new TeacherTimetableConfiguration() );
+        modelBuilder.ApplyConfiguration( new TeacherAvailableHoursConfiguration() );
     }
 
     protected override void OnConfiguring( DbContextOptionsBuilder optionsBuilder )

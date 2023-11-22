@@ -5,18 +5,14 @@ namespace Api.Mappers.Timetable;
 
 public static class TeacherTimetableMapper
 {
-    private static TeacherTimetableDto Map( this TeacherTimetable teacherTimetable ) =>
-        new TeacherTimetableDto()
+    public static List<AvailableHoursByWeekDayDto> Map( this List<TeacherAvailableHours> teacherAvailableHours ) =>
+        teacherAvailableHours.Select( availableHours =>
         {
-            Id = teacherTimetable.Id,
-            SubjectId = teacherTimetable.SubjectId,
-            SubjectName = teacherTimetable.Subject.SubjectName,
-            TeacherId = teacherTimetable.TeacherId,
-            TeacherName = teacherTimetable.Teacher.TeacherName,
-            AvailableHours = teacherTimetable.AvailableHours.Map()
-            // TODO: реализовать оставшиеся поля
-        };
-
-    public static List<TeacherTimetableDto> Map( this List<TeacherTimetable> teacherTimetables ) =>
-        teacherTimetables.Select( Map ).ToList();
+            return new AvailableHoursByWeekDayDto()
+            {
+                WeekDay = availableHours.DayOfWeek,
+                AvailableLessonTimesIds = availableHours.AvailableLessonTimes.Select( a => a.Id ).ToList(),
+                AvailablePairTimesIds = availableHours.AvailablePairTimes.Select( a => a.Id ).ToList()
+            };
+        } ).ToList();
 }

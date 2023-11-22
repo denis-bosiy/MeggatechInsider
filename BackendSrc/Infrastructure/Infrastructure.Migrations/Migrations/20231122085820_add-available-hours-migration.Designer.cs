@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Infrastructure.Migrations.Migrations
 {
     [DbContext(typeof(ApplicationContext))]
-    [Migration("20231120224841_add-available-hours-migration")]
+    [Migration("20231122085820_add-available-hours-migration")]
     partial class addavailablehoursmigration
     {
         /// <inheritdoc />
@@ -25,19 +25,33 @@ namespace Infrastructure.Migrations.Migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
 
-            modelBuilder.Entity("AvailableHoursTeacherTimetable", b =>
+            modelBuilder.Entity("Domain.AssignmentEntities.Assignment", b =>
                 {
-                    b.Property<int>("AvailableHoursId")
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    b.Property<int>("TeacherTimetableId")
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<int>("GroupCount")
                         .HasColumnType("int");
 
-                    b.HasKey("AvailableHoursId", "TeacherTimetableId");
+                    b.Property<int>("SubjectId")
+                        .HasColumnType("int");
 
-                    b.HasIndex("TeacherTimetableId");
+                    b.Property<int>("TeacherId")
+                        .HasColumnType("int");
 
-                    b.ToTable("AvailableHoursTeacherTimetable");
+                    b.Property<int>("Year")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("SubjectId");
+
+                    b.HasIndex("TeacherId");
+
+                    b.ToTable("Assignment", (string)null);
                 });
 
             modelBuilder.Entity("Domain.SubjectEntities.PaymentType", b =>
@@ -494,7 +508,7 @@ namespace Infrastructure.Migrations.Migrations
                     b.ToTable("VerticalSubgroupStudentGroup");
                 });
 
-            modelBuilder.Entity("Domain.TimetableEntities.TeacherEntities.AvailableHours", b =>
+            modelBuilder.Entity("Domain.TimetableEntities.TeacherEntities.TeacherAvailableHours", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -502,61 +516,69 @@ namespace Infrastructure.Migrations.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<int>("DayOfWeek")
-                        .HasColumnType("int");
-
-                    b.Property<int>("LessonTimeId")
-                        .HasColumnType("int");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("LessonTimeId");
-
-                    b.ToTable("AvailableHours");
-                });
-
-            modelBuilder.Entity("Domain.TimetableEntities.TeacherEntities.TeacherTimetable", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<int>("SubjectId")
-                        .HasColumnType("int");
+                    b.Property<DateOnly>("StartDate")
+                        .HasColumnType("date");
 
                     b.Property<int>("TeacherId")
                         .HasColumnType("int");
 
-                    b.Property<int>("Week")
-                        .HasColumnType("int");
-
-                    b.Property<int>("Year")
+                    b.Property<int>("WeekDay")
                         .HasColumnType("int");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("SubjectId");
-
                     b.HasIndex("TeacherId");
 
-                    b.ToTable("TeacherTimetable", (string)null);
+                    b.ToTable("TeacherAvailableHours", (string)null);
                 });
 
-            modelBuilder.Entity("AvailableHoursTeacherTimetable", b =>
+            modelBuilder.Entity("LessonTimeTeacherAvailableHours", b =>
                 {
-                    b.HasOne("Domain.TimetableEntities.TeacherEntities.AvailableHours", null)
+                    b.Property<int>("AvailableLessonTimesId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("TeacherAvailableHoursId")
+                        .HasColumnType("int");
+
+                    b.HasKey("AvailableLessonTimesId", "TeacherAvailableHoursId");
+
+                    b.HasIndex("TeacherAvailableHoursId");
+
+                    b.ToTable("LessonTimeTeacherAvailableHours");
+                });
+
+            modelBuilder.Entity("PairTimeTeacherAvailableHours", b =>
+                {
+                    b.Property<int>("AvailablePairTimesId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("TeacherAvailableHoursId")
+                        .HasColumnType("int");
+
+                    b.HasKey("AvailablePairTimesId", "TeacherAvailableHoursId");
+
+                    b.HasIndex("TeacherAvailableHoursId");
+
+                    b.ToTable("PairTimeTeacherAvailableHours");
+                });
+
+            modelBuilder.Entity("Domain.AssignmentEntities.Assignment", b =>
+                {
+                    b.HasOne("Domain.SubjectEntities.Subject", "Subject")
                         .WithMany()
-                        .HasForeignKey("AvailableHoursId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .HasForeignKey("SubjectId")
+                        .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
 
-                    b.HasOne("Domain.TimetableEntities.TeacherEntities.TeacherTimetable", null)
+                    b.HasOne("Domain.TeacherEntities.Teacher", "Teacher")
                         .WithMany()
-                        .HasForeignKey("TeacherTimetableId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .HasForeignKey("TeacherId")
+                        .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
+
+                    b.Navigation("Subject");
+
+                    b.Navigation("Teacher");
                 });
 
             modelBuilder.Entity("Domain.SubjectEntities.Subject", b =>
@@ -652,34 +674,45 @@ namespace Infrastructure.Migrations.Migrations
                     b.Navigation("Teacher");
                 });
 
-            modelBuilder.Entity("Domain.TimetableEntities.TeacherEntities.AvailableHours", b =>
+            modelBuilder.Entity("Domain.TimetableEntities.TeacherEntities.TeacherAvailableHours", b =>
                 {
-                    b.HasOne("Domain.TimetableEntities.GuidebookEntities.LessonTime", "LessonTime")
-                        .WithMany()
-                        .HasForeignKey("LessonTimeId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("LessonTime");
-                });
-
-            modelBuilder.Entity("Domain.TimetableEntities.TeacherEntities.TeacherTimetable", b =>
-                {
-                    b.HasOne("Domain.SubjectEntities.Subject", "Subject")
-                        .WithMany()
-                        .HasForeignKey("SubjectId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
                     b.HasOne("Domain.TeacherEntities.Teacher", "Teacher")
                         .WithMany()
                         .HasForeignKey("TeacherId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("Subject");
-
                     b.Navigation("Teacher");
+                });
+
+            modelBuilder.Entity("LessonTimeTeacherAvailableHours", b =>
+                {
+                    b.HasOne("Domain.TimetableEntities.GuidebookEntities.LessonTime", null)
+                        .WithMany()
+                        .HasForeignKey("AvailableLessonTimesId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("Domain.TimetableEntities.TeacherEntities.TeacherAvailableHours", null)
+                        .WithMany()
+                        .HasForeignKey("TeacherAvailableHoursId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("PairTimeTeacherAvailableHours", b =>
+                {
+                    b.HasOne("Domain.TimetableEntities.GuidebookEntities.PairTime", null)
+                        .WithMany()
+                        .HasForeignKey("AvailablePairTimesId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("Domain.TimetableEntities.TeacherEntities.TeacherAvailableHours", null)
+                        .WithMany()
+                        .HasForeignKey("TeacherAvailableHoursId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
                 });
 
             modelBuilder.Entity("Domain.SubjectEntities.PaymentType", b =>
