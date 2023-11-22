@@ -1,7 +1,7 @@
 type CategoriesTeachersItem = {
   id: string,
   category: string,
-  coefficient: number,
+  coefficient: string,
 }
 
 export {

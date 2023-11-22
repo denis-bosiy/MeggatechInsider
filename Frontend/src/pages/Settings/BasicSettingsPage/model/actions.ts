@@ -1,39 +1,31 @@
 import { TSetting } from "./types";
 
 export enum BASIC_SETTINGS_PAGE_ACTIONS {
-  NEW_COEFFICIENT = "NEW_COEFFICIENT",
-  DELETE_COEFFICIENT = "DELETE_COEFFICIENT",
-  SAVE_SETTINGS = "SAVE_SETTINGS"
+  SAVE_BASIC_SETTINGS = "SAVE_BASIC_SETTINGS",
+  SAVE_SALARY_SETTINGS = "SAVE_SALARY_SETTINGS"
 }
 
-export type ActionNewCoefficient = {
-  type: BASIC_SETTINGS_PAGE_ACTIONS.NEW_COEFFICIENT;
-  payload: { name: string; value: string };
+export type ActionSaveBasicSettings = {
+  type: BASIC_SETTINGS_PAGE_ACTIONS.SAVE_BASIC_SETTINGS;
+  payload: TSetting[];
 };
 
-export type ActionDeleteCoefficient = {
-  type: BASIC_SETTINGS_PAGE_ACTIONS.DELETE_COEFFICIENT;
-  payload: { name: string };
+export type ActionSaveSalarySettings = {
+  type: BASIC_SETTINGS_PAGE_ACTIONS.SAVE_SALARY_SETTINGS;
+  payload: TSetting[];
 };
 
-export type ActionSaveSettings = {
-  type: BASIC_SETTINGS_PAGE_ACTIONS.SAVE_SETTINGS;
-  payload: { [name: string]: string };
-};
-
-export type BasicSettingsAction = ActionNewCoefficient | ActionDeleteCoefficient | ActionSaveSettings;
+export type BasicSettingsAction =
+  ActionSaveBasicSettings
+  | ActionSaveSalarySettings;
 
 export const BasicSettingsActionBuilder = {
-  newCoefficient: (name: string, value: string) => ({
-    type: BASIC_SETTINGS_PAGE_ACTIONS.NEW_COEFFICIENT,
-    payload: { name, value }
+  saveBasicSettings: (values: TSetting[]) => ({
+    type: BASIC_SETTINGS_PAGE_ACTIONS.SAVE_BASIC_SETTINGS,
+    payload: { values }
   }),
-  deleteCoefficient: (name: string) => ({
-    type: BASIC_SETTINGS_PAGE_ACTIONS.DELETE_COEFFICIENT,
-    payload: { name }
-  }),
-  saveSettings: (values: { [name: string]: TSetting }) => ({
-    type: BASIC_SETTINGS_PAGE_ACTIONS.SAVE_SETTINGS,
+  saveSalarySettings: (values: TSetting[]) => ({
+    type: BASIC_SETTINGS_PAGE_ACTIONS.SAVE_SALARY_SETTINGS,
     payload: { values }
   })
 };

@@ -1,12 +1,13 @@
 using Api.Models.EducationalPlan.Teacher;
 using Domain.TeacherEntities;
 
-namespace Api.Mappers;
+namespace Api.Mappers.EducationalPlan;
 
 public static class TeacherMapper
 {
     private static TeacherResponseDto Map( this Teacher teacher ) =>
         new(
+            teacher.Id,
             teacher.TeacherName,
             teacher.TeacherCategory.TeacherCategoryName,
             teacher.TeacherCategoryAffectsOnSalary,
@@ -20,7 +21,7 @@ public static class TeacherMapper
             DateOnly.FromDateTime( DateTime.Today ).Year
                 - teacher.EmploymentDate.Year
                 + teacher.ExperienceInYearsOnEmploymentDate, // TODO: нужно ли здесь учитывать суммарный опыт?
-            teacher.ExperienceInYearsOnEmploymentDate);
+            teacher.ExperienceInYearsOnEmploymentDate );
 
     public static TeachersResponseDto Map( this IEnumerable<Teacher> teachers ) =>
         new TeachersResponseDto() { Teachers = teachers.Select( Map ).ToList() };

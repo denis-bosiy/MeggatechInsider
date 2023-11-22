@@ -1,19 +1,44 @@
 using Application.Abstractions.StudyingActivityServices;
+using DatabaseProvider.Repositories.Abstractions.TimetableEntities.GuidebookEntities;
 using Domain.TimetableEntities.GuidebookEntities;
 
 namespace Application.Implementations.StudyingActivityServices
 {
     public class PairTimeService : IPairTimeService
     {
-        public List<PairTime> GetPairTimes( int year )
+        private readonly IPairTimeRepository _pairTimeRepository;
+
+        public PairTimeService( IPairTimeRepository pairTimeRepository )
         {
-            // GuidebookEntities не заведены в бд. Дописать, потом реализовать логику метода
-            // Пока пишу каркас, можно оставить так
-            PairTime mock = new PairTime(
-                startTime: new TimeOnly( hour: 8, minute: 0 ),
-                endTime: new TimeOnly( hour: 9, minute: 45 )
-            );
-            return new List<PairTime> { mock };
+            _pairTimeRepository = pairTimeRepository;
+        }
+
+        public List<PairTime> GetPairTimesByYear( int year )
+        {
+            return _pairTimeRepository.GetByYear( year );
+        }
+
+        public void AddPair( int year, TimeOnly startTime, TimeOnly endTime )
+        {
+            PairTime newPairTime = new PairTime( year, startTime, endTime );
+            _pairTimeRepository.Add( newPairTime );
+            _pairTimeRepository.SaveChanges();
+        }
+
+        public void DeletePairTime( int id )
+        {
+            PairTime existingPairTime = _pairTimeRepository.GetById( id );
+            if ( existingPairTime is null )
+            {
+                return;
+            }
+            _pairTimeRepository.Remove( existingPairTime );
+            _pairTimeRepository.SaveChanges();
+        }
+
+        public bool PairTimeExists( int id )
+        {
+            return !( _pairTimeRepository.GetById( id ) is null );
         }
     }
 }

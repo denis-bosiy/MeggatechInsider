@@ -11,5 +11,30 @@
     max-width: $page-width;
     width: 100%;
     flex-direction: column;
+    gap: 24px;
+    position: relative;
+    padding-bottom: 32px;
+  }
+}
+
+.navigation-actions {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.navigation-text {
+  color: $background-color;
+}
+
+.navigation-tabs {
+  display: flex;
+  position: absolute;
+  right: 0;
+  bottom: -24px;
+  gap: 32px;
+
+  &__button {
+    background-color: red;
   }
 }

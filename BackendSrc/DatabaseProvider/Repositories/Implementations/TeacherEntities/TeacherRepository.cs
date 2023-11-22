@@ -6,12 +6,13 @@ namespace DatabaseProvider.Repositories.Implementations.TeacherEntities;
 
 public class TeacherRepository : Repository<Teacher>, ITeacherRepository
 {
-    public TeacherRepository( ApplicationContext context ) : base( context )
-    {
-    }
+    public TeacherRepository( ApplicationContext context )
+        : base( context ) { }
 
-    public List<Teacher> GetAll() =>
-        Entities.Include( t => t.TeacherCategory )
+    public List<Teacher> GetBatchByYear( int year ) =>
+        Entities
+            .Where( t => t.Year == year )
+            .Include( t => t.TeacherCategory )
             .Include( t => t.ContractType )
             .Include( t => t.Education )
             .ToList();

@@ -162,7 +162,6 @@ export class ScheduleBuilder {
       "Руденко Е.В.",
       LessonType.Default
     );
-    
 
     schedule.lessons.push(bigLesson1);
     schedule.lessons.push(bigLesson2);

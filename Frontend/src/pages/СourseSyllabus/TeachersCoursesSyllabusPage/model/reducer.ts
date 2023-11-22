@@ -3,7 +3,7 @@ import { TeachersCoursesSyllabusPageData } from "./types";
 
 const initData: TeachersCoursesSyllabusPageData = [
   {
-    id: 0,
+    id: "0",
     name: "Иванов Иван Иванович",
     workingContract: "ГПХ",
     workingStartDate: "08.10.2023",
@@ -13,7 +13,7 @@ const initData: TeachersCoursesSyllabusPageData = [
     age: 45
   },
   {
-    id: 1,
+    id: "1",
     name: "Петров Иван Сергеевич",
     workingContract: "ДС",
     workingStartDate: "18.01.2023",
@@ -26,8 +26,8 @@ const initData: TeachersCoursesSyllabusPageData = [
 
 const teachersCoursesSyllabusPageReducer = (state = initData, action: Action) => {
   switch (action.type) {
-    case TEACHERS_COURSES_SYLLABUS_PAGE_ACTIONS.TEACHERS_COURSES_SYLLABUS_PAGE_DELETE_TEACHER:
-      return state.filter((item) => item.id !== action.payload);
+    case TEACHERS_COURSES_SYLLABUS_PAGE_ACTIONS.SAVE_SUBJECTS:
+      return action.payload.values;
     default:
       return state;
   }

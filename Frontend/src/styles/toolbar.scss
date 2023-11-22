@@ -5,6 +5,7 @@
   &__buttons-wrapper {
     display: flex;
     flex-direction: row;
+    justify-content: space-between;
     margin-bottom: 25px;
   }
 
@@ -14,5 +15,10 @@
 
   &__search {
     max-width: 385px;
+  }
+
+  &__buttons-box {
+    display: flex;
+    flex-direction: row;
   }
 }

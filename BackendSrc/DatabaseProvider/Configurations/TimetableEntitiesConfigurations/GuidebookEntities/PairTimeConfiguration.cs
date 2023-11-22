@@ -10,6 +10,7 @@ namespace DatabaseProvider.Configurations.TimetableEntitiesConfigurations.Guideb
         {
             builder.ToTable( "PairTime" ).HasKey( pt => pt.Id );
 
+            builder.Property( pt => pt.Year ).IsRequired();
             builder.Property( pt => pt.StartTime ).IsRequired();
             builder.Property( pt => pt.EndTime ).IsRequired();
         }

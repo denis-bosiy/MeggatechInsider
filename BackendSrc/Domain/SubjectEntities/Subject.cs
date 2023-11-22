@@ -15,34 +15,34 @@ namespace Domain.SubjectEntities
         public int ExpectedHoursPerWeekForTenthClasses { get; set; }
         public int ExpectedGroupsCountForTenthClasses { get; set; }
         public int ExpectedHoursPerWeekForEleventhClasses { get; set; }
-        public int IsEge { get; set; }
+        public int ExpectedGroupsCountForEleventhClasses { get; set; }
+        public bool IsEge { get; set; }
+        public int Year { get; set; }
 
-        public List<Lesson> Lessons { get; set; }
+        public List<Lesson> Lessons { get; } = new List<Lesson>();
 
         public Subject(
             string subjectName,
             int paymentTypeId,
-            PaymentType paymentType,
             int subjectTypeId,
-            SubjectType subjectType,
             int subjectCategoryId,
-            SubjectCategory subjectCategory,
             int notebooksPaymentInPercents,
             int expectedHoursPerWeekForTenthClasses,
             int expectedGroupsCountForTenthClasses,
             int expectedHoursPerWeekForEleventhClasses,
-            int isEge
+            int expectedGroupsCountForEleventhClasses,
+            bool isEge,
+            int year
         )
         {
             SubjectName = subjectName;
-            PaymentType = paymentType;
-            SubjectType = subjectType;
-            SubjectCategory = subjectCategory;
             NotebooksPaymentInPercents = notebooksPaymentInPercents;
             ExpectedHoursPerWeekForTenthClasses = expectedHoursPerWeekForTenthClasses;
             ExpectedGroupsCountForTenthClasses = expectedGroupsCountForTenthClasses;
             ExpectedHoursPerWeekForEleventhClasses = expectedHoursPerWeekForEleventhClasses;
+            ExpectedGroupsCountForEleventhClasses = expectedGroupsCountForEleventhClasses;
             IsEge = isEge;
+            Year = year;
             PaymentTypeId = paymentTypeId;
             SubjectTypeId = subjectTypeId;
             SubjectCategoryId = subjectCategoryId;

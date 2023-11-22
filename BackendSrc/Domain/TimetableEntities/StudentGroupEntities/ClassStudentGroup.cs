@@ -1,4 +1,4 @@
-﻿namespace Domain.TimetableEntities.StudentGroupEntities
+namespace Domain.TimetableEntities.StudentGroupEntities
 {
     public class ClassStudentGroup : StudentGroup
     {

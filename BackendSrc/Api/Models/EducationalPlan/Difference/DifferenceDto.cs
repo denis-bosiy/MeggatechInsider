@@ -7,10 +7,10 @@ namespace Api.Models.EducationalPlan.Difference
         [JsonPropertyName( "name" )]
         public string Name { get; set; }
 
-        [JsonPropertyName( "group_count" )]
+        [JsonPropertyName( "groupCount" )]
         public int GroupsCount { get; set; }
 
-        [JsonPropertyName( "group_count_by_plan" )]
+        [JsonPropertyName( "groupCountByPlan" )]
         public int PlanGroupsCount { get; set; }
     }
 }

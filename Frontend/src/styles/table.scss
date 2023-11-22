@@ -1,5 +1,17 @@
 @import "../vars";
 
+.tables-wrapper {
+  display: flex;
+  flex-direction: row;
+  gap: 25px;
+}
+
+.table-wrapper {
+  &__title {
+    margin-bottom: 25px;
+  }
+}
+
 .cell {
   padding: 6px;
   border: 1px solid $table-color;
