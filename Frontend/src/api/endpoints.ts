@@ -4,5 +4,8 @@ export enum Endpoint {
   Lesson = "studying-activity/lesson",
   Parade = "studying-activity/parade",
   TimetableTeachers = "timetable/teachers",
-  TimetableAvailableHours = "timetable/available-hours"
+  TimetableAvailableHours = "timetable/available-hours",
+  SyllabusSubjects = "educational-plan/subjects",
+  SyllabusTeachers = "educational-plan/teachers",
+  SyllabusDiscrepancies = "education-plan/differences"
 }

@@ -1,6 +1,9 @@
 import { TimetableLessonTimeSettingResponse } from "./TimetableLessonTimeSettingResponse";
 import { TimetablePairTimeSettingResponse } from "./TimetablePairTimeSettingResponse";
 import { TimetableParadeTimeSettingResponse } from "./TimetableParadeTimeSettingResponse";
+import { SyllabusSubjectResponse } from "./SyllabusSubjectResponse";
+import { SyllabusTeacherResponse } from "./SyllabusTeacherResponse";
+import { DiscrepancyResponse } from "./DiscrepancyResponse";
 import { TimetableTeacherResponse } from "./TimetableTeacherResponse";
 import { AvailableHourResponse } from "./AvailableHourResponse";
 
@@ -35,6 +38,70 @@ export class ResponseBuilder {
 
   public static BuildTimetableParadeTimeSettingResponse(data: any): TimetableParadeTimeSettingResponse {
     return new TimetableParadeTimeSettingResponse(data.data.weekDay, data.data.startTime, data.data.endTime);
+  }
+
+  public static BuildSyllabusSubjectResponse(data: any): SyllabusSubjectResponse {
+    return new SyllabusSubjectResponse(
+      data.id,
+      data.name,
+      data.financing,
+      data.type,
+      data.category,
+      data.surchargeForNotebooks,
+      data.numberOf10,
+      data.numberOfGroupsIn10,
+      data.numberOf11,
+      data.numberOfGroupsIn11,
+      data.isFinalExam
+    );
+  }
+
+  public static BuildSyllabusSubjectsResponse(data: any): SyllabusSubjectResponse[] {
+    let subjects: SyllabusSubjectResponse[] = [];
+
+    subjects = data.data.subjects.map((subject: any) => ResponseBuilder.BuildSyllabusSubjectResponse(subject));
+
+    return subjects;
+  }
+
+  public static BuildSyllabusTeacherResponse(data: any): SyllabusTeacherResponse {
+    return new SyllabusTeacherResponse(
+      data.id,
+      data.name,
+      data.category,
+      data.categoryPayrollAccounting,
+      data.workingContract,
+      data.workingContractPayrollAccounting,
+      data.education,
+      data.isClassroomTeacher,
+      data.inDepthSubjectPayrollAccounting,
+      data.finalExamPayrollAccounting,
+      data.workingStartDate,
+      data.workExperience,
+      data.workExperienceAtTheTimeOfTheEmployment
+    );
+  }
+
+  public static BuildSyllabusTeachersResponse(data: any): SyllabusTeacherResponse[] {
+    let teachers: SyllabusTeacherResponse[] = [];
+
+    teachers = data.data.teachers.map((teacher: any) => ResponseBuilder.BuildSyllabusTeacherResponse(teacher));
+
+    return teachers;
+  }
+
+  public static BuildDiscrepancyResponse(data: any): DiscrepancyResponse {
+    return new DiscrepancyResponse(data.name, data.groupCount, data.groupCountByPlan);
+  }
+
+  public static BuildDiscrepanciesResponse(data: any): DiscrepancyResponse[] {
+    let discrepancies: DiscrepancyResponse[] = [];
+
+    discrepancies = data.data.differences.map((difference: any) =>
+      ResponseBuilder.BuildDiscrepancyResponse(difference)
+    );
+
+    return discrepancies;
   }
 
   public static BuildAvailableHourResponse(data: any): AvailableHourResponse {
