@@ -70,7 +70,7 @@ export const Menu: MenuItem[] = [
     navigation: [
       { label: "Предметы", url: AppRouter.Subjects },
       { label: "Преподаватели", url: AppRouter.Teachers },
-      { label: "Учебный план", url: AppRouter.SyllabusTable },
+      { label: "Учебный план", url: AppRouter.Syllabus },
       { label: "Назначение", url: AppRouter.Assigning }
     ]
   },
