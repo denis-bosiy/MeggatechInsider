@@ -1,18 +1,20 @@
+import {AssigningsCoursesSyllabusData} from "./types";
+
 enum ASSIGNING_COURSES_SYLLABUS_PAGE_ACTIONS {
-  ASSIGNING_COURSES_SYLLABUS_PAGE_DELETE_ASSIGNING = "ASSIGNING_COURSES_SYLLABUS_PAGE_DELETE_ASSIGNING",
+  SAVE_ASSIGNING = "SAVE_ASSIGNING",
 }
 
-type ActionDeleteAssigning = {
-  type: ASSIGNING_COURSES_SYLLABUS_PAGE_ACTIONS.ASSIGNING_COURSES_SYLLABUS_PAGE_DELETE_ASSIGNING,
-  payload: number,
+type ActionSaveAssigning = {
+  type: ASSIGNING_COURSES_SYLLABUS_PAGE_ACTIONS.SAVE_ASSIGNING,
+  payload: AssigningsCoursesSyllabusData,
 }
 
-type Action = ActionDeleteAssigning
+type Action = ActionSaveAssigning
 
 const ActionBuilder = {
-  deleteAssigning: (assigningId: number) => ({
-    type: ASSIGNING_COURSES_SYLLABUS_PAGE_ACTIONS.ASSIGNING_COURSES_SYLLABUS_PAGE_DELETE_ASSIGNING,
-    payload: assigningId,
+  saveAssigning: (values: AssigningsCoursesSyllabusData) => ({
+    type: ASSIGNING_COURSES_SYLLABUS_PAGE_ACTIONS.SAVE_ASSIGNING,
+    payload: { values }
   }),
 };
 

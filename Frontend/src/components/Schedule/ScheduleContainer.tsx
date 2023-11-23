@@ -6,5 +6,9 @@ import { ISchedule } from "../../core/Schedule/ISchedule";
 export const ScheduleContainerComponent = () => {
   const [schedules] = useState<ISchedule[]>([ScheduleBuilder.BuildSchedule()]);
 
-  return <ScheduleComponent schedule={schedules[0]} />;
+  const handleDeleteLesson = (lessonId: string) => {
+    console.log("Удаление урока с id =", lessonId);
+  };
+
+  return <ScheduleComponent schedule={schedules[0]} handleDeleteLesson={handleDeleteLesson} />;
 };

@@ -1,5 +1,6 @@
 using DatabaseProvider.Configurations.SubjectEntitiesConfigurations;
 using DatabaseProvider.Configurations.TeacherEntitiesConfigurations;
+using DatabaseProvider.Configurations.TimetableEntitiesConfigurations.GuidebookEntities;
 using DatabaseProvider.Configurations.TimetableEntitiesConfigurations.LessonEntities;
 using DatabaseProvider.Configurations.TimetableEntitiesConfigurations.StudentGroupEntities;
 using Microsoft.EntityFrameworkCore;
@@ -36,6 +37,13 @@ public class ApplicationContext : DbContext
 
         //lessons
         modelBuilder.ApplyConfiguration( new LessonConfiguration() );
+        modelBuilder.ApplyConfiguration( new LessonTimeConfiguration() );
+
+        //pairs
+        modelBuilder.ApplyConfiguration( new PairTimeConfiguration() );
+
+        //parade
+        modelBuilder.ApplyConfiguration( new ParadeTimeConfiguration() );
 
         //student groups
         modelBuilder.ApplyConfiguration( new ClassStudentGroupConfiguration() );

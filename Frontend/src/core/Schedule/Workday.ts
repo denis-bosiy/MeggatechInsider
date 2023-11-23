@@ -4,4 +4,6 @@ export enum Workday {
     Wednesday = "Среда",
     Thursday = "Четверг",
     Friday = "Пятница",
+    Saturday = "Суббота",
+    Sunday = "Воскресенье"
 };

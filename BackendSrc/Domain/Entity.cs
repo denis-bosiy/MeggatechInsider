@@ -1,6 +1,6 @@
-﻿namespace Domain;
+namespace Domain;
 
-public class Entity
+public abstract class Entity
 {
     public int Id { get; init; }
 }

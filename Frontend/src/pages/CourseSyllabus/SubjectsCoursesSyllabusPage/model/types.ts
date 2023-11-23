@@ -1,7 +1,7 @@
 type SubjectsCoursesSyllabusPageData = Array<SubjectCoursesSyllabusData>
 
 type SubjectCoursesSyllabusData = {
-  id: number,
+  id: string,
   name: string,
   type: string,
   hoursByPlan: number,
@@ -10,4 +10,5 @@ type SubjectCoursesSyllabusData = {
 
 export {
   type SubjectsCoursesSyllabusPageData,
+  type SubjectCoursesSyllabusData
 };

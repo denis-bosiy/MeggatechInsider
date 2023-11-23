@@ -4,7 +4,7 @@ namespace Domain.SubjectEntities
     {
         public string SubjectTypeName { get; set; }
 
-        public List<Subject> Subjects { get; set; } = new();
+        public List<Subject> Subjects { get; } = new List<Subject>();
 
         public SubjectType( string subjectTypeName )
         {

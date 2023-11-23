@@ -5,7 +5,6 @@ using Api.Models.EducationalPlan.Subject;
 using Api.Models.EducationalPlan.Teacher;
 using Application.Abstractions.EductionalPlan;
 using Microsoft.AspNetCore.Mvc;
-using System.Web.Http.Description;
 
 namespace Api.Controllers;
 
@@ -28,7 +27,9 @@ public sealed class EducationalPlanController : ControllerBase
     }
 
     [HttpGet( "teachers" )]
-    [ResponseType( typeof( TeachersResponseDto ) )]
+    [ProducesResponseType<TeachersResponseDto>( StatusCodes.Status200OK )]
+    [ProducesResponseType( StatusCodes.Status400BadRequest )]
+    [ProducesResponseType( StatusCodes.Status404NotFound )]
     public IActionResult GetTeachers( [FromQuery] TeachersRequestDto teachersRequest )
     {
         if ( !IsValidYear( teachersRequest.Year ) )
@@ -42,7 +43,9 @@ public sealed class EducationalPlanController : ControllerBase
     }
 
     [HttpGet( "subjects" )]
-    [ResponseType( typeof( SubjectsResponseDto ) )]
+    [ProducesResponseType<SubjectsResponseDto>( StatusCodes.Status200OK )]
+    [ProducesResponseType( StatusCodes.Status400BadRequest )]
+    [ProducesResponseType( StatusCodes.Status404NotFound )]
     public IActionResult GetSubjects( [FromQuery] SubjectsRequestDto subjectsRequest )
     {
         if ( !IsValidYear( subjectsRequest.Year ) )
@@ -56,7 +59,9 @@ public sealed class EducationalPlanController : ControllerBase
     }
 
     [HttpGet( "assignments" )]
-    [ResponseType( typeof( AssignmentsResponseDto ) )]
+    [ProducesResponseType<AssignmentsResponseDto>( StatusCodes.Status200OK )]
+    [ProducesResponseType( StatusCodes.Status400BadRequest )]
+    [ProducesResponseType( StatusCodes.Status404NotFound )]
     public IActionResult GetAssignments( [FromQuery] AssignmentsRequestDto assignmentsRequest )
     {
         if ( !IsValidYear( assignmentsRequest.Year ) )
@@ -70,7 +75,9 @@ public sealed class EducationalPlanController : ControllerBase
     }
 
     [HttpGet( "differences" )]
-    [ResponseType( typeof( DifferencesResponseDto ) )]
+    [ProducesResponseType<DifferencesResponseDto>( StatusCodes.Status200OK )]
+    [ProducesResponseType( StatusCodes.Status400BadRequest )]
+    [ProducesResponseType( StatusCodes.Status404NotFound )]
     public IActionResult GetDifferences( [FromQuery] DifferencesRequestDto differencesRequest )
     {
         if ( !IsValidYear( differencesRequest.Year ) )
