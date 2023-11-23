@@ -16,4 +16,5 @@ type BudgetStatisticsTableData = {
 export {
   type BudgetStatisticsPageData,
   type BudgetStatisticsData,
+  type BudgetStatisticsTableData,
 };

@@ -14,6 +14,8 @@ export enum AppRouter {
   TeacherGuidebook = "teacher-guidebook",
   Settings = "settings",
   Basic = "basic",
+  BudgetStatistic = "budget-statistic",
+  Statistic = "statistic",
   NotFound = "*"
 }
 
