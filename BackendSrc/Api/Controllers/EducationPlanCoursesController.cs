@@ -1,7 +1,6 @@
 using Api.Models.EducationPlanCourses.Courses;
 using Api.Models.EducationPlanCourses.Teacher;
 using Microsoft.AspNetCore.Mvc;
-using System.Web.Http.Description;
 
 namespace Api.Controllers
 {
@@ -10,21 +9,21 @@ namespace Api.Controllers
     public class EducationPlanCoursesController : Controller
     {
         [HttpGet( "teachers" )]
-        [ProducesResponseType<TeacherListResponseDto>( StatusCodes.Status200OK )]
+        [ProducesResponseType<CourseTeacherListResponseDto>( StatusCodes.Status200OK )]
         [ProducesResponseType( StatusCodes.Status404NotFound )]
-        public IActionResult GetTeachers( [FromQuery] TeachersRequestDto teachersRequest )
+        public IActionResult GetTeachers( [FromQuery] CourseTeachersRequestDto teachersRequest )
         {
             if ( !IsValidYear( teachersRequest.Year ) )
             {
                 return NotFound( "Не найдено такого года" );
             }
 
-            return Ok( new TeacherListResponseDto()
+            return Ok( new CourseTeacherListResponseDto()
             {
                 //При написании сервисов дату преобразовывать в iso-формат
-                Teachers = new List<TeacherDto>
+                Teachers = new List<CourseTeacherDto>
                 {
-                    new TeacherDto
+                    new CourseTeacherDto
                     {
                         Id = 1,
                         Name = "Прозоров Максим Андреевич",
@@ -35,7 +34,7 @@ namespace Api.Controllers
                         BirthDay = new DateOnly(2002, 01, 21),
                         Age = 25
                     },
-                    new TeacherDto
+                    new CourseTeacherDto
                     {
                         Id = 1,
                         Name = "Крыскин Петр Сергеевич",
@@ -46,7 +45,7 @@ namespace Api.Controllers
                         BirthDay = new DateOnly(2003, 02, 26),
                         Age = 45
                     },
-                    new TeacherDto
+                    new CourseTeacherDto
                     {
                         Id = 1,
                         Name = "Добельманов Генрих Айратович",
@@ -64,7 +63,7 @@ namespace Api.Controllers
         [HttpPut("teacher")]
         [ProducesResponseType( StatusCodes.Status200OK )]
         [ProducesResponseType( StatusCodes.Status404NotFound )]
-        public IActionResult UpdateTeacher(TeacherUpdateRequestDto teacherUpdateRequestDto)
+        public IActionResult UpdateCourseTeacher(CourseTeacherUpdateRequestDto teacherUpdateRequestDto)
         {
             if ( !IsValidYear( teacherUpdateRequestDto.Year ) )
             {
@@ -79,7 +78,7 @@ namespace Api.Controllers
         [HttpPost( "teacher" )]
         [ProducesResponseType( StatusCodes.Status200OK )]
         [ProducesResponseType( StatusCodes.Status404NotFound )]
-        public IActionResult CreateTeacher( TeacherCreateRequestDto teacherCreateRequestDto )
+        public IActionResult CreateTeacher( CourseTeacherCreateRequestDto teacherCreateRequestDto )
         {
             if ( !IsValidYear( teacherCreateRequestDto.Year ) )
             {

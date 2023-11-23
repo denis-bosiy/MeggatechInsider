@@ -2,9 +2,9 @@ using System.Text.Json.Serialization;
 
 namespace Api.Models.EducationPlanCourses.Teacher
 {
-    public class TeacherListResponseDto
+    public class CourseTeacherListResponseDto
     {
         [JsonPropertyName( "teachers" )]
-        public List<TeacherDto> Teachers { get; set; }
+        public List<CourseTeacherDto> Teachers { get; set; }
     }
 }

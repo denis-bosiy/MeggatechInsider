@@ -12,8 +12,8 @@ namespace Api.Models.EducationPlanCourses.Courses
         public int Year { get; set; }
 
         [Required]
-        [DisplayName("courses")]
-        [JsonPropertyName("courses")]
+        [DisplayName( "courses" )]
+        [JsonPropertyName( "courses" )]
         public List<CourseDto> Courses { get; set; }
     }
 }

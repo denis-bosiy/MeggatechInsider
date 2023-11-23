@@ -6,7 +6,7 @@ namespace Api.Models.EducationPlanCourses.Courses
 {
     public class CoursesListResponseDto
     {
-        [JsonPropertyName("courses")]
+        [JsonPropertyName( "courses" )]
         public List<CourseDto> Courses { get; set; }
     }
 }
