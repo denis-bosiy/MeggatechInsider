@@ -3,21 +3,21 @@ import { SubjectsCoursesSyllabusPageData } from "./types";
 
 const initData: SubjectsCoursesSyllabusPageData = [
   {
-    id: 0,
+    id: "0",
     name: "Физика",
     type: "ШЮП",
     hoursByPlan: 15,
     numberOfGroups: 2
   },
   {
-    id: 1,
+    id: "1",
     name: "Биология",
     type: "Подготовительные",
     hoursByPlan: 7,
     numberOfGroups: 1
   },
   {
-    id: 2,
+    id: "2",
     name: "Информатика",
     type: "Экспресс",
     hoursByPlan: 10,
@@ -27,8 +27,8 @@ const initData: SubjectsCoursesSyllabusPageData = [
 
 const subjectsCoursesSyllabusPageReducer = (state = initData, action: Action) => {
   switch (action.type) {
-    case SUBJECTS_COURSES_SYLLABUS_PAGE_ACTIONS.SUBJECTS_COURSES_SYLLABUS_PAGE_DELETE_SUBJECT:
-      return state.filter((item) => item.id !== action.payload);
+    case SUBJECTS_COURSES_SYLLABUS_PAGE_ACTIONS.SAVE_SUBJECTS:
+      return action.payload.values;
     default:
       return state;
   }

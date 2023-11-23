@@ -1,18 +1,20 @@
+import {TeachersCoursesSyllabusPageData} from "./types";
+
 enum TEACHERS_COURSES_SYLLABUS_PAGE_ACTIONS {
-  TEACHERS_COURSES_SYLLABUS_PAGE_DELETE_TEACHER = "TEACHERS_COURSES_SYLLABUS_PAGE_DELETE_TEACHER",
+  SAVE_SUBJECTS = "SAVE_SUBJECTS",
 }
 
-type ActionDeleteTeacher = {
-  type: TEACHERS_COURSES_SYLLABUS_PAGE_ACTIONS.TEACHERS_COURSES_SYLLABUS_PAGE_DELETE_TEACHER,
-  payload: number,
+type ActionSaveTeachers = {
+  type: TEACHERS_COURSES_SYLLABUS_PAGE_ACTIONS.SAVE_SUBJECTS,
+  payload: TeachersCoursesSyllabusPageData,
 }
 
-type Action = ActionDeleteTeacher
+type Action = ActionSaveTeachers
 
 const ActionBuilder = {
-  deleteTeacher: (teacherId: number) => ({
-    type: TEACHERS_COURSES_SYLLABUS_PAGE_ACTIONS.TEACHERS_COURSES_SYLLABUS_PAGE_DELETE_TEACHER,
-    payload: teacherId,
+  saveTeachers: (values: TeachersCoursesSyllabusPageData) => ({
+    type: TEACHERS_COURSES_SYLLABUS_PAGE_ACTIONS.SAVE_SUBJECTS,
+    payload: { values },
   }),
 };
 

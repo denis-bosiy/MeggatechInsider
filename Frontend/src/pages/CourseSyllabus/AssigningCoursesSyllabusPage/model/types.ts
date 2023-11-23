@@ -2,7 +2,7 @@ type AssigningsCoursesSyllabusData = Array<AssigningCoursesSyllabusData>
 type DiscrepanciesCoursesSyllabusData = Array<DiscrepancyCoursesSyllabusData>
 
 type AssigningCoursesSyllabusData = {
-  id: number,
+  id: string,
   name: string,
   teacher: string,
   groupCount: number,
@@ -12,7 +12,7 @@ type AssigningCoursesSyllabusData = {
 }
 
 type DiscrepancyCoursesSyllabusData = {
-  id: number,
+  id: string,
   name: string,
   groupCount: number,
   groupCountByPlan: number
@@ -26,5 +26,6 @@ type AssigningCoursesSyllabusPageData = {
 export {
   type AssigningsCoursesSyllabusData,
   type DiscrepanciesCoursesSyllabusData,
-  type AssigningCoursesSyllabusPageData
+  type AssigningCoursesSyllabusPageData,
+  type AssigningCoursesSyllabusData
 };

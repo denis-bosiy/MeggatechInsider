@@ -15,7 +15,6 @@ import {CTableManager} from "../../../core/Table/CTableManager";
 import {TableType} from "../../../core/Table/TableType";
 import {guidGenerator} from "../../../utils/guidGenerator";
 import {SortingOrder} from "../../../core/Table/SortingOrder";
-import {SubjectSyllabusData} from "../SubjectsSyllabusPage/model/types";
 
 const DiscrepanciesSyllabus = () => {
   const data = useSelector((state: {assigningSyllabusPageStore: AssigningSyllabusPageData}) => state.assigningSyllabusPageStore);
@@ -243,148 +242,28 @@ const AssigningSyllabusPage = () => {
                       )}
                     </td>
                     <td className="cell">
-                      {isAssigningsEditing.value ? (
-                        <Input
-                          placeholder=""
-                          value={value.hoursByPlanOnClassOfTheStudents.toString()}
-                          onValueChange={(newValue: string) =>
-                            setAssigningsTableData(
-                              assigningsTableData.map((data: AssigningSyllabusData) =>
-                                data.id === value.id ? { ...data, hoursByPlanOnClassOfTheStudents: Number(newValue) } : data
-                              )
-                            )
-                          }
-                          size={InputSize.Micro}
-                        />
-                      ) : (
-                        value.hoursByPlanOnClassOfTheStudents
-                      )}
+                      {value.hoursByPlanOnClassOfTheStudents}
                     </td>
                     <td className="cell">
-                      {isAssigningsEditing.value ? (
-                        <Input
-                          placeholder=""
-                          value={value.hoursOnWeekForTheClassOfTheStudents.toString()}
-                          onValueChange={(newValue: string) =>
-                            setAssigningsTableData(
-                              assigningsTableData.map((data: AssigningSyllabusData) =>
-                                data.id === value.id ? { ...data, hoursOnWeekForTheClassOfTheStudents: Number(newValue) } : data
-                              )
-                            )
-                          }
-                          size={InputSize.Micro}
-                        />
-                      ) : (
-                        value.hoursOnWeekForTheClassOfTheStudents
-                      )}
+                      {value.hoursOnWeekForTheClassOfTheStudents}
                     </td>
                     <td className="cell">
-                      {isAssigningsEditing.value ? (
-                        <Input
-                          placeholder=""
-                          value={value.hoursOnWeekOnYearOnTheTeacher.toString()}
-                          onValueChange={(newValue: string) =>
-                            setAssigningsTableData(
-                              assigningsTableData.map((data: AssigningSyllabusData) =>
-                                data.id === value.id ? { ...data, hoursOnWeekOnYearOnTheTeacher: Number(newValue) } : data
-                              )
-                            )
-                          }
-                          size={InputSize.Micro}
-                        />
-                      ) : (
-                        value.hoursOnWeekOnYearOnTheTeacher
-                      )}
+                      {value.hoursOnWeekOnYearOnTheTeacher}
                     </td>
                     <td className="cell">
-                      {isAssigningsEditing.value ? (
-                        <Input
-                          placeholder=""
-                          value={value.hoursOnWeekOnPeriodOnTheTeacher.toString()}
-                          onValueChange={(newValue: string) =>
-                            setAssigningsTableData(
-                              assigningsTableData.map((data: AssigningSyllabusData) =>
-                                data.id === value.id ? { ...data, hoursOnWeekOnPeriodOnTheTeacher: Number(newValue) } : data
-                              )
-                            )
-                          }
-                          size={InputSize.Micro}
-                        />
-                      ) : (
-                        value.hoursOnWeekOnPeriodOnTheTeacher
-                      )}
+                      {value.hoursOnWeekOnPeriodOnTheTeacher}
                     </td>
                     <td className="cell">
-                      {isAssigningsEditing.value ? (
-                        <Input
-                          placeholder=""
-                          value={value.hoursIn1Subgroup.toString()}
-                          onValueChange={(newValue: string) =>
-                            setAssigningsTableData(
-                              assigningsTableData.map((data: AssigningSyllabusData) =>
-                                data.id === value.id ? { ...data, hoursIn1Subgroup: Number(newValue) } : data
-                              )
-                            )
-                          }
-                          size={InputSize.Micro}
-                        />
-                      ) : (
-                        value.hoursIn1Subgroup
-                      )}
+                      {value.hoursIn1Subgroup}
                     </td>
                     <td className="cell">
-                      {isAssigningsEditing.value ? (
-                        <Input
-                          placeholder=""
-                          value={value.hoursIn2Subgroup.toString()}
-                          onValueChange={(newValue: string) =>
-                            setAssigningsTableData(
-                              assigningsTableData.map((data: AssigningSyllabusData) =>
-                                data.id === value.id ? { ...data, hoursIn2Subgroup: Number(newValue) } : data
-                              )
-                            )
-                          }
-                          size={InputSize.Micro}
-                        />
-                      ) : (
-                        value.hoursIn2Subgroup
-                      )}
+                      {value.hoursIn2Subgroup}
                     </td>
                     <td className="cell">
-                      {isAssigningsEditing.value ? (
-                        <Input
-                          placeholder=""
-                          value={value.totalInYear.toString()}
-                          onValueChange={(newValue: string) =>
-                            setAssigningsTableData(
-                              assigningsTableData.map((data: AssigningSyllabusData) =>
-                                data.id === value.id ? { ...data, totalInYear: Number(newValue) } : data
-                              )
-                            )
-                          }
-                          size={InputSize.Micro}
-                        />
-                      ) : (
-                        value.totalInYear
-                      )}
+                      {value.totalInYear}
                     </td>
                     <td className="cell">
-                      {isAssigningsEditing.value ? (
-                        <Input
-                          placeholder=""
-                          value={value.bidShare.toString()}
-                          onValueChange={(newValue: string) =>
-                            setAssigningsTableData(
-                              assigningsTableData.map((data: AssigningSyllabusData) =>
-                                data.id === value.id ? { ...data, bidShare: Number(newValue) } : data
-                              )
-                            )
-                          }
-                          size={InputSize.Micro}
-                        />
-                      ) : (
-                        value.bidShare
-                      )}
+                      {value.bidShare}
                     </td>
                     <td className="cell">
                       <IconButton

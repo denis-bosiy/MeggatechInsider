@@ -19,16 +19,13 @@ namespace Domain.SubjectEntities
         public bool IsEge { get; set; }
         public int Year { get; set; }
 
-        public List<Lesson> Lessons { get; set; }
+        public List<Lesson> Lessons { get; } = new List<Lesson>();
 
         public Subject(
             string subjectName,
             int paymentTypeId,
-            PaymentType paymentType,
             int subjectTypeId,
-            SubjectType subjectType,
             int subjectCategoryId,
-            SubjectCategory subjectCategory,
             int notebooksPaymentInPercents,
             int expectedHoursPerWeekForTenthClasses,
             int expectedGroupsCountForTenthClasses,
@@ -39,9 +36,6 @@ namespace Domain.SubjectEntities
         )
         {
             SubjectName = subjectName;
-            PaymentType = paymentType;
-            SubjectType = subjectType;
-            SubjectCategory = subjectCategory;
             NotebooksPaymentInPercents = notebooksPaymentInPercents;
             ExpectedHoursPerWeekForTenthClasses = expectedHoursPerWeekForTenthClasses;
             ExpectedGroupsCountForTenthClasses = expectedGroupsCountForTenthClasses;
