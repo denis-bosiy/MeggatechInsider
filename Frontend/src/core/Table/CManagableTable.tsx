@@ -26,8 +26,9 @@ export class CManagableTable extends CTable {
     if (this._isAdding.value) {
       return;
     }
-    this._setIsAdding({ ...this._isAdding, value: true });
+
     this.setData([...this.data, valueToAdd]);
+    this._setIsAdding({ ...this._isAdding, value: true });
   }
 
   public applyAdding(
@@ -43,6 +44,8 @@ export class CManagableTable extends CTable {
       this._httpService
         .postByArbitraryUrl(url, buildRequestClass(this.data[this.data.length - 1], year))
         .then(() => saveToStore(this.data));
+    } else {
+      saveToStore(this.data);
     }
     this._setIsAdding({ ...this._isAdding, value: false });
   }

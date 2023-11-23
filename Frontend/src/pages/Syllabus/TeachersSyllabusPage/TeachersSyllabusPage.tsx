@@ -293,6 +293,7 @@ const TeachersSyllabusPage = () => {
                   </td>
                   <td className="cell">
                     <CheckBox
+                      isDisabled={!isTeachersEditing.value}
                       checked={value.categoryPayrollAccounting}
                       onChange={(event) => {
                         setTeachersTableData(
@@ -326,6 +327,7 @@ const TeachersSyllabusPage = () => {
                   </td>
                   <td className="cell">
                     <CheckBox
+                      isDisabled={!isTeachersEditing.value}
                       checked={value.workingContractPayrollAccounting}
                       onChange={(event) => {
                         setTeachersTableData(
@@ -359,6 +361,7 @@ const TeachersSyllabusPage = () => {
                   </td>
                   <td className="cell">
                     <CheckBox
+                      isDisabled={!isTeachersEditing.value}
                       checked={value.isClassroomTeacher}
                       onChange={(event) => {
                         setTeachersTableData(
@@ -371,6 +374,7 @@ const TeachersSyllabusPage = () => {
                   </td>
                   <td className="cell">
                     <CheckBox
+                      isDisabled={!isTeachersEditing.value}
                       checked={value.inDepthSubjectPayrollAccounting}
                       onChange={(event) => {
                         setTeachersTableData(
@@ -383,6 +387,7 @@ const TeachersSyllabusPage = () => {
                   </td>
                   <td className="cell">
                     <CheckBox
+                      isDisabled={!isTeachersEditing.value}
                       checked={value.finalExamPayrollAccounting}
                       onChange={(event) => {
                         setTeachersTableData(
@@ -411,24 +416,7 @@ const TeachersSyllabusPage = () => {
                       value.workingStartDate
                     )}
                   </td>
-                  <td className="cell">
-                    {isTeachersEditing.value ? (
-                      <Input
-                        placeholder=""
-                        value={value.workExperience.toString()}
-                        onValueChange={(newValue: string) =>
-                          setTeachersTableData(
-                            teachersTableData.map((data: TeacherSyllabusData) =>
-                              data.id === value.id ? { ...data, workExperience: Number(newValue) } : data
-                            )
-                          )
-                        }
-                        size={InputSize.Micro}
-                      />
-                    ) : (
-                      value.workExperience
-                    )}
-                  </td>
+                  <td className="cell">{value.workExperience}</td>
                   <td className="cell">
                     {isTeachersEditing.value ? (
                       <Input
@@ -467,24 +455,7 @@ const TeachersSyllabusPage = () => {
                       value.birthDay
                     )}
                   </td>
-                  <td className="cell">
-                    {isTeachersEditing.value ? (
-                      <Input
-                        placeholder=""
-                        value={value.age.toString()}
-                        onValueChange={(newValue: string) =>
-                          setTeachersTableData(
-                            teachersTableData.map((data: TeacherSyllabusData) =>
-                              data.id === value.id ? { ...data, age: Number(newValue) } : data
-                            )
-                          )
-                        }
-                        size={InputSize.Micro}
-                      />
-                    ) : (
-                      value.age
-                    )}
-                  </td>
+                  <td className="cell">{value.age}</td>
                   <td className="cell">
                     <IconButton icon={<GarbageIcon />} onClick={() => handleDeleteTeacher(value.id.toString())} />
                   </td>
@@ -492,7 +463,7 @@ const TeachersSyllabusPage = () => {
               );
             })}
 
-          {isTeachersAdding.value && (
+          {isTeachersAdding.value && teachersTableData[teachersTableData.length - 1] && (
             <tr className="row">
               <td className="cell">
                 <Input
@@ -585,103 +556,14 @@ const TeachersSyllabusPage = () => {
                             : data
                         )
                       );
-                    }}
-                  />
-                </td>
-                <td className="cell">
-                  {isTeachersEditing.value ? (
-                    <Input
-                      placeholder=""
-                      value={value.workingStartDate}
-                      onValueChange={(newValue: string) =>
-                        setTeachersTableData(
-                          teachersTableData.map((data: TeacherSyllabusData) =>
-                            data.id === value.id ? { ...data, workingStartDate: newValue } : data
-                          )
-                        )
-                      }
-                      size={InputSize.Micro}
-                    />
-                  ) : (
-                    value.workingStartDate
-                  )}
-                </td>
-                <td className="cell">
-                  {value.workExperience}
-                </td>
-                <td className="cell">
-                  {isTeachersEditing.value ? (
-                    <Input
-                      placeholder=""
-                      value={value.workExperienceAtTheTimeOfTheEmployment.toString()}
-                      onValueChange={(newValue: string) =>
-                        setTeachersTableData(
-                          teachersTableData.map((data: TeacherSyllabusData) =>
-                            data.id === value.id ? { ...data, workExperienceAtTheTimeOfTheEmployment: Number(newValue) } : data
-                          )
-                        )
-                      }
-                      size={InputSize.Micro}
-                    />
-                  ) : (
-                    value.workExperienceAtTheTimeOfTheEmployment
-                  )}
-                </td>
-                <td className="cell">
-                  {isTeachersEditing.value ? (
-                    <Input
-                      placeholder=""
-                      value={value.birthDay}
-                      onValueChange={(newValue: string) =>
-                        setTeachersTableData(
-                          teachersTableData.map((data: TeacherSyllabusData) =>
-                            data.id === value.id ? { ...data, birthDay: newValue } : data
-                          )
-                        )
-                      }
-                      size={InputSize.Micro}
-                    />
-                  ) : (
-                    value.birthDay
-                  )}
-                </td>
-                <td className="cell">
-                  {value.age}
-                </td>
-                <td className="cell">
-                  <IconButton
-                    icon={<GarbageIcon />}
-                    onClick={() => handleDeleteTeacher(value.id.toString())}
-                  />
-                </td>
-              </tr>
-            );
-          })}
-
-          {isTeachersAdding.value &&
-          <tr className="row">
-            <td className="cell">
-              <Input
-                placeholder="ФИО"
-                value={teachersTableData[teachersTableData.length - 1].name}
-                onValueChange={(newLabel: string) => {
-                  setTeachersTableData(
-                    teachersTableData.map((data: TeacherSyllabusData) =>
-                      data.id === teachersTableData[teachersTableData.length - 1].id
-                        ? { ...data, name: newLabel }
-                        : data
-                    )
-                  );
-                }}
-                size={InputSize.Micro}
-              />
-            </td>
-            <td className="cell">
-              <Select
-                options={categoryOptions}
-                onValueChange={(newValue: string) => {
-                  const selectedOption = categoryOptions.find(e => e.id === newValue);
-                  if (selectedOption) {
+                    }
+                  }}
+                  size={SelectSize.Micro}
+                />
+              </td>
+              <td className="cell">
+                <CheckBox
+                  onChange={(event) => {
                     setTeachersTableData(
                       teachersTableData.map((data: TeacherSyllabusData) =>
                         data.id === teachersTableData[teachersTableData.length - 1].id

@@ -326,88 +326,79 @@ const AssigningSyllabusPage = () => {
                         )}
                       </td>
                       <td className="cell">
-                        {isAssigningsEditing.value ? (
-                          <Input
-                            placeholder=""
-                            value={value.hoursByPlanOnClassOfTheStudents.toString()}
-                            onValueChange={(newValue: string) =>
-                              setAssigningsTableData(
-                                assigningsTableData.map((data: AssigningSyllabusData) =>
-                                  data.id === value.id
-                                    ? { ...data, hoursByPlanOnClassOfTheStudents: Number(newValue) }
-                                    : data
-                                )
-                              )
-                            }
-                            size={InputSize.Micro}
-                          />
-                        ) : (
-                          value.hoursByPlanOnClassOfTheStudents
-                        )}
+                        {value.hoursByPlanOnClassOfTheStudents}
                       </td>
                       <td className="cell">
-                        {isAssigningsEditing.value ? (
-                          <Input
-                            placeholder=""
-                            value={value.hoursOnWeekForTheClassOfTheStudents.toString()}
-                            onValueChange={(newValue: string) =>
-                              setAssigningsTableData(
-                                assigningsTableData.map((data: AssigningSyllabusData) =>
-                                  data.id === value.id
-                                    ? { ...data, hoursOnWeekForTheClassOfTheStudents: Number(newValue) }
-                                    : data
-                                )
-                              )
-                            )
-                          }
-                          size={InputSize.Micro}
-                        />
-                      ) : (
-                        value.groupCount
-                      )}
-                    </td>
-                    <td className="cell">
-                      {value.hoursByPlanOnClassOfTheStudents}
-                    </td>
-                    <td className="cell">
-                      {value.hoursOnWeekForTheClassOfTheStudents}
-                    </td>
-                    <td className="cell">
-                      {value.hoursOnWeekOnYearOnTheTeacher}
-                    </td>
-                    <td className="cell">
-                      {value.hoursOnWeekOnPeriodOnTheTeacher}
-                    </td>
-                    <td className="cell">
-                      {value.hoursIn1Subgroup}
-                    </td>
-                    <td className="cell">
-                      {value.hoursIn2Subgroup}
-                    </td>
-                    <td className="cell">
-                      {value.totalInYear}
-                    </td>
-                    <td className="cell">
-                      {value.bidShare}
-                    </td>
-                    <td className="cell">
-                      <IconButton
-                        icon={<GarbageIcon />}
-                        onClick={() => handleDeleteAssigning(value.id.toString())}
-                      />
-                    </td>
-                  </tr>
-                );
-              })}
+                        {value.hoursOnWeekForTheClassOfTheStudents}
+                      </td>
+                      <td className="cell">
+                        {value.hoursOnWeekOnYearOnTheTeacher}
+                      </td>
+                      <td className="cell">
+                        {value.hoursOnWeekOnPeriodOnTheTeacher}
+                      </td>
+                      <td className="cell">
+                        {value.hoursIn1Subgroup}
+                      </td>
+                      <td className="cell">
+                        {value.hoursIn2Subgroup}
+                      </td>
+                      <td className="cell">
+                        {value.totalInYear}
+                      </td>
+                      <td className="cell">
+                        {value.bidShare}
+                      </td>
+                      <td className="cell">
+                        <IconButton icon={<GarbageIcon />} onClick={() => handleDeleteAssigning(value.id.toString())} />
+                      </td>
+                    </tr>
+                  );
+                })}
 
-              {isAssigningsAdding.value &&
-              <tr className="row">
-                <td className="cell">
-                  <Select
-                    options={subjectOptions}
-                    onValueChange={(newValue: string) => {
-                      const selectedOption = subjectOptions.find(e => e.id === newValue);
-                      if (selectedOption) {
+              {isAssigningsAdding.value && (
+                <tr className="row">
+                  <td className="cell">
+                    <Select
+                      options={subjectOptions}
+                      onValueChange={(newValue: string) => {
+                        const selectedOption = subjectOptions.find((e) => e.id === newValue);
+                        if (selectedOption) {
+                          setAssigningsTableData(
+                            assigningsTableData.map((data: AssigningSyllabusData) =>
+                              data.id === assigningsTableData[assigningsTableData.length - 1].id
+                                ? { ...data, name: selectedOption.content }
+                                : data
+                            )
+                          );
+                        }
+                      }}
+                      size={SelectSize.Micro}
+                    />
+                  </td>
+                  <td className="cell">
+                    <Select
+                      options={teacherOptions}
+                      onValueChange={(newValue: string) => {
+                        const selectedOption = teacherOptions.find((e) => e.id === newValue);
+                        if (selectedOption) {
+                          setAssigningsTableData(
+                            assigningsTableData.map((data: AssigningSyllabusData) =>
+                              data.id === assigningsTableData[assigningsTableData.length - 1].id
+                                ? { ...data, teacher: selectedOption.content }
+                                : data
+                            )
+                          );
+                        }
+                      }}
+                      size={SelectSize.Micro}
+                    />
+                  </td>
+                  <td className="cell">
+                    <Input
+                      placeholder="0"
+                      value={assigningsTableData[assigningsTableData.length - 1].groupCount.toString()}
+                      onValueChange={(newLabel: string) => {
                         setAssigningsTableData(
                           assigningsTableData.map((data: AssigningSyllabusData) =>
                             data.id === assigningsTableData[assigningsTableData.length - 1].id
@@ -457,5 +448,4 @@ const AssigningSyllabusPage = () => {
     </>
   );
 };
-
 export default AssigningSyllabusPage;

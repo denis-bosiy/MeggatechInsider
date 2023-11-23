@@ -415,6 +415,7 @@ const SubjectsSyllabusPage = () => {
                   </td>
                   <td className="cell">
                     <CheckBox
+                      isDisabled={!isSubjectsEditing.value}
                       checked={value.isFinalExam}
                       onChange={(event) => {
                         setSubjectsTableData(
@@ -432,7 +433,7 @@ const SubjectsSyllabusPage = () => {
               );
             })}
 
-          {isSubjectsAdding.value && (
+          {isSubjectsAdding.value && subjectsTableData[subjectsTableData.length - 1] && (
             <tr className="row">
               <td className="cell">
                 <Input
