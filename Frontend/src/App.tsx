@@ -27,6 +27,8 @@ import { store } from "./redux/store";
 import { AppRouter } from "./router";
 import LessonsSchedulePage from "./pages/LessonsSchedulePage/LessonsSchedulePage";
 import TeacherGuidebookCoursesTimetablePage from "./pages/CoursesTimetable/TeacherGuidebookCoursesTimetablePage/TeacherGuidebookCoursesTimetablePage";
+import GroupGuidebookCoursesTimetablePage
+  from "./pages/CoursesTimetable/GroupGuidebookCoursesTimetablePage/GroupGuidebookCoursesTimetablePage";
 
 const queryClient = new QueryClient();
 const App = (): React.JSX.Element => {
@@ -62,6 +64,7 @@ const App = (): React.JSX.Element => {
                 </Route>
                 <Route path={AppRouter.CoursesTimetable}>
                   <Route path={AppRouter.TeacherGuidebook} element={<TeacherGuidebookCoursesTimetablePage/>} />
+                  <Route path={AppRouter.GroupGuidebook} element={<GroupGuidebookCoursesTimetablePage/>} />
                 </Route>
                 <Route path={AppRouter.LessonsSchedule} element={<LessonsSchedulePage />} />
                 <Route path="components" element={<ComponentsPage />} />
