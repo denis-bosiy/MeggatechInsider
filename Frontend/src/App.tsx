@@ -23,6 +23,7 @@ import { AppRouter } from "./router";
 import ProtectedRoot from "./pages/ProtectedRoot";
 import LessonsSchedulePage from "./pages/LessonsSchedulePage/LessonsSchedulePage";
 import { QueryClient, QueryClientProvider } from "react-query";
+import BudgetStatisticsPage from "./pages/Statistics/BudgetStatisticsPage/BudgetStatisticsPage";
 
 const queryClient = new QueryClient();
 const App = (): React.JSX.Element => {
@@ -61,6 +62,9 @@ const App = (): React.JSX.Element => {
                   <Route path={AppRouter.TeacherGuidebook} element={<TeacherGuidebookTimetablePage />} />
                   <Route path={AppRouter.LessonsSchedule} element={<LessonsSchedulePage />} />
                 </Route>
+                <Route path={AppRouter.Statistics}>
+                  <Route path={AppRouter.BudgetStatistics} element={<BudgetStatisticsPage />} />
+                </Route>
                 <Route path="components" element={<ComponentsPage />} />
                 <Route path="test-redux" element={<TestPage />} />
                 <Route path={AppRouter.NotFound} element={<Navigate to={AppRouter.Main} />} />
@@ -73,5 +77,3 @@ const App = (): React.JSX.Element => {
     </ModalSettingsProvider>
   );
 };
-
-export default App;

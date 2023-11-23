@@ -13,6 +13,7 @@ import {typesContractsReducer} from "../pages/Settings/TeacherSettingsPage/view/
 import {categoriesTeachersReducer} from "../pages/Settings/TeacherSettingsPage/view/categoriesTeachers/model/reducer";
 import {teacherEducationReducer} from "../pages/Settings/TeacherSettingsPage/view/teacherEducation/model/reducer";
 import { lessonsSchedulePageReducer } from "../pages/LessonsSchedulePage/model/reducer";
+import {budgetStatisticsPageReducer} from "../pages/Statistics/BudgetStatisticsPage/model/reducer";
 
 export default combineReducers({
   testPageStore: testPageReducer,
@@ -29,4 +30,5 @@ export default combineReducers({
   categoriesTeachersStore: categoriesTeachersReducer,
   teacherEducationStore: teacherEducationReducer,
   lessonsScheduleStore: lessonsSchedulePageReducer,
+  budgetStatisticsPageStore: budgetStatisticsPageReducer,
 });
