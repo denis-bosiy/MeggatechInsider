@@ -19,6 +19,9 @@ import { budgetStatisticsPageReducer } from "../pages/Statistics/BudgetStatistic
 import {
   teacherGuidebookCoursesTimetablePageReducer
 } from "../pages/CoursesTimetable/TeacherGuidebookCoursesTimetablePage/model/reducer";
+import {
+  groupGuidebookCoursesTimetablePageReducer
+} from "../pages/CoursesTimetable/GroupGuidebookCoursesTimetablePage/model/reducer";
 
 export default combineReducers({
   testPageStore: testPageReducer,
@@ -39,4 +42,5 @@ export default combineReducers({
   classGuidebookTimetableStore: classGuidebookTimetablePageReducer,
   budgetStatisticsPageStore: budgetStatisticsPageReducer,
   teacherGuidebookCoursesTimetablePageStore: teacherGuidebookCoursesTimetablePageReducer,
+  groupGuidebookCoursesTimetablePageStore: groupGuidebookCoursesTimetablePageReducer,
 });

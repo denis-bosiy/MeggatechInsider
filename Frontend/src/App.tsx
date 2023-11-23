@@ -30,6 +30,8 @@ import { QueryClient, QueryClientProvider } from "react-query";
 import ClassGuidebookPage from "./pages/Timetable/ClassGuidebookPage/ClassGuidebookPage";
 import BudgetStatisticsPage from "./pages/Statistics/BudgetStatisticsPage/BudgetStatisticsPage";
 import TeacherGuidebookCoursesTimetablePage from "./pages/CoursesTimetable/TeacherGuidebookCoursesTimetablePage/TeacherGuidebookCoursesTimetablePage";
+import GroupGuidebookCoursesTimetablePage
+  from "./pages/CoursesTimetable/GroupGuidebookCoursesTimetablePage/GroupGuidebookCoursesTimetablePage";
 
 const queryClient = new QueryClient();
 const App = (): React.JSX.Element => {
@@ -75,6 +77,7 @@ const App = (): React.JSX.Element => {
                 </Route>
                 <Route path={AppRouter.CoursesTimetable}>
                   <Route path={AppRouter.TeacherGuidebook} element={<TeacherGuidebookCoursesTimetablePage/>} />
+                  <Route path={AppRouter.GroupGuidebook} element={<GroupGuidebookCoursesTimetablePage/>} />
                 </Route>
                 <Route path="components" element={<ComponentsPage />} />
                 <Route path="test-redux" element={<TestPage />} />
