@@ -8,7 +8,7 @@ const initData: TeacherGuidebookCoursesTimetablePageData = [
     type: "ШЮП",
     teacherName: "Леонид Хорошавин",
     teacherId: 1,
-    availableHours: [
+    availableTime: [
       {
         id: 1,
         weekDay: "пн",
@@ -22,6 +22,7 @@ const initData: TeacherGuidebookCoursesTimetablePageData = [
         endTime: "13.45"
       },
     ],
+    selectedTime: [1],
     distributedHoursToPlan: 8,
     hoursToPlan: 8,
     creditHours: 0,
@@ -32,7 +33,7 @@ const initData: TeacherGuidebookCoursesTimetablePageData = [
     type: "Подготовительные",
     teacherName: "Александр Мушкин",
     teacherId: 2,
-    availableHours: [
+    availableTime: [
       {
         id: 1,
         weekDay: "пн",
@@ -46,6 +47,7 @@ const initData: TeacherGuidebookCoursesTimetablePageData = [
         endTime: "13.45"
       },
     ],
+    selectedTime: [1],
     distributedHoursToPlan: 10,
     hoursToPlan: 12,
     creditHours: 0,
@@ -56,7 +58,7 @@ const initData: TeacherGuidebookCoursesTimetablePageData = [
     type: "Экспресс",
     teacherName: "Валентина Смирнова",
     teacherId: 2,
-    availableHours: [
+    availableTime: [
       {
         id: 1,
         weekDay: "пн",
@@ -70,6 +72,7 @@ const initData: TeacherGuidebookCoursesTimetablePageData = [
         endTime: "13.45"
       },
     ],
+    selectedTime: [1],
     distributedHoursToPlan: 8,
     hoursToPlan: 6,
     creditHours: 2,

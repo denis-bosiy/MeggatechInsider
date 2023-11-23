@@ -33,7 +33,9 @@ const TeacherGuidebookCoursesTimetablePage = () => {
       <table className="table">
         <TeacherGuidebookTimetableTable
           data={state.data}
+          isEdited={state.isEdited}
           handleSort={actions.handleSort}
+          setSelectedTime={actions.setSelectedTime}
         />
       </table>
     </>

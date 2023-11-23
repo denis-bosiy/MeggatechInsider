@@ -1,5 +1,5 @@
 import {useDispatch, useSelector} from "react-redux";
-import {TeacherGuidebookCoursesTimetablePageData} from "./model/types";
+import {TeacherGuidebookCoursesTimetableData, TeacherGuidebookCoursesTimetablePageData} from "./model/types";
 import {useState} from "react";
 import {CTableBuilder} from "../../../core/Table/CTableBuilder";
 import {CTable} from "../../../core/Table/CTable";
@@ -59,6 +59,19 @@ function useTableData() {
     teacherGuidebookCoursesTimetableTableManager.invokeFunction("edit", TableType.Editable, []);
   };
 
+  const setSelectedTime = (courseId: number, timeId: number) => {
+    setTableData(tableData.map((data: TeacherGuidebookCoursesTimetableData) => {
+      if (data.id !== courseId) {
+        return data;
+      }
+
+      return {
+        ...data,
+        selectedTime: [timeId],
+      };
+    }));
+  };
+
   return {
     state: {
       data: tableData,
@@ -72,6 +85,7 @@ function useTableData() {
       handleReset,
       handleEdit,
       setSearchValue,
+      setSelectedTime,
     },
   };
 }
