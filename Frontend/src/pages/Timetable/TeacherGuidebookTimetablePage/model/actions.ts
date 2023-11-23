@@ -1,19 +1,29 @@
-import { Guidebook } from "./types";
+import { Guidebook, AvailableHours } from "./types";
 
 export enum TEACHER_GUIDEBOOK_TIMETABLE_PAGE_ACTIONS {
-  SAVE_AVAILABLE_HOURS = "SAVE_AVAILABLE_HOURS",
+  SET_TEACHERS = "SET_TEACHERS",
+  SET_AVAILABLE_HOURS = "SET_AVAILABLE_HOURS"
 }
 
-export type ActionSaveAvailableHours = {
-  type: TEACHER_GUIDEBOOK_TIMETABLE_PAGE_ACTIONS.SAVE_AVAILABLE_HOURS;
+export type ActionSetTeachers = {
+  type: TEACHER_GUIDEBOOK_TIMETABLE_PAGE_ACTIONS.SET_TEACHERS;
   payload: Guidebook;
 };
 
-export type TeacherGuidebookTimetableAction = ActionSaveAvailableHours;
+export type ActionSetAvailableHours = {
+  type: TEACHER_GUIDEBOOK_TIMETABLE_PAGE_ACTIONS.SET_AVAILABLE_HOURS;
+  payload: AvailableHours;
+};
+
+export type Action = ActionSetTeachers | ActionSetAvailableHours;
 
 export const TeacherGuidebookTimetableActionBuilder = {
-  saveAvailableHours: (values: Guidebook) => ({
-    type: TEACHER_GUIDEBOOK_TIMETABLE_PAGE_ACTIONS.SAVE_AVAILABLE_HOURS,
+  setTeachers: (values: Guidebook) => ({
+    type: TEACHER_GUIDEBOOK_TIMETABLE_PAGE_ACTIONS.SET_TEACHERS,
     payload: { values }
   }),
+  setAvailableHours: (availableHours: AvailableHours) => ({
+    type: TEACHER_GUIDEBOOK_TIMETABLE_PAGE_ACTIONS.SET_AVAILABLE_HOURS,
+    payload: { availableHours }
+  })
 };
