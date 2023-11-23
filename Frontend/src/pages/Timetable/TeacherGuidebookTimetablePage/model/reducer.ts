@@ -1,30 +1,35 @@
-import { AvailableHours, Guidebook, TeacherGuidebookTimetablePageData } from "./types";
+import {
+  AvailableHours,
+  Guidebook,
+  TeacherGuidebookTimetablePageData
+} from "./types";
+import { TEACHER_GUIDEBOOK_TIMETABLE_PAGE_ACTIONS, Action } from "./actions";
 
 const initHoursData: AvailableHours = [
   {
     id: "1",
-    weekDay: "пн",
+    weekDayCode: 0,
     startTime: "8.00",
-    endTime: "9.00",
+    endTime: "9.00"
   },
   {
     id: "2",
-    weekDay: "пн",
+    weekDayCode: 0,
     startTime: "9.00",
-    endTime: "10.00",
+    endTime: "10.00"
   },
   {
     id: "3",
-    weekDay: "вт",
+    weekDayCode: 1,
     startTime: "8.00",
-    endTime: "9.00",
+    endTime: "9.00"
   },
   {
     id: "4",
-    weekDay: "вт",
+    weekDayCode: 1,
     startTime: "9.00",
-    endTime: "10.00",
-  },
+    endTime: "10.00"
+  }
 ];
 
 const initGuidebookData: Guidebook = [
@@ -34,30 +39,11 @@ const initGuidebookData: Guidebook = [
     subjectId: "1",
     teacherName: "Константин Борисович Щуков",
     teacherId: "1",
-    /*availableHours: [
-      {
-        id: "1",
-        weekDay: "пн",
-        startTime: "13.00",
-        endTime: "13.45"
-      },
-      {
-        id: "2",
-        weekDay: "вт",
-        startTime: "13.00",
-        endTime: "13.45"
-      },
-    ],*/
-    availableHours: {
-      id: "1",
-      weekDay: "пн",
-      startTime: "8.00",
-      endTime: "9.00",
-    },
+    availableHours: [],
     distributedHoursToPlan: 16,
     hoursToPlan: 15,
     creditHours: 2,
-    workedOverPlan: 20,
+    workedOverPlan: 20
   },
   {
     id: "2",
@@ -65,16 +51,11 @@ const initGuidebookData: Guidebook = [
     subjectId: "2",
     teacherName: "Елена Борисовна Щук",
     teacherId: "2",
-    availableHours: {
-      id: "4",
-      weekDay: "вт",
-      startTime: "9.00",
-      endTime: "10.00",
-    },
+    availableHours: [],
     distributedHoursToPlan: 10,
     hoursToPlan: 15,
     creditHours: 2,
-    workedOverPlan: 20,
+    workedOverPlan: 20
   },
   {
     id: "3",
@@ -82,26 +63,28 @@ const initGuidebookData: Guidebook = [
     subjectId: "2",
     teacherName: "Алена Борисовна Щук",
     teacherId: "2",
-    availableHours: {
-      id: "4",
-      weekDay: "вт",
-      startTime: "9.00",
-      endTime: "10.00",
-    },
+    availableHours: [],
     distributedHoursToPlan: 17,
     hoursToPlan: 15,
     creditHours: 0,
-    workedOverPlan: 20,
-  },
+    workedOverPlan: 20
+  }
 ];
 
 const initData: TeacherGuidebookTimetablePageData = {
-  guidebook: initGuidebookData,
-  availableHours: initHoursData,
+  totalAvailableHours: initHoursData,
+  guidebook: initGuidebookData
 };
 
-const teacherGuidebookTimetablePageReducer = (state = initData) => {
-  return state;
+const teacherGuidebookTimetablePageReducer = (state: TeacherGuidebookTimetablePageData = initData, action: Action) => {
+  switch (action.type) {
+    case TEACHER_GUIDEBOOK_TIMETABLE_PAGE_ACTIONS.SET_TEACHERS:
+      return { ...state, guidebook: action.payload.values };
+    case TEACHER_GUIDEBOOK_TIMETABLE_PAGE_ACTIONS.SET_AVAILABLE_HOURS:
+      return { ...state, totalAvailableHours: action.payload };
+    default:
+      return state;
+  }
 };
 
 export { teacherGuidebookTimetablePageReducer };

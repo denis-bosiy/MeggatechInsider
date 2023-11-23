@@ -7,6 +7,8 @@ export class CSearchableTable extends CTable {
   }
 
   public search(searchQuery: string, dataFromStore: any[]): void {
+    console.log(searchQuery);
+    console.log(dataFromStore);
     if (searchQuery === "") {
       this.setData(dataFromStore);
     } else {

@@ -252,6 +252,75 @@ namespace Infrastructure.Migrations.Migrations
                     b.ToTable("TeacherCategory", (string)null);
                 });
 
+            modelBuilder.Entity("Domain.TimetableEntities.GuidebookEntities.LessonTime", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<TimeOnly>("EndTime")
+                        .HasColumnType("time");
+
+                    b.Property<TimeOnly>("StartTime")
+                        .HasColumnType("time");
+
+                    b.Property<int>("Year")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("LessonTime", (string)null);
+                });
+
+            modelBuilder.Entity("Domain.TimetableEntities.GuidebookEntities.PairTime", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<TimeOnly>("EndTime")
+                        .HasColumnType("time");
+
+                    b.Property<TimeOnly>("StartTime")
+                        .HasColumnType("time");
+
+                    b.Property<int>("Year")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("PairTime", (string)null);
+                });
+
+            modelBuilder.Entity("Domain.TimetableEntities.GuidebookEntities.ParadeTime", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<int>("DayOfWeek")
+                        .HasColumnType("int");
+
+                    b.Property<TimeOnly>("EndTime")
+                        .HasColumnType("time");
+
+                    b.Property<TimeOnly>("StartTime")
+                        .HasColumnType("time");
+
+                    b.Property<int>("Year")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("ParadeTime", (string)null);
+                });
+
             modelBuilder.Entity("Domain.TimetableEntities.LessonEntities.Lesson", b =>
                 {
                     b.Property<int>("Id")
@@ -353,7 +422,7 @@ namespace Infrastructure.Migrations.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("HorizontalSubgroupStudentGroup", (string)null);
+                    b.ToTable("HorizontalSubgroupStudentGroup");
                 });
 
             modelBuilder.Entity("Domain.TimetableEntities.StudentGroupEntities.LiceumStudentGroup", b =>
@@ -366,7 +435,7 @@ namespace Infrastructure.Migrations.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("LiceumStudentGroup", (string)null);
+                    b.ToTable("LiceumStudentGroup");
                 });
 
             modelBuilder.Entity("Domain.TimetableEntities.StudentGroupEntities.ParallelStudentGroup", b =>
@@ -382,7 +451,7 @@ namespace Infrastructure.Migrations.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("ParallelStudentGroup", (string)null);
+                    b.ToTable("ParallelStudentGroup");
                 });
 
             modelBuilder.Entity("Domain.TimetableEntities.StudentGroupEntities.VerticalSubgroupStudentGroup", b =>
@@ -404,7 +473,7 @@ namespace Infrastructure.Migrations.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("VerticalSubgroupStudentGroup", (string)null);
+                    b.ToTable("VerticalSubgroupStudentGroup");
                 });
 
             modelBuilder.Entity("Domain.SubjectEntities.Subject", b =>

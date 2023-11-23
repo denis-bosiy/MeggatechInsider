@@ -19,6 +19,7 @@ import {
 import {
   groupGuidebookCoursesTimetablePageReducer
 } from "../pages/CoursesTimetable/GroupGuidebookCoursesTimetablePage/model/reducer";
+import { headerReducer } from "../layouts/Header/model/reducer";
 
 export default combineReducers({
   testPageStore: testPageReducer,
@@ -37,4 +38,5 @@ export default combineReducers({
   lessonsScheduleStore: lessonsSchedulePageReducer,
   teacherGuidebookCoursesTimetablePageStore: teacherGuidebookCoursesTimetablePageReducer,
   groupGuidebookCoursesTimetablePageStore: groupGuidebookCoursesTimetablePageReducer,
+  headerStore: headerReducer
 });
