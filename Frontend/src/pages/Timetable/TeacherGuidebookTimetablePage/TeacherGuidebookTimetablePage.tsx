@@ -226,6 +226,7 @@ const TeacherGuidebookTimetablePage = () => {
                       defaultValue={teacher.availableHours.map((time) => (hoursOptions.find(e => e.value === time.id)))}
                       options={hoursOptions}
                       isMulti
+                      closeMenuOnSelect={false}
                       className="basic-multi-select"
                       classNamePrefix="select"
                       onChange={(newValue: MultiValue<any>) => { 
