@@ -69,6 +69,7 @@ const App = (): React.JSX.Element => {
                 <Route path={AppRouter.NotFound} element={<Navigate to={AppRouter.Main} />} />
               </Route>
               <Route path={AppRouter.Statistics}>
+                <Route index element={<Navigate to={AppRouter.BudgetStatistic} replace />} />
                 <Route path={AppRouter.BudgetStatistics} element={<BudgetStatisticsPage />} />
               </Route>
             </Routes>
