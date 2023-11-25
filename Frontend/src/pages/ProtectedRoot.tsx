@@ -30,7 +30,7 @@ const ProtectedRoot = () => {
   };
 
   useEffect(() => {
-    if (tabs.length !== 0 && tabParams.getAll("tab").length === 0) {
+    if (tabs.length !== 0 && tabParams.get("tab") === null) {
       setTabParams({ tab: tabs[0] });
     }
   }, [tabs, tabParams]);
