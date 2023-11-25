@@ -105,8 +105,8 @@ export const Menu: MenuItem[] = [
         url: AppRouter.Assigning,
         tabs: {
           courses: "Подготовительные курсы",
-          expressCourses: "Подготовительные экспресс курсы",
-          shup: "ШЮП"
+          expressCourses: "Подготовительные экспресс-курсы",
+          schoolOfAYoungProgrammer: "ШЮП"
         }
       }
     ]
