@@ -37,11 +37,11 @@ const ClassGuidebookPage = () => {
 
   // Вытигявает айди групп класса из данных по первому предмету
   const groupsIds: string[] = guidebook
-    .filter((classGuidebookData: ClassGuidebookData) => classGuidebookData.class_id === tabParams.get("tab"))
+    .filter((classGuidebookData: ClassGuidebookData) => classGuidebookData.classId === tabParams.get("tab"))
     .map((classGuidebookData: ClassGuidebookData) => classGuidebookData.subjectsData[0])
     .map((subjectData: ClassGuidebookSubjectData) => subjectData.groupsData)
     .flat()
-    .map((groupData: ClassGuidebookGroupData) => groupData.group_id);
+    .map((groupData: ClassGuidebookGroupData) => groupData.groupId);
 
   return (
     <>
@@ -82,14 +82,14 @@ const ClassGuidebookPage = () => {
         </thead>
         <tbody>
           {guidebook
-            .find((classGuidebookData: ClassGuidebookData) => classGuidebookData.class_id === tabParams.get("tab"))
+            .find((classGuidebookData: ClassGuidebookData) => classGuidebookData.classId === tabParams.get("tab"))
             ?.subjectsData.map((subjectData: ClassGuidebookSubjectData) => {
               return (
                 <tr className="row" key={subjectData.subjectName}>
                   <td className="cell">{subjectData.subjectName}</td>
                   {subjectData.groupsData.map((groupData: ClassGuidebookGroupData) => {
                     return (
-                      <React.Fragment key={groupData.group_id}>
+                      <React.Fragment key={groupData.groupId}>
                         <td
                           className={classNames(
                             "cell",

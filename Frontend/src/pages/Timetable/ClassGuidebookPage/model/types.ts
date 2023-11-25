@@ -1,7 +1,7 @@
 type Guidebook = Array<ClassGuidebookData>
 
 type ClassGuidebookGroupData = {
-  group_id: string,
+  groupId: string,
   hoursPerWeekDistributed: number,
   hoursPerWeekPlanned: number,
   hoursDebt: number,
@@ -14,7 +14,7 @@ type ClassGuidebookSubjectData = {
 };
 
 type ClassGuidebookData = {
-  class_id: string,
+  classId: string,
   subjectsData: ClassGuidebookSubjectData[]
 }
 
