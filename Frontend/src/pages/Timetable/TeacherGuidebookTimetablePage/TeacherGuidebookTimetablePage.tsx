@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import Select, { MultiValue } from  "react-select";
+import { MultiValue } from  "react-select";
 import {
   Guidebook,
   TeacherGuidebookTimetableData,
@@ -24,6 +24,7 @@ import { TimetableTeacherResponse } from "../../../api/Responses/TimetableTeache
 import { ResponseBuilder } from "../../../api/Responses/ResponseBuilder";
 import { getWorkdayByCode } from "../../../utils/getWorkdayByCode";
 import { shortenWorkday } from "../../../utils/workdayShortener";
+import Multiselect from "../../../components/Multiselect/Multiselect";
 
 const TeacherGuidebookTimetablePage = () => {
   const httpService: HttpService = new HttpService();
@@ -222,14 +223,10 @@ const TeacherGuidebookTimetablePage = () => {
                 <td className="cell">{teacher.teacherName}</td>
                 <td className="cell">
                   {isGuidebookEditing.value ? (
-                    <Select
+                    <Multiselect
                       defaultValue={teacher.availableHours.map((time) => (hoursOptions.find(e => e.value === time.id)))}
                       options={hoursOptions}
-                      isMulti
-                      closeMenuOnSelect={false}
-                      className="basic-multi-select"
-                      classNamePrefix="select"
-                      onChange={(newValue: MultiValue<any>) => { 
+                      onValueChange={(newValue: MultiValue<any>) => { 
                         if (newValue) {
                           setGuidebookTableData(
                             guidebookTableData.map((data: TeacherGuidebookTimetableData) =>
