@@ -86,11 +86,11 @@ export const Menu: MenuItem[] = [
     ]
   },
   {
-    url: "#",
+    url: AppRouter.CoursesTimetable,
     label: "Расписание курсов",
     navigation: [
-      { label: "Справочник по преподавателям", url: "#" },
-      { label: "Справочник по группам", url: "#" },
+      { label: "Справочник по преподавателям", url: AppRouter.TeacherGuidebook },
+      { label: "Справочник по группам", url: AppRouter.GroupGuidebook },
       { label: "Расписание курсов", url: "#" }
     ]
   },

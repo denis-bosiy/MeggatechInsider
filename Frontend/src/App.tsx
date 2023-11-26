@@ -11,14 +11,10 @@ import SignInPage from "./pages/SignInPage/SignInPage";
 import SubjectsSyllabusPage from "./pages/Syllabus/SubjectsSyllabusPage/SubjectsSyllabusPage";
 import TeachersSyllabusPage from "./pages/Syllabus/TeachersSyllabusPage/TeachersSyllabusPage";
 import AssigningSyllabusPage from "./pages/Syllabus/AssigningSyllabusPage/AssigningSyllabusPage";
-import SubjectsCoursesSyllabusPage
-  from "./pages/CourseSyllabus/SubjectsCoursesSyllabusPage/SubjectsCoursesSyllabusPage";
-import TeachersCoursesSyllabusPage
-  from "./pages/CourseSyllabus/TeachersCoursesSyllabusPage/TeachersCoursesSyllabusPage";
-import AssigningCoursesSyllabusPage
-  from "./pages/CourseSyllabus/AssigningCoursesSyllabusPage/AssigningCoursesSyllabusPage";
-import TeacherGuidebookTimetablePage
-  from "./pages/Timetable/TeacherGuidebookTimetablePage/TeacherGuidebookTimetablePage";
+import SubjectsCoursesSyllabusPage from "./pages/CourseSyllabus/SubjectsCoursesSyllabusPage/SubjectsCoursesSyllabusPage";
+import TeachersCoursesSyllabusPage from "./pages/CourseSyllabus/TeachersCoursesSyllabusPage/TeachersCoursesSyllabusPage";
+import AssigningCoursesSyllabusPage from "./pages/CourseSyllabus/AssigningCoursesSyllabusPage/AssigningCoursesSyllabusPage";
+import TeacherGuidebookTimetablePage from "./pages/Timetable/TeacherGuidebookTimetablePage/TeacherGuidebookTimetablePage";
 import TimetableSettingsPage from "./pages/Settings/TimetableSettingsPage/TimetableSettingsPage";
 import TeacherSettingsPage from "./pages/Settings/TeacherSettingsPage/TeacherSettingsPage";
 import { Provider } from "react-redux";
@@ -30,8 +26,7 @@ import { QueryClient, QueryClientProvider } from "react-query";
 import ClassGuidebookPage from "./pages/Timetable/ClassGuidebookPage/ClassGuidebookPage";
 import BudgetStatisticsPage from "./pages/Statistics/BudgetStatisticsPage/BudgetStatisticsPage";
 import TeacherGuidebookCoursesTimetablePage from "./pages/CoursesTimetable/TeacherGuidebookCoursesTimetablePage/TeacherGuidebookCoursesTimetablePage";
-import GroupGuidebookCoursesTimetablePage
-  from "./pages/CoursesTimetable/GroupGuidebookCoursesTimetablePage/GroupGuidebookCoursesTimetablePage";
+import GroupGuidebookCoursesTimetablePage from "./pages/CoursesTimetable/GroupGuidebookCoursesTimetablePage/GroupGuidebookCoursesTimetablePage";
 
 const queryClient = new QueryClient();
 const App = (): React.JSX.Element => {
@@ -76,8 +71,9 @@ const App = (): React.JSX.Element => {
                   <Route path={AppRouter.BudgetStatistics} element={<BudgetStatisticsPage />} />
                 </Route>
                 <Route path={AppRouter.CoursesTimetable}>
-                  <Route path={AppRouter.TeacherGuidebook} element={<TeacherGuidebookCoursesTimetablePage/>} />
-                  <Route path={AppRouter.GroupGuidebook} element={<GroupGuidebookCoursesTimetablePage/>} />
+                  <Route index element={<Navigate to={AppRouter.TeacherGuidebook} replace />} />
+                  <Route path={AppRouter.TeacherGuidebook} element={<TeacherGuidebookCoursesTimetablePage />} />
+                  <Route path={AppRouter.GroupGuidebook} element={<GroupGuidebookCoursesTimetablePage />} />
                 </Route>
                 <Route path="components" element={<ComponentsPage />} />
                 <Route path="test-redux" element={<TestPage />} />
