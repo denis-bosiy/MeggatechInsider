@@ -11,14 +11,10 @@ import SignInPage from "./pages/SignInPage/SignInPage";
 import SubjectsSyllabusPage from "./pages/Syllabus/SubjectsSyllabusPage/SubjectsSyllabusPage";
 import TeachersSyllabusPage from "./pages/Syllabus/TeachersSyllabusPage/TeachersSyllabusPage";
 import AssigningSyllabusPage from "./pages/Syllabus/AssigningSyllabusPage/AssigningSyllabusPage";
-import SubjectsCoursesSyllabusPage
-  from "./pages/CourseSyllabus/SubjectsCoursesSyllabusPage/SubjectsCoursesSyllabusPage";
-import TeachersCoursesSyllabusPage
-  from "./pages/CourseSyllabus/TeachersCoursesSyllabusPage/TeachersCoursesSyllabusPage";
-import AssigningCoursesSyllabusPage
-  from "./pages/CourseSyllabus/AssigningCoursesSyllabusPage/AssigningCoursesSyllabusPage";
-import TeacherGuidebookTimetablePage
-  from "./pages/Timetable/TeacherGuidebookTimetablePage/TeacherGuidebookTimetablePage";
+import SubjectsCoursesSyllabusPage from "./pages/CourseSyllabus/SubjectsCoursesSyllabusPage/SubjectsCoursesSyllabusPage";
+import TeachersCoursesSyllabusPage from "./pages/CourseSyllabus/TeachersCoursesSyllabusPage/TeachersCoursesSyllabusPage";
+import AssigningCoursesSyllabusPage from "./pages/CourseSyllabus/AssigningCoursesSyllabusPage/AssigningCoursesSyllabusPage";
+import TeacherGuidebookTimetablePage from "./pages/Timetable/TeacherGuidebookTimetablePage/TeacherGuidebookTimetablePage";
 import TimetableSettingsPage from "./pages/Settings/TimetableSettingsPage/TimetableSettingsPage";
 import TeacherSettingsPage from "./pages/Settings/TeacherSettingsPage/TeacherSettingsPage";
 import { Provider } from "react-redux";
@@ -70,12 +66,14 @@ const App = (): React.JSX.Element => {
                   <Route path={AppRouter.LessonsSchedule} element={<LessonsSchedulePage />} />
                 </Route>
                 <Route path={AppRouter.CoursesTimetable}>
-                  <Route path={AppRouter.TeacherGuidebook} element={<TeacherGuidebookCoursesTimetablePage/>} />
+                  <Route index element={<Navigate to={AppRouter.TeacherGuidebook} replace />} />
+                  <Route path={AppRouter.TeacherGuidebook} element={<TeacherGuidebookCoursesTimetablePage />} />
                 </Route>
                 <Route path={AppRouter.Statistics}>
                   <Route index element={<Navigate to={AppRouter.BudgetStatistics} replace />} />
                   <Route path={AppRouter.BudgetStatistics} element={<BudgetStatisticsPage />} />
-                </Route>                <Route path="components" element={<ComponentsPage />} />
+                </Route>
+                <Route path="components" element={<ComponentsPage />} />
                 <Route path="test-redux" element={<TestPage />} />
                 <Route path={AppRouter.NotFound} element={<Navigate to={AppRouter.Main} />} />
               </Route>
