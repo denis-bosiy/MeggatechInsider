@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useLayoutEffect, useState } from "react";
 import { useSearchParams } from "react-router-dom";
 import Input, { InputType, InputSize } from "../../../components/Input/Input";
 import { useSelector } from "react-redux";
@@ -19,9 +19,7 @@ const ClassGuidebookPage = () => {
   const [tabParams] = useSearchParams();
 
   const [guidebookTableData, setGuidebookTableData] = useState<ClassGuidebookSubjectData[]>(
-    structuredClone(
-      guidebook.find((classData: ClassGuidebookData) => classData.classId === tabParams.get("tab"))?.subjectsData
-    )
+    structuredClone(guidebook[0].subjectsData)
   );
   const guidebookTableBuilder: CTableBuilder = new CTableBuilder(guidebookTableData, setGuidebookTableData);
   guidebookTableBuilder.addSearchFeature();
@@ -37,6 +35,16 @@ const ClassGuidebookPage = () => {
   const handleSort = (columnName: string): void => {
     guidebookTableManager.invokeFunction("sort", TableType.Default, [columnName, SortingOrder.Ascending]);
   };
+
+  useLayoutEffect(() => {
+    const subjectsData: ClassGuidebookSubjectData[] | undefined = guidebook.find(
+      (classGuidebookData: ClassGuidebookData) => classGuidebookData.classId === tabParams.get("tab")
+    )?.subjectsData;
+
+    if (subjectsData) {
+      setGuidebookTableData(subjectsData);
+    }
+  }, [tabParams.get("tab")]);
 
   // Вытигявает айди групп класса из данных по первому предмету
   const groupsIds: string[] = guidebook
@@ -84,7 +92,7 @@ const ClassGuidebookPage = () => {
           </tr>
         </thead>
         <tbody>
-          {guidebookTableData.map((subjectData: ClassGuidebookSubjectData) => {
+          {guidebookTableData?.map((subjectData: ClassGuidebookSubjectData) => {
             return (
               <tr className="row" key={subjectData.subjectName}>
                 <td className="cell">{subjectData.subjectName}</td>
