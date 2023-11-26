@@ -13,6 +13,8 @@ export enum AppRouter {
   ClassesGuidebook = "classes-guidebook",
   TeacherGuidebook = "teacher-guidebook",
   Settings = "settings",
+  FinancialReport = "financial-report",
+  OffBudgetReport = "off-budget-report",
   Basic = "basic",
   BudgetStatistics = "budget-statistics",
   Statistics = "statistics",
@@ -122,11 +124,11 @@ export const Menu: MenuItem[] = [
     ]
   },
   {
-    url: "#",
+    url: AppRouter.FinancialReport,
     label: "Финансовый отчет",
     navigation: [
       { label: "Тарификация", url: "#" },
-      { label: "Внебюджет", url: "#" },
+      { label: "Внебюджет", url: AppRouter.OffBudgetReport },
       { label: "Финальный отчет", url: "#" },
       { label: "Внебюджетные категории", url: "#" }
     ]
