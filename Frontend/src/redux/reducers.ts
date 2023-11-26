@@ -15,6 +15,7 @@ import {teacherEducationReducer} from "../pages/Settings/TeacherSettingsPage/vie
 import { lessonsSchedulePageReducer } from "../pages/LessonsSchedulePage/model/reducer";
 import { headerReducer } from "../layouts/Header/model/reducer";
 import { classGuidebookTimetablePageReducer } from "../pages/Timetable/ClassGuidebookPage/model/reducer";
+import { budgetStatisticsPageReducer } from "../pages/Statistics/BudgetStatisticsPage/model/reducer";
 
 export default combineReducers({
   testPageStore: testPageReducer,
@@ -32,5 +33,6 @@ export default combineReducers({
   teacherEducationStore: teacherEducationReducer,
   lessonsScheduleStore: lessonsSchedulePageReducer,
   headerStore: headerReducer,
-  classGuidebookTimetableStore: classGuidebookTimetablePageReducer
+  classGuidebookTimetableStore: classGuidebookTimetablePageReducer,
+  budgetStatisticsPageStore: budgetStatisticsPageReducer,
 });

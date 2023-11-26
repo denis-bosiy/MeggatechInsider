@@ -14,6 +14,8 @@ export enum AppRouter {
   TeacherGuidebook = "teacher-guidebook",
   Settings = "settings",
   Basic = "basic",
+  BudgetStatistics = "budget-statistics",
+  Statistics = "statistics",
   NotFound = "*"
 }
 
@@ -134,10 +136,10 @@ export const Menu: MenuItem[] = [
     label: "Контроль учебного плана за год"
   },
   {
-    url: "#",
+    url: AppRouter.Statistics,
     label: "Статистика",
     navigation: [
-      { label: "Статистика бюджетов", url: "#" },
+      { label: "Статистика бюджетов", url: AppRouter.BudgetStatistics },
       { label: "Статистика категорий", url: "#" },
       { label: "Статистика преподавателей", url: "#" }
     ]
