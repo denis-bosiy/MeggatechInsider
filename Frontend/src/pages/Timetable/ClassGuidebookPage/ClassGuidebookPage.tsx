@@ -3,7 +3,6 @@ import { useSearchParams } from "react-router-dom";
 import Input, { InputType, InputSize } from "../../../components/Input/Input";
 import { useSelector } from "react-redux";
 import { Guidebook, ClassGuidebookData, ClassGuidebookSubjectData, ClassGuidebookGroupData } from "./model/types";
-import { HeaderData } from "../../../layouts/Header/model/types";
 import { CTableBuilder } from "../../../core/Table/CTableBuilder";
 import { CTable } from "../../../core/Table/CTable";
 import { CTableManager } from "../../../core/Table/CTableManager";
@@ -16,21 +15,25 @@ const ClassGuidebookPage = () => {
   const guidebook = useSelector(
     (state: { classGuidebookTimetableStore: Guidebook }) => state.classGuidebookTimetableStore
   );
-  const { currentYear, currentWeek } = useSelector((state: { headerStore: HeaderData }) => state.headerStore);
   const [searchQuery, setSearchQuery] = useState<string>("");
   const [tabParams] = useSearchParams();
 
-  const [guidebookTableData, setGuidebookTableData] = useState<Guidebook>(structuredClone(guidebook));
+  const [guidebookTableData, setGuidebookTableData] = useState<ClassGuidebookSubjectData[]>(
+    structuredClone(
+      guidebook.find((classData: ClassGuidebookData) => classData.classId === tabParams.get("tab"))?.subjectsData
+    )
+  );
   const guidebookTableBuilder: CTableBuilder = new CTableBuilder(guidebookTableData, setGuidebookTableData);
   guidebookTableBuilder.addSearchFeature();
   const guidebookTable: CTable = guidebookTableBuilder.getTable();
   const guidebookTableManager: CTableManager = new CTableManager(guidebookTable);
 
-  // TODO: С поиском тоже
   const handleClassGuidebookSearch = (): void => {
-    guidebookTableManager.invokeFunction("search", TableType.Searchable, [searchQuery, guidebook]);
+    guidebookTableManager.invokeFunction("search", TableType.Searchable, [
+      searchQuery,
+      guidebook.find((classData: ClassGuidebookData) => classData.classId === tabParams.get("tab"))?.subjectsData
+    ]);
   };
-  // TODO: Здесь с сортировкой беда
   const handleSort = (columnName: string): void => {
     guidebookTableManager.invokeFunction("sort", TableType.Default, [columnName, SortingOrder.Ascending]);
   };
@@ -60,7 +63,7 @@ const ClassGuidebookPage = () => {
       <table className="table -fill -list">
         <thead className="header">
           <tr className="row">
-            <th className="cell -filter" rowSpan={2}>
+            <th className="cell -filter" rowSpan={2} onClick={() => handleSort("subjectName")}>
               Предмет
             </th>
             {groupsIds.map((groupId: string) => (
@@ -72,46 +75,44 @@ const ClassGuidebookPage = () => {
           <tr className="row">
             {groupsIds.map((groupId: string) => (
               <React.Fragment key={groupId}>
-                <th className="cell -filter">Часов в нед. распр-но</th>
-                <th className="cell -filter">Часов в нед. по плану</th>
-                <th className="cell -filter">Долг</th>
-                <th className="cell -filter">Часов сверх плана</th>
+                <th className="cell">Часов в нед. распр-но</th>
+                <th className="cell">Часов в нед. по плану</th>
+                <th className="cell">Долг</th>
+                <th className="cell">Часов сверх плана</th>
               </React.Fragment>
             ))}
           </tr>
         </thead>
         <tbody>
-          {guidebook
-            .find((classGuidebookData: ClassGuidebookData) => classGuidebookData.classId === tabParams.get("tab"))
-            ?.subjectsData.map((subjectData: ClassGuidebookSubjectData) => {
-              return (
-                <tr className="row" key={subjectData.subjectName}>
-                  <td className="cell">{subjectData.subjectName}</td>
-                  {subjectData.groupsData.map((groupData: ClassGuidebookGroupData) => {
-                    return (
-                      <React.Fragment key={groupData.groupId}>
-                        <td
-                          className={classNames(
-                            "cell",
-                            groupData.hoursPerWeekDistributed < groupData.hoursPerWeekPlanned ? "-error" : "",
-                            groupData.hoursPerWeekDistributed > groupData.hoursPerWeekPlanned ? "-warning" : ""
-                          )}
-                        >
-                          {groupData.hoursPerWeekDistributed}
-                        </td>
-                        <td className="cell">{groupData.hoursPerWeekPlanned}</td>
-                        <td className={classNames("cell", groupData.hoursDebt !== 0 ? "-error" : "")}>
-                          {groupData.hoursDebt}
-                        </td>
-                        <td className={classNames("cell", groupData.overWorkedHours !== 0 ? "-success" : "")}>
-                          {groupData.overWorkedHours}
-                        </td>
-                      </React.Fragment>
-                    );
-                  })}
-                </tr>
-              );
-            })}
+          {guidebookTableData.map((subjectData: ClassGuidebookSubjectData) => {
+            return (
+              <tr className="row" key={subjectData.subjectName}>
+                <td className="cell">{subjectData.subjectName}</td>
+                {subjectData.groupsData.map((groupData: ClassGuidebookGroupData) => {
+                  return (
+                    <React.Fragment key={groupData.groupId}>
+                      <td
+                        className={classNames(
+                          "cell",
+                          groupData.hoursPerWeekDistributed < groupData.hoursPerWeekPlanned ? "-error" : "",
+                          groupData.hoursPerWeekDistributed > groupData.hoursPerWeekPlanned ? "-warning" : ""
+                        )}
+                      >
+                        {groupData.hoursPerWeekDistributed}
+                      </td>
+                      <td className="cell">{groupData.hoursPerWeekPlanned}</td>
+                      <td className={classNames("cell", groupData.hoursDebt !== 0 ? "-error" : "")}>
+                        {groupData.hoursDebt}
+                      </td>
+                      <td className={classNames("cell", groupData.overWorkedHours !== 0 ? "-success" : "")}>
+                        {groupData.overWorkedHours}
+                      </td>
+                    </React.Fragment>
+                  );
+                })}
+              </tr>
+            );
+          })}
         </tbody>
       </table>
     </>
