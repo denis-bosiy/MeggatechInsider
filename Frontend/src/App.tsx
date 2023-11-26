@@ -23,6 +23,7 @@ import { AppRouter } from "./router";
 import ProtectedRoot from "./pages/ProtectedRoot";
 import LessonsSchedulePage from "./pages/LessonsSchedulePage/LessonsSchedulePage";
 import { QueryClient, QueryClientProvider } from "react-query";
+import ClassGuidebookPage from "./pages/Timetable/ClassGuidebookPage/ClassGuidebookPage";
 
 const queryClient = new QueryClient();
 const App = (): React.JSX.Element => {
@@ -59,6 +60,7 @@ const App = (): React.JSX.Element => {
                 <Route path={AppRouter.Timetable}>
                   <Route index element={<Navigate to={AppRouter.TeacherGuidebook} replace />} />
                   <Route path={AppRouter.TeacherGuidebook} element={<TeacherGuidebookTimetablePage />} />
+                  <Route path={AppRouter.ClassesGuidebook} element={<ClassGuidebookPage />} />
                   <Route path={AppRouter.LessonsSchedule} element={<LessonsSchedulePage />} />
                 </Route>
                 <Route path="components" element={<ComponentsPage />} />

@@ -8,7 +8,12 @@ export class CTable {
 
   public setData: (data: any[]) => void;
 
-  constructor(_table: CTable | undefined, _data: any[], _setData: (data: any[]) => void, _type: TableType = TableType.Default) {
+  constructor(
+    _table: CTable | undefined,
+    _data: any[],
+    _setData: (data: any[]) => void,
+    _type: TableType = TableType.Default
+  ) {
     this.table = _table;
     this.data = _data;
     this.setData = _setData;
