@@ -1,18 +1,20 @@
+import {SubjectsCoursesSyllabusPageData} from "./types";
+
 enum SUBJECTS_COURSES_SYLLABUS_PAGE_ACTIONS {
-  SUBJECTS_COURSES_SYLLABUS_PAGE_DELETE_SUBJECT = "SUBJECTS_COURSES_SYLLABUS_PAGE_DELETE_SUBJECT",
+  SAVE_SUBJECTS = "SAVE_SUBJECTS",
 }
 
-type ActionDeleteSubject = {
-  type: SUBJECTS_COURSES_SYLLABUS_PAGE_ACTIONS.SUBJECTS_COURSES_SYLLABUS_PAGE_DELETE_SUBJECT,
-  payload: number,
+type ActionSaveSubject = {
+  type: SUBJECTS_COURSES_SYLLABUS_PAGE_ACTIONS.SAVE_SUBJECTS,
+  payload: SubjectsCoursesSyllabusPageData,
 }
 
-type Action = ActionDeleteSubject
+type Action = ActionSaveSubject
 
 const ActionBuilder = {
-  deleteSubject: (subjectId: number) => ({
-    type: SUBJECTS_COURSES_SYLLABUS_PAGE_ACTIONS.SUBJECTS_COURSES_SYLLABUS_PAGE_DELETE_SUBJECT,
-    payload: subjectId,
+  saveSubjects: (values: SubjectsCoursesSyllabusPageData) => ({
+    type: SUBJECTS_COURSES_SYLLABUS_PAGE_ACTIONS.SAVE_SUBJECTS,
+    payload: { values },
   }),
 };
 

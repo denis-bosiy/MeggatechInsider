@@ -7,6 +7,12 @@ export enum SelectSize {
   Milli = "MILLI",
   Default = "DEFAULT"
 }
+
+export type SelectOption = {
+  id: string;
+  content: string;
+}
+
 export interface ISelectOption {
   id: string;
   content: string;

@@ -47,6 +47,13 @@ public class ApplicationContext : DbContext
 
         //lessons
         modelBuilder.ApplyConfiguration( new LessonConfiguration() );
+        modelBuilder.ApplyConfiguration( new LessonTimeConfiguration() );
+
+        //pairs
+        modelBuilder.ApplyConfiguration( new PairTimeConfiguration() );
+
+        //parade
+        modelBuilder.ApplyConfiguration( new ParadeTimeConfiguration() );
 
         //student groups
         modelBuilder.ApplyConfiguration( new ClassStudentGroupConfiguration() );

@@ -21,6 +21,10 @@
   display: flex;
   flex-direction: column;
   gap: 16px;
+
+  a {
+    width: fit-content;
+  }
 }
 
 .navigation-text {
