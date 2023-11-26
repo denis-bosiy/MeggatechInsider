@@ -1,6 +1,6 @@
 import React, {useContext, useState} from "react";
 import {useDispatch, useSelector} from "react-redux";
-import {SubjectsSyllabusPageData, SubjectSyllabusData} from "./model/types";
+import {SyllabusPageData, SyllabusData, PlanData} from "./model/types";
 import {ActionBuilder} from "./model/actions";
 import Input, {InputSize, InputType} from "../../../components/Input/Input";
 import ActionButton, {ActionButtonType} from "../../../components/ActionButton/ActionButton";
@@ -15,102 +15,124 @@ import {TableType} from "../../../core/Table/TableType";
 import {guidGenerator} from "../../../utils/guidGenerator";
 import {SortingOrder} from "../../../core/Table/SortingOrder";
 import ModalSettingsContext from "../../../utils/ModalSettingsContext";
+import {AssigningSyllabusData, AssigningSyllabusPageData} from "../AssigningSyllabusPage/model/types";
+import {classNames} from "../../../utils/classNames";
+
+const getGroupedData = (data: SyllabusData) => {
+  let hoursOf1Quarter = data[0].hoursOf1Quarter;
+  let hoursOf2Quarter = data[0].hoursOf2Quarter;
+  let hoursOf3Quarter = data[0].hoursOf3Quarter;
+  let hoursOf4Quarter = data[0].hoursOf4Quarter;
+  for (let i = 1; i < data.length; ++i) {
+    hoursOf1Quarter = hoursOf1Quarter.map((j, k) => j + data[i].hoursOf1Quarter[k]);
+    hoursOf2Quarter = hoursOf2Quarter.map((j, k) => j + data[i].hoursOf2Quarter[k]);
+    hoursOf3Quarter = hoursOf3Quarter.map((j, k) => j + data[i].hoursOf3Quarter[k]);
+    hoursOf4Quarter = hoursOf4Quarter.map((j, k) => j + data[i].hoursOf4Quarter[k]);
+  }
+  return {
+    hoursOf1Quarter,
+    hoursOf2Quarter,
+    hoursOf3Quarter,
+    hoursOf4Quarter
+  };
+};
+
+const getDataForHalfYear = (firstQuarter: number[], secondQuarter: number[]) => {
+  const sumOfFirstQuarter = firstQuarter.reduce((x, y) => {
+    return x + y;
+  }, 0);
+  const sumOfSecondQuarter = secondQuarter.reduce((x, y) => {
+    return x + y;
+  }, 0);
+  return sumOfFirstQuarter + sumOfSecondQuarter;
+};
+
+type GroupedDataProps = {
+  title?: string;
+  data: SyllabusData;
+}
+
+const GroupedData = ({title = "Итого", data}: GroupedDataProps) => {
+  const groupedData = getGroupedData(data);
+
+  return (
+    <tr className="row">
+      <td className="cell" colSpan={9}>{title}</td>
+      {groupedData.hoursOf1Quarter.map((item, index) => (
+        <td key={index} className="cell">{item}</td>
+      ))}
+      <td className="cell"></td>
+      {groupedData.hoursOf2Quarter.map((item, index) => (
+        <td key={index} className="cell">{item}</td>
+      ))}
+      <td className="cell"></td>
+      {groupedData.hoursOf3Quarter.map((item, index) => (
+        <td key={index} className="cell">{item}</td>
+      ))}
+      <td className="cell"></td>
+      {groupedData.hoursOf4Quarter.map((item, index) => (
+        <td key={index} className="cell">{item}</td>
+      ))}
+      <td className="cell"></td>
+      <td className="cell">{getDataForHalfYear(groupedData.hoursOf1Quarter, groupedData.hoursOf2Quarter)}</td>
+      <td className="cell">{getDataForHalfYear(groupedData.hoursOf3Quarter, groupedData.hoursOf4Quarter)}</td>
+      <td className="cell"></td>
+    </tr>
+  );
+};
 
 const SyllabusPage = () => {
-  const financingOptions: ISelectOption[] = [
-    { id: "1", content: "Бюджет" },
-    { id: "2", content: "Внебюджет" },
-  ];
-  const typeOptions: ISelectOption[] = [
-    { id: "1", content: "Обязательный проф." },
-    { id: "2", content: "Необязательный проф." },
-  ];
-  const categoryOptions: ISelectOption[] = [
-    { id: "1", content: "Физ." },
-    { id: "2", content: "Ист." },
-  ];
-
   const { openModal } = useContext(ModalSettingsContext);
   const dispatch = useDispatch();
-  const subjects = useSelector((state: {subjectsSyllabusPageStore: SubjectsSyllabusPageData}) => state.subjectsSyllabusPageStore);
-  const [isSubjectsEditing, setIsSubjectsEditing] = useState<{ value: boolean }>({ value: false });
-  const [isSubjectsAdding, setIsSubjectsAdding] = useState<{ value: boolean }>({ value: false });
-  const [subjectsTableData, setSubjectsTableData] = useState<SubjectsSyllabusPageData>(structuredClone(subjects));
-  const [subjectSearchQuery, setSubjectSearchQuery] = useState<string>("");
-  const subjectsTableBuilder: CTableBuilder = new CTableBuilder(subjectsTableData, setSubjectsTableData);
-  subjectsTableBuilder.addEditFeature(isSubjectsEditing, setIsSubjectsEditing);
-  subjectsTableBuilder.addManageFeature(isSubjectsAdding, setIsSubjectsAdding);
-  subjectsTableBuilder.addSearchFeature();
-  const subjectsTable: CTable = subjectsTableBuilder.getTable();
-  const subjectsTableManager: CTableManager = new CTableManager(subjectsTable);
+  const syllabus = useSelector((state: {syllabusPageStore: SyllabusPageData}) => state.syllabusPageStore);
+  const plan = syllabus.plan;
+  const [isSyllabusEditing, setIsSyllabusEditing] = useState<{ value: boolean }>({ value: false });
+  const [syllabusTableData, setSyllabusTableData] = useState<SyllabusData>(structuredClone(plan));
+  const [syllabusSearchQuery, setSyllabusSearchQuery] = useState<string>("");
+  const syllabusTableBuilder: CTableBuilder = new CTableBuilder(syllabusTableData, setSyllabusTableData);
+  syllabusTableBuilder.addEditFeature(isSyllabusEditing, setIsSyllabusEditing);
+  syllabusTableBuilder.addSearchFeature();
+  const syllabusTable: CTable = syllabusTableBuilder.getTable();
+  const syllabusTableManager: CTableManager = new CTableManager(syllabusTable);
 
-  const handleSaveSubjects = () => {
-    subjectsTableManager.invokeFunction("apply", TableType.Editable, [
-      (data: any[]) => dispatch(ActionBuilder.saveSubjects(data))
+  const handleSaveSyllabus = () => {
+    syllabusTableManager.invokeFunction("apply", TableType.Editable, [
+      (data: any[]) => dispatch(ActionBuilder.saveSyllabus(data))
     ]);
   };
-  const handleResetSubjects = () => {
-    subjectsTableManager.invokeFunction("cancel", TableType.Editable, [subjects]);
+  const handleResetSyllabus = () => {
+    syllabusTableManager.invokeFunction("cancel", TableType.Editable, [plan]);
   };
-  const editSubjects = (): void => {
-    subjectsTableManager.invokeFunction("edit", TableType.Editable, []);
-  };
-  const handleAddingSubjects = (): void => {
-    subjectsTableManager.invokeFunction("add", TableType.Managable, [
-      {
-        id: guidGenerator(),
-        subjectName: "",
-        financing: financingOptions[0].content,
-        type: typeOptions[0].content,
-        category: categoryOptions[0].content,
-        surchargeForNotebooks: 0,
-        numberOf10: 0,
-        numberOfGroupsIn10: 0,
-        numberOf11: 0,
-        numberOfGroupsIn11: 0,
-        isFinalExam: false
-      }
-    ]);
-  };
-  const handleApplyingNewSubject = (): void => {
-    subjectsTableManager.invokeFunction("applyAdding", TableType.Managable, [
-      (data: any[]) => dispatch(ActionBuilder.saveSubjects(data))
-    ]);
+  const editSyllabus = (): void => {
+    syllabusTableManager.invokeFunction("edit", TableType.Editable, []);
   };
   const handleSubjectSearch = (): void => {
-    subjectsTableManager.invokeFunction("search", TableType.Searchable, [
-      subjectSearchQuery,
-      subjects
+    syllabusTableManager.invokeFunction("search", TableType.Searchable, [
+      syllabusSearchQuery,
+      plan
     ]);
   };
   const handleSort = (columnName: string): void => {
-    subjectsTableManager.invokeFunction("sort", TableType.Default, [columnName, SortingOrder.Ascending]);
-  };
-  const handleDeleteSubject = (id: string): void => {
-    subjectsTableManager.invokeFunction("delete", TableType.Managable, [
-      id,
-      (data: any[]) => dispatch(ActionBuilder.saveSubjects(data)),
-      openModal
-    ]);
+    syllabusTableManager.invokeFunction("sort", TableType.Default, [columnName, SortingOrder.Ascending]);
   };
 
   return (
     <>
       <div className="toolbar -fill">
         <div className="toolbar__buttons-wrapper">
-          {isSubjectsEditing.value ? (
+          {isSyllabusEditing.value ? (
             <>
               <ActionButton
                 className="toolbar__button"
                 label="Сохранить"
                 type={ActionButtonType.Positive}
-                onClick={handleSaveSubjects}
+                onClick={handleSaveSyllabus}
               />
               <ActionButton
                 className="toolbar__button"
                 label="Отменить"
                 type={ActionButtonType.Negative}
-                onClick={handleResetSubjects}
+                onClick={handleResetSyllabus}
               />
             </>
           ) : (
@@ -119,15 +141,15 @@ const SyllabusPage = () => {
               label="Редактировать"
               icon={<PenIcon width={18} height={18} />}
               type={ActionButtonType.Default}
-              onClick={editSubjects}
+              onClick={editSyllabus}
             />
           )}
         </div>
         <Input
           className="toolbar__search"
           placeholder="Поиск"
-          value={subjectSearchQuery}
-          onValueChange={setSubjectSearchQuery}
+          value={syllabusSearchQuery}
+          onValueChange={setSyllabusSearchQuery}
           size={InputSize.Default}
           type={InputType.Search}
           onSearch={handleSubjectSearch}
@@ -139,16 +161,16 @@ const SyllabusPage = () => {
             <th className="cell" colSpan={9}>
               &nbsp;
             </th>
-            <th className="cell" colSpan={11}>
+            <th className="cell" colSpan={syllabus.numberOfWeeksIn1Quarter + 1}>
               1 четверть
             </th>
-            <th className="cell" colSpan={9}>
+            <th className="cell" colSpan={syllabus.numberOfWeeksIn2Quarter + 1}>
               2 четверть
             </th>
-            <th className="cell" colSpan={9}>
+            <th className="cell" colSpan={syllabus.numberOfWeeksIn3Quarter + 1}>
               3 четверть
             </th>
-            <th className="cell" colSpan={10}>
+            <th className="cell" colSpan={syllabus.numberOfWeeksIn4Quarter + 1}>
               4 четверть
             </th>
             <th className="cell" colSpan={3}>
@@ -156,53 +178,30 @@ const SyllabusPage = () => {
             </th>
           </tr>
           <tr className="row">
-            <th className="cell -filter">Предмет</th>
-            <th className="cell -filter">Б/Бв</th>
-            <th className="cell -filter">Тип</th>
-            <th className="cell -filter -vertical">Ч. групп</th>
-            <th className="cell -filter -vertical">Ср. в год</th>
-            <th className="cell -filter -vertical">Ср. в период</th>
-            <th className="cell -filter -vertical">Ч. всего</th>
-            <th className="cell -filter -vertical">Ч. ожидается</th>
-            <th className="cell -filter -vertical">Ч. по плану</th>
-            <th className="cell -vertical">7 сент. №1</th>
-            <th className="cell -vertical">14 сент. №2</th>
-            <th className="cell -vertical">21 сент. №3</th>
-            <th className="cell -vertical">№4</th>
-            <th className="cell -vertical">№4</th>
-            <th className="cell -vertical">№4</th>
-            <th className="cell -vertical">№4</th>
-            <th className="cell -vertical">№4</th>
-            <th className="cell -vertical">№4</th>
-            <th className="cell -vertical">№4</th>
+            <th className="cell -filter" onClick={() => handleSort("name")}>Предмет</th>
+            <th className="cell -filter" onClick={() => handleSort("financing")}>Б/Бв</th>
+            <th className="cell -filter" onClick={() => handleSort("type")}>Тип</th>
+            <th className="cell -filter -vertical" onClick={() => handleSort("numberOfGroups")}>Ч. групп</th>
+            <th className="cell -filter -vertical" onClick={() => handleSort("averagePerYear")}>Ср. в год</th>
+            <th className="cell -filter -vertical" onClick={() => handleSort("averageForPeriod")}>Ср. в период</th>
+            <th className="cell -filter -vertical" onClick={() => handleSort("hoursTotal")}>Ч. всего</th>
+            <th className="cell -filter -vertical" onClick={() => handleSort("hoursExpected")}>Ч. ожидается</th>
+            <th className="cell -filter -vertical" onClick={() => handleSort("hoursToPlan")}>Ч. по плану</th>
+            {[...new Array(syllabus.numberOfWeeksIn1Quarter)].map((_, index) => (
+              <th key={index} className="cell -vertical">№{index + 1} {syllabus.startOf1Quarter}</th>
+            ))}
             <th className="cell">&nbsp;</th>
-            <th className="cell -vertical">№4</th>
-            <th className="cell -vertical">№4</th>
-            <th className="cell -vertical">№4</th>
-            <th className="cell -vertical">№4</th>
-            <th className="cell -vertical">№4</th>
-            <th className="cell -vertical">№4</th>
-            <th className="cell -vertical">№4</th>
-            <th className="cell -vertical">№4</th>
+            {[...new Array(syllabus.numberOfWeeksIn2Quarter)].map((_, index) => (
+              <th key={index} className="cell -vertical">№{syllabus.numberOfWeeksIn1Quarter + index + 1} {syllabus.startOf2Quarter}</th>
+            ))}
             <th className="cell">&nbsp;</th>
-            <th className="cell -vertical">№4</th>
-            <th className="cell -vertical">№4</th>
-            <th className="cell -vertical">№4</th>
-            <th className="cell -vertical">№4</th>
-            <th className="cell -vertical">№4</th>
-            <th className="cell -vertical">№4</th>
-            <th className="cell -vertical">№4</th>
-            <th className="cell -vertical">№4</th>
+            {[...new Array(syllabus.numberOfWeeksIn3Quarter)].map((_, index) => (
+              <th key={index} className="cell -vertical">№{syllabus.numberOfWeeksIn1Quarter + syllabus.numberOfWeeksIn2Quarter + index + 1} {syllabus.startOf3Quarter}</th>
+            ))}
             <th className="cell">&nbsp;</th>
-            <th className="cell -vertical">№4</th>
-            <th className="cell -vertical">№4</th>
-            <th className="cell -vertical">№4</th>
-            <th className="cell -vertical">№4</th>
-            <th className="cell -vertical">№4</th>
-            <th className="cell -vertical">№4</th>
-            <th className="cell -vertical">№4</th>
-            <th className="cell -vertical">№4</th>
-            <th className="cell -vertical">24 мая №35</th>
+            {[...new Array(syllabus.numberOfWeeksIn4Quarter)].map((_, index) => (
+              <th key={index} className="cell -vertical">№{syllabus.numberOfWeeksIn1Quarter + syllabus.numberOfWeeksIn2Quarter + syllabus.numberOfWeeksIn3Quarter + index + 1} {syllabus.startOf4Quarter}</th>
+            ))}
             <th className="cell">&nbsp;</th>
             <th className="cell -filter">Ч. 1 пг.</th>
             <th className="cell -filter">Ч. 2 пг.</th>
@@ -210,114 +209,75 @@ const SyllabusPage = () => {
           </tr>
         </thead>
         <tbody>
-          <tr>
-            <td className="cell">Физика</td>
-            <td className="cell">Бюджет</td>
-            <td className="cell">Обязательный профильный</td>
-            <td className="cell">3</td>
-            <td className="cell">12</td>
-            <td className="cell">14</td>
-            <td className="cell -error">105</td>
-            <td className="cell">105</td>
-            <td className="cell">105</td>
-            <td className="cell">12</td>
-            <td className="cell">12</td>
-            <td className="cell">12</td>
-            <td className="cell">12</td>
-            <td className="cell">12</td>
-            <td className="cell">12</td>
-            <td className="cell">12</td>
-            <td className="cell">12</td>
-            <td className="cell">12</td>
-            <td className="cell">12</td>
-            <td className="cell" title="Очистить четверть">
-              del
-            </td>
-            <td className="cell">12</td>
-            <td className="cell">12</td>
-            <td className="cell">12</td>
-            <td className="cell">12</td>
-            <td className="cell">12</td>
-            <td className="cell">12</td>
-            <td className="cell">12</td>
-            <td className="cell">12</td>
-            <td className="cell" title="Очистить четверть">
-              del
-            </td>
-            <td className="cell">12</td>
-            <td className="cell">12</td>
-            <td className="cell">12</td>
-            <td className="cell">12</td>
-            <td className="cell">12</td>
-            <td className="cell">12</td>
-            <td className="cell">12</td>
-            <td className="cell">12</td>
-            <td className="cell" title="Очистить четверть">
-              del
-            </td>
-            <td className="cell">12</td>
-            <td className="cell">12</td>
-            <td className="cell">12</td>
-            <td className="cell">12</td>
-            <td className="cell">12</td>
-            <td className="cell">12</td>
-            <td className="cell">12</td>
-            <td className="cell">12</td>
-            <td className="cell">12</td>
-            <td className="cell" title="Очистить четверть">
-              del
-            </td>
-            <td className="cell">1000</td>
-            <td className="cell">5000</td>
-            <td className="cell">
-              <button>Авто</button>
-            </td>
-          </tr>
-          <tr>
-            <td className="cell" colSpan={9}>Физика</td>
-            <td className="cell">12</td>
-            <td className="cell">12</td>
-            <td className="cell">12</td>
-            <td className="cell">12</td>
-            <td className="cell">12</td>
-            <td className="cell">12</td>
-            <td className="cell">12</td>
-            <td className="cell">12</td>
-            <td className="cell">12</td>
-            <td className="cell">12</td>
-            <td className="cell"></td>
-            <td className="cell">12</td>
-            <td className="cell">12</td>
-            <td className="cell">12</td>
-            <td className="cell">12</td>
-            <td className="cell">12</td>
-            <td className="cell">12</td>
-            <td className="cell">12</td>
-            <td className="cell">12</td>
-            <td className="cell"></td>
-            <td className="cell">12</td>
-            <td className="cell">12</td>
-            <td className="cell">12</td>
-            <td className="cell">12</td>
-            <td className="cell">12</td>
-            <td className="cell">12</td>
-            <td className="cell">12</td>
-            <td className="cell">12</td>
-            <td className="cell"></td>
-            <td className="cell">12</td>
-            <td className="cell">12</td>
-            <td className="cell">12</td>
-            <td className="cell">12</td>
-            <td className="cell">12</td>
-            <td className="cell">12</td>
-            <td className="cell">12</td>
-            <td className="cell">12</td>
-            <td className="cell">12</td>
-            <td className="cell"></td>
-            <td className="cell">1000</td>
-            <td className="cell">5000</td>
-            <td className="cell"></td>
-          </tr>
+          {syllabusTableData.map((value: PlanData) => {
+            return (
+              <tr className="row" key={value.id}>
+                <td className="cell">{value.name}</td>
+                <td className="cell">{value.financing}</td>
+                <td className="cell">{value.type}</td>
+                <td className="cell">{value.numberOfGroups}</td>
+                <td className="cell">{value.averagePerYear}</td>
+                <td className="cell">{value.averageForPeriod}</td>
+                <td className="cell">{value.hoursTotal}</td>
+                <td className="cell">{value.hoursExpected}</td>
+                <td className="cell">0</td>
+                {value.hoursOf1Quarter.map((item, index) => (
+                  <td key={index} className="cell">{item}</td>
+                ))}
+                <td className="cell" title="Очистить четверть">
+                  <IconButton
+                    icon={<GarbageIcon />}
+                    small={true}
+                    onClick={() => alert("Очистить четверть")}
+                  />
+                </td>
+                {value.hoursOf2Quarter.map((item, index) => (
+                  <td key={index} className="cell">{item}</td>
+                ))}
+                <td className="cell" title="Очистить четверть">
+                  <IconButton
+                    icon={<GarbageIcon />}
+                    small={true}
+                    onClick={() => alert("Очистить четверть")}
+                  />
+                </td>
+                {value.hoursOf3Quarter.map((item, index) => (
+                  <td key={index} className="cell">{item}</td>
+                ))}
+                <td className="cell" title="Очистить четверть">
+                  <IconButton
+                    icon={<GarbageIcon />}
+                    small={true}
+                    onClick={() => alert("Очистить четверть")}
+                  />
+                </td>
+                {value.hoursOf4Quarter.map((item, index) => (
+                  <td key={index} className="cell">{item}</td>
+                ))}
+                <td className="cell" title="Очистить четверть">
+                  <IconButton
+                    icon={<GarbageIcon />}
+                    small={true}
+                    onClick={() => alert("Очистить четверть")}
+                  />
+                </td>
+                <td className="cell">{getDataForHalfYear(value.hoursOf1Quarter, value.hoursOf2Quarter)}</td>
+                <td className="cell">{getDataForHalfYear(value.hoursOf3Quarter, value.hoursOf4Quarter)}</td>
+                <td className="cell">
+                  <button>Авто</button>
+                </td>
+              </tr>
+            );
+          })}
+
+          {syllabus.types.map((type: string, index: number) => {
+            const data = syllabus.plan.filter((data: PlanData) => data.type === type);
+            return (
+              <GroupedData key={index} title={type} data={data} />
+            );
+          })}
+
+          <GroupedData data={syllabus.plan} />
         </tbody>
       </table>
     </>
