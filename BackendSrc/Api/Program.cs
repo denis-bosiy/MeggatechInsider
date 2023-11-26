@@ -1,3 +1,4 @@
+using Api.Builders;
 using Api.JsonConverters;
 using Application;
 using DatabaseProvider;
@@ -29,6 +30,7 @@ namespace Api
             } ) );
             builder.Services.AddApplication();
             builder.Services.AddDatabaseRepositories();
+            builder.Services.AddBuilders();
 
 
             WebApplication app = builder.Build();

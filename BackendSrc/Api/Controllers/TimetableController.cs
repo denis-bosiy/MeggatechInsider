@@ -1,5 +1,5 @@
 using System.Web.Http.Description;
-using Api.Mappers.Timetable;
+using Api.Builders.Timetable.TeacherTimetableDtoBuilder;
 using Api.Models.TeacherTimetable;
 using Api.Models.Timetable;
 using Application.Abstractions.EductionalPlan;
@@ -20,17 +20,20 @@ public class TimetableController : ControllerBase
     private readonly IAssignmentService _assignmentService;
     private readonly ILessonTimeService _lessonTimeService;
     private readonly IPairTimeService _pairTimeService;
+    private readonly ITeacherTimetableDtoBuilder _teacherTimetableDtoBuilder;
 
     public TimetableController(
         ITeacherTimetableService teacherTimetableService,
         IAssignmentService assignmentService,
         ILessonTimeService lessonTimeService,
-        IPairTimeService pairTimeService )
+        IPairTimeService pairTimeService,
+        ITeacherTimetableDtoBuilder teacherTimetableDtoBuilder )
     {
         _teacherTimetableService = teacherTimetableService;
         _assignmentService = assignmentService;
         _lessonTimeService = lessonTimeService;
         _pairTimeService = pairTimeService;
+        _teacherTimetableDtoBuilder = teacherTimetableDtoBuilder;
     }
 
     [HttpGet]
@@ -371,7 +374,7 @@ public class TimetableController : ControllerBase
     }
 
     [HttpGet( "pair-time-ranges" )]
-    [ResponseType( typeof( TimetablePairTimeRangesResponseDto ) )]
+    [ResponseType( typeof(TimetablePairTimeRangesResponseDto) )]
     public IActionResult GetTimetablePairTimeRanges(
         [FromQuery] TimetablePairTimeRangesRequestDto timetablePairTimeRangesRequestDto )
     {
@@ -397,7 +400,7 @@ public class TimetableController : ControllerBase
     }
 
     [HttpGet( "lesson-time-ranges" )]
-    [ResponseType( typeof( TimetableLessonTimeRangesResponseDto ) )]
+    [ResponseType( typeof(TimetableLessonTimeRangesResponseDto) )]
     public IActionResult GetTimetableLessonTimeRanges(
         [FromQuery] TimetableLessonTimeRangesRequestDto timetableLessonTimeRangesRequestDto )
     {
@@ -441,16 +444,10 @@ public class TimetableController : ControllerBase
                 .Where( t => t.WeekStartDate == weekStartDate )
                 .ToList();
 
-            return new TeacherTimetableDto()
-            {
-                Id = assignment.Id,
-                SubjectName = assignment.Subject.SubjectName,
-                SubjectId = assignment.SubjectId,
-                TeacherName = assignment.Teacher.TeacherName,
-                TeacherId = assignment.TeacherId,
-                AvailableHoursByWeekDay = assignmentTeacherAvailableHours.Map()
-                // TODO: добавить часы из учебного плана
-            };
+            _teacherTimetableDtoBuilder.SetAssignment( assignment );
+            _teacherTimetableDtoBuilder.SetAvailableHoursByWeekDay( assignmentTeacherAvailableHours );
+
+            return _teacherTimetableDtoBuilder.GetResult();
         } ).ToList();
 
         TeacherTimetableListResponseDto responseDto = new TeacherTimetableListResponseDto()
@@ -513,7 +510,6 @@ public class TimetableController : ControllerBase
                     weekStartDate );
             }
         }
-
 
         return Ok();
     }
