@@ -1,3 +1,4 @@
+using Domain.CourseEntities.CourseTimetables;
 using Domain.TeacherEntities;
 
 namespace Domain.CourseEntities.CourceTeachers
