@@ -1,5 +1,6 @@
 using Application.Implementations.EducationalPlan;
 using Application.Implementations.StudyingActivityServices;
+using Application.Implementations.TimetableServices;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace Application
@@ -10,6 +11,7 @@ namespace Application
         {
             services.AddStudyingActivities();
             services.AddEducationalPlanServices();
+            services.AddTimetableServices();
 
             return services;
         }
