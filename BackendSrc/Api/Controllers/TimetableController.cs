@@ -374,7 +374,7 @@ public class TimetableController : ControllerBase
     }
 
     [HttpGet( "pair-time-ranges" )]
-    [ResponseType( typeof(TimetablePairTimeRangesResponseDto) )]
+    [ResponseType( typeof( TimetablePairTimeRangesResponseDto ) )]
     public IActionResult GetTimetablePairTimeRanges(
         [FromQuery] TimetablePairTimeRangesRequestDto timetablePairTimeRangesRequestDto )
     {
@@ -400,7 +400,7 @@ public class TimetableController : ControllerBase
     }
 
     [HttpGet( "lesson-time-ranges" )]
-    [ResponseType( typeof(TimetableLessonTimeRangesResponseDto) )]
+    [ResponseType( typeof( TimetableLessonTimeRangesResponseDto ) )]
     public IActionResult GetTimetableLessonTimeRanges(
         [FromQuery] TimetableLessonTimeRangesRequestDto timetableLessonTimeRangesRequestDto )
     {
@@ -426,7 +426,7 @@ public class TimetableController : ControllerBase
     }
 
     [HttpGet( "teachers" )]
-    [ProducesResponseType( typeof(TeacherTimetableListResponseDto), StatusCodes.Status200OK )]
+    [ProducesResponseType( typeof( TeacherTimetableListResponseDto ), StatusCodes.Status200OK )]
     public IActionResult GetTeachers( [FromQuery] TeacherTimetableListRequestDto teacherTimetableRequest )
     {
         List<Assignment> assignments = _assignmentService.GetAssignmentsByYear( teacherTimetableRequest.Year );
