@@ -143,7 +143,7 @@ export const Menu: MenuItem[] = [
     navigation: [
       { label: "Статистика бюджетов", url: AppRouter.BudgetStatistics },
       { label: "Статистика категорий", url: "#" },
-      { label: "Статистика преподавателей", url: "#" }
+      { label: "Статистика преподавателей", url: AppRouter.Teachers }
     ]
   }
 ];
