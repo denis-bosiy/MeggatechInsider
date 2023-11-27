@@ -1,9 +1,9 @@
 namespace Domain.CourseEntities.CourseEducationalPlans
 {
-    public class CoursesEducationalPlanHours : Entity
+    public class CourseEducationalPlanHoursByWeek : Entity
     {
         public CoursesEducationalPlan CoursesEducationalPlan { get; set; }
-        public int CoursesEducationalPlanId => CoursesEducationalPlan.Id;
+        public int CoursesEducationalPlanId { get; set; }
         public DateOnly WeekStartDate { get; set; }
         public int HoursCount { get; set; }
     }

@@ -6,10 +6,10 @@ namespace Domain.CourseEntities.CourseAssignments
     public class Assignment : Entity
     {
         public CourseTeacher CourseTeacher { get; set; }
-        public int CourseTeacherId => CourseTeacher.Id;
+        public int CourseTeacherId { get; set; }
 
         public Course Course { get; set; }
-        public int CourseId => Course.Id;
+        public int CourseId { get; set; }
 
         public int GroupCount { get; set; }
 

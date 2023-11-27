@@ -5,7 +5,7 @@ namespace Domain.CourseEntities.CourseEducationalPlans
     public class CoursesEducationalPlan : Entity
     {
         public Course Course { get; set; }
-        public int CourseId => Course.Id;
-        public List<CoursesEducationalPlanHours> CoursesEducationalPlanHours { get; set; }
+        public int CourseId { get; set; }
+        public List<CourseEducationalPlanHoursByWeek> CoursesEducationalPlanHours { get; set; }
     }
 }
