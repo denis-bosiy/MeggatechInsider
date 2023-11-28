@@ -7,6 +7,7 @@ import { DiscrepancyResponse } from "./DiscrepancyResponse";
 import { TimetableTeacherResponse } from "./TimetableTeacherResponse";
 import { AvailableHourResponse } from "./AvailableHourResponse";
 import {SyllabusCoursesSubjectResponse} from "./SyllabusCoursesSubjectResponse";
+import {SyllabusCoursesTeacherResponse} from './SyllabusCoursesTeacherResponse';
 
 export class ResponseBuilder {
   public static BuildTimetablePairTimeSettingsResponse(data: any): TimetablePairTimeSettingResponse {
@@ -105,6 +106,27 @@ export class ResponseBuilder {
     let teachers: SyllabusTeacherResponse[] = [];
 
     teachers = data.data.teachers.map((teacher: any) => ResponseBuilder.BuildSyllabusTeacherResponse(teacher));
+
+    return teachers;
+  }
+
+  public static BuildSyllabusCoursesTeacherResponse(data: any): SyllabusCoursesTeacherResponse {
+    return new SyllabusCoursesTeacherResponse(
+      data.id,
+      data.name,
+      data.workingContract,
+      data.workingStartDate,
+      data.workExperience,
+      data.workExperienceAtTheTimeOfTheEmployment,
+      data.birthDay,
+      data.age,
+    );
+  }
+
+  public static BuildSyllabusCoursesTeachersResponse(data: any): SyllabusCoursesTeacherResponse[] {
+    let teachers: SyllabusCoursesTeacherResponse[] = [];
+
+    teachers = data.data.teachers.map((teacher: any) => ResponseBuilder.BuildSyllabusCoursesTeacherResponse(teacher));
 
     return teachers;
   }

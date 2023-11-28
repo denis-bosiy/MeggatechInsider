@@ -14,11 +14,9 @@ import {CTableManager} from "../../../core/Table/CTableManager";
 import {TableType} from "../../../core/Table/TableType";
 import {guidGenerator} from "../../../utils/guidGenerator";
 import {SortingOrder} from "../../../core/Table/SortingOrder";
-import {SubjectSyllabusData} from "../../Syllabus/SubjectsSyllabusPage/model/types";
 import {HttpService} from "../../../api/http.service";
 import {HeaderData} from "../../../layouts/Header/model/types";
 import {Endpoint} from "../../../api/endpoints";
-import {SyllabusSubjectResponse} from "../../../api/Responses/SyllabusSubjectResponse";
 import {ResponseBuilder} from "../../../api/Responses/ResponseBuilder";
 import {SyllabusCoursesSubjectResponse} from "../../../api/Responses/SyllabusCoursesSubjectResponse";
 

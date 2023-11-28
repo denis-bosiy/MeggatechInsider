@@ -1,4 +1,4 @@
-import React, {useContext, useState} from "react";
+import React, {useContext, useEffect, useState} from "react";
 import {useDispatch, useSelector} from "react-redux";
 import {TeachersCoursesSyllabusPageData, TeacherCoursesSyllabusData} from "./model/types";
 import {ActionBuilder} from "./model/actions";
@@ -8,13 +8,17 @@ import {CheckMarkIcon, GarbageIcon, PenIcon, PlusIcon} from "../../../icons";
 import Select, {ISelectOption, SelectSize} from "../../../components/Select/Select";
 import IconButton, {IconButtonType} from "../../../components/IconButton/IconButton";
 import ModalSettingsContext from "../../../utils/ModalSettingsContext";
-import {TeachersSyllabusPageData, TeacherSyllabusData} from "../../Syllabus/TeachersSyllabusPage/model/types";
 import {CTableBuilder} from "../../../core/Table/CTableBuilder";
 import {CTable} from "../../../core/Table/CTable";
 import {CTableManager} from "../../../core/Table/CTableManager";
 import {TableType} from "../../../core/Table/TableType";
 import {guidGenerator} from "../../../utils/guidGenerator";
 import {SortingOrder} from "../../../core/Table/SortingOrder";
+import {HttpService} from "../../../api/http.service";
+import {HeaderData} from "../../../layouts/Header/model/types";
+import {Endpoint} from "../../../api/endpoints";
+import {ResponseBuilder} from "../../../api/Responses/ResponseBuilder";
+import {SyllabusCoursesTeacherResponse} from "../../../api/Responses/SyllabusCoursesTeacherResponse";
 
 const TeachersCoursesSyllabusPage = () => {
   const workingContractOptions: ISelectOption[] = [
@@ -22,9 +26,13 @@ const TeachersCoursesSyllabusPage = () => {
     { id: "2", content: "ДС" },
   ];
 
+  const httpService = new HttpService();
   const { openModal } = useContext(ModalSettingsContext);
   const dispatch = useDispatch();
-  const teachers = useSelector((state: {teachersCoursesSyllabusPageStore: TeachersCoursesSyllabusPageData}) => state.teachersCoursesSyllabusPageStore);
+  const teachers = useSelector(
+    (state: {teachersCoursesSyllabusPageStore: TeachersCoursesSyllabusPageData}) => state.teachersCoursesSyllabusPageStore
+  );
+  const { currentYear } = useSelector((state: { headerStore: HeaderData }) => state.headerStore);
   const [isTeachersEditing, setIsTeachersEditing] = useState<{ value: boolean }>({ value: false });
   const [isTeachersAdding, setIsTeachersAdding] = useState<{ value: boolean }>({ value: false });
   const [teachersTableData, setTeachersTableData] = useState<TeachersCoursesSyllabusPageData>(structuredClone(teachers));
@@ -35,6 +43,37 @@ const TeachersCoursesSyllabusPage = () => {
   teachersTableBuilder.addSearchFeature();
   const teachersTable: CTable = teachersTableBuilder.getTable();
   const teachersTableManager: CTableManager = new CTableManager(teachersTable);
+
+  useEffect(() => {
+    const params: Map<string, string> = new Map<string, string>();
+    if (currentYear) {
+      params.set("year", currentYear.year.toString());
+    }
+
+    httpService
+      .getByArbitraryUrl(Endpoint.SyllabusCoursesTeachers, params)
+      .then((data: any) => {
+        const teachersResponse: SyllabusCoursesTeacherResponse[] = ResponseBuilder.BuildSyllabusCoursesTeachersResponse(data);
+        const teachers: TeacherCoursesSyllabusData[] = teachersResponse.map((teacherResponse: SyllabusCoursesTeacherResponse) => {
+          return {
+            id: teacherResponse.id.toString(),
+            name: teacherResponse.name,
+            workingContract: teacherResponse.workingContract,
+            workingStartDate: teacherResponse.workingStartDate,
+            workExperience: teacherResponse.workExperience,
+            workExperienceAtTheTimeOfTheEmployment: teacherResponse.workExperienceAtTheTimeOfTheEmployment,
+            birthDay: teacherResponse.birthDay,
+            age: teacherResponse.age,
+          };
+        });
+        dispatch(ActionBuilder.saveTeachers(teachers));
+        setTeachersTableData(structuredClone(teachers));
+      })
+      .catch((e: any) => {
+        dispatch(ActionBuilder.saveTeachers([]));
+        setTeachersTableData([]);
+      });
+  }, [currentYear?.id]);
 
   const handleSaveTeachers = () => {
     teachersTableManager.invokeFunction("apply", TableType.Editable, [
