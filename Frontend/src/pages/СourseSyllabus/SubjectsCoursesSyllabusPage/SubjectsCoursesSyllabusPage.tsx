@@ -1,4 +1,4 @@
-import React, {useContext, useState} from "react";
+import React, {useContext, useEffect, useState} from "react";
 import {useDispatch, useSelector} from "react-redux";
 import {SubjectsCoursesSyllabusPageData, SubjectCoursesSyllabusData} from "./model/types";
 import {ActionBuilder} from "./model/actions";
@@ -15,6 +15,12 @@ import {TableType} from "../../../core/Table/TableType";
 import {guidGenerator} from "../../../utils/guidGenerator";
 import {SortingOrder} from "../../../core/Table/SortingOrder";
 import {SubjectSyllabusData} from "../../Syllabus/SubjectsSyllabusPage/model/types";
+import {HttpService} from "../../../api/http.service";
+import {HeaderData} from "../../../layouts/Header/model/types";
+import {Endpoint} from "../../../api/endpoints";
+import {SyllabusSubjectResponse} from "../../../api/Responses/SyllabusSubjectResponse";
+import {ResponseBuilder} from "../../../api/Responses/ResponseBuilder";
+import {SyllabusCoursesSubjectResponse} from "../../../api/Responses/SyllabusCoursesSubjectResponse";
 
 const SubjectsCoursesSyllabusPage = () => {
   const typeOptions: ISelectOption[] = [
@@ -23,9 +29,13 @@ const SubjectsCoursesSyllabusPage = () => {
     { id: "3", content: "ШЮП" },
   ];
 
+  const httpService = new HttpService();
   const { openModal } = useContext(ModalSettingsContext);
   const dispatch = useDispatch();
-  const subjects = useSelector((state: {subjectsCoursesSyllabusPageStore: SubjectsCoursesSyllabusPageData}) => state.subjectsCoursesSyllabusPageStore);
+  const subjects = useSelector(
+    (state: {subjectsCoursesSyllabusPageStore: SubjectsCoursesSyllabusPageData}) => state.subjectsCoursesSyllabusPageStore
+  );
+  const { currentYear } = useSelector((state: { headerStore: HeaderData }) => state.headerStore);
   const [isSubjectsEditing, setIsSubjectsEditing] = useState<{ value: boolean }>({ value: false });
   const [isSubjectsAdding, setIsSubjectsAdding] = useState<{ value: boolean }>({ value: false });
   const [subjectsTableData, setSubjectsTableData] = useState<SubjectsCoursesSyllabusPageData>(structuredClone(subjects));
@@ -36,6 +46,34 @@ const SubjectsCoursesSyllabusPage = () => {
   subjectsTableBuilder.addSearchFeature();
   const subjectsTable: CTable = subjectsTableBuilder.getTable();
   const subjectsTableManager: CTableManager = new CTableManager(subjectsTable);
+
+  useEffect(() => {
+    const params: Map<string, string> = new Map<string, string>();
+    if (currentYear) {
+      params.set("year", currentYear.year.toString());
+    }
+
+    httpService
+      .getByArbitraryUrl(Endpoint.SyllabusCoursesSubjects, params)
+      .then((data: any) => {
+        const subjectsResponse: SyllabusCoursesSubjectResponse[] = ResponseBuilder.BuildSyllabusCoursesSubjectsResponse(data);
+        const subjects: SubjectCoursesSyllabusData[] = subjectsResponse.map((subjectResponse: SyllabusCoursesSubjectResponse) => {
+          return {
+            id: subjectResponse.id.toString(),
+            name: subjectResponse.name,
+            type: subjectResponse.type,
+            hoursByPlan: subjectResponse.hoursByPlan,
+            numberOfGroups: subjectResponse.numberOfGroups,
+          };
+        });
+        dispatch(ActionBuilder.saveSubjects(subjects));
+        setSubjectsTableData(structuredClone(subjects));
+      })
+      .catch((e: any) => {
+        dispatch(ActionBuilder.saveSubjects([]));
+        setSubjectsTableData([]);
+      });
+  }, [currentYear?.id]);
 
   const handleSaveSubjects = () => {
     subjectsTableManager.invokeFunction("apply", TableType.Editable, [
@@ -65,10 +103,7 @@ const SubjectsCoursesSyllabusPage = () => {
     ]);
   };
   const handleSubjectSearch = (): void => {
-    subjectsTableManager.invokeFunction("search", TableType.Searchable, [
-      subjectSearchQuery,
-      subjects
-    ]);
+    subjectsTableManager.invokeFunction("search", TableType.Searchable, [subjectSearchQuery, subjects]);
   };
   const handleSort = (columnName: string): void => {
     subjectsTableManager.invokeFunction("sort", TableType.Default, [columnName, SortingOrder.Ascending]);

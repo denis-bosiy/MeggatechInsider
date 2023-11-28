@@ -7,5 +7,7 @@ export enum Endpoint {
   TimetableAvailableHours = "timetable/available-hours",
   SyllabusSubjects = "educational-plan/subjects",
   SyllabusTeachers = "educational-plan/teachers",
-  SyllabusDiscrepancies = "education-plan/differences"
+  SyllabusDiscrepancies = "education-plan/differences",
+  SyllabusCoursesSubjects = "educational-plan-courses/courses",
+  SyllabusCoursesTeachers = "educational-plan-courses/teachers",
 }

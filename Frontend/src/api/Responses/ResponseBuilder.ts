@@ -6,6 +6,7 @@ import { SyllabusTeacherResponse } from "./SyllabusTeacherResponse";
 import { DiscrepancyResponse } from "./DiscrepancyResponse";
 import { TimetableTeacherResponse } from "./TimetableTeacherResponse";
 import { AvailableHourResponse } from "./AvailableHourResponse";
+import {SyllabusCoursesSubjectResponse} from "./SyllabusCoursesSubjectResponse";
 
 export class ResponseBuilder {
   public static BuildTimetablePairTimeSettingsResponse(data: any): TimetablePairTimeSettingResponse {
@@ -60,6 +61,24 @@ export class ResponseBuilder {
     let subjects: SyllabusSubjectResponse[] = [];
 
     subjects = data.data.subjects.map((subject: any) => ResponseBuilder.BuildSyllabusSubjectResponse(subject));
+
+    return subjects;
+  }
+
+  public static BuildSyllabusCoursesSubjectResponse(data: any): SyllabusCoursesSubjectResponse {
+    return new SyllabusCoursesSubjectResponse(
+      data.id,
+      data.name,
+      data.type,
+      data.hoursByPlan,
+      data.numberOfGroups
+    );
+  }
+
+  public static BuildSyllabusCoursesSubjectsResponse(data: any): SyllabusCoursesSubjectResponse[] {
+    let subjects: SyllabusCoursesSubjectResponse[] = [];
+
+    subjects = data.data.courses.map((subject: any) => ResponseBuilder.BuildSyllabusCoursesSubjectResponse(subject));
 
     return subjects;
   }
