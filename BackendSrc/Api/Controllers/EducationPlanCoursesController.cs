@@ -1,4 +1,3 @@
-using Api.Models.EducationalPlan.Difference;
 using Api.Models.EducationPlanCourses.Appointments;
 using Api.Models.EducationPlanCourses.Courses;
 using Api.Models.EducationPlanCourses.Difference;
