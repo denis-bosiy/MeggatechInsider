@@ -267,7 +267,7 @@ namespace Api.Controllers
         }
 
         [HttpGet( "differences" )]
-        [ProducesResponseType<DifferencesResponseDto>( StatusCodes.Status200OK )]
+        [ProducesResponseType<DifferenceCourseListResponseDto>( StatusCodes.Status200OK )]
         [ProducesResponseType( StatusCodes.Status404NotFound )]
         public IActionResult GetDifferences( [FromQuery] DifferenceCourseRequestDto differenceCoursesRequestDto )
         {
