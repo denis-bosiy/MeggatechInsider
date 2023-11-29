@@ -1,4 +1,7 @@
+using Api.Models.EducationalPlan.Difference;
+using Api.Models.EducationPlanCourses.Appointments;
 using Api.Models.EducationPlanCourses.Courses;
+using Api.Models.EducationPlanCourses.Difference;
 using Api.Models.EducationPlanCourses.Teacher;
 using Microsoft.AspNetCore.Mvc;
 
@@ -170,6 +173,136 @@ namespace Api.Controllers
             //Удаление данных преподавателя по id
 
             return Ok() ;
+        }
+
+        [HttpGet( "appointments" )]
+        [ProducesResponseType<AppointmentListResponseDto>( StatusCodes.Status200OK )]
+        [ProducesResponseType( StatusCodes.Status404NotFound )]
+        public IActionResult GetAppointments( [FromQuery] AppointmentRequestDto appointmentRequestDto )
+        {
+            if ( !IsValidYear( appointmentRequestDto.Year ) )
+            {
+                return NotFound( "Не найдено такого года" );
+            }
+
+            return Ok(
+                new AppointmentListResponseDto()
+                {
+                    Appointments = new List<AppointmentDto>
+                    {
+                        new AppointmentDto()
+                        {
+                            Id = 1,
+                            Name = "JavaScript",
+                            Teacher = "Прозоров Максим Андреевич",
+                            GroupCount = 1,
+                            HoursOnWeek = 1,
+                            HoursOnYear = 1,
+                            CostPerHour = 4,
+                        },
+                        new AppointmentDto()
+                        {
+                            Id = 2,
+                            Name = "Физика",
+                            Teacher = "Чулков Петр Сергеевич",
+                            GroupCount = 3,
+                            HoursOnWeek = 8,
+                            HoursOnYear = 40,
+                            CostPerHour = 3,
+                        },
+                        new AppointmentDto()
+                        {
+                            Id = 3,
+                            Name = "История",
+                            Teacher = "Добельман Генрих Жицкий",
+                            GroupCount = 4,
+                            HoursOnWeek = 10,
+                            HoursOnYear = 50,
+                            CostPerHour = 2,
+                        },
+                    }
+                }
+             );
+        }
+
+        [HttpPut( "appointments" )]
+        [ProducesResponseType( StatusCodes.Status200OK )]
+        [ProducesResponseType( StatusCodes.Status404NotFound )]
+        public IActionResult UpdateAppointments( UpdateAppointmentsRequestDto updateAppointmentsRequestDto )
+        {
+            if ( !IsValidYear( updateAppointmentsRequestDto.Year ) )
+            {
+                return NotFound( "Не найдено такого года" );
+            }
+
+            //обновление данных назначений
+
+            return Ok();
+        }
+
+        [HttpPost( "appointments" )]
+        [ProducesResponseType( StatusCodes.Status200OK )]
+        [ProducesResponseType( StatusCodes.Status404NotFound )]
+        public IActionResult CreateAppointments( CreateAppointmentRequestDto createAppointmentRequestDto )
+        {
+            if ( !IsValidYear( createAppointmentRequestDto.Year ) )
+            {
+                return NotFound( "Не найдено такого года" );
+            }
+
+            //создание данных назначений
+
+            return Ok();
+        }
+
+        [HttpDelete( "appointments" )]
+        [ProducesResponseType( StatusCodes.Status200OK )]
+        [ProducesResponseType( StatusCodes.Status404NotFound )]
+        public IActionResult DeleteAppointments( DeleteAppointmentRequestDto deleteAppointmentRequestDto )
+        {
+
+            //Удаление данных назначения по id
+
+            return Ok() ;
+        }
+
+        [HttpGet( "differences" )]
+        [ProducesResponseType<DifferencesResponseDto>( StatusCodes.Status200OK )]
+        [ProducesResponseType( StatusCodes.Status404NotFound )]
+        public IActionResult GetDifferences( [FromQuery] DifferenceCourseRequestDto differenceCoursesRequestDto )
+        {
+            if ( !IsValidYear( differenceCoursesRequestDto.Year ) )
+            {
+                return NotFound( "Не найдено такого года" );
+            }
+
+            return Ok( new DifferenceCourseListResponseDto 
+            { 
+                Differences = new List<DifferenceCourseDto>
+                {
+                    new DifferenceCourseDto
+                    {
+                        Id = 1,
+                        Name = "История",
+                        GroupCount = 1,
+                        GroupCountByPlan = 1,
+                    },
+                    new DifferenceCourseDto
+                    {
+                        Id = 2,
+                        Name = "Math",
+                        GroupCount = 2,
+                        GroupCountByPlan = 2,
+                    },
+                    new DifferenceCourseDto
+                    {
+                        Id = 3,
+                        Name = "Russian Language",
+                        GroupCount = 3,
+                        GroupCountByPlan = 3,
+                    },
+                }
+            } );
         }
 
         private bool IsValidYear( int year )
