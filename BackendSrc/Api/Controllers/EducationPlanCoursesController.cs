@@ -90,6 +90,17 @@ namespace Api.Controllers
             return Ok();
         }
 
+        [HttpDelete( "teacher" )]
+        [ProducesResponseType( StatusCodes.Status200OK )]
+        [ProducesResponseType( StatusCodes.Status404NotFound )]
+        public IActionResult DeleteTeacher( CourseTeacherDeleteRequestDto courseTeacherDeleteRequestDto )
+        {
+
+            //Удаление данных преподавателя по id
+
+            return Ok() ;
+        }
+
         [HttpGet( "courses" )]
         [ProducesResponseType<CoursesListResponseDto>( StatusCodes.Status200OK )]
         [ProducesResponseType( StatusCodes.Status404NotFound )]
