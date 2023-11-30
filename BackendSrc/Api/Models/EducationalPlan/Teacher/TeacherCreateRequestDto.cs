@@ -1,8 +1,8 @@
-using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel;
 using System.Text.Json.Serialization;
 
-namespace Api.Models.EducationPlanCourses.Teacher
+namespace Api.Models.EducationPlan.Teacher
 {
     public class TeacherCreateRequestDto
     {

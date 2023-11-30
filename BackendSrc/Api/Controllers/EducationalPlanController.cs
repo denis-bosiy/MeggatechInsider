@@ -42,6 +42,33 @@ public sealed class EducationalPlanController : ControllerBase
             .Map() );
     }
 
+    [HttpPost("teachers")]
+    [ProducesResponseType<TeachersResponseDto>( StatusCodes.Status200OK )]
+    [ProducesResponseType( StatusCodes.Status400BadRequest )]
+    [ProducesResponseType( StatusCodes.Status404NotFound )]
+    public IActionResult CreateTeacher( [FromBody] TeacherCreateRequestDto teacherCreateRequestDto )
+    {
+        return Ok();
+    }
+
+    [HttpPut("teachers")]
+    [ProducesResponseType<TeachersResponseDto>( StatusCodes.Status200OK )]
+    [ProducesResponseType( StatusCodes.Status400BadRequest )]
+    [ProducesResponseType( StatusCodes.Status404NotFound )]
+    public IActionResult UpdateTeachers( [FromBody]  )
+    {
+        return Ok();
+    }
+
+    [HttpDelete("teachers")]
+    [ProducesResponseType<TeachersResponseDto>( StatusCodes.Status200OK )]
+    [ProducesResponseType( StatusCodes.Status400BadRequest )]
+    [ProducesResponseType( StatusCodes.Status404NotFound )]
+    public IActionResult DeleteTeacher( [FromBody]  )
+    {
+        return Ok();
+    }
+
     [HttpGet( "subjects" )]
     [ProducesResponseType<SubjectsResponseDto>( StatusCodes.Status200OK )]
     [ProducesResponseType( StatusCodes.Status400BadRequest )]

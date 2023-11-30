@@ -17,5 +17,10 @@ namespace Application.Implementations.EducationalPlan
         {
             return _teacherRepository.GetBatchByYear( year );
         }
+
+        public bool AddTeacher()
+        {
+            return true;
+        }
     }
 }
