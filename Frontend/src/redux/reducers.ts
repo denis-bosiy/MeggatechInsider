@@ -14,6 +14,7 @@ import { categoriesTeachersReducer } from "../pages/Settings/TeacherSettingsPage
 import { teacherEducationReducer } from "../pages/Settings/TeacherSettingsPage/view/teacherEducation/model/reducer";
 import { lessonsSchedulePageReducer } from "../pages/LessonsSchedulePage/model/reducer";
 import { cirruculumMonitoringReducer } from "../pages/MonthCurriculum/MonitoringPage/model/reducer";
+import { cirruculumReportReducer } from "../pages/MonthCurriculum/ReportPage/model/reducer";
 
 export default combineReducers({
   testPageStore: testPageReducer,
@@ -30,5 +31,6 @@ export default combineReducers({
   categoriesTeachersStore: categoriesTeachersReducer,
   teacherEducationStore: teacherEducationReducer,
   lessonsScheduleStore: lessonsSchedulePageReducer,
-  cirruculumMonitoringStore: cirruculumMonitoringReducer
+  cirruculumMonitoringStore: cirruculumMonitoringReducer,
+  cirruculumReportStore: cirruculumReportReducer
 });

@@ -16,7 +16,8 @@ export enum AppRouter {
   Basic = "basic",
   NotFound = "*",
   Curriculum = "curriculum",
-  Monitoring = "monitoring"
+  Monitoring = "monitoring",
+  Report = "report"
 }
 
 export interface TabNavigation {
@@ -109,7 +110,10 @@ export const Menu: MenuItem[] = [
   {
     url: AppRouter.Curriculum,
     label: "Контроль учебного плана за месяц",
-    navigation: [{ label: "Контроль выполнения за месяц", url: AppRouter.Monitoring }]
+    navigation: [
+      { label: "Табель выполнения за месяц", url: AppRouter.Report },
+      { label: "Контроль выполнения за месяц", url: AppRouter.Monitoring }
+    ]
   },
   {
     url: "#",

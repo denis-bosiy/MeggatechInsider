@@ -78,8 +78,8 @@ const MonthMonitoringPage = () => {
 
   return (
     <>
-      <div style={{ display: "flex", marginBottom: 24, justifyContent: "space-between" }}>
-        <div style={{ display: "flex", gap: 25 }}>
+      <div className="page-actions-panel">
+        <div className="page-actions">
           <Select options={MONTH_SELECT} currentValue={selectedMonth} onValueChange={handleSelectMonth} />
           <Select options={CONTRACT_TYPE_SELECT} currentValue={selectedContract} onValueChange={handleSelectContract} />
           <Button label="Скачать в excel" type={ButtonType.Primary} />
