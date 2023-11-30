@@ -2,7 +2,7 @@ using Domain.TimetableEntities.GuidebookEntities;
 
 namespace Domain.CourseEntities.CourceTeachers
 {
-    public class CourseTeacherAvailableHours
+    public class CourseTeacherAvailableHours : Entity
     {
         public CourseTeacher CourseTeacher { get; set; }
         public int CourseTeacherId => CourseTeacher.Id;

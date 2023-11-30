@@ -3,7 +3,7 @@ using Domain.CourseEntities.Courses;
 
 namespace Domain.CourseEntities.CourseAssignments
 {
-    public class Assignment : Entity
+    public class CourseAssignment : Entity
     {
         public CourseTeacher CourseTeacher { get; set; }
         public int CourseTeacherId => CourseTeacher.Id;

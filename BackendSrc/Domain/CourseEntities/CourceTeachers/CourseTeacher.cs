@@ -15,6 +15,8 @@ namespace Domain.CourseEntities.CourceTeachers
 
         public List<CourseLesson> CourseLessons { get; set; }
 
+        public List<CourseTeacherAvailableHours> AvailableHours { get; set; }
+
         public CourseTeacher(
             string courseTeacherName,
             ContractType contractType,
