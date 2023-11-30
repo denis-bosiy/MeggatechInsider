@@ -21,7 +21,9 @@ public static class TeacherMapper
             DateOnly.FromDateTime( DateTime.Today ).Year
                 - teacher.EmploymentDate.Year
                 + teacher.ExperienceInYearsOnEmploymentDate, // TODO: нужно ли здесь учитывать суммарный опыт?
-            teacher.ExperienceInYearsOnEmploymentDate );
+            teacher.ExperienceInYearsOnEmploymentDate,
+            teacher.BirthdayDate,
+            teacher.Year);
 
     public static TeachersResponseDto Map( this IEnumerable<Teacher> teachers ) =>
         new TeachersResponseDto() { Teachers = teachers.Select( Map ).ToList() };

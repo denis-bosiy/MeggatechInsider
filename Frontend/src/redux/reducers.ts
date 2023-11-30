@@ -15,6 +15,10 @@ import { teacherEducationReducer } from "../pages/Settings/TeacherSettingsPage/v
 import { lessonsSchedulePageReducer } from "../pages/LessonsSchedulePage/model/reducer";
 import { cirruculumMonitoringReducer } from "../pages/MonthCurriculum/MonitoringPage/model/reducer";
 import { cirruculumReportReducer } from "../pages/MonthCurriculum/ReportPage/model/reducer";
+import { headerReducer } from "../layouts/Header/model/reducer";
+import { classGuidebookTimetablePageReducer } from "../pages/Timetable/ClassGuidebookPage/model/reducer";
+import { budgetStatisticsPageReducer } from "../pages/Statistics/BudgetStatisticsPage/model/reducer";
+import { teachersOffBudgetReportPageReducer } from "../pages/FinancialReports/OffBudgerReportPage/model/reducer";
 
 export default combineReducers({
   testPageStore: testPageReducer,
@@ -32,5 +36,9 @@ export default combineReducers({
   teacherEducationStore: teacherEducationReducer,
   lessonsScheduleStore: lessonsSchedulePageReducer,
   cirruculumMonitoringStore: cirruculumMonitoringReducer,
-  cirruculumReportStore: cirruculumReportReducer
+  cirruculumReportStore: cirruculumReportReducer,
+  headerStore: headerReducer,
+  classGuidebookTimetableStore: classGuidebookTimetablePageReducer,
+  budgetStatisticsPageStore: budgetStatisticsPageReducer,
+  teachersOffBudgetReportPageStore: teachersOffBudgetReportPageReducer,
 });

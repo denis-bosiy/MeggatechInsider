@@ -21,7 +21,7 @@ namespace Domain.TeacherEntities
         public DateOnly BirthdayDate { get; set; }
         public int Year { get; set; }
 
-        public IEnumerable<Lesson> Lessons { get; } = new List<Lesson>();
+        public List<Lesson> Lessons { get; } = new List<Lesson>();
 
         public Teacher(
             string teacherName,
