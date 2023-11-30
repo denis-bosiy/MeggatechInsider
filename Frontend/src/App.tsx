@@ -26,6 +26,7 @@ import { QueryClient, QueryClientProvider } from "react-query";
 import ClassGuidebookPage from "./pages/Timetable/ClassGuidebookPage/ClassGuidebookPage";
 import BudgetStatisticsPage from "./pages/Statistics/BudgetStatisticsPage/BudgetStatisticsPage";
 import OffBudgetReportPage from "./pages/FinancialReports/OffBudgerReportPage/OffBudgetReportPage";
+import FinalReportPage from "./pages/FinancialReports/FinalReportPage/FinalReportPage";
 
 const queryClient = new QueryClient();
 const App = (): React.JSX.Element => {
@@ -71,6 +72,7 @@ const App = (): React.JSX.Element => {
                 </Route>
                 <Route path={AppRouter.FinancialReport}>
                   <Route path={AppRouter.OffBudgetReport} element={<OffBudgetReportPage />} />
+                  <Route path={AppRouter.FinalReport} element={<FinalReportPage />} />
                 </Route>
                 <Route path="components" element={<ComponentsPage />} />
                 <Route path="test-redux" element={<TestPage />} />

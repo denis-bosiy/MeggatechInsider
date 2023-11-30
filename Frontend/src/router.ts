@@ -15,6 +15,7 @@ export enum AppRouter {
   Settings = "settings",
   FinancialReport = "financial-report",
   OffBudgetReport = "off-budget-report",
+  FinalReport = "final-report",
   Basic = "basic",
   BudgetStatistics = "budget-statistics",
   Statistics = "statistics",
@@ -129,7 +130,7 @@ export const Menu: MenuItem[] = [
     navigation: [
       { label: "Тарификация", url: "#" },
       { label: "Внебюджет", url: AppRouter.OffBudgetReport },
-      { label: "Финальный отчет", url: "#" },
+      { label: "Финальный отчет", url: AppRouter.FinalReport },
       { label: "Внебюджетные категории", url: "#" }
     ]
   },
