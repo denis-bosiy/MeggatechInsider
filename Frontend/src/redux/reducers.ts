@@ -18,6 +18,7 @@ import { classGuidebookTimetablePageReducer } from "../pages/Timetable/ClassGuid
 import { budgetStatisticsPageReducer } from "../pages/Statistics/BudgetStatisticsPage/model/reducer";
 import { teachersOffBudgetReportPageReducer } from "../pages/FinancialReports/OffBudgerReportPage/model/reducer";
 import { finalReportPageReducer } from "../pages/FinancialReports/FinalReportPage/model/reducer";
+import { tarifficationReportPageReducer } from "../pages/FinancialReports/TarifficationReportPage/model/reducer";
 
 export default combineReducers({
   testPageStore: testPageReducer,
@@ -39,4 +40,5 @@ export default combineReducers({
   budgetStatisticsPageStore: budgetStatisticsPageReducer,
   teachersOffBudgetReportPageStore: teachersOffBudgetReportPageReducer,
   finalReportPageStore: finalReportPageReducer,
+  tarifficationReportPageStore: tarifficationReportPageReducer,
 });
