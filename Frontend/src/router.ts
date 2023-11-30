@@ -16,7 +16,6 @@ export enum AppRouter {
   FinancialReport = "financial-report",
   OffBudgetReport = "off-budget-report",
   Basic = "basic",
-  NotFound = "*",
   Curriculum = "curriculum",
   Monitoring = "monitoring",
   Report = "report",

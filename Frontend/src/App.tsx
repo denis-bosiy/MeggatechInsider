@@ -71,16 +71,17 @@ const App = (): React.JSX.Element => {
                   <Route index element={<Navigate to={AppRouter.Report} replace />} />
                   <Route path={AppRouter.Report} element={<MonthReportPage />} />
                   <Route path={AppRouter.Monitoring} element={<MonthMonitoringPage />} />
-                <Route path={AppRouter.Statistics}>
-                  <Route index element={<Navigate to={AppRouter.BudgetStatistics} replace />} />
-                  <Route path={AppRouter.BudgetStatistics} element={<BudgetStatisticsPage />} />
+                  <Route path={AppRouter.Statistics}>
+                    <Route index element={<Navigate to={AppRouter.BudgetStatistics} replace />} />
+                    <Route path={AppRouter.BudgetStatistics} element={<BudgetStatisticsPage />} />
+                  </Route>
+                  <Route path={AppRouter.FinancialReport}>
+                    <Route path={AppRouter.OffBudgetReport} element={<OffBudgetReportPage />} />
+                  </Route>
+                  <Route path="components" element={<ComponentsPage />} />
+                  <Route path="test-redux" element={<TestPage />} />
+                  <Route path={AppRouter.NotFound} element={<Navigate to={AppRouter.Main} />} />
                 </Route>
-                <Route path={AppRouter.FinancialReport}>
-                  <Route path={AppRouter.OffBudgetReport} element={<OffBudgetReportPage />} />
-                </Route>
-                <Route path="components" element={<ComponentsPage />} />
-                <Route path="test-redux" element={<TestPage />} />
-                <Route path={AppRouter.NotFound} element={<Navigate to={AppRouter.Main} />} />
               </Route>
             </Routes>
           </Router>
