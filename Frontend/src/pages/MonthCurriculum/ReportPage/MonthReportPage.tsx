@@ -1,6 +1,6 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { useSelector } from "react-redux";
-import { CurriculumReportData, ReportTeachers } from "./model/types";
+import { CurriculumReportData, ReportTeacher } from "./model/types";
 import { CTableBuilder } from "../../../core/Table/CTableBuilder";
 import { CTable } from "../../../core/Table/CTable";
 import { CTableManager } from "../../../core/Table/CTableManager";
@@ -10,6 +10,9 @@ import Button, { ButtonType } from "../../../components/Button/Button";
 import { TableType } from "../../../core/Table/TableType";
 import { SortingOrder } from "../../../core/Table/SortingOrder";
 import Input, { InputType } from "../../../components/Input/Input";
+import ActionButton from "../../../components/ActionButton/ActionButton";
+import CommentsModalView from "../../../components/CommentsModalView/CommentsModalView";
+import ModalSettingsContext from "../../../utils/ModalSettingsContext";
 
 const MONTH_SELECT: ISelectOption[] = [
   { content: "Январь", id: "1" },
@@ -33,6 +36,8 @@ const CONTRACT_TYPE_SELECT: ISelectOption[] = [
 ];
 
 const MonthReportPage = () => {
+  const { openModal } = useContext(ModalSettingsContext);
+
   const [selectedMonth, setSelectedMonth] = useState<ISelectOption>(MONTH_SELECT[0]);
   const [selectedContract, setSelectedContract] = useState<ISelectOption>(CONTRACT_TYPE_SELECT[0]);
   const [searchQuery, setSearchQuery] = useState("");
@@ -40,15 +45,23 @@ const MonthReportPage = () => {
   const { teachers, dayCount, startingDayNumber } = useSelector(
     (state: { cirruculumReportStore: CurriculumReportData }) => state.cirruculumReportStore
   );
-  const [reportTableData, setReportTableData] = useState<ReportTeachers[]>(structuredClone(teachers));
+  const [reportTableData, setReportTableData] = useState<ReportTeacher[]>(structuredClone(teachers));
 
   const reportTableBuilder: CTableBuilder = new CTableBuilder(reportTableData, setReportTableData);
   reportTableBuilder.addSearchFeature();
+  reportTableBuilder.addCommentFeature();
 
   const monitoringTable: CTable = reportTableBuilder.getTable();
   const monitoringTableManager: CTableManager = new CTableManager(monitoringTable);
 
   const monthDays = Array.from({ length: dayCount }, (_, i) => i + startingDayNumber);
+
+  const modalComments: { text: string; deleteAction: () => void }[] = [
+    {
+      text: "Прогульщик. Вместо пары решил пойти в бар со своими школьными друзьями. Не видать ему своей зарплаты как и счастья",
+      deleteAction: () => alert("Комментарий удалён")
+    }
+  ];
 
   const handleSelectMonth = (id: string) => {
     const month = MONTH_SELECT.find((month) => month.id === id);
@@ -66,6 +79,18 @@ const MonthReportPage = () => {
 
   const handleSearch = () => {
     monitoringTableManager.invokeFunction("search", TableType.Searchable, [searchQuery, teachers]);
+  };
+
+  const handleComment = (teacher: ReportTeacher) => {
+    openModal(
+      "Комментарии",
+      <CommentsModalView
+        comments={modalComments}
+        addAction={() => {
+          monitoringTableManager.invokeFunction("addComment", TableType.Commentable, [teacher.teacher]);
+        }}
+      />
+    );
   };
 
   const handleSort = (columnName: string): void => {
@@ -135,6 +160,7 @@ const MonthReportPage = () => {
                       {groupIndex === 0 && subjectIndex === 0 && (
                         <td className="cell" rowSpan={classInfo.groups.length * teacher.subjects.length}>
                           {teacher.teacher}
+                          <ActionButton label="Комментарий" onClick={() => handleComment(teacher)} />
                         </td>
                       )}
 

@@ -1,6 +1,6 @@
-import { CurriculumReportData, ReportTeachers } from "./types";
+import { CurriculumReportData, ReportTeacher } from "./types";
 
-export const summarizeTeacherTotal = (teacher: ReportTeachers) => {
+export const summarizeTeacherTotal = (teacher: ReportTeacher) => {
   let total = 0;
   let combinedTotal = 0;
   let remoteTotal = 0;

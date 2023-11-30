@@ -1,10 +1,10 @@
 export type CurriculumReportData = {
   startingDayNumber: number;
   dayCount: number;
-  teachers: ReportTeachers[];
+  teachers: ReportTeacher[];
 };
 
-export type ReportTeachers = {
+export type ReportTeacher = {
   teacher: string;
   subjects: ReportSubject[];
 };
