@@ -14,7 +14,9 @@ export enum AppRouter {
   TeacherGuidebook = "teacher-guidebook",
   Settings = "settings",
   Basic = "basic",
-  NotFound = "*"
+  NotFound = "*",
+  Curriculum = "curriculum",
+  Monitoring = "monitoring"
 }
 
 export interface TabNavigation {
@@ -105,12 +107,9 @@ export const Menu: MenuItem[] = [
     ]
   },
   {
-    url: "#",
+    url: AppRouter.Curriculum,
     label: "Контроль учебного плана за месяц",
-    navigation: [
-      { label: "Табель выполнения за месяц", url: "#" },
-      { label: "Контроль выполнения за месяц", url: "#" }
-    ]
+    navigation: [{ label: "Контроль выполнения за месяц", url: AppRouter.Monitoring }]
   },
   {
     url: "#",
