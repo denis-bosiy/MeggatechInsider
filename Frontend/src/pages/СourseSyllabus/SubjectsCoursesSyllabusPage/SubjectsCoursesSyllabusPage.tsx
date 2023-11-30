@@ -19,6 +19,7 @@ import {HeaderData} from "../../../layouts/Header/model/types";
 import {Endpoint} from "../../../api/endpoints";
 import {ResponseBuilder} from "../../../api/Responses/ResponseBuilder";
 import {SyllabusCoursesSubjectResponse} from "../../../api/Responses/SyllabusCoursesSubjectResponse";
+import {RequestBuilder} from "../../../api/Requests/RequestBuilder";
 
 const SubjectsCoursesSyllabusPage = () => {
   const typeOptions: ISelectOption[] = [
@@ -45,12 +46,7 @@ const SubjectsCoursesSyllabusPage = () => {
   const subjectsTable: CTable = subjectsTableBuilder.getTable();
   const subjectsTableManager: CTableManager = new CTableManager(subjectsTable);
 
-  useEffect(() => {
-    const params: Map<string, string> = new Map<string, string>();
-    if (currentYear) {
-      params.set("year", currentYear.year.toString());
-    }
-
+  const makeGetSubjectsRequest = (params: Map<string, string>): void => {
     httpService
       .getByArbitraryUrl(Endpoint.SyllabusCoursesSubjects, params)
       .then((data: any) => {
@@ -71,7 +67,24 @@ const SubjectsCoursesSyllabusPage = () => {
         dispatch(ActionBuilder.saveSubjects([]));
         setSubjectsTableData([]);
       });
+  };
+
+  useEffect(() => {
+    const params: Map<string, string> = new Map<string, string>();
+    if (currentYear) {
+      params.set("year", currentYear.year.toString());
+    }
+
+    makeGetSubjectsRequest(params);
   }, [currentYear?.id]);
+  useEffect(() => {
+    const params: Map<string, string> = new Map<string, string>();
+    if (currentYear) {
+      params.set("year", currentYear.year.toString());
+    }
+
+    makeGetSubjectsRequest(params);
+  }, [subjects.length]);
 
   const handleSaveSubjects = () => {
     subjectsTableManager.invokeFunction("apply", TableType.Editable, [
@@ -97,7 +110,10 @@ const SubjectsCoursesSyllabusPage = () => {
   };
   const handleApplyingNewSubject = (): void => {
     subjectsTableManager.invokeFunction("applyAdding", TableType.Managable, [
-      (data: any[]) => dispatch(ActionBuilder.saveSubjects(data))
+      (data: any[]) => dispatch(ActionBuilder.saveSubjects(data)),
+      Endpoint.SyllabusCoursesSubjects,
+      RequestBuilder.BuildSyllabusCoursesSubjectRequest,
+      currentYear?.year
     ]);
   };
   const handleSubjectSearch = (): void => {
@@ -110,7 +126,8 @@ const SubjectsCoursesSyllabusPage = () => {
     subjectsTableManager.invokeFunction("delete", TableType.Managable, [
       id,
       (data: any[]) => dispatch(ActionBuilder.saveSubjects(data)),
-      openModal
+      openModal,
+      Endpoint.SyllabusCoursesSubjects
     ]);
   };
 

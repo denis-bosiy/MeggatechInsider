@@ -19,6 +19,7 @@ import {HeaderData} from "../../../layouts/Header/model/types";
 import {Endpoint} from "../../../api/endpoints";
 import {ResponseBuilder} from "../../../api/Responses/ResponseBuilder";
 import {SyllabusCoursesTeacherResponse} from "../../../api/Responses/SyllabusCoursesTeacherResponse";
+import {RequestBuilder} from "../../../api/Requests/RequestBuilder";
 
 const TeachersCoursesSyllabusPage = () => {
   const workingContractOptions: ISelectOption[] = [
@@ -44,12 +45,7 @@ const TeachersCoursesSyllabusPage = () => {
   const teachersTable: CTable = teachersTableBuilder.getTable();
   const teachersTableManager: CTableManager = new CTableManager(teachersTable);
 
-  useEffect(() => {
-    const params: Map<string, string> = new Map<string, string>();
-    if (currentYear) {
-      params.set("year", currentYear.year.toString());
-    }
-
+  const makeGetTeachersRequest = (params: Map<string, string>): void => {
     httpService
       .getByArbitraryUrl(Endpoint.SyllabusCoursesTeachers, params)
       .then((data: any) => {
@@ -73,7 +69,24 @@ const TeachersCoursesSyllabusPage = () => {
         dispatch(ActionBuilder.saveTeachers([]));
         setTeachersTableData([]);
       });
+  };
+
+  useEffect(() => {
+    const params: Map<string, string> = new Map<string, string>();
+    if (currentYear) {
+      params.set("year", currentYear.year.toString());
+    }
+
+    makeGetTeachersRequest(params);
   }, [currentYear?.id]);
+  useEffect(() => {
+    const params: Map<string, string> = new Map<string, string>();
+    if (currentYear) {
+      params.set("year", currentYear.year.toString());
+    }
+
+    makeGetTeachersRequest(params);
+  }, [teachers.length]);
 
   const handleSaveTeachers = () => {
     teachersTableManager.invokeFunction("apply", TableType.Editable, [
@@ -102,7 +115,10 @@ const TeachersCoursesSyllabusPage = () => {
   };
   const handleApplyingNewTeacher = (): void => {
     teachersTableManager.invokeFunction("applyAdding", TableType.Managable, [
-      (data: any[]) => dispatch(ActionBuilder.saveTeachers(data))
+      (data: any[]) => dispatch(ActionBuilder.saveTeachers(data)),
+      Endpoint.SyllabusCoursesTeachers,
+      RequestBuilder.BuildSyllabusCoursesTeacherRequest,
+      currentYear?.year
     ]);
   };
   const handleTeacherSearch = (): void => {
@@ -118,7 +134,8 @@ const TeachersCoursesSyllabusPage = () => {
     teachersTableManager.invokeFunction("delete", TableType.Managable, [
       id,
       (data: any[]) => dispatch(ActionBuilder.saveTeachers(data)),
-      openModal
+      openModal,
+      Endpoint.SyllabusCoursesTeachers
     ]);
   };
 
