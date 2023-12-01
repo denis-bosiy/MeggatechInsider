@@ -13,6 +13,7 @@ import { guidGenerator } from "../../../utils/guidGenerator";
 import { SortingOrder } from "../../../core/Table/SortingOrder";
 import { ActionBuilder } from "./model/actions";
 import { OffBudgetCategoriData, OffBudgetCategoriesPageData } from "./model/types";
+import { CheckBox } from "../../../components/CheckBox/CheckBox";
 
 const OffBudgetCategoriesPage = () => {
   const { openModal } = useContext(ModalSettingsContext);
@@ -45,7 +46,7 @@ const OffBudgetCategoriesPage = () => {
       {
         id: guidGenerator(),
         name: "",
-        costPerHour: 0,
+        costPerHour: 1,
       }
     ]);
   };
@@ -69,6 +70,10 @@ const OffBudgetCategoriesPage = () => {
       (data: any[]) => dispatch(ActionBuilder.saveOffBudgetCategories(data)),
       openModal
     ]);
+  };
+  const [isSaveProportion, setIsSaveProportion] = useState<{ value: boolean }>({ value: true });
+  const handleIsSaveProportion = ():void => {
+    setIsSaveProportion({value: !isSaveProportion.value});           
   };
 
   return (
@@ -106,15 +111,26 @@ const OffBudgetCategoriesPage = () => {
             onClick={handleAddingOffBudgetCategories}
           />
         </div>
-        <Input
-          className="toolbar__search"
-          placeholder="Поиск"
-          value={teacherSearchQuery}
-          onValueChange={setTeacherSearchQuery}
-          size={InputSize.Default}
-          type={InputType.Search}
-          onSearch={handleTeacherSearch}
-        />
+        <div className="toolbar__buttons-wrapper">
+          <Input
+            className="toolbar__search"
+            placeholder="Поиск"
+            value={teacherSearchQuery}
+            onValueChange={setTeacherSearchQuery}
+            size={InputSize.Default}
+            type={InputType.Search}
+            onSearch={handleTeacherSearch}
+          /> 
+        </div>
+        <div className="toolbar__buttons-box">
+          <div className="toolbar__button">
+            <CheckBox
+              checked={isSaveProportion.value}
+              onChange={handleIsSaveProportion}
+            />
+          </div>  
+          <p className="p">Сохранять пропорцию</p>   
+        </div>
       </div>
       <table className="table -fill -list">
         <thead className="header">
@@ -163,9 +179,19 @@ const OffBudgetCategoriesPage = () => {
                         value={value.costPerHour.toString()}
                         onValueChange={(newValue: string) =>
                           setOffBudgetCategoriesTableData(
-                            offBudgetCategoriesTableData.map((data: OffBudgetCategoriData) =>
-                              data.id === value.id ? { ...data, costPerHour: Number(newValue) } : data
-                            )
+                            isSaveProportion.value 
+                              ? (() => {
+                                const oldValueCat = offBudgetCategoriesTableData.find(el => el.id === value.id);
+                                const oldValue = oldValueCat?.costPerHour !== undefined && oldValueCat?.costPerHour !== 0 ? oldValueCat.costPerHour : 1;
+                                if(Number(newValue) === 0) newValue = "1";
+                                const ratio = Number(newValue)/oldValue;
+                                return offBudgetCategoriesTableData.map((data: OffBudgetCategoriData) =>
+                                  data.id === value.id ? { ...data, costPerHour: Number(newValue)} : { ...data, costPerHour: data.costPerHour*ratio }
+                                );
+                              })
+                              : offBudgetCategoriesTableData.map((data: OffBudgetCategoriData) =>
+                                data.id === value.id ? { ...data, costPerHour: Number(newValue) === 0 ? 1 :  Number(newValue) } : data
+                              )
                           )
                         }
                         size={InputSize.Micro}
