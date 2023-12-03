@@ -42,13 +42,13 @@ const initGuidebookData: Guidebook = [
     availableHours: [
       {
         id: "1",
-        weekDay: "пн",
+        weekDayCode: 0,
         startTime: "8.00",
         endTime: "9.00",
       },
       {
         id: "4",
-        weekDay: "вт",
+        weekDayCode: 1,
         startTime: "9.00",
         endTime: "10.00",
       },
@@ -67,7 +67,7 @@ const initGuidebookData: Guidebook = [
     availableHours: [
       {
         id: "4",
-        weekDay: "вт",
+        weekDayCode: 1,
         startTime: "9.00",
         endTime: "10.00",
       },
@@ -86,7 +86,7 @@ const initGuidebookData: Guidebook = [
     availableHours: [
       {
         id: "4",
-        weekDay: "вт",
+        weekDayCode: 1,
         startTime: "9.00",
         endTime: "10.00",
       },

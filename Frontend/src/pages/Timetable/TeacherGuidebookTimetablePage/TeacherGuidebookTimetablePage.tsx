@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { MultiValue } from  "react-select";
+import { MultiValue } from "react-select";
 import {
   Guidebook,
   TeacherGuidebookTimetableData,
@@ -84,8 +84,8 @@ const TeacherGuidebookTimetablePage = () => {
         setGuidebookTableData(structuredClone(teachers));
       })
       .catch((e: any) => {
-        dispatch(TeacherGuidebookTimetableActionBuilder.setTeachers([]));
-        setGuidebookTableData(structuredClone([]));
+        // dispatch(TeacherGuidebookTimetableActionBuilder.setTeachers([]));
+        // setGuidebookTableData(structuredClone([]));
       });
   }, []);
 
@@ -113,7 +113,6 @@ const TeacherGuidebookTimetablePage = () => {
           // const foundAvailablePickedHour: AvailableHour | undefined = teacher.availableHours.find(
           //   (availableHour: AvailableHour) => availableHour.id === availableHourId
           // );
-
           // if (foundAvailablePickedHour) {
           //   return {
           //     ...teacher,
@@ -215,49 +214,63 @@ const TeacherGuidebookTimetablePage = () => {
           </tr>
         </thead>
         <tbody>
-          {guidebookTableData.filter((data: TeacherGuidebookTimetableData, index: number) =>
-            index !== guidebookTableData.length).map((teacher: TeacherGuidebookTimetableData) => {
-            return (
-              <tr className="row" key={teacher.id}>
-                <td className="cell">{teacher.subjectName}</td>
-                <td className="cell">{teacher.teacherName}</td>
-                <td className="cell">
-                  {isGuidebookEditing.value ? (
-                    <Multiselect
-                      defaultValue={teacher.availableHours.map((time) => (hoursOptions.find(e => e.value === time.id)))}
-                      options={hoursOptions}
-                      onValueChange={(newValue: MultiValue<any>) => { 
-                        if (newValue) {
-                          setGuidebookTableData(
-                            guidebookTableData.map((data: TeacherGuidebookTimetableData) =>
-                              (data.id === teacher.id
-                                ? { ...data,
-                                  availableHours: newValue.map((time) => ({
-                                    id: time.value,
-                                    weekDay: time.label.substring(0, 2),
-                                    startTime: time.label.substring(3, 7),
-                                    endTime: time.label.substring(8),
-                                  }))
-                                }
-                                : data))
-                          );
-                        }
-                      }}
-                    />
-                  ) : (
-                    teacher.availableHours.map((time) => (<p key={time.id}>{time.weekDay}  {time.startTime} - {time.endTime}</p>))
-                  )}
-                </td>
-                <td className={classNames("cell" + (teacher.distributedHoursToPlan < teacher.hoursToPlan ? " -error" : "")
-                    + (teacher.distributedHoursToPlan > teacher.hoursToPlan ? " -warning" : ""))}>
-                  {teacher.distributedHoursToPlan}
-                </td>
-                <td className="cell">{teacher.hoursToPlan}</td>
-                <td className="cell">{teacher.creditHours}</td>
-                <td className="cell">{teacher.workedOverPlan}</td>
-              </tr>
-            );
-          })}
+          {guidebookTableData
+            .filter((data: TeacherGuidebookTimetableData, index: number) => index !== guidebookTableData.length)
+            .map((teacher: TeacherGuidebookTimetableData) => {
+              return (
+                <tr className="row" key={teacher.id}>
+                  <td className="cell">{teacher.subjectName}</td>
+                  <td className="cell">{teacher.teacherName}</td>
+                  <td className="cell">
+                    {isGuidebookEditing.value ? (
+                      <Multiselect
+                        defaultValue={teacher.availableHours.map((time) =>
+                          getHoursOptions(teacher.availableHours).find((e: any) => e.value === time.id)
+                        )}
+                        options={getHoursOptions(teacher.availableHours)}
+                        onValueChange={(newValue: MultiValue<any>) => {
+                          if (newValue) {
+                            setGuidebookTableData(
+                              guidebookTableData.map((data: TeacherGuidebookTimetableData) =>
+                                data.id === teacher.id
+                                  ? {
+                                    ...data,
+                                    availableHours: newValue.map((time: any) => ({
+                                      id: time.value,
+                                      weekDayCode: time.label.substring(0, 2),
+                                      startTime: time.label.substring(3, 7),
+                                      endTime: time.label.substring(8)
+                                    }))
+                                  }
+                                  : data
+                              )
+                            );
+                          }
+                        }}
+                      />
+                    ) : (
+                      teacher.availableHours.map((time) => (
+                        <p key={time.id}>
+                          {shortenWorkday(getWorkdayByCode(time.weekDayCode))} {time.startTime} - {time.endTime}
+                        </p>
+                      ))
+                    )}
+                  </td>
+                  <td
+                    className={classNames(
+                      "cell" +
+                        (teacher.distributedHoursToPlan < teacher.hoursToPlan ? " -error" : "") +
+                        (teacher.distributedHoursToPlan > teacher.hoursToPlan ? " -warning" : "")
+                    )}
+                  >
+                    {teacher.distributedHoursToPlan}
+                  </td>
+                  <td className="cell">{teacher.hoursToPlan}</td>
+                  <td className="cell">{teacher.creditHours}</td>
+                  <td className="cell">{teacher.workedOverPlan}</td>
+                </tr>
+              );
+            })}
         </tbody>
       </table>
     </>
