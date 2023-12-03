@@ -35,7 +35,7 @@ const TypesContractsTable = (props: ITypesContractsTableProps) => {
         </tr>
       </thead>
       <tbody>
-        {rows}{" "}
+        {rows}
         {props.isAdding && (
           <tr className="row">
             <td className="cell">
