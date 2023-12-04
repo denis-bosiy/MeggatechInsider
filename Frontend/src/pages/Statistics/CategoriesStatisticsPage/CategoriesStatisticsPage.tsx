@@ -126,7 +126,7 @@ const CategoriesStatisticsPage = () => {
             );
           })}
 
-          <GroupedData data={categoriesTableData} />
+          {categoriesTableData.length > 0 && <GroupedData data={categoriesTableData} />}
         </tbody>
       </table>
     </>
