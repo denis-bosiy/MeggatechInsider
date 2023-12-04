@@ -6,10 +6,6 @@
     display: flex;
     justify-content: space-between;
     width: 100%;
-
-    .toolbar__buttons-wrapper {
-      margin-bottom: 0;
-    }
   }
 
   &__buttons-wrapper {
@@ -17,6 +13,10 @@
     flex-direction: row;
     justify-content: space-between;
     margin-bottom: 25px;
+  }
+
+  &.-fill &__buttons-wrapper {
+    margin-bottom: 0;
   }
 
   &__button {

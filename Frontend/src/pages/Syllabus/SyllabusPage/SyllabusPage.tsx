@@ -383,13 +383,15 @@ const SyllabusPage = () => {
           })}
 
           {!isSyllabusEditing.value && syllabus.types.map((type: string, index: number) => {
-            const data = syllabus.plan.filter((data: PlanData) => data.type === type);
+            const data = syllabusTableData.filter((data: PlanData) => data.type === type);
             return (
-              <GroupedData key={index} title={type} data={data} />
+              <>
+                {data.length > 0 && <GroupedData key={index} title={type} data={data} />}
+              </>
             );
           })}
 
-          {!isSyllabusEditing.value && <GroupedData data={syllabus.plan} />}
+          {!isSyllabusEditing.value && syllabusTableData.length > 0 && <GroupedData data={syllabusTableData} />}
         </tbody>
       </table>
     </>

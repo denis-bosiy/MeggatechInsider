@@ -65,7 +65,10 @@ const initData: SyllabusPageData = {
 const syllabusPageReducer = (state = initData, action: Action) => {
   switch (action.type) {
     case SYLLABUS_PAGE_ACTIONS.SAVE_SYLLABUS:
-      return action.payload.values;
+      return {
+        ...state,
+        plan: action.payload.values
+      };
     default:
       return state;
   }
