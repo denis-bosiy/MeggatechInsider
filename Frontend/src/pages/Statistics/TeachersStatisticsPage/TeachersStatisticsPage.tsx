@@ -199,7 +199,7 @@ const TeachersStatisticsPage = () => {
             );
           })}
 
-          <GroupedData data={teachersTableData} />
+          {teachersTableData.length > 0 && <GroupedData data={teachersTableData} />}
         </tbody>
       </table>
     </>
