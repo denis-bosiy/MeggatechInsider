@@ -16,6 +16,7 @@ import { lessonsSchedulePageReducer } from "../pages/LessonsSchedulePage/model/r
 import { headerReducer } from "../layouts/Header/model/reducer";
 import { classGuidebookTimetablePageReducer } from "../pages/Timetable/ClassGuidebookPage/model/reducer";
 import { budgetStatisticsPageReducer } from "../pages/Statistics/BudgetStatisticsPage/model/reducer";
+import { categoriesStatisticsPageReducer } from "../pages/Statistics/CategoriesStatisticsPage/model/reducer";
 import { teachersOffBudgetReportPageReducer } from "../pages/FinancialReports/OffBudgerReportPage/model/reducer";
 
 export default combineReducers({
@@ -36,5 +37,6 @@ export default combineReducers({
   headerStore: headerReducer,
   classGuidebookTimetableStore: classGuidebookTimetablePageReducer,
   budgetStatisticsPageStore: budgetStatisticsPageReducer,
+  categoriesStatisticsPageStore: categoriesStatisticsPageReducer,
   teachersOffBudgetReportPageStore: teachersOffBudgetReportPageReducer,
 });
