@@ -10,10 +10,15 @@ export enum AppRouter {
   Assigning = "assigning",
   Timetable = "timetable",
   LessonsSchedule = "lessons-schedule",
-  LessonsGuidebook = "lessons-guidebook",
+  ClassesGuidebook = "classes-guidebook",
   TeacherGuidebook = "teacher-guidebook",
   Settings = "settings",
+  FinancialReport = "financial-report",
+  OffBudgetReport = "off-budget-report",
   Basic = "basic",
+  BudgetStatistics = "budget-statistics",
+  Statistics = "statistics",
+  Categories = "categories",
   NotFound = "*"
 }
 
@@ -60,7 +65,14 @@ export const Menu: MenuItem[] = [
     label: "Расписание занятий",
     navigation: [
       { label: "Справочник по преподавателям", url: AppRouter.TeacherGuidebook },
-      { label: "Справочник по классам", url: AppRouter.LessonsGuidebook },
+      {
+        label: "Справочник по классам",
+        url: AppRouter.ClassesGuidebook,
+        tabs: {
+          class10: "10 класс",
+          class11: "11 класс"
+        }
+      },
       { label: "Расписание", url: AppRouter.LessonsSchedule }
     ]
   },
@@ -98,8 +110,8 @@ export const Menu: MenuItem[] = [
         url: AppRouter.Assigning,
         tabs: {
           courses: "Подготовительные курсы",
-          expressCourses: "Подготовительные экспресс курсы",
-          shup: "ШЮП"
+          expressCourses: "Подготовительные экспресс-курсы",
+          schoolOfAYoungProgrammer: "ШЮП"
         }
       }
     ]
@@ -113,11 +125,11 @@ export const Menu: MenuItem[] = [
     ]
   },
   {
-    url: "#",
+    url: AppRouter.FinancialReport,
     label: "Финансовый отчет",
     navigation: [
       { label: "Тарификация", url: "#" },
-      { label: "Внебюджет", url: "#" },
+      { label: "Внебюджет", url: AppRouter.OffBudgetReport },
       { label: "Финальный отчет", url: "#" },
       { label: "Внебюджетные категории", url: "#" }
     ]
@@ -127,12 +139,12 @@ export const Menu: MenuItem[] = [
     label: "Контроль учебного плана за год"
   },
   {
-    url: "#",
+    url: AppRouter.Statistics,
     label: "Статистика",
     navigation: [
-      { label: "Статистика бюджетов", url: "#" },
-      { label: "Статистика категорий", url: "#" },
-      { label: "Статистика преподавателей", url: "#" }
+      { label: "Статистика бюджетов", url: AppRouter.BudgetStatistics },
+      { label: "Статистика категорий", url: AppRouter.Categories },
+      { label: "Статистика преподавателей", url: AppRouter.Teachers }
     ]
   }
 ];

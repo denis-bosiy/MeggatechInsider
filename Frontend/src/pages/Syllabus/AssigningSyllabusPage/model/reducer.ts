@@ -1,5 +1,5 @@
 import { Action, ASSIGNING_SYLLABUS_PAGE_ACTIONS } from "./actions";
-import {AssigningsSyllabusData, DiscrepanciesSyllabusData, AssigningSyllabusPageData} from "./types";
+import { AssigningsSyllabusData, DiscrepanciesSyllabusData, AssigningSyllabusPageData } from "./types";
 
 const initAssigningData: AssigningsSyllabusData = [
   {
@@ -29,7 +29,7 @@ const initAssigningData: AssigningsSyllabusData = [
     hoursIn2Subgroup: 91,
     totalInYear: 128,
     bidShare: 0.5
-  },
+  }
 ];
 
 const initDiscrepanciesData: DiscrepanciesSyllabusData = [
@@ -44,12 +44,12 @@ const initDiscrepanciesData: DiscrepanciesSyllabusData = [
     name: "История",
     groupCount: 3,
     groupCountByPlan: 2
-  },
+  }
 ];
 
 const initData: AssigningSyllabusPageData = {
   assignings: initAssigningData,
-  discrepancies: initDiscrepanciesData,
+  discrepancies: initDiscrepanciesData
 };
 
 const assigningSyllabusPageReducer = (state = initData, action: Action) => {
@@ -58,6 +58,11 @@ const assigningSyllabusPageReducer = (state = initData, action: Action) => {
       return {
         ...state,
         assignings: action.payload.values
+      };
+    case ASSIGNING_SYLLABUS_PAGE_ACTIONS.SAVE_DISCREPANCIES:
+      return {
+        ...state,
+        discrepancies: action.payload.values
       };
     default:
       return state;

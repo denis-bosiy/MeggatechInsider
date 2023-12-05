@@ -13,7 +13,13 @@ import {basicSettingsReducer} from "../pages/Settings/BasicSettingsPage/model/re
 import {typesContractsReducer} from "../pages/Settings/TeacherSettingsPage/view/typesContracts/model/reducer";
 import {categoriesTeachersReducer} from "../pages/Settings/TeacherSettingsPage/view/categoriesTeachers/model/reducer";
 import {teacherEducationReducer} from "../pages/Settings/TeacherSettingsPage/view/teacherEducation/model/reducer";
-import { lessonsSchedulePageReducer } from "../pages/LessonsSchedulePage/model/reducer";
+import {lessonsSchedulePageReducer} from "../pages/LessonsSchedulePage/model/reducer";
+import {headerReducer} from "../layouts/Header/model/reducer";
+import {classGuidebookTimetablePageReducer} from "../pages/Timetable/ClassGuidebookPage/model/reducer";
+import {budgetStatisticsPageReducer} from "../pages/Statistics/BudgetStatisticsPage/model/reducer";
+import {teachersStatisticsPageReducer} from "../pages/Statistics/TeachersStatisticsPage/model/reducer";
+import {categoriesStatisticsPageReducer} from "../pages/Statistics/CategoriesStatisticsPage/model/reducer";
+import {teachersOffBudgetReportPageReducer} from "../pages/FinancialReports/OffBudgerReportPage/model/reducer";
 
 export default combineReducers({
   testPageStore: testPageReducer,
@@ -31,4 +37,10 @@ export default combineReducers({
   categoriesTeachersStore: categoriesTeachersReducer,
   teacherEducationStore: teacherEducationReducer,
   lessonsScheduleStore: lessonsSchedulePageReducer,
+  headerStore: headerReducer,
+  classGuidebookTimetableStore: classGuidebookTimetablePageReducer,
+  budgetStatisticsPageStore: budgetStatisticsPageReducer,
+  teachersStatisticsPageStore: teachersStatisticsPageReducer,
+  categoriesStatisticsPageStore: categoriesStatisticsPageReducer,
+  teachersOffBudgetReportPageStore: teachersOffBudgetReportPageReducer,
 });
