@@ -13,6 +13,11 @@ namespace Application.Implementations.StudyingActivityServices
             _pairTimeRepository = pairTimeRepository;
         }
 
+        public PairTime GetById( int id )
+        {
+            return _pairTimeRepository.GetById( id );
+        }
+
         public List<PairTime> GetPairTimesByYear( int year )
         {
             return _pairTimeRepository.GetByYear( year );
@@ -32,6 +37,7 @@ namespace Application.Implementations.StudyingActivityServices
             {
                 return;
             }
+
             _pairTimeRepository.Remove( existingPairTime );
             _pairTimeRepository.SaveChanges();
         }

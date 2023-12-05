@@ -18,6 +18,7 @@ export enum AppRouter {
   Basic = "basic",
   BudgetStatistics = "budget-statistics",
   Statistics = "statistics",
+  Categories = "categories",
   NotFound = "*"
 }
 
@@ -142,7 +143,7 @@ export const Menu: MenuItem[] = [
     label: "Статистика",
     navigation: [
       { label: "Статистика бюджетов", url: AppRouter.BudgetStatistics },
-      { label: "Статистика категорий", url: "#" },
+      { label: "Статистика категорий", url: AppRouter.Categories },
       { label: "Статистика преподавателей", url: AppRouter.Teachers }
     ]
   }
