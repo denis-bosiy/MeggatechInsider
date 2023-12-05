@@ -11,6 +11,7 @@ import SignInPage from "./pages/SignInPage/SignInPage";
 import SubjectsSyllabusPage from "./pages/Syllabus/SubjectsSyllabusPage/SubjectsSyllabusPage";
 import TeachersSyllabusPage from "./pages/Syllabus/TeachersSyllabusPage/TeachersSyllabusPage";
 import AssigningSyllabusPage from "./pages/Syllabus/AssigningSyllabusPage/AssigningSyllabusPage";
+import SyllabusPage from "./pages/Syllabus/SyllabusPage/SyllabusPage";
 import SubjectsCoursesSyllabusPage from "./pages/СourseSyllabus/SubjectsCoursesSyllabusPage/SubjectsCoursesSyllabusPage";
 import TeachersCoursesSyllabusPage from "./pages/СourseSyllabus/TeachersCoursesSyllabusPage/TeachersCoursesSyllabusPage";
 import AssigningCoursesSyllabusPage from "./pages/СourseSyllabus/AssigningCoursesSyllabusPage/AssigningCoursesSyllabusPage";
@@ -54,6 +55,7 @@ const App = (): React.JSX.Element => {
                   <Route path={AppRouter.Subjects} element={<SubjectsSyllabusPage />} />
                   <Route path={AppRouter.Teachers} element={<TeachersSyllabusPage />} />
                   <Route path={AppRouter.Assigning} element={<AssigningSyllabusPage />} />
+                  <Route path={AppRouter.Syllabus} element={<SyllabusPage />} />
                 </Route>
                 <Route path={AppRouter.CoursesSyllabus}>
                   <Route index element={<Navigate to={AppRouter.Subjects} replace />} />
