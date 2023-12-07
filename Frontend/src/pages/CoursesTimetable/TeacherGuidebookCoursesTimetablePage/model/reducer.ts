@@ -91,4 +91,6 @@ const teacherGuidebookCoursesTimetablePageReducer = (
   }
 };
 
-export { teacherGuidebookCoursesTimetablePageReducer };
+export {
+  teacherGuidebookCoursesTimetablePageReducer,
+};
