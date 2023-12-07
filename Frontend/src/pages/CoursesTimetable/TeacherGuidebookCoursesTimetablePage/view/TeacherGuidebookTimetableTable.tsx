@@ -1,16 +1,21 @@
-import {TeacherGuidebookCoursesTimetablePageData} from "../model/types";
+import {
+  AvailableTime,
+  TeacherGuidebookCoursesTimetableData,
+} from "../model/types";
 import {classNames} from "../../../../utils/classNames";
 import React from "react";
 import Select, {SelectSize} from "../../../../components/Select/Select";
 
 interface TeacherGuidebookTimetableTableProps {
-  data: TeacherGuidebookCoursesTimetablePageData,
+  availableTime: AvailableTime[],
+  data: TeacherGuidebookCoursesTimetableData[],
   isEdited: boolean,
   handleSort: (columnName: string) => void,
-  setSelectedTime: (courseId: number, timeId: number) => void,
+  setSelectedTime: (courseId: string, timeId: string) => void,
 }
 
 const TeacherGuidebookTimetableTable = ({
+  availableTime,
   data,
   isEdited,
   handleSort,
@@ -26,16 +31,16 @@ const TeacherGuidebookTimetableTable = ({
       <td className="cell">
         {isEdited
           ? <Select
-            options={item.availableTime.map(time => ({
-              id: `${time.id}`,
+            options={availableTime.map(time => ({
+              id: time.id,
               content: `${time.weekDay} ${time.startTime} - ${time.endTime}`
             }))}
-            onValueChange={(id) => setSelectedTime(item.id, parseInt(id, 10))}
+            onValueChange={(id) => setSelectedTime(item.id, id)}
             size={SelectSize.Micro}
           />
           : <>
-            {item.availableTime
-              .filter(time => item.selectedTime.includes(time.id))
+            {availableTime
+              .filter(time => item.availableTime.includes(time.id))
               .map((time) => (
                 <p key={time.id}>{time.weekDay} {time.startTime} - {time.endTime}</p>
               ))}

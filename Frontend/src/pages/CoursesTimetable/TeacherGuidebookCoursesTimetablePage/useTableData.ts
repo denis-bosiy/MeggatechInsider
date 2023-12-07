@@ -9,11 +9,11 @@ import {SortingOrder} from "../../../core/Table/SortingOrder";
 import {TeacherGuidebookCoursesTimetableActionBuilder} from "./model/actions";
 
 function useTableData() {
-  const data = useSelector((state: {
+  const pageData = useSelector((state: {
     teacherGuidebookCoursesTimetablePageStore: TeacherGuidebookCoursesTimetablePageData
   }) => state.teacherGuidebookCoursesTimetablePageStore);
 
-  const [tableData, setTableData] = useState(structuredClone(data));
+  const [tableData, setTableData] = useState(structuredClone(pageData.data));
   const [searchValue, setSearchValue] = useState("");
   const [isEdited, setIsEdited] = useState<{ value: boolean }>({ value: false });
 
@@ -39,27 +39,27 @@ function useTableData() {
     teacherGuidebookCoursesTimetableTableManager.invokeFunction(
       "search",
       TableType.Searchable,
-      [searchValue, data]);
+      [searchValue, pageData.data]);
   };
 
   const dispatch = useDispatch();
   const handleSave = () => {
     teacherGuidebookCoursesTimetableTableManager.invokeFunction("apply", TableType.Editable, [
-      (data: any[]) => dispatch(TeacherGuidebookCoursesTimetableActionBuilder.saveData(data)),
+      (data: TeacherGuidebookCoursesTimetableData[]) => dispatch(TeacherGuidebookCoursesTimetableActionBuilder.saveData(data)),
     ]);
   };
   const handleReset = () => {
     teacherGuidebookCoursesTimetableTableManager.invokeFunction(
       "cancel",
       TableType.Editable,
-      [data],
+      [pageData.data],
     );
   };
   const handleEdit = () => {
     teacherGuidebookCoursesTimetableTableManager.invokeFunction("edit", TableType.Editable, []);
   };
 
-  const setSelectedTime = (courseId: number, timeId: number) => {
+  const setSelectedTime = (courseId: string, timeId: string) => {
     setTableData(tableData.map((data: TeacherGuidebookCoursesTimetableData) => {
       if (data.id !== courseId) {
         return data;
@@ -74,7 +74,8 @@ function useTableData() {
 
   return {
     state: {
-      data: tableData,
+      availableTime: pageData.availableTime,
+      tableData: tableData,
       isEdited: isEdited.value,
       searchValue,
     },

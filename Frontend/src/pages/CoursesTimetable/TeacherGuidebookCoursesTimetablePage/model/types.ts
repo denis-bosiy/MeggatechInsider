@@ -1,26 +1,29 @@
 type AvailableTime = {
-  id: number,
+  id: string,
   weekDay: string,
   startTime: string,
   endTime: string,
 }
 
 type TeacherGuidebookCoursesTimetableData = {
-  id: number,
+  id: string,
   course: string,
   type: string,
   teacherName: string,
-  teacherId: number,
-  availableTime: AvailableTime[],
-  selectedTime: number[],
+  teacherId: string,
+  availableTime: string[],
   distributedHoursToPlan: number,
   hoursToPlan: number,
   creditHours: number,
 }
 
-type TeacherGuidebookCoursesTimetablePageData = TeacherGuidebookCoursesTimetableData[]
+type TeacherGuidebookCoursesTimetablePageData = {
+  availableTime: AvailableTime[],
+  data: TeacherGuidebookCoursesTimetableData[],
+}
 
 export {
+  type AvailableTime,
   type TeacherGuidebookCoursesTimetableData,
   type TeacherGuidebookCoursesTimetablePageData,
 };
