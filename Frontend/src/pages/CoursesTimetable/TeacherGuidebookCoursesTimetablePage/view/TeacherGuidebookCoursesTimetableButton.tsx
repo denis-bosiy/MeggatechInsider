@@ -9,7 +9,7 @@ interface TeacherGuidebookTimetableButtonProps {
   handleReset: () => void,
 }
 
-const TeacherGuidebookTimetableButton = ({
+const TeacherGuidebookCoursesTimetableButton = ({
   isEdited,
   handleEdit,
   handleSave,
@@ -43,4 +43,4 @@ const TeacherGuidebookTimetableButton = ({
   );
 };
 
-export default TeacherGuidebookTimetableButton;
+export default TeacherGuidebookCoursesTimetableButton;

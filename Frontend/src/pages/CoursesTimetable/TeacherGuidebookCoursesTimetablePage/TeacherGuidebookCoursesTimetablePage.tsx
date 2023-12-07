@@ -1,8 +1,8 @@
 import React from "react";
 import Input, {InputType} from "../../../components/Input/Input";
 import {useTableData} from "./useTableData";
-import TeacherGuidebookTimetableButton from "./view/TeacherGuidebookTimetableButton";
-import TeacherGuidebookTimetableTable from "./view/TeacherGuidebookTimetableTable";
+import TeacherGuidebookCoursesTimetableButton from "./view/TeacherGuidebookCoursesTimetableButton";
+import TeacherGuidebookCoursesTimetableTable from "./view/TeacherGuidebookCoursesTimetableTable";
 
 const TeacherGuidebookCoursesTimetablePage = () => {
   const {
@@ -14,7 +14,7 @@ const TeacherGuidebookCoursesTimetablePage = () => {
     <>
       <div className="toolbar">
         <div className="toolbar__buttons-wrapper">
-          <TeacherGuidebookTimetableButton
+          <TeacherGuidebookCoursesTimetableButton
             isEdited={state.isEdited}
             handleEdit={actions.handleEdit}
             handleSave={actions.handleSave}
@@ -31,7 +31,7 @@ const TeacherGuidebookCoursesTimetablePage = () => {
         </div>
       </div>
       <table className="table">
-        <TeacherGuidebookTimetableTable
+        <TeacherGuidebookCoursesTimetableTable
           availableTime={state.availableTime}
           data={state.tableData}
           isEdited={state.isEdited}

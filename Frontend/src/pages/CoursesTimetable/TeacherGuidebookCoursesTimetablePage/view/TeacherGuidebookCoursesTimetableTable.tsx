@@ -14,7 +14,7 @@ interface TeacherGuidebookTimetableTableProps {
   setSelectedTime: (courseId: string, timeId: string) => void,
 }
 
-const TeacherGuidebookTimetableTable = ({
+const TeacherGuidebookCoursesTimetableTable = ({
   availableTime,
   data,
   isEdited,
@@ -108,4 +108,4 @@ const TeacherGuidebookTimetableTable = ({
   </>;
 };
 
-export default TeacherGuidebookTimetableTable;
+export default TeacherGuidebookCoursesTimetableTable;
