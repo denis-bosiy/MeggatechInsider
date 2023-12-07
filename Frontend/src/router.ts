@@ -103,7 +103,12 @@ export const Menu: MenuItem[] = [
       { label: "Преподаватели", url: AppRouter.Teachers },
       {
         label: "План",
-        url: AppRouter.CoursesSyllabusTable
+        url: AppRouter.CoursesSyllabusTable,
+        tabs: {
+          courses: "Подготовительные курсы",
+          expressCourses: "Подготовительные экспресс-курсы",
+          schoolOfAYoungProgrammer: "ШЮП"
+        }
       },
       {
         label: "Назначение",
