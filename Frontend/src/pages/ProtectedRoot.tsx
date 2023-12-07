@@ -30,10 +30,10 @@ const ProtectedRoot = () => {
   };
 
   useEffect(() => {
-    if (page && page.tabs) {
+    if (tabs.length !== 0 && tabParams.get("tab") === null) {
       setTabParams({ tab: tabs[0] });
     }
-  }, [page]);
+  }, [tabs, tabParams]);
 
   return (
     <div className="root">

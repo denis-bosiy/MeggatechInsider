@@ -1,0 +1,19 @@
+.budget-statistic-page {
+    &__container {
+        display: flex;
+        justify-content: space-between;
+        gap: 25px;
+    }
+
+    &__box {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 25px;
+    }
+
+    &__table-result
+    {
+        font-weight: bold;
+    }
+}
