@@ -22,7 +22,7 @@ public class TeacherRepository : Repository<Teacher>, ITeacherRepository
 
     public List<Teacher> GetByCategoryId( int id ) => Entities.Where( t => t.TeacherCategoryId == id ).ToList();
 
-    public List<Teacher> GetContractTypeId( int id ) => Entities.Where( t => t.ContractTypeId == id ).ToList();
+    public List<Teacher> GetByContractTypeId( int id ) => Entities.Where( t => t.ContractTypeId == id ).ToList();
 
     public List<Teacher> GetByEducationId( int id ) => Entities.Where( t => t.EducationId == id ).ToList();
 }

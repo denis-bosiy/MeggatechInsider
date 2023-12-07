@@ -22,6 +22,35 @@ namespace Infrastructure.Migrations.Migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
 
+            modelBuilder.Entity("Domain.AssignmentEntities.Assignment", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<int>("GroupCount")
+                        .HasColumnType("int");
+
+                    b.Property<int>("SubjectId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("TeacherId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("Year")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("SubjectId");
+
+                    b.HasIndex("TeacherId");
+
+                    b.ToTable("Assignment", (string)null);
+                });
+
             modelBuilder.Entity("Domain.SubjectEntities.PaymentType", b =>
                 {
                     b.Property<int>("Id")
@@ -476,6 +505,79 @@ namespace Infrastructure.Migrations.Migrations
                     b.ToTable("VerticalSubgroupStudentGroup");
                 });
 
+            modelBuilder.Entity("Domain.TimetableEntities.TeacherEntities.TeacherAvailableHours", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<int>("DayOfWeek")
+                        .HasColumnType("int");
+
+                    b.Property<int>("TeacherId")
+                        .HasColumnType("int");
+
+                    b.Property<DateOnly>("WeekStartDate")
+                        .HasColumnType("date");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("TeacherId");
+
+                    b.ToTable("TeacherAvailableHours", (string)null);
+                });
+
+            modelBuilder.Entity("LessonTimeTeacherAvailableHours", b =>
+                {
+                    b.Property<int>("AvailableLessonTimesId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("TeacherAvailableHoursId")
+                        .HasColumnType("int");
+
+                    b.HasKey("AvailableLessonTimesId", "TeacherAvailableHoursId");
+
+                    b.HasIndex("TeacherAvailableHoursId");
+
+                    b.ToTable("LessonTimeTeacherAvailableHours");
+                });
+
+            modelBuilder.Entity("PairTimeTeacherAvailableHours", b =>
+                {
+                    b.Property<int>("AvailablePairTimesId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("TeacherAvailableHoursId")
+                        .HasColumnType("int");
+
+                    b.HasKey("AvailablePairTimesId", "TeacherAvailableHoursId");
+
+                    b.HasIndex("TeacherAvailableHoursId");
+
+                    b.ToTable("PairTimeTeacherAvailableHours");
+                });
+
+            modelBuilder.Entity("Domain.AssignmentEntities.Assignment", b =>
+                {
+                    b.HasOne("Domain.SubjectEntities.Subject", "Subject")
+                        .WithMany()
+                        .HasForeignKey("SubjectId")
+                        .OnDelete(DeleteBehavior.NoAction)
+                        .IsRequired();
+
+                    b.HasOne("Domain.TeacherEntities.Teacher", "Teacher")
+                        .WithMany()
+                        .HasForeignKey("TeacherId")
+                        .OnDelete(DeleteBehavior.NoAction)
+                        .IsRequired();
+
+                    b.Navigation("Subject");
+
+                    b.Navigation("Teacher");
+                });
+
             modelBuilder.Entity("Domain.SubjectEntities.Subject", b =>
                 {
                     b.HasOne("Domain.SubjectEntities.PaymentType", "PaymentType")
@@ -567,6 +669,47 @@ namespace Infrastructure.Migrations.Migrations
                     b.Navigation("Subject");
 
                     b.Navigation("Teacher");
+                });
+
+            modelBuilder.Entity("Domain.TimetableEntities.TeacherEntities.TeacherAvailableHours", b =>
+                {
+                    b.HasOne("Domain.TeacherEntities.Teacher", "Teacher")
+                        .WithMany()
+                        .HasForeignKey("TeacherId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Teacher");
+                });
+
+            modelBuilder.Entity("LessonTimeTeacherAvailableHours", b =>
+                {
+                    b.HasOne("Domain.TimetableEntities.GuidebookEntities.LessonTime", null)
+                        .WithMany()
+                        .HasForeignKey("AvailableLessonTimesId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("Domain.TimetableEntities.TeacherEntities.TeacherAvailableHours", null)
+                        .WithMany()
+                        .HasForeignKey("TeacherAvailableHoursId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("PairTimeTeacherAvailableHours", b =>
+                {
+                    b.HasOne("Domain.TimetableEntities.GuidebookEntities.PairTime", null)
+                        .WithMany()
+                        .HasForeignKey("AvailablePairTimesId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("Domain.TimetableEntities.TeacherEntities.TeacherAvailableHours", null)
+                        .WithMany()
+                        .HasForeignKey("TeacherAvailableHoursId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
                 });
 
             modelBuilder.Entity("Domain.SubjectEntities.PaymentType", b =>
