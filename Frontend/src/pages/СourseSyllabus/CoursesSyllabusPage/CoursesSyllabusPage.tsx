@@ -116,7 +116,7 @@ const CoursesSyllabusPage = () => {
                 </td>
               );
             })}
-            <td className="cell -vertical">Продолжить по первым 2 неделям</td>
+            {isEditing.value && <td className="cell -vertical">Продолжить по первым 2 неделям</td>}
           </tr>
         </thead>
         <tbody>
@@ -132,13 +132,46 @@ const CoursesSyllabusPage = () => {
                 {subject.weeksPlan.map((plan: number, index: number) => {
                   return (
                     <td className="cell" key={index}>
-                      {plan}
+                      {isEditing.value ? (
+                        <Input
+                          placeholder=""
+                          value={plan.toString()}
+                          onValueChange={(newValue: string) => {
+                            const newWeeksPlan = subject.weeksPlan;
+                            newWeeksPlan[index] = Number(newValue);
+                            setTableData(
+                              tableData.map((data: CoursesSyllabusSubject) =>
+                                data.id === subject.id ? { ...data, weeksPlan: newWeeksPlan } : data
+                              )
+                            );
+                          }}
+                          size={InputSize.Micro}
+                        />
+                      ) : (
+                        plan
+                      )}
                     </td>
                   );
                 })}
-                <td className="cell">
-                  <button>Авто</button>
-                </td>
+                {isEditing.value && (
+                  <td className="cell">
+                    <button
+                      onClick={() => {
+                        const newWeeksPlan = [...Array(subject.weeksPlan.length)].map((_, index) => {
+                          if (index % 2 === 0) return subject.weeksPlan[0];
+                          return subject.weeksPlan[1];
+                        });
+                        setTableData(
+                          tableData.map((data: CoursesSyllabusSubject) =>
+                            data.id === subject.id ? { ...data, weeksPlan: newWeeksPlan } : data
+                          )
+                        );
+                      }}
+                    >
+                      Авто
+                    </button>
+                  </td>
+                )}
               </tr>
             );
           })}
