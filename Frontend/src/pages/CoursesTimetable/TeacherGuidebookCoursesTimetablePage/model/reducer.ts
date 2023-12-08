@@ -68,19 +68,6 @@ const teacherGuidebookCoursesTimetablePageReducer = (
         ...state,
         data: [...action.payload],
       };
-    case TEACHER_GUIDEBOOK_COURSES_TIMETABLE_PAGE_ACTIONS.SET_AVAILABLE_TIMES:
-      return {
-        ...state,
-        data: state.data.map(item => {
-          if (item.id === action.payload.courseId) {
-            return {
-              ...item,
-              availableTimes: action.payload.availableTimes,
-            };
-          }
-          return item;
-        })
-      };
     default:
       return state;
   }

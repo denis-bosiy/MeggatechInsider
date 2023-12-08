@@ -49,7 +49,7 @@ const TeacherGuidebookCoursesTimetableTable = ({
               .map(getSelectItem)
             }
             options={availableTimes.map(getSelectItem)}
-            onValueChange={(ids) => setAvailableTimes(item.id, ids.map(id => id))}
+            onValueChange={(ids) => setAvailableTimes(item.id, ids.map(id => id.value))}
           />
           : <>
             {availableTimes

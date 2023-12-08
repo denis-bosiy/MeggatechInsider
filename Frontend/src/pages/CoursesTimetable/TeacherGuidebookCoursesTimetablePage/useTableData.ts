@@ -59,9 +59,17 @@ function useTableData() {
     teacherGuidebookCoursesTimetableTableManager.invokeFunction("edit", TableType.Editable, []);
   };
 
-  const setAvailableTimes = (courseId: string, availableTimes: string[]) => dispatch(
-    TeacherGuidebookCoursesTimetableActionBuilder.setAvailableTimes(courseId, availableTimes),
-  );
+  const setAvailableTimes = (courseId: string, availableTimes: string[]) => {
+    setTableData(tableData.map((item: TeacherGuidebookCoursesTimetableData) => {
+      if (item.id === courseId) {
+        return {
+          ...item,
+          availableTimes,
+        };
+      }
+      return item;
+    }));
+  };
 
   return {
     state: {
