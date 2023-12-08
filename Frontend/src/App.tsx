@@ -11,6 +11,7 @@ import SignInPage from "./pages/SignInPage/SignInPage";
 import SubjectsSyllabusPage from "./pages/Syllabus/SubjectsSyllabusPage/SubjectsSyllabusPage";
 import TeachersSyllabusPage from "./pages/Syllabus/TeachersSyllabusPage/TeachersSyllabusPage";
 import AssigningSyllabusPage from "./pages/Syllabus/AssigningSyllabusPage/AssigningSyllabusPage";
+import SyllabusPage from "./pages/Syllabus/SyllabusPage/SyllabusPage";
 import SubjectsCoursesSyllabusPage
   from "./pages/CourseSyllabus/SubjectsCoursesSyllabusPage/SubjectsCoursesSyllabusPage";
 import TeachersCoursesSyllabusPage
@@ -32,8 +33,10 @@ import GroupGuidebookCoursesTimetablePage
 import { QueryClient, QueryClientProvider } from "react-query";
 import ClassGuidebookPage from "./pages/Timetable/ClassGuidebookPage/ClassGuidebookPage";
 import BudgetStatisticsPage from "./pages/Statistics/BudgetStatisticsPage/BudgetStatisticsPage";
-import TeacherGuidebookCoursesTimetablePage from "./pages/CoursesTimetable/TeacherGuidebookCoursesTimetablePage/TeacherGuidebookCoursesTimetablePage";
-import GroupGuidebookCoursesTimetablePage from "./pages/CoursesTimetable/GroupGuidebookCoursesTimetablePage/GroupGuidebookCoursesTimetablePage";
+import CategoriesStatisticsPage from "./pages/Statistics/CategoriesStatisticsPage/CategoriesStatisticsPage";
+import OffBudgetReportPage from "./pages/FinancialReports/OffBudgerReportPage/OffBudgetReportPage";
+import TeachersStatisticsPage from "./pages/Statistics/TeachersStatisticsPage/TeachersStatisticsPage";
+import CoursesSyllabusPage from "./pages/СourseSyllabus/CoursesSyllabusPage/CoursesSyllabusPage";
 
 const queryClient = new QueryClient();
 const App = (): React.JSX.Element => {
@@ -60,11 +63,13 @@ const App = (): React.JSX.Element => {
                   <Route path={AppRouter.Subjects} element={<SubjectsSyllabusPage />} />
                   <Route path={AppRouter.Teachers} element={<TeachersSyllabusPage />} />
                   <Route path={AppRouter.Assigning} element={<AssigningSyllabusPage />} />
+                  <Route path={AppRouter.Syllabus} element={<SyllabusPage />} />
                 </Route>
                 <Route path={AppRouter.CoursesSyllabus}>
                   <Route index element={<Navigate to={AppRouter.Subjects} replace />} />
                   <Route path={AppRouter.Subjects} element={<SubjectsCoursesSyllabusPage />} />
                   <Route path={AppRouter.Teachers} element={<TeachersCoursesSyllabusPage />} />
+                  <Route path={AppRouter.CoursesSyllabusTable} element={<CoursesSyllabusPage />} />
                   <Route path={AppRouter.Assigning} element={<AssigningCoursesSyllabusPage />} />
                 </Route>
                 <Route path={AppRouter.Timetable}>
@@ -73,17 +78,23 @@ const App = (): React.JSX.Element => {
                   <Route path={AppRouter.ClassesGuidebook} element={<ClassGuidebookPage />} />
                   <Route path={AppRouter.LessonsSchedule} element={<LessonsSchedulePage />} />
                 </Route>
+                <Route path={AppRouter.CoursesTimetable}>
+                  <Route index element={<Navigate to={AppRouter.TeacherGuidebook} replace />} />
+                  <Route path={AppRouter.TeacherGuidebook} element={<TeacherGuidebookCoursesTimetablePage />} />
+                </Route>
                 <Route path={AppRouter.Statistics}>
                   <Route index element={<Navigate to={AppRouter.BudgetStatistics} replace />} />
                   <Route path={AppRouter.BudgetStatistics} element={<BudgetStatisticsPage />} />
+                  <Route path={AppRouter.Categories} element={<CategoriesStatisticsPage />} />
+                  <Route path={AppRouter.Teachers} element={<TeachersStatisticsPage />} />
                 </Route>
                 <Route path={AppRouter.CoursesTimetable}>
                   <Route index element={<Navigate to={AppRouter.TeacherGuidebook} replace />} />
                   <Route path={AppRouter.TeacherGuidebook} element={<TeacherGuidebookCoursesTimetablePage />} />
                   <Route path={AppRouter.GroupGuidebook} element={<GroupGuidebookCoursesTimetablePage />} />
                 </Route>
-                <Route path={AppRouter.CoursesTimetable}>
-                  <Route path={AppRouter.TeacherGuidebook} element={<TeacherGuidebookCoursesTimetablePage/>} />
+                <Route path={AppRouter.FinancialReport}>
+                  <Route path={AppRouter.OffBudgetReport} element={<OffBudgetReportPage />} />
                   <Route path={AppRouter.GroupGuidebook} element={<GroupGuidebookCoursesTimetablePage/>} />
                 </Route>
                 <Route path={AppRouter.LessonsSchedule} element={<LessonsSchedulePage />} />

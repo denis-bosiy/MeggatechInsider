@@ -1,5 +1,5 @@
 import {useDispatch, useSelector} from "react-redux";
-import {TeacherGuidebookCoursesTimetablePageData} from "./model/types";
+import {TeacherGuidebookCoursesTimetableData, TeacherGuidebookCoursesTimetablePageData} from "./model/types";
 import {useState} from "react";
 import {CTableBuilder} from "../../../core/Table/CTableBuilder";
 import {CTable} from "../../../core/Table/CTable";
@@ -9,11 +9,11 @@ import {SortingOrder} from "../../../core/Table/SortingOrder";
 import {TeacherGuidebookCoursesTimetableActionBuilder} from "./model/actions";
 
 function useTableData() {
-  const data = useSelector((state: {
+  const pageData = useSelector((state: {
     teacherGuidebookCoursesTimetablePageStore: TeacherGuidebookCoursesTimetablePageData
   }) => state.teacherGuidebookCoursesTimetablePageStore);
 
-  const [tableData, setTableData] = useState(structuredClone(data));
+  const [tableData, setTableData] = useState(structuredClone(pageData.data));
   const [searchValue, setSearchValue] = useState("");
   const [isEdited, setIsEdited] = useState<{ value: boolean }>({ value: false });
 
@@ -39,29 +39,42 @@ function useTableData() {
     teacherGuidebookCoursesTimetableTableManager.invokeFunction(
       "search",
       TableType.Searchable,
-      [searchValue, data]);
+      [searchValue, pageData.data]);
   };
 
   const dispatch = useDispatch();
   const handleSave = () => {
     teacherGuidebookCoursesTimetableTableManager.invokeFunction("apply", TableType.Editable, [
-      (data: any[]) => dispatch(TeacherGuidebookCoursesTimetableActionBuilder.saveData(data)),
+      (data: TeacherGuidebookCoursesTimetableData[]) => dispatch(TeacherGuidebookCoursesTimetableActionBuilder.setData(data)),
     ]);
   };
   const handleReset = () => {
     teacherGuidebookCoursesTimetableTableManager.invokeFunction(
       "cancel",
       TableType.Editable,
-      [data],
+      [pageData.data],
     );
   };
   const handleEdit = () => {
     teacherGuidebookCoursesTimetableTableManager.invokeFunction("edit", TableType.Editable, []);
   };
 
+  const setAvailableTimes = (courseId: string, availableTimes: string[]) => {
+    setTableData(tableData.map((item: TeacherGuidebookCoursesTimetableData) => {
+      if (item.id === courseId) {
+        return {
+          ...item,
+          availableTimes,
+        };
+      }
+      return item;
+    }));
+  };
+
   return {
     state: {
-      data: tableData,
+      availableTimes: pageData.availableTimes,
+      tableData: tableData,
       isEdited: isEdited.value,
       searchValue,
     },
@@ -72,6 +85,7 @@ function useTableData() {
       handleReset,
       handleEdit,
       setSearchValue,
+      setAvailableTimes,
     },
   };
 }

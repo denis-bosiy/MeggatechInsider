@@ -22,7 +22,7 @@ namespace Api.Models.TeacherTimetable
         public int TeacherId { get; set; }
 
         [JsonPropertyName( "availableHours" )]
-        public List<AvailableHoursDto> AvailableHours { get; set; }
+        public List<AvailableHoursByWeekDayDto> AvailableHoursByWeekDay { get; set; }
 
         [JsonPropertyName( "distributedHoursToPlan" )]
         public int DistributedHoursToPlan { get; set; }

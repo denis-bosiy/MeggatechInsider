@@ -39,13 +39,15 @@ export class HttpService {
     }
   }
 
-  public async getByArbitraryUrl(url: string, params: Map<string, string>) {
+  public async getByArbitraryUrl(url: string, params?: Map<string, string>) {
     try {
       let resultUrl: string = url;
-      if (params.size !== 0) {
-        resultUrl += "?";
+      if (params) {
+        if (params.size !== 0) {
+          resultUrl += "?";
+        }
+        params.forEach((value: string, key: string) => (resultUrl += key + "=" + value + "&"));
       }
-      params.forEach((value: string, key: string) => (resultUrl += key + "=" + value + "&"));
       return await this.api.get(resultUrl);
     } catch (error: any) {
       if (error.response.status === 404) {

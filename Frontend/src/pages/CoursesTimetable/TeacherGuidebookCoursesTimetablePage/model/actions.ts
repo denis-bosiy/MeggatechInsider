@@ -1,19 +1,25 @@
-import {TeacherGuidebookCoursesTimetablePageData} from "./types";
+import {TeacherGuidebookCoursesTimetableData, TeacherGuidebookCoursesTimetablePageData} from "./types";
 
-export enum TEACHER_GUIDEBOOK_COURSES_TIMETABLE_PAGE_ACTIONS {
-  SAVE_DATA = "TEACHER_GUIDEBOOK_COURSES_TIMETABLE_PAGE_ACTIONS_SAVE_DATA",
+enum TEACHER_GUIDEBOOK_COURSES_TIMETABLE_PAGE_ACTIONS {
+  SET_DATA = "TEACHER_GUIDEBOOK_COURSES_TIMETABLE_PAGE_ACTIONS_SET_DATA",
 }
 
-export type ActionSaveData = {
-  type: TEACHER_GUIDEBOOK_COURSES_TIMETABLE_PAGE_ACTIONS.SAVE_DATA;
+type ActionSetData = {
+  type: TEACHER_GUIDEBOOK_COURSES_TIMETABLE_PAGE_ACTIONS.SET_DATA;
   payload: TeacherGuidebookCoursesTimetablePageData[];
 };
 
-export type TeacherGuidebookCoursesTimetableAction = ActionSaveData;
+type TeacherGuidebookCoursesTimetableAction = ActionSetData;
 
-export const TeacherGuidebookCoursesTimetableActionBuilder = {
-  saveData: (values: TeacherGuidebookCoursesTimetablePageData[]) => ({
-    type: TEACHER_GUIDEBOOK_COURSES_TIMETABLE_PAGE_ACTIONS.SAVE_DATA,
+const TeacherGuidebookCoursesTimetableActionBuilder = {
+  setData: (values: TeacherGuidebookCoursesTimetableData[]) => ({
+    type: TEACHER_GUIDEBOOK_COURSES_TIMETABLE_PAGE_ACTIONS.SET_DATA,
     payload: values,
   }),
+};
+
+export {
+  type TeacherGuidebookCoursesTimetableAction,
+  TEACHER_GUIDEBOOK_COURSES_TIMETABLE_PAGE_ACTIONS,
+  TeacherGuidebookCoursesTimetableActionBuilder,
 };

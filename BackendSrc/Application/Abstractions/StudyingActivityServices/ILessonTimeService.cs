@@ -4,6 +4,7 @@ namespace Application.Abstractions.StudyingActivityServices
 {
     public interface ILessonTimeService
     {
+        LessonTime GetById( int id );
         List<LessonTime> GetLessonTimesByYear( int year );
         void AddLesson( int year, TimeOnly startTime, TimeOnly endTime );
         void DeleteLessonTime( int id );
