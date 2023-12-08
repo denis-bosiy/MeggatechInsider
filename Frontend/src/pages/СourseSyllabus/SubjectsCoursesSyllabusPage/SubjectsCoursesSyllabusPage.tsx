@@ -14,7 +14,6 @@ import {CTableManager} from "../../../core/Table/CTableManager";
 import {TableType} from "../../../core/Table/TableType";
 import {guidGenerator} from "../../../utils/guidGenerator";
 import {SortingOrder} from "../../../core/Table/SortingOrder";
-import {SubjectSyllabusData} from "../../Syllabus/SubjectsSyllabusPage/model/types";
 
 const SubjectsCoursesSyllabusPage = () => {
   const typeOptions: ISelectOption[] = [

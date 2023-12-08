@@ -39,7 +39,20 @@ const initGuidebookData: Guidebook = [
     subjectId: "1",
     teacherName: "Константин Борисович Щуков",
     teacherId: "1",
-    availableHours: [],
+    availableHours: [
+      {
+        id: "1",
+        weekDayCode: 0,
+        startTime: "8.00",
+        endTime: "9.00",
+      },
+      {
+        id: "4",
+        weekDayCode: 1,
+        startTime: "9.00",
+        endTime: "10.00",
+      },
+    ],
     distributedHoursToPlan: 16,
     hoursToPlan: 15,
     creditHours: 2,
@@ -51,7 +64,14 @@ const initGuidebookData: Guidebook = [
     subjectId: "2",
     teacherName: "Елена Борисовна Щук",
     teacherId: "2",
-    availableHours: [],
+    availableHours: [
+      {
+        id: "4",
+        weekDayCode: 1,
+        startTime: "9.00",
+        endTime: "10.00",
+      },
+    ],
     distributedHoursToPlan: 10,
     hoursToPlan: 15,
     creditHours: 2,
@@ -63,7 +83,14 @@ const initGuidebookData: Guidebook = [
     subjectId: "2",
     teacherName: "Алена Борисовна Щук",
     teacherId: "2",
-    availableHours: [],
+    availableHours: [
+      {
+        id: "4",
+        weekDayCode: 1,
+        startTime: "9.00",
+        endTime: "10.00",
+      },
+    ],
     distributedHoursToPlan: 17,
     hoursToPlan: 15,
     creditHours: 0,
