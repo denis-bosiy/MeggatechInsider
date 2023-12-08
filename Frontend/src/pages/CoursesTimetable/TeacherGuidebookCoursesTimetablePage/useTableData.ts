@@ -45,7 +45,7 @@ function useTableData() {
   const dispatch = useDispatch();
   const handleSave = () => {
     teacherGuidebookCoursesTimetableTableManager.invokeFunction("apply", TableType.Editable, [
-      (data: TeacherGuidebookCoursesTimetableData[]) => dispatch(TeacherGuidebookCoursesTimetableActionBuilder.saveData(data)),
+      (data: TeacherGuidebookCoursesTimetableData[]) => dispatch(TeacherGuidebookCoursesTimetableActionBuilder.setData(data)),
     ]);
   };
   const handleReset = () => {
@@ -59,22 +59,13 @@ function useTableData() {
     teacherGuidebookCoursesTimetableTableManager.invokeFunction("edit", TableType.Editable, []);
   };
 
-  const setSelectedTime = (courseId: string, timeId: string) => {
-    setTableData(tableData.map((data: TeacherGuidebookCoursesTimetableData) => {
-      if (data.id !== courseId) {
-        return data;
-      }
-
-      return {
-        ...data,
-        selectedTime: [timeId],
-      };
-    }));
-  };
+  const setAvailableTimes = (courseId: string, availableTimes: string[]) => dispatch(
+    TeacherGuidebookCoursesTimetableActionBuilder.setAvailableTimes(courseId, availableTimes),
+  );
 
   return {
     state: {
-      availableTime: pageData.availableTime,
+      availableTimes: pageData.availableTimes,
       tableData: tableData,
       isEdited: isEdited.value,
       searchValue,
@@ -86,7 +77,7 @@ function useTableData() {
       handleReset,
       handleEdit,
       setSearchValue,
-      setSelectedTime,
+      setAvailableTimes,
     },
   };
 }

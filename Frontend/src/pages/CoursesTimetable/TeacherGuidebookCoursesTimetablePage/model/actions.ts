@@ -2,7 +2,7 @@ import {TeacherGuidebookCoursesTimetableData, TeacherGuidebookCoursesTimetablePa
 
 enum TEACHER_GUIDEBOOK_COURSES_TIMETABLE_PAGE_ACTIONS {
   SET_DATA = "TEACHER_GUIDEBOOK_COURSES_TIMETABLE_PAGE_ACTIONS_SET_DATA",
-  SET_AVAILABLE_TIME = "TEACHER_GUIDEBOOK_COURSES_TIMETABLE_PAGE_ACTIONS_SET_AVAILABLE_TIME",
+  SET_AVAILABLE_TIMES = "TEACHER_GUIDEBOOK_COURSES_TIMETABLE_PAGE_ACTIONS_SET_AVAILABLE_TIMES",
 }
 
 type ActionSetData = {
@@ -10,17 +10,27 @@ type ActionSetData = {
   payload: TeacherGuidebookCoursesTimetablePageData[];
 };
 
-type ActionSetAvailableTime = {
-  type: TEACHER_GUIDEBOOK_COURSES_TIMETABLE_PAGE_ACTIONS.SET_AVAILABLE_TIME;
-  payload: TeacherGuidebookCoursesTimetablePageData[];
+type ActionSetAvailableTimes = {
+  type: TEACHER_GUIDEBOOK_COURSES_TIMETABLE_PAGE_ACTIONS.SET_AVAILABLE_TIMES;
+  payload: {
+    courseId: string,
+    availableTimes: string[],
+  };
 };
 
-type TeacherGuidebookCoursesTimetableAction = ActionSetData | ActionSetAvailableTime;
+type TeacherGuidebookCoursesTimetableAction = ActionSetData | ActionSetAvailableTimes;
 
 const TeacherGuidebookCoursesTimetableActionBuilder = {
-  saveData: (values: TeacherGuidebookCoursesTimetableData[]) => ({
+  setData: (values: TeacherGuidebookCoursesTimetableData[]) => ({
     type: TEACHER_GUIDEBOOK_COURSES_TIMETABLE_PAGE_ACTIONS.SET_DATA,
     payload: values,
+  }),
+  setAvailableTimes: (courseId: string, availableTimes: string[]) => ({
+    type: TEACHER_GUIDEBOOK_COURSES_TIMETABLE_PAGE_ACTIONS.SET_AVAILABLE_TIMES,
+    payload: {
+      courseId,
+      availableTimes,
+    },
   }),
 };
 

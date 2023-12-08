@@ -12,7 +12,7 @@ const initData: TeacherGuidebookCoursesTimetableData[] = [
     type: "ШЮП",
     teacherName: "Леонид Хорошавин",
     teacherId: "1.1",
-    availableTime: ["1"],
+    availableTimes: ["1"],
     distributedHoursToPlan: 8,
     hoursToPlan: 8,
     creditHours: 0,
@@ -23,7 +23,7 @@ const initData: TeacherGuidebookCoursesTimetableData[] = [
     type: "Подготовительные",
     teacherName: "Александр Мушкин",
     teacherId: "2.2",
-    availableTime: ["1"],
+    availableTimes: ["1"],
     distributedHoursToPlan: 10,
     hoursToPlan: 12,
     creditHours: 0,
@@ -34,14 +34,14 @@ const initData: TeacherGuidebookCoursesTimetableData[] = [
     type: "Экспресс",
     teacherName: "Валентина Смирнова",
     teacherId: "3.1",
-    availableTime: ["1"],
+    availableTimes: ["1"],
     distributedHoursToPlan: 8,
     hoursToPlan: 6,
     creditHours: 2,
   }
 ];
 
-const initAvailableTime: AvailableTime[] = [{
+const initAvailableTimes: AvailableTime[] = [{
   id: "1",
   weekDayCode: 0,
   startTime: "08.20",
@@ -54,7 +54,7 @@ const initAvailableTime: AvailableTime[] = [{
 }];
 
 const initState: TeacherGuidebookCoursesTimetablePageData = {
-  availableTime: initAvailableTime,
+  availableTimes: initAvailableTimes,
   data: initData,
 };
 
@@ -67,6 +67,19 @@ const teacherGuidebookCoursesTimetablePageReducer = (
       return {
         ...state,
         data: [...action.payload],
+      };
+    case TEACHER_GUIDEBOOK_COURSES_TIMETABLE_PAGE_ACTIONS.SET_AVAILABLE_TIMES:
+      return {
+        ...state,
+        data: state.data.map(item => {
+          if (item.id === action.payload.courseId) {
+            return {
+              ...item,
+              availableTimes: action.payload.availableTimes,
+            };
+          }
+          return item;
+        })
       };
     default:
       return state;

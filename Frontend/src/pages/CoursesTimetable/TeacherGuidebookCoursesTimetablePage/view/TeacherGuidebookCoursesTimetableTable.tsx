@@ -8,20 +8,31 @@ import Multiselect from "../../../../components/Multiselect/Multiselect";
 import {shortenWorkday} from "../../../../utils/workdayShortener";
 import {getWorkdayByCode} from "../../../../utils/getWorkdayByCode";
 
+function getSelectLabel(time: AvailableTime) {
+  return `${shortenWorkday(getWorkdayByCode(time.weekDayCode))} ${time.startTime} - ${time.endTime}`;
+}
+
+function getSelectItem(time: AvailableTime) {
+  return {
+    value: time.id,
+    label: getSelectLabel(time),
+  };
+}
+
 interface TeacherGuidebookTimetableTableProps {
-  availableTime: AvailableTime[],
+  availableTimes: AvailableTime[],
   data: TeacherGuidebookCoursesTimetableData[],
   isEdited: boolean,
   handleSort: (columnName: string) => void,
-  setSelectedTime: (courseId: string, timeId: string) => void,
+  setAvailableTimes: (courseId: string, availableTimes: string[]) => void,
 }
 
 const TeacherGuidebookCoursesTimetableTable = ({
-  availableTime,
+  availableTimes,
   data,
   isEdited,
   handleSort,
-  setSelectedTime,
+  setAvailableTimes,
 }: TeacherGuidebookTimetableTableProps) => {
   const rows = data.map((item) => (
     <tr className="row" key={item.id}>
@@ -33,17 +44,18 @@ const TeacherGuidebookCoursesTimetableTable = ({
       <td className="cell">
         {isEdited
           ? <Multiselect
-            options={availableTime.map(time => ({
-              value: time.id,
-              label: `${shortenWorkday(getWorkdayByCode(time.weekDayCode))} ${time.startTime} - ${time.endTime}`
-            }))}
-            onValueChange={(id) => console.log(id)}
+            defaultValue={availableTimes
+              .filter(time => item.availableTimes.includes(time.id))
+              .map(getSelectItem)
+            }
+            options={availableTimes.map(getSelectItem)}
+            onValueChange={(ids) => setAvailableTimes(item.id, ids.map(id => id))}
           />
           : <>
-            {availableTime
-              .filter(time => item.availableTime.includes(time.id))
+            {availableTimes
+              .filter(time => item.availableTimes.includes(time.id))
               .map((time) => (
-                <p key={time.id}>{shortenWorkday(getWorkdayByCode(time.weekDayCode))} {time.startTime} - {time.endTime}</p>
+                <p key={time.id}>{getSelectLabel(time)}</p>
               ))}
           </>}
       </td>

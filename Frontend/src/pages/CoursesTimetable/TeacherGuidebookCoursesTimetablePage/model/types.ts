@@ -11,14 +11,14 @@ type TeacherGuidebookCoursesTimetableData = {
   type: string,
   teacherName: string,
   teacherId: string,
-  availableTime: string[],
+  availableTimes: string[],
   distributedHoursToPlan: number,
   hoursToPlan: number,
   creditHours: number,
 }
 
 type TeacherGuidebookCoursesTimetablePageData = {
-  availableTime: AvailableTime[],
+  availableTimes: AvailableTime[],
   data: TeacherGuidebookCoursesTimetableData[],
 }
 
