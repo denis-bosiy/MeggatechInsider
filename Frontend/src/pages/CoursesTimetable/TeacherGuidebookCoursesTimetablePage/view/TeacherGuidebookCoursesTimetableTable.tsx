@@ -59,8 +59,11 @@ const TeacherGuidebookCoursesTimetableTable = ({
               ))}
           </>}
       </td>
-      <td className={classNames("cell" + (item.distributedHoursToPlan < item.hoursToPlan ? " -error" : "")
-        + (item.distributedHoursToPlan > item.hoursToPlan ? " -warning" : ""))}>
+      <td className={classNames(
+        "cell" +
+        (item.distributedHoursToPlan < item.hoursToPlan ? " -error" : "") +
+        (item.distributedHoursToPlan > item.hoursToPlan ? " -warning" : ""))}
+      >
         {item.distributedHoursToPlan}
       </td>
       <td className="cell">{item.hoursToPlan}</td>
