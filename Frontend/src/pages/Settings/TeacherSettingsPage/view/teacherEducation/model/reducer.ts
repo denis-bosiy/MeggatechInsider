@@ -1,36 +1,33 @@
-import {Action, TEACHER_EDUCATION_ACTIONS} from "./actions";
-import {TeacherEducationItem} from "./types";
+import { Action, TEACHER_EDUCATION_ACTIONS } from "./actions";
+import { TeacherEducationItem } from "./types";
 
-const defaultData: TeacherEducationItem[] = [{
-  id: "Среднее образование",
-  education: "Среднее образование",
-  coefficient: 0.3,
-}, {
-  id: "Высшее образование",
-  education: "Высшее образование",
-  coefficient: 0.3,
-}, {
-  id: "Степень к.н.",
-  education: "Степень к.н.",
-  coefficient: 0.3,
-}, {
-  id: "Степень д.н.",
-  education: "Степень д.н.",
-  coefficient: 0.3,
-}];
+const defaultData: TeacherEducationItem[] = [
+  {
+    id: "Среднее образование",
+    education: "Среднее образование",
+    coefficient: 0.3
+  },
+  {
+    id: "Высшее образование",
+    education: "Высшее образование",
+    coefficient: 0.3
+  },
+  {
+    id: "Степень к.н.",
+    education: "Степень к.н.",
+    coefficient: 0.3
+  },
+  {
+    id: "Степень д.н.",
+    education: "Степень д.н.",
+    coefficient: 0.3
+  }
+];
 
 const teacherEducationReducer = (state: TeacherEducationItem[] = defaultData, action: Action) => {
   switch (action.type) {
-    case TEACHER_EDUCATION_ACTIONS.TEACHER_EDUCATION_ACTIONS_ADD_ITEM:
-      return [...state, {
-        id: action.payload.name,
-        education: action.payload.name,
-        coefficient: action.payload.coefficient,
-      }];
     case TEACHER_EDUCATION_ACTIONS.TEACHER_EDUCATION_ACTIONS_SET_ITEMS:
       return [...action.payload];
-    case TEACHER_EDUCATION_ACTIONS.TEACHER_EDUCATION_ACTIONS_DELETE_ITEM:
-      return [...state].filter(item => item.id !== action.payload.id);
     default:
       return state;
   }
