@@ -12,10 +12,13 @@ export enum AppRouter {
   LessonsSchedule = "lessons-schedule",
   CoursesTimetable = "courses-timetable",
   LessonsGuidebook = "lessons-guidebook",
+  ClassesGuidebook = "classes-guidebook",
   TeacherGuidebook = "teacher-guidebook",
   GroupGuidebook = "group-guidebook",
   Settings = "settings",
   Basic = "basic",
+  BudgetStatistics = "budget-statistics",
+  Statistics = "statistics",
   NotFound = "*"
 }
 
@@ -62,7 +65,14 @@ export const Menu: MenuItem[] = [
     label: "Расписание занятий",
     navigation: [
       { label: "Справочник по преподавателям", url: AppRouter.TeacherGuidebook },
-      { label: "Справочник по классам", url: AppRouter.LessonsGuidebook },
+      {
+        label: "Справочник по классам",
+        url: AppRouter.ClassesGuidebook,
+        tabs: {
+          class10: "10 класс",
+          class11: "11 класс"
+        }
+      },
       { label: "Расписание", url: AppRouter.LessonsSchedule }
     ]
   },
@@ -77,11 +87,11 @@ export const Menu: MenuItem[] = [
     ]
   },
   {
-    url: "#",
+    url: AppRouter.CoursesTimetable,
     label: "Расписание курсов",
     navigation: [
-      { label: "Справочник по преподавателям", url: "#" },
-      { label: "Справочник по группам", url: "#" },
+      { label: "Справочник по преподавателям", url: AppRouter.TeacherGuidebook },
+      { label: "Справочник по группам", url: AppRouter.GroupGuidebook },
       { label: "Расписание курсов", url: "#" }
     ]
   },
@@ -100,8 +110,8 @@ export const Menu: MenuItem[] = [
         url: AppRouter.Assigning,
         tabs: {
           courses: "Подготовительные курсы",
-          expressCourses: "Подготовительные экспресс курсы",
-          shup: "ШЮП"
+          expressCourses: "Подготовительные экспресс-курсы",
+          schoolOfAYoungProgrammer: "ШЮП"
         }
       }
     ]
@@ -129,10 +139,10 @@ export const Menu: MenuItem[] = [
     label: "Контроль учебного плана за год"
   },
   {
-    url: "#",
+    url: AppRouter.Statistics,
     label: "Статистика",
     navigation: [
-      { label: "Статистика бюджетов", url: "#" },
+      { label: "Статистика бюджетов", url: AppRouter.BudgetStatistics },
       { label: "Статистика категорий", url: "#" },
       { label: "Статистика преподавателей", url: "#" }
     ]

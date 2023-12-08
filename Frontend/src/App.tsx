@@ -30,6 +30,10 @@ import TeacherGuidebookCoursesTimetablePage from "./pages/CoursesTimetable/Teach
 import GroupGuidebookCoursesTimetablePage
   from "./pages/CoursesTimetable/GroupGuidebookCoursesTimetablePage/GroupGuidebookCoursesTimetablePage";
 import { QueryClient, QueryClientProvider } from "react-query";
+import ClassGuidebookPage from "./pages/Timetable/ClassGuidebookPage/ClassGuidebookPage";
+import BudgetStatisticsPage from "./pages/Statistics/BudgetStatisticsPage/BudgetStatisticsPage";
+import TeacherGuidebookCoursesTimetablePage from "./pages/CoursesTimetable/TeacherGuidebookCoursesTimetablePage/TeacherGuidebookCoursesTimetablePage";
+import GroupGuidebookCoursesTimetablePage from "./pages/CoursesTimetable/GroupGuidebookCoursesTimetablePage/GroupGuidebookCoursesTimetablePage";
 
 const queryClient = new QueryClient();
 const App = (): React.JSX.Element => {
@@ -66,7 +70,17 @@ const App = (): React.JSX.Element => {
                 <Route path={AppRouter.Timetable}>
                   <Route index element={<Navigate to={AppRouter.TeacherGuidebook} replace />} />
                   <Route path={AppRouter.TeacherGuidebook} element={<TeacherGuidebookTimetablePage />} />
+                  <Route path={AppRouter.ClassesGuidebook} element={<ClassGuidebookPage />} />
                   <Route path={AppRouter.LessonsSchedule} element={<LessonsSchedulePage />} />
+                </Route>
+                <Route path={AppRouter.Statistics}>
+                  <Route index element={<Navigate to={AppRouter.BudgetStatistics} replace />} />
+                  <Route path={AppRouter.BudgetStatistics} element={<BudgetStatisticsPage />} />
+                </Route>
+                <Route path={AppRouter.CoursesTimetable}>
+                  <Route index element={<Navigate to={AppRouter.TeacherGuidebook} replace />} />
+                  <Route path={AppRouter.TeacherGuidebook} element={<TeacherGuidebookCoursesTimetablePage />} />
+                  <Route path={AppRouter.GroupGuidebook} element={<GroupGuidebookCoursesTimetablePage />} />
                 </Route>
                 <Route path={AppRouter.CoursesTimetable}>
                   <Route path={AppRouter.TeacherGuidebook} element={<TeacherGuidebookCoursesTimetablePage/>} />

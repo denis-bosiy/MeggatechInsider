@@ -20,6 +20,14 @@ import {
   groupGuidebookCoursesTimetablePageReducer
 } from "../pages/CoursesTimetable/GroupGuidebookCoursesTimetablePage/model/reducer";
 import { headerReducer } from "../layouts/Header/model/reducer";
+import { classGuidebookTimetablePageReducer } from "../pages/Timetable/ClassGuidebookPage/model/reducer";
+import { budgetStatisticsPageReducer } from "../pages/Statistics/BudgetStatisticsPage/model/reducer";
+import {
+  teacherGuidebookCoursesTimetablePageReducer
+} from "../pages/CoursesTimetable/TeacherGuidebookCoursesTimetablePage/model/reducer";
+import {
+  groupGuidebookCoursesTimetablePageReducer
+} from "../pages/CoursesTimetable/GroupGuidebookCoursesTimetablePage/model/reducer";
 
 export default combineReducers({
   testPageStore: testPageReducer,
@@ -38,5 +46,9 @@ export default combineReducers({
   lessonsScheduleStore: lessonsSchedulePageReducer,
   teacherGuidebookCoursesTimetablePageStore: teacherGuidebookCoursesTimetablePageReducer,
   groupGuidebookCoursesTimetablePageStore: groupGuidebookCoursesTimetablePageReducer,
-  headerStore: headerReducer
+  headerStore: headerReducer,
+  classGuidebookTimetableStore: classGuidebookTimetablePageReducer,
+  budgetStatisticsPageStore: budgetStatisticsPageReducer,
+  teacherGuidebookCoursesTimetablePageStore: teacherGuidebookCoursesTimetablePageReducer,
+  groupGuidebookCoursesTimetablePageStore: groupGuidebookCoursesTimetablePageReducer,
 });
