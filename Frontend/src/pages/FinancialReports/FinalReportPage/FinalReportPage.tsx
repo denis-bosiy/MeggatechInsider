@@ -12,17 +12,18 @@ const FinalReportPage = () => {
 
   return (
     <>
-      <div className="toolbar">
+      <div className="toolbar -fill">
         <div className="toolbar__buttons-wrapper">
           <Button
+            className="toolbar__button"
             type={ButtonType.Secondary}
             size={ButtonSize.Default}
             label="Скачать в excel"
             onClick={actions.handleExport}
           />
         </div>
-
         <Input
+          className="toolbar__search"
           placeholder="Поиск"
           value={state.searchQuery}
           onValueChange={actions.setSearchQuery}
@@ -31,7 +32,6 @@ const FinalReportPage = () => {
           onSearch={actions.handleSearch}
         />
       </div>
-
       <table className="table">
         <thead className="header">
           <tr className="row">
