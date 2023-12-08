@@ -19,17 +19,21 @@ function TarifficationTable({
 
   return (
     <div className="tariffication-table">
-      <div className="toolbar">
-        <h2>{title}</h2>
-        <div className="toolbar__buttons-wrapper">
-          <Button
-            type={ButtonType.Secondary}
-            size={ButtonSize.Default}
-            label="Скачать в excel"
-            onClick={actions.handleExport}
-          />
+      <div className="toolbar -fill">
+        <div className="tariffication-table__header">
+          <h2>{title}</h2>
+          <div className="toolbar__buttons-wrapper">
+            <Button
+              className="toolbar__button"
+              type={ButtonType.Secondary}
+              size={ButtonSize.Default}
+              label="Скачать в excel"
+              onClick={actions.handleExport}
+            />
+          </div>
         </div>
         <Input
+          className="toolbar__search"
           placeholder="Поиск"
           value={state.searchQuery}
           onValueChange={actions.setSearchQuery}
