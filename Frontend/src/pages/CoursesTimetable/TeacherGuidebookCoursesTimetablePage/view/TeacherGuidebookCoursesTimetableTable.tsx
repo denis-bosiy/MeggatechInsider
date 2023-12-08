@@ -4,7 +4,9 @@ import {
 } from "../model/types";
 import {classNames} from "../../../../utils/classNames";
 import React from "react";
-import Select, {SelectSize} from "../../../../components/Select/Select";
+import Multiselect from "../../../../components/Multiselect/Multiselect";
+import {shortenWorkday} from "../../../../utils/workdayShortener";
+import {getWorkdayByCode} from "../../../../utils/getWorkdayByCode";
 
 interface TeacherGuidebookTimetableTableProps {
   availableTime: AvailableTime[],
@@ -30,19 +32,18 @@ const TeacherGuidebookCoursesTimetableTable = ({
       <td className="cell">{item.teacherName}</td>
       <td className="cell">
         {isEdited
-          ? <Select
+          ? <Multiselect
             options={availableTime.map(time => ({
-              id: time.id,
-              content: `${time.weekDay} ${time.startTime} - ${time.endTime}`
+              value: time.id,
+              label: `${shortenWorkday(getWorkdayByCode(time.weekDayCode))} ${time.startTime} - ${time.endTime}`
             }))}
-            onValueChange={(id) => setSelectedTime(item.id, id)}
-            size={SelectSize.Micro}
+            onValueChange={(id) => console.log(id)}
           />
           : <>
             {availableTime
               .filter(time => item.availableTime.includes(time.id))
               .map((time) => (
-                <p key={time.id}>{time.weekDay} {time.startTime} - {time.endTime}</p>
+                <p key={time.id}>{shortenWorkday(getWorkdayByCode(time.weekDayCode))} {time.startTime} - {time.endTime}</p>
               ))}
           </>}
       </td>

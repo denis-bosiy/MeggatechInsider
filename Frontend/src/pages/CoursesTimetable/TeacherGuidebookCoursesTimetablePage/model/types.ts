@@ -1,6 +1,6 @@
 type AvailableTime = {
   id: string,
-  weekDay: string,
+  weekDayCode: number,
   startTime: string,
   endTime: string,
 }

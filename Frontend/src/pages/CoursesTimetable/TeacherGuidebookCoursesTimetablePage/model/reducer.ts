@@ -43,12 +43,12 @@ const initData: TeacherGuidebookCoursesTimetableData[] = [
 
 const initAvailableTime: AvailableTime[] = [{
   id: "1",
-  weekDay: "пн",
+  weekDayCode: 0,
   startTime: "08.20",
   endTime: "09.50"
 }, {
   id: "2",
-  weekDay: "вт",
+  weekDayCode: 1,
   startTime: "13.00",
   endTime: "13.45"
 }];
