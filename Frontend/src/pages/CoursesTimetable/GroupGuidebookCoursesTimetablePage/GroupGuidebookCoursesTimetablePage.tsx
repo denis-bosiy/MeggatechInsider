@@ -3,6 +3,7 @@ import Input, {InputType} from "../../../components/Input/Input";
 import {useTableData} from "./useTableData";
 import {GroupGuidebookCoursesTimetablePageData} from "./model/types";
 import "./GroupGuidebookCoursesTimetablePage.scss";
+import {classNames} from "../../../utils/classNames";
 
 interface TableProps {
   data: GroupGuidebookCoursesTimetablePageData,
@@ -20,7 +21,13 @@ const Table = ({
       </td>
       <td className="cell">{group.type}</td>
       {group.groups.map((item) => <Fragment key={item.id}>
-        <td className="cell">{item.distributedHoursToPlan}</td>
+        <td className={classNames(
+          "cell" +
+          (item.distributedHoursToPlan < item.hoursToPlan ? " -error" : "") +
+          (item.distributedHoursToPlan > item.hoursToPlan ? " -warning" : "")
+        )}>
+          {item.distributedHoursToPlan}
+        </td>
         <td className="cell">{item.hoursToPlan}</td>
         <td className="cell">{item.creditHours}</td>
       </Fragment>)}
