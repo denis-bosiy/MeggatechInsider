@@ -24,6 +24,7 @@ export enum AppRouter {
   BudgetStatistics = "budget-statistics",
   Statistics = "statistics",
   Categories = "categories",
+  OffBudgetCategories = "off-budget-categories",
   NotFound = "*"
 }
 
@@ -141,7 +142,7 @@ export const Menu: MenuItem[] = [
       { label: "Тарификация", url: AppRouter.TarifficationReport },
       { label: "Внебюджет", url: AppRouter.OffBudgetReport },
       { label: "Финальный отчет", url: AppRouter.FinalReport },
-      { label: "Внебюджетные категории", url: "#" }
+      { label: "Внебюджетные категории", url: AppRouter.OffBudgetCategories }
     ]
   },
   {
