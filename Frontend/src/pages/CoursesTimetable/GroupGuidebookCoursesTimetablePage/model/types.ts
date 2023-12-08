@@ -1,5 +1,5 @@
 type GroupData = {
-  id: number,
+  id: string,
   name: string,
   distributedHoursToPlan: number,
   hoursToPlan: number,
@@ -7,7 +7,7 @@ type GroupData = {
 }
 
 type GroupGuidebookCoursesTimetableData = {
-  id: number,
+  id: string,
   name: string,
   type: string,
   groups: GroupData[],

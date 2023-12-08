@@ -81,17 +81,13 @@ const App = (): React.JSX.Element => {
                 <Route path={AppRouter.CoursesTimetable}>
                   <Route index element={<Navigate to={AppRouter.TeacherGuidebook} replace />} />
                   <Route path={AppRouter.TeacherGuidebook} element={<TeacherGuidebookCoursesTimetablePage />} />
+                  <Route path={AppRouter.GroupGuidebook} element={<GroupGuidebookCoursesTimetablePage />} />
                 </Route>
                 <Route path={AppRouter.Statistics}>
                   <Route index element={<Navigate to={AppRouter.BudgetStatistics} replace />} />
                   <Route path={AppRouter.BudgetStatistics} element={<BudgetStatisticsPage />} />
                   <Route path={AppRouter.Categories} element={<CategoriesStatisticsPage />} />
                   <Route path={AppRouter.Teachers} element={<TeachersStatisticsPage />} />
-                </Route>
-                <Route path={AppRouter.CoursesTimetable}>
-                  <Route index element={<Navigate to={AppRouter.TeacherGuidebook} replace />} />
-                  <Route path={AppRouter.TeacherGuidebook} element={<TeacherGuidebookCoursesTimetablePage />} />
-                  <Route path={AppRouter.GroupGuidebook} element={<GroupGuidebookCoursesTimetablePage />} />
                 </Route>
                 <Route path={AppRouter.FinancialReport}>
                   <Route path={AppRouter.OffBudgetReport} element={<OffBudgetReportPage />} />

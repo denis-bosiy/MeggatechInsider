@@ -44,7 +44,7 @@ const Table = ({
         >
           Тип
         </th>
-        {data.length && data[0].groups.map((group) => <th
+        {!!data.length && data[0].groups.map((group) => <th
           key={group.id}
           className="cell"
           colSpan={3}
@@ -53,7 +53,7 @@ const Table = ({
         </th>)}
       </tr>
       <tr className="row">
-        {data.length && data[0].groups.map((group) => <Fragment key={group.id}>
+        {!!data.length && data[0].groups.map((group) => <Fragment key={group.id}>
           <th
             className="cell -filter"
             onClick={() => handleSort("distributedHoursToPlan")}
@@ -75,7 +75,9 @@ const Table = ({
         </Fragment>)}
       </tr>
     </thead>
-    <tbody>{rows}</tbody>
+    <tbody>
+      {rows}
+    </tbody>
   </>;
 };
 
