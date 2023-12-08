@@ -26,7 +26,8 @@ import {budgetStatisticsPageReducer} from "../pages/Statistics/BudgetStatisticsP
 import {teachersStatisticsPageReducer} from "../pages/Statistics/TeachersStatisticsPage/model/reducer";
 import {categoriesStatisticsPageReducer} from "../pages/Statistics/CategoriesStatisticsPage/model/reducer";
 import {teachersOffBudgetReportPageReducer} from "../pages/FinancialReports/OffBudgerReportPage/model/reducer";
-import { coursesSyllabusPageReducer } from "../pages/СourseSyllabus/CoursesSyllabusPage/model/reducer";
+import {finalReportPageReducer} from "../pages/FinancialReports/FinalReportPage/model/reducer";
+import {coursesSyllabusPageReducer} from "../pages/СourseSyllabus/CoursesSyllabusPage/model/reducer";
 
 export default combineReducers({
   testPageStore: testPageReducer,
@@ -52,5 +53,6 @@ export default combineReducers({
   teachersStatisticsPageStore: teachersStatisticsPageReducer,
   categoriesStatisticsPageStore: categoriesStatisticsPageReducer,
   teachersOffBudgetReportPageStore: teachersOffBudgetReportPageReducer,
+  finalReportPageStore: finalReportPageReducer,
   coursesSyllabusPageStore: coursesSyllabusPageReducer
 });

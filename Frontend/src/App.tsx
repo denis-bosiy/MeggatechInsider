@@ -37,6 +37,7 @@ import CategoriesStatisticsPage from "./pages/Statistics/CategoriesStatisticsPag
 import OffBudgetReportPage from "./pages/FinancialReports/OffBudgerReportPage/OffBudgetReportPage";
 import TeachersStatisticsPage from "./pages/Statistics/TeachersStatisticsPage/TeachersStatisticsPage";
 import CoursesSyllabusPage from "./pages/СourseSyllabus/CoursesSyllabusPage/CoursesSyllabusPage";
+import FinalReportPage from "./pages/FinancialReports/FinalReportPage/FinalReportPage";
 
 const queryClient = new QueryClient();
 const App = (): React.JSX.Element => {
@@ -91,7 +92,7 @@ const App = (): React.JSX.Element => {
                 </Route>
                 <Route path={AppRouter.FinancialReport}>
                   <Route path={AppRouter.OffBudgetReport} element={<OffBudgetReportPage />} />
-                  <Route path={AppRouter.GroupGuidebook} element={<GroupGuidebookCoursesTimetablePage/>} />
+                  <Route path={AppRouter.FinalReport} element={<FinalReportPage />} />
                 </Route>
                 <Route path={AppRouter.LessonsSchedule} element={<LessonsSchedulePage />} />
                 <Route path="components" element={<ComponentsPage />} />
