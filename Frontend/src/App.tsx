@@ -30,6 +30,7 @@ import CategoriesStatisticsPage from "./pages/Statistics/CategoriesStatisticsPag
 import OffBudgetReportPage from "./pages/FinancialReports/OffBudgerReportPage/OffBudgetReportPage";
 import TeachersStatisticsPage from "./pages/Statistics/TeachersStatisticsPage/TeachersStatisticsPage";
 import CoursesSyllabusPage from "./pages/СourseSyllabus/CoursesSyllabusPage/CoursesSyllabusPage";
+import OffBudgetCategoriesPage from "./pages/FinancialReports/OffBudgetCategoriesPage/OffBudgetCategoriesPage";
 
 const queryClient = new QueryClient();
 const App = (): React.JSX.Element => {
@@ -78,7 +79,9 @@ const App = (): React.JSX.Element => {
                   <Route path={AppRouter.Teachers} element={<TeachersStatisticsPage />} />
                 </Route>
                 <Route path={AppRouter.FinancialReport}>
+                  <Route index element={<Navigate to={AppRouter.OffBudgetCategories} replace />} />
                   <Route path={AppRouter.OffBudgetReport} element={<OffBudgetReportPage />} />
+                  <Route path={AppRouter.OffBudgetCategories} element={<OffBudgetCategoriesPage />} />
                 </Route>
                 <Route path="components" element={<ComponentsPage />} />
                 <Route path="test-redux" element={<TestPage />} />
