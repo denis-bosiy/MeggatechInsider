@@ -30,6 +30,9 @@ import {finalReportPageReducer} from "../pages/FinancialReports/FinalReportPage/
 import {tarifficationReportPageReducer} from "../pages/FinancialReports/TarifficationReportPage/model/reducer";
 import {coursesSyllabusPageReducer} from "../pages/СourseSyllabus/CoursesSyllabusPage/model/reducer";
 import {offBudgetCategoriesPageReducer} from "../pages/FinancialReports/OffBudgetCategoriesPage/model/reducer";
+import {
+  lessonsScheduleCoursesTimetablePageReducer
+} from "../pages/CoursesTimetable/LessonsScheduleCoursesTimetablePage/model/reducer";
 
 export default combineReducers({
   testPageStore: testPageReducer,
@@ -59,4 +62,5 @@ export default combineReducers({
   offBudgetCategoriesPageStore: offBudgetCategoriesPageReducer,
   finalReportPageStore: finalReportPageReducer,
   tarifficationReportPageStore: tarifficationReportPageReducer,
+  lessonsScheduleCoursesTimetablePageStore: lessonsScheduleCoursesTimetablePageReducer,
 });

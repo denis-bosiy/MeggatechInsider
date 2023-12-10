@@ -98,7 +98,7 @@ export const Menu: MenuItem[] = [
     navigation: [
       { label: "Справочник по преподавателям", url: AppRouter.TeacherGuidebook },
       { label: "Справочник по группам", url: AppRouter.GroupGuidebook },
-      { label: "Расписание курсов", url: "#" }
+      { label: "Расписание курсов", url: AppRouter.LessonsSchedule }
     ]
   },
   {
