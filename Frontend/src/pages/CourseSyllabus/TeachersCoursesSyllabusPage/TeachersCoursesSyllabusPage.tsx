@@ -1,33 +1,37 @@
-import React, {useContext, useState} from "react";
-import {useDispatch, useSelector} from "react-redux";
-import {TeachersCoursesSyllabusPageData, TeacherCoursesSyllabusData} from "./model/types";
-import {ActionBuilder} from "./model/actions";
-import Input, {InputSize, InputType} from "../../../components/Input/Input";
-import ActionButton, {ActionButtonType} from "../../../components/ActionButton/ActionButton";
-import {CheckMarkIcon, GarbageIcon, PenIcon, PlusIcon} from "../../../icons";
-import Select, {ISelectOption, SelectSize} from "../../../components/Select/Select";
-import IconButton, {IconButtonType} from "../../../components/IconButton/IconButton";
+import React, { useContext, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { TeachersCoursesSyllabusPageData, TeacherCoursesSyllabusData } from "./model/types";
+import { ActionBuilder } from "./model/actions";
+import Input, { InputSize, InputType } from "../../../components/Input/Input";
+import ActionButton, { ActionButtonType } from "../../../components/ActionButton/ActionButton";
+import { CheckMarkIcon, GarbageIcon, PenIcon, PlusIcon } from "../../../icons";
+import Select, { ISelectOption, SelectSize } from "../../../components/Select/Select";
+import IconButton, { IconButtonType } from "../../../components/IconButton/IconButton";
 import ModalSettingsContext from "../../../utils/ModalSettingsContext";
-import {TeachersSyllabusPageData, TeacherSyllabusData} from "../../Syllabus/TeachersSyllabusPage/model/types";
-import {CTableBuilder} from "../../../core/Table/CTableBuilder";
-import {CTable} from "../../../core/Table/CTable";
-import {CTableManager} from "../../../core/Table/CTableManager";
-import {TableType} from "../../../core/Table/TableType";
-import {guidGenerator} from "../../../utils/guidGenerator";
-import {SortingOrder} from "../../../core/Table/SortingOrder";
+import { CTableBuilder } from "../../../core/Table/CTableBuilder";
+import { CTable } from "../../../core/Table/CTable";
+import { CTableManager } from "../../../core/Table/CTableManager";
+import { TableType } from "../../../core/Table/TableType";
+import { guidGenerator } from "../../../utils/guidGenerator";
+import { SortingOrder } from "../../../core/Table/SortingOrder";
 
 const TeachersCoursesSyllabusPage = () => {
   const workingContractOptions: ISelectOption[] = [
     { id: "1", content: "ГПХ" },
-    { id: "2", content: "ДС" },
+    { id: "2", content: "ДС" }
   ];
 
   const { openModal } = useContext(ModalSettingsContext);
   const dispatch = useDispatch();
-  const teachers = useSelector((state: {teachersCoursesSyllabusPageStore: TeachersCoursesSyllabusPageData}) => state.teachersCoursesSyllabusPageStore);
+  const teachers = useSelector(
+    (state: { teachersCoursesSyllabusPageStore: TeachersCoursesSyllabusPageData }) =>
+      state.teachersCoursesSyllabusPageStore
+  );
   const [isTeachersEditing, setIsTeachersEditing] = useState<{ value: boolean }>({ value: false });
   const [isTeachersAdding, setIsTeachersAdding] = useState<{ value: boolean }>({ value: false });
-  const [teachersTableData, setTeachersTableData] = useState<TeachersCoursesSyllabusPageData>(structuredClone(teachers));
+  const [teachersTableData, setTeachersTableData] = useState<TeachersCoursesSyllabusPageData>(
+    structuredClone(teachers)
+  );
   const [teacherSearchQuery, setTeacherSearchQuery] = useState<string>("");
   const teachersTableBuilder: CTableBuilder = new CTableBuilder(teachersTableData, setTeachersTableData);
   teachersTableBuilder.addEditFeature(isTeachersEditing, setIsTeachersEditing);
@@ -57,7 +61,7 @@ const TeachersCoursesSyllabusPage = () => {
         workExperience: 0,
         workExperienceAtTheTimeOfTheEmployment: 0,
         birthDay: "",
-        age: 0,
+        age: 0
       }
     ]);
   };
@@ -67,10 +71,7 @@ const TeachersCoursesSyllabusPage = () => {
     ]);
   };
   const handleTeacherSearch = (): void => {
-    teachersTableManager.invokeFunction("search", TableType.Searchable, [
-      teacherSearchQuery,
-      teachers
-    ]);
+    teachersTableManager.invokeFunction("search", TableType.Searchable, [teacherSearchQuery, teachers]);
   };
   const handleSort = (columnName: string): void => {
     teachersTableManager.invokeFunction("sort", TableType.Default, [columnName, SortingOrder.Ascending]);
@@ -131,251 +132,273 @@ const TeachersCoursesSyllabusPage = () => {
       <table className="table -fill -list">
         <thead className="header">
           <tr className="row">
-            <th className="cell -filter" onClick={() => handleSort("name")}>ФИО</th>
-            <th className="cell -filter" onClick={() => handleSort("workingContract")}>Договор</th>
-            <th className="cell -filter" onClick={() => handleSort("workingStartDate")}>Дата начала работы</th>
-            <th className="cell -filter" onClick={() => handleSort("workExperience")}>Стаж, лет</th>
-            <th className="cell -filter" onClick={() => handleSort("workExperienceAtTheTimeOfTheEmployment")}>Стаж на момент устр-ва</th>
-            <th className="cell -filter" onClick={() => handleSort("birthDay")}>Дата рождения</th>
-            <th className="cell -filter" onClick={() => handleSort("age")}>Возраст, лет</th>
+            <th className="cell -filter" onClick={() => handleSort("name")}>
+              ФИО
+            </th>
+            <th className="cell -filter" onClick={() => handleSort("workingContract")}>
+              Договор
+            </th>
+            <th className="cell -filter" onClick={() => handleSort("workingStartDate")}>
+              Дата начала работы
+            </th>
+            <th className="cell -filter" onClick={() => handleSort("workExperience")}>
+              Стаж, лет
+            </th>
+            <th className="cell -filter" onClick={() => handleSort("workExperienceAtTheTimeOfTheEmployment")}>
+              Стаж на момент устр-ва
+            </th>
+            <th className="cell -filter" onClick={() => handleSort("birthDay")}>
+              Дата рождения
+            </th>
+            <th className="cell -filter" onClick={() => handleSort("age")}>
+              Возраст, лет
+            </th>
           </tr>
         </thead>
         <tbody>
-          {teachersTableData.filter((data: TeacherCoursesSyllabusData, index: number) =>
-            !isTeachersAdding.value || index !== teachersTableData.length - 1
-          ).map((value: TeacherCoursesSyllabusData) => {
-            return (
-              <tr className="row" key={value.id}>
-                <td className="cell">
-                  {isTeachersEditing.value ? (
-                    <Input
-                      placeholder=""
-                      value={value.name}
-                      onValueChange={(newValue: string) =>
-                        setTeachersTableData(
-                          teachersTableData.map((data: TeacherCoursesSyllabusData) =>
-                            data.id === value.id ? { ...data, name: newValue } : data
-                          )
-                        )
-                      }
-                      size={InputSize.Micro}
-                    />
-                  ) : (
-                    value.name
-                  )}
-                </td>
-                <td className="cell">
-                  {isTeachersEditing.value ? (
-                    <Select
-                      currentValue={workingContractOptions.find(e => e.content === value.workingContract)}
-                      options={workingContractOptions}
-                      onValueChange={(newValue: string) => {
-                        const selectedOption = workingContractOptions.find(e => e.id === newValue);
-                        if (selectedOption) {
+          {teachersTableData
+            .filter(
+              (data: TeacherCoursesSyllabusData, index: number) =>
+                !isTeachersAdding.value || index !== teachersTableData.length - 1
+            )
+            .map((value: TeacherCoursesSyllabusData) => {
+              return (
+                <tr className="row" key={value.id}>
+                  <td className="cell">
+                    {isTeachersEditing.value ? (
+                      <Input
+                        placeholder=""
+                        value={value.name}
+                        onValueChange={(newValue: string) =>
                           setTeachersTableData(
                             teachersTableData.map((data: TeacherCoursesSyllabusData) =>
-                              data.id === value.id ? {...data, workingContract: selectedOption.content} : data
+                              data.id === value.id ? { ...data, name: newValue } : data
                             )
-                          );
+                          )
                         }
-                      }}
-                      size={SelectSize.Micro}
-                    />
-                  ) : (
-                    value.workingContract
-                  )}
-                </td>
-                <td className="cell">
-                  {isTeachersEditing.value ? (
-                    <Input
-                      placeholder=""
-                      value={value.workingStartDate}
-                      onValueChange={(newValue: string) =>
-                        setTeachersTableData(
-                          teachersTableData.map((data: TeacherCoursesSyllabusData) =>
-                            data.id === value.id ? { ...data, workingStartDate: newValue } : data
+                        size={InputSize.Micro}
+                      />
+                    ) : (
+                      value.name
+                    )}
+                  </td>
+                  <td className="cell">
+                    {isTeachersEditing.value ? (
+                      <Select
+                        currentValue={workingContractOptions.find((e) => e.content === value.workingContract)}
+                        options={workingContractOptions}
+                        onValueChange={(newValue: string) => {
+                          const selectedOption = workingContractOptions.find((e) => e.id === newValue);
+                          if (selectedOption) {
+                            setTeachersTableData(
+                              teachersTableData.map((data: TeacherCoursesSyllabusData) =>
+                                data.id === value.id ? { ...data, workingContract: selectedOption.content } : data
+                              )
+                            );
+                          }
+                        }}
+                        size={SelectSize.Micro}
+                      />
+                    ) : (
+                      value.workingContract
+                    )}
+                  </td>
+                  <td className="cell">
+                    {isTeachersEditing.value ? (
+                      <Input
+                        placeholder=""
+                        value={value.workingStartDate}
+                        onValueChange={(newValue: string) =>
+                          setTeachersTableData(
+                            teachersTableData.map((data: TeacherCoursesSyllabusData) =>
+                              data.id === value.id ? { ...data, workingStartDate: newValue } : data
+                            )
                           )
-                        )
-                      }
-                      size={InputSize.Micro}
-                    />
-                  ) : (
-                    value.workingStartDate
-                  )}
-                </td>
-                <td className="cell">
-                  {isTeachersEditing.value ? (
-                    <Input
-                      placeholder=""
-                      value={value.workExperience.toString()}
-                      onValueChange={(newValue: string) =>
-                        setTeachersTableData(
-                          teachersTableData.map((data: TeacherCoursesSyllabusData) =>
-                            data.id === value.id ? { ...data, workExperience: Number(newValue) } : data
+                        }
+                        size={InputSize.Micro}
+                      />
+                    ) : (
+                      value.workingStartDate
+                    )}
+                  </td>
+                  <td className="cell">
+                    {isTeachersEditing.value ? (
+                      <Input
+                        placeholder=""
+                        value={value.workExperience.toString()}
+                        onValueChange={(newValue: string) =>
+                          setTeachersTableData(
+                            teachersTableData.map((data: TeacherCoursesSyllabusData) =>
+                              data.id === value.id ? { ...data, workExperience: Number(newValue) } : data
+                            )
                           )
-                        )
-                      }
-                      size={InputSize.Micro}
-                    />
-                  ) : (
-                    value.workExperience
-                  )}
-                </td>
-                <td className="cell">
-                  {isTeachersEditing.value ? (
-                    <Input
-                      placeholder=""
-                      value={value.workExperienceAtTheTimeOfTheEmployment.toString()}
-                      onValueChange={(newValue: string) =>
-                        setTeachersTableData(
-                          teachersTableData.map((data: TeacherCoursesSyllabusData) =>
-                            data.id === value.id ? { ...data, workExperienceAtTheTimeOfTheEmployment: Number(newValue) } : data
+                        }
+                        size={InputSize.Micro}
+                      />
+                    ) : (
+                      value.workExperience
+                    )}
+                  </td>
+                  <td className="cell">
+                    {isTeachersEditing.value ? (
+                      <Input
+                        placeholder=""
+                        value={value.workExperienceAtTheTimeOfTheEmployment.toString()}
+                        onValueChange={(newValue: string) =>
+                          setTeachersTableData(
+                            teachersTableData.map((data: TeacherCoursesSyllabusData) =>
+                              data.id === value.id
+                                ? { ...data, workExperienceAtTheTimeOfTheEmployment: Number(newValue) }
+                                : data
+                            )
                           )
-                        )
-                      }
-                      size={InputSize.Micro}
-                    />
-                  ) : (
-                    value.workExperienceAtTheTimeOfTheEmployment
-                  )}
-                </td>
-                <td className="cell">
-                  {isTeachersEditing.value ? (
-                    <Input
-                      placeholder=""
-                      value={value.birthDay}
-                      onValueChange={(newValue: string) =>
-                        setTeachersTableData(
-                          teachersTableData.map((data: TeacherCoursesSyllabusData) =>
-                            data.id === value.id ? { ...data, birthDay: newValue } : data
+                        }
+                        size={InputSize.Micro}
+                      />
+                    ) : (
+                      value.workExperienceAtTheTimeOfTheEmployment
+                    )}
+                  </td>
+                  <td className="cell">
+                    {isTeachersEditing.value ? (
+                      <Input
+                        placeholder=""
+                        value={value.birthDay}
+                        onValueChange={(newValue: string) =>
+                          setTeachersTableData(
+                            teachersTableData.map((data: TeacherCoursesSyllabusData) =>
+                              data.id === value.id ? { ...data, birthDay: newValue } : data
+                            )
                           )
-                        )
-                      }
-                      size={InputSize.Micro}
-                    />
-                  ) : (
-                    value.birthDay
-                  )}
-                </td>
-                <td className="cell">
-                  {isTeachersEditing.value ? (
-                    <Input
-                      placeholder=""
-                      value={value.age.toString()}
-                      onValueChange={(newValue: string) =>
-                        setTeachersTableData(
-                          teachersTableData.map((data: TeacherCoursesSyllabusData) =>
-                            data.id === value.id ? { ...data, age: Number(newValue) } : data
+                        }
+                        size={InputSize.Micro}
+                      />
+                    ) : (
+                      value.birthDay
+                    )}
+                  </td>
+                  <td className="cell">
+                    {isTeachersEditing.value ? (
+                      <Input
+                        placeholder=""
+                        value={value.age.toString()}
+                        onValueChange={(newValue: string) =>
+                          setTeachersTableData(
+                            teachersTableData.map((data: TeacherCoursesSyllabusData) =>
+                              data.id === value.id ? { ...data, age: Number(newValue) } : data
+                            )
                           )
-                        )
-                      }
-                      size={InputSize.Micro}
-                    />
-                  ) : (
-                    value.age
-                  )}
-                </td>
-                <td className="cell">
-                  <IconButton
-                    icon={<GarbageIcon />}
-                    onClick={() => handleDeleteTeacher(value.id.toString())}
-                  />
-                </td>
-              </tr>);
-          })}
+                        }
+                        size={InputSize.Micro}
+                      />
+                    ) : (
+                      value.age
+                    )}
+                  </td>
+                  <td className="cell">
+                    <IconButton icon={<GarbageIcon />} onClick={() => handleDeleteTeacher(value.id.toString())} />
+                  </td>
+                </tr>
+              );
+            })}
 
-          {isTeachersAdding.value &&
-          <tr className="row">
-            <td className="cell">
-              <Input
-                placeholder="ФИО"
-                value={teachersTableData[teachersTableData.length - 1].name}
-                onValueChange={(newLabel: string) => {
-                  setTeachersTableData(
-                    teachersTableData.map((data: TeacherCoursesSyllabusData) =>
-                      data.id === teachersTableData[teachersTableData.length - 1].id
-                        ? { ...data, name: newLabel }
-                        : data
-                    )
-                  );
-                }}
-                size={InputSize.Micro}
-              />
-            </td>
-            <td className="cell">
-              <Select
-                options={workingContractOptions}
-                onValueChange={(newValue: string) => {
-                  const selectedOption = workingContractOptions.find(e => e.id === newValue);
-                  if (selectedOption) {
+          {isTeachersAdding.value && (
+            <tr className="row">
+              <td className="cell">
+                <Input
+                  placeholder="ФИО"
+                  value={teachersTableData[teachersTableData.length - 1].name}
+                  onValueChange={(newLabel: string) => {
                     setTeachersTableData(
                       teachersTableData.map((data: TeacherCoursesSyllabusData) =>
-                        data.id === teachersTableData[teachersTableData.length - 1].id ? {...data, workingContract: selectedOption.content} : data
+                        data.id === teachersTableData[teachersTableData.length - 1].id
+                          ? { ...data, name: newLabel }
+                          : data
                       )
                     );
-                  }
-                }}
-                size={SelectSize.Micro}
-              />
-            </td>
-            <td className="cell">
-              <Input
-                placeholder="01.09.2023"
-                value={teachersTableData[teachersTableData.length - 1].workingStartDate}
-                onValueChange={(newLabel: string) => {
-                  setTeachersTableData(
-                    teachersTableData.map((data: TeacherCoursesSyllabusData) =>
-                      data.id === teachersTableData[teachersTableData.length - 1].id
-                        ? { ...data, workingStartDate: newLabel }
-                        : data
-                    )
-                  );
-                }}
-                size={InputSize.Micro}
-              />
-            </td>
-            <td className="cell"></td>
-            <td className="cell">
-              <Input
-                placeholder="01.09.2023"
-                value={teachersTableData[teachersTableData.length - 1].workExperienceAtTheTimeOfTheEmployment.toString()}
-                onValueChange={(newLabel: string) => {
-                  setTeachersTableData(
-                    teachersTableData.map((data: TeacherCoursesSyllabusData) =>
-                      data.id === teachersTableData[teachersTableData.length - 1].id
-                        ? { ...data, workExperienceAtTheTimeOfTheEmployment: Number(newLabel) }
-                        : data
-                    )
-                  );
-                }}
-                size={InputSize.Micro}
-              />
-            </td>
-            <td className="cell">
-              <Input
-                placeholder="01.09.2023"
-                value={teachersTableData[teachersTableData.length - 1].birthDay}
-                onValueChange={(newLabel: string) => {
-                  setTeachersTableData(
-                    teachersTableData.map((data: TeacherCoursesSyllabusData) =>
-                      data.id === teachersTableData[teachersTableData.length - 1].id
-                        ? { ...data, birthDay: newLabel }
-                        : data
-                    )
-                  );
-                }}
-                size={InputSize.Micro}
-              />
-            </td>
-            <td className="cell"></td>
-            <td className="cell">
-              <IconButton
-                icon={<CheckMarkIcon />}
-                type={IconButtonType.Secondary}
-                onClick={handleApplyingNewTeacher}
-              />
-            </td>
-          </tr>}
+                  }}
+                  size={InputSize.Micro}
+                />
+              </td>
+              <td className="cell">
+                <Select
+                  options={workingContractOptions}
+                  onValueChange={(newValue: string) => {
+                    const selectedOption = workingContractOptions.find((e) => e.id === newValue);
+                    if (selectedOption) {
+                      setTeachersTableData(
+                        teachersTableData.map((data: TeacherCoursesSyllabusData) =>
+                          data.id === teachersTableData[teachersTableData.length - 1].id
+                            ? { ...data, workingContract: selectedOption.content }
+                            : data
+                        )
+                      );
+                    }
+                  }}
+                  size={SelectSize.Micro}
+                />
+              </td>
+              <td className="cell">
+                <Input
+                  placeholder="01.09.2023"
+                  value={teachersTableData[teachersTableData.length - 1].workingStartDate}
+                  onValueChange={(newLabel: string) => {
+                    setTeachersTableData(
+                      teachersTableData.map((data: TeacherCoursesSyllabusData) =>
+                        data.id === teachersTableData[teachersTableData.length - 1].id
+                          ? { ...data, workingStartDate: newLabel }
+                          : data
+                      )
+                    );
+                  }}
+                  size={InputSize.Micro}
+                />
+              </td>
+              <td className="cell"></td>
+              <td className="cell">
+                <Input
+                  placeholder="01.09.2023"
+                  value={teachersTableData[
+                    teachersTableData.length - 1
+                  ].workExperienceAtTheTimeOfTheEmployment.toString()}
+                  onValueChange={(newLabel: string) => {
+                    setTeachersTableData(
+                      teachersTableData.map((data: TeacherCoursesSyllabusData) =>
+                        data.id === teachersTableData[teachersTableData.length - 1].id
+                          ? { ...data, workExperienceAtTheTimeOfTheEmployment: Number(newLabel) }
+                          : data
+                      )
+                    );
+                  }}
+                  size={InputSize.Micro}
+                />
+              </td>
+              <td className="cell">
+                <Input
+                  placeholder="01.09.2023"
+                  value={teachersTableData[teachersTableData.length - 1].birthDay}
+                  onValueChange={(newLabel: string) => {
+                    setTeachersTableData(
+                      teachersTableData.map((data: TeacherCoursesSyllabusData) =>
+                        data.id === teachersTableData[teachersTableData.length - 1].id
+                          ? { ...data, birthDay: newLabel }
+                          : data
+                      )
+                    );
+                  }}
+                  size={InputSize.Micro}
+                />
+              </td>
+              <td className="cell"></td>
+              <td className="cell">
+                <IconButton
+                  icon={<CheckMarkIcon />}
+                  type={IconButtonType.Secondary}
+                  onClick={handleApplyingNewTeacher}
+                />
+              </td>
+            </tr>
+          )}
         </tbody>
       </table>
     </>

@@ -1,14 +1,11 @@
 import React from "react";
-import Input, {InputType} from "../../../components/Input/Input";
-import {useTableData} from "./useTableData";
+import Input, { InputType } from "../../../components/Input/Input";
+import { useTableData } from "./useTableData";
 import TeacherGuidebookCoursesTimetableButton from "./view/TeacherGuidebookCoursesTimetableButton";
 import TeacherGuidebookCoursesTimetableTable from "./view/TeacherGuidebookCoursesTimetableTable";
 
 const TeacherGuidebookCoursesTimetablePage = () => {
-  const {
-    state,
-    actions,
-  } = useTableData();
+  const { state, actions } = useTableData();
 
   return (
     <>

@@ -121,7 +121,9 @@ const CategoriesTeachersTable = (props: CategoriesTeachersTableProps) => {
     <table className="table -fill -list">
       <thead className="header">
         <tr className="row">
-          <th className="cell -filter" onClick={() => props.handleSort("category")}>Категории преподавателей</th>
+          <th className="cell -filter" onClick={() => props.handleSort("category")}>
+            Категории преподавателей
+          </th>
           <th className="cell">Коэффициент</th>
         </tr>
       </thead>

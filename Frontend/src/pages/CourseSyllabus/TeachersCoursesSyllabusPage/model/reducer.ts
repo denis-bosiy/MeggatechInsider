@@ -21,7 +21,7 @@ const initData: TeachersCoursesSyllabusPageData = [
     workExperienceAtTheTimeOfTheEmployment: 2,
     birthDay: "11.07.2002",
     age: 30
-  },
+  }
 ];
 
 const teachersCoursesSyllabusPageReducer = (state = initData, action: Action) => {

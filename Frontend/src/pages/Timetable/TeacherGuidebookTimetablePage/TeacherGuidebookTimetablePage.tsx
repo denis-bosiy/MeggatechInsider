@@ -29,7 +29,7 @@ import Multiselect from "../../../components/Multiselect/Multiselect";
 const TeacherGuidebookTimetablePage = () => {
   const httpService: HttpService = new HttpService();
 
-  const { guidebook, totalAvailableHours } = useSelector(
+  const { guidebook } = useSelector(
     (state: { teacherGuidebookTimetablePageStore: TeacherGuidebookTimetablePageData }) =>
       state.teacherGuidebookTimetablePageStore
   );
@@ -83,7 +83,7 @@ const TeacherGuidebookTimetablePage = () => {
         dispatch(TeacherGuidebookTimetableActionBuilder.setTeachers(teachers));
         setGuidebookTableData(structuredClone(teachers));
       })
-      .catch((e: any) => {
+      .catch(() => {
         // dispatch(TeacherGuidebookTimetableActionBuilder.setTeachers([]));
         // setGuidebookTableData(structuredClone([]));
       });
@@ -106,24 +106,24 @@ const TeacherGuidebookTimetablePage = () => {
   const handleSort = (columnName: string): void => {
     guidebookTableManager.invokeFunction("sort", TableType.Default, [columnName, SortingOrder.Ascending]);
   };
-  const handlePickingAvailableHour = (teacherId: string, availableHourId: string): void => {
-    setGuidebookTableData(
-      guidebookTableData.map((teacher: TeacherGuidebookTimetableData) => {
-        if (teacher.id === teacherId) {
-          // const foundAvailablePickedHour: AvailableHour | undefined = teacher.availableHours.find(
-          //   (availableHour: AvailableHour) => availableHour.id === availableHourId
-          // );
-          // if (foundAvailablePickedHour) {
-          //   return {
-          //     ...teacher,
-          //     availableHours: [...teacher.pickedHours, foundAvailablePickedHour]
-          //   };
-          // }
-        }
-        return teacher;
-      })
-    );
-  };
+  // const handlePickingAvailableHour = (teacherId: string, availableHourId: string): void => {
+  //   setGuidebookTableData(
+  //     guidebookTableData.map((teacher: TeacherGuidebookTimetableData) => {
+  //       if (teacher.id === teacherId) {
+  //         // const foundAvailablePickedHour: AvailableHour | undefined = teacher.availableHours.find(
+  //         //   (availableHour: AvailableHour) => availableHour.id === availableHourId
+  //         // );
+  //         // if (foundAvailablePickedHour) {
+  //         //   return {
+  //         //     ...teacher,
+  //         //     availableHours: [...teacher.pickedHours, foundAvailablePickedHour]
+  //         //   };
+  //         // }
+  //       }
+  //       return teacher;
+  //     })
+  //   );
+  // };
 
   const getHoursOptions = (availableHours: AvailableHour[]): MultiValue<any> => {
     return availableHours.map((availableHour: AvailableHour) => {

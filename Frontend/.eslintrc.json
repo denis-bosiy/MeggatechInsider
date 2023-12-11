@@ -11,9 +11,10 @@
   },
   "plugins": ["@typescript-eslint", "react"],
   "rules": {
-    "indent": ["error", 2, { "SwitchCase": 1 }],
+    "indent": ["error", 2, { "SwitchCase": 1, "ignoredNodes": ["ConditionalExpression *"] }],
     "quotes": ["error", "double"],
-    "semi": ["error", "always"]
+    "semi": ["error", "always"],
+    "@typescript-eslint/no-explicit-any": "off"
   },
   "settings": {
     "react": {

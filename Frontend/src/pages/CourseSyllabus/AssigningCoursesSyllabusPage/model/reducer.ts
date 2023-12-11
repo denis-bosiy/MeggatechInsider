@@ -1,5 +1,9 @@
 import { Action, ASSIGNING_COURSES_SYLLABUS_PAGE_ACTIONS } from "./actions";
-import {AssigningsCoursesSyllabusData, DiscrepanciesCoursesSyllabusData, AssigningCoursesSyllabusPageData} from "./types";
+import {
+  AssigningsCoursesSyllabusData,
+  DiscrepanciesCoursesSyllabusData,
+  AssigningCoursesSyllabusPageData
+} from "./types";
 
 const initAssigningData: AssigningsCoursesSyllabusData = [
   {
@@ -9,7 +13,7 @@ const initAssigningData: AssigningsCoursesSyllabusData = [
     groupCount: 3,
     hoursOnWeek: 4.2,
     hoursOnYear: 10,
-    costPerHour: 500,
+    costPerHour: 500
   },
   {
     id: "1",
@@ -18,8 +22,8 @@ const initAssigningData: AssigningsCoursesSyllabusData = [
     groupCount: 2,
     hoursOnWeek: 4.2,
     hoursOnYear: 10,
-    costPerHour: 500,
-  },
+    costPerHour: 500
+  }
 ];
 
 const initDiscrepanciesData: DiscrepanciesCoursesSyllabusData = [
@@ -34,12 +38,12 @@ const initDiscrepanciesData: DiscrepanciesCoursesSyllabusData = [
     name: "История",
     groupCount: 3,
     groupCountByPlan: 2
-  },
+  }
 ];
 
 const initData: AssigningCoursesSyllabusPageData = {
   assignings: initAssigningData,
-  discrepancies: initDiscrepanciesData,
+  discrepancies: initDiscrepanciesData
 };
 
 const assigningCoursesSyllabusPageReducer = (state = initData, action: Action) => {
