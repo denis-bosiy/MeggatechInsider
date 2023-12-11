@@ -1,33 +1,38 @@
-import React, {useContext, useState} from "react";
-import {useDispatch, useSelector} from "react-redux";
-import {SubjectsCoursesSyllabusPageData, SubjectCoursesSyllabusData} from "./model/types";
-import {ActionBuilder} from "./model/actions";
-import Input, {InputSize, InputType} from "../../../components/Input/Input";
-import ActionButton, {ActionButtonType} from "../../../components/ActionButton/ActionButton";
-import {CheckMarkIcon, GarbageIcon, PenIcon, PlusIcon} from "../../../icons";
-import Select, {ISelectOption, SelectSize} from "../../../components/Select/Select";
-import IconButton, {IconButtonType} from "../../../components/IconButton/IconButton";
+import React, { useContext, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { SubjectsCoursesSyllabusPageData, SubjectCoursesSyllabusData } from "./model/types";
+import { ActionBuilder } from "./model/actions";
+import Input, { InputSize, InputType } from "../../../components/Input/Input";
+import ActionButton, { ActionButtonType } from "../../../components/ActionButton/ActionButton";
+import { CheckMarkIcon, GarbageIcon, PenIcon, PlusIcon } from "../../../icons";
+import Select, { ISelectOption, SelectSize } from "../../../components/Select/Select";
+import IconButton, { IconButtonType } from "../../../components/IconButton/IconButton";
 import ModalSettingsContext from "../../../utils/ModalSettingsContext";
-import {CTableBuilder} from "../../../core/Table/CTableBuilder";
-import {CTable} from "../../../core/Table/CTable";
-import {CTableManager} from "../../../core/Table/CTableManager";
-import {TableType} from "../../../core/Table/TableType";
-import {guidGenerator} from "../../../utils/guidGenerator";
-import {SortingOrder} from "../../../core/Table/SortingOrder";
+import { CTableBuilder } from "../../../core/Table/CTableBuilder";
+import { CTable } from "../../../core/Table/CTable";
+import { CTableManager } from "../../../core/Table/CTableManager";
+import { TableType } from "../../../core/Table/TableType";
+import { guidGenerator } from "../../../utils/guidGenerator";
+import { SortingOrder } from "../../../core/Table/SortingOrder";
 
 const SubjectsCoursesSyllabusPage = () => {
   const typeOptions: ISelectOption[] = [
     { id: "1", content: "Подготовительные курсы" },
     { id: "2", content: "Подготовительные экспресс-курсы" },
-    { id: "3", content: "ШЮП" },
+    { id: "3", content: "ШЮП" }
   ];
 
   const { openModal } = useContext(ModalSettingsContext);
   const dispatch = useDispatch();
-  const subjects = useSelector((state: {subjectsCoursesSyllabusPageStore: SubjectsCoursesSyllabusPageData}) => state.subjectsCoursesSyllabusPageStore);
+  const subjects = useSelector(
+    (state: { subjectsCoursesSyllabusPageStore: SubjectsCoursesSyllabusPageData }) =>
+      state.subjectsCoursesSyllabusPageStore
+  );
   const [isSubjectsEditing, setIsSubjectsEditing] = useState<{ value: boolean }>({ value: false });
   const [isSubjectsAdding, setIsSubjectsAdding] = useState<{ value: boolean }>({ value: false });
-  const [subjectsTableData, setSubjectsTableData] = useState<SubjectsCoursesSyllabusPageData>(structuredClone(subjects));
+  const [subjectsTableData, setSubjectsTableData] = useState<SubjectsCoursesSyllabusPageData>(
+    structuredClone(subjects)
+  );
   const [subjectSearchQuery, setSubjectSearchQuery] = useState<string>("");
   const subjectsTableBuilder: CTableBuilder = new CTableBuilder(subjectsTableData, setSubjectsTableData);
   subjectsTableBuilder.addEditFeature(isSubjectsEditing, setIsSubjectsEditing);
@@ -64,10 +69,7 @@ const SubjectsCoursesSyllabusPage = () => {
     ]);
   };
   const handleSubjectSearch = (): void => {
-    subjectsTableManager.invokeFunction("search", TableType.Searchable, [
-      subjectSearchQuery,
-      subjects
-    ]);
+    subjectsTableManager.invokeFunction("search", TableType.Searchable, [subjectSearchQuery, subjects]);
   };
   const handleSort = (columnName: string): void => {
     subjectsTableManager.invokeFunction("sort", TableType.Default, [columnName, SortingOrder.Ascending]);
@@ -128,177 +130,188 @@ const SubjectsCoursesSyllabusPage = () => {
       <table className="table -fill -list">
         <thead className="header">
           <tr className="row">
-            <th className="cell -filter" onClick={() => handleSort("name")}>Курс</th>
-            <th className="cell -filter" onClick={() => handleSort("type")}>Тип</th>
-            <th className="cell -filter" onClick={() => handleSort("hoursByPlan")}>Планируемое кол-во часов</th>
-            <th className="cell -filter" onClick={() => handleSort("numberOfGroups")}>Число групп</th>
+            <th className="cell -filter" onClick={() => handleSort("name")}>
+              Курс
+            </th>
+            <th className="cell -filter" onClick={() => handleSort("type")}>
+              Тип
+            </th>
+            <th className="cell -filter" onClick={() => handleSort("hoursByPlan")}>
+              Планируемое кол-во часов
+            </th>
+            <th className="cell -filter" onClick={() => handleSort("numberOfGroups")}>
+              Число групп
+            </th>
           </tr>
         </thead>
         <tbody>
-          {subjectsTableData.filter((data: SubjectCoursesSyllabusData, index: number) =>
-            !isSubjectsAdding.value || index !== subjectsTableData.length - 1
-          ).map((value: SubjectCoursesSyllabusData) => {
-            return (
-              <tr className="row" key={value.id}>
-                <td className="cell">
-                  {isSubjectsEditing.value ? (
-                    <Input
-                      placeholder=""
-                      value={value.name}
-                      onValueChange={(newValue: string) =>
-                        setSubjectsTableData(
-                          subjectsTableData.map((data: SubjectCoursesSyllabusData) =>
-                            data.id === value.id ? { ...data, name: newValue } : data
-                          )
-                        )
-                      }
-                      size={InputSize.Micro}
-                    />
-                  ) : (
-                    value.name
-                  )}
-                </td>
-                <td className="cell">
-                  {isSubjectsEditing.value ? (
-                    <Select
-                      currentValue={typeOptions.find(e => e.content === value.type)}
-                      options={typeOptions}
-                      onValueChange={(newValue: string) => {
-                        const selectedOption = typeOptions.find(e => e.id === newValue);
-                        if (selectedOption) {
+          {subjectsTableData
+            .filter(
+              (data: SubjectCoursesSyllabusData, index: number) =>
+                !isSubjectsAdding.value || index !== subjectsTableData.length - 1
+            )
+            .map((value: SubjectCoursesSyllabusData) => {
+              return (
+                <tr className="row" key={value.id}>
+                  <td className="cell">
+                    {isSubjectsEditing.value ? (
+                      <Input
+                        placeholder=""
+                        value={value.name}
+                        onValueChange={(newValue: string) =>
                           setSubjectsTableData(
                             subjectsTableData.map((data: SubjectCoursesSyllabusData) =>
-                              data.id === value.id ? {...data, type: selectedOption.content} : data
+                              data.id === value.id ? { ...data, name: newValue } : data
                             )
-                          );
+                          )
                         }
-                      }}
-                      size={SelectSize.Micro}
-                    />
-                  ) : (
-                    value.type
-                  )}
-                </td>
-                <td className="cell">
-                  {isSubjectsEditing.value ? (
-                    <Input
-                      placeholder=""
-                      value={value.hoursByPlan.toString()}
-                      onValueChange={(newValue: string) =>
-                        setSubjectsTableData(
-                          subjectsTableData.map((data: SubjectCoursesSyllabusData) =>
-                            data.id === value.id ? { ...data, hoursByPlan: Number(newValue) } : data
+                        size={InputSize.Micro}
+                      />
+                    ) : (
+                      value.name
+                    )}
+                  </td>
+                  <td className="cell">
+                    {isSubjectsEditing.value ? (
+                      <Select
+                        currentValue={typeOptions.find((e) => e.content === value.type)}
+                        options={typeOptions}
+                        onValueChange={(newValue: string) => {
+                          const selectedOption = typeOptions.find((e) => e.id === newValue);
+                          if (selectedOption) {
+                            setSubjectsTableData(
+                              subjectsTableData.map((data: SubjectCoursesSyllabusData) =>
+                                data.id === value.id ? { ...data, type: selectedOption.content } : data
+                              )
+                            );
+                          }
+                        }}
+                        size={SelectSize.Micro}
+                      />
+                    ) : (
+                      value.type
+                    )}
+                  </td>
+                  <td className="cell">
+                    {isSubjectsEditing.value ? (
+                      <Input
+                        placeholder=""
+                        value={value.hoursByPlan.toString()}
+                        onValueChange={(newValue: string) =>
+                          setSubjectsTableData(
+                            subjectsTableData.map((data: SubjectCoursesSyllabusData) =>
+                              data.id === value.id ? { ...data, hoursByPlan: Number(newValue) } : data
+                            )
                           )
-                        )
-                      }
-                      size={InputSize.Micro}
-                    />
-                  ) : (
-                    value.hoursByPlan
-                  )}
-                </td>
-                <td className="cell">
-                  {isSubjectsEditing.value ? (
-                    <Input
-                      placeholder=""
-                      value={value.numberOfGroups.toString()}
-                      onValueChange={(newValue: string) =>
-                        setSubjectsTableData(
-                          subjectsTableData.map((data: SubjectCoursesSyllabusData) =>
-                            data.id === value.id ? { ...data, numberOfGroups: Number(newValue) } : data
+                        }
+                        size={InputSize.Micro}
+                      />
+                    ) : (
+                      value.hoursByPlan
+                    )}
+                  </td>
+                  <td className="cell">
+                    {isSubjectsEditing.value ? (
+                      <Input
+                        placeholder=""
+                        value={value.numberOfGroups.toString()}
+                        onValueChange={(newValue: string) =>
+                          setSubjectsTableData(
+                            subjectsTableData.map((data: SubjectCoursesSyllabusData) =>
+                              data.id === value.id ? { ...data, numberOfGroups: Number(newValue) } : data
+                            )
                           )
-                        )
-                      }
-                      size={InputSize.Micro}
-                    />
-                  ) : (
-                    value.numberOfGroups
-                  )}
-                </td>
-                <td className="cell">
-                  <IconButton
-                    icon={<GarbageIcon />}
-                    onClick={() => handleDeleteSubject(value.id.toString())}
-                  />
-                </td>
-              </tr>
-            );
-          })}
+                        }
+                        size={InputSize.Micro}
+                      />
+                    ) : (
+                      value.numberOfGroups
+                    )}
+                  </td>
+                  <td className="cell">
+                    <IconButton icon={<GarbageIcon />} onClick={() => handleDeleteSubject(value.id.toString())} />
+                  </td>
+                </tr>
+              );
+            })}
 
-          {isSubjectsAdding.value &&
-          <tr className="row">
-            <td className="cell">
-              <Input
-                placeholder="Наименование"
-                value={subjectsTableData[subjectsTableData.length - 1].name}
-                onValueChange={(newLabel: string) => {
-                  setSubjectsTableData(
-                    subjectsTableData.map((data: SubjectCoursesSyllabusData) =>
-                      data.id === subjectsTableData[subjectsTableData.length - 1].id
-                        ? { ...data, name: newLabel }
-                        : data
-                    )
-                  );
-                }}
-                size={InputSize.Micro}
-              />
-            </td>
-            <td className="cell">
-              <Select
-                options={typeOptions}
-                onValueChange={(newValue: string) => {
-                  const selectedOption = typeOptions.find(e => e.id === newValue);
-                  if (selectedOption) {
+          {isSubjectsAdding.value && (
+            <tr className="row">
+              <td className="cell">
+                <Input
+                  placeholder="Наименование"
+                  value={subjectsTableData[subjectsTableData.length - 1].name}
+                  onValueChange={(newLabel: string) => {
                     setSubjectsTableData(
                       subjectsTableData.map((data: SubjectCoursesSyllabusData) =>
-                        data.id === subjectsTableData[subjectsTableData.length - 1].id ? {...data, type: selectedOption.content} : data
+                        data.id === subjectsTableData[subjectsTableData.length - 1].id
+                          ? { ...data, name: newLabel }
+                          : data
                       )
                     );
-                  }
-                }}
-                size={SelectSize.Micro}
-              />
-            </td>
-            <td className="cell">
-              <Input
-                placeholder=""
-                value={subjectsTableData[subjectsTableData.length - 1].hoursByPlan.toString()}
-                onValueChange={(newLabel: string) => {
-                  setSubjectsTableData(
-                    subjectsTableData.map((data: SubjectCoursesSyllabusData) =>
-                      data.id === subjectsTableData[subjectsTableData.length - 1].id
-                        ? { ...data, hoursByPlan: Number(newLabel) }
-                        : data
-                    )
-                  );
-                }}
-                size={InputSize.Micro}
-              />
-            </td>
-            <td className="cell">
-              <Input
-                placeholder=""
-                value={subjectsTableData[subjectsTableData.length - 1].numberOfGroups.toString()}
-                onValueChange={(newLabel: string) => {
-                  setSubjectsTableData(
-                    subjectsTableData.map((data: SubjectCoursesSyllabusData) =>
-                      data.id === subjectsTableData[subjectsTableData.length - 1].id
-                        ? { ...data, numberOfGroups: Number(newLabel) }
-                        : data
-                    )
-                  );
-                }}
-                size={InputSize.Micro}
-              />
-            </td>
-            <td className="cell">
-              <IconButton
-                icon={<CheckMarkIcon />}
-                type={IconButtonType.Secondary}
-                onClick={handleApplyingNewSubject}
-              />
-            </td>
-          </tr>}
+                  }}
+                  size={InputSize.Micro}
+                />
+              </td>
+              <td className="cell">
+                <Select
+                  options={typeOptions}
+                  onValueChange={(newValue: string) => {
+                    const selectedOption = typeOptions.find((e) => e.id === newValue);
+                    if (selectedOption) {
+                      setSubjectsTableData(
+                        subjectsTableData.map((data: SubjectCoursesSyllabusData) =>
+                          data.id === subjectsTableData[subjectsTableData.length - 1].id
+                            ? { ...data, type: selectedOption.content }
+                            : data
+                        )
+                      );
+                    }
+                  }}
+                  size={SelectSize.Micro}
+                />
+              </td>
+              <td className="cell">
+                <Input
+                  placeholder=""
+                  value={subjectsTableData[subjectsTableData.length - 1].hoursByPlan.toString()}
+                  onValueChange={(newLabel: string) => {
+                    setSubjectsTableData(
+                      subjectsTableData.map((data: SubjectCoursesSyllabusData) =>
+                        data.id === subjectsTableData[subjectsTableData.length - 1].id
+                          ? { ...data, hoursByPlan: Number(newLabel) }
+                          : data
+                      )
+                    );
+                  }}
+                  size={InputSize.Micro}
+                />
+              </td>
+              <td className="cell">
+                <Input
+                  placeholder=""
+                  value={subjectsTableData[subjectsTableData.length - 1].numberOfGroups.toString()}
+                  onValueChange={(newLabel: string) => {
+                    setSubjectsTableData(
+                      subjectsTableData.map((data: SubjectCoursesSyllabusData) =>
+                        data.id === subjectsTableData[subjectsTableData.length - 1].id
+                          ? { ...data, numberOfGroups: Number(newLabel) }
+                          : data
+                      )
+                    );
+                  }}
+                  size={InputSize.Micro}
+                />
+              </td>
+              <td className="cell">
+                <IconButton
+                  icon={<CheckMarkIcon />}
+                  type={IconButtonType.Secondary}
+                  onClick={handleApplyingNewSubject}
+                />
+              </td>
+            </tr>
+          )}
         </tbody>
       </table>
     </>

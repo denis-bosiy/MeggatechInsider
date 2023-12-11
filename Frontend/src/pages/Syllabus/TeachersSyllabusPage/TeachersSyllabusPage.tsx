@@ -86,7 +86,7 @@ const TeachersSyllabusPage = () => {
         dispatch(ActionBuilder.saveTeachers(teachers));
         setTeachersTableData(structuredClone(teachers));
       })
-      .catch((e: any) => {
+      .catch(() => {
         dispatch(ActionBuilder.saveTeachers([]));
         setTeachersTableData([]);
       });

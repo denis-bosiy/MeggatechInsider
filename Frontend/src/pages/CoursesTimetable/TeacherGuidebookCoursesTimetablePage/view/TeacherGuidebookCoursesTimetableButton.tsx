@@ -1,29 +1,22 @@
-import ActionButton, {ActionButtonType} from "../../../../components/ActionButton/ActionButton";
-import {PenIcon} from "../../../../icons";
+import ActionButton, { ActionButtonType } from "../../../../components/ActionButton/ActionButton";
+import { PenIcon } from "../../../../icons";
 import React from "react";
 
 interface TeacherGuidebookTimetableButtonProps {
-  isEdited: boolean,
-  handleEdit: () => void,
-  handleSave: () => void,
-  handleReset: () => void,
+  isEdited: boolean;
+  handleEdit: () => void;
+  handleSave: () => void;
+  handleReset: () => void;
 }
 
 const TeacherGuidebookCoursesTimetableButton = ({
   isEdited,
   handleEdit,
   handleSave,
-  handleReset,
+  handleReset
 }: TeacherGuidebookTimetableButtonProps) => {
   if (!isEdited) {
-    return (
-      <ActionButton
-        className="toolbar__button"
-        label="Редактировать"
-        icon={<PenIcon/>}
-        onClick={handleEdit}
-      />
-    );
+    return <ActionButton className="toolbar__button" label="Редактировать" icon={<PenIcon />} onClick={handleEdit} />;
   }
   return (
     <div className="toolbar__buttons-box">

@@ -76,9 +76,9 @@ const OffBudgetReportPage = (): JSX.Element => {
           teacher.id !== teacherId
             ? teacher
             : {
-              ...teacher,
-              offBudgetCategory: newOffBudgetCategoryContent
-            }
+                ...teacher,
+                offBudgetCategory: newOffBudgetCategoryContent
+              }
         )
       );
     }

@@ -22,7 +22,7 @@ const initData: SubjectsCoursesSyllabusPageData = [
     type: "Экспресс",
     hoursByPlan: 10,
     numberOfGroups: 3
-  },
+  }
 ];
 
 const subjectsCoursesSyllabusPageReducer = (state = initData, action: Action) => {

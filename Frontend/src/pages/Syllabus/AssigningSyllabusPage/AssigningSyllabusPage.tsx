@@ -57,7 +57,7 @@ const DiscrepanciesSyllabus = () => {
         );
         dispatch(ActionBuilder.saveDiscrepancies(discrepancies));
       })
-      .catch((e: any) => {
+      .catch(() => {
         dispatch(ActionBuilder.saveDiscrepancies([]));
       });
   }, [currentYear?.id]);
@@ -325,30 +325,14 @@ const AssigningSyllabusPage = () => {
                           value.groupCount
                         )}
                       </td>
-                      <td className="cell">
-                        {value.hoursByPlanOnClassOfTheStudents}
-                      </td>
-                      <td className="cell">
-                        {value.hoursOnWeekForTheClassOfTheStudents}
-                      </td>
-                      <td className="cell">
-                        {value.hoursOnWeekOnYearOnTheTeacher}
-                      </td>
-                      <td className="cell">
-                        {value.hoursOnWeekOnPeriodOnTheTeacher}
-                      </td>
-                      <td className="cell">
-                        {value.hoursIn1Subgroup}
-                      </td>
-                      <td className="cell">
-                        {value.hoursIn2Subgroup}
-                      </td>
-                      <td className="cell">
-                        {value.totalInYear}
-                      </td>
-                      <td className="cell">
-                        {value.bidShare}
-                      </td>
+                      <td className="cell">{value.hoursByPlanOnClassOfTheStudents}</td>
+                      <td className="cell">{value.hoursOnWeekForTheClassOfTheStudents}</td>
+                      <td className="cell">{value.hoursOnWeekOnYearOnTheTeacher}</td>
+                      <td className="cell">{value.hoursOnWeekOnPeriodOnTheTeacher}</td>
+                      <td className="cell">{value.hoursIn1Subgroup}</td>
+                      <td className="cell">{value.hoursIn2Subgroup}</td>
+                      <td className="cell">{value.totalInYear}</td>
+                      <td className="cell">{value.bidShare}</td>
                       <td className="cell">
                         <IconButton icon={<GarbageIcon />} onClick={() => handleDeleteAssigning(value.id.toString())} />
                       </td>

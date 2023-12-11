@@ -6,7 +6,7 @@ export class CSyllabusContinuableTable extends CTable {
     super(_table, _data, _setData, _type);
   }
 
-  public continueSyllabusByWeekNumber(id: string, weekNumber: number): void {
-    //
+  public continueSyllabusByWeekNumber(): void {
+    // params: id: string, weekNumber: number
   }
 }
