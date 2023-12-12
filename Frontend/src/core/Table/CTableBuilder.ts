@@ -1,6 +1,5 @@
 import { TableType } from "./TableType";
 import { CTable } from "./CTable";
-import { CAcademicQuartersTable } from "./CAcademicQuartersTable";
 import { CAdditionalLoadedTable } from "./CAdditionalLoadedTable";
 import { CCommentableTable } from "./CCommentableTable";
 import { CEditableTable } from "./CEditableTable";
@@ -14,15 +13,6 @@ export class CTableBuilder {
 
   constructor(data: any[], setData: (data: any[]) => void) {
     this._table = new CTable(undefined, data, setData);
-  }
-
-  public addAcademicQuartersFeature(): void {
-    this._table = new CAcademicQuartersTable(
-      this._table,
-      this._table.data,
-      this._table.setData,
-      TableType.AcademicQuarters
-    );
   }
 
   public addAdditionalLoadFeature(): void {

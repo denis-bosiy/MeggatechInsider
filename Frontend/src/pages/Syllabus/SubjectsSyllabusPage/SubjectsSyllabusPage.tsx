@@ -82,7 +82,7 @@ const SubjectsSyllabusPage = () => {
         dispatch(ActionBuilder.saveSubjects(subjects));
         setSubjectsTableData(structuredClone(subjects));
       })
-      .catch((e: any) => {
+      .catch(() => {
         dispatch(ActionBuilder.saveSubjects([]));
         setSubjectsTableData([]);
       });

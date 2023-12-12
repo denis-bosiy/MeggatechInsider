@@ -42,8 +42,9 @@ const TimetableSettingsPage = () => {
     httpService
       .getByArbitraryUrl(Endpoint.Pair, params)
       .then((data: any) => {
-        const pairTimesResponse: TimetablePairTimeSettingResponse[] =
-          ResponseBuilder.BuildTimetablePairTimeSettingsResponses(data);
+        const pairTimesResponse: TimetablePairTimeSettingResponse[] = ResponseBuilder.BuildTimetablePairTimeSettingsResponses(
+          data
+        );
         const pairTimes: TimetableSettingsPageTimeData = pairTimesResponse.map(
           (pairTime: TimetablePairTimeSettingResponse) => {
             return { id: pairTime.id, startTime: pairTime.startTime, endTime: pairTime.endTime };
@@ -52,7 +53,7 @@ const TimetableSettingsPage = () => {
         dispatch(TimetableSettingsPageActionBuilder.savePairs(pairTimes));
         setPairsTableData(structuredClone(pairTimes));
       })
-      .catch((e: any) => {
+      .catch(() => {
         dispatch(TimetableSettingsPageActionBuilder.savePairs([]));
         setPairsTableData(structuredClone([]));
       });
@@ -61,8 +62,9 @@ const TimetableSettingsPage = () => {
     httpService
       .getByArbitraryUrl(Endpoint.Lesson, params)
       .then((data: any) => {
-        const lessonTimesResponse: TimetableLessonTimeSettingResponse[] =
-          ResponseBuilder.BuildTimetableLessonTimeSettingsResponses(data);
+        const lessonTimesResponse: TimetableLessonTimeSettingResponse[] = ResponseBuilder.BuildTimetableLessonTimeSettingsResponses(
+          data
+        );
         const lessonTimes: TimetableSettingsPageTimeData = lessonTimesResponse.map(
           (lessonTime: TimetableLessonTimeSettingResponse) => {
             return { id: lessonTime.id, startTime: lessonTime.startTime, endTime: lessonTime.endTime };
@@ -71,7 +73,7 @@ const TimetableSettingsPage = () => {
         dispatch(TimetableSettingsPageActionBuilder.saveLessons(lessonTimes));
         setLessonsTableData(structuredClone(lessonTimes));
       })
-      .catch((e: any) => {
+      .catch(() => {
         dispatch(TimetableSettingsPageActionBuilder.saveLessons([]));
         setLessonsTableData(structuredClone([]));
       });
@@ -80,8 +82,9 @@ const TimetableSettingsPage = () => {
     httpService
       .getByArbitraryUrl(Endpoint.Parade, params)
       .then((data: any) => {
-        const paradeResponse: TimetableParadeTimeSettingResponse =
-          ResponseBuilder.BuildTimetableParadeTimeSettingResponse(data);
+        const paradeResponse: TimetableParadeTimeSettingResponse = ResponseBuilder.BuildTimetableParadeTimeSettingResponse(
+          data
+        );
         const parade: TimetableSettingsPageParadeData = {
           weekDayCode: paradeResponse.weekDay,
           startTime: paradeResponse.startTime,
@@ -90,7 +93,7 @@ const TimetableSettingsPage = () => {
         dispatch(TimetableSettingsPageActionBuilder.saveParade(parade));
         setParadeData(structuredClone(parade));
       })
-      .catch((e: any) => {
+      .catch(() => {
         dispatch(
           TimetableSettingsPageActionBuilder.saveParade({
             weekDayCode: 0,

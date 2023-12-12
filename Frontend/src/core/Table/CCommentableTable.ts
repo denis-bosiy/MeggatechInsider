@@ -6,7 +6,8 @@ export class CCommentableTable extends CTable {
     super(_table, _data, _setData, _type);
   }
 
-  public addComment(teacherId: string): void {
+  public addComment(): void {
+    // params: teacherId: string
     // TODO: При реализации добаваления комментариев добавить функциональность
   }
 }

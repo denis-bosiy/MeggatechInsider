@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { MultiValue } from "react-select";
 import {
   Guidebook,
   TeacherGuidebookTimetableData,
@@ -15,7 +16,6 @@ import { CTable } from "../../../core/Table/CTable";
 import { CTableManager } from "../../../core/Table/CTableManager";
 import { TableType } from "../../../core/Table/TableType";
 import { TeacherGuidebookTimetableActionBuilder } from "./model/actions";
-import Select, { ISelectOption, SelectSize } from "../../../components/Select/Select";
 import { SortingOrder } from "../../../core/Table/SortingOrder";
 import { HeaderData } from "../../../layouts/Header/model/types";
 import { HttpService } from "../../../api/http.service";
@@ -24,11 +24,12 @@ import { TimetableTeacherResponse } from "../../../api/Responses/TimetableTeache
 import { ResponseBuilder } from "../../../api/Responses/ResponseBuilder";
 import { getWorkdayByCode } from "../../../utils/getWorkdayByCode";
 import { shortenWorkday } from "../../../utils/workdayShortener";
+import Multiselect from "../../../components/Multiselect/Multiselect";
 
 const TeacherGuidebookTimetablePage = () => {
   const httpService: HttpService = new HttpService();
 
-  const { guidebook, totalAvailableHours } = useSelector(
+  const { guidebook } = useSelector(
     (state: { teacherGuidebookTimetablePageStore: TeacherGuidebookTimetablePageData }) =>
       state.teacherGuidebookTimetablePageStore
   );
@@ -82,9 +83,9 @@ const TeacherGuidebookTimetablePage = () => {
         dispatch(TeacherGuidebookTimetableActionBuilder.setTeachers(teachers));
         setGuidebookTableData(structuredClone(teachers));
       })
-      .catch((e: any) => {
-        dispatch(TeacherGuidebookTimetableActionBuilder.setTeachers([]));
-        setGuidebookTableData(structuredClone([]));
+      .catch(() => {
+        // dispatch(TeacherGuidebookTimetableActionBuilder.setTeachers([]));
+        // setGuidebookTableData(structuredClone([]));
       });
   }, []);
 
@@ -105,31 +106,30 @@ const TeacherGuidebookTimetablePage = () => {
   const handleSort = (columnName: string): void => {
     guidebookTableManager.invokeFunction("sort", TableType.Default, [columnName, SortingOrder.Ascending]);
   };
-  const handlePickingAvailableHour = (teacherId: string, availableHourId: string): void => {
-    setGuidebookTableData(
-      guidebookTableData.map((teacher: TeacherGuidebookTimetableData) => {
-        if (teacher.id === teacherId) {
-          // const foundAvailablePickedHour: AvailableHour | undefined = teacher.availableHours.find(
-          //   (availableHour: AvailableHour) => availableHour.id === availableHourId
-          // );
+  // const handlePickingAvailableHour = (teacherId: string, availableHourId: string): void => {
+  //   setGuidebookTableData(
+  //     guidebookTableData.map((teacher: TeacherGuidebookTimetableData) => {
+  //       if (teacher.id === teacherId) {
+  //         // const foundAvailablePickedHour: AvailableHour | undefined = teacher.availableHours.find(
+  //         //   (availableHour: AvailableHour) => availableHour.id === availableHourId
+  //         // );
+  //         // if (foundAvailablePickedHour) {
+  //         //   return {
+  //         //     ...teacher,
+  //         //     availableHours: [...teacher.pickedHours, foundAvailablePickedHour]
+  //         //   };
+  //         // }
+  //       }
+  //       return teacher;
+  //     })
+  //   );
+  // };
 
-          // if (foundAvailablePickedHour) {
-          //   return {
-          //     ...teacher,
-          //     availableHours: [...teacher.pickedHours, foundAvailablePickedHour]
-          //   };
-          // }
-        }
-        return teacher;
-      })
-    );
-  };
-
-  const getHoursOptions = (availableHours: AvailableHour[]): ISelectOption[] => {
+  const getHoursOptions = (availableHours: AvailableHour[]): MultiValue<any> => {
     return availableHours.map((availableHour: AvailableHour) => {
       return {
-        id: availableHour.id,
-        content:
+        value: availableHour.id,
+        label:
           shortenWorkday(getWorkdayByCode(availableHour.weekDayCode)) +
           " " +
           availableHour.startTime +
@@ -223,24 +223,37 @@ const TeacherGuidebookTimetablePage = () => {
                   <td className="cell">{teacher.teacherName}</td>
                   <td className="cell">
                     {isGuidebookEditing.value ? (
-                      <Select
-                        currentValue={getHoursOptions(teacher.availableHours).find((e) =>
-                          teacher.availableHours.find((pickedHour: AvailableHour) => pickedHour.id === e.id)
+                      <Multiselect
+                        defaultValue={teacher.availableHours.map((time) =>
+                          getHoursOptions(teacher.availableHours).find((e: any) => e.value === time.id)
                         )}
                         options={getHoursOptions(teacher.availableHours)}
-                        onValueChange={(newValue: string) => {
-                          const selectedOption = getHoursOptions(teacher.availableHours).find((e) => e.id === newValue);
-                          if (selectedOption) {
-                            handlePickingAvailableHour(teacher.id, selectedOption.id);
+                        onValueChange={(newValue: MultiValue<any>) => {
+                          if (newValue) {
+                            setGuidebookTableData(
+                              guidebookTableData.map((data: TeacherGuidebookTimetableData) =>
+                                data.id === teacher.id
+                                  ? {
+                                    ...data,
+                                    availableHours: newValue.map((time: any) => ({
+                                      id: time.value,
+                                      weekDayCode: time.label.substring(0, 2),
+                                      startTime: time.label.substring(3, 7),
+                                      endTime: time.label.substring(8)
+                                    }))
+                                  }
+                                  : data
+                              )
+                            );
                           }
                         }}
-                        size={SelectSize.Micro}
                       />
                     ) : (
-                      <p>
-                        {shortenWorkday(getWorkdayByCode(teacher.availableHours[0]?.weekDayCode))}{" "}
-                        {teacher.availableHours[0]?.startTime}-{teacher.availableHours[0]?.endTime}
-                      </p>
+                      teacher.availableHours.map((time) => (
+                        <p key={time.id}>
+                          {shortenWorkday(getWorkdayByCode(time.weekDayCode))} {time.startTime} - {time.endTime}
+                        </p>
+                      ))
                     )}
                   </td>
                   <td

@@ -10,17 +10,24 @@ export enum AppRouter {
   Assigning = "assigning",
   Timetable = "timetable",
   LessonsSchedule = "lessons-schedule",
+  CoursesTimetable = "courses-timetable",
+  LessonsGuidebook = "lessons-guidebook",
   ClassesGuidebook = "classes-guidebook",
   TeacherGuidebook = "teacher-guidebook",
+  GroupGuidebook = "group-guidebook",
   Settings = "settings",
   FinancialReport = "financial-report",
   OffBudgetReport = "off-budget-report",
+  FinalReport = "final-report",
+  TarifficationReport = "tariffication-report",
   Basic = "basic",
   Curriculum = "curriculum",
   Monitoring = "monitoring",
   Report = "report",
   BudgetStatistics = "budget-statistics",
   Statistics = "statistics",
+  Categories = "categories",
+  OffBudgetCategories = "off-budget-categories",
   NotFound = "*"
 }
 
@@ -84,16 +91,16 @@ export const Menu: MenuItem[] = [
     navigation: [
       { label: "Предметы", url: AppRouter.Subjects },
       { label: "Преподаватели", url: AppRouter.Teachers },
-      { label: "Учебный план", url: AppRouter.SyllabusTable },
+      { label: "Учебный план", url: AppRouter.Syllabus },
       { label: "Назначение", url: AppRouter.Assigning }
     ]
   },
   {
-    url: "#",
+    url: AppRouter.CoursesTimetable,
     label: "Расписание курсов",
     navigation: [
-      { label: "Справочник по преподавателям", url: "#" },
-      { label: "Справочник по группам", url: "#" },
+      { label: "Справочник по преподавателям", url: AppRouter.TeacherGuidebook },
+      { label: "Справочник по группам", url: AppRouter.GroupGuidebook },
       { label: "Расписание курсов", url: "#" }
     ]
   },
@@ -105,7 +112,12 @@ export const Menu: MenuItem[] = [
       { label: "Преподаватели", url: AppRouter.Teachers },
       {
         label: "План",
-        url: AppRouter.CoursesSyllabusTable
+        url: AppRouter.CoursesSyllabusTable,
+        tabs: {
+          courses: "Подготовительные курсы",
+          expressCourses: "Подготовительные экспресс-курсы",
+          schoolOfAYoungProgrammer: "ШЮП"
+        }
       },
       {
         label: "Назначение",
@@ -130,10 +142,10 @@ export const Menu: MenuItem[] = [
     url: AppRouter.FinancialReport,
     label: "Финансовый отчет",
     navigation: [
-      { label: "Тарификация", url: "#" },
+      { label: "Тарификация", url: AppRouter.TarifficationReport },
       { label: "Внебюджет", url: AppRouter.OffBudgetReport },
-      { label: "Финальный отчет", url: "#" },
-      { label: "Внебюджетные категории", url: "#" }
+      { label: "Финальный отчет", url: AppRouter.FinalReport },
+      { label: "Внебюджетные категории", url: AppRouter.OffBudgetCategories }
     ]
   },
   {
@@ -145,8 +157,8 @@ export const Menu: MenuItem[] = [
     label: "Статистика",
     navigation: [
       { label: "Статистика бюджетов", url: AppRouter.BudgetStatistics },
-      { label: "Статистика категорий", url: "#" },
-      { label: "Статистика преподавателей", url: "#" }
+      { label: "Статистика категорий", url: AppRouter.Categories },
+      { label: "Статистика преподавателей", url: AppRouter.Teachers }
     ]
   }
 ];
