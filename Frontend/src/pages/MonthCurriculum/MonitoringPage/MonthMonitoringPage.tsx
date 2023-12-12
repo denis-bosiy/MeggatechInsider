@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import Button, { ButtonType } from "../../../components/Button/Button";
+import Button, { ButtonSize, ButtonType } from "../../../components/Button/Button";
 import Select, { ISelectOption } from "../../../components/Select/Select";
 import Input, { InputType } from "../../../components/Input/Input";
 import { CTableBuilder } from "../../../core/Table/CTableBuilder";
@@ -83,7 +83,7 @@ const MonthMonitoringPage = () => {
         <div className="page-actions">
           <Select options={MONTH_SELECT} currentValue={selectedMonth} onValueChange={handleSelectMonth} />
           <Select options={CONTRACT_TYPE_SELECT} currentValue={selectedContract} onValueChange={handleSelectContract} />
-          <Button label="Скачать в excel" type={ButtonType.Primary} />
+          <Button label="Скачать в excel" size={ButtonSize.Fixed} type={ButtonType.Secondary} />
         </div>
         <div>
           <Input
