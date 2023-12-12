@@ -1,4 +1,4 @@
-import { CurriculumReportData, ReportTeacher } from "./types";
+import { ReportTeacher } from "./types";
 
 export const summarizeTeacherTotal = (teacher: ReportTeacher) => {
   let total = 0;

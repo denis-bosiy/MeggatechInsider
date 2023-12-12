@@ -9,6 +9,7 @@ import { CTableManager } from "../../../core/Table/CTableManager";
 import { CurriculumMonitoringData, CurriculumMonitoring } from "./model/types";
 import { TableType } from "../../../core/Table/TableType";
 import { SortingOrder } from "../../../core/Table/SortingOrder";
+import { summarizeMonitoringTotal } from "./model/utils";
 
 const MONTH_SELECT: ISelectOption[] = [
   { content: "Январь", id: "1" },
@@ -104,24 +105,20 @@ const MonthMonitoringPage = () => {
             <th className="cell -filter" onClick={() => handleSort("subject")}>
               Предмет
             </th>
-            <th className="cell -filter" onClick={() => handleSort("subject")}>
-              Классы
-            </th>
-            <th className="cell -filter" onClick={() => handleSort("hours")}>
-              Часов
-            </th>
+            <th className="cell">Классы</th>
+            <th className="cell">Часов</th>
             <th className="cell">Из них совмещ.</th>
             <th className="cell">Из них дистанц.</th>
-            <th className="cell -filter" onClick={() => handleSort("total")}>
-              Итого
-            </th>
+            <th className="cell">Итого</th>
             <th className="cell">Из итога совмещ.</th>
             <th className="cell">Из итога дистанц.</th>
           </tr>
         </thead>
         <tbody>
-          {monitoringTableData.map((monitoring, i) =>
-            monitoring.contracts.map((contract, j) => (
+          {monitoringTableData.map((monitoring, i) => {
+            const { combinedTotal, remoteTotal, total } = summarizeMonitoringTotal(monitoring);
+
+            return monitoring.contracts.map((contract, j) => (
               <tr className="row" key={`${i}-${j}`}>
                 {j === 0 && (
                   <td className="cell" rowSpan={monitoring.contracts.length}>
@@ -136,22 +133,22 @@ const MonthMonitoringPage = () => {
                 <td className="cell">{contract.remoteHours}</td>
                 {j === 0 && (
                   <td className="cell" rowSpan={monitoring.contracts.length}>
-                    {monitoring.total}
+                    {total}
                   </td>
                 )}
                 {j === 0 && (
                   <td className="cell" rowSpan={monitoring.contracts.length}>
-                    {monitoring.totalCombined}
+                    {combinedTotal}
                   </td>
                 )}
                 {j === 0 && (
                   <td className="cell" rowSpan={monitoring.contracts.length}>
-                    {monitoring.totalRemoted}
+                    {remoteTotal}
                   </td>
                 )}
               </tr>
-            ))
-          )}
+            ));
+          })}
         </tbody>
       </table>
     </>

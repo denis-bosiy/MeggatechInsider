@@ -6,11 +6,11 @@ import { CTable } from "../../../core/Table/CTable";
 import { CTableManager } from "../../../core/Table/CTableManager";
 import { summarizeTeacherTotal } from "./model/utils";
 import Select, { ISelectOption } from "../../../components/Select/Select";
-import Button, { ButtonType } from "../../../components/Button/Button";
+import Button, { ButtonSize, ButtonType } from "../../../components/Button/Button";
 import { TableType } from "../../../core/Table/TableType";
 import { SortingOrder } from "../../../core/Table/SortingOrder";
 import Input, { InputType } from "../../../components/Input/Input";
-import ActionButton from "../../../components/ActionButton/ActionButton";
+import ActionButton, { ActionButtonSize, ActionButtonType } from "../../../components/ActionButton/ActionButton";
 import CommentsModalView from "../../../components/CommentsModalView/CommentsModalView";
 import ModalSettingsContext from "../../../utils/ModalSettingsContext";
 
@@ -110,7 +110,7 @@ const MonthReportPage = () => {
         <div className="page-actions">
           <Select options={MONTH_SELECT} currentValue={selectedMonth} onValueChange={handleSelectMonth} />
           <Select options={CONTRACT_TYPE_SELECT} currentValue={selectedContract} onValueChange={handleSelectContract} />
-          <Button label="Скачать в excel" type={ButtonType.Primary} />
+          <Button label="Скачать в excel" type={ButtonType.Secondary} size={ButtonSize.Fixed} />
         </div>
         <div>
           <Input
@@ -132,7 +132,7 @@ const MonthReportPage = () => {
             <th className="cell -filter" onClick={() => handleSort("subject")}>
               Предмет
             </th>
-            <th className="cell -filter" colSpan={2} onClick={() => handleSort("class")}>
+            <th className="cell" colSpan={2}>
               Класс
             </th>
             {monthDays.map((day) => (
@@ -160,7 +160,11 @@ const MonthReportPage = () => {
                       {groupIndex === 0 && subjectIndex === 0 && (
                         <td className="cell" rowSpan={classInfo.groups.length * teacher.subjects.length}>
                           {teacher.teacher}
-                          <ActionButton label="Комментарий" onClick={() => handleComment(teacher)} />
+                          <ActionButton
+                            label="Комментарии"
+                            size={ActionButtonSize.Small}
+                            onClick={() => handleComment(teacher)}
+                          />
                         </td>
                       )}
 
