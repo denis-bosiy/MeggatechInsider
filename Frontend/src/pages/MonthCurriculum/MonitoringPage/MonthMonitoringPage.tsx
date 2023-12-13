@@ -28,8 +28,7 @@ const MONTH_SELECT: ISelectOption[] = [
 
 const CONTRACT_TYPE_SELECT: ISelectOption[] = [
   { content: "ДС", id: "1" },
-  { content: "ГПХ", id: "2" },
-  { content: "Что-то еще...", id: "3" }
+  { content: "ГПХ", id: "2" }
 ];
 
 const MonthMonitoringPage = () => {
