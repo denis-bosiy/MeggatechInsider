@@ -31,6 +31,8 @@ import TeacherGuidebookCoursesTimetablePage from "./pages/CoursesTimetable/Teach
 import GroupGuidebookCoursesTimetablePage
   from "./pages/CoursesTimetable/GroupGuidebookCoursesTimetablePage/GroupGuidebookCoursesTimetablePage";
 import { QueryClient, QueryClientProvider } from "react-query";
+import MonthReportPage from "./pages/MonthCurriculum/ReportPage/MonthReportPage";
+import MonthMonitoringPage from "./pages/MonthCurriculum/MonitoringPage/MonthMonitoringPage";
 import ClassGuidebookPage from "./pages/Timetable/ClassGuidebookPage/ClassGuidebookPage";
 import BudgetStatisticsPage from "./pages/Statistics/BudgetStatisticsPage/BudgetStatisticsPage";
 import CategoriesStatisticsPage from "./pages/Statistics/CategoriesStatisticsPage/CategoriesStatisticsPage";
@@ -80,6 +82,11 @@ const App = (): React.JSX.Element => {
                   <Route path={AppRouter.TeacherGuidebook} element={<TeacherGuidebookTimetablePage />} />
                   <Route path={AppRouter.ClassesGuidebook} element={<ClassGuidebookPage />} />
                   <Route path={AppRouter.LessonsSchedule} element={<LessonsSchedulePage />} />
+                </Route>
+                <Route path={AppRouter.Curriculum}>
+                  <Route index element={<Navigate to={AppRouter.Report} replace />} />
+                  <Route path={AppRouter.Report} element={<MonthReportPage />} />
+                  <Route path={AppRouter.Monitoring} element={<MonthMonitoringPage />} />
                 </Route>
                 <Route path={AppRouter.CoursesTimetable}>
                   <Route index element={<Navigate to={AppRouter.TeacherGuidebook} replace />} />
