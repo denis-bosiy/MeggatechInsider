@@ -14,6 +14,7 @@ import ModalSettingsContext from "../../utils/ModalSettingsContext";
 import AgreementModalView from "../../components/AgreementModalView/AgreementModalView";
 import CommentsModalView from "../../components/CommentsModalView/CommentsModalView";
 import { ScheduleContainerComponent } from "../../components/Schedule/ScheduleContainer";
+import Loader from "../../components/Loader/Loader";
 
 const ComponentsPage = () => {
   const { openModal } = useContext(ModalSettingsContext);
@@ -636,6 +637,13 @@ const ComponentsPage = () => {
         <h2>Расписание</h2>
 
         <ScheduleContainerComponent />
+      </section>
+
+      <section className="section">
+        <h2>Прелоадер</h2>
+        <p>Используется для индикации загрузки</p>
+
+        <Loader />
       </section>
     </main>
   );

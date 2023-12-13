@@ -55,12 +55,15 @@ export enum AppRouter {
   // Статистика
   Statistics = "statistics",
 
-  Curriculum = "curriculum",
-  Monitoring = "monitoring",
-  Report = "report",
   BudgetStatistics = "budget-statistics",
   Categories = "categories",
   // Teachers = "teachers",
+  
+  // Контроль учебного плана за месяц
+  Curriculum = "curriculum",
+
+  Monitoring = "monitoring",
+  Report = "report",
 
   NotFound = "*"
 }
@@ -184,7 +187,10 @@ export const Menu: MenuItem[] = [
   },
   {
     url: AppRouter.YearImplementationMonitoring,
-    label: "Контроль учебного плана за год"
+    label: "Контроль учебного плана за год",
+    navigation: [
+      { label: "Контроль учебного плана за год", url: "" },
+    ]
   },
   {
     url: AppRouter.Statistics,

@@ -18,6 +18,7 @@ const ProtectedRoot = () => {
   const route = Menu.find((element) => locations.includes(element.url));
   const navigation = (route && route.navigation) || [];
   const page = navigation.find((nav) => locations.includes(nav.url));
+  console.log(page);
 
   const tabs = (page && page.tabs && Object.keys(page.tabs)) || [];
 

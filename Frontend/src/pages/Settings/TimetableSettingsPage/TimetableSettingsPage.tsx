@@ -28,6 +28,7 @@ import { TimetablePairTimeSettingResponse } from "../../../api/Responses/Timetab
 import { ResponseBuilder } from "../../../api/Responses/ResponseBuilder";
 import { TimetableLessonTimeSettingResponse } from "../../../api/Responses/TimetableLessonTimeSettingResponse";
 import { TimetableParadeTimeSettingResponse } from "../../../api/Responses/TimetableParadeTimeSettingResponse";
+import Loader from "../../../components/Loader/Loader";
 
 const TimetableSettingsPage = () => {
   const httpService = new HttpService();
@@ -37,14 +38,18 @@ const TimetableSettingsPage = () => {
   const { currentYear } = useSelector((state: { headerStore: HeaderData }) => state.headerStore);
   const { openModal } = useContext(ModalSettingsContext);
   const dispatch = useDispatch();
+  const [isPairsLoading, setIsPairsLoading] = useState<boolean>(true);
+  const [isLessonsLoading, setIsLessonsLoading] = useState<boolean>(true);
+  const [isParadeLoading, setIsParadeLoading] = useState<boolean>(true);
 
   const makeGetPairsRequest = (params: Map<string, string>): void => {
+    setIsPairsLoading(true);
+
     httpService
       .getByArbitraryUrl(Endpoint.Pair, params)
       .then((data: any) => {
-        const pairTimesResponse: TimetablePairTimeSettingResponse[] = ResponseBuilder.BuildTimetablePairTimeSettingsResponses(
-          data
-        );
+        const pairTimesResponse: TimetablePairTimeSettingResponse[] =
+          ResponseBuilder.BuildTimetablePairTimeSettingsResponses(data);
         const pairTimes: TimetableSettingsPageTimeData = pairTimesResponse.map(
           (pairTime: TimetablePairTimeSettingResponse) => {
             return { id: pairTime.id, startTime: pairTime.startTime, endTime: pairTime.endTime };
@@ -56,15 +61,17 @@ const TimetableSettingsPage = () => {
       .catch(() => {
         dispatch(TimetableSettingsPageActionBuilder.savePairs([]));
         setPairsTableData(structuredClone([]));
+      })
+      .finally(() => {
+        setIsPairsLoading(false);
       });
   };
   const makeGetLessonsRequest = (params: Map<string, string>): void => {
     httpService
       .getByArbitraryUrl(Endpoint.Lesson, params)
       .then((data: any) => {
-        const lessonTimesResponse: TimetableLessonTimeSettingResponse[] = ResponseBuilder.BuildTimetableLessonTimeSettingsResponses(
-          data
-        );
+        const lessonTimesResponse: TimetableLessonTimeSettingResponse[] =
+          ResponseBuilder.BuildTimetableLessonTimeSettingsResponses(data);
         const lessonTimes: TimetableSettingsPageTimeData = lessonTimesResponse.map(
           (lessonTime: TimetableLessonTimeSettingResponse) => {
             return { id: lessonTime.id, startTime: lessonTime.startTime, endTime: lessonTime.endTime };
@@ -76,15 +83,17 @@ const TimetableSettingsPage = () => {
       .catch(() => {
         dispatch(TimetableSettingsPageActionBuilder.saveLessons([]));
         setLessonsTableData(structuredClone([]));
+      })
+      .finally(() => {
+        setIsLessonsLoading(false);
       });
   };
   const makeGetParadeRequest = (params: Map<string, string>): void => {
     httpService
       .getByArbitraryUrl(Endpoint.Parade, params)
       .then((data: any) => {
-        const paradeResponse: TimetableParadeTimeSettingResponse = ResponseBuilder.BuildTimetableParadeTimeSettingResponse(
-          data
-        );
+        const paradeResponse: TimetableParadeTimeSettingResponse =
+          ResponseBuilder.BuildTimetableParadeTimeSettingResponse(data);
         const parade: TimetableSettingsPageParadeData = {
           weekDayCode: paradeResponse.weekDay,
           startTime: paradeResponse.startTime,
@@ -106,6 +115,9 @@ const TimetableSettingsPage = () => {
           startTime: "08:00",
           endTime: "08:45"
         });
+      })
+      .finally(() => {
+        setIsParadeLoading(false);
       });
   };
 
@@ -244,213 +256,238 @@ const TimetableSettingsPage = () => {
       <div className="timetable-settings-page__container">
         <div className="timetable-settings-page__box timetable-settings-page__box-table">
           <h2 className="h2">Время проведения пар</h2>
-          <ActionButton
-            label="Добавить пару"
-            icon={<PlusIcon />}
-            type={ActionButtonType.Warning}
-            onClick={handleAddingPairs}
-          />
-          <table className="table -fill -list">
-            <thead className="header">
-              <tr className="row">
-                <th className="cell -filter" onClick={() => handleSortPairs("startTime")}>
-                  Начало
-                </th>
-                <th className="cell -filter" onClick={() => handleSortPairs("endTime")}>
-                  Окончание
-                </th>
-                <th className="cell"></th>
-              </tr>
-            </thead>
-            <tbody>
-              {pairsTableData
-                .filter((data: TimeData, index: number) => !isPairsAdding.value || index !== pairsTableData.length - 1)
-                .map((lesson: TimeData) => {
-                  return (
-                    <tr className="row" key={lesson.id}>
-                      <td className="cell">{lesson.startTime}</td>
-                      <td className="cell">{lesson.endTime}</td>
+          {isPairsLoading ? (
+            <Loader />
+          ) : (
+            <>
+              <ActionButton
+                label="Добавить пару"
+                icon={<PlusIcon />}
+                type={ActionButtonType.Warning}
+                onClick={handleAddingPairs}
+              />
+              <table className="table -fill -list">
+                <thead className="header">
+                  <tr className="row">
+                    <th className="cell -filter" onClick={() => handleSortPairs("startTime")}>
+                      Начало
+                    </th>
+                    <th className="cell -filter" onClick={() => handleSortPairs("endTime")}>
+                      Окончание
+                    </th>
+                    <th className="cell"></th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {pairsTableData
+                    .filter(
+                      (data: TimeData, index: number) => !isPairsAdding.value || index !== pairsTableData.length - 1
+                    )
+                    .map((lesson: TimeData) => {
+                      return (
+                        <tr className="row" key={lesson.id}>
+                          <td className="cell">{lesson.startTime}</td>
+                          <td className="cell">{lesson.endTime}</td>
+                          <td className="cell">
+                            <IconButton icon={<GarbageIcon />} onClick={() => handleDeleteRowInPairs(lesson.id)} />
+                          </td>
+                        </tr>
+                      );
+                    })}
+                  {isPairsAdding.value && (
+                    <tr className="row">
                       <td className="cell">
-                        <IconButton icon={<GarbageIcon />} onClick={() => handleDeleteRowInPairs(lesson.id)} />
+                        <Input
+                          placeholder="Время"
+                          value={pairsTableData[pairsTableData.length - 1].startTime}
+                          onValueChange={(newLabel: string) => {
+                            setPairsTableData(
+                              pairsTableData.map((data: TimeData) =>
+                                data.id === pairsTableData[pairsTableData.length - 1].id
+                                  ? { ...data, startTime: newLabel }
+                                  : data
+                              )
+                            );
+                          }}
+                          size={InputSize.Micro}
+                        />
+                      </td>
+                      <td className="cell">
+                        <Input
+                          placeholder="Время"
+                          value={pairsTableData[pairsTableData.length - 1].endTime}
+                          onValueChange={(newLabel: string) => {
+                            setPairsTableData(
+                              pairsTableData.map((data: TimeData) =>
+                                data.id === pairsTableData[pairsTableData.length - 1].id
+                                  ? { ...data, endTime: newLabel }
+                                  : data
+                              )
+                            );
+                          }}
+                          size={InputSize.Micro}
+                        />
+                      </td>
+                      <td className="cell">
+                        <IconButton
+                          icon={<CheckMarkIcon />}
+                          type={IconButtonType.Secondary}
+                          onClick={handleApplyingNewPair}
+                        />
                       </td>
                     </tr>
-                  );
-                })}
-              {isPairsAdding.value && (
-                <tr className="row">
-                  <td className="cell">
-                    <Input
-                      placeholder="Время"
-                      value={pairsTableData[pairsTableData.length - 1].startTime}
-                      onValueChange={(newLabel: string) => {
-                        setPairsTableData(
-                          pairsTableData.map((data: TimeData) =>
-                            data.id === pairsTableData[pairsTableData.length - 1].id
-                              ? { ...data, startTime: newLabel }
-                              : data
-                          )
-                        );
-                      }}
-                      size={InputSize.Micro}
-                    />
-                  </td>
-                  <td className="cell">
-                    <Input
-                      placeholder="Время"
-                      value={pairsTableData[pairsTableData.length - 1].endTime}
-                      onValueChange={(newLabel: string) => {
-                        setPairsTableData(
-                          pairsTableData.map((data: TimeData) =>
-                            data.id === pairsTableData[pairsTableData.length - 1].id
-                              ? { ...data, endTime: newLabel }
-                              : data
-                          )
-                        );
-                      }}
-                      size={InputSize.Micro}
-                    />
-                  </td>
-                  <td className="cell">
-                    <IconButton
-                      icon={<CheckMarkIcon />}
-                      type={IconButtonType.Secondary}
-                      onClick={handleApplyingNewPair}
-                    />
-                  </td>
-                </tr>
-              )}
-            </tbody>
-          </table>
+                  )}
+                </tbody>
+              </table>
+            </>
+          )}
         </div>
 
         <div className="timetable-settings-page__box timetable-settings-page__box-table">
           <h2 className="h2">Время проведения уроков</h2>
-          <ActionButton
-            label="Добавить урок"
-            icon={<PlusIcon />}
-            type={ActionButtonType.Warning}
-            onClick={handleAddingLessons}
-          />
-          <table className="table -fill -list">
-            <thead className="header">
-              <tr className="row">
-                <th className="cell -filter" onClick={() => handleSortLessons("startTime")}>
-                  Начало
-                </th>
-                <th className="cell -filter" onClick={() => handleSortLessons("endTime")}>
-                  Окончание
-                </th>
-                <th className="cell"></th>
-              </tr>
-            </thead>
-            <tbody>
-              {lessonsTableData
-                .filter(
-                  (data: TimeData, index: number) => !isLessonsAdding.value || index !== lessonsTableData.length - 1
-                )
-                .map((lesson: TimeData) => {
-                  return (
-                    <tr className="row" key={lesson.id}>
-                      <td className="cell">{lesson.startTime}</td>
-                      <td className="cell">{lesson.endTime}</td>
+          {isLessonsLoading ? (
+            <Loader />
+          ) : (
+            <>
+              <ActionButton
+                label="Добавить урок"
+                icon={<PlusIcon />}
+                type={ActionButtonType.Warning}
+                onClick={handleAddingLessons}
+              />
+              <table className="table -fill -list">
+                <thead className="header">
+                  <tr className="row">
+                    <th className="cell -filter" onClick={() => handleSortLessons("startTime")}>
+                      Начало
+                    </th>
+                    <th className="cell -filter" onClick={() => handleSortLessons("endTime")}>
+                      Окончание
+                    </th>
+                    <th className="cell"></th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {lessonsTableData
+                    .filter(
+                      (data: TimeData, index: number) => !isLessonsAdding.value || index !== lessonsTableData.length - 1
+                    )
+                    .map((lesson: TimeData) => {
+                      return (
+                        <tr className="row" key={lesson.id}>
+                          <td className="cell">{lesson.startTime}</td>
+                          <td className="cell">{lesson.endTime}</td>
+                          <td className="cell">
+                            <IconButton icon={<GarbageIcon />} onClick={() => handleDeleteRowInLessons(lesson.id)} />
+                          </td>
+                        </tr>
+                      );
+                    })}
+                  {isLessonsAdding.value && (
+                    <tr className="row">
                       <td className="cell">
-                        <IconButton icon={<GarbageIcon />} onClick={() => handleDeleteRowInLessons(lesson.id)} />
+                        <Input
+                          placeholder="Время"
+                          value={lessonsTableData[lessonsTableData.length - 1].startTime}
+                          onValueChange={(newLabel: string) => {
+                            setLessonsTableData(
+                              lessonsTableData.map((data: TimeData) =>
+                                data.id === lessonsTableData[lessonsTableData.length - 1].id
+                                  ? { ...data, startTime: newLabel }
+                                  : data
+                              )
+                            );
+                          }}
+                          size={InputSize.Micro}
+                        />
+                      </td>
+                      <td className="cell">
+                        <Input
+                          placeholder="Время"
+                          value={lessonsTableData[lessonsTableData.length - 1].endTime}
+                          onValueChange={(newLabel: string) => {
+                            setLessonsTableData(
+                              lessonsTableData.map((data: TimeData) =>
+                                data.id === lessonsTableData[lessonsTableData.length - 1].id
+                                  ? { ...data, endTime: newLabel }
+                                  : data
+                              )
+                            );
+                          }}
+                          size={InputSize.Micro}
+                        />
+                      </td>
+                      <td className="cell">
+                        <IconButton
+                          icon={<CheckMarkIcon />}
+                          type={IconButtonType.Secondary}
+                          onClick={handleApplyingNewLesson}
+                        />
                       </td>
                     </tr>
-                  );
-                })}
-              {isLessonsAdding.value && (
-                <tr className="row">
-                  <td className="cell">
-                    <Input
-                      placeholder="Время"
-                      value={lessonsTableData[lessonsTableData.length - 1].startTime}
-                      onValueChange={(newLabel: string) => {
-                        setLessonsTableData(
-                          lessonsTableData.map((data: TimeData) =>
-                            data.id === lessonsTableData[lessonsTableData.length - 1].id
-                              ? { ...data, startTime: newLabel }
-                              : data
-                          )
-                        );
-                      }}
-                      size={InputSize.Micro}
-                    />
-                  </td>
-                  <td className="cell">
-                    <Input
-                      placeholder="Время"
-                      value={lessonsTableData[lessonsTableData.length - 1].endTime}
-                      onValueChange={(newLabel: string) => {
-                        setLessonsTableData(
-                          lessonsTableData.map((data: TimeData) =>
-                            data.id === lessonsTableData[lessonsTableData.length - 1].id
-                              ? { ...data, endTime: newLabel }
-                              : data
-                          )
-                        );
-                      }}
-                      size={InputSize.Micro}
-                    />
-                  </td>
-                  <td className="cell">
-                    <IconButton
-                      icon={<CheckMarkIcon />}
-                      type={IconButtonType.Secondary}
-                      onClick={handleApplyingNewLesson}
-                    />
-                  </td>
-                </tr>
-              )}
-            </tbody>
-          </table>
+                  )}
+                </tbody>
+              </table>
+            </>
+          )}
         </div>
 
         <div className="timetable-settings-page__box">
           <h2 className="h2">Проведение линейки</h2>
-          {isParadeEditing.value && (
+          {isParadeLoading ? (
+            <Loader />
+          ) : (
             <>
-              <div className="timetable-settings-page__box timetable-settings-page__box-button">
-                <ActionButton label="Сохранить" type={ActionButtonType.Positive} onClick={saveParade} />
-                <ActionButton label="Отменить" type={ActionButtonType.Negative} onClick={resetEditParade} />
-              </div>
-              <Select
-                currentValue={weekOptions.find((e) => e.id === paradeData.weekDayCode.toString())}
-                options={weekOptions}
-                onValueChange={(newValue: string) => {
-                  const selectedOption = weekOptions.find((e) => e.id === newValue);
-                  if (selectedOption) {
-                    setParadeData({ ...paradeData, weekDayCode: parseFloat(selectedOption.id) });
-                  }
-                }}
-                size={SelectSize.Default}
-              />
+              {isParadeEditing.value && (
+                <>
+                  <div className="timetable-settings-page__box timetable-settings-page__box-button">
+                    <ActionButton label="Сохранить" type={ActionButtonType.Positive} onClick={saveParade} />
+                    <ActionButton label="Отменить" type={ActionButtonType.Negative} onClick={resetEditParade} />
+                  </div>
+                  <Select
+                    currentValue={weekOptions.find((e) => e.id === paradeData.weekDayCode.toString())}
+                    options={weekOptions}
+                    onValueChange={(newValue: string) => {
+                      const selectedOption = weekOptions.find((e) => e.id === newValue);
+                      if (selectedOption) {
+                        setParadeData({ ...paradeData, weekDayCode: parseFloat(selectedOption.id) });
+                      }
+                    }}
+                    size={SelectSize.Default}
+                  />
 
-              <div className="timetable-settings-page__box timetable-settings-page__box-button">
-                <Input
-                  placeholder="Время"
-                  value={paradeData.startTime}
-                  onValueChange={(newValue: string) => setParadeData({ ...paradeData, startTime: newValue })}
-                  size={InputSize.Default}
-                />
-                <Input
-                  placeholder="Время"
-                  value={paradeData.endTime}
-                  onValueChange={(newValue: string) => setParadeData({ ...paradeData, endTime: newValue })}
-                  size={InputSize.Default}
-                />
-              </div>
-            </>
-          )}
-          {!isParadeEditing.value && (
-            <>
-              <ActionButton className="toolbar__button" label="Редактировать" icon={<PenIcon />} onClick={editParade} />
-              <div className="timetable-settings-page__box timetable-settings-page__box-p">
-                <p className="p">{weekOptions.find((e) => e.id === paradeData.weekDayCode?.toString())?.content}</p>
-                <p className="p">
-                  {paradeData.startTime} - {paradeData.endTime}
-                </p>
-              </div>
+                  <div className="timetable-settings-page__box timetable-settings-page__box-button">
+                    <Input
+                      placeholder="Время"
+                      value={paradeData.startTime}
+                      onValueChange={(newValue: string) => setParadeData({ ...paradeData, startTime: newValue })}
+                      size={InputSize.Default}
+                    />
+                    <Input
+                      placeholder="Время"
+                      value={paradeData.endTime}
+                      onValueChange={(newValue: string) => setParadeData({ ...paradeData, endTime: newValue })}
+                      size={InputSize.Default}
+                    />
+                  </div>
+                </>
+              )}
+              {!isParadeEditing.value && (
+                <>
+                  <ActionButton
+                    className="toolbar__button"
+                    label="Редактировать"
+                    icon={<PenIcon />}
+                    onClick={editParade}
+                  />
+                  <div className="timetable-settings-page__box timetable-settings-page__box-p">
+                    <p className="p">{weekOptions.find((e) => e.id === paradeData.weekDayCode?.toString())?.content}</p>
+                    <p className="p">
+                      {paradeData.startTime} - {paradeData.endTime}
+                    </p>
+                  </div>
+                </>
+              )}
             </>
           )}
         </div>

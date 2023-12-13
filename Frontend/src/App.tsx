@@ -84,17 +84,20 @@ const App = (): React.JSX.Element => {
                   <Route path={AppRouter.CoursesSyllabus} element={<CoursesSyllabusPage />} />
                   <Route path={AppRouter.Assigning} element={<AssigningCoursesSyllabusPage />} />
                 </Route>
-                <Route path={AppRouter.FinancialReport}>
-                  <Route index element={<Navigate to={AppRouter.OffBudgetCategories} replace />} />
-                  <Route path={AppRouter.OffBudget} element={<OffBudgetReportPage />} />
-                  <Route path={AppRouter.Final} element={<FinalReportPage />} />
-                  <Route path={AppRouter.Tariffication} element={<TarifficationReportPage />} />
-                  <Route path={AppRouter.OffBudgetCategories} element={<OffBudgetCategoriesPage />} />
-                </Route>
                 <Route path={AppRouter.Curriculum}>
                   <Route index element={<Navigate to={AppRouter.Report} replace />} />
                   <Route path={AppRouter.Report} element={<MonthReportPage />} />
                   <Route path={AppRouter.Monitoring} element={<MonthMonitoringPage />} />
+                </Route>
+                <Route path={AppRouter.FinancialReport}>
+                  <Route index element={<Navigate to={AppRouter.Tariffication} replace />} />
+                  <Route path={AppRouter.Tariffication} element={<TarifficationReportPage />} />
+                  <Route path={AppRouter.OffBudget} element={<OffBudgetReportPage />} />
+                  <Route path={AppRouter.Final} element={<FinalReportPage />} />
+                  <Route path={AppRouter.OffBudgetCategories} element={<OffBudgetCategoriesPage />} />
+                </Route>
+                <Route path={AppRouter.YearImplementationMonitoring}>
+                  <Route path="" element={<YearImplementationMonitoringPage />} />
                 </Route>
                 <Route path={AppRouter.Statistics}>
                   <Route index element={<Navigate to={AppRouter.BudgetStatistics} replace />} />
