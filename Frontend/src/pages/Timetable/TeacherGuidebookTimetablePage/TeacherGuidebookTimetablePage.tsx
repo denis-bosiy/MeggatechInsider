@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useLayoutEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { MultiValue } from "react-select";
 import {
@@ -45,7 +45,7 @@ const TeacherGuidebookTimetablePage = () => {
   const guidebookTable: CTable = guidebookTableBuilder.getTable();
   const guidebookTableManager: CTableManager = new CTableManager(guidebookTable);
 
-  useEffect(() => {
+  useLayoutEffect(() => {
     const params: Map<string, string> = new Map<string, string>();
     if (currentYear && currentWeek) {
       params.set("year", currentYear.year.toString());
@@ -234,14 +234,14 @@ const TeacherGuidebookTimetablePage = () => {
                               guidebookTableData.map((data: TeacherGuidebookTimetableData) =>
                                 data.id === teacher.id
                                   ? {
-                                    ...data,
-                                    availableHours: newValue.map((time: any) => ({
-                                      id: time.value,
-                                      weekDayCode: time.label.substring(0, 2),
-                                      startTime: time.label.substring(3, 7),
-                                      endTime: time.label.substring(8)
-                                    }))
-                                  }
+                                      ...data,
+                                      availableHours: newValue.map((time: any) => ({
+                                        id: time.value,
+                                        weekDayCode: time.label.substring(0, 2),
+                                        startTime: time.label.substring(3, 7),
+                                        endTime: time.label.substring(8)
+                                      }))
+                                    }
                                   : data
                               )
                             );

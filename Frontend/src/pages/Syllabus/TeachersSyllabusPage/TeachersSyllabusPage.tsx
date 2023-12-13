@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useContext, useState, useLayoutEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { TeachersSyllabusPageData, TeacherSyllabusData } from "./model/types";
 import { ActionBuilder } from "./model/actions";
@@ -54,7 +54,7 @@ const TeachersSyllabusPage = () => {
   const teachersTable: CTable = teachersTableBuilder.getTable();
   const teachersTableManager: CTableManager = new CTableManager(teachersTable);
 
-  useEffect(() => {
+  useLayoutEffect(() => {
     const params: Map<string, string> = new Map<string, string>();
     if (currentYear) {
       params.set("year", currentYear.year.toString());
@@ -148,7 +148,7 @@ const TeachersSyllabusPage = () => {
       <div className="toolbar">
         <div className="toolbar__buttons-wrapper">
           {isTeachersEditing.value ? (
-            <>
+            <div className="toolbar__buttons-box">
               <ActionButton
                 className="toolbar__button"
                 label="Сохранить"
@@ -161,7 +161,7 @@ const TeachersSyllabusPage = () => {
                 type={ActionButtonType.Negative}
                 onClick={handleResetTeachers}
               />
-            </>
+            </div>
           ) : (
             <ActionButton
               className="toolbar__button"

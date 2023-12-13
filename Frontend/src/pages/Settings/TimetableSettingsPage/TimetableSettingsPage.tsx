@@ -1,4 +1,4 @@
-import React, { useContext, useState, useEffect } from "react";
+import React, { useContext, useState, useLayoutEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { TimetableSettingsPageActionBuilder } from "./model/actions";
 import {
@@ -109,14 +109,12 @@ const TimetableSettingsPage = () => {
       });
   };
 
-  useEffect(() => {
+  useLayoutEffect(() => {
     const params: Map<string, string> = new Map<string, string>();
     if (currentYear) {
       params.set("year", currentYear.year.toString());
     }
 
-    makeGetPairsRequest(params);
-    makeGetLessonsRequest(params);
     makeGetParadeRequest(params);
   }, [currentYear?.id]);
 
@@ -127,22 +125,22 @@ const TimetableSettingsPage = () => {
   const pairsTable: CTable = pairsTableBuilder.getTable();
   const pairsTableManager: CTableManager = new CTableManager(pairsTable);
 
-  useEffect(() => {
+  useLayoutEffect(() => {
     const params: Map<string, string> = new Map<string, string>();
     if (currentYear) {
       params.set("year", currentYear.year.toString());
     }
 
     makeGetPairsRequest(params);
-  }, [pairs.length]);
-  useEffect(() => {
+  }, [pairs.length, currentYear?.id]);
+  useLayoutEffect(() => {
     const params: Map<string, string> = new Map<string, string>();
     if (currentYear) {
       params.set("year", currentYear.year.toString());
     }
 
     makeGetLessonsRequest(params);
-  }, [lessons.length]);
+  }, [lessons.length, currentYear?.id]);
 
   const handleAddingPairs = (): void => {
     pairsTableManager.invokeFunction("add", TableType.Managable, [
