@@ -58,7 +58,7 @@ export enum AppRouter {
   BudgetStatistics = "budget-statistics",
   Categories = "categories",
   // Teachers = "teachers",
-  
+
   // Контроль учебного плана за месяц
   Curriculum = "curriculum",
 

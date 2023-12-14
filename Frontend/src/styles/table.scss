@@ -33,7 +33,20 @@
   }
 
   &.-filter {
+    position: relative;
+    padding-right: 12px;
     cursor: pointer;
+
+    &::after {
+      content: "";
+      position: absolute;
+      top: 50%;
+      right: 3px;
+      border: 4px solid transparent;
+      border-top: 8px solid $alternative-text-color;
+      border-bottom: 0 none;
+      transform: translateY(-50%);
+    }
   }
 
   &.-vertical {

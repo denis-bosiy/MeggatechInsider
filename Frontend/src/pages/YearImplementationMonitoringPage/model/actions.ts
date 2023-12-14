@@ -1,0 +1,31 @@
+import { Teacher } from "./types";
+
+enum YEAR_IMPLEMENTATION_MONITORING_PAGE_ACTIONS {
+  YEAR_IMPLEMENTATION_MONITORING_PAGE_SET_DATES = "YEAR_IMPLEMENTATION_MONITORING_PAGE_SET_DATES",
+  YEAR_IMPLEMENTATION_MONITORING_PAGE_SET_TEACHERS = "YEAR_IMPLEMENTATION_MONITORING_PAGE_SET_TEACHERS"
+}
+
+type ActionSetDates = {
+  type: YEAR_IMPLEMENTATION_MONITORING_PAGE_ACTIONS.YEAR_IMPLEMENTATION_MONITORING_PAGE_SET_DATES;
+  payload: string[];
+};
+
+type ActionSetTeachers = {
+  type: YEAR_IMPLEMENTATION_MONITORING_PAGE_ACTIONS.YEAR_IMPLEMENTATION_MONITORING_PAGE_SET_TEACHERS;
+  payload: Teacher[];
+};
+
+type Action = ActionSetDates | ActionSetTeachers;
+
+const YearImplementationMonitoringPageActionBuilder = {
+  setDates: (values: string[]) => ({
+    type: YEAR_IMPLEMENTATION_MONITORING_PAGE_ACTIONS.YEAR_IMPLEMENTATION_MONITORING_PAGE_SET_DATES,
+    payload: values
+  }),
+  setTeachers: (values: Teacher[]) => ({
+    type: YEAR_IMPLEMENTATION_MONITORING_PAGE_ACTIONS.YEAR_IMPLEMENTATION_MONITORING_PAGE_SET_TEACHERS,
+    payload: values
+  })
+};
+
+export { YEAR_IMPLEMENTATION_MONITORING_PAGE_ACTIONS, type Action, YearImplementationMonitoringPageActionBuilder };
