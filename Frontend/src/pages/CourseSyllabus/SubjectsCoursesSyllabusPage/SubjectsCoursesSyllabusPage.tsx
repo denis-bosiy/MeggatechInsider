@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { SubjectsCoursesSyllabusPageData, SubjectCoursesSyllabusData } from "./model/types";
 import { ActionBuilder } from "./model/actions";
@@ -14,6 +14,10 @@ import { CTableManager } from "../../../core/Table/CTableManager";
 import { TableType } from "../../../core/Table/TableType";
 import { guidGenerator } from "../../../utils/guidGenerator";
 import { SortingOrder } from "../../../core/Table/SortingOrder";
+import { HttpService } from "../../../api/http.service";
+import { HeaderData } from "../../../layouts/Header/model/types";
+import { Endpoint } from "../../../api/endpoints";
+import { ResponseBuilder } from "../../../api/Responses/ResponseBuilder";
 
 const SubjectsCoursesSyllabusPage = () => {
   const typeOptions: ISelectOption[] = [
@@ -22,6 +26,7 @@ const SubjectsCoursesSyllabusPage = () => {
     { id: "3", content: "ШЮП" }
   ];
 
+  const httpService = new HttpService();
   const { openModal } = useContext(ModalSettingsContext);
   const dispatch = useDispatch();
   const subjects = useSelector(
@@ -40,6 +45,7 @@ const SubjectsCoursesSyllabusPage = () => {
   subjectsTableBuilder.addSearchFeature();
   const subjectsTable: CTable = subjectsTableBuilder.getTable();
   const subjectsTableManager: CTableManager = new CTableManager(subjectsTable);
+  const { currentYear } = useSelector((state: { headerStore: HeaderData }) => state.headerStore);
 
   const handleSaveSubjects = () => {
     subjectsTableManager.invokeFunction("apply", TableType.Editable, [
@@ -65,7 +71,17 @@ const SubjectsCoursesSyllabusPage = () => {
   };
   const handleApplyingNewSubject = (): void => {
     subjectsTableManager.invokeFunction("applyAdding", TableType.Managable, [
-      (data: any[]) => dispatch(ActionBuilder.saveSubjects(data))
+      (data: any[]) => {
+        // const addedSubject = data.at(-1) as SubjectCoursesSyllabusData;
+        // console.log(addedSubject);
+        // httpService.postByArbitraryUrl(Endpoint.CoursesSyllabus, {
+        //   year: currentYear?.year,
+        //   ...addedSubject,
+        //   id: data.length
+        // });
+
+        dispatch(ActionBuilder.saveSubjects(data));
+      }
     ]);
   };
   const handleSubjectSearch = (): void => {
@@ -81,6 +97,27 @@ const SubjectsCoursesSyllabusPage = () => {
       openModal
     ]);
   };
+
+  useEffect(() => {
+    const params: Map<string, string> = new Map<string, string>();
+    if (currentYear) {
+      params.set("year", currentYear.year.toString());
+    }
+
+    httpService
+      .getByArbitraryUrl(Endpoint.CoursesSyllabus, params)
+      .then((response) => {
+        const courses = ResponseBuilder.BuildResponse<SubjectsCoursesSyllabusPageData>(response, "courses");
+        if (courses) {
+          dispatch(ActionBuilder.saveSubjects(courses));
+          setSubjectsTableData(structuredClone(courses));
+        }
+      })
+      .catch(() => {
+        dispatch(ActionBuilder.saveSubjects([]));
+        setSubjectsTableData(structuredClone([]));
+      });
+  }, []);
 
   return (
     <>

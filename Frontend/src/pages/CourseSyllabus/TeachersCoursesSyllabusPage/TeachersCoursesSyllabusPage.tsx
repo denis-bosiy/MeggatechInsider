@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { TeachersCoursesSyllabusPageData, TeacherCoursesSyllabusData } from "./model/types";
 import { ActionBuilder } from "./model/actions";
@@ -14,12 +14,19 @@ import { CTableManager } from "../../../core/Table/CTableManager";
 import { TableType } from "../../../core/Table/TableType";
 import { guidGenerator } from "../../../utils/guidGenerator";
 import { SortingOrder } from "../../../core/Table/SortingOrder";
+import { HttpService } from "../../../api/http.service";
+import { HeaderData } from "../../../layouts/Header/model/types";
+import { Endpoint } from "../../../api/endpoints";
+import { ResponseBuilder } from "../../../api/Responses/ResponseBuilder";
 
 const TeachersCoursesSyllabusPage = () => {
   const workingContractOptions: ISelectOption[] = [
     { id: "1", content: "ГПХ" },
     { id: "2", content: "ДС" }
   ];
+
+  const httpService = new HttpService();
+  const { currentYear } = useSelector((state: { headerStore: HeaderData }) => state.headerStore);
 
   const { openModal } = useContext(ModalSettingsContext);
   const dispatch = useDispatch();
@@ -83,6 +90,27 @@ const TeachersCoursesSyllabusPage = () => {
       openModal
     ]);
   };
+
+  useEffect(() => {
+    const params: Map<string, string> = new Map<string, string>();
+    if (currentYear) {
+      params.set("year", currentYear.year.toString());
+    }
+
+    httpService
+      .getByArbitraryUrl(Endpoint.CoursesSyllabusTeacher, params)
+      .then((response) => {
+        const courses = ResponseBuilder.BuildResponse<TeachersCoursesSyllabusPageData>(response, "teachers");
+        if (courses) {
+          dispatch(ActionBuilder.saveTeachers(courses));
+          setTeachersTableData(structuredClone(courses));
+        }
+      })
+      .catch(() => {
+        dispatch(ActionBuilder.saveTeachers([]));
+        setTeachersTableData(structuredClone([]));
+      });
+  }, []);
 
   return (
     <>

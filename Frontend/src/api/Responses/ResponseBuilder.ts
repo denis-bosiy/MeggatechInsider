@@ -6,6 +6,7 @@ import { SyllabusTeacherResponse } from "./SyllabusTeacherResponse";
 import { DiscrepancyResponse } from "./DiscrepancyResponse";
 import { TimetableTeacherResponse } from "./TimetableTeacherResponse";
 import { AvailableHourResponse } from "./AvailableHourResponse";
+import { AxiosResponse } from "axios";
 
 export class ResponseBuilder {
   public static BuildTimetablePairTimeSettingsResponse(data: any): TimetablePairTimeSettingResponse {
@@ -129,5 +130,12 @@ export class ResponseBuilder {
     responses = data.data.teachers.map((teacher: any) => ResponseBuilder.BuildTimetableTeacherResponse(teacher));
 
     return responses;
+  }
+
+  public static BuildResponse<T>(response: AxiosResponse, key?: string): T | undefined {
+    if (key) {
+      return response.data[key] as T;
+    }
+    return response.data as T;
   }
 }
