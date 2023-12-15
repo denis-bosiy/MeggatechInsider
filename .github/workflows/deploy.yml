@@ -29,7 +29,6 @@ jobs:
         with:
           context: ./Frontend/
           push: true
-          tags: v1
           labels: deploy
 
       - name: Build and push Docker image backend
@@ -37,5 +36,4 @@ jobs:
         with:
           context: ./BackendSrc/
           push: true
-          tags: v1
           labels: deploy
