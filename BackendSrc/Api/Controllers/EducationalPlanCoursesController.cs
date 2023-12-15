@@ -1,6 +1,7 @@
 using Api.Models.EducationPlanCourses.Appointments;
 using Api.Models.EducationPlanCourses.Courses;
 using Api.Models.EducationPlanCourses.Difference;
+using Api.Models.EducationPlanCourses.Plan;
 using Api.Models.EducationPlanCourses.Teacher;
 using Microsoft.AspNetCore.Mvc;
 
@@ -8,7 +9,7 @@ namespace Api.Controllers
 {
     [ApiController]
     [Route( "api/educational-plan-courses" )]
-    public class EducationPlanCoursesController : Controller
+    public class EducationalPlanCoursesController : Controller
     {
         [HttpGet( "teachers" )]
         [ProducesResponseType<CourseTeacherListResponseDto>( StatusCodes.Status200OK )]
@@ -315,9 +316,104 @@ namespace Api.Controllers
             } );
         }
 
+        [HttpGet( "plan" )]
+        [ProducesResponseType<EducationalPlanCoursesResponseDto>( StatusCodes.Status200OK )]
+        [ProducesResponseType( StatusCodes.Status404NotFound )]
+        public IActionResult GetEducationalPlanCourses( [FromQuery] EducationalPlanCoursesRequestDto planCoursesRequestDto )
+        {
+            if ( !IsValidYear( planCoursesRequestDto.Year ) )
+            {
+                return NotFound( "Не найдено такого года" );
+            }
+
+            if ( !IsValidCourse( planCoursesRequestDto.CourseType ) )
+            {
+                return NotFound( "Не найдено такого курса" );
+            }
+
+            return Ok( new EducationalPlanCoursesResponseDto
+            {
+                Subjects = new List<EducationalPlanCoursesDto>
+                {
+                    new EducationalPlanCoursesDto
+                    {
+                        Id = 1,
+                        Name = "Физика",
+                        Type = "Обязательный профильный",
+                        GroupsCount = 1,
+                        HoursTotal = 30,
+                        HoursAwaited = 20,
+                        HoursPlanned = 25,
+                        WeeksPlan = new List<int> { 5, 5, 5, 5, 5, 5 }
+                    },
+                    new EducationalPlanCoursesDto
+                    {
+                        Id = 1,
+                        Name = "Математика",
+                        Type = "Обязательный профильный",
+                        GroupsCount = 1,
+                        HoursTotal = 30,
+                        HoursAwaited = 20,
+                        HoursPlanned = 25,
+                        WeeksPlan = new List<int> { 5, 5, 5, 5, 5, 5 }
+                    },
+                    new EducationalPlanCoursesDto
+                    {
+                        Id = 1,
+                        Name = "Философия",
+                        Type = "Обязательный профильный",
+                        GroupsCount = 1,
+                        HoursTotal = 30,
+                        HoursAwaited = 20,
+                        HoursPlanned = 25,
+                        WeeksPlan = new List<int> { 5, 5, 5, 5, 5, 5 }
+                    },
+                },
+                WeekStartDates = new List<string>
+                {
+                    "21.01.2023",
+                    "28.01.2023",
+                    "05.02.2023",
+                    "12.02.2023",
+                    "19.02.2023",
+                    "26.02.2023"
+                }
+            } );
+        }
+
+        [HttpPut( "plan" )]
+        [ProducesResponseType( StatusCodes.Status200OK )]
+        [ProducesResponseType( StatusCodes.Status404NotFound )]
+        public IActionResult UpdateEducationalPlanCourses( [FromBody] UpdateEducationalPlanCoursesRequestDto planCoursesDto)
+        {
+            if ( !IsValidYear( planCoursesDto.Year ) )
+            {
+                return NotFound( "Не найдено такого года" );
+            }
+
+            if ( !IsValidCourse( planCoursesDto.CourseType ) )
+            {
+                return NotFound( "Не найдено такого курса" );
+            }
+
+            //проверяем существование предмета
+            int subjectId = 0;
+            if ( subjectId == 1 )
+            {
+                return NotFound( "Не найдено такого предмета" );
+            }
+
+            return Ok();
+        }
+
         private bool IsValidYear( int year )
         {
             // TODO Определить границы лет
+            return true;
+        }
+
+        private bool IsValidCourse( string course )
+        {
             return true;
         }
     }
