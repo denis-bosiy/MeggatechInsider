@@ -22,7 +22,7 @@ jobs:
         id: meta
         uses: docker/metadata-action@v5
         with:
-          images: Meggatech/MeggatechInsider
+          images: darkmoonli/meggatechinsider
       
       - name: Build and push Docker image frontend
         uses: docker/build-push-action@v5
