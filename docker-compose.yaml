@@ -2,16 +2,14 @@ version: '3'
 
 services:
   frontend:
-    build: 
-      context: frontend/
+    image: darkmoonli/frontend:latest
     container_name: frontend
     restart: always
     ports:
       - "2000:3000"
 
   backend:
-    build: 
-      context: BackendSrc/
+    image: darkmoonli/backend:latest
     container_name: backend
     restart: always
     ports:
