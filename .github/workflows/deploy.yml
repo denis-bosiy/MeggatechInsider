@@ -24,5 +24,18 @@ jobs:
         with:
           images: Meggatech/MeggatechInsider
       
-      - name: Build and push Docker image
+      - name: Build and push Docker image frontend
         uses: docker/build-push-action@v5
+        with:
+          context: ./Frontend/
+          push: true
+          tags: v1
+          labels: deploy
+
+      - name: Build and push Docker image backend
+        uses: docker/build-push-action@v5
+        with:
+          context: ./BackendSrc/
+          push: true
+          tags: v1
+          labels: deploy
