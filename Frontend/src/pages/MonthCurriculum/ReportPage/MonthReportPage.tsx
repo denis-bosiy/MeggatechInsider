@@ -10,7 +10,7 @@ import Button, { ButtonSize, ButtonType } from "../../../components/Button/Butto
 import { TableType } from "../../../core/Table/TableType";
 import { SortingOrder } from "../../../core/Table/SortingOrder";
 import Input, { InputType } from "../../../components/Input/Input";
-import ActionButton, { ActionButtonSize, ActionButtonType } from "../../../components/ActionButton/ActionButton";
+import ActionButton, { ActionButtonSize } from "../../../components/ActionButton/ActionButton";
 import CommentsModalView from "../../../components/CommentsModalView/CommentsModalView";
 import ModalSettingsContext from "../../../utils/ModalSettingsContext";
 
