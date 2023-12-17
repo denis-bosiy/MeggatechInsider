@@ -24,7 +24,7 @@ export enum AppRouter {
 
   Subjects = "subjects",
   Teachers = "teachers",
-  // Syllabus = "syllabus",
+  SyllabusTable = "syllabus-table",
   Assigning = "assigning",
 
   // Расписание курсов
@@ -38,7 +38,7 @@ export enum AppRouter {
 
   // Subjects = "subjects",
   // Teachers = "teachers",
-  // CoursesSyllabus = "courses-syllabus",
+  CoursesSyllabusTable = "courses-syllabus-table",
   // Assigning = "assigning",
 
   // Финансовый отчёт
@@ -128,7 +128,7 @@ export const Menu: MenuItem[] = [
     navigation: [
       { label: "Предметы", url: AppRouter.Subjects },
       { label: "Преподаватели", url: AppRouter.Teachers },
-      { label: "Учебный план", url: AppRouter.Syllabus },
+      { label: "Учебный план", url: AppRouter.SyllabusTable },
       { label: "Назначение", url: AppRouter.Assigning }
     ]
   },
@@ -149,7 +149,7 @@ export const Menu: MenuItem[] = [
       { label: "Преподаватели", url: AppRouter.Teachers },
       {
         label: "План",
-        url: AppRouter.CoursesSyllabus,
+        url: AppRouter.CoursesSyllabusTable,
         tabs: {
           courses: "Подготовительные курсы",
           expressCourses: "Подготовительные экспресс-курсы",

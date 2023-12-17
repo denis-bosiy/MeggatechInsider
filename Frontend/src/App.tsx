@@ -70,7 +70,7 @@ const App = (): React.JSX.Element => {
                   <Route path={AppRouter.Subjects} element={<SubjectsSyllabusPage />} />
                   <Route path={AppRouter.Teachers} element={<TeachersSyllabusPage />} />
                   <Route path={AppRouter.Assigning} element={<AssigningSyllabusPage />} />
-                  <Route path={AppRouter.Syllabus} element={<SyllabusPage />} />
+                  <Route path={AppRouter.SyllabusTable} element={<SyllabusPage />} />
                 </Route>
                 <Route path={AppRouter.CoursesTimetable}>
                   <Route index element={<Navigate to={AppRouter.TeachersGuidebook} replace />} />
@@ -81,7 +81,7 @@ const App = (): React.JSX.Element => {
                   <Route index element={<Navigate to={AppRouter.Subjects} replace />} />
                   <Route path={AppRouter.Subjects} element={<SubjectsCoursesSyllabusPage />} />
                   <Route path={AppRouter.Teachers} element={<TeachersCoursesSyllabusPage />} />
-                  <Route path={AppRouter.CoursesSyllabus} element={<CoursesSyllabusPage />} />
+                  <Route path={AppRouter.CoursesSyllabusTable} element={<CoursesSyllabusPage />} />
                   <Route path={AppRouter.Assigning} element={<AssigningCoursesSyllabusPage />} />
                 </Route>
                 <Route path={AppRouter.Curriculum}>

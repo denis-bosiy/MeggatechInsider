@@ -1,11 +1,9 @@
 import { TableType } from "./TableType";
 import { CTable } from "./CTable";
-import { CAdditionalLoadedTable } from "./CAdditionalLoadedTable";
 import { CCommentableTable } from "./CCommentableTable";
 import { CEditableTable } from "./CEditableTable";
 import { CExportableTable } from "./CExportableTable";
 import { CManagableTable } from "./CManagableTable";
-import { CSyllabusContinuableTable } from "./CSyllabusContinuableTable";
 import { CSearchableTable } from "./CSearchableTable";
 
 export class CTableBuilder {
@@ -13,15 +11,6 @@ export class CTableBuilder {
 
   constructor(data: any[], setData: (data: any[]) => void) {
     this._table = new CTable(undefined, data, setData);
-  }
-
-  public addAdditionalLoadFeature(): void {
-    this._table = new CAdditionalLoadedTable(
-      this._table,
-      this._table.data,
-      this._table.setData,
-      TableType.AdditionalLoaded
-    );
   }
 
   public addCommentFeature(): void {
@@ -56,15 +45,6 @@ export class CTableBuilder {
 
   public addSearchFeature(): void {
     this._table = new CSearchableTable(this._table, this._table.data, this._table.setData, TableType.Searchable);
-  }
-
-  public addSyllabusContinueFeature(): void {
-    this._table = new CSyllabusContinuableTable(
-      this._table,
-      this._table.data,
-      this._table.setData,
-      TableType.SyllabusContinuable
-    );
   }
 
   public getTable(): CTable {
