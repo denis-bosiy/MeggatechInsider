@@ -1,12 +1,16 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using Domain.CourseEntities.Courses;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace DatabaseProvider.Configurations.CourseEntitiesConfigurations.Courses
 {
-    internal class CourseTypeConfiguration
+    public class CourseTypeConfiguration : IEntityTypeConfiguration<CourseType>
     {
+        public void Configure( EntityTypeBuilder<CourseType> builder )
+        {
+            builder.ToTable( "CourseType" ).HasKey( t => t.Id );
+
+            builder.Property( t => t.CourseTypeName ).IsRequired();
+        }
     }
 }
