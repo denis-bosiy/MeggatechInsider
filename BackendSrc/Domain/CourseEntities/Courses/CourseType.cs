@@ -4,7 +4,7 @@ namespace Domain.CourseEntities.Courses
     {
         public string CourseTypeName { get; set; }
 
-        public List<Course> Courses { get; set; } = new();
+        public List<Course> Courses { get; set; } = new List<Course>();
 
         public CourseType( string courseTypeName )
         {

@@ -4,11 +4,12 @@ using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace DatabaseProvider.Configurations.TimetableEntitiesConfigurations.StudentGroupEntities;
 
-public class HorizontalSubgroupStudentGroupConfiguration : IEntityTypeConfiguration<HorizontalSubgroupStudentGroup>
+public class HorizontalSubgroupStudentGroupConfiguration : StudentGroupConfiguration<HorizontalSubgroupStudentGroup>
 {
-    public void Configure( EntityTypeBuilder<HorizontalSubgroupStudentGroup> builder )
+    public new void Configure( EntityTypeBuilder<HorizontalSubgroupStudentGroup> builder )
     {
-        builder.ToTable( "HorizontalSubgroupStudentGroup" ).HasKey( sg => sg.Id );
+        base.Configure( builder );
+        builder.ToTable( "HorizontalSubgroupStudentGroup" );
 
         builder.Property( sg => sg.Parallel ).HasConversion<int>().IsRequired();
         builder.Property( sg => sg.SubgroupNumber ).IsRequired();

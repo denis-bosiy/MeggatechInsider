@@ -1,25 +1,26 @@
 type TimetableSettingsPageData = {
-    pairs: TimetableSettingsPageTimeData,
-    lessons: TimetableSettingsPageTimeData,
-    parade: TimetableSettingsPageParadeData,
-}
+  pairs: TimetableSettingsPageTimeData;
+  lessons: TimetableSettingsPageTimeData;
+  parade: TimetableSettingsPageParadeData;
+};
 
-type TimetableSettingsPageTimeData = Array<TimeData>
+type TimetableSettingsPageTimeData = Array<TimeData>;
 
 type TimetableSettingsPageParadeData = {
-    week_day: string,
-    start_time: string,
-    end_time: string,
-}
+  weekDayCode: number;
+  startTime: string;
+  endTime: string;
+};
 
 type TimeData = {
-  id: number,
-  start_time: string,
-  end_time: string,
-}
+  id: string;
+  startTime: string;
+  endTime: string;
+};
 
 export {
   type TimetableSettingsPageData,
   type TimetableSettingsPageParadeData,
   type TimetableSettingsPageTimeData,
+  type TimeData
 };

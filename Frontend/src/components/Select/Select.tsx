@@ -7,6 +7,12 @@ export enum SelectSize {
   Milli = "MILLI",
   Default = "DEFAULT"
 }
+
+export type SelectOption = {
+  id: string;
+  content: string;
+}
+
 export interface ISelectOption {
   id: string;
   content: string;
@@ -16,6 +22,7 @@ interface ISelectProps {
   options: ISelectOption[];
   onValueChange: (id: string) => void;
   size?: SelectSize;
+  currentValue?: ISelectOption;
 }
 
 const Select = (props: ISelectProps) => {
@@ -64,6 +71,7 @@ const Select = (props: ISelectProps) => {
   return (
     <div className="select-container">
       <select
+        value={props.currentValue?.content}
         ref={selectRef}
         className={"select" + (sizeModificator ? " " + sizeModificator : "")}
         onChange={onChange}

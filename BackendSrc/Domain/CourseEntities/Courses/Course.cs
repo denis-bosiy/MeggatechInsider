@@ -19,7 +19,6 @@ namespace Domain.CourseEntities.Courses
 
         public Course(
             string courseName,
-            int courseTypeId,
             CourseType courseType,
             int expectedHoursPerWeek,
             int expectedGroupsCount,
@@ -31,7 +30,6 @@ namespace Domain.CourseEntities.Courses
             ExpectedHoursPerWeek = expectedHoursPerWeek;
             ExpectedGroupsCount = expectedGroupsCount;
             Year = year;
-            CourseTypeId = courseTypeId;
         }
     }
 }

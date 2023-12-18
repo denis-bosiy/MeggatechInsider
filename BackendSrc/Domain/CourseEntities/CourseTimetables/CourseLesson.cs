@@ -12,9 +12,9 @@ namespace Domain.CourseEntities.CourseTimetables
         public int StudentGroupNumber { get; set; }
         public StudentGroupType StudentGroupType { get; set; }
         
-        public int CourseId => Course.Id;
+        public int CourseId { get; set; }
         public Course Course { get; set; }
-        public int CourseTeacherId => CourseTeacher.Id;
+        public int CourseTeacherId { get; set; }
         public CourseTeacher CourseTeacher { get; set; }
 
         /*

@@ -1,8 +1,41 @@
-name: Deploy
+name: Publish Docker image
 
 on:
   push:
-    branches:
-      - master
+    branches: ['master']
 
 jobs:
+  push_to_registry:
+    name: Push Docker image to Docker Hub
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out the repo
+        uses: actions/checkout@v3
+      
+      - name: Log in to Docker Hub
+        uses: docker/login-action@v3
+        with:
+          username: darkmoonli
+          password: dckr_pat_ZP4lcfewthZBGR9oUjgAOX-q6wM
+      
+      - name: Extract metadata (tags, labels) for Docker
+        id: meta
+        uses: docker/metadata-action@v5
+        with:
+          images: darkmoonli/meggatechinsider
+      
+      - name: Build and push Docker image frontend
+        uses: docker/build-push-action@v5
+        with:
+          context: ./Frontend/
+          push: true
+          tags: darkmoonli/frontend:latest
+          labels: deploy
+
+      - name: Build and push Docker image backend
+        uses: docker/build-push-action@v5
+        with:
+          context: ./BackendSrc/
+          push: true
+          tags: darkmoonli/backend:latest
+          labels: deploy

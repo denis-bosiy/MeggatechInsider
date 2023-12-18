@@ -1,3 +1,4 @@
+using DatabaseProvider.Configurations.AssignmentEntitiesConfiguration;
 using DatabaseProvider.Configurations.CourseEntitiesConfigurations.CourseAssignments;
 using DatabaseProvider.Configurations.CourseEntitiesConfigurations.CourseEducationalPlans;
 using DatabaseProvider.Configurations.CourseEntitiesConfigurations.Courses;
@@ -5,8 +6,10 @@ using DatabaseProvider.Configurations.CourseEntitiesConfigurations.CourseTeacher
 using DatabaseProvider.Configurations.CourseEntitiesConfigurations.CourseTimetables;
 using DatabaseProvider.Configurations.SubjectEntitiesConfigurations;
 using DatabaseProvider.Configurations.TeacherEntitiesConfigurations;
+using DatabaseProvider.Configurations.TimetableEntitiesConfigurations.GuidebookEntities;
 using DatabaseProvider.Configurations.TimetableEntitiesConfigurations.LessonEntities;
 using DatabaseProvider.Configurations.TimetableEntitiesConfigurations.StudentGroupEntities;
+using DatabaseProvider.Configurations.TimetableEntitiesConfigurations.TeacherEntities;
 using Microsoft.EntityFrameworkCore;
 
 namespace DatabaseProvider;
@@ -27,6 +30,9 @@ public class ApplicationContext : DbContext
 
     protected override void OnModelCreating( ModelBuilder modelBuilder )
     {
+        //assignment
+        modelBuilder.ApplyConfiguration( new AssignmentConfiguration() );
+        
         //subjects
         modelBuilder.ApplyConfiguration( new PaymentTypeConfiguration() );
         modelBuilder.ApplyConfiguration( new SubjectCategoryConfiguration() );
@@ -38,9 +44,21 @@ public class ApplicationContext : DbContext
         modelBuilder.ApplyConfiguration( new EducationConfiguration() );
         modelBuilder.ApplyConfiguration( new TeacherCategoryConfiguration() );
         modelBuilder.ApplyConfiguration( new TeacherConfiguration() );
+        
+        //guidebooks
+        modelBuilder.ApplyConfiguration( new LessonTimeConfiguration() );
+        modelBuilder.ApplyConfiguration( new PairTimeConfiguration() );
+        modelBuilder.ApplyConfiguration( new ParadeTimeConfiguration() );
 
         //lessons
         modelBuilder.ApplyConfiguration( new LessonConfiguration() );
+        modelBuilder.ApplyConfiguration( new LessonTimeConfiguration() );
+
+        //pairs
+        modelBuilder.ApplyConfiguration( new PairTimeConfiguration() );
+
+        //parade
+        modelBuilder.ApplyConfiguration( new ParadeTimeConfiguration() );
 
         //student groups
         modelBuilder.ApplyConfiguration( new ClassStudentGroupConfiguration() );
@@ -58,6 +76,9 @@ public class ApplicationContext : DbContext
         modelBuilder.ApplyConfiguration( new CourseTeacherAvailableHoursConfiguration() );
         modelBuilder.ApplyConfiguration( new CourseTeacherConfiguration() );
         modelBuilder.ApplyConfiguration( new CourseLessonConfiguration() );
+        
+        //timetable
+        modelBuilder.ApplyConfiguration( new TeacherAvailableHoursConfiguration() );
     }
 
     protected override void OnConfiguring( DbContextOptionsBuilder optionsBuilder )

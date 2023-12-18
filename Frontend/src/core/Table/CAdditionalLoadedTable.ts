@@ -6,7 +6,8 @@ export class CAdditionalLoadedTable extends CTable {
     super(_table, _data, _setData, _type);
   }
 
-  public addAdditionalLoaded(teacherId: string): void {
+  public addAdditionalLoaded(): void {
+    // params: teacherId: string
     // TODO: При реализации добавления доп. нагрузки добавить функциональность
   }
 }

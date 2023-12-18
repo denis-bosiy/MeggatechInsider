@@ -5,7 +5,6 @@ using Api.Models.StudyingActivityTimeModels.ParadeTime;
 using Application.Abstractions.StudyingActivityServices;
 using Domain.TimetableEntities.GuidebookEntities;
 using Microsoft.AspNetCore.Mvc;
-using System.Web.Http.Description;
 
 namespace Api.Controllers
 {
@@ -19,18 +18,20 @@ namespace Api.Controllers
         private readonly ILessonTimeService _lessonTimeService;
         private readonly IParadeTimeService _paradeTimeService;
 
-        public StudyingActivityController( 
+        public StudyingActivityController(
             IPairTimeService pairTimeService,
             ILessonTimeService lessonTimeService,
-            IParadeTimeService paradeTimeService ) 
-        { 
+            IParadeTimeService paradeTimeService )
+        {
             _pairTimeService = pairTimeService;
             _lessonTimeService = lessonTimeService;
             _paradeTimeService = paradeTimeService;
         }
 
         [HttpGet( "pair" )]
-        [ResponseType( typeof( PairTimesDto ) )]
+        [ProducesResponseType<PairTimesDto>( StatusCodes.Status200OK )]
+        [ProducesResponseType( StatusCodes.Status400BadRequest )]
+        [ProducesResponseType( StatusCodes.Status404NotFound )]
         public IActionResult GetPairTime( [FromQuery] int year )
         {
             List<PairTime> pairTimes = _pairTimeService.GetPairTimesByYear( year );
@@ -51,6 +52,8 @@ namespace Api.Controllers
         }
 
         [HttpPost( "pair" )]
+        [ProducesResponseType( StatusCodes.Status200OK )]
+        [ProducesResponseType( StatusCodes.Status400BadRequest )]
         public IActionResult AddPairTime( [FromBody] CreatePairTimeDto dto )
         {
             if ( dto.Year < LiceumFoundationYear || dto.Year > DateTime.Now.Year + 1 )
@@ -63,7 +66,10 @@ namespace Api.Controllers
         }
 
         [HttpDelete( "pair" )]
-        public IActionResult DeletePairTime( [FromQuery] int id ) 
+        [ProducesResponseType( StatusCodes.Status200OK )]
+        [ProducesResponseType( StatusCodes.Status400BadRequest )]
+        [ProducesResponseType( StatusCodes.Status409Conflict )]
+        public IActionResult DeletePairTime( [FromQuery] int id )
         {
             if ( !_pairTimeService.PairTimeExists( id ) )
             {
@@ -74,8 +80,10 @@ namespace Api.Controllers
         }
 
         [HttpGet( "lesson" )]
-        [ResponseType( typeof( LessonTimesDto ) )]
-        public IActionResult GetLessonTime( [FromQuery] int year ) 
+        [ProducesResponseType<LessonTimesDto>( StatusCodes.Status200OK )]
+        [ProducesResponseType( StatusCodes.Status400BadRequest )]
+        [ProducesResponseType( StatusCodes.Status404NotFound )]
+        public IActionResult GetLessonTime( [FromQuery] int year )
         {
             List<LessonTime> lessonTimes = _lessonTimeService.GetLessonTimesByYear( year );
 
@@ -95,9 +103,10 @@ namespace Api.Controllers
         }
 
         [HttpPost( "lesson" )]
+        [ProducesResponseType( StatusCodes.Status200OK )]
+        [ProducesResponseType( StatusCodes.Status400BadRequest )]
         public IActionResult AddLessonTime( [FromBody] CreateLessonTimeDto dto )
         {
-            
             if ( dto.Year < LiceumFoundationYear || dto.Year > DateTime.Now.Year + 1 )
             {
                 return BadRequest( "Не найдено такого года" );
@@ -108,7 +117,10 @@ namespace Api.Controllers
         }
 
         [HttpDelete( "lesson" )]
-        public IActionResult DeleteLessonTime( [FromQuery] int id ) 
+        [ProducesResponseType( StatusCodes.Status200OK )]
+        [ProducesResponseType( StatusCodes.Status400BadRequest )]
+        [ProducesResponseType( StatusCodes.Status409Conflict )]
+        public IActionResult DeleteLessonTime( [FromQuery] int id )
         {
             if ( !_lessonTimeService.LessonTimeExists( id ) )
             {
@@ -119,7 +131,9 @@ namespace Api.Controllers
         }
 
         [HttpGet( "parade" )]
-        [ResponseType( typeof( ParadeTimeDto ) )]
+        [ProducesResponseType<ParadeTimeDto>( StatusCodes.Status200OK )]
+        [ProducesResponseType( StatusCodes.Status400BadRequest )]
+        [ProducesResponseType( StatusCodes.Status404NotFound )]
         public IActionResult GetParadeTime( [FromQuery] int year )
         {
             ParadeTime paradeTime = _paradeTimeService.GetParadeTimeByYear( year );
@@ -132,6 +146,8 @@ namespace Api.Controllers
         }
 
         [HttpPost( "parade" )]
+        [ProducesResponseType( StatusCodes.Status200OK )]
+        [ProducesResponseType( StatusCodes.Status400BadRequest )]
         public IActionResult CreateParadeTime( [FromBody] SetParadeTimeDto dto )
         {
             if ( dto.Year < LiceumFoundationYear || dto.Year > DateTime.Now.Year + 1 )
@@ -144,6 +160,8 @@ namespace Api.Controllers
         }
 
         [HttpPut( "parade" )]
+        [ProducesResponseType( StatusCodes.Status200OK )]
+        [ProducesResponseType( StatusCodes.Status400BadRequest )]
         public IActionResult UpdateParadeTime( [FromBody] SetParadeTimeDto dto )
         {
             if ( dto.Year < LiceumFoundationYear || dto.Year > DateTime.Now.Year + 1 )
@@ -157,11 +175,12 @@ namespace Api.Controllers
                 return BadRequest( "Не найдено такого года" );
             }
 
-            _paradeTimeService.UpdateParadeTime( 
+            _paradeTimeService.UpdateParadeTime(
                 paradeTimeForRequestedYear.Id, dto.Year, dto.WeekDay, dto.StartTime, dto.EndTime );
             return Ok();
         }
 
+        [Obsolete( "Выпилится в MVP2" )]
         [HttpGet( "days-of-week" )]
         public List<WeekDayDto> GetDaysOfWeek()
         {

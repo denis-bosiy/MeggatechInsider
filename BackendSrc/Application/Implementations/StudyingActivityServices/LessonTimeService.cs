@@ -13,6 +13,11 @@ namespace Application.Implementations.StudyingActivityServices
             _lessonTimeRepository = lessonTimeRepository;
         }
 
+        public LessonTime GetById( int id )
+        {
+            return _lessonTimeRepository.GetById( id );
+        }
+
         public List<LessonTime> GetLessonTimesByYear( int year )
         {
             return _lessonTimeRepository.GetByYear( year );

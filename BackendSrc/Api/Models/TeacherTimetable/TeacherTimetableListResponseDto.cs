@@ -6,6 +6,6 @@ namespace Api.Models.TeacherTimetable
     public class TeacherTimetableListResponseDto
     {
         [JsonPropertyName( "teachers" )]
-        public List<TeacherTimetableDto> Teachers { get; set; }
+        public List<TeacherTimetableDto> TeachersTimetables { get; set; }
     }
 }

@@ -12,6 +12,10 @@ export const shortenWorkday = (workday: Workday): string => {
       return "чт";
     case Workday.Friday:
       return "пт";
+    case Workday.Saturday:
+      return "сб";
+    case Workday.Sunday:
+      return "вс";
     default:
       return "";
   }

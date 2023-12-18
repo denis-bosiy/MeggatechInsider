@@ -23,7 +23,9 @@ public class TeacherResponseDto
         bool egeAffectsOnSalary,
         DateOnly employmentDate,
         int experienceInYears,
-        int experienceInYearsOnEmploymentDate )
+        int experienceInYearsOnEmploymentDate,
+        DateOnly birthDay,
+        int age )
     {
         Id = id;
         TeacherName = teacherName;
@@ -38,6 +40,8 @@ public class TeacherResponseDto
         EmploymentDate = employmentDate;
         ExperienceInYears = experienceInYears;
         ExperienceInYearsOnEmploymentDate = experienceInYearsOnEmploymentDate;
+        BirthDay = birthDay;
+        Age = age;
     }
 
     [JsonPropertyName( "id" )]
@@ -78,4 +82,10 @@ public class TeacherResponseDto
 
     [JsonPropertyName( "workExperienceAtTheTimeOfTheEmployment" )]
     public int ExperienceInYearsOnEmploymentDate { get; set; }
+
+    [JsonPropertyName( "birthDay" )]
+    public DateOnly BirthDay { get; set; }
+
+    [JsonPropertyName( "age" )]
+    public int Age { get; set;}
 }

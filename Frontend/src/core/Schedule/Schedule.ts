@@ -4,11 +4,25 @@ import { ScheduleLesson } from "./ScheduleLesson";
 import { Workday } from "./Workday";
 
 export class Schedule implements ISchedule {
-  public groups: string[] = [];
-  public subgroups: Map<string, string[]> = new Map<string, string[]>();
-  public workdays: Workday[] = [];
-  public lessonTimes: Map<Workday, LessonTime[]> = new Map<Workday, LessonTime[]>;
-  public lessons: ScheduleLesson[] = [];
+  public groups: string[];
+  public subgroups: Map<string, string[]>;
+  public workdays: Workday[];
+  public lessonTimes: Map<Workday, LessonTime[]>;
+  public lessons: ScheduleLesson[];
+
+  constructor(
+    _groups: string[] = [],
+    _subgroups: Map<string, string[]> = new Map<string, string[]>(),
+    _workdays: Workday[] = [],
+    _lessonTimes: Map<Workday, LessonTime[]> = new Map<Workday, LessonTime[]>(),
+    _lessons: ScheduleLesson[] = []
+  ) {
+    this.groups = _groups;
+    this.subgroups = _subgroups;
+    this.workdays = _workdays;
+    this.lessonTimes = _lessonTimes;
+    this.lessons = _lessons;
+  }
 
   public addLesson(scheduleLesson: ScheduleLesson): void {
     this.lessons.push(scheduleLesson);
@@ -39,7 +53,7 @@ export class Schedule implements ISchedule {
   }
 
   public clone(): Schedule {
-    return this;
+    return new Schedule(this.groups, this.subgroups, this.workdays, this.lessonTimes, this.lessons);
   }
 
   public getGroups(): string[] {

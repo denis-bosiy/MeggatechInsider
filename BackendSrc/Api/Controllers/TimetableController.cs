@@ -1,6 +1,13 @@
 using System.Web.Http.Description;
+using Api.Builders.Timetable.TeacherTimetableDtoBuilder;
 using Api.Models.TeacherTimetable;
 using Api.Models.Timetable;
+using Application.Abstractions.EductionalPlan;
+using Application.Abstractions.StudyingActivityServices;
+using Application.Abstractions.TimetableServices;
+using Domain.AssignmentEntities;
+using Domain.TimetableEntities.GuidebookEntities;
+using Domain.TimetableEntities.TeacherEntities;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Api.Controllers;
@@ -9,6 +16,26 @@ namespace Api.Controllers;
 [Route( "api/timetable" )]
 public class TimetableController : ControllerBase
 {
+    private readonly ITeacherTimetableService _teacherTimetableService;
+    private readonly IAssignmentService _assignmentService;
+    private readonly ILessonTimeService _lessonTimeService;
+    private readonly IPairTimeService _pairTimeService;
+    private readonly ITeacherTimetableDtoBuilder _teacherTimetableDtoBuilder;
+
+    public TimetableController(
+        ITeacherTimetableService teacherTimetableService,
+        IAssignmentService assignmentService,
+        ILessonTimeService lessonTimeService,
+        IPairTimeService pairTimeService,
+        ITeacherTimetableDtoBuilder teacherTimetableDtoBuilder )
+    {
+        _teacherTimetableService = teacherTimetableService;
+        _assignmentService = assignmentService;
+        _lessonTimeService = lessonTimeService;
+        _pairTimeService = pairTimeService;
+        _teacherTimetableDtoBuilder = teacherTimetableDtoBuilder;
+    }
+
     [HttpGet]
     [ResponseType( typeof( TimetableResponseDto ) )]
     public IActionResult SearchTimetable( [FromQuery] TimetableRequestDto timetableRequestDto )
@@ -399,96 +426,91 @@ public class TimetableController : ControllerBase
     }
 
     [HttpGet( "teachers" )]
-    [ResponseType( typeof( TeacherTimetableListResponseDto ) )]
+    [ProducesResponseType( typeof( TeacherTimetableListResponseDto ), StatusCodes.Status200OK )]
     public IActionResult GetTeachers( [FromQuery] TeacherTimetableListRequestDto teacherTimetableRequest )
     {
-        // mock
-        // Вызываем сервис для получения преподавателей
+        List<Assignment> assignments = _assignmentService.GetAssignmentsByYear( teacherTimetableRequest.Year );
 
-        return Ok( new TeacherTimetableListResponseDto()
+        DateOnly weekStartDate =
+            _teacherTimetableService.GetWeekStartDate( teacherTimetableRequest.Year, teacherTimetableRequest.Week );
+
+        List<TeacherAvailableHours> teachersAvailableHours =
+            _teacherTimetableService.GetAvailableHoursByWeekStartDate( weekStartDate );
+
+        List<TeacherTimetableDto> teacherTimetableDto = assignments.Select( assignment =>
         {
-            Teachers = new List<TeacherTimetableDto>
-            {
-                new TeacherTimetableDto()
-                {
-                    Id = 1,
-                    SubjectName = "Физика",
-                    SubjectId = 1,
-                    TeacherName = "Prozorov Maxim Andreevich",
-                    TeacherId = 1,
-                    AvailableHours = new List<AvailableHoursDto>()
-                    {
-                        new AvailableHoursDto()
-                        {
-                            Id = 1,
-                            WeekDay = DayOfWeek.Sunday,
-                            StartTime = new TimeOnly(09, 00),
-                            EndTime = new TimeOnly(09, 45)
-                        },
-                        new AvailableHoursDto()
-                        {
-                            Id = 2,
-                            WeekDay = DayOfWeek.Sunday,
-                            StartTime = new TimeOnly(10, 00),
-                            EndTime = new TimeOnly(10, 45)
-                        },
-                        new AvailableHoursDto()
-                        {
-                            Id = 3,
-                            WeekDay = DayOfWeek.Sunday,
-                            StartTime = new TimeOnly(11, 00),
-                            EndTime = new TimeOnly(11, 45)
-                        }
-                    },
-                    DistributedHoursToPlan = 10,
-                    HoursToPlan = 11,
-                    CreditHours = 12,
-                    WorkedOverPlan = 13
-                }
-            }
-        } );
+            List<TeacherAvailableHours> assignmentTeacherAvailableHours = teachersAvailableHours
+                .Where( t => t.TeacherId == assignment.TeacherId )
+                .Where( t => t.WeekStartDate == weekStartDate )
+                .ToList();
+
+            _teacherTimetableDtoBuilder.SetAssignment( assignment );
+            _teacherTimetableDtoBuilder.SetAvailableHoursByWeekDay( assignmentTeacherAvailableHours );
+
+            return _teacherTimetableDtoBuilder.GetResult();
+        } ).ToList();
+
+        TeacherTimetableListResponseDto responseDto = new TeacherTimetableListResponseDto()
+        {
+            TeachersTimetables = teacherTimetableDto
+        };
+
+        return Ok( responseDto );
     }
 
-    [HttpPatch( "set-hours" )]
+    [HttpPatch( "set-available-hours" )]
+    [ProducesResponseType( StatusCodes.Status200OK )]
+    [ProducesResponseType( StatusCodes.Status400BadRequest )]
     public IActionResult SetAvailableHours( [FromBody] TeacherTimetableSaveRequestDto teacherTimetableRequest )
     {
-        // mock
-        // Вызываем сервис для сохранения изменений
-        return Ok();
-    }
-
-    [HttpGet( "available-hours" )]
-    [ResponseType( typeof( AvailableHoursResponseListDto ) )]
-    public IActionResult GetAvailableHours()
-    {
-        // mock
-        // Вызываем сервис для получения времени
-        return Ok( new AvailableHoursResponseListDto()
+        if ( !_teacherTimetableService.IsValidYear( teacherTimetableRequest.Year ) )
         {
-            AvailableHours = new List<AvailableHoursDto>()
+            return BadRequest( "Не найдено такого года" );
+        }
+
+        if ( !_teacherTimetableService.IsValidWeek( teacherTimetableRequest.Week ) )
+        {
+            return BadRequest( "Не найдено такой недели" );
+        }
+
+        DateOnly weekStartDate =
+            _teacherTimetableService.GetWeekStartDate( teacherTimetableRequest.Year, teacherTimetableRequest.Week );
+
+        TeacherAvailableHours? teacherAvailableHours =
+            _teacherTimetableService.GetAvailableHoursByWeekStartDate( weekStartDate )
+                .FirstOrDefault( t => t.TeacherId == teacherTimetableRequest.TeacherId );
+        if ( teacherAvailableHours is null )
+        {
+            foreach ( AvailableHoursByWeekDayDto availableHoursByWeekDay in
+                     teacherTimetableRequest.AvailableHoursByWeekDay )
             {
-                new AvailableHoursDto()
-                {
-                    Id = 1,
-                    WeekDay = DayOfWeek.Sunday,
-                    StartTime = new TimeOnly(09, 00),
-                    EndTime = new TimeOnly(09, 45)
-                },
-                new AvailableHoursDto()
-                {
-                    Id = 2,
-                    WeekDay = DayOfWeek.Sunday,
-                    StartTime = new TimeOnly(10, 00),
-                    EndTime = new TimeOnly(10, 45)
-                },
-                new AvailableHoursDto()
-                {
-                    Id = 3,
-                    WeekDay = DayOfWeek.Sunday,
-                    StartTime = new TimeOnly(11, 00),
-                    EndTime = new TimeOnly(11, 45)
-                }
-            },
-        } ); 
+                List<LessonTime> lessonTimes =
+                    availableHoursByWeekDay.AvailableLessonTimesIds.Select( t => _lessonTimeService.GetById( t ) )
+                        .ToList();
+                List<PairTime> pairTimes =
+                    availableHoursByWeekDay.AvailablePairTimesIds.Select( t => _pairTimeService.GetById( t ) ).ToList();
+
+                _teacherTimetableService.CreateTeacherAvailableHours( teacherTimetableRequest.TeacherId,
+                    availableHoursByWeekDay.WeekDay, pairTimes, lessonTimes, weekStartDate );
+            }
+        }
+        else
+        {
+            foreach ( AvailableHoursByWeekDayDto availableHoursByWeekDay in
+                     teacherTimetableRequest.AvailableHoursByWeekDay )
+            {
+                List<LessonTime> lessonTimes =
+                    availableHoursByWeekDay.AvailableLessonTimesIds.Select( t => _lessonTimeService.GetById( t ) )
+                        .ToList();
+                List<PairTime> pairTimes =
+                    availableHoursByWeekDay.AvailablePairTimesIds.Select( t => _pairTimeService.GetById( t ) ).ToList();
+
+                _teacherTimetableService.UpdateTeacherAvailableHours( teacherAvailableHours.Id,
+                    teacherTimetableRequest.TeacherId, availableHoursByWeekDay.WeekDay, pairTimes, lessonTimes,
+                    weekStartDate );
+            }
+        }
+
+        return Ok();
     }
 }

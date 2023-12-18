@@ -11,7 +11,7 @@ public class AssignmentConfiguration : IEntityTypeConfiguration<Assignment>
         builder.ToTable( "Assignment" ).HasKey( x => x.Id );
 
         builder.Property( x => x.GroupCount ).IsRequired();
-        builder.Property( x => x.Year).IsRequired();
+        builder.Property( x => x.Year ).IsRequired();
 
         builder.HasOne( x => x.Teacher )
             .WithMany()

@@ -16,6 +16,7 @@ namespace DatabaseProvider.Repositories
             services.AddSubjectRepositories();
             services.AddTeacherRepositories();
             services.AddTimetableRepositories();
+            services.AddAssignmentRepositories();
 
             return services;
         }

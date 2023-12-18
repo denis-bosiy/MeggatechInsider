@@ -69,4 +69,8 @@
     padding: 29px 20px;
     font-weight: 600;
   }
+
+  &.-fixed {
+    min-width: 192px;
+  }
 }

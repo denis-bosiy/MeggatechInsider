@@ -6,7 +6,7 @@ namespace Domain.CourseEntities.CourceTeachers
     public class CourseTeacher : Entity
     {
         public string CourseTeacherName { get; set; }
-        public int ContractTypeId => ContractType.Id;
+        public int ContractTypeId { get; set; }
         public ContractType ContractType { get; set; }
         public DateOnly EmploymentDate { get; set; }
         public int ExperienceInYearsOnEmploymentDate { get; set; }
