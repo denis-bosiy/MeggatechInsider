@@ -1,3 +1,4 @@
+using Domain.ReportEntities.SubdeanEntities;
 using Domain.SubjectEntities;
 
 namespace Application.Models.ActualAcademicHours;
@@ -35,4 +36,5 @@ public class ActualAcademicHoursForSubjectsByTeacher()
 {
     public string TeacherName { get; set; }
     public List<ActualAcademicHoursForClassesBySubject> AcademicHoursForTeachers { get; set; }
+    public MonthComment MonthComment { get; set; }
 }
