@@ -159,7 +159,13 @@ export const ScheduleComponent = (props: IScheduleProps) => {
                   if (isPartOfTheLesson) {
                     return <></>;
                   }
-                  return <td className="cell schedule__cell" key={cellCoordinate}></td>;
+                  return (
+                    <td className="cell -controllable schedule__cell" key={cellCoordinate}>
+                      <div className="cell__controls">
+                        <IconButton icon={<PenIcon />} small={true} onClick={() => alert("Редактирование урока")} />
+                      </div>
+                    </td>
+                  );
                 });
             })}
           </tr>
