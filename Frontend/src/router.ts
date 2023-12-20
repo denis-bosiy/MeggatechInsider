@@ -21,6 +21,9 @@ export enum AppRouter {
   FinalReport = "final-report",
   TarifficationReport = "tariffication-report",
   Basic = "basic",
+  Curriculum = "curriculum",
+  Monitoring = "monitoring",
+  Report = "report",
   BudgetStatistics = "budget-statistics",
   Statistics = "statistics",
   Categories = "categories",
@@ -128,11 +131,11 @@ export const Menu: MenuItem[] = [
     ]
   },
   {
-    url: "#",
+    url: AppRouter.Curriculum,
     label: "Контроль учебного плана за месяц",
     navigation: [
-      { label: "Табель выполнения за месяц", url: "#" },
-      { label: "Контроль выполнения за месяц", url: "#" }
+      { label: "Табель выполнения за месяц", url: AppRouter.Report },
+      { label: "Контроль выполнения за месяц", url: AppRouter.Monitoring }
     ]
   },
   {
