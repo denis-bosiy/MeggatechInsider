@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useContext, useState, useLayoutEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import {
   AssigningSyllabusPageData,
@@ -35,7 +35,7 @@ const DiscrepanciesSyllabus = () => {
   );
   const discrepancies = data.discrepancies;
 
-  useEffect(() => {
+  useLayoutEffect(() => {
     const params: Map<string, string> = new Map<string, string>();
     if (currentYear) {
       params.set("year", currentYear.year.toString());
@@ -164,7 +164,7 @@ const AssigningSyllabusPage = () => {
       <div className="toolbar">
         <div className="toolbar__buttons-wrapper">
           {isAssigningsEditing.value ? (
-            <>
+            <div className="toolbar__buttons-box">
               <ActionButton
                 className="toolbar__button"
                 label="Сохранить"
@@ -177,7 +177,7 @@ const AssigningSyllabusPage = () => {
                 type={ActionButtonType.Negative}
                 onClick={handleResetAssignings}
               />
-            </>
+            </div>
           ) : (
             <ActionButton
               className="toolbar__button"

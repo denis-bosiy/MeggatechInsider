@@ -128,7 +128,7 @@ export const ScheduleComponent = (props: IScheduleProps) => {
                     return (
                       <td
                         className={classNames(
-                          "cell schedule__cell",
+                          "cell -controllable schedule__cell",
                           lesson.lessonType === LessonType.Important ? "-warning" : "",
                           cellCoordinate
                         )}
@@ -145,7 +145,7 @@ export const ScheduleComponent = (props: IScheduleProps) => {
                         ) : (
                           <></>
                         )}
-                        <div className="schedule__cell-controls">
+                        <div className="cell__controls">
                           <IconButton
                             icon={<GarbageIcon />}
                             small={true}
@@ -168,7 +168,7 @@ export const ScheduleComponent = (props: IScheduleProps) => {
   });
 
   return (
-    <table className="table schedule">
+    <table className="table -schedule schedule">
       <thead className="header">
         <tr className="row">
           <th className="cell" rowSpan={2}></th>

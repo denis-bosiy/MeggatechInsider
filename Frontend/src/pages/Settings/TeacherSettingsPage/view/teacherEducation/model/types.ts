@@ -1,7 +1,7 @@
 type TeacherEducationItem = {
   id: string,
-  education: string,
-  coefficient: number,
+  name: string,
+  coefficient: string,
 }
 
 export {

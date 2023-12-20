@@ -6,18 +6,19 @@ import { Footer } from "../layouts/Footer/Footer";
 import { Page } from "../layouts/Page/Page";
 import { Link, LinkType } from "../components/Link/Link";
 import PageNavigation from "../components/PageNavigation/PageNavigation";
-import { Menu } from "../router";
+import { Menu, NavigationItem } from "../router";
 
 import "./Root.scss";
 
 const ProtectedRoot = () => {
   const { pathname } = useLocation();
-  const locations = pathname.split("/").filter(String);
+  const locations: string[] = pathname.split("/").filter(String);
+  const lastLocation: string = locations[locations.length - 1];
   const navigate = useNavigate();
 
   const route = Menu.find((element) => locations.includes(element.url));
   const navigation = (route && route.navigation) || [];
-  const page = navigation.find((nav) => locations.includes(nav.url));
+  const page: NavigationItem | undefined = navigation.find((nav) => lastLocation === nav.url || nav.url === "");
 
   const tabs = (page && page.tabs && Object.keys(page.tabs)) || [];
 

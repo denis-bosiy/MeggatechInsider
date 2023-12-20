@@ -1,26 +1,27 @@
 import { Action, TEACHER_EDUCATION_ACTIONS } from "./actions";
 import { TeacherEducationItem } from "./types";
+import { guidGenerator } from "../../../../../../utils/guidGenerator";
 
 const defaultData: TeacherEducationItem[] = [
   {
-    id: "Среднее образование",
-    education: "Среднее образование",
-    coefficient: 0.3
+    id: guidGenerator(),
+    name: "Среднее образование",
+    coefficient: "0.3"
   },
   {
-    id: "Высшее образование",
-    education: "Высшее образование",
-    coefficient: 0.3
+    id: guidGenerator(),
+    name: "Высшее образование",
+    coefficient: "0.3"
   },
   {
-    id: "Степень к.н.",
-    education: "Степень к.н.",
-    coefficient: 0.3
+    id: guidGenerator(),
+    name: "Степень к.н.",
+    coefficient: "0.3"
   },
   {
-    id: "Степень д.н.",
-    education: "Степень д.н.",
-    coefficient: 0.3
+    id: guidGenerator(),
+    name: "Степень д.н.",
+    coefficient: "0.3"
   }
 ];
 

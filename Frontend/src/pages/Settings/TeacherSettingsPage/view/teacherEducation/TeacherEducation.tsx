@@ -33,7 +33,7 @@ const TeacherEducation = () => {
     ]);
   };
   const handleAdding = (): void => {
-    tableManager.invokeFunction("add", TableType.Managable, [{ id: guidGenerator(), name: "", coefficient: 0 }]);
+    tableManager.invokeFunction("add", TableType.Managable, [{ id: guidGenerator(), name: "", coefficient: "0" }]);
   };
   const handleApplying = (): void => {
     tableManager.invokeFunction("applyAdding", TableType.Managable, [

@@ -28,6 +28,7 @@ import { offBudgetCategoriesPageReducer } from "../pages/FinancialReports/OffBud
 import { subjectsCoursesSyllabusPageReducer } from "../pages/CourseSyllabus/SubjectsCoursesSyllabusPage/model/reducer";
 import { teachersCoursesSyllabusPageReducer } from "../pages/CourseSyllabus/TeachersCoursesSyllabusPage/model/reducer";
 import { assigningCoursesSyllabusPageReducer } from "../pages/CourseSyllabus/AssigningCoursesSyllabusPage/model/reducer";
+import { yearImplementationMonitoringPageReducer } from "../pages/YearImplementationMonitoringPage/model/reducer";
 
 export default combineReducers({
   testPageStore: testPageReducer,
@@ -58,5 +59,6 @@ export default combineReducers({
   coursesSyllabusPageStore: coursesSyllabusPageReducer,
   offBudgetCategoriesPageStore: offBudgetCategoriesPageReducer,
   finalReportPageStore: finalReportPageReducer,
-  tarifficationReportPageStore: tarifficationReportPageReducer
+  tarifficationReportPageStore: tarifficationReportPageReducer,
+  yearImplementationMonitoringPageStore: yearImplementationMonitoringPageReducer
 });

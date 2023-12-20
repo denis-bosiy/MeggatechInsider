@@ -2,41 +2,49 @@ import React, { useState } from "react";
 import Button, { ButtonType } from "../Button/Button";
 import "./CommentsModalView.scss";
 import Input from "../Input/Input";
+import { CommentData } from "../../core/Comment/Comment";
+import { guidGenerator } from "../../utils/guidGenerator";
 import Comment from "../Comment/Comment";
+import { HttpService } from "../../api/http.service";
 
 interface ICommentsModalViewProps {
-  comments: {
-    text: string;
-    deleteAction: () => void;
-  }[];
-  addAction: () => void;
+  getUrl: string;
+  putUrl: string;
+  deleteUrl: string;
 }
 
 const CommentsModalView = (props: ICommentsModalViewProps) => {
-  const [commentValue, setCommentValue] = useState<string>("");
+  // const httpService: HttpService = new HttpService();
+  const [newCommentValue, setNewCommentValue] = useState<string>("");
+  const [comments, setComments] = useState<CommentData[]>([
+    {
+      id: guidGenerator(),
+      text: "Прогульщик. Вместо пары решил пойти в бар со своими школьными друзьями. Не видать ему своей зарплаты как и счастья"
+    }
+  ]);
 
   const onAddButtonClick = () => {
-    props.addAction();
-    setCommentValue("");
+    setComments([...comments, { id: guidGenerator(), text: newCommentValue }]);
+    setNewCommentValue("");
+    // httpService.putByArbitraryUrl(props.putUrl, {text: newCommentValue});
   };
-  const commentsCards: React.JSX.Element[] = props.comments.map(
-    (
-      comment: {
-        text: string;
-        deleteAction: () => void;
-      },
-      index: number
-    ) => (
-      <div key={index}>
-        <Comment text={comment.text} deleteAction={comment.deleteAction} />
-      </div>
-    )
-  );
+  const deleteAction = (commentId: string): void => {
+    setComments(comments.filter((comment: CommentData) => comment.id !== commentId));
+
+    // const params: Map<string, string> = new Map<string, string>();
+    // params.set("id", commentId);
+    // httpService.deleteByArbitraryUrl(props.deleteUrl, params);
+  };
+  const commentsCards: React.JSX.Element[] = comments.map((comment: CommentData, index: number) => (
+    <div key={index}>
+      <Comment text={comment.text} deleteAction={() => deleteAction(comment.id)} />
+    </div>
+  ));
 
   return (
     <div className="x-cmv">
       <div className="x-cmv__comments-list">
-        <Input value={commentValue} placeholder="Введите комментарий" onValueChange={setCommentValue} />
+        <Input value={newCommentValue} placeholder="Введите комментарий" onValueChange={setNewCommentValue} />
         {commentsCards}
       </div>
       <div className="x-cmv__save-button">
