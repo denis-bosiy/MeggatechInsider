@@ -1,5 +1,5 @@
 type YearImplementationMonitoringPageData = {
-  dates: string[];
+  months: string[];
   teachers: Teacher[];
 };
 
@@ -17,18 +17,28 @@ type Subject = {
   classes: Group[];
 };
 
+type AdditionalLoad = {
+  id: string;
+  name: string;
+  doneHours: number[];
+  isEditing: boolean;
+};
+
 type Teacher = {
+  id: string;
   name: string;
   type: string;
   subjects: Subject[];
   hoursPerWeek: number;
   remoteHours: number;
   combinedHours: number;
+  additionalLoads: AdditionalLoad[];
 };
 
 export {
   type YearImplementationMonitoringPageData,
   type Group,
   type Subject,
+  type AdditionalLoad,
   type Teacher
 };

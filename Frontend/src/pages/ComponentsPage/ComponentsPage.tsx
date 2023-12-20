@@ -43,14 +43,6 @@ const ComponentsPage = () => {
     console.log(searchInputValue);
   };
 
-  const modalComments: { text: string; deleteAction: () => void }[] = [
-    {
-      text:
-        "Прогульщик. Вместо пары решил пойти в бар со своими школьными друзьями. Не видать ему своей зарплаты как и счастья",
-      deleteAction: () => alert("Комментарий удалён")
-    }
-  ];
-
   return (
     <main className="components-page">
       <h1>Страница компонентов</h1>
@@ -627,7 +619,7 @@ const ComponentsPage = () => {
           onClick={() =>
             openModal(
               "Комментарии",
-              <CommentsModalView comments={modalComments} addAction={() => alert("Комментарий добавлен")} />
+              <CommentsModalView getUrl="" putUrl="" deleteUrl="" />
             )
           }
         />

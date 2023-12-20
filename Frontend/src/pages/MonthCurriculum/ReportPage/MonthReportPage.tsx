@@ -10,34 +10,41 @@ import Button, { ButtonSize, ButtonType } from "../../../components/Button/Butto
 import { TableType } from "../../../core/Table/TableType";
 import { SortingOrder } from "../../../core/Table/SortingOrder";
 import Input, { InputType } from "../../../components/Input/Input";
-import ActionButton, { ActionButtonSize, ActionButtonType } from "../../../components/ActionButton/ActionButton";
+import ActionButton, { ActionButtonSize } from "../../../components/ActionButton/ActionButton";
 import CommentsModalView from "../../../components/CommentsModalView/CommentsModalView";
 import ModalSettingsContext from "../../../utils/ModalSettingsContext";
+import { useSearchParams } from "react-router-dom";
 
 const MONTH_SELECT: ISelectOption[] = [
-  { content: "Январь", id: "1" },
-  { content: "Февраль", id: "2" },
-  { content: "Март", id: "3" },
-  { content: "Апрель", id: "4" },
-  { content: "Май", id: "5" },
-  { content: "Июнь", id: "6" },
-  { content: "Июль", id: "7" },
-  { content: "Август", id: "8" },
-  { content: "Сентябрь", id: "9" },
-  { content: "Октябрь", id: "10" },
-  { content: "Ноябрь", id: "11" },
-  { content: "Декабрь", id: "12" }
+  { content: "Январь", id: "0" },
+  { content: "Февраль", id: "1" },
+  { content: "Март", id: "2" },
+  { content: "Апрель", id: "3" },
+  { content: "Май", id: "4" },
+  { content: "Июнь", id: "5" },
+  { content: "Июль", id: "6" },
+  { content: "Август", id: "7" },
+  { content: "Сентябрь", id: "8" },
+  { content: "Октябрь", id: "9" },
+  { content: "Ноябрь", id: "10" },
+  { content: "Декабрь", id: "11" }
 ];
 
 const CONTRACT_TYPE_SELECT: ISelectOption[] = [
-  { content: "ДС", id: "1" },
-  { content: "ГПХ", id: "2" }
+  { content: "ДС", id: "0" },
+  { content: "ГПХ", id: "1" }
 ];
 
 const MonthReportPage = () => {
   const { openModal } = useContext(ModalSettingsContext);
 
-  const [selectedMonth, setSelectedMonth] = useState<ISelectOption>(MONTH_SELECT[0]);
+  const [searchParams, setSearchParams] = useSearchParams();
+  const monthFromSearchParams: ISelectOption | undefined = searchParams.get("month")
+    ? MONTH_SELECT.find((monthValue: ISelectOption) => monthValue.id === searchParams.get("month"))
+    : undefined;
+  const [selectedMonth, setSelectedMonth] = useState<ISelectOption>(
+    monthFromSearchParams ? monthFromSearchParams : MONTH_SELECT[0]
+  );
   const [selectedContract, setSelectedContract] = useState<ISelectOption>(CONTRACT_TYPE_SELECT[0]);
   const [searchQuery, setSearchQuery] = useState("");
 
@@ -48,19 +55,11 @@ const MonthReportPage = () => {
 
   const reportTableBuilder: CTableBuilder = new CTableBuilder(reportTableData, setReportTableData);
   reportTableBuilder.addSearchFeature();
-  reportTableBuilder.addCommentFeature();
 
   const monitoringTable: CTable = reportTableBuilder.getTable();
   const monitoringTableManager: CTableManager = new CTableManager(monitoringTable);
 
   const monthDays = Array.from({ length: dayCount }, (_, i) => i + startingDayNumber);
-
-  const modalComments: { text: string; deleteAction: () => void }[] = [
-    {
-      text: "Прогульщик. Вместо пары решил пойти в бар со своими школьными друзьями. Не видать ему своей зарплаты как и счастья",
-      deleteAction: () => alert("Комментарий удалён")
-    }
-  ];
 
   const handleSelectMonth = (id: string) => {
     const month = MONTH_SELECT.find((month) => month.id === id);
@@ -80,14 +79,13 @@ const MonthReportPage = () => {
     monitoringTableManager.invokeFunction("search", TableType.Searchable, [searchQuery, teachers]);
   };
 
-  const handleComment = (teacher: ReportTeacher) => {
+  const handleComment = () => {
     openModal(
       "Комментарии",
       <CommentsModalView
-        comments={modalComments}
-        addAction={() => {
-          monitoringTableManager.invokeFunction("addComment", TableType.Commentable, [teacher.teacher]);
-        }}
+        getUrl=""
+        putUrl=""
+        deleteUrl=""
       />
     );
   };
@@ -97,11 +95,15 @@ const MonthReportPage = () => {
   };
 
   useEffect(() => {
-    const handleMonitoringDataUpdate = async () => {
-      // TODO: Make api request
-    };
+    setSearchParams({ month: selectedMonth.id });
+  }, [selectedMonth.id]);
+
+  useEffect(() => {
+    // const handleMonitoringDataUpdate = async () => {
+    //   // TODO: Make api request
+    // };
     // or use react-query lib to get rid of making this
-  }, [selectedContract, selectedMonth]);
+  }, [selectedContract.id, selectedMonth.id]);
 
   return (
     <>
@@ -160,9 +162,9 @@ const MonthReportPage = () => {
                         <td className="cell" rowSpan={classInfo.groups.length * teacher.subjects.length}>
                           {teacher.teacher}
                           <ActionButton
-                            label="Комментарии"
+                            label="Комментарий"
                             size={ActionButtonSize.Small}
-                            onClick={() => handleComment(teacher)}
+                            onClick={() => handleComment()}
                           />
                         </td>
                       )}

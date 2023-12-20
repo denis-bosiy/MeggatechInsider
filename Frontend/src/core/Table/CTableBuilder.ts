@@ -1,6 +1,5 @@
 import { TableType } from "./TableType";
 import { CTable } from "./CTable";
-import { CCommentableTable } from "./CCommentableTable";
 import { CEditableTable } from "./CEditableTable";
 import { CExportableTable } from "./CExportableTable";
 import { CManagableTable } from "./CManagableTable";
@@ -11,10 +10,6 @@ export class CTableBuilder {
 
   constructor(data: any[], setData: (data: any[]) => void) {
     this._table = new CTable(undefined, data, setData);
-  }
-
-  public addCommentFeature(): void {
-    this._table = new CCommentableTable(this._table, this._table.data, this._table.setData, TableType.Commentable);
   }
 
   public addEditFeature(isEditing: { value: boolean }, setIsEditing: ({ value }: { value: boolean }) => void): void {

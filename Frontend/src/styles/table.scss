@@ -13,9 +13,18 @@
 }
 
 .cell {
+  $module: ".cell";
+
   padding: 6px;
   border: 1px solid $table-color;
   text-align: left;
+
+  &__buttons {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-top: 20px;
+  }
 
   &.-success {
     color: $success-color;
@@ -30,6 +39,10 @@
   &.-error {
     color: $error-color;
     background-color: $error-background-color;
+  }
+
+  &.-link {
+    cursor: pointer;
   }
 
   &.-filter {
@@ -47,6 +60,12 @@
       border-bottom: 0 none;
       transform: translateY(-50%);
     }
+
+    &.-vertical {
+      &::after {
+        transform: rotate(180deg);
+      }
+    }
   }
 
   &.-vertical {
@@ -57,26 +76,31 @@
       text-align: right;
     }
   }
-}
 
-.table {
-  width: 100%;
-  font-size: 14px;
-  line-height: 18px;
-  color: $alternative-text-color;
-  border-spacing: 0;
-  border-collapse: separate;
+  &.-controllable {
+    $controllable-cell-color: #e8ebee;
 
-  &.-fill {
-    width: 100%;
+    position: relative;
+    background-color: $controllable-cell-color;
+
+    &:hover {
+      #{$module}__controls {
+        display: block;
+      }
+    }
+
+    #{$module}__controls {
+      position: absolute;
+      top: 0;
+      right: 0;
+      display: none;
+    }
   }
 
-  &.-list {
-    .cell {
-      border-right: 0;
-      border-left: 0;
-      border-top: 0;
-    }
+  &.-with-button {
+    display: flex;
+    flex-direction: row;
+    min-width: 300px;
   }
 }
 
@@ -100,15 +124,38 @@
     cursor: pointer;
   }
 
-  &:hover {
-    .cell {
-      background-color: rgba($table-color, 0.6);
-    }
-  }
-
   &:last-child {
     .cell {
       border-bottom: 0;
+    }
+  }
+}
+
+.table {
+  width: 100%;
+  font-size: 14px;
+  line-height: 18px;
+  color: $alternative-text-color;
+  border-spacing: 0;
+  border-collapse: separate;
+
+  &.-fill {
+    width: 100%;
+  }
+
+  &.-list {
+    .cell {
+      border-right: 0;
+      border-left: 0;
+      border-top: 0;
+    }
+  }
+
+  &.-schedule {
+    .row:hover {
+      .cell {
+        background-color: rgba($table-color, 0.6);
+      }
     }
   }
 }
