@@ -1,5 +1,5 @@
 import React from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import "./MenuPage.scss";
 import Button, { ButtonSize } from "../../components/Button/Button";
 import { Menu } from "../../router";
