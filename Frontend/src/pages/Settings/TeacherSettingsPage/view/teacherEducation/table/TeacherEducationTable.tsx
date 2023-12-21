@@ -45,7 +45,7 @@ const TeacherEducationTable = (props: ITeacherEducationTableProps) => {
               <Input
                 size={InputSize.Micro}
                 value={props.items[props.items.length - 1].name}
-                placeholder=""
+                placeholder="Образование преподавателя"
                 onValueChange={(newEducationValue: string) => {
                   props.setItems(
                     props.items.map((value: TeacherEducationItem, index: number) =>
@@ -69,7 +69,7 @@ const TeacherEducationTable = (props: ITeacherEducationTableProps) => {
                     ? props.items[props.items.length - 1].coefficient.toString()
                     : ""
                 }
-                placeholder=""
+                placeholder="Коэффициент"
                 onValueChange={(newCoefficientValue: string) => {
                   props.setItems(
                     props.items.map((value: TeacherEducationItem, index: number) =>

@@ -243,7 +243,12 @@ const YearImplementationMonitoringPage = () => {
             <th className="cell">часов в неделю</th>
             {months.map((month: string) => {
               return (
-                <th className="cell -link" key={month} onClick={() => handleMonthClicking(month.split("/")[0])}>
+                <th
+                  className="cell -link"
+                  key={month}
+                  onClick={() => handleMonthClicking(month.split("/")[0])}
+                  title="Перейти в табель выполнения за месяц"
+                >
                   {month}
                 </th>
               );
@@ -355,7 +360,7 @@ const YearImplementationMonitoringPage = () => {
                         onClick={() => handleAdditionalLoadAdding(teacher.id)}
                       ></ActionButton>
                       <ActionButton
-                        label="Комментарий"
+                        label="Добавить комментарий"
                         size={ActionButtonSize.Small}
                         onClick={() => handleAddingCommenting()}
                       ></ActionButton>

@@ -42,7 +42,7 @@ const TypesContractsTable = (props: ITypesContractsTableProps) => {
               <Input
                 size={InputSize.Micro}
                 value={props.items[props.items.length - 1].name}
-                placeholder=""
+                placeholder="Тип договора"
                 onValueChange={(newNameValue: string) => {
                   props.setItems(
                     props.items.map((value: TypesContractsItem, index: number) =>

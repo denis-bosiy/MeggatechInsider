@@ -18,12 +18,33 @@
   padding: 6px;
   border: 1px solid $table-color;
   text-align: left;
+  font-feature-settings: 'tnum';
 
   &__buttons {
     display: flex;
     flex-direction: column;
     gap: 10px;
     margin-top: 20px;
+  }
+
+  &.-controllable {
+    $controllable-cell-color: #e8ebee;
+
+    position: relative;
+    background-color: $controllable-cell-color;
+
+    &:hover {
+      #{$module}__controls {
+        display: block;
+      }
+    }
+
+    #{$module}__controls {
+      position: absolute;
+      top: 0;
+      right: 0;
+      display: none;
+    }
   }
 
   &.-success {
@@ -43,6 +64,7 @@
 
   &.-link {
     cursor: pointer;
+    text-decoration: underline;
   }
 
   &.-filter {
@@ -74,26 +96,6 @@
 
     &.-from-top {
       text-align: right;
-    }
-  }
-
-  &.-controllable {
-    $controllable-cell-color: #e8ebee;
-
-    position: relative;
-    background-color: $controllable-cell-color;
-
-    &:hover {
-      #{$module}__controls {
-        display: block;
-      }
-    }
-
-    #{$module}__controls {
-      position: absolute;
-      top: 0;
-      right: 0;
-      display: none;
     }
   }
 
