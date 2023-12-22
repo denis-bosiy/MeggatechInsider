@@ -262,6 +262,11 @@ const YearImplementationMonitoringPage = () => {
               0
             );
             const teacherRowHeightInPoints: number = teacherRowSubjectsHeightInPoints + teacher.additionalLoads.length;
+            const teacherAdditionalLoadsSum: number = teacher.additionalLoads.reduce(
+              (acc: number, additionalLoad: AdditionalLoad) =>
+                acc + additionalLoad.doneHours.reduce((hoursAcc: number, hours: number) => hoursAcc + hours, 0),
+              0
+            );
             const hoursPlannedForTeacher: number = teacher.subjects.reduce(
               (hoursPlannedForTeacher: number, subject: Subject) => {
                 return (
@@ -428,7 +433,7 @@ const YearImplementationMonitoringPage = () => {
                   </tr>
                 ))}
 
-                {teacher.additionalLoads.map((additionalLoad: AdditionalLoad) => (
+                {teacher.additionalLoads.map((additionalLoad: AdditionalLoad, index: number) => (
                   <tr className="row" key={additionalLoad.id}>
                     <td
                       className={classNames("cell", additionalLoad.isEditing ? "-with-button" : "-controllable")}
@@ -483,6 +488,12 @@ const YearImplementationMonitoringPage = () => {
                         )}
                       </td>
                     ))}
+                    {index === 0 && (
+                      <React.Fragment>
+                        <td colSpan={3}></td>
+                        <td className="cell" rowSpan={teacher.additionalLoads.length}>{teacherAdditionalLoadsSum}</td>
+                      </React.Fragment>
+                    )}
                   </tr>
                 ))}
               </React.Fragment>
