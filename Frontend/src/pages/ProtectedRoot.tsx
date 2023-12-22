@@ -6,9 +6,10 @@ import { Footer } from "../layouts/Footer/Footer";
 import { Page } from "../layouts/Page/Page";
 import { Link, LinkType } from "../components/Link/Link";
 import PageNavigation from "../components/PageNavigation/PageNavigation";
-import { Menu, NavigationItem } from "../router";
+import { AppRouter, Menu, NavigationItem } from "../router";
 
 import "./Root.scss";
+import { ScheduleNavigation } from "../components/ScheduleNavigation/ScheduleNavigation";
 
 const ProtectedRoot = () => {
   const { pathname } = useLocation();
@@ -44,7 +45,7 @@ const ProtectedRoot = () => {
             <Link key={index} type={LinkType.Light} label={item.label} path={`${route.url}/${item.url}`} />
           ))}
       </Header>
-      {page && (
+      {page && page.url !== AppRouter.LessonsSchedule && (
         <PageNavigation
           onBack
           title={page.label}
@@ -54,6 +55,7 @@ const ProtectedRoot = () => {
           onTabChange={(value) => setTabParams({ tab: value })}
         />
       )}
+      {page && page.url === AppRouter.LessonsSchedule && <ScheduleNavigation />}
       <Page>
         <Outlet />
       </Page>

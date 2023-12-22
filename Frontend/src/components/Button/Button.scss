@@ -70,6 +70,12 @@
     font-weight: 600;
   }
 
+  &.-small {
+    padding: 12.5px 15px;
+    font-size: 12px;
+    line-height: normal;
+  }
+
   &.-fixed {
     min-width: 192px;
   }

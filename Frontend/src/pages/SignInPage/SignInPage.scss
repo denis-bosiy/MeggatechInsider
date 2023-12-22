@@ -11,18 +11,9 @@
 .sign-in {
   max-width: fit-content;
   max-height: fit-content;
-  padding: 18px 25px 25px;
+  padding: 30px 25px 25px;
   border-radius: 16px;
   box-shadow: 0 1px 4px rgba(#000, 25%);
-
-  &__title {
-    margin-bottom: 15px;
-    font-size: $default-text-size;
-    font-weight: 400;
-    line-height: $default-line-height;
-    text-align: center;
-    color: $alternative-text-color;
-  }
 
   &__input {
     margin-bottom: 25px;

@@ -230,7 +230,7 @@ const BasicSettingsPage = () => {
                 <td className="cell">
                   <Input
                     value={salarySettingsTableData[salarySettingsTableData.length - 1].label}
-                    placeholder="Название"
+                    placeholder="Настройка зарплаты"
                     onValueChange={(newLabel: string) => {
                       setSalarySettingTableData(
                         salarySettingsTableData.map((data: TSetting) =>
@@ -246,7 +246,7 @@ const BasicSettingsPage = () => {
                 <td className="cell">
                   <Input
                     value={salarySettingsTableData[salarySettingsTableData.length - 1].value}
-                    placeholder="Название"
+                    placeholder="Коэффициент"
                     onValueChange={(newValue: string) => {
                       setSalarySettingTableData(
                         salarySettingsTableData.map((data: TSetting) =>

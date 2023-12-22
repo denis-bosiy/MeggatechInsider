@@ -44,7 +44,7 @@ const CommentsModalView = (props: ICommentsModalViewProps) => {
   return (
     <div className="x-cmv">
       <div className="x-cmv__comments-list">
-        <Input value={newCommentValue} placeholder="Введите комментарий" onValueChange={setNewCommentValue} />
+        <Input value={newCommentValue} placeholder="Комментарий" onValueChange={setNewCommentValue} />
         {commentsCards}
       </div>
       <div className="x-cmv__save-button">

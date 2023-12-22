@@ -80,14 +80,7 @@ const MonthReportPage = () => {
   };
 
   const handleComment = () => {
-    openModal(
-      "Комментарии",
-      <CommentsModalView
-        getUrl=""
-        putUrl=""
-        deleteUrl=""
-      />
-    );
+    openModal("Комментарии", <CommentsModalView getUrl="" putUrl="" deleteUrl="" />);
   };
 
   const handleSort = (columnName: string): void => {
@@ -161,11 +154,14 @@ const MonthReportPage = () => {
                       {groupIndex === 0 && subjectIndex === 0 && (
                         <td className="cell" rowSpan={classInfo.groups.length * teacher.subjects.length}>
                           {teacher.teacher}
-                          <ActionButton
-                            label="Комментарий"
-                            size={ActionButtonSize.Small}
-                            onClick={() => handleComment()}
-                          />
+
+                          <div className="cell__buttons">
+                            <ActionButton
+                              label="Добавить комментарий"
+                              size={ActionButtonSize.Small}
+                              onClick={() => handleComment()}
+                            />
+                          </div>
                         </td>
                       )}
 
