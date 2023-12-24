@@ -66,7 +66,7 @@ namespace Api.Controllers
         [HttpPut("teacher")]
         [ProducesResponseType( StatusCodes.Status200OK )]
         [ProducesResponseType( StatusCodes.Status404NotFound )]
-        public IActionResult UpdateCourseTeacher(CourseTeacherUpdateRequestDto teacherUpdateRequestDto)
+        public IActionResult UpdateCourseTeacher(CourseTeacherUpdateRequestDto teacherUpdateRequestDto )
         {
             if ( !IsValidYear( teacherUpdateRequestDto.Year ) )
             {
@@ -384,7 +384,7 @@ namespace Api.Controllers
         [HttpPut( "plan" )]
         [ProducesResponseType( StatusCodes.Status200OK )]
         [ProducesResponseType( StatusCodes.Status404NotFound )]
-        public IActionResult UpdateEducationalPlanCourses( [FromBody] UpdateEducationalPlanCoursesRequestDto planCoursesDto)
+        public IActionResult UpdateEducationalPlanCourses( [FromBody] UpdateEducationalPlanCoursesRequestDto planCoursesDto )
         {
             if ( !IsValidYear( planCoursesDto.Year ) )
             {

@@ -205,7 +205,7 @@ namespace Api.Controllers
         [HttpDelete( "teacher-categories" )]
         [ProducesResponseType( StatusCodes.Status200OK )]
         [ProducesResponseType( StatusCodes.Status404NotFound )]
-        public IActionResult DeleteTeacherCategories( [FromBody] DeleteTeacherCategoryRequestDto deleteTeacherCategory)
+        public IActionResult DeleteTeacherCategories( [FromBody] DeleteTeacherCategoryRequestDto deleteTeacherCategory )
         {
             if ( !IsValidYear( deleteTeacherCategory.Year ) )
             {
