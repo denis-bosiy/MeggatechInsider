@@ -2,9 +2,9 @@ using System.ComponentModel.DataAnnotations;
 using System.ComponentModel;
 using System.Text.Json.Serialization;
 
-namespace Api.Models.Settings.TeacherCategories
+namespace Api.Models.Settings.TeacherEducation
 {
-    public class TeacherCategoriesRequestDto
+    public class TeacherEducationsRequestDto
     {
         [Required]
         [DisplayName( "year" )]

@@ -1,8 +1,8 @@
 using System.Text.Json.Serialization;
 
-namespace Api.Models.Settings.TeacherCategories
+namespace Api.Models.Settings.TeacherEducation
 {
-    public class CategoryTeacherDto
+    public class TeacherEducationDto
     {
         [JsonPropertyName( "id" )]
         public int Id { get; set; }

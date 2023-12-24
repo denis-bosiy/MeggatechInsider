@@ -1,5 +1,7 @@
 using Api.Models.EducationPlanCourses.Teacher;
 using Api.Models.Settings.SalarySettings;
+using Api.Models.Settings.TeacherCategories;
+using Api.Models.Settings.TeacherEducation;
 using Api.Models.Settings.TypesContracts;
 using Microsoft.AspNetCore.Mvc;
 
@@ -152,29 +154,37 @@ namespace Api.Controllers
         }
 
         [HttpGet( "teacher-categories" )]
-        [ProducesResponseType<TypesContractsListResponseDto>( StatusCodes.Status200OK )]
+        [ProducesResponseType<TeacherCategoriesResponseDto>( StatusCodes.Status200OK )]
         [ProducesResponseType( StatusCodes.Status404NotFound )]
-        public IActionResult GetTeacherCategories( [FromQuery] TypesContractsRequestDto contractsRequestDto )
+        public IActionResult GetTeacherCategories( [FromQuery] TeacherCategoriesRequestDto teacherCategories )
         {
-            if ( !IsValidYear( contractsRequestDto.Year ) )
+            if ( !IsValidYear( teacherCategories.Year ) )
             {
                 return NotFound( "Не найдено такого года" );
             }
 
-            return Ok( new TypesContractsListResponseDto
+            return Ok( new TeacherCategoriesResponseDto
             {
-                TypesContracts = new List<TypeContractDto>
+                Categories = new List<CategoryTeacherDto>
                 {
-                    new TypeContractDto
+                    new CategoryTeacherDto
                     {
                         Id = 1,
-                        Name = "ГПХ"
+                        Name = "Высшая категория",
+                        Coefficient = 2
                     },
-                    new TypeContractDto
+                    new CategoryTeacherDto
                     {
-                        Id = 1,
-                        Name = "Основной"
+                        Id = 2,
+                        Name = "Первая категория",
+                        Coefficient = 3
                     },
+                    new CategoryTeacherDto
+                    {
+                        Id = 3,
+                        Name = "Вторая категория",
+                        Coefficient = 4
+                    }
                 }
             } );
         }
@@ -182,9 +192,9 @@ namespace Api.Controllers
         [HttpPost( "teacher-categories" )]
         [ProducesResponseType( StatusCodes.Status200OK )]
         [ProducesResponseType( StatusCodes.Status404NotFound )]
-        public IActionResult CreateTeacherCategories( [FromBody] CreateTypeContractRequestDto contractRequestDto )
+        public IActionResult CreateTeacherCategories( [FromBody] CreateTeacherCategoryRequestDto createTeacherCategory )
         {
-            if ( !IsValidYear( contractRequestDto.Year ) )
+            if ( !IsValidYear( createTeacherCategory.Year ) )
             {
                 return NotFound( "Не найдено такого года" );
             }
@@ -195,16 +205,83 @@ namespace Api.Controllers
         [HttpDelete( "teacher-categories" )]
         [ProducesResponseType( StatusCodes.Status200OK )]
         [ProducesResponseType( StatusCodes.Status404NotFound )]
-        public IActionResult DeleteTeacherCategories( [FromBody] DeleteTypeContractRequestDto contractRequestDto )
+        public IActionResult DeleteTeacherCategories( [FromBody] DeleteTeacherCategoryRequestDto deleteTeacherCategory)
         {
-            if ( !IsValidYear( contractRequestDto.Year ) )
+            if ( !IsValidYear( deleteTeacherCategory.Year ) )
             {
                 return NotFound( "Не найдено такого года" );
             }
 
-            if ( contractRequestDto.Id == null )
+            if ( deleteTeacherCategory.Id == null )
             {
-                return NotFound( "Не найдено такого контракта" );
+                return NotFound( "Не найдено такой категории" );
+            }
+
+            return Ok();
+        }
+
+        [HttpGet( "teacher-educations" )]
+        [ProducesResponseType<TeacherEducationsResponseDto>( StatusCodes.Status200OK )]
+        [ProducesResponseType( StatusCodes.Status404NotFound )]
+        public IActionResult GetTeacherEducations( [FromQuery] TeacherEducationsRequestDto teacherEducations )
+        {
+            if ( !IsValidYear( teacherEducations.Year ) )
+            {
+                return NotFound( "Не найдено такого года" );
+            }
+
+            return Ok( new TeacherEducationsResponseDto
+            {
+                Educations = new List<TeacherEducationDto>
+                {
+                    new TeacherEducationDto
+                    {
+                        Id = 1,
+                        Name = "Среднее профессиональное образование",
+                        Coefficient = 2
+                    },
+                    new TeacherEducationDto
+                    {
+                        Id = 2,
+                        Name = "Высшее профессиональное образование",
+                        Coefficient = 3
+                    },
+                    new TeacherEducationDto
+                    {
+                        Id = 3,
+                        Name = "Высшее образование",
+                        Coefficient = 4
+                    }
+                }
+            } );
+        }
+
+        [HttpPost( "teacher-educations" )]
+        [ProducesResponseType( StatusCodes.Status200OK )]
+        [ProducesResponseType( StatusCodes.Status404NotFound )]
+        public IActionResult CreateTeacherEducation( [FromBody] CreateTeacherEducationRequestDto createTeacherEducation )
+        {
+            if ( !IsValidYear( createTeacherEducation.Year ) )
+            {
+                return NotFound( "Не найдено такого года" );
+            }
+
+            return Ok();
+        }
+
+        [HttpDelete( "teacher-educations" )]
+        [ProducesResponseType( StatusCodes.Status200OK )]
+        [ProducesResponseType( StatusCodes.Status404NotFound )]
+        public IActionResult DeleteTeacherEducation( [FromBody] DeleteTeacherCategoryRequestDto deleteTeacherEducation )
+        {
+            if ( !IsValidYear( deleteTeacherEducation.Year ) )
+            {
+                return NotFound( "Не найдено такого года" );
+            }
+
+            if ( deleteTeacherEducation.Id == null )
+            {
+                return NotFound( "Не найдено такого образования" );
             }
 
             return Ok();
