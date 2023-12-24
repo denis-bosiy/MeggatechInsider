@@ -1,6 +1,7 @@
 using Api.Mappers.EducationalPlan;
 using Api.Models.EducationalPlan.Appointment;
 using Api.Models.EducationalPlan.Difference;
+using Api.Models.EducationalPlan.PlanSettings;
 using Api.Models.EducationalPlan.Subject;
 using Api.Models.EducationalPlan.Teacher;
 using Application.Abstractions.EductionalPlan;
@@ -115,6 +116,47 @@ public sealed class EducationalPlanController : ControllerBase
         return Ok( _assignmentService
             .GetDifferencesByYear( differencesRequest.Year )
             .Map() );
+    }
+
+    [HttpGet( "plan-settings" )]
+    [ProducesResponseType<EducationalPlanSettingsResponseDto>( StatusCodes.Status200OK )]
+    [ProducesResponseType( StatusCodes.Status404NotFound )]
+    public IActionResult GetPlanSettings( [FromQuery] EducationalPlanSettingsRequestDto educationalPlanSettings )
+    {
+        // mock
+
+        if ( !IsValidYear( educationalPlanSettings.Year ) )
+        {
+            return NotFound( "Не найдено такого года" );
+        }
+
+        return Ok( new EducationalPlanSettingsResponseDto
+        {
+            NumberOf10Classes = 2,
+            NumberOf11Classes = 2,
+            NumberOfWeeksIn1Quarter = 8,
+            StartOf1Quarter = "23.09.2023",
+            NumberOfWeeksIn2Quarter = 9,
+            StartOf2Quarter = "05.11.2023",
+            NumberOfWeeksIn3Quarter = 10,
+            StartOf3Quarter = "09.01.2024",
+            NumberOfWeeksIn4Quarter = 7,
+            StartOf4Quarter = "10.04.2024",
+            NumberOfWeeks = 34
+        } );
+    }
+
+    [HttpPut( "plan-settings" )]
+    [ProducesResponseType( StatusCodes.Status200OK )]
+    [ProducesResponseType( StatusCodes.Status404NotFound )]
+    public IActionResult UpdatePlanSettings( [FromBody] UpdateEducationalPlanSettingsRequestDto educationPlanSettingsDto )
+    {
+        if ( !IsValidYear( educationPlanSettingsDto.Year ) )
+        {
+            return NotFound( "Не найдено такого года" );
+        }
+
+        return Ok();
     }
 
     private bool IsValidYear( int year )

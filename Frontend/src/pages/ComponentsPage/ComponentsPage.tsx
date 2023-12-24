@@ -14,6 +14,7 @@ import ModalSettingsContext from "../../utils/ModalSettingsContext";
 import AgreementModalView from "../../components/AgreementModalView/AgreementModalView";
 import CommentsModalView from "../../components/CommentsModalView/CommentsModalView";
 import { ScheduleContainerComponent } from "../../components/Schedule/ScheduleContainer";
+import Loader from "../../components/Loader/Loader";
 
 const ComponentsPage = () => {
   const { openModal } = useContext(ModalSettingsContext);
@@ -41,13 +42,6 @@ const ComponentsPage = () => {
   const logSearchInputValue = () => {
     console.log(searchInputValue);
   };
-
-  const modalComments: { text: string; deleteAction: () => void }[] = [
-    {
-      text: "Прогульщик. Вместо пары решил пойти в бар со своими школьными друзьями. Не видать ему своей зарплаты как и счастья",
-      deleteAction: () => alert("Комментарий удалён")
-    }
-  ];
 
   return (
     <main className="components-page">
@@ -625,7 +619,7 @@ const ComponentsPage = () => {
           onClick={() =>
             openModal(
               "Комментарии",
-              <CommentsModalView comments={modalComments} addAction={() => alert("Комментарий добавлен")} />
+              <CommentsModalView getUrl="" putUrl="" deleteUrl="" />
             )
           }
         />
@@ -635,6 +629,13 @@ const ComponentsPage = () => {
         <h2>Расписание</h2>
 
         <ScheduleContainerComponent />
+      </section>
+
+      <section className="section">
+        <h2>Прелоадер</h2>
+        <p>Используется для индикации загрузки</p>
+
+        <Loader />
       </section>
     </main>
   );

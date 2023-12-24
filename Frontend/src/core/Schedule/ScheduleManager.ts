@@ -1,15 +1,8 @@
 import { CoordinateManager } from "../../utils/CoordinateManager";
-import { ISchedule } from "./ISchedule";
-import { Schedule } from "./Schedule";
 import { ScheduleLesson } from "./ScheduleLesson";
 import { SchedulePosition } from "./SchedulePosition";
 
 export class ScheduleManager {
-  public static ApplyScheduleToAnotherSchedule(scheduleFrom: ISchedule, scheduleTo: ISchedule): void {
-    // TODO: Убрать приведение к типу
-    scheduleTo = scheduleFrom.clone() as Schedule;
-  }
-
   public static IsPartOfTheLesson(lesson: ScheduleLesson, position: SchedulePosition) {
     const isHorizontalPart: boolean =
       CoordinateManager.GetIndexFromEnglishLetter(position.horizontalGeneralPosition) >=

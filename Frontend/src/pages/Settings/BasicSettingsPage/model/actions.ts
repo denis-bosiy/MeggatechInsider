@@ -15,9 +15,7 @@ export type ActionSaveSalarySettings = {
   payload: TSetting[];
 };
 
-export type BasicSettingsAction =
-  ActionSaveBasicSettings
-  | ActionSaveSalarySettings;
+export type BasicSettingsAction = ActionSaveBasicSettings | ActionSaveSalarySettings;
 
 export const BasicSettingsActionBuilder = {
   saveBasicSettings: (values: TSetting[]) => ({

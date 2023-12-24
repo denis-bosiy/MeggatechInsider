@@ -1,6 +1,13 @@
 .toolbar {
   margin-bottom: 25px;
-  width: fit-content;
+  width: 100%;
+
+  &.-fill {
+    display: flex;
+    justify-content: space-between;
+    gap: 50px;
+    width: 100%;
+  }
 
   &__buttons-wrapper {
     display: flex;
@@ -9,7 +16,12 @@
     margin-bottom: 25px;
   }
 
-  &__button {
+  &.-fill &__buttons-wrapper {
+    margin-bottom: 0;
+  }
+
+  &__button,
+  &__select {
     margin-right: 25px;
   }
 
