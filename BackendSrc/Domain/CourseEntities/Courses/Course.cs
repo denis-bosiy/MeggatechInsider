@@ -17,6 +17,8 @@ namespace Domain.CourseEntities.Courses
 
         public List<CourseLesson> CourseLessons { get; set; }
 
+        public Course() { }
+
         public Course(
             string courseName,
             CourseType courseType,

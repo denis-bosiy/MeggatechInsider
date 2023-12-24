@@ -4,13 +4,8 @@ using System.Text.Json.Serialization;
 
 namespace Api.Models.EducationalPlan.Teacher
 {
-    public class TeacherCreateRequestDto
+    public class UpdateTeacherDto
     {
-        [Required]
-        [DisplayName( "year" )]
-        [JsonPropertyName( "year" )]
-        public int Year {  get; set; }
-
         [Required]
         [DisplayName( "name" )]
         [JsonPropertyName( "name" )]

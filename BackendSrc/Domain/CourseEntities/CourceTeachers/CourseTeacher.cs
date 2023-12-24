@@ -1,3 +1,4 @@
+using Domain.CourseEntities.Courses;
 using Domain.CourseEntities.CourseTimetables;
 using Domain.TeacherEntities;
 
@@ -16,6 +17,8 @@ namespace Domain.CourseEntities.CourceTeachers
         public List<CourseLesson> CourseLessons { get; set; }
 
         public List<CourseTeacherAvailableHours> AvailableHours { get; set; }
+
+        public CourseTeacher() { }
 
         public CourseTeacher(
             string courseTeacherName,
