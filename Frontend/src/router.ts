@@ -1,33 +1,70 @@
 export enum AppRouter {
-  Main = "/",
+  // Вход
   Login = "login",
+
+  // Меню
+  Main = "/",
+
+  // Вводные данные
+  Settings = "settings",
+
+  Basic = "basic",
+  // Teachers = "teachers",
+  // Timetable = "timetable",
+
+  // Расписание занятий
+  Timetable = "timetable",
+
+  TeachersGuidebook = "teachers-guidebook",
+  ClassesGuidebook = "classes-guidebook",
+  LessonsSchedule = "lessons-schedule",
+
+  // Учебный план
   Syllabus = "syllabus",
-  SyllabusTable = "syllabus-table",
-  CoursesSyllabus = "courses-syllabus",
-  CoursesSyllabusTable = "courses-syllabus-table",
+
   Subjects = "subjects",
   Teachers = "teachers",
+  SyllabusTable = "syllabus-table",
   Assigning = "assigning",
-  Timetable = "timetable",
-  LessonsSchedule = "lessons-schedule",
+
+  // Расписание курсов
   CoursesTimetable = "courses-timetable",
-  LessonsGuidebook = "lessons-guidebook",
-  ClassesGuidebook = "classes-guidebook",
-  TeacherGuidebook = "teacher-guidebook",
+
+  // TeachersGuidebook = "teachers-guidebook",
   GroupGuidebook = "group-guidebook",
-  Settings = "settings",
+
+  // План курсов
+  CoursesSyllabus = "courses-syllabus",
+
+  // Subjects = "subjects",
+  // Teachers = "teachers",
+  CoursesSyllabusTable = "courses-syllabus-table",
+  // Assigning = "assigning",
+
+  // Финансовый отчёт
   FinancialReport = "financial-report",
-  OffBudgetReport = "off-budget-report",
-  FinalReport = "final-report",
-  TarifficationReport = "tariffication-report",
-  Basic = "basic",
+
+  Tariffication = "tariffication",
+  OffBudgetCategories = "off-budget-categories",
+  OffBudget = "off-budget",
+  Final = "final",
+
+  // Контроль учебного плана за год
+  YearImplementationMonitoring = "year-implementation-monitoring",
+
+  // Статистика
+  Statistics = "statistics",
+
+  BudgetStatistics = "budget-statistics",
+  Categories = "categories",
+  // Teachers = "teachers",
+
+  // Контроль учебного плана за месяц
   Curriculum = "curriculum",
+
   Monitoring = "monitoring",
   Report = "report",
-  BudgetStatistics = "budget-statistics",
-  Statistics = "statistics",
-  Categories = "categories",
-  OffBudgetCategories = "off-budget-categories",
+
   NotFound = "*"
 }
 
@@ -73,7 +110,7 @@ export const Menu: MenuItem[] = [
     url: AppRouter.Timetable,
     label: "Расписание занятий",
     navigation: [
-      { label: "Справочник по преподавателям", url: AppRouter.TeacherGuidebook },
+      { label: "Справочник по преподавателям", url: AppRouter.TeachersGuidebook },
       {
         label: "Справочник по классам",
         url: AppRouter.ClassesGuidebook,
@@ -91,7 +128,7 @@ export const Menu: MenuItem[] = [
     navigation: [
       { label: "Предметы", url: AppRouter.Subjects },
       { label: "Преподаватели", url: AppRouter.Teachers },
-      { label: "Учебный план", url: AppRouter.Syllabus },
+      { label: "Учебный план", url: AppRouter.SyllabusTable },
       { label: "Назначение", url: AppRouter.Assigning }
     ]
   },
@@ -99,9 +136,9 @@ export const Menu: MenuItem[] = [
     url: AppRouter.CoursesTimetable,
     label: "Расписание курсов",
     navigation: [
-      { label: "Справочник по преподавателям", url: AppRouter.TeacherGuidebook },
+      { label: "Справочник по преподавателям", url: AppRouter.TeachersGuidebook },
       { label: "Справочник по группам", url: AppRouter.GroupGuidebook },
-      { label: "Расписание курсов", url: "#" }
+      { label: "Расписание курсов", url: "not-implemented" }
     ]
   },
   {
@@ -142,15 +179,18 @@ export const Menu: MenuItem[] = [
     url: AppRouter.FinancialReport,
     label: "Финансовый отчет",
     navigation: [
-      { label: "Тарификация", url: AppRouter.TarifficationReport },
-      { label: "Внебюджет", url: AppRouter.OffBudgetReport },
-      { label: "Финальный отчет", url: AppRouter.FinalReport },
+      { label: "Тарификация", url: AppRouter.Tariffication },
+      { label: "Внебюджет", url: AppRouter.OffBudget },
+      { label: "Финальный отчет", url: AppRouter.Final },
       { label: "Внебюджетные категории", url: AppRouter.OffBudgetCategories }
     ]
   },
   {
-    url: "#",
-    label: "Контроль учебного плана за год"
+    url: AppRouter.YearImplementationMonitoring,
+    label: "Контроль учебного плана за год",
+    navigation: [
+      { label: "Контроль учебного плана за год", url: "" },
+    ]
   },
   {
     url: AppRouter.Statistics,

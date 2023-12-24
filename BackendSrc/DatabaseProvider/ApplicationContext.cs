@@ -1,4 +1,9 @@
 using DatabaseProvider.Configurations.AssignmentEntitiesConfiguration;
+using DatabaseProvider.Configurations.CourseEntitiesConfigurations.CourseAssignments;
+using DatabaseProvider.Configurations.CourseEntitiesConfigurations.CourseEducationalPlans;
+using DatabaseProvider.Configurations.CourseEntitiesConfigurations.Courses;
+using DatabaseProvider.Configurations.CourseEntitiesConfigurations.CourseTeachers;
+using DatabaseProvider.Configurations.CourseEntitiesConfigurations.CourseTimetables;
 using DatabaseProvider.Configurations.SubjectEntitiesConfigurations;
 using DatabaseProvider.Configurations.TeacherEntitiesConfigurations;
 using DatabaseProvider.Configurations.TimetableEntitiesConfigurations.GuidebookEntities;
@@ -62,6 +67,16 @@ public class ApplicationContext : DbContext
         modelBuilder.ApplyConfiguration( new ParallelStudentGroupConfiguration() );
         modelBuilder.ApplyConfiguration( new VerticalSubgroupStudentGroupConfiguration() );
 
+        //courses
+        modelBuilder.ApplyConfiguration( new CourseAssignmentConfiguration() );
+        modelBuilder.ApplyConfiguration( new CourseEducationalPlanHoursConfiguration() );
+        modelBuilder.ApplyConfiguration( new CoursesEducationalPlanConfiguration() );
+        modelBuilder.ApplyConfiguration( new CourseConfiguration() );
+        modelBuilder.ApplyConfiguration( new CourseTypeConfiguration() );
+        modelBuilder.ApplyConfiguration( new CourseTeacherAvailableHoursConfiguration() );
+        modelBuilder.ApplyConfiguration( new CourseTeacherConfiguration() );
+        modelBuilder.ApplyConfiguration( new CourseLessonConfiguration() );
+        
         //timetable
         modelBuilder.ApplyConfiguration( new TeacherAvailableHoursConfiguration() );
     }

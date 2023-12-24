@@ -18,7 +18,7 @@ const TeacherEducationTable = (props: ITeacherEducationTableProps) => {
     .filter((item: TeacherEducationItem, index: number) => !props.isAdding || index !== props.items.length - 1)
     .map((item, index) => (
       <tr className="row" key={`${item.id}-${index}`}>
-        <td className="cell">{item.education}</td>
+        <td className="cell">{item.name}</td>
         <td className="cell">{item.coefficient}</td>
         <td className="cell">
           <IconButton icon={<GarbageIcon />} small={true} onClick={() => props.handleDeleteRow(item.id)} />
@@ -44,17 +44,17 @@ const TeacherEducationTable = (props: ITeacherEducationTableProps) => {
             <td className="cell">
               <Input
                 size={InputSize.Micro}
-                value={props.items[props.items.length - 1].education}
-                placeholder=""
+                value={props.items[props.items.length - 1].name}
+                placeholder="Образование преподавателя"
                 onValueChange={(newEducationValue: string) => {
                   props.setItems(
                     props.items.map((value: TeacherEducationItem, index: number) =>
                       index === props.items.length - 1
                         ? {
-                          id: value.id,
-                          education: newEducationValue,
-                          coefficient: value.coefficient
-                        }
+                            id: value.id,
+                            name: newEducationValue,
+                            coefficient: value.coefficient
+                          }
                         : value
                     )
                   );
@@ -69,16 +69,16 @@ const TeacherEducationTable = (props: ITeacherEducationTableProps) => {
                     ? props.items[props.items.length - 1].coefficient.toString()
                     : ""
                 }
-                placeholder=""
+                placeholder="Коэффициент"
                 onValueChange={(newCoefficientValue: string) => {
                   props.setItems(
                     props.items.map((value: TeacherEducationItem, index: number) =>
                       index === props.items.length - 1
                         ? {
-                          id: value.id,
-                          education: value.education,
-                          coefficient: parseFloat(newCoefficientValue)
-                        }
+                            id: value.id,
+                            name: value.name,
+                            coefficient: newCoefficientValue
+                          }
                         : value
                     )
                   );
