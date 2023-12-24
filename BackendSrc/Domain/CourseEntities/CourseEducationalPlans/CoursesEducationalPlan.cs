@@ -6,6 +6,6 @@ namespace Domain.CourseEntities.CourseEducationalPlans
     {
         public Course Course { get; set; }
         public int CourseId { get; set; }
-        public List<CourseEducationalPlanHoursByWeek> CoursesEducationalPlanHours { get; set; }
+        public List<CoursesEducationalPlanHours> CoursesEducationalPlanHours { get; set; }
     }
 }

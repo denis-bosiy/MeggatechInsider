@@ -1,3 +1,4 @@
+using Domain.CourseEntities.CourseEducationalPlans;
 using Domain.CourseEntities.CourseTimetables;
 
 namespace Domain.CourseEntities.Courses
@@ -10,6 +11,9 @@ namespace Domain.CourseEntities.Courses
         public int ExpectedHoursPerWeek { get; set; }
         public int ExpectedGroupsCount { get; set; }
         public int Year { get; set; }
+
+        public CoursesEducationalPlan CourseEducationalPlan { get; set; }
+        public int CourseEducationalPlanId { get; set; }
 
         public List<CourseLesson> CourseLessons { get; set; }
 
