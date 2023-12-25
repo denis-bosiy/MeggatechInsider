@@ -105,12 +105,11 @@ const App = (): React.JSX.Element => {
                   <Route path={AppRouter.Categories} element={<CategoriesStatisticsPage />} />
                   <Route path={AppRouter.Teachers} element={<TeachersStatisticsPage />} />
                 </Route>
+                <Route path={AppRouter.NotFound} element={<NotFoundPage />} />
 
                 <Route path="components" element={<ComponentsPage />} />
                 <Route path="test-redux" element={<TestPage />} />
               </Route>
-
-              <Route path={AppRouter.NotFound} element={<NotFoundPage />} />
             </Routes>
           </Router>
         </Provider>

@@ -115,7 +115,7 @@ export const ScheduleNavigation = () => {
     const foundIndex: number = divisions.findIndex((division: string) => division === changingDivision);
 
     if (foundIndex !== -1) {
-      setDivisions(divisions.filter((division: string) => division === changingDivision));
+      setDivisions(divisions.filter((division: string) => division !== changingDivision));
     } else {
       setDivisions([...divisions, changingDivision]);
     }
@@ -124,7 +124,7 @@ export const ScheduleNavigation = () => {
     const foundIndex: number = groups.findIndex((group: string) => group === changingGroup);
 
     if (foundIndex !== -1) {
-      setGroups(groups.filter((group: string) => group === changingGroup));
+      setGroups(groups.filter((group: string) => group !== changingGroup));
     } else {
       setGroups([...groups, changingGroup]);
     }
