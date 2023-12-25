@@ -4,6 +4,7 @@ using DatabaseProvider.Configurations.CourseEntitiesConfigurations.CourseEducati
 using DatabaseProvider.Configurations.CourseEntitiesConfigurations.Courses;
 using DatabaseProvider.Configurations.CourseEntitiesConfigurations.CourseTeachers;
 using DatabaseProvider.Configurations.CourseEntitiesConfigurations.CourseTimetables;
+using DatabaseProvider.Configurations.EducationalPlanConfigurations;
 using DatabaseProvider.Configurations.SubjectEntitiesConfigurations;
 using DatabaseProvider.Configurations.TeacherEntitiesConfigurations;
 using DatabaseProvider.Configurations.TimetableEntitiesConfigurations.GuidebookEntities;
@@ -79,6 +80,11 @@ public class ApplicationContext : DbContext
         
         //timetable
         modelBuilder.ApplyConfiguration( new TeacherAvailableHoursConfiguration() );
+
+        //educational plan
+        modelBuilder.ApplyConfiguration( new EducationalPlanConfiguration() );
+        modelBuilder.ApplyConfiguration( new EducationalPlanHoursByWeekConfiguration() );
+        modelBuilder.ApplyConfiguration( new EducationalPlanSubjectConfiguration() );
     }
 
     protected override void OnConfiguring( DbContextOptionsBuilder optionsBuilder )
