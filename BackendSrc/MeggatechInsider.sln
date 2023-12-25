@@ -18,6 +18,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Application", "Application\
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Infrastructure.Migrations", "Infrastructure\Infrastructure.Migrations\Infrastructure.Migrations.csproj", "{FC34FE5C-ECF8-4EA4-9309-B1C1D72EBAD8}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ExcelGenerator", "ExcelGenerator\ExcelGenerator.csproj", "{5F585916-A510-4B26-A036-7BEDFBFE9564}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -43,11 +45,17 @@ Global
 		{FC34FE5C-ECF8-4EA4-9309-B1C1D72EBAD8}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{FC34FE5C-ECF8-4EA4-9309-B1C1D72EBAD8}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{FC34FE5C-ECF8-4EA4-9309-B1C1D72EBAD8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5F585916-A510-4B26-A036-7BEDFBFE9564}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5F585916-A510-4B26-A036-7BEDFBFE9564}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5F585916-A510-4B26-A036-7BEDFBFE9564}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5F585916-A510-4B26-A036-7BEDFBFE9564}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {B53BA2EB-37CC-465D-B5E6-547E02B2E7C4}
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
 	EndGlobalSection
 EndGlobal
