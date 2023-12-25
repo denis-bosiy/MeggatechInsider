@@ -81,7 +81,7 @@ namespace Application.Implementations.EducationalPlan
             _teacherRepository.SaveChanges();
         }
 
-        public void DeleteTeacher(int id)
+        public void DeleteTeacher( int id )
         {
             Teacher existingTeacher = _teacherRepository.GetById( id );
 

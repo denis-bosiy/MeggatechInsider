@@ -43,7 +43,7 @@ public sealed class EducationalPlanController : ControllerBase
             .Map() );
     }
 
-    [HttpPost("teachers")]
+    [HttpPost( "teachers" )]
     [ProducesResponseType( StatusCodes.Status200OK )]
     [ProducesResponseType( StatusCodes.Status400BadRequest )]
     [ProducesResponseType( StatusCodes.Status404NotFound )]
@@ -73,7 +73,7 @@ public sealed class EducationalPlanController : ControllerBase
         return Ok();
     }
 
-    [HttpPut("teachers")]
+    [HttpPut( "teachers" )]
     [ProducesResponseType( StatusCodes.Status200OK )]
     [ProducesResponseType( StatusCodes.Status400BadRequest )]
     [ProducesResponseType( StatusCodes.Status404NotFound )]
@@ -106,7 +106,7 @@ public sealed class EducationalPlanController : ControllerBase
         return Ok();
     }
 
-    [HttpDelete("teachers")]
+    [HttpDelete( "teachers" )]
     [ProducesResponseType( StatusCodes.Status200OK )]
     [ProducesResponseType( StatusCodes.Status400BadRequest )]
     [ProducesResponseType( StatusCodes.Status404NotFound )]
