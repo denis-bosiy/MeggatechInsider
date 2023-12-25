@@ -1,6 +1,6 @@
 namespace Domain.EducationalPlan;
 
-public class EducationalPlanHoursByWeek
+public class EducationalPlanHoursByWeek : Entity
 {
     public EducationalPlan EducationalPlan { get; set; }
     public int EducationalPlanId { get; set; }
