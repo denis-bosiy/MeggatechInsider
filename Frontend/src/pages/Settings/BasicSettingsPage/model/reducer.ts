@@ -4,16 +4,16 @@ import { BasicSettingsData } from "./types";
 
 const initData: BasicSettingsData = {
   basicSettings: [
-    { id: guidGenerator(), label: "Число 10-ых классов", value: "" },
-    { id: guidGenerator(), label: "Число 11-ых классов", value: "" },
-    { id: guidGenerator(), label: "Недель в 1 четверти", value: "" },
-    { id: guidGenerator(), label: "Начало 1 четверти", value: "" },
-    { id: guidGenerator(), label: "Недель во 2 четверти", value: "" },
-    { id: guidGenerator(), label: "Начало 2 четверти", value: "" },
-    { id: guidGenerator(), label: "Недель в 3 четверти", value: "" },
-    { id: guidGenerator(), label: "Начало 3 четверти", value: "" },
-    { id: guidGenerator(), label: "Недель в 4 четверти", value: "" },
-    { id: guidGenerator(), label: "Начало 4 четверти", value: "" }
+    { id: guidGenerator(), label: "Кол-во 10 классов", value: "" },
+    { id: guidGenerator(), label: "Кол-во 11 классов", value: "" },
+    { id: guidGenerator(), label: "Недель в 1-й четверти", value: "" },
+    { id: guidGenerator(), label: "Начало 1-й четверти", value: "" },
+    { id: guidGenerator(), label: "Недель во 2-й четверти", value: "" },
+    { id: guidGenerator(), label: "Начало 2-й четверти", value: "" },
+    { id: guidGenerator(), label: "Недель в 3-й четверти", value: "" },
+    { id: guidGenerator(), label: "Начало 3-й четверти", value: "" },
+    { id: guidGenerator(), label: "Недель в 4-й четверти", value: "" },
+    { id: guidGenerator(), label: "Начало 4-й четверти", value: "" }
   ],
   salarySettings: [
     { id: guidGenerator(), label: "Базовый оклад", value: "1000" },

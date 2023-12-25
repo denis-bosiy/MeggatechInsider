@@ -73,8 +73,11 @@ export const ScheduleComponent = (props: IScheduleProps) => {
           >
             {lessonTimeIndex === 0 && workdayElement}
             <td className="cell">
-              {lessonTime.startTime.hours}.{lessonTime.startTime.minutes}-<br />
-              {lessonTime.endTime.hours}.{lessonTime.endTime.minutes}
+              {lessonTime.startTime.hours < 10 ? "0" + lessonTime.startTime.hours : lessonTime.startTime.hours}.
+              {lessonTime.startTime.minutes < 10 ? "0" + lessonTime.startTime.minutes : lessonTime.startTime.minutes}-
+              <br />
+              {lessonTime.endTime.hours < 10 ? "0" + lessonTime.endTime.hours : lessonTime.endTime.hours}.
+              {lessonTime.endTime.minutes < 10 ? "0" + lessonTime.endTime.minutes : lessonTime.endTime.minutes}
             </td>
             {props.schedule.getGroups().map((group: string, groupIndex: number) => {
               return props.schedule

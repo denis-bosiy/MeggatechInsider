@@ -50,6 +50,8 @@ const subjectsOptions: ISelectOption[] = [
 
 export const ScheduleNavigation = () => {
   const [lesson, setLesson] = useState<ScheduleLesson>();
+
+  // Controls
   const [day, setDay] = useState<ISelectOption>(daySelectsOptions[0]);
   const [time, setTime] = useState<ISelectOption>(lessonTimesOptions[0]);
   const [isPair, setIsPair] = useState<boolean>(false);
@@ -62,6 +64,7 @@ export const ScheduleNavigation = () => {
   const [divisions, setDivisions] = useState<string[]>([]);
   const [groups, setGroups] = useState<string[]>([]);
 
+  // Controls handlers
   const handleChangingDay = (newDayId: string): void => {
     const foundIndex: number = daySelectsOptions.findIndex((subgroup: ISelectOption) => subgroup.id === newDayId);
 
@@ -150,7 +153,6 @@ export const ScheduleNavigation = () => {
 
     setPossibleSubgroups(newPossibleSubgroups);
   }, [subgroupsCount]);
-
   useLayoutEffect(() => {
     if (isPair) {
       setTime(pairTimesOptions[0]);

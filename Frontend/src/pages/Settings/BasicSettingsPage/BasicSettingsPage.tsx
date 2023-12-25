@@ -137,7 +137,7 @@ const BasicSettingsPage = () => {
             })}
             <tr className="row">
               <td className="cell">Всего недель</td>
-              <td className="cell">8</td>
+              <td className="cell">34</td>
             </tr>
           </tbody>
         </table>

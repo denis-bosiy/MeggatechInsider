@@ -16,7 +16,8 @@ const NotFoundPage = () => {
         <h1 className="h1 not-found-page__heading">Ой!</h1>
 
         <p className="not-found-page__hint">
-          Кажется, такой страницы не существует. Проверьте правильность написания адреса или вернитесь на главный экран.
+          Кажется, такой страницы не&nbsp;существует. Проверьте правильность написания адреса или вернитесь
+          на&nbsp;главный экран.
         </p>
 
         <Button label={"Вернуться на главный экран"} onClick={goToMenuPage} type={ButtonType.Primary} />
