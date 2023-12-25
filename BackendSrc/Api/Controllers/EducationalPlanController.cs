@@ -43,6 +43,84 @@ public sealed class EducationalPlanController : ControllerBase
             .Map() );
     }
 
+    [HttpPost( "teachers" )]
+    [ProducesResponseType( StatusCodes.Status200OK )]
+    [ProducesResponseType( StatusCodes.Status400BadRequest )]
+    [ProducesResponseType( StatusCodes.Status404NotFound )]
+    public IActionResult CreateTeacher( [FromBody] TeacherCreateRequestDto teacherCreateRequestDto )
+    {
+        if ( !IsValidYear( teacherCreateRequestDto.Year ) )
+        {
+            return NotFound( "Не найдено такого года" );
+        }
+
+        _teacherService.AddTeacher(
+            teacherCreateRequestDto.Year,
+            teacherCreateRequestDto.Name,
+            teacherCreateRequestDto.Category,
+            teacherCreateRequestDto.CategoryPayrollAccounting,
+            teacherCreateRequestDto.WorkingContract,
+            teacherCreateRequestDto.WorkingContractPayrollAccounting,
+            teacherCreateRequestDto.Education,
+            teacherCreateRequestDto.IsClassroomTeacher,
+            teacherCreateRequestDto.InDepthSubjectPayrollAccounting,
+            teacherCreateRequestDto.EgeAffectsOnSalary,
+            teacherCreateRequestDto.WorkingStartDate,
+            teacherCreateRequestDto.WorkingExperienceAtTheTimeOfTheEmployment,
+            teacherCreateRequestDto.BirthDay
+        );
+
+        return Ok();
+    }
+
+    [HttpPut( "teachers" )]
+    [ProducesResponseType( StatusCodes.Status200OK )]
+    [ProducesResponseType( StatusCodes.Status400BadRequest )]
+    [ProducesResponseType( StatusCodes.Status404NotFound )]
+    public IActionResult UpdateTeachers( [FromBody] UpdateTeachersRequestDto updateTeachers)
+    {
+        if ( !IsValidYear( updateTeachers.Year ) )
+        {
+            return NotFound( "Не найдено такого года" );
+        }
+
+        foreach ( UpdateTeacherDto teacher in updateTeachers.Teachers )
+        {
+            _teacherService.UpdateTeacher(
+                updateTeachers.Year,
+                teacher.Name,
+                teacher.Category,
+                teacher.CategoryPayrollAccounting,
+                teacher.WorkingContract,
+                teacher.WorkingContractPayrollAccounting,
+                teacher.Education,
+                teacher.IsClassroomTeacher,
+                teacher.InDepthSubjectPayrollAccounting,
+                teacher.EgeAffectsOnSalary,
+                teacher.WorkingStartDate,
+                teacher.WorkingExperienceAtTheTimeOfTheEmployment,
+                teacher.BirthDay
+            );
+        }
+
+        return Ok();
+    }
+
+    [HttpDelete( "teachers" )]
+    [ProducesResponseType( StatusCodes.Status200OK )]
+    [ProducesResponseType( StatusCodes.Status400BadRequest )]
+    [ProducesResponseType( StatusCodes.Status404NotFound )]
+    public IActionResult DeleteTeacher( [FromBody] DeleteTeacherRequestDto teacherRequestDto )
+    {
+        if ( _teacherService.IsExistingTeacher( teacherRequestDto.Id ) )
+        {
+            return NotFound( "Не найдено такого преподавателя" );
+        }
+
+        _teacherService.DeleteTeacher( teacherRequestDto.Id );
+        return Ok();
+    }
+
     [HttpGet( "subjects" )]
     [ProducesResponseType<SubjectsResponseDto>( StatusCodes.Status200OK )]
     [ProducesResponseType( StatusCodes.Status400BadRequest )]

@@ -9,4 +9,5 @@ public interface ITeacherRepository : IRepository<Teacher>
     public List<Teacher> GetByCategoryId( int id );
     public List<Teacher> GetByContractTypeId( int id );
     public List<Teacher> GetByEducationId( int id );
+    public void Update( Teacher teacher );
 }
