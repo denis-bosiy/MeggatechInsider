@@ -71,7 +71,7 @@
     "stylelint-dev": "stylelint src/**/*.scss --cache --cache-location ./.stylelintcache --fix ; exit 0",
     "stylelint-build": "stylelint src/**/*.scss",
     "stylelint-fix-sass": "stylelint src/**/*.scss --fix",
-    "test": "jest"
+    "test": "jest --transformIgnorePatterns \"node_modules/(?!@codemirror)/\" "
   },
   "devDependencies": {
     "@babel/plugin-proposal-private-property-in-object": "^7.21.11",
