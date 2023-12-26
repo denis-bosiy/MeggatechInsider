@@ -18,6 +18,7 @@ import { HttpService } from "../../../api/http.service";
 import { HeaderData } from "../../../layouts/Header/model/types";
 import { Endpoint } from "../../../api/endpoints";
 import { ResponseBuilder } from "../../../api/Responses/ResponseBuilder";
+import Loader from "../../../components/Loader/Loader";
 
 const TeachersCoursesSyllabusPage = () => {
   const workingContractOptions: ISelectOption[] = [
@@ -27,6 +28,7 @@ const TeachersCoursesSyllabusPage = () => {
 
   const httpService = new HttpService();
   const { currentYear } = useSelector((state: { headerStore: HeaderData }) => state.headerStore);
+  const [isDataLoading, setDataLoading] = useState<boolean>(true);
 
   const { openModal } = useContext(ModalSettingsContext);
   const dispatch = useDispatch();
@@ -97,6 +99,7 @@ const TeachersCoursesSyllabusPage = () => {
       params.set("year", currentYear.year.toString());
     }
 
+    setDataLoading(false);
     httpService
       .getByArbitraryUrl(Endpoint.CoursesSyllabusTeacher, params)
       .then((response) => {
@@ -104,13 +107,19 @@ const TeachersCoursesSyllabusPage = () => {
         if (courses) {
           dispatch(ActionBuilder.saveTeachers(courses));
           setTeachersTableData(structuredClone(courses));
+          setDataLoading(true);
         }
       })
       .catch(() => {
         dispatch(ActionBuilder.saveTeachers([]));
         setTeachersTableData(structuredClone([]));
+        setDataLoading(false);
       });
   }, []);
+
+  if (isDataLoading) {
+    return <Loader />;
+  }
 
   return (
     <>

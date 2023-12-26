@@ -18,6 +18,7 @@ import { HttpService } from "../../../api/http.service";
 import { HeaderData } from "../../../layouts/Header/model/types";
 import { Endpoint } from "../../../api/endpoints";
 import { ResponseBuilder } from "../../../api/Responses/ResponseBuilder";
+import Loader from "../../../components/Loader/Loader";
 
 const SubjectsCoursesSyllabusPage = () => {
   const typeOptions: ISelectOption[] = [
@@ -25,6 +26,7 @@ const SubjectsCoursesSyllabusPage = () => {
     { id: "2", content: "Подготовительные экспресс-курсы" },
     { id: "3", content: "ШЮП" }
   ];
+  const [isDataLoading, setDataLoading] = useState<boolean>(true);
 
   const httpService = new HttpService();
   const { openModal } = useContext(ModalSettingsContext);
@@ -72,13 +74,13 @@ const SubjectsCoursesSyllabusPage = () => {
   const handleApplyingNewSubject = (): void => {
     subjectsTableManager.invokeFunction("applyAdding", TableType.Managable, [
       (data: any[]) => {
-        // const addedSubject = data.at(-1) as SubjectCoursesSyllabusData;
-        // console.log(addedSubject);
-        // httpService.postByArbitraryUrl(Endpoint.CoursesSyllabus, {
-        //   year: currentYear?.year,
-        //   ...addedSubject,
-        //   id: data.length
-        // });
+        const addedSubject = data.at(-1) as SubjectCoursesSyllabusData;
+        console.log(addedSubject);
+        httpService.postByArbitraryUrl(Endpoint.CoursesSyllabus, {
+          year: currentYear?.year,
+          ...addedSubject,
+          id: data.length
+        });
 
         dispatch(ActionBuilder.saveSubjects(data));
       }
@@ -103,7 +105,7 @@ const SubjectsCoursesSyllabusPage = () => {
     if (currentYear) {
       params.set("year", currentYear.year.toString());
     }
-
+    setDataLoading(true);
     httpService
       .getByArbitraryUrl(Endpoint.CoursesSyllabus, params)
       .then((response) => {
@@ -111,13 +113,19 @@ const SubjectsCoursesSyllabusPage = () => {
         if (courses) {
           dispatch(ActionBuilder.saveSubjects(courses));
           setSubjectsTableData(structuredClone(courses));
+          setDataLoading(false);
         }
       })
       .catch(() => {
         dispatch(ActionBuilder.saveSubjects([]));
         setSubjectsTableData(structuredClone([]));
+        setDataLoading(false);
       });
   }, []);
+
+  if (isDataLoading) {
+    return <Loader />;
+  }
 
   return (
     <>

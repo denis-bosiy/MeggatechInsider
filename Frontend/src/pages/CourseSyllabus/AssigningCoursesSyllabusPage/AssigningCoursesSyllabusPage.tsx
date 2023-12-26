@@ -23,6 +23,7 @@ import { HeaderData } from "../../../layouts/Header/model/types";
 import { HttpService } from "../../../api/http.service";
 import { Endpoint } from "../../../api/endpoints";
 import { ResponseBuilder } from "../../../api/Responses/ResponseBuilder";
+import Loader from "../../../components/Loader/Loader";
 
 const DiscrepanciesCoursesSyllabus = () => {
   const data = useSelector(
@@ -62,6 +63,7 @@ const AssigningCoursesSyllabusPage = () => {
     { id: "2", content: "Петров Иван Иванович" },
     { id: "3", content: "Васечкин Николай Иванович" }
   ];
+  const [isDataLoading, setDataLoading] = useState<boolean>(true);
 
   const httpService = new HttpService();
   const { currentYear } = useSelector((state: { headerStore: HeaderData }) => state.headerStore);
@@ -135,7 +137,7 @@ const AssigningCoursesSyllabusPage = () => {
       params.set("year", currentYear.year.toString());
       params.set("type", currentYear.year.toString());
     }
-
+    setDataLoading(true);
     httpService
       .getByArbitraryUrl(Endpoint.CoursesSyllabusAppointments, params)
       .then((response) => {
@@ -143,13 +145,19 @@ const AssigningCoursesSyllabusPage = () => {
         if (courses) {
           dispatch(ActionBuilder.saveAssigning(courses));
           setAssigningsTableData(structuredClone(courses));
+          setDataLoading(false);
         }
       })
       .catch(() => {
         dispatch(ActionBuilder.saveAssigning([]));
         setAssigningsTableData(structuredClone([]));
+        setDataLoading(false);
       });
   }, []);
+
+  if (isDataLoading) {
+    return <Loader />;
+  }
 
   return (
     <>
