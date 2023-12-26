@@ -14,11 +14,9 @@ jobs:
         uses: actions/checkout@v3
 
       - name: Install packages
+        working-directory: ./Frontend/
         run: npm i
-        with:
-          context: ./Frontend/
 
       - name: Run tests
+        working-directory: ./Frontend/
         run: npm test
-        with:
-          context: ./Frontend/
