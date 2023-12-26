@@ -18,12 +18,11 @@
 
     &__box-button {
         flex-direction: row;
-        justify-content: space-between;
-        max-width: 285px;
-        gap: 30px;
+        justify-content: flex-start;
     }
 
     &__box-table {
         max-width: 347px;
     }
+
 }

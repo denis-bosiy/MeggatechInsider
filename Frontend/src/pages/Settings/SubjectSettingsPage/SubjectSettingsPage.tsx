@@ -638,7 +638,7 @@ const TypeSettingsTab = () => {
   return (
     <>
       <div className="toolbar">
-        <div className="toolbar__buttons-wrapper">
+        <div className="toolbar__buttons-wrapper sybject-settings-page__box-button">
           {isTableEditing.value ? (
             <>
               <ActionButton
