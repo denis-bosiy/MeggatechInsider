@@ -7,8 +7,9 @@ import { ScheduleLesson } from "./ScheduleLesson";
 import { SchedulePosition } from "./SchedulePosition";
 import { Time } from "./Time";
 import { Workday } from "./Workday";
+import {AbstractScheduleBuilder} from "./AbstractScheduleBuilder";
 
-export class ScheduleBuilder {
+export class ScheduleBuilder extends AbstractScheduleBuilder {
   // TODO: Убрать тестовые данные, после подключение редакса в BuildSchedule пропихивать данные, необходимые для конструированя расписания
   public static BuildSchedule(): ISchedule {
     const schedule: Schedule = new Schedule();

@@ -7,14 +7,18 @@ import { ScheduleLesson } from "./ScheduleLesson";
 import { SchedulePosition } from "./SchedulePosition";
 import { Time } from "./Time";
 import { Workday } from "./Workday";
+import {AbstractScheduleBuilder} from "./AbstractScheduleBuilder";
 
-export class CourseScheduleBuilder {
+// TODO: Сделать стратегию для расписания (Абстрактный Builder с релизацией BuildLessonTimes, BuildLessons)
+// TODO: В ScheduleComponent прокинуть showHeader
+
+export class CourseScheduleBuilder extends AbstractScheduleBuilder {
   // TODO: Убрать тестовые данные, после подключение редакса в BuildSchedule пропихивать данные, необходимые для конструированя расписания
   public static BuildSchedule(): ISchedule {
     const schedule: Schedule = new Schedule();
 
-    // this.BuildGroups(schedule);
-    // this.BuildSubgroups(schedule);
+    this.BuildGroups(schedule);
+    this.BuildSubgroups(schedule);
     this.BuildWorkdays(schedule);
     this.BuildLessonTimes(schedule);
     this.BuildLessons(schedule);
@@ -23,17 +27,17 @@ export class CourseScheduleBuilder {
   }
 
   private static BuildGroups(schedule: Schedule): Schedule {
-    schedule.groups = ["10-1", "10-2", "11-1", "11-2", "11-3"];
+    schedule.groups = ["0", "1", "2", "3", "4"];
 
     return schedule;
   }
 
   private static BuildSubgroups(schedule: Schedule): Schedule {
-    schedule.subgroups.set("10-1", ["10-1-1", "10-1-2"]);
-    schedule.subgroups.set("10-2", ["10-2-3", "10-2-4"]);
-    schedule.subgroups.set("11-1", ["11-1-1", "11-1-2"]);
-    schedule.subgroups.set("11-2", ["11-2-3", "11-2-4"]);
-    schedule.subgroups.set("11-3", ["11-3-5", "11-3-6"]);
+    schedule.subgroups.set("0", [""]);
+    schedule.subgroups.set("1", [""]);
+    schedule.subgroups.set("2", [""]);
+    schedule.subgroups.set("3", [""]);
+    schedule.subgroups.set("4", [""]);
 
     return schedule;
   }
@@ -91,7 +95,7 @@ export class CourseScheduleBuilder {
     const bigLesson1: ScheduleLesson = new ScheduleLesson(
       "random-string-0",
       new SchedulePosition(EnglishAlphabet.A, 0, EnglishAlphabet.A, 0),
-      new SchedulePosition(EnglishAlphabet.A, 1, EnglishAlphabet.A, 0),
+      new SchedulePosition(EnglishAlphabet.A, 0, EnglishAlphabet.A, 0),
       "Общелицейская линейка",
       "",
       "",
@@ -100,7 +104,7 @@ export class CourseScheduleBuilder {
     const bigLesson2: ScheduleLesson = new ScheduleLesson(
       "random-string-1",
       new SchedulePosition(EnglishAlphabet.B, 0, EnglishAlphabet.A, 0),
-      new SchedulePosition(EnglishAlphabet.B, 1, EnglishAlphabet.A, 0),
+      new SchedulePosition(EnglishAlphabet.B, 0, EnglishAlphabet.A, 0),
       "Общелицейская линейка",
       "",
       "",
@@ -109,7 +113,7 @@ export class CourseScheduleBuilder {
     const bigLesson3: ScheduleLesson = new ScheduleLesson(
       "random-string-2",
       new SchedulePosition(EnglishAlphabet.C, 0, EnglishAlphabet.A, 0),
-      new SchedulePosition(EnglishAlphabet.C, 1, EnglishAlphabet.A, 0),
+      new SchedulePosition(EnglishAlphabet.C, 0, EnglishAlphabet.A, 0),
       "Общелицейская линейка",
       "",
       "",
@@ -118,7 +122,7 @@ export class CourseScheduleBuilder {
     const bigLesson4: ScheduleLesson = new ScheduleLesson(
       "random-string-3",
       new SchedulePosition(EnglishAlphabet.D, 0, EnglishAlphabet.A, 0),
-      new SchedulePosition(EnglishAlphabet.D, 1, EnglishAlphabet.A, 0),
+      new SchedulePosition(EnglishAlphabet.D, 0, EnglishAlphabet.A, 0),
       "Общелицейская линейка",
       "",
       "",
@@ -127,7 +131,7 @@ export class CourseScheduleBuilder {
     const bigLesson5: ScheduleLesson = new ScheduleLesson(
       "random-string-4",
       new SchedulePosition(EnglishAlphabet.E, 0, EnglishAlphabet.A, 0),
-      new SchedulePosition(EnglishAlphabet.E, 1, EnglishAlphabet.A, 0),
+      new SchedulePosition(EnglishAlphabet.E, 0, EnglishAlphabet.A, 0),
       "Общелицейская линейка",
       "",
       "",
@@ -145,7 +149,7 @@ export class CourseScheduleBuilder {
     const standardLesson2: ScheduleLesson = new ScheduleLesson(
       "random-string-6",
       new SchedulePosition(EnglishAlphabet.A, 0, EnglishAlphabet.A, 3),
-      new SchedulePosition(EnglishAlphabet.A, 1, EnglishAlphabet.A, 3),
+      new SchedulePosition(EnglishAlphabet.A, 0, EnglishAlphabet.A, 3),
       "Геометрия",
       "520",
       "Гусарова Л.Г.",
@@ -154,7 +158,7 @@ export class CourseScheduleBuilder {
     const standardLesson3: ScheduleLesson = new ScheduleLesson(
       "random-string-7",
       new SchedulePosition(EnglishAlphabet.A, 0, EnglishAlphabet.B, 0),
-      new SchedulePosition(EnglishAlphabet.A, 1, EnglishAlphabet.B, 1),
+      new SchedulePosition(EnglishAlphabet.A, 0, EnglishAlphabet.B, 1),
       "ОБЖ",
       "523",
       "Логинова М.Ю.",

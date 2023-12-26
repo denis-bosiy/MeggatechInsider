@@ -11,7 +11,6 @@ const LessonsScheduleCoursesTimetablePage = () => {
     lessonsScheduleCoursesTimetablePageStore: ISchedule,
   }) => state.lessonsScheduleCoursesTimetablePageStore);
 
-
   const dispatch = useDispatch();
   const { openModal } = useContext(ModalSettingsContext);
 
