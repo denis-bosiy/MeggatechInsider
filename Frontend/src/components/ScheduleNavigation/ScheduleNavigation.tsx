@@ -11,6 +11,7 @@ import { RadioButton } from "../RadioButton/RadioButton";
 import { CheckBox } from "../CheckBox/CheckBox";
 import { guidGenerator } from "../../utils/guidGenerator";
 import Input, { InputSize } from "../Input/Input";
+import { Workday } from "../../core/Schedule/Workday";
 
 interface IScheduleNavigationProps {
   checked?: boolean;
@@ -48,8 +49,31 @@ const subjectsOptions: ISelectOption[] = [
   { id: guidGenerator(), content: "Английский язык" }
 ];
 
+enum LessonType {
+  Pair = "pair",
+  Lesson = "lesson"
+}
+class ScheduleNavigationLesson {
+  workDay: Workday = Workday.Monday;
+  lessonType: LessonType = LessonType.Lesson;
+  timePeriod = "";
+
+  groups: string[] = [];
+
+  subgroupsCount = 0;
+  chosenSubgroup = 0;
+
+  lessonName = "";
+  classRoom?: string;
+  isOnline = false;
+
+  divisionTypes: string[] = [];
+}
+
 export const ScheduleNavigation = () => {
-  const [lesson, setLesson] = useState<ScheduleLesson>();
+  const [lesson, setLesson] = useState<ScheduleNavigationLesson>();
+
+  // Controls
   const [day, setDay] = useState<ISelectOption>(daySelectsOptions[0]);
   const [time, setTime] = useState<ISelectOption>(lessonTimesOptions[0]);
   const [isPair, setIsPair] = useState<boolean>(false);
@@ -62,6 +86,7 @@ export const ScheduleNavigation = () => {
   const [divisions, setDivisions] = useState<string[]>([]);
   const [groups, setGroups] = useState<string[]>([]);
 
+  // Controls handlers
   const handleChangingDay = (newDayId: string): void => {
     const foundIndex: number = daySelectsOptions.findIndex((subgroup: ISelectOption) => subgroup.id === newDayId);
 
@@ -115,7 +140,7 @@ export const ScheduleNavigation = () => {
     const foundIndex: number = divisions.findIndex((division: string) => division === changingDivision);
 
     if (foundIndex !== -1) {
-      setDivisions(divisions.filter((division: string) => division === changingDivision));
+      setDivisions(divisions.filter((division: string) => division !== changingDivision));
     } else {
       setDivisions([...divisions, changingDivision]);
     }
@@ -124,7 +149,7 @@ export const ScheduleNavigation = () => {
     const foundIndex: number = groups.findIndex((group: string) => group === changingGroup);
 
     if (foundIndex !== -1) {
-      setGroups(groups.filter((group: string) => group === changingGroup));
+      setGroups(groups.filter((group: string) => group !== changingGroup));
     } else {
       setGroups([...groups, changingGroup]);
     }
@@ -150,7 +175,6 @@ export const ScheduleNavigation = () => {
 
     setPossibleSubgroups(newPossibleSubgroups);
   }, [subgroupsCount]);
-
   useLayoutEffect(() => {
     if (isPair) {
       setTime(pairTimesOptions[0]);

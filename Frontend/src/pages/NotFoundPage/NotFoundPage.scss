@@ -4,10 +4,9 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 100vh;
+  height: 100%;
   width: 100%;
   text-align: center;
-  background-color: $primary-button-background-color;
 
   &__info {
     display: flex;
@@ -17,9 +16,19 @@
     padding: 15px 20px;
     background-color: $background-color;
     border-radius: 18px;
+    max-width: 480px;
+  }
+
+  &__hint {
+    margin-bottom: 26px;
+    color: $alternative-text-color;
   }
 
   &__heading {
     margin-bottom: 16px;
+    font-size: 128px;
+    line-height: 156px;
+    font-weight: 400;
+    color: $alternative-text-color;
   }
 }

@@ -1,10 +1,10 @@
 import React, { useContext } from "react";
-import { ScheduleComponent } from "../../components/Schedule/Schedule";
+import { ScheduleComponent } from "../../../components/Schedule/Schedule";
 import { useDispatch, useSelector } from "react-redux";
-import { ISchedule } from "../../core/Schedule/ISchedule";
+import { ISchedule } from "../../../core/Schedule/ISchedule";
 import { ActionBuilder } from "./model/actions";
-import ModalSettingsContext from "../../utils/ModalSettingsContext";
-import AgreementModalView from "../../components/AgreementModalView/AgreementModalView";
+import ModalSettingsContext from "../../../utils/ModalSettingsContext";
+import AgreementModalView from "../../../components/AgreementModalView/AgreementModalView";
 
 const LessonsSchedulePage = (): JSX.Element => {
   const schedule: ISchedule = useSelector((state: { lessonsScheduleStore: ISchedule }) => state.lessonsScheduleStore);

@@ -45,17 +45,19 @@ const ProtectedRoot = () => {
             <Link key={index} type={LinkType.Light} label={item.label} path={`${route.url}/${item.url}`} />
           ))}
       </Header>
-      {page && page.url !== AppRouter.LessonsSchedule && (
-        <PageNavigation
-          onBack
-          title={page.label}
-          text={currentTab}
-          currentTab={tabValue}
-          tabs={page.tabs}
-          onTabChange={(value) => setTabParams({ tab: value })}
-        />
-      )}
-      {page && page.url === AppRouter.LessonsSchedule && <ScheduleNavigation />}
+      <React.Fragment>
+        {page && page.url !== AppRouter.LessonsSchedule && (
+          <PageNavigation
+            onBack
+            title={page.label}
+            text={currentTab}
+            currentTab={tabValue}
+            tabs={page.tabs}
+            onTabChange={(value) => setTabParams({ tab: value })}
+          />
+        )}
+        {page && page.url === AppRouter.LessonsSchedule && <ScheduleNavigation />}
+      </React.Fragment>
       <Page>
         <Outlet />
       </Page>

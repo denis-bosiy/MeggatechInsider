@@ -9,7 +9,7 @@ import { basicSettingsReducer } from "../pages/Settings/BasicSettingsPage/model/
 import { typesContractsReducer } from "../pages/Settings/TeacherSettingsPage/view/typesContracts/model/reducer";
 import { categoriesTeachersReducer } from "../pages/Settings/TeacherSettingsPage/view/categoriesTeachers/model/reducer";
 import { teacherEducationReducer } from "../pages/Settings/TeacherSettingsPage/view/teacherEducation/model/reducer";
-import { lessonsSchedulePageReducer } from "../pages/LessonsSchedulePage/model/reducer";
+import { lessonsSchedulePageReducer } from "../pages/Timetable/LessonsSchedulePage/model/reducer";
 import { cirruculumMonitoringReducer } from "../pages/MonthCurriculum/MonitoringPage/model/reducer";
 import { cirruculumReportReducer } from "../pages/MonthCurriculum/ReportPage/model/reducer";
 import { headerReducer } from "../layouts/Header/model/reducer";
