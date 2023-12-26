@@ -122,12 +122,9 @@ const OffBudgetCategoriesPage = () => {
             onSearch={handleTeacherSearch}
           />
         </div>
-        <div className="toolbar__buttons-box">
+        <div className="toolbar__checkbox">
           <div className="toolbar__button">
-            <CheckBox
-              checked={isSaveProportion.value}
-              onChange={handleIsSaveProportion}
-            />
+            <CheckBox checked={isSaveProportion.value} onChange={handleIsSaveProportion} />
           </div>
           <p className="p">Сохранять пропорцию</p>
         </div>
@@ -148,8 +145,9 @@ const OffBudgetCategoriesPage = () => {
         </thead>
         <tbody>
           {offBudgetCategoriesTableData
-            .filter((data: OffBudgetCategoriData, index: number) =>
-              !isOffBudgetCategoriesAdding.value || index !== offBudgetCategoriesTableData.length - 1
+            .filter(
+              (data: OffBudgetCategoriData, index: number) =>
+                !isOffBudgetCategoriesAdding.value || index !== offBudgetCategoriesTableData.length - 1
             )
             .map((value: OffBudgetCategoriData) => {
               return (
@@ -180,18 +178,25 @@ const OffBudgetCategoriesPage = () => {
                         onValueChange={(newValue: string) =>
                           setOffBudgetCategoriesTableData(
                             isSaveProportion.value
-                              ? (() => {
-                                const oldValueCat = offBudgetCategoriesTableData.find(el => el.id === value.id);
-                                const oldValue = oldValueCat?.costPerHour !== undefined && oldValueCat?.costPerHour !== 0 ? oldValueCat.costPerHour : 1;
-                                if(Number(newValue) === 0) newValue = "1";
-                                const ratio = Number(newValue)/oldValue;
-                                return offBudgetCategoriesTableData.map((data: OffBudgetCategoriData) =>
-                                  data.id === value.id ? { ...data, costPerHour: Number(newValue)} : { ...data, costPerHour: data.costPerHour*ratio }
-                                );
-                              })
+                              ? () => {
+                                  const oldValueCat = offBudgetCategoriesTableData.find((el) => el.id === value.id);
+                                  const oldValue =
+                                    oldValueCat?.costPerHour !== undefined && oldValueCat?.costPerHour !== 0
+                                      ? oldValueCat.costPerHour
+                                      : 1;
+                                  if (Number(newValue) === 0) newValue = "1";
+                                  const ratio = Number(newValue) / oldValue;
+                                  return offBudgetCategoriesTableData.map((data: OffBudgetCategoriData) =>
+                                    data.id === value.id
+                                      ? { ...data, costPerHour: Number(newValue) }
+                                      : { ...data, costPerHour: data.costPerHour * ratio }
+                                  );
+                                }
                               : offBudgetCategoriesTableData.map((data: OffBudgetCategoriData) =>
-                                data.id === value.id ? { ...data, costPerHour: Number(newValue) === 0 ? 1 :  Number(newValue) } : data
-                              )
+                                  data.id === value.id
+                                    ? { ...data, costPerHour: Number(newValue) === 0 ? 1 : Number(newValue) }
+                                    : data
+                                )
                           )
                         }
                         size={InputSize.Micro}
@@ -208,7 +213,8 @@ const OffBudgetCategoriesPage = () => {
               );
             })}
 
-          {isOffBudgetCategoriesAdding.value && offBudgetCategoriesTableData[offBudgetCategoriesTableData.length - 1] && (
+          {isOffBudgetCategoriesAdding.value &&
+            offBudgetCategoriesTableData[offBudgetCategoriesTableData.length - 1] && (
             <tr className="row">
               <td className="cell">
                 <Input
