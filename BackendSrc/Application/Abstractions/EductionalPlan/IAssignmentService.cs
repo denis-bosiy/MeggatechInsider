@@ -7,7 +7,7 @@ namespace Application.Abstractions.EductionalPlan
     {
         List<Assignment> GetAssignmentsByYear( int year );
         List<AssignmentDifference> GetDifferencesByYear( int year );
-        void AddAssignment( int year, int classNumber, string subjectName, string teacherName, int groupCount);
+        void AddAssignment( int year, int classNumber, string subjectName, string teacherName, int groupCount );
         public void UpdateAssignment( int year, int classNumber, string subjectName, string teacherName, int groupCount );
         public void DeleteAssignment( int id );
         public Assignment GetAssignmentById( int id );
