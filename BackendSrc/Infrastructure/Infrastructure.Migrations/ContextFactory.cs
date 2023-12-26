@@ -9,7 +9,7 @@ public class ContextFactory : IDesignTimeDbContextFactory<ApplicationContext>
     public ApplicationContext CreateDbContext(string[] args)
     {
         string connectionString =
-            "Data Source=TLCORE21\\SQLEXPRESS;Initial Catalog=MeggatechInsider;Pooling=true;Integrated Security=SSPI;Encrypt=True;TrustServerCertificate=True";
+            "Data Source=DESKTOP-N396A21\\SQLEXPRESS;Initial Catalog=MeggatechInsider;Pooling=true;Integrated Security=SSPI;Encrypt=True;TrustServerCertificate=True";
         DbContextOptionsBuilder<ApplicationContext> optionalBuilder = new DbContextOptionsBuilder<ApplicationContext>();
 
         optionalBuilder.UseSqlServer( connectionString, 
