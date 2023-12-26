@@ -39,12 +39,6 @@ export class ScheduleBuilder extends AbstractScheduleBuilder {
     return schedule;
   }
 
-  private static BuildWorkdays(schedule: Schedule): Schedule {
-    schedule.workdays = [Workday.Monday, Workday.Tuesday, Workday.Wednesday, Workday.Thursday, Workday.Friday, Workday.Saturday];
-
-    return schedule;
-  }
-
   private static BuildLessonTimes(schedule: Schedule): Schedule {
     const lessonTimesForMonday: LessonTime[] = [];
     lessonTimesForMonday.push(new LessonTime(new Time(8, 0), new Time(8, 20)));
