@@ -27,7 +27,9 @@ export class CManagableTable extends CTable {
       return;
     }
 
-    this.setData([...this.data, valueToAdd]);
+    const newData: any[] = [...this.data, valueToAdd];
+    this.setData(newData);
+    this.data = newData;
     this._setIsAdding({ ...this._isAdding, value: true });
   }
 

@@ -9,5 +9,5 @@ public class ShortClassInfoDto
     [Required]
     [DisplayName( "classId" )]
     [JsonPropertyName( "classId" )]
-    public int ClassId { get; set; }
+    public string ClassId { get; set; }
 }

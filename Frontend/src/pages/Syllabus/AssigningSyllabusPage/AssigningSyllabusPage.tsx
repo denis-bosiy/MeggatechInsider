@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useContext, useState, useLayoutEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import {
   AssigningSyllabusPageData,
@@ -35,7 +35,7 @@ const DiscrepanciesSyllabus = () => {
   );
   const discrepancies = data.discrepancies;
 
-  useEffect(() => {
+  useLayoutEffect(() => {
     const params: Map<string, string> = new Map<string, string>();
     if (currentYear) {
       params.set("year", currentYear.year.toString());
@@ -57,7 +57,7 @@ const DiscrepanciesSyllabus = () => {
         );
         dispatch(ActionBuilder.saveDiscrepancies(discrepancies));
       })
-      .catch((e: any) => {
+      .catch(() => {
         dispatch(ActionBuilder.saveDiscrepancies([]));
       });
   }, [currentYear?.id]);
@@ -164,7 +164,7 @@ const AssigningSyllabusPage = () => {
       <div className="toolbar">
         <div className="toolbar__buttons-wrapper">
           {isAssigningsEditing.value ? (
-            <>
+            <div className="toolbar__buttons-box">
               <ActionButton
                 className="toolbar__button"
                 label="Сохранить"
@@ -177,7 +177,7 @@ const AssigningSyllabusPage = () => {
                 type={ActionButtonType.Negative}
                 onClick={handleResetAssignings}
               />
-            </>
+            </div>
           ) : (
             <ActionButton
               className="toolbar__button"
@@ -325,30 +325,14 @@ const AssigningSyllabusPage = () => {
                           value.groupCount
                         )}
                       </td>
-                      <td className="cell">
-                        {value.hoursByPlanOnClassOfTheStudents}
-                      </td>
-                      <td className="cell">
-                        {value.hoursOnWeekForTheClassOfTheStudents}
-                      </td>
-                      <td className="cell">
-                        {value.hoursOnWeekOnYearOnTheTeacher}
-                      </td>
-                      <td className="cell">
-                        {value.hoursOnWeekOnPeriodOnTheTeacher}
-                      </td>
-                      <td className="cell">
-                        {value.hoursIn1Subgroup}
-                      </td>
-                      <td className="cell">
-                        {value.hoursIn2Subgroup}
-                      </td>
-                      <td className="cell">
-                        {value.totalInYear}
-                      </td>
-                      <td className="cell">
-                        {value.bidShare}
-                      </td>
+                      <td className="cell">{value.hoursByPlanOnClassOfTheStudents}</td>
+                      <td className="cell">{value.hoursOnWeekForTheClassOfTheStudents}</td>
+                      <td className="cell">{value.hoursOnWeekOnYearOnTheTeacher}</td>
+                      <td className="cell">{value.hoursOnWeekOnPeriodOnTheTeacher}</td>
+                      <td className="cell">{value.hoursIn1Subgroup}</td>
+                      <td className="cell">{value.hoursIn2Subgroup}</td>
+                      <td className="cell">{value.totalInYear}</td>
+                      <td className="cell">{value.bidShare}</td>
                       <td className="cell">
                         <IconButton icon={<GarbageIcon />} onClick={() => handleDeleteAssigning(value.id.toString())} />
                       </td>

@@ -51,6 +51,298 @@ namespace Infrastructure.Migrations.Migrations
                     b.ToTable("Assignment", (string)null);
                 });
 
+            modelBuilder.Entity("Domain.CourseEntities.CourceTeachers.CourseTeacher", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<DateOnly>("BirthdayDate")
+                        .HasColumnType("date");
+
+                    b.Property<int>("ContractTypeId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("CourseTeacherName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateOnly>("EmploymentDate")
+                        .HasColumnType("date");
+
+                    b.Property<int>("ExperienceInYearsOnEmploymentDate")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasDefaultValue(0);
+
+                    b.Property<int>("Year")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ContractTypeId");
+
+                    b.ToTable("CourseTeacher", (string)null);
+                });
+
+            modelBuilder.Entity("Domain.CourseEntities.CourceTeachers.CourseTeacherAvailableHours", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<int>("CourseTeacherId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("DayOfWeek")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("CourseTeacherId");
+
+                    b.ToTable("CourseTeacherAvailableHours", (string)null);
+                });
+
+            modelBuilder.Entity("Domain.CourseEntities.CourseAssignments.CourseAssignment", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<int>("CourseId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("CourseTeacherId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("GroupCount")
+                        .HasColumnType("int");
+
+                    b.Property<int>("Year")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("CourseId");
+
+                    b.HasIndex("CourseTeacherId");
+
+                    b.ToTable("CourseAssignment", (string)null);
+                });
+
+            modelBuilder.Entity("Domain.CourseEntities.CourseEducationalPlans.CoursesEducationalPlan", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<int>("CourseId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("CourseId")
+                        .IsUnique();
+
+                    b.ToTable("CoursesEducationalPlan", (string)null);
+                });
+
+            modelBuilder.Entity("Domain.CourseEntities.CourseEducationalPlans.CoursesEducationalPlanHours", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<int>("CoursesEducationalPlanId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("HoursCount")
+                        .HasColumnType("int");
+
+                    b.Property<DateOnly>("WeekStartDate")
+                        .HasColumnType("date");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("CoursesEducationalPlanId");
+
+                    b.ToTable("CoursesEducationalPlanHours", (string)null);
+                });
+
+            modelBuilder.Entity("Domain.CourseEntities.CourseTimetables.CourseLesson", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<int>("Classroom")
+                        .HasColumnType("int");
+
+                    b.Property<int>("CourseId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("CourseTeacherId")
+                        .HasColumnType("int");
+
+                    b.Property<TimeOnly>("EndTime")
+                        .HasColumnType("time");
+
+                    b.Property<int>("LessonType")
+                        .HasColumnType("int");
+
+                    b.Property<TimeOnly>("StartTime")
+                        .HasColumnType("time");
+
+                    b.Property<int>("StudentGroupNumber")
+                        .HasColumnType("int");
+
+                    b.Property<int>("StudentGroupType")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("CourseId");
+
+                    b.HasIndex("CourseTeacherId");
+
+                    b.ToTable("CourseLesson", (string)null);
+                });
+
+            modelBuilder.Entity("Domain.CourseEntities.Courses.Course", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<int>("CourseEducationalPlanId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("CourseName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("CourseTypeId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("ExpectedGroupsCount")
+                        .HasColumnType("int");
+
+                    b.Property<int>("ExpectedHoursPerWeek")
+                        .HasColumnType("int");
+
+                    b.Property<int>("Year")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("CourseTypeId");
+
+                    b.ToTable("Course", (string)null);
+                });
+
+            modelBuilder.Entity("Domain.CourseEntities.Courses.CourseType", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("CourseTypeName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("CourseType", (string)null);
+                });
+
+            modelBuilder.Entity("Domain.EducationalPlan.EducationalPlan", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<int>("ClassNumber")
+                        .HasColumnType("int");
+
+                    b.Property<int>("Year")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("EducationalPlan", (string)null);
+                });
+
+            modelBuilder.Entity("Domain.EducationalPlan.EducationalPlanHoursByWeek", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<int>("EducationalPlanId")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("EducationalPlanSubjectId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("HoursCount")
+                        .HasColumnType("int");
+
+                    b.Property<DateOnly>("WeekStartDate")
+                        .HasColumnType("date");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("EducationalPlanId");
+
+                    b.HasIndex("EducationalPlanSubjectId");
+
+                    b.ToTable("EducationalPlanHoursByWeek", (string)null);
+                });
+
+            modelBuilder.Entity("Domain.EducationalPlan.EducationalPlanSubject", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<int?>("EducationalPlanId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("SubjectId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("EducationalPlanId");
+
+                    b.HasIndex("SubjectId");
+
+                    b.ToTable("EducationalPlanSubject", (string)null);
+                });
+
             modelBuilder.Entity("Domain.SubjectEntities.PaymentType", b =>
                 {
                     b.Property<int>("Id")
@@ -289,6 +581,9 @@ namespace Infrastructure.Migrations.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
+                    b.Property<int?>("CourseTeacherAvailableHoursId")
+                        .HasColumnType("int");
+
                     b.Property<TimeOnly>("EndTime")
                         .HasColumnType("time");
 
@@ -299,6 +594,8 @@ namespace Infrastructure.Migrations.Migrations
                         .HasColumnType("int");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("CourseTeacherAvailableHoursId");
 
                     b.ToTable("LessonTime", (string)null);
                 });
@@ -311,6 +608,9 @@ namespace Infrastructure.Migrations.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
+                    b.Property<int?>("CourseTeacherAvailableHoursId")
+                        .HasColumnType("int");
+
                     b.Property<TimeOnly>("EndTime")
                         .HasColumnType("time");
 
@@ -321,6 +621,8 @@ namespace Infrastructure.Migrations.Migrations
                         .HasColumnType("int");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("CourseTeacherAvailableHoursId");
 
                     b.ToTable("PairTime", (string)null);
                 });
@@ -364,6 +666,12 @@ namespace Infrastructure.Migrations.Migrations
                     b.Property<int>("Classroom")
                         .HasColumnType("int");
 
+                    b.Property<int>("CurrentGroup")
+                        .HasColumnType("int");
+
+                    b.Property<DateOnly>("Date")
+                        .HasColumnType("date");
+
                     b.Property<TimeOnly>("EndTime")
                         .HasColumnType("time");
 
@@ -376,14 +684,22 @@ namespace Infrastructure.Migrations.Migrations
                     b.Property<int?>("LiceumStudentGroupId")
                         .HasColumnType("int");
 
+                    b.Property<int>("NumberOfGroups")
+                        .HasColumnType("int");
+
+                    b.Property<string>("ParadeText")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<int?>("ParallelStudentGroupId")
                         .HasColumnType("int");
 
                     b.Property<TimeOnly>("StartTime")
                         .HasColumnType("time");
 
-                    b.Property<int>("StudentGroupId")
-                        .HasColumnType("int");
+                    b.Property<string>("StudentGroupGuid")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("StudentGroupType")
                         .HasColumnType("int");
@@ -427,7 +743,14 @@ namespace Infrastructure.Migrations.Migrations
                     b.Property<int>("ClassNumber")
                         .HasColumnType("int");
 
+                    b.Property<string>("Guid")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<int>("Parallel")
+                        .HasColumnType("int");
+
+                    b.Property<int>("Year")
                         .HasColumnType("int");
 
                     b.HasKey("Id");
@@ -443,10 +766,17 @@ namespace Infrastructure.Migrations.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
+                    b.Property<string>("Guid")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<int>("Parallel")
                         .HasColumnType("int");
 
                     b.Property<int>("SubgroupNumber")
+                        .HasColumnType("int");
+
+                    b.Property<int>("Year")
                         .HasColumnType("int");
 
                     b.HasKey("Id");
@@ -462,6 +792,13 @@ namespace Infrastructure.Migrations.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
+                    b.Property<string>("Guid")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("Year")
+                        .HasColumnType("int");
+
                     b.HasKey("Id");
 
                     b.ToTable("LiceumStudentGroup");
@@ -475,7 +812,14 @@ namespace Infrastructure.Migrations.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
+                    b.Property<string>("Guid")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<int>("Parallel")
+                        .HasColumnType("int");
+
+                    b.Property<int>("Year")
                         .HasColumnType("int");
 
                     b.HasKey("Id");
@@ -494,10 +838,17 @@ namespace Infrastructure.Migrations.Migrations
                     b.Property<int>("ClassNumber")
                         .HasColumnType("int");
 
+                    b.Property<string>("Guid")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<int>("Parallel")
                         .HasColumnType("int");
 
                     b.Property<int>("SubgroupNumber")
+                        .HasColumnType("int");
+
+                    b.Property<int>("Year")
                         .HasColumnType("int");
 
                     b.HasKey("Id");
@@ -578,6 +929,129 @@ namespace Infrastructure.Migrations.Migrations
                     b.Navigation("Teacher");
                 });
 
+            modelBuilder.Entity("Domain.CourseEntities.CourceTeachers.CourseTeacher", b =>
+                {
+                    b.HasOne("Domain.TeacherEntities.ContractType", "ContractType")
+                        .WithMany("CourseTeachers")
+                        .HasForeignKey("ContractTypeId")
+                        .OnDelete(DeleteBehavior.NoAction)
+                        .IsRequired();
+
+                    b.Navigation("ContractType");
+                });
+
+            modelBuilder.Entity("Domain.CourseEntities.CourceTeachers.CourseTeacherAvailableHours", b =>
+                {
+                    b.HasOne("Domain.CourseEntities.CourceTeachers.CourseTeacher", "CourseTeacher")
+                        .WithMany("AvailableHours")
+                        .HasForeignKey("CourseTeacherId")
+                        .OnDelete(DeleteBehavior.NoAction)
+                        .IsRequired();
+
+                    b.Navigation("CourseTeacher");
+                });
+
+            modelBuilder.Entity("Domain.CourseEntities.CourseAssignments.CourseAssignment", b =>
+                {
+                    b.HasOne("Domain.CourseEntities.Courses.Course", "Course")
+                        .WithMany()
+                        .HasForeignKey("CourseId")
+                        .OnDelete(DeleteBehavior.NoAction)
+                        .IsRequired();
+
+                    b.HasOne("Domain.CourseEntities.CourceTeachers.CourseTeacher", "CourseTeacher")
+                        .WithMany()
+                        .HasForeignKey("CourseTeacherId")
+                        .OnDelete(DeleteBehavior.NoAction)
+                        .IsRequired();
+
+                    b.Navigation("Course");
+
+                    b.Navigation("CourseTeacher");
+                });
+
+            modelBuilder.Entity("Domain.CourseEntities.CourseEducationalPlans.CoursesEducationalPlan", b =>
+                {
+                    b.HasOne("Domain.CourseEntities.Courses.Course", "Course")
+                        .WithOne("CourseEducationalPlan")
+                        .HasForeignKey("Domain.CourseEntities.CourseEducationalPlans.CoursesEducationalPlan", "CourseId")
+                        .OnDelete(DeleteBehavior.NoAction)
+                        .IsRequired();
+
+                    b.Navigation("Course");
+                });
+
+            modelBuilder.Entity("Domain.CourseEntities.CourseEducationalPlans.CoursesEducationalPlanHours", b =>
+                {
+                    b.HasOne("Domain.CourseEntities.CourseEducationalPlans.CoursesEducationalPlan", "CoursesEducationalPlan")
+                        .WithMany("CoursesEducationalPlanHours")
+                        .HasForeignKey("CoursesEducationalPlanId")
+                        .OnDelete(DeleteBehavior.NoAction)
+                        .IsRequired();
+
+                    b.Navigation("CoursesEducationalPlan");
+                });
+
+            modelBuilder.Entity("Domain.CourseEntities.CourseTimetables.CourseLesson", b =>
+                {
+                    b.HasOne("Domain.CourseEntities.Courses.Course", "Course")
+                        .WithMany("CourseLessons")
+                        .HasForeignKey("CourseId")
+                        .OnDelete(DeleteBehavior.NoAction)
+                        .IsRequired();
+
+                    b.HasOne("Domain.CourseEntities.CourceTeachers.CourseTeacher", "CourseTeacher")
+                        .WithMany("CourseLessons")
+                        .HasForeignKey("CourseTeacherId")
+                        .OnDelete(DeleteBehavior.NoAction)
+                        .IsRequired();
+
+                    b.Navigation("Course");
+
+                    b.Navigation("CourseTeacher");
+                });
+
+            modelBuilder.Entity("Domain.CourseEntities.Courses.Course", b =>
+                {
+                    b.HasOne("Domain.CourseEntities.Courses.CourseType", "CourseType")
+                        .WithMany("Courses")
+                        .HasForeignKey("CourseTypeId")
+                        .OnDelete(DeleteBehavior.NoAction)
+                        .IsRequired();
+
+                    b.Navigation("CourseType");
+                });
+
+            modelBuilder.Entity("Domain.EducationalPlan.EducationalPlanHoursByWeek", b =>
+                {
+                    b.HasOne("Domain.EducationalPlan.EducationalPlan", "EducationalPlan")
+                        .WithMany()
+                        .HasForeignKey("EducationalPlanId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("Domain.EducationalPlan.EducationalPlanSubject", null)
+                        .WithMany("EducationalPlanHours")
+                        .HasForeignKey("EducationalPlanSubjectId");
+
+                    b.Navigation("EducationalPlan");
+                });
+
+            modelBuilder.Entity("Domain.EducationalPlan.EducationalPlanSubject", b =>
+                {
+                    b.HasOne("Domain.EducationalPlan.EducationalPlan", null)
+                        .WithMany("Subjects")
+                        .HasForeignKey("EducationalPlanId");
+
+                    b.HasOne("Domain.SubjectEntities.Subject", "Subject")
+                        .WithMany()
+                        .HasForeignKey("SubjectId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Subject");
+                });
+
             modelBuilder.Entity("Domain.SubjectEntities.Subject", b =>
                 {
                     b.HasOne("Domain.SubjectEntities.PaymentType", "PaymentType")
@@ -630,6 +1104,20 @@ namespace Infrastructure.Migrations.Migrations
                     b.Navigation("Education");
 
                     b.Navigation("TeacherCategory");
+                });
+
+            modelBuilder.Entity("Domain.TimetableEntities.GuidebookEntities.LessonTime", b =>
+                {
+                    b.HasOne("Domain.CourseEntities.CourceTeachers.CourseTeacherAvailableHours", null)
+                        .WithMany("AvailableLessonTimes")
+                        .HasForeignKey("CourseTeacherAvailableHoursId");
+                });
+
+            modelBuilder.Entity("Domain.TimetableEntities.GuidebookEntities.PairTime", b =>
+                {
+                    b.HasOne("Domain.CourseEntities.CourceTeachers.CourseTeacherAvailableHours", null)
+                        .WithMany("AvailablePairTimes")
+                        .HasForeignKey("CourseTeacherAvailableHoursId");
                 });
 
             modelBuilder.Entity("Domain.TimetableEntities.LessonEntities.Lesson", b =>
@@ -712,6 +1200,48 @@ namespace Infrastructure.Migrations.Migrations
                         .IsRequired();
                 });
 
+            modelBuilder.Entity("Domain.CourseEntities.CourceTeachers.CourseTeacher", b =>
+                {
+                    b.Navigation("AvailableHours");
+
+                    b.Navigation("CourseLessons");
+                });
+
+            modelBuilder.Entity("Domain.CourseEntities.CourceTeachers.CourseTeacherAvailableHours", b =>
+                {
+                    b.Navigation("AvailableLessonTimes");
+
+                    b.Navigation("AvailablePairTimes");
+                });
+
+            modelBuilder.Entity("Domain.CourseEntities.CourseEducationalPlans.CoursesEducationalPlan", b =>
+                {
+                    b.Navigation("CoursesEducationalPlanHours");
+                });
+
+            modelBuilder.Entity("Domain.CourseEntities.Courses.Course", b =>
+                {
+                    b.Navigation("CourseEducationalPlan")
+                        .IsRequired();
+
+                    b.Navigation("CourseLessons");
+                });
+
+            modelBuilder.Entity("Domain.CourseEntities.Courses.CourseType", b =>
+                {
+                    b.Navigation("Courses");
+                });
+
+            modelBuilder.Entity("Domain.EducationalPlan.EducationalPlan", b =>
+                {
+                    b.Navigation("Subjects");
+                });
+
+            modelBuilder.Entity("Domain.EducationalPlan.EducationalPlanSubject", b =>
+                {
+                    b.Navigation("EducationalPlanHours");
+                });
+
             modelBuilder.Entity("Domain.SubjectEntities.PaymentType", b =>
                 {
                     b.Navigation("Subjects");
@@ -734,6 +1264,8 @@ namespace Infrastructure.Migrations.Migrations
 
             modelBuilder.Entity("Domain.TeacherEntities.ContractType", b =>
                 {
+                    b.Navigation("CourseTeachers");
+
                     b.Navigation("Teachers");
                 });
 

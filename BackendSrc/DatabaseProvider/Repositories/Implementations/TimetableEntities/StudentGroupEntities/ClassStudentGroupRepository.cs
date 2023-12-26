@@ -12,4 +12,8 @@ public class ClassStudentGroupRepository<T> : Repository<T>, IClassStudentGroupR
     public List<T> GetAll() => Entities.ToList();
 
     public T GetById( int id ) => Entities.FirstOrDefault( sg => sg.Id == id ) ?? throw new InvalidOperationException();
+
+    public T GetByGuid( string guid ) => Entities.FirstOrDefault( sg => sg.Guid == guid );
+
+    public List<T> GetByYear( int year ) => Entities.Where( sg => sg.Year == year ).ToList();
 }

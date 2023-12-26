@@ -21,7 +21,7 @@ const CategoriesTeachersCategoriesCell = ({
   if (isAdding) {
     return (
       <Input
-        placeholder=""
+        placeholder="Категория преподавателя"
         value={label}
         onValueChange={(newCategory: string) =>
           setItems(
@@ -56,7 +56,7 @@ const CategoriesTeachersCoefficientCell = ({
     <div className="categories-teachers-coefficient-cell">
       {isAdding ? (
         <Input
-          placeholder=""
+          placeholder="Коэффицент"
           value={coefficient.toString()}
           onValueChange={(newCoefficient: string) =>
             setItems(
@@ -121,7 +121,9 @@ const CategoriesTeachersTable = (props: CategoriesTeachersTableProps) => {
     <table className="table -fill -list">
       <thead className="header">
         <tr className="row">
-          <th className="cell -filter" onClick={() => props.handleSort("category")}>Категории преподавателей</th>
+          <th className="cell -filter" onClick={() => props.handleSort("category")}>
+            Категории преподавателей
+          </th>
           <th className="cell">Коэффициент</th>
         </tr>
       </thead>

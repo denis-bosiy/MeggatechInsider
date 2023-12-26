@@ -73,8 +73,11 @@ export const ScheduleComponent = (props: IScheduleProps) => {
           >
             {lessonTimeIndex === 0 && workdayElement}
             <td className="cell">
-              {lessonTime.startTime.hours}.{lessonTime.startTime.minutes}-<br />
-              {lessonTime.endTime.hours}.{lessonTime.endTime.minutes}
+              {lessonTime.startTime.hours < 10 ? "0" + lessonTime.startTime.hours : lessonTime.startTime.hours}.
+              {lessonTime.startTime.minutes < 10 ? "0" + lessonTime.startTime.minutes : lessonTime.startTime.minutes}-
+              <br />
+              {lessonTime.endTime.hours < 10 ? "0" + lessonTime.endTime.hours : lessonTime.endTime.hours}.
+              {lessonTime.endTime.minutes < 10 ? "0" + lessonTime.endTime.minutes : lessonTime.endTime.minutes}
             </td>
             {props.schedule.getGroups().map((group: string, groupIndex: number) => {
               return props.schedule
@@ -128,7 +131,7 @@ export const ScheduleComponent = (props: IScheduleProps) => {
                     return (
                       <td
                         className={classNames(
-                          "cell schedule__cell",
+                          "cell -controllable schedule__cell",
                           lesson.lessonType === LessonType.Important ? "-warning" : "",
                           cellCoordinate
                         )}
@@ -145,7 +148,7 @@ export const ScheduleComponent = (props: IScheduleProps) => {
                         ) : (
                           <></>
                         )}
-                        <div className="schedule__cell-controls">
+                        <div className="cell__controls">
                           <IconButton
                             icon={<GarbageIcon />}
                             small={true}
@@ -159,7 +162,13 @@ export const ScheduleComponent = (props: IScheduleProps) => {
                   if (isPartOfTheLesson) {
                     return <></>;
                   }
-                  return <td className="cell schedule__cell" key={cellCoordinate}></td>;
+                  return (
+                    <td className="cell -controllable schedule__cell" key={cellCoordinate}>
+                      <div className="cell__controls">
+                        <IconButton icon={<PenIcon />} small={true} onClick={() => alert("Редактирование урока")} />
+                      </div>
+                    </td>
+                  );
                 });
             })}
           </tr>
@@ -168,7 +177,7 @@ export const ScheduleComponent = (props: IScheduleProps) => {
   });
 
   return (
-    <table className="table schedule">
+    <table className="table -schedule schedule">
       <thead className="header">
         <tr className="row">
           <th className="cell" rowSpan={2}></th>
