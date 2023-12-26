@@ -3,7 +3,7 @@ name: Test project
 on:
   push:
     branches:
-      - '*'
+      - "*"
 
 jobs:
   test:
@@ -12,9 +12,13 @@ jobs:
     steps:
       - name: Check out the repo
         uses: actions/checkout@v3
-      
+
       - name: Install packages
         run: npm i
-        
+        with:
+          context: ./Frontend/
+
       - name: Run tests
         run: npm test
+        with:
+          context: ./Frontend/
