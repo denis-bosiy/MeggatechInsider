@@ -246,7 +246,7 @@ const YearImplementationMonitoringPage = () => {
                 <th
                   className="cell -link"
                   key={month}
-                  onClick={() => handleMonthClicking(month.split("/")[0])}
+                  onClick={() => handleMonthClicking((Number(month.split("/")[0]) - 1).toString())}
                   title="Перейти в табель выполнения за месяц"
                 >
                   {month}
@@ -491,7 +491,9 @@ const YearImplementationMonitoringPage = () => {
                     {index === 0 && (
                       <React.Fragment>
                         <td colSpan={3}></td>
-                        <td className="cell" rowSpan={teacher.additionalLoads.length}>{teacherAdditionalLoadsSum}</td>
+                        <td className="cell" rowSpan={teacher.additionalLoads.length}>
+                          {teacherAdditionalLoadsSum}
+                        </td>
                       </React.Fragment>
                     )}
                   </tr>
