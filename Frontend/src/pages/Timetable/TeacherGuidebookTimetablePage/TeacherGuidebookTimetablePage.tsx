@@ -25,9 +25,11 @@ import { ResponseBuilder } from "../../../api/Responses/ResponseBuilder";
 import { getWorkdayByCode } from "../../../utils/getWorkdayByCode";
 import { shortenWorkday } from "../../../utils/workdayShortener";
 import Multiselect from "../../../components/Multiselect/Multiselect";
+import Loader from "../../../components/Loader/Loader";
 
 const TeacherGuidebookTimetablePage = () => {
   const httpService: HttpService = new HttpService();
+  const [isDataLoading, setDataLoading] = useState<boolean>(true);
 
   const { guidebook } = useSelector(
     (state: { teacherGuidebookTimetablePageStore: TeacherGuidebookTimetablePageData }) =>
@@ -51,13 +53,14 @@ const TeacherGuidebookTimetablePage = () => {
       params.set("year", currentYear.year.toString());
       params.set("week", currentWeek.week.toString());
     }
-
+    setDataLoading(true);
     // httpService.getByArbitraryUrl(Endpoint.TimetableAvailableHours, params).then((data: any) => {
 
     // });
     httpService
       .getByArbitraryUrl(Endpoint.TimetableTeachers, params)
       .then((data: any) => {
+        setDataLoading(false);
         const teachersResponse: TimetableTeacherResponse[] = ResponseBuilder.BuildTimetableTeacherResponses(data);
         const teachers: Guidebook = teachersResponse.map((teacher: TimetableTeacherResponse) => {
           return {
@@ -84,6 +87,7 @@ const TeacherGuidebookTimetablePage = () => {
         setGuidebookTableData(structuredClone(teachers));
       })
       .catch(() => {
+        setDataLoading(false);
         // dispatch(TeacherGuidebookTimetableActionBuilder.setTeachers([]));
         // setGuidebookTableData(structuredClone([]));
       });
@@ -138,6 +142,10 @@ const TeacherGuidebookTimetablePage = () => {
       };
     });
   };
+
+  if (isDataLoading) {
+    return <Loader />;
+  }
 
   return (
     <>

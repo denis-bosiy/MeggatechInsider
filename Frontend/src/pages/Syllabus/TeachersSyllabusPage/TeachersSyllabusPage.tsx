@@ -20,6 +20,7 @@ import { Endpoint } from "../../../api/endpoints";
 import { SyllabusTeacherResponse } from "../../../api/Responses/SyllabusTeacherResponse";
 import { ResponseBuilder } from "../../../api/Responses/ResponseBuilder";
 import { HeaderData } from "../../../layouts/Header/model/types";
+import Loader from "../../../components/Loader/Loader";
 
 const TeachersSyllabusPage = () => {
   // TODO: Добавить вытягивание этих данных с бэкенда
@@ -35,6 +36,7 @@ const TeachersSyllabusPage = () => {
     { id: "1", content: "Степень к.н." },
     { id: "2", content: "Докторская степень" }
   ];
+  const [isDataLoading, setDataLoading] = useState<boolean>(true);
 
   const httpService = new HttpService();
   const { openModal } = useContext(ModalSettingsContext);
@@ -59,10 +61,11 @@ const TeachersSyllabusPage = () => {
     if (currentYear) {
       params.set("year", currentYear.year.toString());
     }
-
+    setDataLoading(true);
     httpService
       .getByArbitraryUrl(Endpoint.SyllabusTeachers, params)
       .then((data: any) => {
+        setDataLoading(false);
         const teachersResponse: SyllabusTeacherResponse[] = ResponseBuilder.BuildSyllabusTeachersResponse(data);
         const teachers: TeacherSyllabusData[] = teachersResponse.map((teacherResponse: SyllabusTeacherResponse) => {
           return {
@@ -89,6 +92,7 @@ const TeachersSyllabusPage = () => {
       .catch(() => {
         dispatch(ActionBuilder.saveTeachers([]));
         setTeachersTableData([]);
+        setDataLoading(false);
       });
   }, [currentYear?.id]);
 
@@ -142,6 +146,10 @@ const TeachersSyllabusPage = () => {
       openModal
     ]);
   };
+
+  if (isDataLoading) {
+    return <Loader />;
+  }
 
   return (
     <>
