@@ -173,13 +173,13 @@ public sealed class EducationalPlanController : ControllerBase
     [ProducesResponseType( StatusCodes.Status404NotFound )]
     public IActionResult DeleteSubject( [FromBody] DeleteSubjectRequestDto deleteSubject )
     {
-        if (_subjectService.GetSubjectById( deleteSubject.Id ) is not null) 
+        if ( _subjectService.GetSubjectById( deleteSubject.Id ) is not null ) 
         {
             _subjectService.DeleteSubject( deleteSubject.Id );
         }
         else
         {
-            return NotFound("Не найдено такого предмета");
+            return NotFound( "Не найдено такого предмета" );
         }
 
         return Ok();
@@ -189,7 +189,7 @@ public sealed class EducationalPlanController : ControllerBase
     [ProducesResponseType( StatusCodes.Status200OK )]
     [ProducesResponseType( StatusCodes.Status400BadRequest )]
     [ProducesResponseType( StatusCodes.Status404NotFound )]
-    public IActionResult UpdateSubjects( [FromBody] UpdateSubjectsRequestDto updateSubjects)
+    public IActionResult UpdateSubjects( [FromBody] UpdateSubjectsRequestDto updateSubjects )
     {
         foreach( SubjectDto subject in updateSubjects.Subjects )
         {
@@ -207,15 +207,14 @@ public sealed class EducationalPlanController : ControllerBase
                     subject.TenthGroupsCount,
                     subject.EleventhNumber,
                     subject.EleventhGroupsCount,
-                    subject.IsFinalExam
-                    );
+                    subject.IsFinalExam );
             }
             else
             {
                 return NotFound( "Не найдено такого предмета" );
             }
         }
-
+        ы
         return Ok();
     }
 
