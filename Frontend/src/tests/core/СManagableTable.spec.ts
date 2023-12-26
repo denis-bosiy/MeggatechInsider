@@ -4,15 +4,17 @@ import { TableType } from "../../core/Table/TableType";
 describe("CManagableTable", () => {
   it("should add", () => {
     const isAdding: { value: boolean } = { value: false };
-    const setIsAdding = jest.fn((newIsAdding: { value: boolean }) => {});
+    const setIsAdding = jest.fn((newIsAdding: { value: boolean }) => {
+      isAdding.value = newIsAdding.value;
+    });
     let data: any[] = [];
     const setData = jest.fn((newData: any[]) => {
-        data = newData;
+      data = newData;
     });
     const table: CManagableTable = new CManagableTable(
       undefined,
       data,
-      () => {},
+      setData,
       TableType.Managable,
       isAdding,
       setIsAdding
@@ -28,80 +30,98 @@ describe("CManagableTable", () => {
     expect(table.data[0]).toBe("Русский язык");
   });
 
-  //   it("should add", () => {
-  //     const isAdding: { value: boolean } = { value: false };
-  //     const setIsAdding = jest.fn((newIsAdding: { value: boolean }) => {
-  //         isAdding.value = newIsAdding.value;
-  //     });
-  //     const table: CManagableTable = new CManagableTable(
-  //       undefined,
-  //       [],
-  //       () => {},
-  //       TableType.Editable,
-  //       isAdding,
-  //       setIsAdding
-  //     );
+  it("should not able to add twice", () => {
+    const isAdding: { value: boolean } = { value: false };
+    const setIsAdding = jest.fn((newIsAdding: { value: boolean }) => {
+      isAdding.value = newIsAdding.value;
+    });
+    let data: any[] = [];
+    const setData = jest.fn((newData: any[]) => {
+      data = newData;
+    });
+    const table: CManagableTable = new CManagableTable(
+      undefined,
+      data,
+      setData,
+      TableType.Managable,
+      isAdding,
+      setIsAdding
+    );
 
-  //     table.edit();
+    table.add("Русский язык");
+    table.add("Геометрия");
 
-  //     expect(setIsEditing.mock.calls.length).toBe(1);
-  //     expect(isEditing.value).toBeTruthy();
-  //   });
+    expect(setIsAdding.mock.calls.length).toBe(1);
+    expect(isAdding.value).toBeTruthy();
+    expect(data.length).toBe(1);
+    expect(data[0]).toBe("Русский язык");
+    expect(table.data.length).toBe(1);
+    expect(table.data[0]).toBe("Русский язык");
+  });
 
-  //   it("should apply", () => {
-  //     const isEditing: { value: boolean } = { value: false };
-  //     const setIsEditing = jest.fn((newIsEditing: { value: boolean }) => {
-  //       isEditing.value = newIsEditing.value;
-  //     });
-  //     let data: any[] = [];
-  //     const setData = jest.fn((newData: any[]) => {
-  //       data = newData;
-  //     });
-  //     const table: CEditableTable = new CEditableTable(
-  //       undefined,
-  //       ["Геометрия"],
-  //       () => {},
-  //       TableType.Editable,
-  //       isEditing,
-  //       setIsEditing
-  //     );
+  it("should not able to apply adding when not any adding has happened", () => {
+    const isAdding: { value: boolean } = { value: false };
+    const setIsAdding = jest.fn((newIsAdding: { value: boolean }) => {
+      isAdding.value = newIsAdding.value;
+    });
+    let data: any[] = [];
+    const setData = jest.fn((newData: any[]) => {
+      data = newData;
+    });
+    let storeData: any[] = [];
+    const setStoreData = jest.fn((newStoreData: any[]) => {
+      storeData = newStoreData;
+    });
+    const table: CManagableTable = new CManagableTable(
+      undefined,
+      data,
+      setData,
+      TableType.Managable,
+      isAdding,
+      setIsAdding
+    );
 
-  //     table.edit();
-  //     table.apply(setData);
+    table.applyAdding(setStoreData);
 
-  //     expect(setIsEditing.mock.calls.length).toBe(2);
-  //     expect(isEditing.value).toBeFalsy();
-  //     expect(setData.mock.calls.length).toBe(1);
-  //     expect(data.length).toBe(1);
-  //     expect(data[0]).toBe("Геометрия");
-  //   });
+    expect(setIsAdding.mock.calls.length).toBe(0);
+    expect(isAdding.value).toBeFalsy();
+    expect(data.length).toBe(0);
+    expect(table.data.length).toBe(0);
+    expect(storeData.length).toBe(0);
+  });
 
-  //   it("should cancel", () => {
-  //     const isEditing: { value: boolean } = { value: false };
-  //     const setIsEditing = jest.fn((newIsEditing: { value: boolean }) => {
-  //       isEditing.value = newIsEditing.value;
-  //     });
-  //     let data: any[] = ["Геометрия"];
-  //     const setData = (newData: any[]) => {
-  //       data = newData;
-  //     };
-  //     const table: CEditableTable = new CEditableTable(
-  //       undefined,
-  //       data,
-  //       setData,
-  //       TableType.Editable,
-  //       isEditing,
-  //       setIsEditing
-  //     );
+  it("should apply adding", () => {
+    const isAdding: { value: boolean } = { value: false };
+    const setIsAdding = jest.fn((newIsAdding: { value: boolean }) => {
+      isAdding.value = newIsAdding.value;
+    });
+    let data: any[] = [];
+    const setData = jest.fn((newData: any[]) => {
+      data = newData;
+    });
+    let storeData: any[] = [];
+    const setStoreData = jest.fn((newStoreData: any[]) => {
+      storeData = newStoreData;
+    });
+    const table: CManagableTable = new CManagableTable(
+      undefined,
+      data,
+      setData,
+      TableType.Managable,
+      isAdding,
+      setIsAdding
+    );
 
-  //     table.edit();
-  //     table.cancel(["Русский язык"]);
+    table.add("Русский язык");
+    table.applyAdding(setStoreData);
 
-  //     expect(setIsEditing.mock.calls.length).toBe(2);
-  //     expect(isEditing.value).toBeFalsy();
-  //     expect(table.data.length).toBe(1);
-  //     expect(table.data[0]).toBe("Русский язык");
-  //     expect(data.length).toBe(1);
-  //     expect(data[0]).toBe("Русский язык");
-  //   });
+    expect(setIsAdding.mock.calls.length).toBe(2);
+    expect(isAdding.value).toBeFalsy();
+    expect(data.length).toBe(1);
+    expect(data[0]).toBe("Русский язык");
+    expect(table.data.length).toBe(1);
+    expect(table.data[0]).toBe("Русский язык");
+    expect(storeData.length).toBe(1);
+    expect(storeData[0]).toBe("Русский язык");
+  });
 });
