@@ -5,6 +5,7 @@ using DatabaseProvider.Configurations.CourseEntitiesConfigurations.Courses;
 using DatabaseProvider.Configurations.CourseEntitiesConfigurations.CourseTeachers;
 using DatabaseProvider.Configurations.CourseEntitiesConfigurations.CourseTimetables;
 using DatabaseProvider.Configurations.EducationalPlanConfigurations;
+using DatabaseProvider.Configurations.ReportEntitiesConfigurations.SubdeanEntities;
 using DatabaseProvider.Configurations.SubjectEntitiesConfigurations;
 using DatabaseProvider.Configurations.TeacherEntitiesConfigurations;
 using DatabaseProvider.Configurations.TimetableEntitiesConfigurations.GuidebookEntities;
@@ -85,6 +86,10 @@ public class ApplicationContext : DbContext
         modelBuilder.ApplyConfiguration( new EducationalPlanConfiguration() );
         modelBuilder.ApplyConfiguration( new EducationalPlanHoursByWeekConfiguration() );
         modelBuilder.ApplyConfiguration( new EducationalPlanSubjectConfiguration() );
+
+        //subdean report comments
+        modelBuilder.ApplyConfiguration( new MonthCommentConfiguration() );
+        modelBuilder.ApplyConfiguration( new YearCommentConfiguration() );
     }
 
     protected override void OnConfiguring( DbContextOptionsBuilder optionsBuilder )
