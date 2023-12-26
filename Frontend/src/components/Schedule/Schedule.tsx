@@ -16,6 +16,7 @@ import { GarbageIcon, PenIcon } from "../../icons";
 interface IScheduleProps {
   schedule: ISchedule;
   handleDeleteLesson: (lessonId: string) => void;
+  showHeader?: boolean,
 }
 
 export const ScheduleComponent = (props: IScheduleProps) => {
@@ -178,7 +179,7 @@ export const ScheduleComponent = (props: IScheduleProps) => {
 
   return (
     <table className="table -schedule schedule">
-      <thead className="header">
+      <thead className={`header ${props.showHeader ? "" : "schedule-header_hidden"}`}>
         <tr className="row">
           <th className="cell" rowSpan={2}></th>
           <th className="cell" rowSpan={2}></th>
