@@ -32,6 +32,7 @@ import { yearImplementationMonitoringPageReducer } from "../pages/YearImplementa
 import {
   lessonsScheduleCoursesTimetablePageReducer
 } from "../pages/CoursesTimetable/LessonsScheduleCoursesTimetablePage/model/reducer";
+import { sybjectSettingsPageReducer } from "../pages/Settings/SubjectSettingsPage/model/reducer";
 
 export default combineReducers({
   testPageStore: testPageReducer,
@@ -65,4 +66,5 @@ export default combineReducers({
   tarifficationReportPageStore: tarifficationReportPageReducer,
   yearImplementationMonitoringPageStore: yearImplementationMonitoringPageReducer,
   lessonsScheduleCoursesTimetablePageStore: lessonsScheduleCoursesTimetablePageReducer,
+  sybjectSettingsPageStore: sybjectSettingsPageReducer,
 });

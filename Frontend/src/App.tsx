@@ -41,6 +41,7 @@ import LessonsScheduleCoursesTimetablePage
   from "./pages/CoursesTimetable/LessonsScheduleCoursesTimetablePage/LessonsScheduleCoursesTimetablePage";
 import YearImplementationMonitoringPage from "./pages/YearImplementationMonitoringPage/YearImplementationMonitoringPage";
 import NotFoundPage from "./pages/NotFoundPage/NotFoundPage";
+import SubjectSettingsPage from "./pages/Settings/SubjectSettingsPage/SubjectSettingsPage";
 
 const queryClient = new QueryClient();
 const App = (): React.JSX.Element => {
@@ -60,6 +61,7 @@ const App = (): React.JSX.Element => {
                   <Route path={AppRouter.Basic} element={<BasicSettingsPage />} />
                   <Route path={AppRouter.Timetable} element={<TimetableSettingsPage />} />
                   <Route path={AppRouter.Teachers} element={<TeacherSettingsPage />} />
+                  <Route path={AppRouter.Subjects} element={<SubjectSettingsPage />} />
                 </Route>
                 <Route path={AppRouter.Timetable}>
                   <Route index element={<Navigate to={AppRouter.TeachersGuidebook} replace />} />
