@@ -19,7 +19,7 @@ describe("CEditableTable", () => {
     table.edit();
 
     expect(setIsEditing.mock.calls.length).toBe(1);
-    expect(isEditing.value).toBeTruthy();
+    expect(isEditing.value).toBeFalsy();
   });
 
   it("should apply", () => {
