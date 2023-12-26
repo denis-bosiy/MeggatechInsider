@@ -7,14 +7,15 @@ import { CTable } from "../../../core/Table/CTable";
 import { CTableManager } from "../../../core/Table/CTableManager";
 import { TableType } from "../../../core/Table/TableType";
 import { SortingOrder } from "../../../core/Table/SortingOrder";
-import { CategorySetting, DepthTypeSetting, FinancingSetting, IsBasisSetting, SettingsData } from "./model/types";
+import { CategorySetting, DepthTypeSetting, FinancingSetting, IsBasisSetting, SettingsData, TypeSetting } from "./model/types";
 import { guidGenerator } from "../../../utils/guidGenerator";
 import { SybjectSettingsActionBuilder } from "./model/actions";
 import ModalSettingsContext from "../../../utils/ModalSettingsContext";
 import ActionButton, { ActionButtonType } from "../../../components/ActionButton/ActionButton";
-import { CheckMarkIcon, GarbageIcon, PlusIcon } from "../../../icons";
+import { CheckMarkIcon, GarbageIcon, PenIcon, PlusIcon } from "../../../icons";
 import IconButton, { IconButtonType } from "../../../components/IconButton/IconButton";
 import "./SubjectSettingsPage.scss";
+import Select, { ISelectOption, SelectSize } from "../../../components/Select/Select";
 
 //1 table
 const FinancingSettingsTab = () => {
@@ -562,10 +563,295 @@ const SybjectGuidebookSettingsTab = () => {
   );
 };
 
+//5 table
+const TypeSettingsTab = () => {
+  const { openModal } = useContext(ModalSettingsContext);
+  const dispatch = useDispatch();
+  const dataType = useSelector(
+    (state: { sybjectSettingsPageStore: SettingsData }) =>
+      state.sybjectSettingsPageStore
+  ).typeSetting;
+  const [searchQuery, setSearchQuery] = useState<string>("");
+  const [isTableAdding, setIsTableAdding] = useState<{ value: boolean }>({ value: false });
+  const [isTableEditing, setIsTableEditing] = useState<{ value: boolean }>({ value: false });
+  const [typeTableData, setTypeTableData] = useState<TypeSetting[]>(
+    structuredClone(dataType)
+  );
+  const typeTableBuilder: CTableBuilder = new CTableBuilder(typeTableData, setTypeTableData);
+  typeTableBuilder.addManageFeature(isTableAdding, setIsTableAdding);
+  typeTableBuilder.addEditFeature(isTableEditing, setIsTableEditing);
+  typeTableBuilder.addSearchFeature();
+  const typeTable: CTable = typeTableBuilder.getTable();
+  const typeTableManager: CTableManager = new CTableManager(typeTable);
+
+  const handleSave = () => {
+    typeTableManager.invokeFunction("apply", TableType.Editable, [
+      (data: any[]) => dispatch(SybjectSettingsActionBuilder.saveTypeSettings(data))
+    ]);
+  };
+  const handleReset = () => {
+    typeTableManager.invokeFunction("cancel", TableType.Editable, [dataType]);
+  };
+  const editOff = (): void => {
+    typeTableManager.invokeFunction("edit", TableType.Editable, []);
+  };
+
+  const handleAdding = (): void => {
+    typeTableManager.invokeFunction("add", TableType.Managable, [
+      {
+        id: guidGenerator(),
+        subjectType: "",
+        basisType: "Основной",
+        depthType: "Углубленный",
+      }
+    ]);
+  };
+  const handleApplyingNewT = (): void => {
+    typeTableManager.invokeFunction("applyAdding", TableType.Managable, [
+      (data: any[]) => dispatch(SybjectSettingsActionBuilder.saveTypeSettings(data))
+    ]);
+  };
+  const handleSearch = (): void => {
+    typeTableManager.invokeFunction("search", TableType.Searchable, [
+      searchQuery,
+      dataType
+    ]);
+  };
+  const handleSort = (columnName: string): void => {
+    typeTableManager.invokeFunction("sort", TableType.Default, [columnName, SortingOrder.Ascending]);
+  };
+  const handleDelete = (id: string): void => {
+    typeTableManager.invokeFunction("delete", TableType.Managable, [
+      id,
+      (data: any[]) => dispatch(SybjectSettingsActionBuilder.saveTypeSettings(data)),
+      openModal
+    ]);
+  };
+  const basisOption: ISelectOption[] = [
+    { id: "1", content: "Основной" },
+    { id: "2", content: "Дополнительный" },
+  ];
+
+  const depthOption: ISelectOption[] = [
+    { id: "1", content: "Углубленный" },
+    { id: "2", content: "Не углубленный" },
+  ];
+
+  return (
+    <>
+      <div className="toolbar">
+        <div className="toolbar__buttons-wrapper">
+          {isTableEditing.value ? (
+            <>
+              <ActionButton
+                className="toolbar__button"
+                label="Сохранить"
+                type={ActionButtonType.Positive}
+                onClick={handleSave}
+              />
+              <ActionButton
+                className="toolbar__button"
+                label="Отменить"
+                type={ActionButtonType.Negative}
+                onClick={handleReset}
+              />
+            </>
+          ) : (
+            <ActionButton
+              className="toolbar__button"
+              label="Редактировать"
+              icon={<PenIcon width={18} height={18} />}
+              type={ActionButtonType.Default}
+              onClick={editOff}
+            />
+          )}
+          <ActionButton
+            label="Добавить"
+            type={ActionButtonType.Warning}
+            icon={<PlusIcon />}
+            onClick={handleAdding}
+          />
+        </div>
+        <div className="toolbar__buttons-wrapper">
+          <Input
+            className="toolbar__search"
+            placeholder="Поиск"
+            value={searchQuery}
+            onValueChange={setSearchQuery}
+            size={InputSize.Default}
+            type={InputType.Search}
+            onSearch={handleSearch}
+          /> 
+        </div>
+      </div>
+      <table className="table -fill -list">
+        <thead className="header">
+          <tr className="row">
+            <th className="cell -filter" onClick={() => handleSort("subjectType")}>
+              Тип
+            </th>
+            <th className="cell -filter" onClick={() => handleSort("basisType")}>
+              Является основным
+            </th>
+            <th className="cell -filter" onClick={() => handleSort("depthType")}>
+              Является углубленным
+            </th>
+          </tr>
+        </thead>
+        <tbody>
+          {typeTableData
+            .filter((data: TypeSetting, index: number) =>
+              !isTableAdding.value || index !== typeTableData.length - 1
+            )
+            .map((value: TypeSetting) => {
+              return (
+                <tr className="row" key={value.id}>
+                  <td className="cell">
+                    {isTableEditing.value ? (
+                      <Input
+                        placeholder="Наименование"
+                        value={value.subjectType}
+                        onValueChange={(newValue: string) =>
+                          setTypeTableData(
+                            typeTableData.map((data: TypeSetting) =>
+                              data.id === value.id ? { ...data, subjectType: newValue } : data
+                            )
+                          )
+                        }
+                        size={InputSize.Micro}
+                      />
+                    ) : (
+                      value.subjectType
+                    )}
+                  </td>
+                  <td className="cell">
+                    {isTableEditing.value ? (
+                      <Select
+                        currentValue={basisOption.find(e => e.content === value.basisType)}
+                        options={basisOption}
+                        onValueChange={(newValue: string) => {
+                          const selectedOption = basisOption.find(e => e.id === newValue);
+                          if (selectedOption) {
+                            setTypeTableData(
+                              typeTableData.map((data: TypeSetting) =>
+                                data.id === value.id ? {
+                                  ...data,
+                                  basisType: selectedOption.content
+                                } : data
+                              )
+                            );
+                          }
+                        }}
+                        size={SelectSize.Micro}
+                      />
+                    ) : (
+                      value.basisType
+                    )}
+                  </td>
+                  <td className="cell">
+                    {isTableEditing.value ? (
+                      <Select
+                        currentValue={depthOption.find(e => e.content === value.depthType)}
+                        options={depthOption}
+                        onValueChange={(newValue: string) => {
+                          const selectedOption = depthOption.find(e => e.id === newValue);
+                          if (selectedOption) {
+                            setTypeTableData(
+                              typeTableData.map((data: TypeSetting) =>
+                                data.id === value.id ? {
+                                  ...data,
+                                  depthType: selectedOption.content
+                                } : data
+                              )
+                            );
+                          }
+                        }}
+                        size={SelectSize.Micro}
+                      />
+                    ) : (
+                      value.depthType
+                    )}
+                  </td>
+                  <td className="cell">
+                    <IconButton icon={<GarbageIcon />} onClick={() => handleDelete(value.id.toString())} />
+                  </td>
+                </tr>
+              );
+            })}
+
+          {isTableAdding.value && typeTableData[typeTableData.length - 1] && (
+            <tr className="row">
+              <td className="cell">
+                <Input
+                  placeholder="Наименование"
+                  value={typeTableData[typeTableData.length - 1].subjectType}
+                  onValueChange={(newLabel: string) => {
+                    setTypeTableData(
+                      typeTableData.map((data: TypeSetting) =>
+                        data.id === typeTableData[typeTableData.length - 1].id
+                          ? { ...data, subjectType: newLabel }
+                          : data
+                      )
+                    );
+                  }}
+                  size={InputSize.Micro}
+                />
+              </td>
+              <td className="cell">
+                <Select
+                  options={basisOption}
+                  onValueChange={(newValue: string) => {
+                    const selectedOption = basisOption.find(e => e.id === newValue);
+                    if (selectedOption) {
+                      setTypeTableData(
+                        typeTableData.map((data: TypeSetting) =>
+                          data.id === typeTableData[typeTableData.length - 1].id
+                            ? { ...data, basisType: selectedOption.content}
+                            : data
+                        )
+                      );
+                    }
+                  }}
+                  size={SelectSize.Micro}
+                />
+              </td>
+              <td className="cell">
+                <Select
+                  options={depthOption}
+                  onValueChange={(newValue: string) => {
+                    const selectedOption = depthOption.find(e => e.id === newValue);
+                    if (selectedOption) {
+                      setTypeTableData(
+                        typeTableData.map((data: TypeSetting) =>
+                          data.id === typeTableData[typeTableData.length - 1].id
+                            ? { ...data, depthType: selectedOption.content}
+                            : data
+                        )
+                      );
+                    }
+                  }}
+                  size={SelectSize.Micro}
+                />
+              </td>
+              <td className="cell">
+                <IconButton
+                  icon={<CheckMarkIcon />}
+                  type={IconButtonType.Secondary}
+                  onClick={handleApplyingNewT}
+                />
+              </td>
+            </tr>
+          )}
+        </tbody>
+      </table> 
+    </>
+  );
+};
+
 
 const SubjectSettingsPage = () => {
   const [tabParams, setTabParams] = useSearchParams();
-
+  
   return (
     <>
       {((tabParams.get("tab")) == "finances") ? (
@@ -573,6 +859,9 @@ const SubjectSettingsPage = () => {
         : (<></>) }
       {((tabParams.get("tab")) == "guidebooks") ? (
         <SybjectGuidebookSettingsTab />) 
+        : (<></>)}
+      {((tabParams.get("tab")) == "types") ? (
+        <TypeSettingsTab />) 
         : (<></>) }
     </>
   );
