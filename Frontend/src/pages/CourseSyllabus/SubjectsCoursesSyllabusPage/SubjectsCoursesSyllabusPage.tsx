@@ -276,7 +276,7 @@ const SubjectsCoursesSyllabusPage = () => {
             <tr className="row">
               <td className="cell">
                 <Input
-                  placeholder="Наименование"
+                  placeholder="Курс"
                   value={subjectsTableData[subjectsTableData.length - 1].name}
                   onValueChange={(newLabel: string) => {
                     setSubjectsTableData(

@@ -12,6 +12,7 @@ export enum ButtonType {
 export enum ButtonSize {
   Kilo = "KILO",
   Fixed = "FIXED",
+  Small = "SMALL",
   Default = "DEFAULT"
 }
 

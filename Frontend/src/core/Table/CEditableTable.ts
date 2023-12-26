@@ -37,6 +37,7 @@ export class CEditableTable extends CTable {
       return;
     }
     this.setData(storeData);
+    this.data = storeData;
     this._setIsEditing({ ...this._isEditing, value: false });
   }
 }

@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useContext, useState, useLayoutEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { SubjectsSyllabusPageData, SubjectSyllabusData } from "./model/types";
 import { ActionBuilder } from "./model/actions";
@@ -54,7 +54,7 @@ const SubjectsSyllabusPage = () => {
   const subjectsTable: CTable = subjectsTableBuilder.getTable();
   const subjectsTableManager: CTableManager = new CTableManager(subjectsTable);
 
-  useEffect(() => {
+  useLayoutEffect(() => {
     const params: Map<string, string> = new Map<string, string>();
     if (currentYear) {
       params.set("year", currentYear.year.toString());
@@ -140,7 +140,7 @@ const SubjectsSyllabusPage = () => {
       <div className="toolbar">
         <div className="toolbar__buttons-wrapper">
           {isSubjectsEditing.value ? (
-            <>
+            <div className="toolbar__buttons-box">
               <ActionButton
                 className="toolbar__button"
                 label="Сохранить"
@@ -153,7 +153,7 @@ const SubjectsSyllabusPage = () => {
                 type={ActionButtonType.Negative}
                 onClick={handleResetSubjects}
               />
-            </>
+            </div>
           ) : (
             <ActionButton
               className="toolbar__button"
@@ -437,7 +437,7 @@ const SubjectsSyllabusPage = () => {
             <tr className="row">
               <td className="cell">
                 <Input
-                  placeholder="Наименование"
+                  placeholder="Предмет"
                   value={subjectsTableData[subjectsTableData.length - 1].subjectName}
                   onValueChange={(newLabel: string) => {
                     setSubjectsTableData(

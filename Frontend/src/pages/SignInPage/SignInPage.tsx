@@ -28,7 +28,6 @@ const SignInPage = () => {
           <Notification className="sign-in__notification" title="Ошибка" description="Введен неправильный пароль" />
         )}
         <div className="sign-in">
-          <h1 className="sign-in__title">Пароль</h1>
           <form onSubmit={handleSubmit(submitForm)} autoComplete="off">
             <Controller
               control={control}

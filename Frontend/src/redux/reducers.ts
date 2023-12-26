@@ -9,7 +9,7 @@ import { basicSettingsReducer } from "../pages/Settings/BasicSettingsPage/model/
 import { typesContractsReducer } from "../pages/Settings/TeacherSettingsPage/view/typesContracts/model/reducer";
 import { categoriesTeachersReducer } from "../pages/Settings/TeacherSettingsPage/view/categoriesTeachers/model/reducer";
 import { teacherEducationReducer } from "../pages/Settings/TeacherSettingsPage/view/teacherEducation/model/reducer";
-import { lessonsSchedulePageReducer } from "../pages/LessonsSchedulePage/model/reducer";
+import { lessonsSchedulePageReducer } from "../pages/Timetable/LessonsSchedulePage/model/reducer";
 import { cirruculumMonitoringReducer } from "../pages/MonthCurriculum/MonitoringPage/model/reducer";
 import { cirruculumReportReducer } from "../pages/MonthCurriculum/ReportPage/model/reducer";
 import { headerReducer } from "../layouts/Header/model/reducer";
@@ -28,6 +28,7 @@ import { offBudgetCategoriesPageReducer } from "../pages/FinancialReports/OffBud
 import { subjectsCoursesSyllabusPageReducer } from "../pages/CourseSyllabus/SubjectsCoursesSyllabusPage/model/reducer";
 import { teachersCoursesSyllabusPageReducer } from "../pages/CourseSyllabus/TeachersCoursesSyllabusPage/model/reducer";
 import { assigningCoursesSyllabusPageReducer } from "../pages/CourseSyllabus/AssigningCoursesSyllabusPage/model/reducer";
+import { yearImplementationMonitoringPageReducer } from "../pages/YearImplementationMonitoringPage/model/reducer";
 
 export default combineReducers({
   testPageStore: testPageReducer,
@@ -58,5 +59,6 @@ export default combineReducers({
   coursesSyllabusPageStore: coursesSyllabusPageReducer,
   offBudgetCategoriesPageStore: offBudgetCategoriesPageReducer,
   finalReportPageStore: finalReportPageReducer,
-  tarifficationReportPageStore: tarifficationReportPageReducer
+  tarifficationReportPageStore: tarifficationReportPageReducer,
+  yearImplementationMonitoringPageStore: yearImplementationMonitoringPageReducer
 });

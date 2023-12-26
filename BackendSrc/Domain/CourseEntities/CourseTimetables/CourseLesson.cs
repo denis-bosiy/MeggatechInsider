@@ -24,6 +24,8 @@ namespace Domain.CourseEntities.CourseTimetables
          */
         public int Classroom { get; set; }
 
+        public CourseLesson() { }
+
         public CourseLesson(
             LessonType lessonType,
             TimeOnly startTime,
