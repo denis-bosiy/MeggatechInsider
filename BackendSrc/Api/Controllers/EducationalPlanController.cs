@@ -234,6 +234,64 @@ public sealed class EducationalPlanController : ControllerBase
             .Map() );
     }
 
+    [HttpPost( "assignments" )]
+    [ProducesResponseType( StatusCodes.Status200OK )]
+    [ProducesResponseType( StatusCodes.Status400BadRequest )]
+    [ProducesResponseType( StatusCodes.Status404NotFound )]
+    public IActionResult CreateAssignment( [FromQuery] CreateAsignmentRequestDto createAssignment )
+    {
+        if ( !IsValidYear( createAssignment.Year ) )
+        {
+            return NotFound( "Не найдено такого года" );
+        }
+
+        _assignmentService.UpdateAssignment(
+            createAssignment.Year,
+            createAssignment.ClassNumber,
+            createAssignment.SubjectName,
+            createAssignment.TeacherName,
+            createAssignment.GroupCount );
+
+        return Ok();
+    }
+
+    [HttpPut( "assignments" )]
+    [ProducesResponseType( StatusCodes.Status200OK )]
+    [ProducesResponseType( StatusCodes.Status400BadRequest )]
+    [ProducesResponseType( StatusCodes.Status404NotFound )]
+    public IActionResult UpdateAssignment( [FromQuery] CreateAsignmentRequestDto updateAssignment )
+    {
+        if ( !IsValidYear( updateAssignment.Year ) )
+        {
+            return NotFound( "Не найдено такого года" );
+        }
+
+        _assignmentService.UpdateAssignment(
+            updateAssignment.Year,
+            updateAssignment.ClassNumber,
+            updateAssignment.SubjectName,
+            updateAssignment.TeacherName,
+            updateAssignment.GroupCount );
+
+        return Ok();
+    }
+
+    [HttpDelete( "assignments" )]
+    [ProducesResponseType( StatusCodes.Status200OK )]
+    [ProducesResponseType( StatusCodes.Status400BadRequest )]
+    [ProducesResponseType( StatusCodes.Status404NotFound )]
+    public IActionResult DeleteAssignment( [FromQuery] DeleteAssignmentRequestDto deleteAssignment )
+    {
+        if ( _assignmentService.GetAssignmentById( deleteAssignment.Id ) is null )
+        {
+            return NotFound( "Не найдено такого назначения" );
+        }
+
+        _assignmentService.DeleteAssignment( deleteAssignment.Id );
+
+        return Ok();
+    }
+
     [HttpGet( "differences" )]
     [ProducesResponseType<DifferencesResponseDto>( StatusCodes.Status200OK )]
     [ProducesResponseType( StatusCodes.Status400BadRequest )]

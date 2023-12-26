@@ -14,5 +14,6 @@ namespace Domain.AssignmentEntities
         public int GroupCount { get; set; }
 
         public int Year { get; set; }
+        public int ClassNumber { get; set; }
     }
 }

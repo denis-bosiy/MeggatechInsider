@@ -12,6 +12,7 @@ public class AssignmentConfiguration : IEntityTypeConfiguration<Assignment>
 
         builder.Property( x => x.GroupCount ).IsRequired();
         builder.Property( x => x.Year ).IsRequired();
+        builder.Property( x => x.ClassNumber ).IsRequired();
 
         builder.HasOne( x => x.Teacher )
             .WithMany()
