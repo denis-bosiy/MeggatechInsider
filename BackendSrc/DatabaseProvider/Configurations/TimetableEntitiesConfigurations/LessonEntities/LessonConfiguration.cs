@@ -15,6 +15,9 @@ public class LessonConfiguration : IEntityTypeConfiguration<Lesson>
         builder.Property( l => l.EndTime ).IsRequired();
         builder.Property( l => l.Classroom ).IsRequired();
         builder.Property( l => l.StudentGroupType ).IsRequired();
+        builder.Property( l => l.NumberOfGroups ).IsRequired();
+        builder.Property( l => l.CurrentGroup ).IsRequired();
+        builder.Property( l => l.StudentGroupGuid ).IsRequired();
 
         builder.HasOne( l => l.Subject )
             .WithMany( s => s.Lessons )

@@ -9,6 +9,9 @@ namespace DatabaseProvider.Configurations.TimetableEntitiesConfigurations.Studen
         public void Configure( EntityTypeBuilder<TEntity> builder )
         {
             builder.HasKey( x => x.Id );
+
+            builder.Property( x => x.Guid ).IsRequired();
+            builder.Property( x => x.Year ).IsRequired();
         }
     }
 }

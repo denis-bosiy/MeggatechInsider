@@ -18,7 +18,7 @@ public class LessonRepository : Repository<Lesson>, ILessonRepository
     public Lesson GetById( int id ) =>
         Entities.FirstOrDefault( l => l.Id == id ) ?? throw new InvalidOperationException();
 
-    public List<Lesson> GetByStudentGroup( int id ) => Entities.Where( l => l.StudentGroupId == id ).ToList();
+    public List<Lesson> GetByStudentGroup( string guid ) => Entities.Where( l => l.StudentGroupGuid == guid ).ToList();
 
     public List<Lesson> GetBySubjectId( int id ) => Entities.Where( l => l.SubjectId == id ).ToList();
 

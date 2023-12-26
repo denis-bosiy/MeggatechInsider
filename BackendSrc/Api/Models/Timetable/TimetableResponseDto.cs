@@ -51,6 +51,12 @@ public class CellDto
 
     [JsonPropertyName( "isGroup" )]
     public bool IsGroup { get; set; }
+
+    [JsonPropertyName( "isPair" )]
+    public bool IsPair { get; set; }
+
+    [JsonPropertyName( "isLesson" )]
+    public bool IsLesson { get; set; }
 }
 
 public class SubjectDto

@@ -1,5 +1,6 @@
 using System.Web.Http.Description;
 using Api.Builders.Timetable.TeacherTimetableDtoBuilder;
+using Api.Builders.Timetable.TimetableDtoBuilders;
 using Api.Models.TeacherTimetable;
 using Api.Models.Timetable;
 using Application.Abstractions.EductionalPlan;
@@ -7,6 +8,7 @@ using Application.Abstractions.StudyingActivityServices;
 using Application.Abstractions.TimetableServices;
 using Domain.AssignmentEntities;
 using Domain.TimetableEntities.GuidebookEntities;
+using Domain.TimetableEntities.LessonEntities;
 using Domain.TimetableEntities.TeacherEntities;
 using Microsoft.AspNetCore.Mvc;
 
@@ -17,203 +19,46 @@ namespace Api.Controllers;
 public class TimetableController : ControllerBase
 {
     private readonly ITeacherTimetableService _teacherTimetableService;
+    private readonly ITimetableService _timetableService;
     private readonly IAssignmentService _assignmentService;
     private readonly ILessonTimeService _lessonTimeService;
     private readonly IPairTimeService _pairTimeService;
     private readonly ITeacherTimetableDtoBuilder _teacherTimetableDtoBuilder;
+    private readonly ITimetableDtoBuilder _timetableDtoBuilder;
 
     public TimetableController(
         ITeacherTimetableService teacherTimetableService,
+        ITimetableService timetableService,
         IAssignmentService assignmentService,
         ILessonTimeService lessonTimeService,
         IPairTimeService pairTimeService,
-        ITeacherTimetableDtoBuilder teacherTimetableDtoBuilder )
+        ITeacherTimetableDtoBuilder teacherTimetableDtoBuilder,
+        ITimetableDtoBuilder timetableDtoBuilder )
     {
         _teacherTimetableService = teacherTimetableService;
+        _timetableService = timetableService;
         _assignmentService = assignmentService;
         _lessonTimeService = lessonTimeService;
         _pairTimeService = pairTimeService;
         _teacherTimetableDtoBuilder = teacherTimetableDtoBuilder;
+        _timetableDtoBuilder = timetableDtoBuilder;
     }
 
     [HttpGet]
     [ResponseType( typeof( TimetableResponseDto ) )]
     public IActionResult SearchTimetable( [FromQuery] TimetableRequestDto timetableRequestDto )
     {
-        // mock
-        // получаем каким-либо образом отфильтрованные по дате предметы
-
-        if ( false )
+        if ( !IsValidYear( timetableRequestDto.Year ) )
         {
             return NotFound( "Не найдено такого года" );
         }
 
-        if ( false )
-        {
-            return NotFound( "Не найдено такой недели" );
-        }
+        List<Lesson> lessons = _timetableService.GetLessonsByDate( timetableRequestDto.Year, timetableRequestDto.Week );
 
-        List<CellDto> cells = new List<CellDto>
-        {
-            new CellDto
-            {
-                CellId = 1,
-                WeekDay = DayOfWeek.Monday,
-                StartTime = new TimeOnly( 8, 0, 0 ),
-                EndTime = new TimeOnly( 9, 30, 0 ),
-                Class = new List<ShortClassInfoDto> { new ShortClassInfoDto { ClassId = 1 } },
-                NumberOfGroup = 2,
-                CurrentGroup = 1,
-                Subject =
-                    new SubjectDto { SubjectId = 1, TeacherName = "Павел Ермаков", SubjectName = "Обществознание" },
-                Classroom = 402,
-                IsOnline = true,
-                IsParallel = false,
-                IsClass = true,
-                IsGroup = false
-            },
-            new CellDto
-            {
-                CellId = 2,
-                WeekDay = DayOfWeek.Monday,
-                StartTime = new TimeOnly( 9, 50, 0 ),
-                EndTime = new TimeOnly( 11, 20, 0 ),
-                Class = new List<ShortClassInfoDto> { new ShortClassInfoDto { ClassId = 1 } },
-                NumberOfGroup = 1,
-                CurrentGroup = 1,
-                Subject = new SubjectDto { SubjectId = 302, TeacherName = "Аристотель", SubjectName = "Физика" },
-                Classroom = 404,
-                IsOnline = false,
-                IsParallel = false,
-                IsClass = true,
-                IsGroup = false
-            },
-            new CellDto
-            {
-                CellId = 3,
-                WeekDay = DayOfWeek.Monday,
-                StartTime = new TimeOnly( 11, 40, 0 ),
-                EndTime = new TimeOnly( 13, 10, 0 ),
-                Class = new List<ShortClassInfoDto> { new ShortClassInfoDto { ClassId = 1 } },
-                NumberOfGroup = 1,
-                CurrentGroup = 1,
-                Subject = new SubjectDto { SubjectId = 303, TeacherName = "Птолемей", SubjectName = "Геометрия" },
-                Classroom = 500,
-                IsOnline = false,
-                IsParallel = false,
-                IsClass = true,
-                IsGroup = false
-            },
-            new CellDto
-            {
-                CellId = 4,
-                WeekDay = DayOfWeek.Monday,
-                StartTime = new TimeOnly( 13, 20, 0 ),
-                EndTime = new TimeOnly( 14, 50, 0 ),
-                Class = new List<ShortClassInfoDto> { new ShortClassInfoDto { ClassId = 1 } },
-                NumberOfGroup = 1,
-                CurrentGroup = 1,
-                Subject = new SubjectDto { SubjectId = 304, TeacherName = "Плутарх", SubjectName = "Философия" },
-                Classroom = 404,
-                IsOnline = false,
-                IsParallel = true,
-                IsClass = true,
-                IsGroup = true
-            },
-            new CellDto
-            {
-                CellId = 5,
-                WeekDay = DayOfWeek.Tuesday,
-                StartTime = new TimeOnly( 8, 0, 0 ),
-                EndTime = new TimeOnly( 9, 30, 0 ),
-                Class = new List<ShortClassInfoDto> { new ShortClassInfoDto { ClassId = 2 } },
-                NumberOfGroup = 3,
-                CurrentGroup = 2,
-                Subject =
-                    new SubjectDto
-                    {
-                        SubjectId = 13,
-                        TeacherName = "Хабибрахманова А.З.",
-                        SubjectName = "Трудности освоения русского языка"
-                    },
-                Classroom = 403,
-                IsOnline = false,
-                IsParallel = false,
-                IsClass = true,
-                IsGroup = false
-            },
-            new CellDto
-            {
-                CellId = 6,
-                WeekDay = DayOfWeek.Tuesday,
-                StartTime = new TimeOnly( 9, 50, 0 ),
-                EndTime = new TimeOnly( 11, 20, 0 ),
-                Class = new List<ShortClassInfoDto> { new ShortClassInfoDto { ClassId = 2 } },
-                NumberOfGroup = 2,
-                CurrentGroup = 2,
-                Subject = new SubjectDto { SubjectId = 14, TeacherName = "Охотников С.А.", SubjectName = "АиП" },
-                Classroom = 405,
-                IsOnline = true,
-                IsParallel = false,
-                IsClass = true,
-                IsGroup = false
-            },
-            new CellDto
-            {
-                CellId = 7,
-                WeekDay = DayOfWeek.Tuesday,
-                StartTime = new TimeOnly( 11, 40, 0 ),
-                EndTime = new TimeOnly( 13, 10, 0 ),
-                Class = new List<ShortClassInfoDto> { new ShortClassInfoDto { ClassId = 2 } },
-                NumberOfGroup = 3,
-                CurrentGroup = 2,
-                Subject =
-                    new SubjectDto
-                    {
-                        SubjectId = 15, TeacherName = "Гусарова Л.Г.", SubjectName = "Теор. вер. и статистика"
-                    },
-                Classroom = 406,
-                IsOnline = true,
-                IsParallel = false,
-                IsClass = true,
-                IsGroup = false
-            },
-            new CellDto
-            {
-                CellId = 8,
-                WeekDay = DayOfWeek.Tuesday,
-                StartTime = new TimeOnly( 13, 20, 0 ),
-                EndTime = new TimeOnly( 14, 50, 0 ),
-                Class = new List<ShortClassInfoDto> { new ShortClassInfoDto { ClassId = 16 } },
-                NumberOfGroup = 2,
-                CurrentGroup = 3,
-                Subject =
-                    new SubjectDto
-                    {
-                        SubjectId = 16, TeacherName = "Старикова Т.Л.", SubjectName = "Родной (русский) язык"
-                    },
-                Classroom = 407,
-                IsOnline = true,
-                IsParallel = true,
-                IsClass = true,
-                IsGroup = false
-            },
-        };
+        _timetableDtoBuilder.SetCells( lessons.Where( l => l.LessonType != LessonType.Parade ).ToList() );
+        _timetableDtoBuilder.SetSchoolMeeting( lessons.Where( l => l.LessonType == LessonType.Parade ).First() );
 
-        SchoolMeetingDto schoolMeetingDto = new SchoolMeetingDto
-        {
-            Text = "Общелицейская линейка",
-            WeekDay = DayOfWeek.Wednesday,
-            StartTime = new TimeOnly( 8, 0, 0 ),
-            EndTime = new TimeOnly( 8, 20, 0 )
-        };
-
-        TimetableResponseDto timetableResponse = new TimetableResponseDto
-        {
-            Cells = cells, SchoolMeeting = schoolMeetingDto
-        };
-
-        return Ok( timetableResponse );
+        return Ok( _timetableDtoBuilder.GetResult() );
     }
 
     [HttpPut]
@@ -512,5 +357,10 @@ public class TimetableController : ControllerBase
         }
 
         return Ok();
+    }
+
+    private bool IsValidYear( int year )
+    {
+        return ( year >= 2022 ) && ( year <= DateTime.UtcNow.Year + 1 );
     }
 }
