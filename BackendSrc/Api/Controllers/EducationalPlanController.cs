@@ -214,7 +214,7 @@ public sealed class EducationalPlanController : ControllerBase
                 return NotFound( "Не найдено такого предмета" );
             }
         }
-        ы
+        
         return Ok();
     }
 

@@ -15,5 +15,5 @@ public class PaymentTypeRepository : Repository<PaymentType>, IPaymentTypeReposi
     public PaymentType GetById( int id ) =>
         Entities.FirstOrDefault( pt => pt.Id == id ) ?? throw new InvalidOperationException();
 
-    public PaymentType GetPaymentTypeByType( string type ) => ( PaymentType )Entities.Where( s => s.PaymentTypeName == type );
+    public PaymentType GetPaymentTypeByType( string type ) => Entities.Where( s => s.PaymentTypeName == type ).FirstOrDefault();
 }

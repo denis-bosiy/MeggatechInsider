@@ -14,5 +14,5 @@ public class SubjectTypeRepository : Repository<SubjectType>, ISubjectTypeReposi
     public SubjectType GetById( int id ) =>
         Entities.FirstOrDefault( st => st.Id == id ) ?? throw new InvalidOperationException();
 
-    public SubjectType GetSubjectTypeByType( string type ) => Entities.FirstOrDefault( s => s.SubjectTypeName == type ) ?? throw new InvalidOperationException();
+    public SubjectType GetSubjectTypeByType( string type ) => Entities.Where( s => s.SubjectTypeName == type ).FirstOrDefault();
 }

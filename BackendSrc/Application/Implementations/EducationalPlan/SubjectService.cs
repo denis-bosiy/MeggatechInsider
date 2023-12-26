@@ -48,7 +48,10 @@ namespace Application.Implementations.EducationalPlan
             PaymentType paymentType = _paymentTypeRepository.GetPaymentTypeByType( financing );
             SubjectType subjectType = _subjectTypeRepository.GetSubjectTypeByType( type );
             SubjectCategory subjectCategory = _subjectCategoryRepository.GetSubjectCategoryByCategory( category );
-            Subject newSubject = new Subject(
+
+            if ( subjectType is not null && paymentType is not null && subjectCategory is not null )
+            {
+                Subject newSubject = new Subject(
                 name,
                 paymentType.Id,
                 subjectType.Id,
@@ -61,8 +64,6 @@ namespace Application.Implementations.EducationalPlan
                 isFinalExam,
                 year );
 
-            if ( subjectType is not null && paymentType is not null && subjectCategory is not null )
-            { 
                 _subjectRepository.Add( newSubject ); 
             }
         }
@@ -90,7 +91,10 @@ namespace Application.Implementations.EducationalPlan
             PaymentType paymentType = _paymentTypeRepository.GetPaymentTypeByType( financing );
             SubjectType subjectType = _subjectTypeRepository.GetSubjectTypeByType( type );
             SubjectCategory subjectCategory = _subjectCategoryRepository.GetSubjectCategoryByCategory( category );
-            Subject newSubject = new Subject(
+
+            if ( subjectType is not null && paymentType is not null && subjectCategory is not null )
+            {
+                Subject newSubject = new Subject(
                 name,
                 paymentType.Id,
                 subjectType.Id,
@@ -103,8 +107,6 @@ namespace Application.Implementations.EducationalPlan
                 isFinalExam,
                 year );
 
-            if ( subjectType is not null && paymentType is not null && subjectCategory is not null )
-            {
                 _subjectRepository.Update( newSubject );
             }
         }
