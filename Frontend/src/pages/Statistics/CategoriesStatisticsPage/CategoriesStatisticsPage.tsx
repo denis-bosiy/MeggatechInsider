@@ -137,7 +137,7 @@ const CategoriesStatisticsPage = () => {
                 <td className="cell">{value.rateBudget}</td>
                 <td className="cell">{value.rateOffbudget}</td>
                 <td className="cell">{value.rateBsp}</td>
-                <td className="cell">{rateTotal}</td>
+                <td className="cell">{rateTotal.toFixed(2)}</td>
               </tr>
             );
           })}
