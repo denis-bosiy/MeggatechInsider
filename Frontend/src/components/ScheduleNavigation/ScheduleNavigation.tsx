@@ -11,6 +11,7 @@ import { RadioButton } from "../RadioButton/RadioButton";
 import { CheckBox } from "../CheckBox/CheckBox";
 import { guidGenerator } from "../../utils/guidGenerator";
 import Input, { InputSize } from "../Input/Input";
+import { Workday } from "../../core/Schedule/Workday";
 
 interface IScheduleNavigationProps {
   checked?: boolean;
@@ -48,8 +49,29 @@ const subjectsOptions: ISelectOption[] = [
   { id: guidGenerator(), content: "Английский язык" }
 ];
 
+enum LessonType {
+  Pair = "pair",
+  Lesson = "lesson"
+}
+class ScheduleNavigationLesson {
+  workDay: Workday = Workday.Monday;
+  lessonType: LessonType = LessonType.Lesson;
+  timePeriod = "";
+
+  groups: string[] = [];
+
+  subgroupsCount = 0;
+  chosenSubgroup = 0;
+
+  lessonName = "";
+  classRoom?: string;
+  isOnline = false;
+
+  divisionTypes: string[] = [];
+}
+
 export const ScheduleNavigation = () => {
-  const [lesson, setLesson] = useState<ScheduleLesson>();
+  const [lesson, setLesson] = useState<ScheduleNavigationLesson>();
 
   // Controls
   const [day, setDay] = useState<ISelectOption>(daySelectsOptions[0]);

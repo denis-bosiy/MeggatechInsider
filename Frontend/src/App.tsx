@@ -22,7 +22,7 @@ import { Provider } from "react-redux";
 import { store } from "./redux/store";
 import { AppRouter } from "./router";
 import ProtectedRoot from "./pages/ProtectedRoot";
-import LessonsSchedulePage from "./pages/LessonsSchedulePage/LessonsSchedulePage";
+import LessonsSchedulePage from "./pages/Timetable/LessonsSchedulePage/LessonsSchedulePage";
 import TeacherGuidebookCoursesTimetablePage from "./pages/CoursesTimetable/TeacherGuidebookCoursesTimetablePage/TeacherGuidebookCoursesTimetablePage";
 import GroupGuidebookCoursesTimetablePage from "./pages/CoursesTimetable/GroupGuidebookCoursesTimetablePage/GroupGuidebookCoursesTimetablePage";
 import { QueryClient, QueryClientProvider } from "react-query";
