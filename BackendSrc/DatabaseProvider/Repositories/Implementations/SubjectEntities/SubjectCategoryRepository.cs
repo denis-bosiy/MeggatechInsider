@@ -13,4 +13,6 @@ public class SubjectCategoryRepository : Repository<SubjectCategory>, ISubjectCa
 
     public SubjectCategory GetById( int id ) =>
         Entities.FirstOrDefault( sc => sc.Id == id ) ?? throw new InvalidOperationException();
+
+    public SubjectCategory GetSubjectCategoryByCategory( string category ) => Entities.Where( s => s.SubjectCategoryName == category ).FirstOrDefault();
 }
