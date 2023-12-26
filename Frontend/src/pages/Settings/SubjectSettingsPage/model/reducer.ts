@@ -24,27 +24,27 @@ const sybjectSettingsPageReducer = (state = initData, action: SybjectSettingsAct
     case SYBJECT_SETTINGS_PAGE_ACTIONS.SAVE_CATEGORY_SETTINGS:
       return {
         ...state,
-        pairs: action.payload
+        categorySetting: action.payload.values
       };
     case SYBJECT_SETTINGS_PAGE_ACTIONS.SAVE_DEPTH_SETTINGS:
       return {
         ...state,
-        pairs: action.payload
+        depthTypeSetting: action.payload.values
       };
     case SYBJECT_SETTINGS_PAGE_ACTIONS.SAVE_FINANCING_SETTINGS:
       return {
         ...state,
-        pairs: action.payload
+        financingSettings: action.payload.values
       };
     case SYBJECT_SETTINGS_PAGE_ACTIONS.SAVE_ISBASIS_SETTINGS:
       return {
         ...state,
-        pairs: action.payload
+        isBasisSetting: action.payload.values
       };
     case SYBJECT_SETTINGS_PAGE_ACTIONS.SAVE_TYPE_SETTINGS:
       return {
         ...state,
-        pairs: action.payload
+        typeSetting: action.payload.values
       };  
     default:
       return state;

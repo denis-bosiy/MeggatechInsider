@@ -1,4 +1,4 @@
-import React, { useContext, useLayoutEffect, useState } from "react";
+import React, { useContext, useState } from "react";
 import { useSearchParams } from "react-router-dom";
 import Input, { InputType, InputSize } from "../../../components/Input/Input";
 import { useDispatch, useSelector } from "react-redux";
@@ -555,10 +555,8 @@ const SybjectGuidebookSettingsTab = () => {
               )}
             </tbody>
           </table>          
-        </div>
-              
+        </div>     
       </div>
-      
     </>
   );
 };
