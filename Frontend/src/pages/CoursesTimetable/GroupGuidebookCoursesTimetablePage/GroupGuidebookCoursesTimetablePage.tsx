@@ -2,7 +2,6 @@ import React, { Fragment } from "react";
 import Input, { InputType } from "../../../components/Input/Input";
 import { useTableData } from "./useTableData";
 import { GroupGuidebookCoursesTimetablePageData } from "./model/types";
-import "./GroupGuidebookCoursesTimetablePage.scss";
 import { classNames } from "../../../utils/classNames";
 
 interface TableProps {
@@ -77,7 +76,7 @@ const GroupGuidebookCoursesTimetablePage = () => {
 
   return (
     <>
-      <div className="toolbar group-guidebook_float_right">
+      <div className="toolbar -search">
         <Input
           className="toolbar__search"
           value={state.searchValue}

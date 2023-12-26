@@ -25,42 +25,13 @@ import { HttpService } from "../../../api/http.service";
 import { Endpoint } from "../../../api/endpoints";
 import { DiscrepancyResponse } from "../../../api/Responses/DiscrepancyResponse";
 import { ResponseBuilder } from "../../../api/Responses/ResponseBuilder";
+import Loader from "../../../components/Loader/Loader";
 
 const DiscrepanciesSyllabus = () => {
-  const httpService = new HttpService();
-  const { currentYear } = useSelector((state: { headerStore: HeaderData }) => state.headerStore);
-  const dispatch = useDispatch();
   const data = useSelector(
     (state: { assigningSyllabusPageStore: AssigningSyllabusPageData }) => state.assigningSyllabusPageStore
   );
   const discrepancies = data.discrepancies;
-
-  useLayoutEffect(() => {
-    const params: Map<string, string> = new Map<string, string>();
-    if (currentYear) {
-      params.set("year", currentYear.year.toString());
-    }
-
-    httpService
-      .getByArbitraryUrl(Endpoint.SyllabusDiscrepancies, params)
-      .then((data: any) => {
-        const discrepanciesResponse: DiscrepancyResponse[] = ResponseBuilder.BuildDiscrepanciesResponse(data);
-        const discrepancies: DiscrepanciesSyllabusData = discrepanciesResponse.map(
-          (discrepancy: DiscrepancyResponse) => {
-            return {
-              id: guidGenerator(),
-              name: discrepancy.name,
-              groupCount: discrepancy.groupCount,
-              groupCountByPlan: discrepancy.groupCountByPlan
-            };
-          }
-        );
-        dispatch(ActionBuilder.saveDiscrepancies(discrepancies));
-      })
-      .catch(() => {
-        dispatch(ActionBuilder.saveDiscrepancies([]));
-      });
-  }, [currentYear?.id]);
 
   return (
     <>
@@ -93,6 +64,10 @@ const AssigningSyllabusPage = () => {
     { id: "2", content: "Петров Иван Иванович" },
     { id: "3", content: "Васечкин Николай Иванович" }
   ];
+  const [isDataLoading, setDataLoading] = useState<boolean>(true);
+
+  const httpService = new HttpService();
+  const { currentYear } = useSelector((state: { headerStore: HeaderData }) => state.headerStore);
 
   const { openModal } = useContext(ModalSettingsContext);
   const dispatch = useDispatch();
@@ -158,6 +133,39 @@ const AssigningSyllabusPage = () => {
       openModal
     ]);
   };
+
+  useLayoutEffect(() => {
+    const params: Map<string, string> = new Map<string, string>();
+    if (currentYear) {
+      params.set("year", currentYear.year.toString());
+    }
+    setDataLoading(true);
+    httpService
+      .getByArbitraryUrl(Endpoint.SyllabusDiscrepancies, params)
+      .then((data: any) => {
+        setDataLoading(false);
+        const discrepanciesResponse: DiscrepancyResponse[] = ResponseBuilder.BuildDiscrepanciesResponse(data);
+        const discrepancies: DiscrepanciesSyllabusData = discrepanciesResponse.map(
+          (discrepancy: DiscrepancyResponse) => {
+            return {
+              id: guidGenerator(),
+              name: discrepancy.name,
+              groupCount: discrepancy.groupCount,
+              groupCountByPlan: discrepancy.groupCountByPlan
+            };
+          }
+        );
+        dispatch(ActionBuilder.saveDiscrepancies(discrepancies));
+      })
+      .catch(() => {
+        dispatch(ActionBuilder.saveDiscrepancies([]));
+        setDataLoading(false);
+      });
+  }, [currentYear?.id]);
+
+  if (isDataLoading) {
+    return <Loader />;
+  }
 
   return (
     <>

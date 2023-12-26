@@ -17,7 +17,7 @@ export class HttpService {
       return await this.api.post(Endpoint.Login, credentials);
     } catch (error) {
       if (axios.isAxiosError(error)) {
-        throw Error("refresh - ошибка");
+        throw Error("Введен неправильный пароль");
       }
       throw Error("token - ошибка на стороне сервера");
     }

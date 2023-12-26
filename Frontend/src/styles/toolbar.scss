@@ -1,23 +1,17 @@
 .toolbar {
-  margin-bottom: 25px;
+  display: flex;
+  flex-flow: row wrap;
+  align-items: flex-start;
+  justify-content: space-between;
   width: 100%;
+  margin-bottom: 25px;
 
-  &.-fill {
-    display: flex;
-    justify-content: space-between;
-    gap: 50px;
-    width: 100%;
+  &.-search {
+    justify-content: flex-end;
   }
 
   &__buttons-wrapper {
     display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    margin-bottom: 25px;
-  }
-
-  &.-fill &__buttons-wrapper {
-    margin-bottom: 0;
   }
 
   &__button,
@@ -31,6 +25,12 @@
 
   &__buttons-box {
     display: flex;
-    flex-direction: row;
+    width: 100%;
+  }
+
+  &__checkbox {
+    display: flex;
+    width: 100%;
+    margin-top: 25px;
   }
 }

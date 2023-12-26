@@ -19,12 +19,14 @@ interface IHeaderProps {
 
 export const Header = ({ children, pageRoute, onLogout }: IHeaderProps) => {
   // TODO: Добавить route === AppRouter.CoursesTimetable, когда будет доступен блок с настройками расписания курсов
+  const getIsOnLogin = (route?: string): boolean => (route ? route === AppRouter.Login : false);
   const getIsOnSchedule = (route?: string): boolean => (route ? route === AppRouter.Timetable : false);
 
   const dispatch = useDispatch();
   const { years, currentYear, weeks, currentWeek, isLogedIn } = useSelector(
     (state: { headerStore: HeaderData }) => state.headerStore
   );
+  const [isOnLogin, setIsOnLogin] = useState<boolean>(getIsOnLogin(pageRoute));
   const [isOnSchedule, setIsOnSchedule] = useState<boolean>(getIsOnSchedule(pageRoute));
 
   useEffect(() => {
@@ -33,6 +35,7 @@ export const Header = ({ children, pageRoute, onLogout }: IHeaderProps) => {
   }, []);
 
   useEffect(() => {
+    setIsOnLogin(getIsOnLogin(pageRoute));
     setIsOnSchedule(getIsOnSchedule(pageRoute));
   }, [pageRoute]);
 
@@ -58,7 +61,7 @@ export const Header = ({ children, pageRoute, onLogout }: IHeaderProps) => {
         </div>
         <nav className="header-container__navigation">{children}</nav>
         <div className="header-actions">
-          <Select onValueChange={handleYearChanging} options={years} currentValue={currentYear} />
+          {!isOnLogin && <Select onValueChange={handleYearChanging} options={years} currentValue={currentYear} />}
           {isLogedIn && <IconButton icon={<Logout />} onClick={handleLogOut} />}
         </div>
       </div>

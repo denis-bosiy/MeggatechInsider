@@ -17,15 +17,15 @@ const TeacherGuidebookCoursesTimetablePage = () => {
             handleSave={actions.handleSave}
             handleReset={actions.handleReset}
           />
-          <Input
-            className="toolbar__search"
-            value={state.searchValue}
-            type={InputType.Search}
-            placeholder="Поиск"
-            onValueChange={actions.setSearchValue}
-            onSearch={actions.handleSearch}
-          />
         </div>
+        <Input
+          className="toolbar__search"
+          value={state.searchValue}
+          type={InputType.Search}
+          placeholder="Поиск"
+          onValueChange={actions.setSearchValue}
+          onSearch={actions.handleSearch}
+        />
       </div>
       <table className="table">
         <TeacherGuidebookCoursesTimetableTable

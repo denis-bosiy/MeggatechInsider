@@ -84,6 +84,13 @@ interface MenuItem {
   navigation?: NavigationItem[];
 }
 
+export const OutsideMenu: MenuItem[] = [
+  {
+    url: AppRouter.Login,
+    label: "Логинация",
+  }
+];
+
 export const Menu: MenuItem[] = [
   {
     url: AppRouter.Settings,
