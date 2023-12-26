@@ -6,5 +6,7 @@ public interface IRepository<in TEntity> where TEntity : class
     public void Add( IEnumerable<TEntity> entities );
     public void Remove( TEntity entity );
     public void Remove( IEnumerable<TEntity> entities );
+
+    public void Update( TEntity entity );
     public void SaveChanges();
 }

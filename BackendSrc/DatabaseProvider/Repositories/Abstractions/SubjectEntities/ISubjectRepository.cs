@@ -1,3 +1,4 @@
+using DatabaseProvider.Repositories.Implementations.SubjectEntities;
 using Domain.SubjectEntities;
 
 namespace DatabaseProvider.Repositories.Abstractions.SubjectEntities;
