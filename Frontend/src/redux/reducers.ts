@@ -63,6 +63,6 @@ export default combineReducers({
   offBudgetCategoriesPageStore: offBudgetCategoriesPageReducer,
   finalReportPageStore: finalReportPageReducer,
   tarifficationReportPageStore: tarifficationReportPageReducer,
-  yearImplementationMonitoringPageStore: yearImplementationMonitoringPageReducer
+  yearImplementationMonitoringPageStore: yearImplementationMonitoringPageReducer,
   lessonsScheduleCoursesTimetablePageStore: lessonsScheduleCoursesTimetablePageReducer,
 });
