@@ -99,7 +99,7 @@ const TeachersCoursesSyllabusPage = () => {
       params.set("year", currentYear.year.toString());
     }
 
-    setDataLoading(false);
+    setDataLoading(true);
     httpService
       .getByArbitraryUrl(Endpoint.CoursesSyllabusTeacher, params)
       .then((response) => {
@@ -107,7 +107,7 @@ const TeachersCoursesSyllabusPage = () => {
         if (courses) {
           dispatch(ActionBuilder.saveTeachers(courses));
           setTeachersTableData(structuredClone(courses));
-          setDataLoading(true);
+          setDataLoading(false);
         }
       })
       .catch(() => {
