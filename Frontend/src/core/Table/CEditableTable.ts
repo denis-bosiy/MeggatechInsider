@@ -19,6 +19,10 @@ export class CEditableTable extends CTable {
   }
 
   public edit(): void {
+    if (this._isEditing.value) {
+      return;
+    }
+
     this._setIsEditing({ ...this._isEditing, value: true });
   }
 
