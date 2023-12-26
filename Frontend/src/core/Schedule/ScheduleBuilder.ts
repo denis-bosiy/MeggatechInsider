@@ -7,8 +7,9 @@ import { ScheduleLesson } from "./ScheduleLesson";
 import { SchedulePosition } from "./SchedulePosition";
 import { Time } from "./Time";
 import { Workday } from "./Workday";
+import {AbstractScheduleBuilder} from "./AbstractScheduleBuilder";
 
-export class ScheduleBuilder {
+export class ScheduleBuilder extends AbstractScheduleBuilder {
   // TODO: Убрать тестовые данные, после подключение редакса в BuildSchedule пропихивать данные, необходимые для конструированя расписания
   public static BuildSchedule(): ISchedule {
     const schedule: Schedule = new Schedule();
@@ -34,12 +35,6 @@ export class ScheduleBuilder {
     schedule.subgroups.set("11-1", ["11-1-1", "11-1-2"]);
     schedule.subgroups.set("11-2", ["11-2-3", "11-2-4"]);
     schedule.subgroups.set("11-3", ["11-3-5", "11-3-6"]);
-
-    return schedule;
-  }
-
-  private static BuildWorkdays(schedule: Schedule): Schedule {
-    schedule.workdays = [Workday.Monday, Workday.Tuesday, Workday.Wednesday, Workday.Thursday, Workday.Friday, Workday.Saturday];
 
     return schedule;
   }
