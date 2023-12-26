@@ -166,17 +166,16 @@ const TeacherGuidebookTimetablePage = () => {
               onClick={editGuidebookTable}
             />
           )}
-
-          <Input
-            className="toolbar__search"
-            value={guidebookSearchQuery}
-            type={InputType.Search}
-            placeholder="Поиск"
-            onValueChange={setGuidebookSearchQuery}
-            size={InputSize.Default}
-            onSearch={handleGuidebookSearch}
-          />
         </div>
+        <Input
+          className="toolbar__search"
+          value={guidebookSearchQuery}
+          type={InputType.Search}
+          placeholder="Поиск"
+          onValueChange={setGuidebookSearchQuery}
+          size={InputSize.Default}
+          onSearch={handleGuidebookSearch}
+        />
       </div>
       <table className="table -fill -list">
         <thead className="header">

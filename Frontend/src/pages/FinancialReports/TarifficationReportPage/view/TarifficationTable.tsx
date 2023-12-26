@@ -1,25 +1,16 @@
-import {useTableData} from "../useTableData";
-import Button, {ButtonSize, ButtonType} from "../../../../components/Button/Button";
-import Input, {InputSize, InputType} from "../../../../components/Input/Input";
+import { useTableData } from "../useTableData";
+import Button, { ButtonSize, ButtonType } from "../../../../components/Button/Button";
+import Input, { InputSize, InputType } from "../../../../components/Input/Input";
 import React from "react";
-import {TarifficationReportData, TarifficationReportItem} from "../model/types";
+import { TarifficationReportData, TarifficationReportItem } from "../model/types";
 import "./TarifficationTable.scss";
 
-function TarifficationTable({
-  title,
-  data,
-}: {
-  title: string,
-  data: TarifficationReportData
-}) {
-  const {
-    state,
-    actions,
-  } = useTableData(data);
+function TarifficationTable({ title, data }: { title: string; data: TarifficationReportData }) {
+  const { state, actions } = useTableData(data);
 
   return (
     <div className="tariffication-table">
-      <div className="toolbar -fill">
+      <div className="toolbar">
         <div className="tariffication-table__header">
           <h2>{title}</h2>
           <div className="toolbar__buttons-wrapper">
@@ -130,6 +121,4 @@ function TarifficationTable({
   );
 }
 
-export {
-  TarifficationTable,
-};
+export { TarifficationTable };

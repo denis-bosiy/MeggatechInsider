@@ -73,7 +73,7 @@ const OffBudgetCategoriesPage = () => {
   };
   const [isSaveProportion, setIsSaveProportion] = useState<{ value: boolean }>({ value: true });
   const handleIsSaveProportion = ():void => {
-    setIsSaveProportion({value: !isSaveProportion.value});           
+    setIsSaveProportion({value: !isSaveProportion.value});
   };
 
   return (
@@ -120,7 +120,7 @@ const OffBudgetCategoriesPage = () => {
             size={InputSize.Default}
             type={InputType.Search}
             onSearch={handleTeacherSearch}
-          /> 
+          />
         </div>
         <div className="toolbar__buttons-box">
           <div className="toolbar__button">
@@ -128,8 +128,8 @@ const OffBudgetCategoriesPage = () => {
               checked={isSaveProportion.value}
               onChange={handleIsSaveProportion}
             />
-          </div>  
-          <p className="p">Сохранять пропорцию</p>   
+          </div>
+          <p className="p">Сохранять пропорцию</p>
         </div>
       </div>
       <table className="table -fill -list">
@@ -179,7 +179,7 @@ const OffBudgetCategoriesPage = () => {
                         value={value.costPerHour.toString()}
                         onValueChange={(newValue: string) =>
                           setOffBudgetCategoriesTableData(
-                            isSaveProportion.value 
+                            isSaveProportion.value
                               ? (() => {
                                 const oldValueCat = offBudgetCategoriesTableData.find(el => el.id === value.id);
                                 const oldValue = oldValueCat?.costPerHour !== undefined && oldValueCat?.costPerHour !== 0 ? oldValueCat.costPerHour : 1;
@@ -199,7 +199,7 @@ const OffBudgetCategoriesPage = () => {
                     ) : (
                       value.costPerHour
                     )}
-                  </td>                 
+                  </td>
                   <td className="cell">{value.corporateSalaryValue}</td>
                   <td className="cell">
                     <IconButton icon={<GarbageIcon />} onClick={() => handleDeleteTeacher(value.id.toString())} />

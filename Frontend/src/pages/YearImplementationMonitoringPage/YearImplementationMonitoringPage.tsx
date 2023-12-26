@@ -169,7 +169,7 @@ const YearImplementationMonitoringPage = () => {
 
   return (
     <>
-      <div className="toolbar -fill">
+      <div className="toolbar">
         <div className="toolbar__buttons-wrapper">
           <div className="toolbar__select">
             <Select
