@@ -113,7 +113,8 @@ public class ActualAcademicHoursReportGenerator : IActualAcademicHoursReportGene
         {
             int rowsForSubject = subject.YearAcademicHoursForClasses
                 .SelectMany( classHours => classHours.YearAcademicHoursForSubgroups ).Count();
-            ExcelRange subjectCells = worksheet.Cells[ excelRange.Start.Row + subjectRowOffset, excelRange.Start.Column + 2,
+            ExcelRange subjectCells = worksheet.Cells[ excelRange.Start.Row + subjectRowOffset,
+                excelRange.Start.Column + 2,
                 excelRange.Start.Row + subjectRowOffset + rowsForSubject - 1,
                 excelRange.Start.Column + 2 ];
             subjectCells.Merge = true;
@@ -123,29 +124,33 @@ public class ActualAcademicHoursReportGenerator : IActualAcademicHoursReportGene
             foreach ( YearActualAcademicHoursForSubgroupsByClass classHours in subject.YearAcademicHoursForClasses )
             {
                 int rowsForClass = classHours.YearAcademicHoursForSubgroups.Count;
-                // выставляем значение Класс
-                ExcelRange classCells = worksheet.Cells[ excelRange.Start.Row + subjectRowOffset + classRowOffset, excelRange.Start.Column + 3,
+                // выставляем значение для класса
+                ExcelRange classCells = worksheet.Cells[ excelRange.Start.Row + subjectRowOffset + classRowOffset,
+                    excelRange.Start.Column + 3,
                     excelRange.Start.Row + subjectRowOffset + classRowOffset + rowsForClass - 1,
                     excelRange.Start.Column + 3 ];
                 classCells.Merge = true;
                 classCells.Value = classHours.ClassName;
-                
+
                 // выставляем План часов в год -> по классам
-                ExcelRange yearHoursByClassCells = worksheet.Cells[ excelRange.Start.Row + subjectRowOffset + classRowOffset, excelRange.Start.Column + 5,
+                ExcelRange yearHoursByClassCells = worksheet.Cells[
+                    excelRange.Start.Row + subjectRowOffset + classRowOffset, excelRange.Start.Column + 5,
                     excelRange.Start.Row + subjectRowOffset + classRowOffset + rowsForClass - 1,
                     excelRange.Start.Column + 5 ];
                 yearHoursByClassCells.Merge = true;
                 yearHoursByClassCells.Value = classHours.YearHoursByClass;
-                
+
                 // выставляем План часов в год -> план сумма
-                ExcelRange yearHoursBySubjectGroupCells = worksheet.Cells[ excelRange.Start.Row + subjectRowOffset + classRowOffset, excelRange.Start.Column + 6,
+                ExcelRange yearHoursBySubjectGroupCells = worksheet.Cells[
+                    excelRange.Start.Row + subjectRowOffset + classRowOffset, excelRange.Start.Column + 6,
                     excelRange.Start.Row + subjectRowOffset + classRowOffset + rowsForClass - 1,
                     excelRange.Start.Column + 6 ];
                 yearHoursBySubjectGroupCells.Merge = true;
                 yearHoursBySubjectGroupCells.Value = classHours.YearHoursBySubjectGroup;
-                
+
                 // выставляем План часов в год -> часов в неделю
-                ExcelRange hoursPerWeekCells = worksheet.Cells[ excelRange.Start.Row + subjectRowOffset + classRowOffset, excelRange.Start.Column + 7,
+                ExcelRange hoursPerWeekCells = worksheet.Cells[
+                    excelRange.Start.Row + subjectRowOffset + classRowOffset, excelRange.Start.Column + 7,
                     excelRange.Start.Row + subjectRowOffset + classRowOffset + rowsForClass - 1,
                     excelRange.Start.Column + 7 ];
                 hoursPerWeekCells.Merge = true;
@@ -156,57 +161,81 @@ public class ActualAcademicHoursReportGenerator : IActualAcademicHoursReportGene
                 {
                     // выставляем План часов в год -> часов в неделю
                     int rowsForSubgroup = 1;
-                    ExcelRange subgroupCells = worksheet.Cells[ excelRange.Start.Row + subjectRowOffset + classRowOffset + subgroupRowOffset, excelRange.Start.Column + 4,
-                        excelRange.Start.Row + subjectRowOffset + classRowOffset + subgroupRowOffset + rowsForSubgroup - 1,
+                    ExcelRange subgroupCells = worksheet.Cells[
+                        excelRange.Start.Row + subjectRowOffset + classRowOffset + subgroupRowOffset,
+                        excelRange.Start.Column + 4,
+                        excelRange.Start.Row + subjectRowOffset + classRowOffset + subgroupRowOffset + rowsForSubgroup -
+                        1,
                         excelRange.Start.Column + 4 ];
                     subgroupCells.Merge = true;
                     subgroupCells.Value = subgroupHours.SubgroupName;
                     int monthOffset = 0;
                     foreach ( KeyValuePair<DateOnly, int> hoursByDate in subgroupHours.AcademicHoursByDate )
                     {
-                        ExcelRange monthCells = worksheet.Cells[ excelRange.Start.Row + subjectRowOffset + classRowOffset + subgroupRowOffset, excelRange.Start.Column + 8 + monthOffset,
-                            excelRange.Start.Row + subjectRowOffset + classRowOffset + subgroupRowOffset + rowsForSubgroup - 1,
+                        ExcelRange monthCells = worksheet.Cells[
+                            excelRange.Start.Row + subjectRowOffset + classRowOffset + subgroupRowOffset,
+                            excelRange.Start.Column + 8 + monthOffset,
+                            excelRange.Start.Row + subjectRowOffset + classRowOffset + subgroupRowOffset +
+                            rowsForSubgroup - 1,
                             excelRange.Start.Column + 8 + monthOffset ];
                         monthCells.Value = hoursByDate.Value;
                         monthOffset++;
                     }
-                    
-                    ExcelRange completedWorkloadHoursCells = worksheet.Cells[ excelRange.Start.Row + subjectRowOffset + classRowOffset + subgroupRowOffset, excelRange.Start.Column + 18,
-                        excelRange.Start.Row + subjectRowOffset + classRowOffset + subgroupRowOffset + rowsForSubgroup - 1,
+
+                    ExcelRange completedWorkloadHoursCells = worksheet.Cells[
+                        excelRange.Start.Row + subjectRowOffset + classRowOffset + subgroupRowOffset,
+                        excelRange.Start.Column + 18,
+                        excelRange.Start.Row + subjectRowOffset + classRowOffset + subgroupRowOffset + rowsForSubgroup -
+                        1,
                         excelRange.Start.Column + 18 ];
                     completedWorkloadHoursCells.Merge = true;
                     completedWorkloadHoursCells.Value = subgroupHours.CompletedWorkloadHours;
-                    
-                    ExcelRange remoteWorkloadHoursCells = worksheet.Cells[ excelRange.Start.Row + subjectRowOffset + classRowOffset + subgroupRowOffset, excelRange.Start.Column + 19,
-                        excelRange.Start.Row + subjectRowOffset + classRowOffset + subgroupRowOffset + rowsForSubgroup - 1,
+
+                    ExcelRange remoteWorkloadHoursCells = worksheet.Cells[
+                        excelRange.Start.Row + subjectRowOffset + classRowOffset + subgroupRowOffset,
+                        excelRange.Start.Column + 19,
+                        excelRange.Start.Row + subjectRowOffset + classRowOffset + subgroupRowOffset + rowsForSubgroup -
+                        1,
                         excelRange.Start.Column + 19 ];
                     remoteWorkloadHoursCells.Merge = true;
                     remoteWorkloadHoursCells.Value = subgroupHours.RemoteAcademicHours;
-                    
-                    ExcelRange combinedWorkloadHoursCells = worksheet.Cells[ excelRange.Start.Row + subjectRowOffset + classRowOffset + subgroupRowOffset, excelRange.Start.Column + 20,
-                        excelRange.Start.Row + subjectRowOffset + classRowOffset + subgroupRowOffset + rowsForSubgroup - 1,
+
+                    ExcelRange combinedWorkloadHoursCells = worksheet.Cells[
+                        excelRange.Start.Row + subjectRowOffset + classRowOffset + subgroupRowOffset,
+                        excelRange.Start.Column + 20,
+                        excelRange.Start.Row + subjectRowOffset + classRowOffset + subgroupRowOffset + rowsForSubgroup -
+                        1,
                         excelRange.Start.Column + 20 ];
                     combinedWorkloadHoursCells.Merge = true;
                     combinedWorkloadHoursCells.Value = subgroupHours.CombinedAcademicHours;
-                    
-                    ExcelRange remainderWorkloadHoursCells = worksheet.Cells[ excelRange.Start.Row + subjectRowOffset + classRowOffset + subgroupRowOffset, excelRange.Start.Column + 24,
-                        excelRange.Start.Row + subjectRowOffset + classRowOffset + subgroupRowOffset + rowsForSubgroup - 1,
+
+                    ExcelRange remainderWorkloadHoursCells = worksheet.Cells[
+                        excelRange.Start.Row + subjectRowOffset + classRowOffset + subgroupRowOffset,
+                        excelRange.Start.Column + 24,
+                        excelRange.Start.Row + subjectRowOffset + classRowOffset + subgroupRowOffset + rowsForSubgroup -
+                        1,
                         excelRange.Start.Column + 24 ];
                     remainderWorkloadHoursCells.Merge = true;
                     remainderWorkloadHoursCells.Value = subgroupHours.RemainderHoursOfPlan;
-                    
-                    ExcelRange planFailureCells = worksheet.Cells[ excelRange.Start.Row + subjectRowOffset + classRowOffset + subgroupRowOffset, excelRange.Start.Column + 25,
-                        excelRange.Start.Row + subjectRowOffset + classRowOffset + subgroupRowOffset + rowsForSubgroup - 1,
+
+                    ExcelRange planFailureCells = worksheet.Cells[
+                        excelRange.Start.Row + subjectRowOffset + classRowOffset + subgroupRowOffset,
+                        excelRange.Start.Column + 25,
+                        excelRange.Start.Row + subjectRowOffset + classRowOffset + subgroupRowOffset + rowsForSubgroup -
+                        1,
                         excelRange.Start.Column + 25 ];
                     planFailureCells.Merge = true;
                     planFailureCells.Value = subgroupHours.PlanFailurePercent;
-                    
+
                     subgroupRowOffset += 1;
                 }
+
                 classRowOffset += rowsForClass;
             }
+
             subjectRowOffset += rowsForSubject;
         }
+
         currentCells = MoveNextCurrentCell( worksheet, currentCells, subgroupsNumber );
     }
 
