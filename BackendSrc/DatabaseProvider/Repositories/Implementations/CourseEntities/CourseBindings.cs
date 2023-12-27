@@ -1,9 +1,11 @@
 using DatabaseProvider.Repositories.Abstractions.CourseEntities.CourseAssignments;
 using DatabaseProvider.Repositories.Abstractions.CourseEntities.CourseEducationalPlans;
+using DatabaseProvider.Repositories.Abstractions.CourseEntities.Courses;
 using DatabaseProvider.Repositories.Abstractions.CourseEntities.CourseTeachers;
 using DatabaseProvider.Repositories.Abstractions.CourseEntities.CourseTimetables;
 using DatabaseProvider.Repositories.Implementations.CourseEntities.CourseAssignments;
 using DatabaseProvider.Repositories.Implementations.CourseEntities.CourseEducationalPlans;
+using DatabaseProvider.Repositories.Implementations.CourseEntities.Courses;
 using DatabaseProvider.Repositories.Implementations.CourseEntities.CourseTeachers;
 using DatabaseProvider.Repositories.Implementations.CourseEntities.CourseTimetables;
 using Microsoft.Extensions.DependencyInjection;
@@ -23,6 +25,9 @@ namespace DatabaseProvider.Repositories.Implementations.CourseEntities
             services.AddScoped<ICourseTeacherRepository, CourseTeacherRepository>();
 
             services.AddScoped<ICourseLessonRepository, CourseLessonRepository>();
+
+            services.AddScoped<ICourseRepository, CourseRepository>();
+            services.AddScoped<ICourseTypeRepository, CourseTypeRepository>();
 
             return services;
         }
