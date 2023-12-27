@@ -1,5 +1,5 @@
 using Domain.ReportEntities.SubdeanEntities;
-using Domain.SubjectEntities;
+using Domain.TeacherEntities;
 
 namespace Application.Models.ActualAcademicHours;
 
@@ -8,7 +8,7 @@ public class MonthActualAcademicHoursReport
     public List<ActualAcademicHoursForSubjectsByTeacher> AcademicHoursForSubjectsByTeachers { get; set; }
     public int Year { get; set; }
     public int Month { get; set; }
-    public PaymentType PaymentType { get; set; }
+    public ContractType ContractType { get; set; }
 }
 
 public class ActualAcademicHoursForSubgroup()

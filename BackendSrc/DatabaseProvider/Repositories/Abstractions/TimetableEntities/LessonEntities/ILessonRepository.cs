@@ -10,4 +10,5 @@ public interface ILessonRepository : IRepository<Lesson>
     public List<Lesson> GetBySubjectId( int id );
     public List<Lesson> GetByTeacherId( int id );
     List<Lesson> GetByWeekStartingDate( DateOnly startingDate );
+    List<Lesson> GetByMonth( int year, int month );
 }
