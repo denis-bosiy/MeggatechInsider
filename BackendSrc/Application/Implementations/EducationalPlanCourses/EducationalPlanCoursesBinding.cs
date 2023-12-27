@@ -8,6 +8,7 @@ namespace Application.Implementations.EducationalPlanCourses
         public static IServiceCollection AddEducationalPlanCoursesServices( this IServiceCollection services )
         {
             services.AddScoped<ITeacherCourseService, TeacherCourseService>();
+            services.AddScoped<ICourseService, CourseService>();
 
             return services;
         }

@@ -7,6 +7,7 @@ using Application.Abstractions.EducationalPlanCourses;
 using Api.Mappers.EducationalPlanCourse;
 using Microsoft.AspNetCore.Mvc;
 using Domain.TeacherEntities;
+using Domain.CourseEntities.Courses;
 
 namespace Api.Controllers
 {
@@ -15,10 +16,12 @@ namespace Api.Controllers
     public class EducationalPlanCoursesController : Controller
     {
         private readonly ITeacherCourseService _teacherCourseService;
+        private readonly ICourseService _courseService;
 
-        public EducationalPlanCoursesController( ITeacherCourseService teacherCourseService )
+        public EducationalPlanCoursesController( ITeacherCourseService teacherCourseService, ICourseService courseService )
         {
             _teacherCourseService = teacherCourseService;
+            _courseService = courseService;
         }
 
         [HttpGet( "teachers" )]
@@ -92,7 +95,6 @@ namespace Api.Controllers
         [ProducesResponseType( StatusCodes.Status404NotFound )]
         public IActionResult DeleteTeacher( CourseTeacherDeleteRequestDto courseTeacherDeleteRequestDto )
         {
-
             if ( _teacherCourseService.GetTeacherCourseById( courseTeacherDeleteRequestDto.Id ) is not null )
             {
                 _teacherCourseService.DeleteTeacherCourse( courseTeacherDeleteRequestDto.Id );
@@ -111,48 +113,28 @@ namespace Api.Controllers
                 return NotFound( "Не найдено такого года" );
             }
 
-            return Ok( new CoursesListResponseDto 
-            {
-                Courses = new List<CourseDto> {
-                    new CourseDto()
-                    {
-                        Id = 1,
-                        Name = "Математика",
-                        Type = "шюп",
-                        HoursByPlan = 40,
-                        NumberOfGroups = 3
-                    },
-                    new CourseDto()
-                    {
-                        Id = 2,
-                        Name = "Физика",
-                        Type = "подготовительные-экспресс",
-                        HoursByPlan = 30,
-                        NumberOfGroups = 2
-                    },
-                    new CourseDto()
-                    {
-                        Id = 3,
-                        Name = "Информатика",
-                        Type = "шюп",
-                        HoursByPlan = 60,
-                        NumberOfGroups = 4
-                    }
-                }
-            } );
+            return Ok( _courseService.GetCoursesByYear( coursesRequestDto.Year ).Map() );
         }
 
         [HttpPut( "courses" )]
         [ProducesResponseType( StatusCodes.Status200OK )]
         [ProducesResponseType( StatusCodes.Status404NotFound )]
-        public IActionResult UpdateTeacher( CoursesUpdateRequestDto coursesUpdateRequestDto )
+        public IActionResult UpdateCourses( CoursesUpdateRequestDto coursesUpdateRequestDto )
         {
             if ( !IsValidYear( coursesUpdateRequestDto.Year ) )
             {
                 return NotFound( "Не найдено такого года" );
             }
 
-            //обновление данных преподавателя
+            foreach ( CourseDto course in coursesUpdateRequestDto.Courses )
+            {
+                _courseService.UpdateCourse(
+                    course.Id,
+                    course.Name,
+                    course.Type,
+                    course.HoursByPlan,
+                    course.NumberOfGroups );
+            }
 
             return Ok();
         }
@@ -167,7 +149,12 @@ namespace Api.Controllers
                 return NotFound( "Не найдено такого года" );
             }
 
-            //создание данных преподавателя
+            _courseService.AddCourse(
+                    coursesCreateRequestDto.Id,
+                    coursesCreateRequestDto.Name,
+                    coursesCreateRequestDto.Type,
+                    coursesCreateRequestDto.HoursByPlan,
+                    coursesCreateRequestDto.NumberOfGroups );
 
             return Ok();
         }
@@ -178,9 +165,12 @@ namespace Api.Controllers
         public IActionResult DeleteCourse( CoursesDeleteRequestDto coursesDeleteRequestDto )
         {
 
-            //Удаление данных преподавателя по id
+            if ( _courseService.GetCourseById( coursesDeleteRequestDto.Id ) is not null )
+            {
+                _courseService.DeleteCourse( coursesDeleteRequestDto.Id );
+            }
 
-            return Ok() ;
+            return Ok();
         }
 
         [HttpGet( "appointments" )]

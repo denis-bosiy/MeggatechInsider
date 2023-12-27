@@ -6,6 +6,20 @@ namespace Api.Models.EducationPlanCourses.Courses
 {
     public class CourseDto
     {
+        public CourseDto(
+            int id,
+            string name,
+            string type,
+            int hoursByPlan,
+            int numberOfGroups )
+        {
+            Id = id;
+            Name = name;
+            Type = type;
+            HoursByPlan = hoursByPlan;
+            NumberOfGroups = numberOfGroups;
+        }
+
         [Required]
         [DisplayName( "id" )]
         [JsonPropertyName( "id" )]
