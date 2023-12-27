@@ -38,7 +38,7 @@ const LessonsSchedulePage = (): JSX.Element => {
 
   return (
     <>
-      <ScheduleComponent schedule={schedule} handleDeleteLesson={handleDeleteLesson} />
+      <ScheduleComponent schedule={schedule} handleDeleteLesson={handleDeleteLesson} showHeader={true} />
     </>
   );
 };
