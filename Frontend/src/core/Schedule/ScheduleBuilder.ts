@@ -10,7 +10,6 @@ import { Workday } from "./Workday";
 import {AbstractScheduleBuilder} from "./AbstractScheduleBuilder";
 
 export class ScheduleBuilder extends AbstractScheduleBuilder {
-  // TODO: Убрать тестовые данные, после подключение редакса в BuildSchedule пропихивать данные, необходимые для конструированя расписания
   public static BuildSchedule(): ISchedule {
     const schedule: Schedule = new Schedule();
 
@@ -50,8 +49,7 @@ export class ScheduleBuilder extends AbstractScheduleBuilder {
     lessonTimesForMonday.push(new LessonTime(new Time(12, 50), new Time(13, 30)));
     lessonTimesForMonday.push(new LessonTime(new Time(13, 40), new Time(14, 20)));
     lessonTimesForMonday.push(new LessonTime(new Time(14, 30), new Time(15, 10)));
-    // TODO: Тут надо как-то вытягивать данные по дням недели + время линейки
-    // Эта логика должна храниться в билдере
+
     schedule.lessonTimes.set(schedule.getWorkdays()[0], lessonTimesForMonday);
 
     const lessonTimesForTheOthersDays: LessonTime[] = [];

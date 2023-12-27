@@ -10,5 +10,7 @@ export enum Endpoint {
   SyllabusDiscrepancies = "education-plan/differences",
   CoursesSyllabus = "educational-plan-courses/courses",
   CoursesSyllabusTeacher = "educational-plan-courses/teachers",
-  CoursesSyllabusAppointments = "educational-plan-courses/appointments"
+  CoursesSyllabusAppointments = "educational-plan-courses/appointments",
+  MonthReportExcel = "month-report-excel",
+  MonthMonitoringPageExcel = "month-monitoring-page-excel"
 }
