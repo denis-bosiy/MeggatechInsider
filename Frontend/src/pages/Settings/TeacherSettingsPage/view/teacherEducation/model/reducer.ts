@@ -11,17 +11,17 @@ const defaultData: TeacherEducationItem[] = [
   {
     id: guidGenerator(),
     name: "Высшее образование",
-    coefficient: "0.3"
+    coefficient: "0.6"
   },
   {
     id: guidGenerator(),
     name: "Степень к.н.",
-    coefficient: "0.3"
+    coefficient: "0.7"
   },
   {
     id: guidGenerator(),
     name: "Степень д.н.",
-    coefficient: "0.3"
+    coefficient: "1.0"
   }
 ];
 

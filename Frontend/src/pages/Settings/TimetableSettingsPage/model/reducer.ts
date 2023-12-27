@@ -8,7 +8,7 @@ const initLessonData: TimetableSettingsPageTimeData = [];
 const initParadeData: TimetableSettingsPageParadeData = {
   weekDayCode: 0,
   startTime: "08:00",
-  endTime: "08:45"
+  endTime: "08:20"
 };
 
 const initData: TimetableSettingsPageData = {

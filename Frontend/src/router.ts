@@ -182,16 +182,16 @@ export const Menu: MenuItem[] = [
       { label: "Контроль выполнения за месяц", url: AppRouter.Monitoring }
     ]
   },
-  {
-    url: AppRouter.FinancialReport,
-    label: "Финансовый отчет",
-    navigation: [
-      { label: "Тарификация", url: AppRouter.Tariffication },
-      { label: "Внебюджет", url: AppRouter.OffBudget },
-      { label: "Финальный отчет", url: AppRouter.Final },
-      { label: "Внебюджетные категории", url: AppRouter.OffBudgetCategories }
-    ]
-  },
+  // {
+  //   url: AppRouter.FinancialReport,
+  //   label: "Финансовый отчет",
+  //   navigation: [
+  //     { label: "Тарификация", url: AppRouter.Tariffication },
+  //     { label: "Внебюджет", url: AppRouter.OffBudget },
+  //     { label: "Финальный отчет", url: AppRouter.Final },
+  //     { label: "Внебюджетные категории", url: AppRouter.OffBudgetCategories }
+  //   ]
+  // },
   {
     url: AppRouter.YearImplementationMonitoring,
     label: "Контроль учебного плана за год",
@@ -199,13 +199,13 @@ export const Menu: MenuItem[] = [
       { label: "Контроль учебного плана за год", url: "" },
     ]
   },
-  {
-    url: AppRouter.Statistics,
-    label: "Статистика",
-    navigation: [
-      { label: "Статистика бюджетов", url: AppRouter.BudgetStatistics },
-      { label: "Статистика категорий", url: AppRouter.Categories },
-      { label: "Статистика преподавателей", url: AppRouter.Teachers }
-    ]
-  }
+  // {
+  //   url: AppRouter.Statistics,
+  //   label: "Статистика",
+  //   navigation: [
+  //     { label: "Статистика бюджетов", url: AppRouter.BudgetStatistics },
+  //     { label: "Статистика категорий", url: AppRouter.Categories },
+  //     { label: "Статистика преподавателей", url: AppRouter.Teachers }
+  //   ]
+  // }
 ];

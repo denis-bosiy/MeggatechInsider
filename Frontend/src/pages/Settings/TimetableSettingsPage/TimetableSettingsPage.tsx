@@ -107,13 +107,13 @@ const TimetableSettingsPage = () => {
           TimetableSettingsPageActionBuilder.saveParade({
             weekDayCode: 0,
             startTime: "08:00",
-            endTime: "08:45"
+            endTime: "08:20"
           })
         );
         setParadeData({
           weekDayCode: 0,
           startTime: "08:00",
-          endTime: "08:45"
+          endTime: "08:20"
         });
       })
       .finally(() => {

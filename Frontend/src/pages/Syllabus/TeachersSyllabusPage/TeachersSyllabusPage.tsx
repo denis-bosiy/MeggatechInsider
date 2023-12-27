@@ -90,8 +90,148 @@ const TeachersSyllabusPage = () => {
         setTeachersTableData(structuredClone(teachers));
       })
       .catch(() => {
-        dispatch(ActionBuilder.saveTeachers([]));
-        setTeachersTableData([]);
+        dispatch(
+          ActionBuilder.saveTeachers([
+            {
+              id: guidGenerator(),
+              name: "Охотников С.А.",
+              category: categoryOptions[0].content,
+              categoryPayrollAccounting: false,
+              workingContract: workingContractOptions[0].content,
+              workingContractPayrollAccounting: false,
+              education: educationOptions[0].content,
+              isClassroomTeacher: false,
+              inDepthSubjectPayrollAccounting: false,
+              finalExamPayrollAccounting: false,
+              workingStartDate: "",
+              workExperience: 0,
+              workExperienceAtTheTimeOfTheEmployment: 0,
+              birthDay: "",
+              age: 25
+            },
+            {
+              id: guidGenerator(),
+              name: "Гусарова Л.Г.",
+              category: categoryOptions[0].content,
+              categoryPayrollAccounting: false,
+              workingContract: workingContractOptions[0].content,
+              workingContractPayrollAccounting: false,
+              education: educationOptions[0].content,
+              isClassroomTeacher: false,
+              inDepthSubjectPayrollAccounting: false,
+              finalExamPayrollAccounting: false,
+              workingStartDate: "",
+              workExperience: 0,
+              workExperienceAtTheTimeOfTheEmployment: 0,
+              birthDay: "",
+              age: 25
+            },
+            {
+              id: guidGenerator(),
+              name: "Логинова М.Ю.",
+              category: categoryOptions[0].content,
+              categoryPayrollAccounting: false,
+              workingContract: workingContractOptions[0].content,
+              workingContractPayrollAccounting: false,
+              education: educationOptions[0].content,
+              isClassroomTeacher: false,
+              inDepthSubjectPayrollAccounting: false,
+              finalExamPayrollAccounting: false,
+              workingStartDate: "",
+              workExperience: 0,
+              workExperienceAtTheTimeOfTheEmployment: 0,
+              birthDay: "",
+              age: 25
+            },
+            {
+              id: guidGenerator(),
+              name: "Руденко Е.В.",
+              category: categoryOptions[0].content,
+              categoryPayrollAccounting: false,
+              workingContract: workingContractOptions[0].content,
+              workingContractPayrollAccounting: false,
+              education: educationOptions[0].content,
+              isClassroomTeacher: false,
+              inDepthSubjectPayrollAccounting: false,
+              finalExamPayrollAccounting: false,
+              workingStartDate: "",
+              workExperience: 0,
+              workExperienceAtTheTimeOfTheEmployment: 0,
+              birthDay: "",
+              age: 25
+            }
+          ])
+        );
+        setTeachersTableData([
+          {
+            id: guidGenerator(),
+            name: "Охотников С.А.",
+            category: categoryOptions[0].content,
+            categoryPayrollAccounting: false,
+            workingContract: workingContractOptions[0].content,
+            workingContractPayrollAccounting: false,
+            education: educationOptions[0].content,
+            isClassroomTeacher: false,
+            inDepthSubjectPayrollAccounting: false,
+            finalExamPayrollAccounting: false,
+            workingStartDate: "",
+            workExperience: 0,
+            workExperienceAtTheTimeOfTheEmployment: 0,
+            birthDay: "",
+            age: 25
+          },
+          {
+            id: guidGenerator(),
+            name: "Гусарова Л.Г.",
+            category: categoryOptions[0].content,
+            categoryPayrollAccounting: false,
+            workingContract: workingContractOptions[0].content,
+            workingContractPayrollAccounting: false,
+            education: educationOptions[0].content,
+            isClassroomTeacher: false,
+            inDepthSubjectPayrollAccounting: false,
+            finalExamPayrollAccounting: false,
+            workingStartDate: "",
+            workExperience: 0,
+            workExperienceAtTheTimeOfTheEmployment: 0,
+            birthDay: "",
+            age: 25
+          },
+          {
+            id: guidGenerator(),
+            name: "Логинова М.Ю.",
+            category: categoryOptions[0].content,
+            categoryPayrollAccounting: false,
+            workingContract: workingContractOptions[0].content,
+            workingContractPayrollAccounting: false,
+            education: educationOptions[0].content,
+            isClassroomTeacher: false,
+            inDepthSubjectPayrollAccounting: false,
+            finalExamPayrollAccounting: false,
+            workingStartDate: "",
+            workExperience: 0,
+            workExperienceAtTheTimeOfTheEmployment: 0,
+            birthDay: "",
+            age: 25
+          },
+          {
+            id: guidGenerator(),
+            name: "Руденко Е.В.",
+            category: categoryOptions[0].content,
+            categoryPayrollAccounting: false,
+            workingContract: workingContractOptions[0].content,
+            workingContractPayrollAccounting: false,
+            education: educationOptions[0].content,
+            isClassroomTeacher: false,
+            inDepthSubjectPayrollAccounting: false,
+            finalExamPayrollAccounting: false,
+            workingStartDate: "",
+            workExperience: 0,
+            workExperienceAtTheTimeOfTheEmployment: 0,
+            birthDay: "",
+            age: 25
+          }
+        ]);
         setDataLoading(false);
       });
   }, [currentYear?.id]);

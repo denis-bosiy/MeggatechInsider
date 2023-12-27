@@ -34,7 +34,10 @@ const SubjectsSyllabusPage = () => {
   ];
   const categoryOptions: ISelectOption[] = [
     { id: "1", content: "Физ." },
-    { id: "2", content: "Ист." }
+    { id: "2", content: "Ист." },
+    { id: "3", content: "Мат." },
+    { id: "4", content: "Общ." },
+    { id: "5", content: "Инф." }
   ];
   const [isDataLoading, setDataLoading] = useState<boolean>(true);
 
@@ -86,8 +89,116 @@ const SubjectsSyllabusPage = () => {
         setSubjectsTableData(structuredClone(subjects));
       })
       .catch(() => {
-        dispatch(ActionBuilder.saveSubjects([]));
-        setSubjectsTableData([]);
+        dispatch(
+          ActionBuilder.saveSubjects([
+            {
+              id: guidGenerator(),
+              subjectName: "АиП",
+              financing: financingOptions[0].content,
+              type: typeOptions[0].content,
+              category: categoryOptions[4].content,
+              surchargeForNotebooks: 0,
+              numberOf10: 1,
+              numberOfGroupsIn10: 1,
+              numberOf11: 0,
+              numberOfGroupsIn11: 0,
+              isFinalExam: false
+            },
+            {
+              id: guidGenerator(),
+              subjectName: "Геометрия",
+              financing: financingOptions[0].content,
+              type: typeOptions[0].content,
+              category: categoryOptions[2].content,
+              surchargeForNotebooks: 0,
+              numberOf10: 1,
+              numberOfGroupsIn10: 2,
+              numberOf11: 0,
+              numberOfGroupsIn11: 0,
+              isFinalExam: true
+            },
+            {
+              id: guidGenerator(),
+              subjectName: "Английский язык",
+              financing: financingOptions[0].content,
+              type: typeOptions[0].content,
+              category: categoryOptions[3].content,
+              surchargeForNotebooks: 0,
+              numberOf10: 1,
+              numberOfGroupsIn10: 1,
+              numberOf11: 0,
+              numberOfGroupsIn11: 0,
+              isFinalExam: true
+            },
+            {
+              id: guidGenerator(),
+              subjectName: "ОБЖ",
+              financing: financingOptions[0].content,
+              type: typeOptions[0].content,
+              category: categoryOptions[3].content,
+              surchargeForNotebooks: 0,
+              numberOf10: 1,
+              numberOfGroupsIn10: 2,
+              numberOf11: 0,
+              numberOfGroupsIn11: 0,
+              isFinalExam: false
+            }
+          ])
+        );
+        setSubjectsTableData([
+          {
+            id: guidGenerator(),
+            subjectName: "АИП",
+            financing: financingOptions[0].content,
+            type: typeOptions[0].content,
+            category: categoryOptions[4].content,
+            surchargeForNotebooks: 0,
+            numberOf10: 1,
+            numberOfGroupsIn10: 1,
+            numberOf11: 0,
+            numberOfGroupsIn11: 0,
+            isFinalExam: false
+          },
+          {
+            id: guidGenerator(),
+            subjectName: "Геометрия",
+            financing: financingOptions[0].content,
+            type: typeOptions[0].content,
+            category: categoryOptions[2].content,
+            surchargeForNotebooks: 0,
+            numberOf10: 1,
+            numberOfGroupsIn10: 2,
+            numberOf11: 0,
+            numberOfGroupsIn11: 0,
+            isFinalExam: true
+          },
+          {
+            id: guidGenerator(),
+            subjectName: "Английский язык",
+            financing: financingOptions[0].content,
+            type: typeOptions[0].content,
+            category: categoryOptions[3].content,
+            surchargeForNotebooks: 0,
+            numberOf10: 1,
+            numberOfGroupsIn10: 1,
+            numberOf11: 0,
+            numberOfGroupsIn11: 0,
+            isFinalExam: true
+          },
+          {
+            id: guidGenerator(),
+            subjectName: "ОБЖ",
+            financing: financingOptions[0].content,
+            type: typeOptions[0].content,
+            category: categoryOptions[3].content,
+            surchargeForNotebooks: 0,
+            numberOf10: 1,
+            numberOfGroupsIn10: 2,
+            numberOf11: 0,
+            numberOfGroupsIn11: 0,
+            isFinalExam: false
+          }
+        ]);
         setDataLoading(false);
       });
   }, [currentYear?.id]);
