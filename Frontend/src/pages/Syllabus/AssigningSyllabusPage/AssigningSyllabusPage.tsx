@@ -27,32 +27,6 @@ import { DiscrepancyResponse } from "../../../api/Responses/DiscrepancyResponse"
 import { ResponseBuilder } from "../../../api/Responses/ResponseBuilder";
 import Loader from "../../../components/Loader/Loader";
 
-const DiscrepanciesSyllabus = () => {
-  const data = useSelector(
-    (state: { assigningSyllabusPageStore: AssigningSyllabusPageData }) => state.assigningSyllabusPageStore
-  );
-  const discrepancies = data.discrepancies;
-
-  return (
-    <>
-      {discrepancies.map((discrepancy) => (
-        <tr className="row" key={discrepancy.id}>
-          <td className="cell">{discrepancy.name}</td>
-          <td
-            className={classNames(
-              "cell" +
-                (discrepancy.groupCount < discrepancy.groupCountByPlan ? " -error" : "") +
-                (discrepancy.groupCount > discrepancy.groupCountByPlan ? " -warning" : "")
-            )}
-          >
-            {discrepancy.groupCount}
-          </td>
-        </tr>
-      ))}
-    </>
-  );
-};
-
 const AssigningSyllabusPage = () => {
   const subjectOptions: ISelectOption[] = [
     { id: "1", content: "JavaScript" },
@@ -229,39 +203,7 @@ const AssigningSyllabusPage = () => {
                   <br />
                   групп
                 </th>
-                <th className="cell -filter" onClick={() => handleSort("hoursByPlanOnClassOfTheStudents")}>
-                  Часов по плану на
-                  <br />
-                  класс
-                </th>
-                <th className="cell -filter" onClick={() => handleSort("hoursOnWeekForTheClassOfTheStudents")}>
-                  Часов в неделю на класс
-                </th>
-                <th className="cell -filter" onClick={() => handleSort("hoursOnWeekOnYearOnTheTeacher")}>
-                  Часов в неделю в<br />
-                  год на
-                  <br />
-                  препод-я
-                </th>
-                <th className="cell -filter" onClick={() => handleSort("hoursOnWeekOnPeriodOnTheTeacher")}>
-                  Часов в неделю в<br />
-                  период на
-                  <br />
-                  препод-я
-                </th>
-                <th className="cell -filter" onClick={() => handleSort("hoursIn1Subgroup")}>
-                  Часов в 1 пг.
-                </th>
-                <th className="cell -filter" onClick={() => handleSort("hoursIn2Subgroup")}>
-                  Часов во 2 пг.
-                </th>
-                <th className="cell -filter" onClick={() => handleSort("totalInYear")}>
-                  Всего
-                  <br />в год
-                </th>
-                <th className="cell -filter" onClick={() => handleSort("bidShare")}>
-                  Доля ставки
-                </th>
+              
               </tr>
             </thead>
             <tbody>
@@ -333,14 +275,7 @@ const AssigningSyllabusPage = () => {
                           value.groupCount
                         )}
                       </td>
-                      <td className="cell">{value.hoursByPlanOnClassOfTheStudents}</td>
-                      <td className="cell">{value.hoursOnWeekForTheClassOfTheStudents}</td>
-                      <td className="cell">{value.hoursOnWeekOnYearOnTheTeacher}</td>
-                      <td className="cell">{value.hoursOnWeekOnPeriodOnTheTeacher}</td>
-                      <td className="cell">{value.hoursIn1Subgroup}</td>
-                      <td className="cell">{value.hoursIn2Subgroup}</td>
-                      <td className="cell">{value.totalInYear}</td>
-                      <td className="cell">{value.bidShare}</td>
+                      
                       <td className="cell">
                         <IconButton icon={<GarbageIcon />} onClick={() => handleDeleteAssigning(value.id.toString())} />
                       </td>
@@ -402,14 +337,7 @@ const AssigningSyllabusPage = () => {
                       size={InputSize.Micro}
                     />
                   </td>
-                  <td className="cell"></td>
-                  <td className="cell"></td>
-                  <td className="cell"></td>
-                  <td className="cell"></td>
-                  <td className="cell"></td>
-                  <td className="cell"></td>
-                  <td className="cell"></td>
-                  <td className="cell"></td>
+                  
                   <td className="cell">
                     <IconButton
                       icon={<CheckMarkIcon />}
@@ -419,20 +347,6 @@ const AssigningSyllabusPage = () => {
                   </td>
                 </tr>
               )}
-            </tbody>
-          </table>
-        </div>
-        <div className="table-wrapper">
-          <h2 className="h2 table-wrapper__title">Расхождения</h2>
-          <table className="table -fill -list">
-            <thead className="header">
-              <tr className="row">
-                <th className="cell">Предмет</th>
-                <th className="cell">Число групп</th>
-              </tr>
-            </thead>
-            <tbody>
-              <DiscrepanciesSyllabus />
             </tbody>
           </table>
         </div>
