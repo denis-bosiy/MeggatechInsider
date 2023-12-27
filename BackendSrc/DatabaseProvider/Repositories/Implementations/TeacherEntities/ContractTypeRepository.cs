@@ -13,4 +13,6 @@ public class ContractTypeRepository : Repository<ContractType>, IContractTypeRep
 
     public ContractType GetById( int id ) =>
         Entities.FirstOrDefault( ct => ct.Id == id ) ?? throw new InvalidOperationException();
+
+    public ContractType GetContractTypeByName( string name ) => Entities.Where( s => s.ContractTypeName == name ).FirstOrDefault();
 }
