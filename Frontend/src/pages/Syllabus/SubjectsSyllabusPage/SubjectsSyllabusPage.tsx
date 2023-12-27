@@ -20,6 +20,7 @@ import { HttpService } from "../../../api/http.service";
 import { Endpoint } from "../../../api/endpoints";
 import { SyllabusSubjectResponse } from "../../../api/Responses/SyllabusSubjectResponse";
 import { ResponseBuilder } from "../../../api/Responses/ResponseBuilder";
+import Loader from "../../../components/Loader/Loader";
 
 const SubjectsSyllabusPage = () => {
   // TODO: Добавить вытягивание этих данных с бэкенда
@@ -35,6 +36,7 @@ const SubjectsSyllabusPage = () => {
     { id: "1", content: "Физ." },
     { id: "2", content: "Ист." }
   ];
+  const [isDataLoading, setDataLoading] = useState<boolean>(true);
 
   const httpService = new HttpService();
   const { openModal } = useContext(ModalSettingsContext);
@@ -59,10 +61,11 @@ const SubjectsSyllabusPage = () => {
     if (currentYear) {
       params.set("year", currentYear.year.toString());
     }
-
+    setDataLoading(true);
     httpService
       .getByArbitraryUrl(Endpoint.SyllabusSubjects, params)
       .then((data: any) => {
+        setDataLoading(false);
         const subjectsResponse: SyllabusSubjectResponse[] = ResponseBuilder.BuildSyllabusSubjectsResponse(data);
         const subjects: SubjectSyllabusData[] = subjectsResponse.map((subjectResponse: SyllabusSubjectResponse) => {
           return {
@@ -85,6 +88,7 @@ const SubjectsSyllabusPage = () => {
       .catch(() => {
         dispatch(ActionBuilder.saveSubjects([]));
         setSubjectsTableData([]);
+        setDataLoading(false);
       });
   }, [currentYear?.id]);
 
@@ -134,6 +138,10 @@ const SubjectsSyllabusPage = () => {
       openModal
     ]);
   };
+
+  if (isDataLoading) {
+    return <Loader />;
+  }
 
   return (
     <>

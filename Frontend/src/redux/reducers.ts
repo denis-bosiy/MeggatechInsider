@@ -29,6 +29,10 @@ import { subjectsCoursesSyllabusPageReducer } from "../pages/CourseSyllabus/Subj
 import { teachersCoursesSyllabusPageReducer } from "../pages/CourseSyllabus/TeachersCoursesSyllabusPage/model/reducer";
 import { assigningCoursesSyllabusPageReducer } from "../pages/CourseSyllabus/AssigningCoursesSyllabusPage/model/reducer";
 import { yearImplementationMonitoringPageReducer } from "../pages/YearImplementationMonitoringPage/model/reducer";
+import {
+  lessonsScheduleCoursesTimetablePageReducer
+} from "../pages/CoursesTimetable/LessonsScheduleCoursesTimetablePage/model/reducer";
+import { sybjectSettingsPageReducer } from "../pages/Settings/SubjectSettingsPage/model/reducer";
 
 export default combineReducers({
   testPageStore: testPageReducer,
@@ -60,5 +64,7 @@ export default combineReducers({
   offBudgetCategoriesPageStore: offBudgetCategoriesPageReducer,
   finalReportPageStore: finalReportPageReducer,
   tarifficationReportPageStore: tarifficationReportPageReducer,
-  yearImplementationMonitoringPageStore: yearImplementationMonitoringPageReducer
+  yearImplementationMonitoringPageStore: yearImplementationMonitoringPageReducer,
+  lessonsScheduleCoursesTimetablePageStore: lessonsScheduleCoursesTimetablePageReducer,
+  sybjectSettingsPageStore: sybjectSettingsPageReducer,
 });

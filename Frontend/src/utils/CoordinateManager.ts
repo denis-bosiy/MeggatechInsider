@@ -14,8 +14,31 @@ export class CoordinateManager {
         return EnglishAlphabet.D;
       case Workday.Friday:
         return EnglishAlphabet.E;
+      case Workday.Saturday:
+        return EnglishAlphabet.F;
       default:
         return EnglishAlphabet.Unknown;
+    }
+  }
+
+  public static GetWorkdayFromEnglishLetter(letter: EnglishAlphabet): Workday {
+    switch(letter) {
+      case EnglishAlphabet.A:
+        return Workday.Monday;
+      case EnglishAlphabet.B:
+        return Workday.Tuesday;
+      case EnglishAlphabet.C:
+        return Workday.Wednesday;
+      case EnglishAlphabet.D:
+        return Workday.Thursday;
+      case EnglishAlphabet.E:
+        return Workday.Friday;
+      case EnglishAlphabet.F:
+        return Workday.Saturday;
+      case EnglishAlphabet.G:
+        return Workday.Sunday;
+      default:
+        return Workday.Monday;
     }
   }
 

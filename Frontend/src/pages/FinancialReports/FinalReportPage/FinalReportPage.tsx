@@ -12,7 +12,7 @@ const FinalReportPage = () => {
 
   return (
     <>
-      <div className="toolbar -fill">
+      <div className="toolbar">
         <div className="toolbar__buttons-wrapper">
           <Button
             className="toolbar__button"

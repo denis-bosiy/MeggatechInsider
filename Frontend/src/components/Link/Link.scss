@@ -34,6 +34,7 @@
   }
 
   &.-important {
+    text-decoration: underline;
     color: $link-important-color;
     fill: $link-important-color;
 

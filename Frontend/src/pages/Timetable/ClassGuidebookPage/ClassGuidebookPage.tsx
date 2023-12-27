@@ -8,7 +8,6 @@ import { CTable } from "../../../core/Table/CTable";
 import { CTableManager } from "../../../core/Table/CTableManager";
 import { TableType } from "../../../core/Table/TableType";
 import { SortingOrder } from "../../../core/Table/SortingOrder";
-import "./ClassGuidebookPage.scss";
 import { classNames } from "../../../utils/classNames";
 
 const ClassGuidebookPage = () => {
@@ -56,7 +55,7 @@ const ClassGuidebookPage = () => {
 
   return (
     <>
-      <div className="toolbar class-guidebook-page__toolbar">
+      <div className="toolbar -search">
         <Input
           className="toolbar__search"
           placeholder="Поиск"

@@ -5,7 +5,9 @@ export class ScheduleNotifier {
   private _subscribers: ISubscriber[] = [];
   private static _instance: ScheduleNotifier;
 
-  private constructor() {}
+  private constructor() {
+    //
+  }
 
   public static getInstance(): ScheduleNotifier {
     if (!ScheduleNotifier._instance) {

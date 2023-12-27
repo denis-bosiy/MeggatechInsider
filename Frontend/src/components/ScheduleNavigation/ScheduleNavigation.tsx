@@ -6,12 +6,15 @@ import { Link, LinkType } from "../Link/Link";
 import ActionButton, { ActionButtonSize, ActionButtonType } from "../ActionButton/ActionButton";
 import Button, { ButtonSize, ButtonType } from "../Button/Button";
 import Select, { ISelectOption, SelectSize } from "../Select/Select";
-import { ScheduleLesson } from "../../core/Schedule/ScheduleLesson";
 import { RadioButton } from "../RadioButton/RadioButton";
 import { CheckBox } from "../CheckBox/CheckBox";
 import { guidGenerator } from "../../utils/guidGenerator";
 import Input, { InputSize } from "../Input/Input";
 import { Workday } from "../../core/Schedule/Workday";
+import { ScheduleNotifier } from "../../core/Schedule/ScheduleNotifier";
+import { ScheduleSubscriber } from "../../core/Schedule/ScheduleSubscriber";
+import { ScheduleEvent } from "../../core/Schedule/ScheduleEvent";
+import { ScheduleConverter } from "../../core/Schedule/ScheduleConverter";
 
 interface IScheduleNavigationProps {
   checked?: boolean;
@@ -19,43 +22,62 @@ interface IScheduleNavigationProps {
 }
 
 const daySelectsOptions: ISelectOption[] = [
-  { id: "monday", content: "Понедельник" },
-  { id: "tuesday", content: "Вторник" },
-  { id: "wednesday", content: "Среда" },
-  { id: "thursday", content: "Четверг" },
-  { id: "friday", content: "Пятница" },
-  { id: "saturday", content: "Суббота" },
-  { id: "sunday", content: "Воскресенье" }
+  { id: Workday.Monday, content: "Понедельник" },
+  { id: Workday.Tuesday, content: "Вторник" },
+  { id: Workday.Wednesday, content: "Среда" },
+  { id: Workday.Thursday, content: "Четверг" },
+  { id: Workday.Friday, content: "Пятница" },
+  { id: Workday.Saturday, content: "Суббота" },
+  { id: Workday.Sunday, content: "Воскресенье" }
 ];
 const pairTimesOptions: ISelectOption[] = [
-  { id: guidGenerator(), content: "08:20-09:50" },
-  { id: guidGenerator(), content: "10:10-11:40" },
-  { id: guidGenerator(), content: "12:00-13:30" },
-  { id: guidGenerator(), content: "13:40-15:10" }
+  { id: guidGenerator(), content: "08.20-09.50" },
+  { id: guidGenerator(), content: "10.10-11.40" },
+  { id: guidGenerator(), content: "12.00-13.30" },
+  { id: guidGenerator(), content: "13.40-15.10" }
+];
+const pairTimesOptionsForNotMonday: ISelectOption[] = [
+  { id: guidGenerator(), content: "08.00-09.30" },
+  { id: guidGenerator(), content: "09.50-11.20" },
+  { id: guidGenerator(), content: "11.40-13.10" },
+  { id: guidGenerator(), content: "13.20-14.50" }
 ];
 const lessonTimesOptions: ISelectOption[] = [
-  { id: guidGenerator(), content: "08:20-09:00" },
-  { id: guidGenerator(), content: "09:10-09:50" },
-  { id: guidGenerator(), content: "10:10-10:50" },
-  { id: guidGenerator(), content: "11:00-11:40" },
-  { id: guidGenerator(), content: "12:00-12:40" },
-  { id: guidGenerator(), content: "12:50-13:30" },
-  { id: guidGenerator(), content: "13:40-14:20" },
-  { id: guidGenerator(), content: "14:30-15:10" }
+  { id: guidGenerator(), content: "08.20-09.00" },
+  { id: guidGenerator(), content: "09.10-09.50" },
+  { id: guidGenerator(), content: "10.10-10.50" },
+  { id: guidGenerator(), content: "11.00-11.40" },
+  { id: guidGenerator(), content: "12.00-12.40" },
+  { id: guidGenerator(), content: "12.50-13.30" },
+  { id: guidGenerator(), content: "13.40-14.20" },
+  { id: guidGenerator(), content: "14.30-15.10" }
+];
+const lessonTimesOptionsForNotMonday: ISelectOption[] = [
+  { id: guidGenerator(), content: "08.00-08.40" },
+  { id: guidGenerator(), content: "08.50-09.30" },
+  { id: guidGenerator(), content: "09.50-10.30" },
+  { id: guidGenerator(), content: "10.40-11.20" },
+  { id: guidGenerator(), content: "11.40-12.20" },
+  { id: guidGenerator(), content: "12.30-13.10" },
+  { id: guidGenerator(), content: "13.20-14.00" },
+  { id: guidGenerator(), content: "14.10-14.50" }
 ];
 const subjectsOptions: ISelectOption[] = [
   { id: guidGenerator(), content: "Геометрия" },
   { id: guidGenerator(), content: "Физика" },
-  { id: guidGenerator(), content: "Английский язык" }
+  { id: guidGenerator(), content: "Английский язык" },
+  { id: guidGenerator(), content: "АиП" },
+  { id: guidGenerator(), content: "ОБЖ" }
 ];
 
-enum LessonType {
+export enum ScheduleNavigationLessonType {
   Pair = "pair",
   Lesson = "lesson"
 }
-class ScheduleNavigationLesson {
+export class ScheduleNavigationLesson {
+  id: string;
   workDay: Workday = Workday.Monday;
-  lessonType: LessonType = LessonType.Lesson;
+  lessonType: ScheduleNavigationLessonType = ScheduleNavigationLessonType.Lesson;
   timePeriod = "";
 
   groups: string[] = [];
@@ -68,6 +90,33 @@ class ScheduleNavigationLesson {
   isOnline = false;
 
   divisionTypes: string[] = [];
+
+  constructor(
+    id: string,
+    workday: Workday,
+    lessonType: ScheduleNavigationLessonType,
+    timePeriod: string,
+    groups: string[],
+    subgroupsCount: number,
+    chosenSubgroup: number,
+    lessonName: string,
+    isOnline: boolean,
+    classRoom?: string
+  ) {
+    this.id = id;
+    this.workDay = workday;
+    this.lessonType = lessonType;
+    this.timePeriod = timePeriod;
+    this.groups = groups;
+    this.subgroupsCount = subgroupsCount;
+    this.chosenSubgroup = chosenSubgroup;
+    this.lessonName = lessonName;
+    this.isOnline = isOnline;
+
+    if (classRoom) {
+      this.classRoom = classRoom;
+    }
+  }
 }
 
 export const ScheduleNavigation = () => {
@@ -91,11 +140,19 @@ export const ScheduleNavigation = () => {
     const foundIndex: number = daySelectsOptions.findIndex((subgroup: ISelectOption) => subgroup.id === newDayId);
 
     if (foundIndex !== -1) {
+      const selectedDay: ISelectOption = daySelectsOptions[foundIndex];
+
       setDay(daySelectsOptions[foundIndex]);
+      lesson && setLesson({ ...lesson, workDay: selectedDay.id as Workday });
     }
   };
   const handleIsPairChanging = (): void => {
     setIsPair(!isPair);
+    lesson &&
+      setLesson({
+        ...lesson,
+        lessonType: isPair ? ScheduleNavigationLessonType.Pair : ScheduleNavigationLessonType.Lesson
+      });
   };
   const handleChangingTime = (newTimeId: string): void => {
     if (isPair) {
@@ -103,6 +160,7 @@ export const ScheduleNavigation = () => {
 
       if (foundIndex !== -1) {
         setTime(pairTimesOptions[foundIndex]);
+        lesson && setLesson({ ...lesson, timePeriod: pairTimesOptions[foundIndex].content });
       }
     } else {
       const foundIndex: number = lessonTimesOptions.findIndex(
@@ -111,11 +169,13 @@ export const ScheduleNavigation = () => {
 
       if (foundIndex !== -1) {
         setTime(lessonTimesOptions[foundIndex]);
+        lesson && setLesson({ ...lesson, timePeriod: lessonTimesOptions[foundIndex].content });
       }
     }
   };
   const handleChangingSubgroupsCount = (newSubgroupsCount: string): void => {
     setSubgroupsCount(parseFloat(newSubgroupsCount));
+    lesson && setLesson({ ...lesson, subgroupsCount: parseFloat(newSubgroupsCount) });
   };
   const handleChangingChosenSubgroup = (newChosenSubgroupId: string): void => {
     const foundIndex: number = possibleSubgroups.findIndex(
@@ -124,6 +184,7 @@ export const ScheduleNavigation = () => {
 
     if (foundIndex !== -1) {
       setChosenSubgroup(possibleSubgroups[foundIndex]);
+      lesson && setLesson({ ...lesson, chosenSubgroup: parseFloat(possibleSubgroups[foundIndex].content) });
     }
   };
   const handleChangingSubject = (newSubjectId: string): void => {
@@ -131,18 +192,27 @@ export const ScheduleNavigation = () => {
 
     if (foundIndex !== -1) {
       setSubject(subjectsOptions[foundIndex]);
+      lesson && setLesson({ ...lesson, lessonName: subjectsOptions[foundIndex].content });
     }
   };
   const handleChangingRoom = (newRoom: string): void => {
     setRoom(newRoom);
+    lesson && setLesson({ ...lesson, classRoom: newRoom });
+  };
+  const handleSettingIsOnline = (): void => {
+    setIsOnline(!isOnline);
+    lesson && setLesson({ ...lesson, isOnline: !isOnline });
   };
   const handleChangingDivision = (changingDivision: string): void => {
     const foundIndex: number = divisions.findIndex((division: string) => division === changingDivision);
 
     if (foundIndex !== -1) {
       setDivisions(divisions.filter((division: string) => division !== changingDivision));
+      lesson &&
+        setLesson({ ...lesson, divisionTypes: divisions.filter((division: string) => division !== changingDivision) });
     } else {
       setDivisions([...divisions, changingDivision]);
+      lesson && setLesson({ ...lesson, divisionTypes: [...divisions, changingDivision] });
     }
   };
   const handleChangingGroup = (changingGroup: string): void => {
@@ -150,8 +220,10 @@ export const ScheduleNavigation = () => {
 
     if (foundIndex !== -1) {
       setGroups(groups.filter((group: string) => group !== changingGroup));
+      lesson && setLesson({ ...lesson, groups: groups.filter((group: string) => group !== changingGroup) });
     } else {
       setGroups([...groups, changingGroup]);
+      lesson && setLesson({ ...lesson, groups: [...groups, changingGroup] });
     }
   };
   const handleReseting = (): void => {
@@ -164,6 +236,9 @@ export const ScheduleNavigation = () => {
     setIsOnline(false);
     setDivisions([]);
     setGroups([]);
+  };
+  const handleSaving = (): void => {
+    ScheduleNotifier.getInstance().notify(ScheduleEvent.StoppedLessonEditing, lesson);
   };
 
   useLayoutEffect(() => {
@@ -182,6 +257,68 @@ export const ScheduleNavigation = () => {
       setTime(lessonTimesOptions[0]);
     }
   }, [isPair]);
+  useLayoutEffect(() => {
+    if (!lesson) {
+      return;
+    }
+
+    if (lesson.workDay === Workday.Monday) {
+      if (lesson.lessonType === ScheduleNavigationLessonType.Lesson) {
+        setTime(
+          lessonTimesOptions.find(
+            (lessonTimeOption: ISelectOption) => lessonTimeOption.content === lesson.timePeriod
+          ) || lessonTimesOptions[0]
+        );
+      } else {
+        setTime(
+          pairTimesOptions.find((pairTimeOption: ISelectOption) => pairTimeOption.content === lesson.timePeriod) ||
+            pairTimesOptions[0]
+        );
+      }
+    } else {
+      if (lesson.lessonType === ScheduleNavigationLessonType.Lesson) {
+        setTime(
+          lessonTimesOptionsForNotMonday.find(
+            (lessonTimeOption: ISelectOption) => lessonTimeOption.content === lesson.timePeriod
+          ) || lessonTimesOptions[0]
+        );
+      } else {
+        setTime(
+          pairTimesOptionsForNotMonday.find(
+            (pairTimeOption: ISelectOption) => pairTimeOption.content === lesson.timePeriod
+          ) || pairTimesOptions[0]
+        );
+      }
+    }
+    setDay(
+      daySelectsOptions.find((daySelectOption: ISelectOption) => daySelectOption.content === lesson.workDay) ||
+        daySelectsOptions[0]
+    );
+    setSubject(
+      subjectsOptions.find((subjectOption: ISelectOption) => subjectOption.content === lesson.lessonName) ||
+        subjectsOptions[0]
+    );
+    setRoom(lesson.isOnline ? "" : lesson.classRoom ? lesson.classRoom : "");
+    setIsOnline(lesson.isOnline);
+    if (lesson.groups.length > 0) {
+      setGroups([lesson.groups[0]]);
+    }
+    setSubgroupsCount(lesson.subgroupsCount);
+    setChosenSubgroup(
+      possibleSubgroups.find(
+        (possibleSubgroup: ISelectOption) => parseFloat(possibleSubgroup.content) === lesson.chosenSubgroup
+      ) || possibleSubgroups[0]
+    );
+  }, [lesson]);
+  useLayoutEffect(() => {
+    ScheduleNotifier.getInstance().subscribe(
+      new ScheduleSubscriber((data: any) => {
+        if (data.lesson) {
+          setLesson(ScheduleConverter.ConvertFromLessonToNavigationLesson(data.lesson, data.schedule));
+        }
+      }, ScheduleEvent.StartedLessonEditing)
+    );
+  }, []);
 
   return (
     <div className="page-navigation">
@@ -210,7 +347,7 @@ export const ScheduleNavigation = () => {
             {isPair && (
               <Select
                 currentValue={time}
-                options={pairTimesOptions}
+                options={day.id === Workday.Monday ? pairTimesOptions : pairTimesOptionsForNotMonday}
                 onValueChange={handleChangingTime}
                 size={SelectSize.Micro}
               />
@@ -218,7 +355,7 @@ export const ScheduleNavigation = () => {
             {!isPair && (
               <Select
                 currentValue={time}
-                options={lessonTimesOptions}
+                options={day.id === Workday.Monday ? lessonTimesOptions : lessonTimesOptionsForNotMonday}
                 onValueChange={handleChangingTime}
                 size={SelectSize.Micro}
               />
@@ -282,7 +419,7 @@ export const ScheduleNavigation = () => {
               onValueChange={handleChangingRoom}
               size={InputSize.Micro}
             />
-            <CheckBox checked={isOnline} label="Онлайн" onChange={setIsOnline} />
+            <CheckBox checked={isOnline} label="Онлайн" onChange={() => handleSettingIsOnline()} />
           </div>
           <div className="schedule-navigation__control">
             <span>Деление по</span>
@@ -311,7 +448,7 @@ export const ScheduleNavigation = () => {
               size={ActionButtonSize.Small}
               onClick={handleReseting}
             />
-            <ActionButton label={"Сохранить"} type={ActionButtonType.Positive} size={ActionButtonSize.Small} />
+            <ActionButton label={"Сохранить"} type={ActionButtonType.Positive} size={ActionButtonSize.Small} onClick={() => handleSaving()}/>
           </div>
         </div>
       </div>

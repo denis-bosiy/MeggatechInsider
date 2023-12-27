@@ -30,6 +30,9 @@ namespace Infrastructure.Migrations.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
+                    b.Property<int>("ClassNumber")
+                        .HasColumnType("int");
+
                     b.Property<int>("GroupCount")
                         .HasColumnType("int");
 
@@ -341,6 +344,67 @@ namespace Infrastructure.Migrations.Migrations
                     b.HasIndex("SubjectId");
 
                     b.ToTable("EducationalPlanSubject", (string)null);
+                });
+
+            modelBuilder.Entity("Domain.ReportEntities.SubdeanEntities.MonthComment", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<int>("Month")
+                        .HasColumnType("int");
+
+                    b.Property<int>("PaymentTypeId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("TeacherId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Text")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("Year")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("PaymentTypeId");
+
+                    b.HasIndex("TeacherId");
+
+                    b.ToTable("MonthComment", (string)null);
+                });
+
+            modelBuilder.Entity("Domain.ReportEntities.SubdeanEntities.YearComment", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<int>("PaymentTypeId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("TeacherId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Text")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("Year")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("TeacherId");
+
+                    b.ToTable("YearComment", (string)null);
                 });
 
             modelBuilder.Entity("Domain.SubjectEntities.PaymentType", b =>
@@ -1052,6 +1116,44 @@ namespace Infrastructure.Migrations.Migrations
                     b.Navigation("Subject");
                 });
 
+            modelBuilder.Entity("Domain.ReportEntities.SubdeanEntities.MonthComment", b =>
+                {
+                    b.HasOne("Domain.SubjectEntities.PaymentType", "PaymentType")
+                        .WithMany("MonthComments")
+                        .HasForeignKey("PaymentTypeId")
+                        .OnDelete(DeleteBehavior.NoAction)
+                        .IsRequired();
+
+                    b.HasOne("Domain.TeacherEntities.Teacher", "Teacher")
+                        .WithMany("MonthComments")
+                        .HasForeignKey("TeacherId")
+                        .OnDelete(DeleteBehavior.NoAction)
+                        .IsRequired();
+
+                    b.Navigation("PaymentType");
+
+                    b.Navigation("Teacher");
+                });
+
+            modelBuilder.Entity("Domain.ReportEntities.SubdeanEntities.YearComment", b =>
+                {
+                    b.HasOne("Domain.SubjectEntities.PaymentType", "PaymentType")
+                        .WithMany("YearComments")
+                        .HasForeignKey("TeacherId")
+                        .OnDelete(DeleteBehavior.NoAction)
+                        .IsRequired();
+
+                    b.HasOne("Domain.TeacherEntities.Teacher", "Teacher")
+                        .WithMany("YearComments")
+                        .HasForeignKey("TeacherId")
+                        .OnDelete(DeleteBehavior.NoAction)
+                        .IsRequired();
+
+                    b.Navigation("PaymentType");
+
+                    b.Navigation("Teacher");
+                });
+
             modelBuilder.Entity("Domain.SubjectEntities.Subject", b =>
                 {
                     b.HasOne("Domain.SubjectEntities.PaymentType", "PaymentType")
@@ -1244,7 +1346,11 @@ namespace Infrastructure.Migrations.Migrations
 
             modelBuilder.Entity("Domain.SubjectEntities.PaymentType", b =>
                 {
+                    b.Navigation("MonthComments");
+
                     b.Navigation("Subjects");
+
+                    b.Navigation("YearComments");
                 });
 
             modelBuilder.Entity("Domain.SubjectEntities.Subject", b =>
@@ -1277,6 +1383,10 @@ namespace Infrastructure.Migrations.Migrations
             modelBuilder.Entity("Domain.TeacherEntities.Teacher", b =>
                 {
                     b.Navigation("Lessons");
+
+                    b.Navigation("MonthComments");
+
+                    b.Navigation("YearComments");
                 });
 
             modelBuilder.Entity("Domain.TeacherEntities.TeacherCategory", b =>

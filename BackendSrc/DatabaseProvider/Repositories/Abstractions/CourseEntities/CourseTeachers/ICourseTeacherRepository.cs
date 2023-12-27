@@ -5,5 +5,6 @@ namespace DatabaseProvider.Repositories.Abstractions.CourseEntities.CourseTeache
     public interface ICourseTeacherRepository : IRepository<CourseTeacher>
     {
         CourseTeacher GetById( int id );
+        public List<CourseTeacher> GetCourseTeachersByYear( int year );
     }
 }

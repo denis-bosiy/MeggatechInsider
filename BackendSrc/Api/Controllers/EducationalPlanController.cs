@@ -138,6 +138,86 @@ public sealed class EducationalPlanController : ControllerBase
             .Map() );
     }
 
+    [HttpPost( "subjects" )]
+    [ProducesResponseType( StatusCodes.Status200OK )]
+    [ProducesResponseType( StatusCodes.Status400BadRequest )]
+    [ProducesResponseType( StatusCodes.Status404NotFound )]
+    public IActionResult CreateSubject( [FromBody] CreateSubjectRequestDto createSubject )
+    {
+        if ( !IsValidYear( createSubject.Year ) )
+        {
+            return NotFound( "Не найдено такого года" );
+        }
+
+        _subjectService.AddSubject(
+            createSubject.Year,
+            createSubject.Id,
+            createSubject.Name,
+            createSubject.Financing,
+            createSubject.Type,
+            createSubject.Category,
+            createSubject.SurchargeForNotebooks,
+            createSubject.NumberOf10,
+            createSubject.NumberOfGroupsIn10,
+            createSubject.NumberOf11,
+            createSubject.NumberOfGroupsIn11,
+            createSubject.IsFinalExam
+            );
+
+        return Ok();
+    }
+
+    [HttpDelete( "subjects" )]
+    [ProducesResponseType( StatusCodes.Status200OK )]
+    [ProducesResponseType( StatusCodes.Status400BadRequest )]
+    [ProducesResponseType( StatusCodes.Status404NotFound )]
+    public IActionResult DeleteSubject( [FromBody] DeleteSubjectRequestDto deleteSubject )
+    {
+        if ( _subjectService.GetSubjectById( deleteSubject.Id ) is not null ) 
+        {
+            _subjectService.DeleteSubject( deleteSubject.Id );
+        }
+        else
+        {
+            return NotFound( "Не найдено такого предмета" );
+        }
+
+        return Ok();
+    }
+
+    [HttpPut( "subjects" )]
+    [ProducesResponseType( StatusCodes.Status200OK )]
+    [ProducesResponseType( StatusCodes.Status400BadRequest )]
+    [ProducesResponseType( StatusCodes.Status404NotFound )]
+    public IActionResult UpdateSubjects( [FromBody] UpdateSubjectsRequestDto updateSubjects )
+    {
+        foreach( SubjectDto subject in updateSubjects.Subjects )
+        {
+            if ( _subjectService.GetSubjectById( subject.Id ) is not null )
+            {
+                _subjectService.UpdateSubject(
+                    updateSubjects.Year,
+                    subject.Id,
+                    subject.Name,
+                    subject.PaymentType,
+                    subject.Type,
+                    subject.Category,
+                    subject.NotebooksSurcharge,
+                    subject.TenthCount,
+                    subject.TenthGroupsCount,
+                    subject.EleventhNumber,
+                    subject.EleventhGroupsCount,
+                    subject.IsFinalExam );
+            }
+            else
+            {
+                return NotFound( "Не найдено такого предмета" );
+            }
+        }
+        
+        return Ok();
+    }
+
     [HttpGet( "assignments" )]
     [ProducesResponseType<AssignmentsResponseDto>( StatusCodes.Status200OK )]
     [ProducesResponseType( StatusCodes.Status400BadRequest )]
@@ -152,6 +232,64 @@ public sealed class EducationalPlanController : ControllerBase
         return Ok( _assignmentService
             .GetAssignmentsByYear( assignmentsRequest.Year )
             .Map() );
+    }
+
+    [HttpPost( "assignments" )]
+    [ProducesResponseType( StatusCodes.Status200OK )]
+    [ProducesResponseType( StatusCodes.Status400BadRequest )]
+    [ProducesResponseType( StatusCodes.Status404NotFound )]
+    public IActionResult CreateAssignment( [FromQuery] CreateAsignmentRequestDto createAssignment )
+    {
+        if ( !IsValidYear( createAssignment.Year ) )
+        {
+            return NotFound( "Не найдено такого года" );
+        }
+
+        _assignmentService.UpdateAssignment(
+            createAssignment.Year,
+            createAssignment.ClassNumber,
+            createAssignment.SubjectName,
+            createAssignment.TeacherName,
+            createAssignment.GroupCount );
+
+        return Ok();
+    }
+
+    [HttpPut( "assignments" )]
+    [ProducesResponseType( StatusCodes.Status200OK )]
+    [ProducesResponseType( StatusCodes.Status400BadRequest )]
+    [ProducesResponseType( StatusCodes.Status404NotFound )]
+    public IActionResult UpdateAssignment( [FromQuery] CreateAsignmentRequestDto updateAssignment )
+    {
+        if ( !IsValidYear( updateAssignment.Year ) )
+        {
+            return NotFound( "Не найдено такого года" );
+        }
+
+        _assignmentService.UpdateAssignment(
+            updateAssignment.Year,
+            updateAssignment.ClassNumber,
+            updateAssignment.SubjectName,
+            updateAssignment.TeacherName,
+            updateAssignment.GroupCount );
+
+        return Ok();
+    }
+
+    [HttpDelete( "assignments" )]
+    [ProducesResponseType( StatusCodes.Status200OK )]
+    [ProducesResponseType( StatusCodes.Status400BadRequest )]
+    [ProducesResponseType( StatusCodes.Status404NotFound )]
+    public IActionResult DeleteAssignment( [FromQuery] DeleteAssignmentRequestDto deleteAssignment )
+    {
+        if ( _assignmentService.GetAssignmentById( deleteAssignment.Id ) is null )
+        {
+            return NotFound( "Не найдено такого назначения" );
+        }
+
+        _assignmentService.DeleteAssignment( deleteAssignment.Id );
+
+        return Ok();
     }
 
     [HttpGet( "differences" )]

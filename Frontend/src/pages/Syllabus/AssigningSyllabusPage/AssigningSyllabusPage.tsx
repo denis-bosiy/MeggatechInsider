@@ -25,62 +25,7 @@ import { HttpService } from "../../../api/http.service";
 import { Endpoint } from "../../../api/endpoints";
 import { DiscrepancyResponse } from "../../../api/Responses/DiscrepancyResponse";
 import { ResponseBuilder } from "../../../api/Responses/ResponseBuilder";
-
-const DiscrepanciesSyllabus = () => {
-  const httpService = new HttpService();
-  const { currentYear } = useSelector((state: { headerStore: HeaderData }) => state.headerStore);
-  const dispatch = useDispatch();
-  const data = useSelector(
-    (state: { assigningSyllabusPageStore: AssigningSyllabusPageData }) => state.assigningSyllabusPageStore
-  );
-  const discrepancies = data.discrepancies;
-
-  useLayoutEffect(() => {
-    const params: Map<string, string> = new Map<string, string>();
-    if (currentYear) {
-      params.set("year", currentYear.year.toString());
-    }
-
-    httpService
-      .getByArbitraryUrl(Endpoint.SyllabusDiscrepancies, params)
-      .then((data: any) => {
-        const discrepanciesResponse: DiscrepancyResponse[] = ResponseBuilder.BuildDiscrepanciesResponse(data);
-        const discrepancies: DiscrepanciesSyllabusData = discrepanciesResponse.map(
-          (discrepancy: DiscrepancyResponse) => {
-            return {
-              id: guidGenerator(),
-              name: discrepancy.name,
-              groupCount: discrepancy.groupCount,
-              groupCountByPlan: discrepancy.groupCountByPlan
-            };
-          }
-        );
-        dispatch(ActionBuilder.saveDiscrepancies(discrepancies));
-      })
-      .catch(() => {
-        dispatch(ActionBuilder.saveDiscrepancies([]));
-      });
-  }, [currentYear?.id]);
-
-  return (
-    <>
-      {discrepancies.map((discrepancy) => (
-        <tr className="row" key={discrepancy.id}>
-          <td className="cell">{discrepancy.name}</td>
-          <td
-            className={classNames(
-              "cell" +
-                (discrepancy.groupCount < discrepancy.groupCountByPlan ? " -error" : "") +
-                (discrepancy.groupCount > discrepancy.groupCountByPlan ? " -warning" : "")
-            )}
-          >
-            {discrepancy.groupCount}
-          </td>
-        </tr>
-      ))}
-    </>
-  );
-};
+import Loader from "../../../components/Loader/Loader";
 
 const AssigningSyllabusPage = () => {
   const subjectOptions: ISelectOption[] = [
@@ -93,6 +38,10 @@ const AssigningSyllabusPage = () => {
     { id: "2", content: "Петров Иван Иванович" },
     { id: "3", content: "Васечкин Николай Иванович" }
   ];
+  const [isDataLoading, setDataLoading] = useState<boolean>(true);
+
+  const httpService = new HttpService();
+  const { currentYear } = useSelector((state: { headerStore: HeaderData }) => state.headerStore);
 
   const { openModal } = useContext(ModalSettingsContext);
   const dispatch = useDispatch();
@@ -159,6 +108,39 @@ const AssigningSyllabusPage = () => {
     ]);
   };
 
+  useLayoutEffect(() => {
+    const params: Map<string, string> = new Map<string, string>();
+    if (currentYear) {
+      params.set("year", currentYear.year.toString());
+    }
+    setDataLoading(true);
+    httpService
+      .getByArbitraryUrl(Endpoint.SyllabusDiscrepancies, params)
+      .then((data: any) => {
+        setDataLoading(false);
+        const discrepanciesResponse: DiscrepancyResponse[] = ResponseBuilder.BuildDiscrepanciesResponse(data);
+        const discrepancies: DiscrepanciesSyllabusData = discrepanciesResponse.map(
+          (discrepancy: DiscrepancyResponse) => {
+            return {
+              id: guidGenerator(),
+              name: discrepancy.name,
+              groupCount: discrepancy.groupCount,
+              groupCountByPlan: discrepancy.groupCountByPlan
+            };
+          }
+        );
+        dispatch(ActionBuilder.saveDiscrepancies(discrepancies));
+      })
+      .catch(() => {
+        dispatch(ActionBuilder.saveDiscrepancies([]));
+        setDataLoading(false);
+      });
+  }, [currentYear?.id]);
+
+  if (isDataLoading) {
+    return <Loader />;
+  }
+
   return (
     <>
       <div className="toolbar">
@@ -221,39 +203,7 @@ const AssigningSyllabusPage = () => {
                   <br />
                   групп
                 </th>
-                <th className="cell -filter" onClick={() => handleSort("hoursByPlanOnClassOfTheStudents")}>
-                  Часов по плану на
-                  <br />
-                  класс
-                </th>
-                <th className="cell -filter" onClick={() => handleSort("hoursOnWeekForTheClassOfTheStudents")}>
-                  Часов в неделю на класс
-                </th>
-                <th className="cell -filter" onClick={() => handleSort("hoursOnWeekOnYearOnTheTeacher")}>
-                  Часов в неделю в<br />
-                  год на
-                  <br />
-                  препод-я
-                </th>
-                <th className="cell -filter" onClick={() => handleSort("hoursOnWeekOnPeriodOnTheTeacher")}>
-                  Часов в неделю в<br />
-                  период на
-                  <br />
-                  препод-я
-                </th>
-                <th className="cell -filter" onClick={() => handleSort("hoursIn1Subgroup")}>
-                  Часов в 1 пг.
-                </th>
-                <th className="cell -filter" onClick={() => handleSort("hoursIn2Subgroup")}>
-                  Часов во 2 пг.
-                </th>
-                <th className="cell -filter" onClick={() => handleSort("totalInYear")}>
-                  Всего
-                  <br />в год
-                </th>
-                <th className="cell -filter" onClick={() => handleSort("bidShare")}>
-                  Доля ставки
-                </th>
+              
               </tr>
             </thead>
             <tbody>
@@ -325,14 +275,7 @@ const AssigningSyllabusPage = () => {
                           value.groupCount
                         )}
                       </td>
-                      <td className="cell">{value.hoursByPlanOnClassOfTheStudents}</td>
-                      <td className="cell">{value.hoursOnWeekForTheClassOfTheStudents}</td>
-                      <td className="cell">{value.hoursOnWeekOnYearOnTheTeacher}</td>
-                      <td className="cell">{value.hoursOnWeekOnPeriodOnTheTeacher}</td>
-                      <td className="cell">{value.hoursIn1Subgroup}</td>
-                      <td className="cell">{value.hoursIn2Subgroup}</td>
-                      <td className="cell">{value.totalInYear}</td>
-                      <td className="cell">{value.bidShare}</td>
+                      
                       <td className="cell">
                         <IconButton icon={<GarbageIcon />} onClick={() => handleDeleteAssigning(value.id.toString())} />
                       </td>
@@ -394,14 +337,7 @@ const AssigningSyllabusPage = () => {
                       size={InputSize.Micro}
                     />
                   </td>
-                  <td className="cell"></td>
-                  <td className="cell"></td>
-                  <td className="cell"></td>
-                  <td className="cell"></td>
-                  <td className="cell"></td>
-                  <td className="cell"></td>
-                  <td className="cell"></td>
-                  <td className="cell"></td>
+                  
                   <td className="cell">
                     <IconButton
                       icon={<CheckMarkIcon />}
@@ -411,20 +347,6 @@ const AssigningSyllabusPage = () => {
                   </td>
                 </tr>
               )}
-            </tbody>
-          </table>
-        </div>
-        <div className="table-wrapper">
-          <h2 className="h2 table-wrapper__title">Расхождения</h2>
-          <table className="table -fill -list">
-            <thead className="header">
-              <tr className="row">
-                <th className="cell">Предмет</th>
-                <th className="cell">Число групп</th>
-              </tr>
-            </thead>
-            <tbody>
-              <DiscrepanciesSyllabus />
             </tbody>
           </table>
         </div>

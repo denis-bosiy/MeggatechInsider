@@ -24,5 +24,7 @@ public class Repository<TEntity> : IRepository<TEntity>
 
     public void Remove( IEnumerable<TEntity> entities ) => Entities.RemoveRange( entities );
 
+    public void Update( TEntity entity ) => Entities.Update( entity );
+
     public void SaveChanges() => _context.SaveChanges();
 }

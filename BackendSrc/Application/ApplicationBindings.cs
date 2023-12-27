@@ -2,6 +2,7 @@ using Application.Implementations.EducationalPlan;
 using Application.Implementations.StudyingActivityServices;
 using Application.Implementations.SubdeanReportServices;
 using Application.Implementations.TimetableServices;
+using Application.Implementations.EducationalPlanCourses;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace Application
@@ -14,6 +15,7 @@ namespace Application
             services.AddEducationalPlanServices();
             services.AddTimetableServices();
             services.AddSubdeanReportServices();
+            services.AddEducationalPlanCoursesServices();
 
             return services;
         }

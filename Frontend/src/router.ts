@@ -84,6 +84,13 @@ interface MenuItem {
   navigation?: NavigationItem[];
 }
 
+export const OutsideMenu: MenuItem[] = [
+  {
+    url: AppRouter.Login,
+    label: "Логинация",
+  }
+];
+
 export const Menu: MenuItem[] = [
   {
     url: AppRouter.Settings,
@@ -138,7 +145,7 @@ export const Menu: MenuItem[] = [
     navigation: [
       { label: "Справочник по преподавателям", url: AppRouter.TeachersGuidebook },
       { label: "Справочник по группам", url: AppRouter.GroupGuidebook },
-      { label: "Расписание курсов", url: "not-implemented" }
+      { label: "Расписание курсов", url: AppRouter.LessonsSchedule }
     ]
   },
   {

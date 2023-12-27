@@ -111,7 +111,7 @@ const TeachersStatisticsPage = () => {
 
   return (
     <>
-      <div className="toolbar">
+      <div className="toolbar -search">
         <Input
           className="toolbar__search"
           placeholder="Поиск"

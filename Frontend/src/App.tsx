@@ -37,8 +37,11 @@ import CoursesSyllabusPage from "./pages/СourseSyllabus/CoursesSyllabusPage/Cou
 import FinalReportPage from "./pages/FinancialReports/FinalReportPage/FinalReportPage";
 import TarifficationReportPage from "./pages/FinancialReports/TarifficationReportPage/TarifficationReportPage";
 import OffBudgetCategoriesPage from "./pages/FinancialReports/OffBudgetCategoriesPage/OffBudgetCategoriesPage";
+import LessonsScheduleCoursesTimetablePage
+  from "./pages/CoursesTimetable/LessonsScheduleCoursesTimetablePage/LessonsScheduleCoursesTimetablePage";
 import YearImplementationMonitoringPage from "./pages/YearImplementationMonitoringPage/YearImplementationMonitoringPage";
 import NotFoundPage from "./pages/NotFoundPage/NotFoundPage";
+import SubjectSettingsPage from "./pages/Settings/SubjectSettingsPage/SubjectSettingsPage";
 
 const queryClient = new QueryClient();
 const App = (): React.JSX.Element => {
@@ -58,6 +61,7 @@ const App = (): React.JSX.Element => {
                   <Route path={AppRouter.Basic} element={<BasicSettingsPage />} />
                   <Route path={AppRouter.Timetable} element={<TimetableSettingsPage />} />
                   <Route path={AppRouter.Teachers} element={<TeacherSettingsPage />} />
+                  <Route path={AppRouter.Subjects} element={<SubjectSettingsPage />} />
                 </Route>
                 <Route path={AppRouter.Timetable}>
                   <Route index element={<Navigate to={AppRouter.TeachersGuidebook} replace />} />
@@ -76,6 +80,7 @@ const App = (): React.JSX.Element => {
                   <Route index element={<Navigate to={AppRouter.TeachersGuidebook} replace />} />
                   <Route path={AppRouter.TeachersGuidebook} element={<TeacherGuidebookCoursesTimetablePage />} />
                   <Route path={AppRouter.GroupGuidebook} element={<GroupGuidebookCoursesTimetablePage />} />
+                  <Route path={AppRouter.LessonsSchedule} element={<LessonsScheduleCoursesTimetablePage/>} />
                 </Route>
                 <Route path={AppRouter.CoursesSyllabus}>
                   <Route index element={<Navigate to={AppRouter.Subjects} replace />} />

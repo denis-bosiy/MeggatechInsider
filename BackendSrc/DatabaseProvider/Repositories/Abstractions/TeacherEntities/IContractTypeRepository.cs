@@ -6,4 +6,5 @@ public interface IContractTypeRepository : IRepository<ContractType>
 {
     public List<ContractType> GetAll();
     public ContractType GetById( int id );
+    public ContractType GetContractTypeByName( string name );
 }

@@ -1,10 +1,7 @@
-import React, {useState} from "react";
-import {useSelector} from "react-redux";
-import {
-  CategoriesStatisticsPageData,
-  CategoriesStatisticsData
-} from "./model/types";
-import Input, {InputSize, InputType} from "../../../components/Input/Input";
+import React, { useState } from "react";
+import { useSelector } from "react-redux";
+import { CategoriesStatisticsPageData, CategoriesStatisticsData } from "./model/types";
+import Input, { InputSize, InputType } from "../../../components/Input/Input";
 import { CTableBuilder } from "../../../core/Table/CTableBuilder";
 import { CTable } from "../../../core/Table/CTable";
 import { CTableManager } from "../../../core/Table/CTableManager";
@@ -33,15 +30,15 @@ const getGroupedData = (data: CategoriesStatisticsPageData) => {
     hoursBsp,
     rateBudget,
     rateOffbudget,
-    rateBsp,
+    rateBsp
   };
 };
 
 type GroupedDataProps = {
   title?: string;
   data: CategoriesStatisticsPageData;
-}
-const GroupedData = ({title = "Итого", data}: GroupedDataProps) => {
+};
+const GroupedData = ({ title = "Итого", data }: GroupedDataProps) => {
   const groupedData = getGroupedData(data);
   const hoursTotal = groupedData.hoursBudget + groupedData.hoursOffbudget + groupedData.hoursBsp;
   const rateTotal = groupedData.rateBudget + groupedData.rateOffbudget + groupedData.rateBsp;
@@ -62,8 +59,12 @@ const GroupedData = ({title = "Итого", data}: GroupedDataProps) => {
 };
 
 const CategoriesStatisticsPage = () => {
-  const categories = useSelector((state: {categoriesStatisticsPageStore: CategoriesStatisticsPageData}) => state.categoriesStatisticsPageStore);
-  const [categoriesTableData, setCategoriesTableData] = useState<CategoriesStatisticsPageData>(structuredClone(categories));
+  const categories = useSelector(
+    (state: { categoriesStatisticsPageStore: CategoriesStatisticsPageData }) => state.categoriesStatisticsPageStore
+  );
+  const [categoriesTableData, setCategoriesTableData] = useState<CategoriesStatisticsPageData>(
+    structuredClone(categories)
+  );
   const [categorySearchQuery, setCategorySearchQuery] = useState<string>("");
   const categoriesTableBuilder: CTableBuilder = new CTableBuilder(categoriesTableData, setCategoriesTableData);
   categoriesTableBuilder.addSearchFeature();
@@ -71,10 +72,7 @@ const CategoriesStatisticsPage = () => {
   const categoriesTableManager: CTableManager = new CTableManager(categoriesTable);
 
   const handleSubjectSearch = (): void => {
-    categoriesTableManager.invokeFunction("search", TableType.Searchable, [
-      categorySearchQuery,
-      categories
-    ]);
+    categoriesTableManager.invokeFunction("search", TableType.Searchable, [categorySearchQuery, categories]);
   };
   const handleSort = (columnName: string): void => {
     categoriesTableManager.invokeFunction("sort", TableType.Default, [columnName, SortingOrder.Ascending]);
@@ -82,7 +80,7 @@ const CategoriesStatisticsPage = () => {
 
   return (
     <>
-      <div className="toolbar">
+      <div className="toolbar -search">
         <Input
           className="toolbar__search"
           placeholder="Поиск"
@@ -96,15 +94,33 @@ const CategoriesStatisticsPage = () => {
       <table className="table -fill -list">
         <thead className="header">
           <tr className="row">
-            <th className="cell -filter" onClick={() => handleSort("name")}>Категория</th>
-            <th className="cell -filter" onClick={() => handleSort("hoursBudget")}>ч бюдж</th>
-            <th className="cell -filter" onClick={() => handleSort("hoursOffbudget")}>ч внеб</th>
-            <th className="cell -filter" onClick={() => handleSort("hoursBsp")}>ч б-сп</th>
-            <th className="cell -filter" onClick={() => handleSort("hoursTotal")}>ч всего</th>
-            <th className="cell -filter" onClick={() => handleSort("rateBudget")}>ставки бюдж</th>
-            <th className="cell -filter" onClick={() => handleSort("rateOffbudget")}>ставки внеб</th>
-            <th className="cell -filter" onClick={() => handleSort("rateBsp")}>ставки б-сп</th>
-            <th className="cell -filter" onClick={() => handleSort("rateTotal")}>ставки всего</th>
+            <th className="cell -filter" onClick={() => handleSort("name")}>
+              Категория
+            </th>
+            <th className="cell -filter" onClick={() => handleSort("hoursBudget")}>
+              ч бюдж
+            </th>
+            <th className="cell -filter" onClick={() => handleSort("hoursOffbudget")}>
+              ч внеб
+            </th>
+            <th className="cell -filter" onClick={() => handleSort("hoursBsp")}>
+              ч б-сп
+            </th>
+            <th className="cell -filter" onClick={() => handleSort("hoursTotal")}>
+              ч всего
+            </th>
+            <th className="cell -filter" onClick={() => handleSort("rateBudget")}>
+              ставки бюдж
+            </th>
+            <th className="cell -filter" onClick={() => handleSort("rateOffbudget")}>
+              ставки внеб
+            </th>
+            <th className="cell -filter" onClick={() => handleSort("rateBsp")}>
+              ставки б-сп
+            </th>
+            <th className="cell -filter" onClick={() => handleSort("rateTotal")}>
+              ставки всего
+            </th>
           </tr>
         </thead>
         <tbody>
@@ -121,7 +137,7 @@ const CategoriesStatisticsPage = () => {
                 <td className="cell">{value.rateBudget}</td>
                 <td className="cell">{value.rateOffbudget}</td>
                 <td className="cell">{value.rateBsp}</td>
-                <td className="cell">{rateTotal}</td>
+                <td className="cell">{rateTotal.toFixed(2)}</td>
               </tr>
             );
           })}

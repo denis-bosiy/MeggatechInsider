@@ -9,25 +9,41 @@ import Notification from "../../components/Notification/Notification";
 import { HttpService } from "../../api/http.service";
 import { AppRouter } from "../../router";
 import { LoginCredentials } from "../../api/models";
+import { AxiosError } from "axios";
+import Loader from "../../components/Loader/Loader";
+import { classNames } from "../../utils/classNames";
 
 const SignInPage = () => {
   const service = new HttpService();
   const navigate = useNavigate();
-  const { control, handleSubmit } = useForm<LoginCredentials>();
-  const { mutate, isError } = useMutation((credentials: LoginCredentials) => service.login(credentials), {
-    onSuccess: () => navigate(AppRouter.Main)
-  });
+  const {
+    control,
+    handleSubmit,
+    formState: { errors }
+  } = useForm<LoginCredentials>();
+  const { mutate, error, isError, isLoading } = useMutation(
+    (credentials: LoginCredentials) => service.login(credentials),
+    {
+      onSuccess: () => navigate(AppRouter.Main)
+    }
+  );
   const submitForm: SubmitHandler<LoginCredentials> = (data) => {
     mutate(data);
   };
+  const axiosError = error as AxiosError;
 
   return (
     <>
       <div className="sign-in-wrapper">
-        {isError && (
-          <Notification className="sign-in__notification" title="Ошибка" description="Введен неправильный пароль" />
+        {(!!errors.password || isError) && (
+          <Notification
+            className="sign-in__notification"
+            title="Ошибка"
+            description={errors.password?.message || axiosError?.message}
+          />
         )}
-        <div className="sign-in">
+        {isLoading && <Loader disabledInterface={isLoading} />}
+        <div className={classNames("sign-in" + (isLoading ? " -disabled" : ""))}>
           <form onSubmit={handleSubmit(submitForm)} autoComplete="off">
             <Controller
               control={control}
@@ -36,11 +52,13 @@ const SignInPage = () => {
                   className="sign-in__input"
                   type={InputType.Password}
                   placeholder="Введите пароль"
-                  value={field.value || ""}
+                  value={field.value}
                   onValueChange={field.onChange}
+                  isInvalidValue={isError}
                 />
               )}
               name="password"
+              rules={{ required: "Пароль не введен" }}
             />
             <Button className="sign-in__button" type={ButtonType.Primary} size={ButtonSize.Default} label="Войти" />
           </form>
