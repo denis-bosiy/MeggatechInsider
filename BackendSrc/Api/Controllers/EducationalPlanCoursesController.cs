@@ -3,7 +3,10 @@ using Api.Models.EducationPlanCourses.Courses;
 using Api.Models.EducationPlanCourses.Difference;
 using Api.Models.EducationPlanCourses.Plan;
 using Api.Models.EducationPlanCourses.Teacher;
+using Application.Abstractions.EducationalPlanCourses;
+using Api.Mappers.EducationalPlanCourse;
 using Microsoft.AspNetCore.Mvc;
+using Domain.TeacherEntities;
 
 namespace Api.Controllers
 {
@@ -11,6 +14,13 @@ namespace Api.Controllers
     [Route( "api/educational-plan-courses" )]
     public class EducationalPlanCoursesController : Controller
     {
+        private readonly ITeacherCourseService _teacherCourseService;
+
+        public EducationalPlanCoursesController( ITeacherCourseService teacherCourseService )
+        {
+            _teacherCourseService = teacherCourseService;
+        }
+
         [HttpGet( "teachers" )]
         [ProducesResponseType<CourseTeacherListResponseDto>( StatusCodes.Status200OK )]
         [ProducesResponseType( StatusCodes.Status404NotFound )]
@@ -21,59 +31,34 @@ namespace Api.Controllers
                 return NotFound( "Не найдено такого года" );
             }
 
-            return Ok( new CourseTeacherListResponseDto()
-            {
-                //При написании сервисов дату преобразовывать в iso-формат
-                Teachers = new List<CourseTeacherDto>
-                {
-                    new CourseTeacherDto
-                    {
-                        Id = 1,
-                        Name = "Прозоров Максим Андреевич",
-                        WorkingContract = "ГПХ",
-                        WorkingStartDate = new DateOnly(2020, 01, 21),
-                        WorkExperience = 2,
-                        WorkExperienceAtTheTimeOfTheEmployment = 2,
-                        BirthDay = new DateOnly(2002, 01, 21),
-                        Age = 25
-                    },
-                    new CourseTeacherDto
-                    {
-                        Id = 1,
-                        Name = "Крыскин Петр Сергеевич",
-                        WorkingContract = "ГПХ",
-                        WorkingStartDate = new DateOnly(2019, 01, 21),
-                        WorkExperience = 4,
-                        WorkExperienceAtTheTimeOfTheEmployment = 1,
-                        BirthDay = new DateOnly(2003, 02, 26),
-                        Age = 45
-                    },
-                    new CourseTeacherDto
-                    {
-                        Id = 1,
-                        Name = "Добельманов Генрих Айратович",
-                        WorkingContract = "ГПХ",
-                        WorkingStartDate = new DateOnly(2022, 01, 21),
-                        WorkExperience = 3,
-                        WorkExperienceAtTheTimeOfTheEmployment = 2,
-                        BirthDay = new DateOnly(1980, 01, 11),
-                        Age = 30
-                    }
-                }
-            });
+            return Ok( _teacherCourseService
+                .GetTeachersCourseByYear( teachersRequest.Year )
+                .Map() );
         }
 
         [HttpPut("teacher")]
         [ProducesResponseType( StatusCodes.Status200OK )]
         [ProducesResponseType( StatusCodes.Status404NotFound )]
-        public IActionResult UpdateCourseTeacher(CourseTeacherUpdateRequestDto teacherUpdateRequestDto )
+        public IActionResult UpdateCourseTeacher( CourseTeacherUpdateListRequestDto teacherUpdateRequestDto )
         {
             if ( !IsValidYear( teacherUpdateRequestDto.Year ) )
             {
                 return NotFound( "Не найдено такого года" );
             }
 
-            //обновление данных преподавателя
+            foreach (CourseTeacherUpdateRequestDto teacher in teacherUpdateRequestDto.Teachers )
+            {
+                _teacherCourseService.UpdateTeacherCourse(
+                    teacher.Year,
+                    teacher.Id,
+                    teacher.Name,
+                    teacher.WorkingContract,
+                    teacher.WorkingStartDate,
+                    teacher.WorkExperience,
+                    teacher.WorkExperienceAtTheTimeOfTheEmployment,
+                    teacher.BirthDay,
+                    teacher.Age );
+            }
 
             return Ok();
         }
@@ -88,7 +73,16 @@ namespace Api.Controllers
                 return NotFound( "Не найдено такого года" );
             }
 
-            //создание данных преподавателя
+            _teacherCourseService.UpdateTeacherCourse(
+                    teacherCreateRequestDto.Year,
+                    teacherCreateRequestDto.Id,
+                    teacherCreateRequestDto.Name,
+                    teacherCreateRequestDto.WorkingContract,
+                    teacherCreateRequestDto.WorkingStartDate,
+                    teacherCreateRequestDto.WorkExperience,
+                    teacherCreateRequestDto.WorkExperienceAtTheTimeOfTheEmployment,
+                    teacherCreateRequestDto.BirthDay,
+                    teacherCreateRequestDto.Age );
 
             return Ok();
         }
@@ -99,7 +93,10 @@ namespace Api.Controllers
         public IActionResult DeleteTeacher( CourseTeacherDeleteRequestDto courseTeacherDeleteRequestDto )
         {
 
-            //Удаление данных преподавателя по id
+            if(_teacherCourseService.GetTeacherCourseById( courseTeacherDeleteRequestDto.Id ) is not null )
+            {
+                _teacherCourseService.DeleteTeacherCourse( courseTeacherDeleteRequestDto.Id );
+            }
 
             return Ok() ;
         }

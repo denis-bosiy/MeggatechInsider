@@ -23,7 +23,7 @@ public static class TeacherMapper
                 + teacher.ExperienceInYearsOnEmploymentDate, // TODO: нужно ли здесь учитывать суммарный опыт?
             teacher.ExperienceInYearsOnEmploymentDate,
             teacher.BirthdayDate,
-            teacher.Year);
+            teacher.Year );
 
     public static TeachersResponseDto Map( this IEnumerable<Teacher> teachers ) =>
         new TeachersResponseDto() { Teachers = teachers.Select( Map ).ToList() };

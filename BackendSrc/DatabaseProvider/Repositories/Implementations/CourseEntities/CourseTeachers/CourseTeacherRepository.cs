@@ -5,11 +5,13 @@ namespace DatabaseProvider.Repositories.Implementations.CourseEntities.CourseTea
 {
     public class CourseTeacherRepository : Repository<CourseTeacher>, ICourseTeacherRepository
     {
-        public CourseTeacherRepository( ApplicationContext context ) 
+        public CourseTeacherRepository( ApplicationContext context )
             : base( context )
         { }
 
         public CourseTeacher GetById( int id )
             => Entities.Where( t => t.Id == id ).FirstOrDefault();
+
+        public List<CourseTeacher> GetCourseTeachersByYear( int year ) => Entities.Where( s => s.Year == year ).ToList();
     }
 }
