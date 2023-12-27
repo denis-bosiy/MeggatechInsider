@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useLayoutEffect } from "react";
 import { ScheduleComponent } from "./Schedule";
 import { ScheduleBuilder } from "../../core/Schedule/ScheduleBuilder";
 import { ISchedule } from "../../core/Schedule/ISchedule";
