@@ -14,7 +14,7 @@ public class YearActualAcademicHoursForSubjectsByTeacher()
 {
     public string TeacherName { get; set; }
     public string TeacherContractType { get; set; }
-    public List<YearActualAcademicHoursForClassesBySubject> YearAcademicHoursForClasses { get; set; }
+    public List<YearActualAcademicHoursForClassesBySubject> YearAcademicHoursForSubjects { get; set; }
     public YearComment YearComment { get; set; }
     // Сумма
     public int SumHours { get; set; }
@@ -27,7 +27,7 @@ public class YearActualAcademicHoursForSubjectsByTeacher()
 public class YearActualAcademicHoursForClassesBySubject()
 {
     public string SubjectName { get; set; }
-    public List<YearActualAcademicHoursForSubgroupsByClass> YearAcademicHoursForSubgroups { get; set; }
+    public List<YearActualAcademicHoursForSubgroupsByClass> YearAcademicHoursForClasses { get; set; }
 }
 
 public class YearActualAcademicHoursForSubgroupsByClass()

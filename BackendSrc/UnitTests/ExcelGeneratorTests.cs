@@ -34,12 +34,357 @@ public class Tests
                     TeacherName = "Иванов Иван Иванович",
                     TeacherContractType = "ГПХ",
                     YearComment = new YearComment( "Ура! Текст комментария", 2023, 1, 1 ),
-                    YearAcademicHoursForClasses = new List<YearActualAcademicHoursForClassesBySubject>()
+                    YearAcademicHoursForSubjects = new List<YearActualAcademicHoursForClassesBySubject>()
                     {
                         new YearActualAcademicHoursForClassesBySubject()
                         {
                             SubjectName = "История",
-                            YearAcademicHoursForSubgroups = new List<YearActualAcademicHoursForSubgroupsByClass>()
+                            YearAcademicHoursForClasses = new List<YearActualAcademicHoursForSubgroupsByClass>()
+                            {
+                                new YearActualAcademicHoursForSubgroupsByClass()
+                                {
+                                    ClassName = "10-1",
+                                    YearAcademicHoursForSubgroups = new List<YearActualAcademicHoursForSubgroup>()
+                                    {
+                                        new YearActualAcademicHoursForSubgroup()
+                                        {
+                                            SubgroupName = "10-1-1",
+                                            AcademicHoursByDate = new Dictionary<DateOnly, int>()
+                                            {
+                                                { new DateOnly( 2023, 9, 1 ), 8 },
+                                                { new DateOnly( 2023, 10, 1 ), 8 },
+                                                { new DateOnly( 2023, 11, 1 ), 8 },
+                                                { new DateOnly( 2023, 12, 1 ), 8 },
+                                                { new DateOnly( 2024, 1, 1 ), 8 },
+                                                { new DateOnly( 2024, 2, 1 ), 8 },
+                                                { new DateOnly( 2024, 3, 1 ), 8 },
+                                                { new DateOnly( 2024, 4, 1 ), 8 },
+                                                { new DateOnly( 2024, 5, 1 ), 8 },
+                                            },
+                                            CompletedWorkloadHours = 71,
+                                            RemoteAcademicHours = 0,
+                                            CombinedAcademicHours = 0,
+                                            RemainderHoursOfPlan = 1,
+                                            PlanFailurePercent = 1.4f
+                                        },
+                                        new YearActualAcademicHoursForSubgroup()
+                                        {
+                                            SubgroupName = "10-1-2",
+                                            AcademicHoursByDate = new Dictionary<DateOnly, int>()
+                                            {
+                                                { new DateOnly( 2023, 9, 1 ), 8 },
+                                                { new DateOnly( 2023, 10, 1 ), 8 },
+                                                { new DateOnly( 2023, 11, 1 ), 8 },
+                                                { new DateOnly( 2023, 12, 1 ), 8 },
+                                                { new DateOnly( 2024, 1, 1 ), 8 },
+                                                { new DateOnly( 2024, 2, 1 ), 8 },
+                                                { new DateOnly( 2024, 3, 1 ), 8 },
+                                                { new DateOnly( 2024, 4, 1 ), 8 },
+                                                { new DateOnly( 2024, 5, 1 ), 8 },
+                                            },
+                                            CompletedWorkloadHours = 71,
+                                            RemoteAcademicHours = 0,
+                                            CombinedAcademicHours = 0,
+                                            RemainderHoursOfPlan = 1,
+                                            PlanFailurePercent = 1.4f
+                                        }
+                                    },
+                                    YearHoursByClass = 144,
+                                    YearHoursBySubjectGroup = 144,
+                                    HoursPerWeek = 2
+                                },
+                                new YearActualAcademicHoursForSubgroupsByClass()
+                                {
+                                    ClassName = "10-2",
+                                    YearAcademicHoursForSubgroups = new List<YearActualAcademicHoursForSubgroup>()
+                                    {
+                                        new YearActualAcademicHoursForSubgroup()
+                                        {
+                                            SubgroupName = "10-2-1",
+                                            AcademicHoursByDate = new Dictionary<DateOnly, int>()
+                                            {
+                                                { new DateOnly( 2023, 9, 1 ), 8 },
+                                                { new DateOnly( 2023, 10, 1 ), 8 },
+                                                { new DateOnly( 2023, 11, 1 ), 8 },
+                                                { new DateOnly( 2023, 12, 1 ), 8 },
+                                                { new DateOnly( 2024, 1, 1 ), 8 },
+                                                { new DateOnly( 2024, 2, 1 ), 8 },
+                                                { new DateOnly( 2024, 3, 1 ), 8 },
+                                                { new DateOnly( 2024, 4, 1 ), 8 },
+                                                { new DateOnly( 2024, 5, 1 ), 8 },
+                                            },
+                                            CompletedWorkloadHours = 71,
+                                            RemoteAcademicHours = 0,
+                                            CombinedAcademicHours = 0,
+                                            RemainderHoursOfPlan = 1,
+                                            PlanFailurePercent = 1.4f
+                                        },
+                                        new YearActualAcademicHoursForSubgroup()
+                                        {
+                                            SubgroupName = "10-2-2",
+                                            AcademicHoursByDate = new Dictionary<DateOnly, int>()
+                                            {
+                                                { new DateOnly( 2023, 9, 1 ), 8 },
+                                                { new DateOnly( 2023, 10, 1 ), 8 },
+                                                { new DateOnly( 2023, 11, 1 ), 8 },
+                                                { new DateOnly( 2023, 12, 1 ), 8 },
+                                                { new DateOnly( 2024, 1, 1 ), 8 },
+                                                { new DateOnly( 2024, 2, 1 ), 8 },
+                                                { new DateOnly( 2024, 3, 1 ), 8 },
+                                                { new DateOnly( 2024, 4, 1 ), 8 },
+                                                { new DateOnly( 2024, 5, 1 ), 8 },
+                                            },
+                                            CompletedWorkloadHours = 71,
+                                            RemoteAcademicHours = 0,
+                                            CombinedAcademicHours = 0,
+                                            RemainderHoursOfPlan = 1,
+                                            PlanFailurePercent = 1.4f
+                                        }
+                                    },
+                                    YearHoursByClass = 144,
+                                    YearHoursBySubjectGroup = 144,
+                                    HoursPerWeek = 2
+                                }
+                            }
+                        },
+                        new YearActualAcademicHoursForClassesBySubject()
+                        {
+                            SubjectName = "История2",
+                            YearAcademicHoursForClasses = new List<YearActualAcademicHoursForSubgroupsByClass>()
+                            {
+                                new YearActualAcademicHoursForSubgroupsByClass()
+                                {
+                                    ClassName = "10-1",
+                                    YearAcademicHoursForSubgroups = new List<YearActualAcademicHoursForSubgroup>()
+                                    {
+                                        new YearActualAcademicHoursForSubgroup()
+                                        {
+                                            SubgroupName = "10-1-1",
+                                            AcademicHoursByDate = new Dictionary<DateOnly, int>()
+                                            {
+                                                { new DateOnly( 2023, 9, 1 ), 8 },
+                                                { new DateOnly( 2023, 10, 1 ), 8 },
+                                                { new DateOnly( 2023, 11, 1 ), 8 },
+                                                { new DateOnly( 2023, 12, 1 ), 8 },
+                                                { new DateOnly( 2024, 1, 1 ), 8 },
+                                                { new DateOnly( 2024, 2, 1 ), 8 },
+                                                { new DateOnly( 2024, 3, 1 ), 8 },
+                                                { new DateOnly( 2024, 4, 1 ), 8 },
+                                                { new DateOnly( 2024, 5, 1 ), 8 },
+                                            },
+                                            CompletedWorkloadHours = 71,
+                                            RemoteAcademicHours = 0,
+                                            CombinedAcademicHours = 0,
+                                            RemainderHoursOfPlan = 1,
+                                            PlanFailurePercent = 1.4f
+                                        },
+                                        new YearActualAcademicHoursForSubgroup()
+                                        {
+                                            SubgroupName = "10-1-2",
+                                            AcademicHoursByDate = new Dictionary<DateOnly, int>()
+                                            {
+                                                { new DateOnly( 2023, 9, 1 ), 8 },
+                                                { new DateOnly( 2023, 10, 1 ), 8 },
+                                                { new DateOnly( 2023, 11, 1 ), 8 },
+                                                { new DateOnly( 2023, 12, 1 ), 8 },
+                                                { new DateOnly( 2024, 1, 1 ), 8 },
+                                                { new DateOnly( 2024, 2, 1 ), 8 },
+                                                { new DateOnly( 2024, 3, 1 ), 8 },
+                                                { new DateOnly( 2024, 4, 1 ), 8 },
+                                                { new DateOnly( 2024, 5, 1 ), 8 },
+                                            },
+                                            CompletedWorkloadHours = 71,
+                                            RemoteAcademicHours = 0,
+                                            CombinedAcademicHours = 0,
+                                            RemainderHoursOfPlan = 1,
+                                            PlanFailurePercent = 1.4f
+                                        }
+                                    },
+                                    YearHoursByClass = 144,
+                                    YearHoursBySubjectGroup = 144,
+                                    HoursPerWeek = 2
+                                },
+                                new YearActualAcademicHoursForSubgroupsByClass()
+                                {
+                                    ClassName = "10-2",
+                                    YearAcademicHoursForSubgroups = new List<YearActualAcademicHoursForSubgroup>()
+                                    {
+                                        new YearActualAcademicHoursForSubgroup()
+                                        {
+                                            SubgroupName = "10-2-1",
+                                            AcademicHoursByDate = new Dictionary<DateOnly, int>()
+                                            {
+                                                { new DateOnly( 2023, 9, 1 ), 8 },
+                                                { new DateOnly( 2023, 10, 1 ), 8 },
+                                                { new DateOnly( 2023, 11, 1 ), 8 },
+                                                { new DateOnly( 2023, 12, 1 ), 8 },
+                                                { new DateOnly( 2024, 1, 1 ), 8 },
+                                                { new DateOnly( 2024, 2, 1 ), 8 },
+                                                { new DateOnly( 2024, 3, 1 ), 8 },
+                                                { new DateOnly( 2024, 4, 1 ), 8 },
+                                                { new DateOnly( 2024, 5, 1 ), 8 },
+                                            },
+                                            CompletedWorkloadHours = 71,
+                                            RemoteAcademicHours = 0,
+                                            CombinedAcademicHours = 0,
+                                            RemainderHoursOfPlan = 1,
+                                            PlanFailurePercent = 1.4f
+                                        },
+                                        new YearActualAcademicHoursForSubgroup()
+                                        {
+                                            SubgroupName = "10-2-2",
+                                            AcademicHoursByDate = new Dictionary<DateOnly, int>()
+                                            {
+                                                { new DateOnly( 2023, 9, 1 ), 8 },
+                                                { new DateOnly( 2023, 10, 1 ), 8 },
+                                                { new DateOnly( 2023, 11, 1 ), 8 },
+                                                { new DateOnly( 2023, 12, 1 ), 8 },
+                                                { new DateOnly( 2024, 1, 1 ), 8 },
+                                                { new DateOnly( 2024, 2, 1 ), 8 },
+                                                { new DateOnly( 2024, 3, 1 ), 8 },
+                                                { new DateOnly( 2024, 4, 1 ), 8 },
+                                                { new DateOnly( 2024, 5, 1 ), 8 },
+                                            },
+                                            CompletedWorkloadHours = 71,
+                                            RemoteAcademicHours = 0,
+                                            CombinedAcademicHours = 0,
+                                            RemainderHoursOfPlan = 1,
+                                            PlanFailurePercent = 1.4f
+                                        }
+                                    },
+                                    YearHoursByClass = 144,
+                                    YearHoursBySubjectGroup = 144,
+                                    HoursPerWeek = 2
+                                }
+                            }
+                        }
+                    }
+                },
+                new YearActualAcademicHoursForSubjectsByTeacher()
+                {
+                    SumHours = 144,
+                    RemoteSumHours = 0,
+                    CombinedSumHours = 0,
+                    TeacherName = "Иванов Иван Иванович",
+                    TeacherContractType = "ГПХ",
+                    YearComment = new YearComment( "Ура! Текст комментария", 2023, 1, 1 ),
+                    YearAcademicHoursForSubjects = new List<YearActualAcademicHoursForClassesBySubject>()
+                    {
+                        new YearActualAcademicHoursForClassesBySubject()
+                        {
+                            SubjectName = "История",
+                            YearAcademicHoursForClasses = new List<YearActualAcademicHoursForSubgroupsByClass>()
+                            {
+                                new YearActualAcademicHoursForSubgroupsByClass()
+                                {
+                                    ClassName = "10-1",
+                                    YearAcademicHoursForSubgroups = new List<YearActualAcademicHoursForSubgroup>()
+                                    {
+                                        new YearActualAcademicHoursForSubgroup()
+                                        {
+                                            SubgroupName = "10-1-1",
+                                            AcademicHoursByDate = new Dictionary<DateOnly, int>()
+                                            {
+                                                { new DateOnly( 2023, 9, 1 ), 8 },
+                                                { new DateOnly( 2023, 10, 1 ), 8 },
+                                                { new DateOnly( 2023, 11, 1 ), 8 },
+                                                { new DateOnly( 2023, 12, 1 ), 8 },
+                                                { new DateOnly( 2024, 1, 1 ), 8 },
+                                                { new DateOnly( 2024, 2, 1 ), 8 },
+                                                { new DateOnly( 2024, 3, 1 ), 8 },
+                                                { new DateOnly( 2024, 4, 1 ), 8 },
+                                                { new DateOnly( 2024, 5, 1 ), 8 },
+                                            },
+                                            CompletedWorkloadHours = 71,
+                                            RemoteAcademicHours = 0,
+                                            CombinedAcademicHours = 0,
+                                            RemainderHoursOfPlan = 1,
+                                            PlanFailurePercent = 1.4f
+                                        },
+                                        new YearActualAcademicHoursForSubgroup()
+                                        {
+                                            SubgroupName = "10-1-2",
+                                            AcademicHoursByDate = new Dictionary<DateOnly, int>()
+                                            {
+                                                { new DateOnly( 2023, 9, 1 ), 8 },
+                                                { new DateOnly( 2023, 10, 1 ), 8 },
+                                                { new DateOnly( 2023, 11, 1 ), 8 },
+                                                { new DateOnly( 2023, 12, 1 ), 8 },
+                                                { new DateOnly( 2024, 1, 1 ), 8 },
+                                                { new DateOnly( 2024, 2, 1 ), 8 },
+                                                { new DateOnly( 2024, 3, 1 ), 8 },
+                                                { new DateOnly( 2024, 4, 1 ), 8 },
+                                                { new DateOnly( 2024, 5, 1 ), 8 },
+                                            },
+                                            CompletedWorkloadHours = 71,
+                                            RemoteAcademicHours = 0,
+                                            CombinedAcademicHours = 0,
+                                            RemainderHoursOfPlan = 1,
+                                            PlanFailurePercent = 1.4f
+                                        }
+                                    },
+                                    YearHoursByClass = 144,
+                                    YearHoursBySubjectGroup = 144,
+                                    HoursPerWeek = 2
+                                },
+                                new YearActualAcademicHoursForSubgroupsByClass()
+                                {
+                                    ClassName = "10-2",
+                                    YearAcademicHoursForSubgroups = new List<YearActualAcademicHoursForSubgroup>()
+                                    {
+                                        new YearActualAcademicHoursForSubgroup()
+                                        {
+                                            SubgroupName = "10-2-1",
+                                            AcademicHoursByDate = new Dictionary<DateOnly, int>()
+                                            {
+                                                { new DateOnly( 2023, 9, 1 ), 8 },
+                                                { new DateOnly( 2023, 10, 1 ), 8 },
+                                                { new DateOnly( 2023, 11, 1 ), 8 },
+                                                { new DateOnly( 2023, 12, 1 ), 8 },
+                                                { new DateOnly( 2024, 1, 1 ), 8 },
+                                                { new DateOnly( 2024, 2, 1 ), 8 },
+                                                { new DateOnly( 2024, 3, 1 ), 8 },
+                                                { new DateOnly( 2024, 4, 1 ), 8 },
+                                                { new DateOnly( 2024, 5, 1 ), 8 },
+                                            },
+                                            CompletedWorkloadHours = 71,
+                                            RemoteAcademicHours = 0,
+                                            CombinedAcademicHours = 0,
+                                            RemainderHoursOfPlan = 1,
+                                            PlanFailurePercent = 1.4f
+                                        },
+                                        new YearActualAcademicHoursForSubgroup()
+                                        {
+                                            SubgroupName = "10-2-2",
+                                            AcademicHoursByDate = new Dictionary<DateOnly, int>()
+                                            {
+                                                { new DateOnly( 2023, 9, 1 ), 8 },
+                                                { new DateOnly( 2023, 10, 1 ), 8 },
+                                                { new DateOnly( 2023, 11, 1 ), 8 },
+                                                { new DateOnly( 2023, 12, 1 ), 8 },
+                                                { new DateOnly( 2024, 1, 1 ), 8 },
+                                                { new DateOnly( 2024, 2, 1 ), 8 },
+                                                { new DateOnly( 2024, 3, 1 ), 8 },
+                                                { new DateOnly( 2024, 4, 1 ), 8 },
+                                                { new DateOnly( 2024, 5, 1 ), 8 },
+                                            },
+                                            CompletedWorkloadHours = 71,
+                                            RemoteAcademicHours = 0,
+                                            CombinedAcademicHours = 0,
+                                            RemainderHoursOfPlan = 1,
+                                            PlanFailurePercent = 1.4f
+                                        }
+                                    },
+                                    YearHoursByClass = 144,
+                                    YearHoursBySubjectGroup = 144,
+                                    HoursPerWeek = 2
+                                }
+                            }
+                        },
+                        new YearActualAcademicHoursForClassesBySubject()
+                        {
+                            SubjectName = "История2",
+                            YearAcademicHoursForClasses = new List<YearActualAcademicHoursForSubgroupsByClass>()
                             {
                                 new YearActualAcademicHoursForSubgroupsByClass()
                                 {
