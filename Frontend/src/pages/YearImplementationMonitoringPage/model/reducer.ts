@@ -21,28 +21,20 @@ const initData: YearImplementationMonitoringPageData = {
   teachers: [
     {
       id: guidGenerator(),
-      name: "Иванов Иван Иванович",
+      name: "Гусарова Л.Г.",
       type: "ГПХ",
       subjects: [
         {
-          name: "История",
+          name: "Геометрия",
           classes: [
             {
               name: "10-1",
-              hoursPlanned: 0,
-              doneHours: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-              totalDoneHours: 8,
-              doneDistanceHours: 8,
-              doneCombinedHours: 8
+              hoursPlanned: 100,
+              doneHours: [0, 1, 0, 0, 0, 0, 0, 0, 0, 0],
+              totalDoneHours: 1,
+              doneDistanceHours: 0,
+              doneCombinedHours: 0
             },
-            {
-              name: "10-2",
-              hoursPlanned: 0,
-              doneHours: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-              totalDoneHours: 8,
-              doneDistanceHours: 8,
-              doneCombinedHours: 8
-            }
           ]
         }
       ],
@@ -53,48 +45,70 @@ const initData: YearImplementationMonitoringPageData = {
     },
     {
       id: guidGenerator(),
-      name: "Иванова Алла Викторовна",
-      type: "Совместитель",
+      name: "Охотников С.А.",
+      type: "ГПХ",
       subjects: [
         {
-          name: "Математика",
+          name: "АиП",
           classes: [
             {
               name: "10-1",
-              hoursPlanned: 0,
-              doneHours: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-              totalDoneHours: 8,
-              doneDistanceHours: 8,
-              doneCombinedHours: 8
+              hoursPlanned: 100,
+              doneHours: [0, 2, 0, 0, 0, 0, 0, 0, 0, 0],
+              totalDoneHours: 2,
+              doneDistanceHours: 0,
+              doneCombinedHours: 0
             }
           ]
         },
+      ],
+      hoursPerWeek: 0,
+      remoteHours: 0,
+      combinedHours: 0,
+      additionalLoads: []
+    },
+    {
+      id: guidGenerator(),
+      name: "Логинова М.Ю.",
+      type: "ГПХ",
+      subjects: [
         {
-          name: "Физика",
+          name: "ОБЖ",
+          classes: [
+            {
+              name: "10-1",
+              hoursPlanned: 50,
+              doneHours: [0, 2, 0, 0, 0, 0, 0, 0, 0, 0],
+              totalDoneHours: 2,
+              doneDistanceHours: 0,
+              doneCombinedHours: 0
+            }
+          ]
+        },
+      ],
+      hoursPerWeek: 0,
+      remoteHours: 0,
+      combinedHours: 0,
+      additionalLoads: []
+    },
+    {
+      id: guidGenerator(),
+      name: "Руденко Е.В.",
+      type: "ГПХ",
+      subjects: [
+        {
+          name: "Английский язык",
           classes: [
             {
               name: "10-2",
-              hoursPlanned: 0,
-              doneHours: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-              totalDoneHours: 8,
-              doneDistanceHours: 8,
-              doneCombinedHours: 8
+              hoursPlanned: 100,
+              doneHours: [0, 1, 0, 0, 0, 0, 0, 0, 0, 0],
+              totalDoneHours: 1,
+              doneDistanceHours: 0,
+              doneCombinedHours: 0
             }
           ]
         },
-        {
-          name: "Проблемы в физике",
-          classes: [
-            {
-              name: "10-1",
-              hoursPlanned: 0,
-              doneHours: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-              totalDoneHours: 8,
-              doneDistanceHours: 8,
-              doneCombinedHours: 8
-            }
-          ]
-        }
       ],
       hoursPerWeek: 0,
       remoteHours: 0,

@@ -33,7 +33,7 @@ const initData: CurriculumReportData = {
           title: "АиП",
           classes: [
             {
-              number: "10-1",
+              number: "10-1-1",
               groups: [
                 {
                   number: "10-1-1",
@@ -80,7 +80,7 @@ const initData: CurriculumReportData = {
               number: "10-2-2",
               groups: [
                 {
-                  number: "10-1",
+                  number: "10-2-2",
                   amount: 1,
                   combined: 0,
                   remoted: 0,
