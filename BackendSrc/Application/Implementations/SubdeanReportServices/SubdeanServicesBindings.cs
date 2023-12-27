@@ -8,6 +8,7 @@ namespace Application.Implementations.SubdeanReportServices
         public static IServiceCollection AddSubdeanReportServices( this IServiceCollection services )
         {
             services.AddScoped<IMonthReportService, MonthReportService>();
+            services.AddScoped<IYearReportService, YearReportService>();
 
             return services;
         }
