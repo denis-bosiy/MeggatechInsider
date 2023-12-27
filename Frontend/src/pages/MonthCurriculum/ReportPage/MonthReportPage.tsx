@@ -14,6 +14,8 @@ import ActionButton, { ActionButtonSize } from "../../../components/ActionButton
 import CommentsModalView from "../../../components/CommentsModalView/CommentsModalView";
 import ModalSettingsContext from "../../../utils/ModalSettingsContext";
 import { useSearchParams } from "react-router-dom";
+import { HttpService } from "../../../api/http.service";
+import { Endpoint } from "../../../api/endpoints";
 
 const MONTH_SELECT: ISelectOption[] = [
   { content: "Январь", id: "0" },
@@ -36,6 +38,7 @@ const CONTRACT_TYPE_SELECT: ISelectOption[] = [
 ];
 
 const MonthReportPage = () => {
+  const httpService = new HttpService();
   const { openModal } = useContext(ModalSettingsContext);
 
   const [searchParams, setSearchParams] = useSearchParams();
@@ -87,13 +90,19 @@ const MonthReportPage = () => {
     monitoringTableManager.invokeFunction("sort", TableType.Default, [columnName, SortingOrder.Ascending]);
   };
 
+  const handleExportingToExcel = (): void => {
+    httpService.getByArbitraryUrl(Endpoint.MonthReportExcel).then(() => {
+      // Выгрузка excel
+    });
+  };
+
   useEffect(() => {
     setSearchParams({ month: selectedMonth.id });
   }, [selectedMonth.id]);
 
   useEffect(() => {
     // const handleMonitoringDataUpdate = async () => {
-    //   // TODO: Make api request
+    //   // TODO:
     // };
     // or use react-query lib to get rid of making this
   }, [selectedContract.id, selectedMonth.id]);
@@ -104,7 +113,7 @@ const MonthReportPage = () => {
         <div className="page-actions">
           <Select options={MONTH_SELECT} currentValue={selectedMonth} onValueChange={handleSelectMonth} />
           <Select options={CONTRACT_TYPE_SELECT} currentValue={selectedContract} onValueChange={handleSelectContract} />
-          <Button label="Скачать в excel" type={ButtonType.Secondary} size={ButtonSize.Fixed} />
+          <Button label="Скачать в excel" type={ButtonType.Secondary} size={ButtonSize.Fixed} onClick={handleExportingToExcel} />
         </div>
         <div>
           <Input

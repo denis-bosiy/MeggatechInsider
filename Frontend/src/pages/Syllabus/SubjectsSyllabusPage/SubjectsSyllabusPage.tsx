@@ -23,7 +23,6 @@ import { ResponseBuilder } from "../../../api/Responses/ResponseBuilder";
 import Loader from "../../../components/Loader/Loader";
 
 const SubjectsSyllabusPage = () => {
-  // TODO: Добавить вытягивание этих данных с бэкенда
   const financingOptions: ISelectOption[] = [
     { id: "1", content: "Бюджет" },
     { id: "2", content: "Внебюджет" }

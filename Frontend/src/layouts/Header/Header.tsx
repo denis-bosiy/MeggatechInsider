@@ -18,7 +18,6 @@ interface IHeaderProps {
 }
 
 export const Header = ({ children, pageRoute, onLogout }: IHeaderProps) => {
-  // TODO: Добавить route === AppRouter.CoursesTimetable, когда будет доступен блок с настройками расписания курсов
   const getIsOnLogin = (route?: string): boolean => (route ? route === AppRouter.Login : false);
   const getIsOnSchedule = (route?: string): boolean => (route ? route === AppRouter.Timetable : false);
 
@@ -30,8 +29,7 @@ export const Header = ({ children, pageRoute, onLogout }: IHeaderProps) => {
   const [isOnSchedule, setIsOnSchedule] = useState<boolean>(getIsOnSchedule(pageRoute));
 
   useEffect(() => {
-    // TODO: Добавить запрос на получение учебных лет
-    // TODO: Добавить запрос на получение учебных недель
+    //
   }, []);
 
   useEffect(() => {

@@ -44,7 +44,6 @@ export const ScheduleComponent = (props: IScheduleProps) => {
     );
   });
 
-  // TODO: Развязать клубок
   const dataElements: (JSX.Element[] | undefined)[] = props.schedule.getWorkdays().map((workday: Workday) => {
     const workdayElement: JSX.Element = (
       <td

@@ -28,7 +28,7 @@ const CoursesSyllabusPage = () => {
   const tableManager: CTableManager = new CTableManager(table);
 
   useLayoutEffect(() => {
-    // TODO: Добавить запрос на получение нового учебного плана
+    // 
   }, [tabParams.get("tab")]);
 
   const handleSaving = () => {

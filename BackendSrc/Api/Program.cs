@@ -31,6 +31,7 @@ namespace Api
             builder.Services.AddApplication();
             builder.Services.AddDatabaseRepositories();
             builder.Services.AddBuilders();
+            
 
 
             WebApplication app = builder.Build();
@@ -43,7 +44,8 @@ namespace Api
             }
 
             app.UseAuthorization();
-
+            app.UseStaticFiles();
+            app.UseDefaultFiles();
             app.UseCors( "cors_allowany" );
 
             app.MapControllers();

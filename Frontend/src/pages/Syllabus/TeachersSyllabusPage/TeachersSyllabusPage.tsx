@@ -23,7 +23,6 @@ import { HeaderData } from "../../../layouts/Header/model/types";
 import Loader from "../../../components/Loader/Loader";
 
 const TeachersSyllabusPage = () => {
-  // TODO: Добавить вытягивание этих данных с бэкенда
   const categoryOptions: ISelectOption[] = [
     { id: "1", content: "Высшая категория" },
     { id: "2", content: "Высокая категория" }

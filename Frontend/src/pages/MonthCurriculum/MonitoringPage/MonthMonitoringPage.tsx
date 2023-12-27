@@ -10,6 +10,8 @@ import { CurriculumMonitoringData, CurriculumMonitoring } from "./model/types";
 import { TableType } from "../../../core/Table/TableType";
 import { SortingOrder } from "../../../core/Table/SortingOrder";
 import { summarizeMonitoringTotal } from "./model/utils";
+import { HttpService } from "../../../api/http.service";
+import { Endpoint } from "../../../api/endpoints";
 
 const MONTH_SELECT: ISelectOption[] = [
   { content: "Январь", id: "1" },
@@ -32,6 +34,7 @@ const CONTRACT_TYPE_SELECT: ISelectOption[] = [
 ];
 
 const MonthMonitoringPage = () => {
+  const httpService = new HttpService();
   const [selectedMonth, setSelectedMonth] = useState<ISelectOption>(MONTH_SELECT[0]);
   const [selectedContract, setSelectedContract] = useState<ISelectOption>(CONTRACT_TYPE_SELECT[0]);
   const [searchQuery, setSearchQuery] = useState("");
@@ -69,9 +72,15 @@ const MonthMonitoringPage = () => {
     monitoringTableManager.invokeFunction("sort", TableType.Default, [columnName, SortingOrder.Ascending]);
   };
 
+  const handleExportingToExcel = (): void => {
+    httpService.getByArbitraryUrl(Endpoint.MonthReportExcel).then(() => {
+      // Выгрузка excel
+    });
+  };
+
   useEffect(() => {
     const handleMonitoringDataUpdate = async () => {
-      // TODO: Make api request
+      //
     };
     // or use react-query lib to get rid of making this
   }, [selectedContract, selectedMonth]);
@@ -82,7 +91,12 @@ const MonthMonitoringPage = () => {
         <div className="page-actions">
           <Select options={MONTH_SELECT} currentValue={selectedMonth} onValueChange={handleSelectMonth} />
           <Select options={CONTRACT_TYPE_SELECT} currentValue={selectedContract} onValueChange={handleSelectContract} />
-          <Button label="Скачать в excel" size={ButtonSize.Fixed} type={ButtonType.Secondary} />
+          <Button
+            label="Скачать в excel"
+            size={ButtonSize.Fixed}
+            type={ButtonType.Secondary}
+            onClick={() => handleExportingToExcel()}
+          />
         </div>
         <div>
           <Input

@@ -13,7 +13,6 @@ import { AbstractScheduleBuilder } from "./AbstractScheduleBuilder";
 // TODO: В ScheduleComponent прокинуть showHeader
 
 export class CourseScheduleBuilder extends AbstractScheduleBuilder {
-  // TODO: Убрать тестовые данные, после подключение редакса в BuildSchedule пропихивать данные, необходимые для конструированя расписания
   public static BuildSchedule(): ISchedule {
     const schedule: Schedule = new Schedule();
 

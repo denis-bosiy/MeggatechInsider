@@ -25,7 +25,6 @@ import CommentsModalView from "../../components/CommentsModalView/CommentsModalV
 
 const CONTRACTS_SELECT: ISelectOption[] = [{ content: "Штаб бц", id: guidGenerator() }];
 
-// TODO: Это полный пиздос. Нужно отрефакторить всю страницу на новогодних
 const YearImplementationMonitoringPage = () => {
   const { openModal } = useContext(ModalSettingsContext);
   const navigate = useNavigate();
