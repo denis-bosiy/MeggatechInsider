@@ -31,8 +31,8 @@ const MONTH_SELECT: ISelectOption[] = [
 ];
 
 const CONTRACT_TYPE_SELECT: ISelectOption[] = [
-  { content: "ДС", id: "0" },
-  { content: "ГПХ", id: "1" }
+  { content: "ГПХ", id: "0" },
+  { content: "ДС", id: "1" },
 ];
 
 const MonthReportPage = () => {
@@ -43,7 +43,7 @@ const MonthReportPage = () => {
     ? MONTH_SELECT.find((monthValue: ISelectOption) => monthValue.id === searchParams.get("month"))
     : undefined;
   const [selectedMonth, setSelectedMonth] = useState<ISelectOption>(
-    monthFromSearchParams ? monthFromSearchParams : MONTH_SELECT[0]
+    monthFromSearchParams ? monthFromSearchParams : MONTH_SELECT[9]
   );
   const [selectedContract, setSelectedContract] = useState<ISelectOption>(CONTRACT_TYPE_SELECT[0]);
   const [searchQuery, setSearchQuery] = useState("");

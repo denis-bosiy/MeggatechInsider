@@ -5,51 +5,42 @@ const initData: CurriculumReportData = {
   dayCount: 31,
   teachers: [
     {
-      teacher: "Иванов Иван Иванович",
+      teacher: "Гусарова Л.Г.",
       subjects: [
         {
-          title: "История",
+          title: "Геометрия",
           classes: [
             {
               number: "10-1",
               groups: [
                 {
-                  number: "10-1-1",
-                  amount: 0,
+                  number: "10-1",
+                  amount: 1,
                   combined: 0,
-                  remoted: 12,
-                  hours: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+                  remoted: 0,
+                  hours: [0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
                 },
-                {
-                  number: "10-1-2",
-                  amount: 0,
-                  combined: 0,
-                  remoted: 12,
-                  hours: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
-                }
               ]
             }
           ]
         },
+      ]
+    },
+    {
+      teacher: "Охотников С.А.",
+      subjects: [
         {
-          title: "Алгоритмы",
+          title: "АиП",
           classes: [
             {
               number: "10-1",
               groups: [
                 {
                   number: "10-1-1",
-                  amount: 0,
+                  amount: 2,
                   combined: 0,
-                  remoted: 12,
-                  hours: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
-                },
-                {
-                  number: "10-1-2",
-                  amount: 0,
-                  combined: 0,
-                  remoted: 12,
-                  hours: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+                  remoted: 0,
+                  hours: [0, 0, 0, 0, 0, 0, 0, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
                 }
               ]
             }
@@ -58,20 +49,42 @@ const initData: CurriculumReportData = {
       ]
     },
     {
-      teacher: "Рыбкин Анатолий Николаевич",
+      teacher: "Логинова М.Ю.",
       subjects: [
         {
-          title: "Java",
+          title: "ОБЖ",
           classes: [
             {
               number: "10-1",
               groups: [
                 {
-                  number: "10-1-1",
-                  amount: 0,
+                  number: "10-1",
+                  amount: 2,
                   combined: 0,
-                  remoted: 12,
-                  hours: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+                  remoted: 0,
+                  hours: [0, 0, 0, 0, 0, 0, 0, 0, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      teacher: "Руденко Е.В.",
+      subjects: [
+        {
+          title: "Английский язык",
+          classes: [
+            {
+              number: "10-2-2",
+              groups: [
+                {
+                  number: "10-1",
+                  amount: 1,
+                  combined: 0,
+                  remoted: 0,
+                  hours: [0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
                 }
               ]
             }
