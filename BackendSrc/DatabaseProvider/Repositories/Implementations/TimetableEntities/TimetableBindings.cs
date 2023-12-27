@@ -30,6 +30,8 @@ namespace DatabaseProvider.Repositories.Implementations.TimetableEntities
                 ClassStudentGroupRepository<HorizontalSubgroupStudentGroup>>();
             services.AddScoped<ITeacherAvailableHoursRepository, TeacherAvailableHoursRepository>();
 
+            services.AddScoped<IGenericStudentGroupRepository, GenericStudentGroupRepository>();
+
             return services;
         }
     }

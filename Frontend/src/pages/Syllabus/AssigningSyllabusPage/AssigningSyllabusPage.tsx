@@ -31,6 +31,10 @@ const AssigningSyllabusPage = () => {
     { id: "2", content: "Петров Иван Иванович" },
     { id: "3", content: "Васечкин Николай Иванович" }
   ];
+  const [isDataLoading, setDataLoading] = useState<boolean>(true);
+
+  const httpService = new HttpService();
+  const { currentYear } = useSelector((state: { headerStore: HeaderData }) => state.headerStore);
 
   const { openModal } = useContext(ModalSettingsContext);
   const dispatch = useDispatch();
@@ -97,12 +101,45 @@ const AssigningSyllabusPage = () => {
     ]);
   };
 
+  useLayoutEffect(() => {
+    const params: Map<string, string> = new Map<string, string>();
+    if (currentYear) {
+      params.set("year", currentYear.year.toString());
+    }
+    setDataLoading(true);
+    httpService
+      .getByArbitraryUrl(Endpoint.SyllabusDiscrepancies, params)
+      .then((data: any) => {
+        setDataLoading(false);
+        const discrepanciesResponse: DiscrepancyResponse[] = ResponseBuilder.BuildDiscrepanciesResponse(data);
+        const discrepancies: DiscrepanciesSyllabusData = discrepanciesResponse.map(
+          (discrepancy: DiscrepancyResponse) => {
+            return {
+              id: guidGenerator(),
+              name: discrepancy.name,
+              groupCount: discrepancy.groupCount,
+              groupCountByPlan: discrepancy.groupCountByPlan
+            };
+          }
+        );
+        dispatch(ActionBuilder.saveDiscrepancies(discrepancies));
+      })
+      .catch(() => {
+        dispatch(ActionBuilder.saveDiscrepancies([]));
+        setDataLoading(false);
+      });
+  }, [currentYear?.id]);
+
+  if (isDataLoading) {
+    return <Loader />;
+  }
+
   return (
     <>
       <div className="toolbar">
         <div className="toolbar__buttons-wrapper">
           {isAssigningsEditing.value ? (
-            <>
+            <div className="toolbar__buttons-box">
               <ActionButton
                 className="toolbar__button"
                 label="Сохранить"
@@ -115,7 +152,7 @@ const AssigningSyllabusPage = () => {
                 type={ActionButtonType.Negative}
                 onClick={handleResetAssignings}
               />
-            </>
+            </div>
           ) : (
             <ActionButton
               className="toolbar__button"

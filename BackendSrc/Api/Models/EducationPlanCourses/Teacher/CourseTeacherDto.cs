@@ -4,6 +4,27 @@ namespace Api.Models.EducationPlanCourses.Teacher
 {
     public class CourseTeacherDto
     {
+        public CourseTeacherDto(
+            int id,
+            string name,
+            string workingContract,
+            DateOnly workingStartDate,
+            int workExperience,
+            int workExperienceAtTheTimeOfTheEmployment,
+            DateOnly birthDay,
+            int age
+            )
+        {
+            Id = id;
+            Name = name;
+            WorkingContract = workingContract;
+            WorkingStartDate = workingStartDate;
+            WorkExperience = workExperience;
+            WorkExperienceAtTheTimeOfTheEmployment = workExperienceAtTheTimeOfTheEmployment;
+            BirthDay = birthDay;
+            Age = age;
+        }
+
         [JsonPropertyName( "id" )]
         public int Id { get; set; }
 

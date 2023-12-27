@@ -6,4 +6,5 @@ public interface IPaymentTypeRepository : IRepository<PaymentType>
 {
     public List<PaymentType> GetAll();
     public PaymentType GetById( int id );
+    public PaymentType GetPaymentTypeByType( string type );
 }

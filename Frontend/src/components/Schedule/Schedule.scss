@@ -1,27 +1,13 @@
 .schedule {
-  $module: '.schedule';
+  $module: ".schedule";
   $schedule-cell-color: #e8ebee;
+
+  &-header_hidden {
+    display: none;
+  }
 
   &__heading {
     font-weight: bold;
     background-color: $schedule-cell-color;
-  }
-
-  &__cell {
-    position: relative;
-    background-color: $schedule-cell-color;
-
-    &:hover {
-      #{$module}__cell-controls {
-        display: block;
-      }
-    }
-  }
-
-  &__cell-controls {
-    position: absolute;
-    top: 0;
-    right: 0;
-    display: none;
   }
 }

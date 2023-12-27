@@ -25,4 +25,6 @@ public class TeacherRepository : Repository<Teacher>, ITeacherRepository
     public List<Teacher> GetByContractTypeId( int id ) => Entities.Where( t => t.ContractTypeId == id ).ToList();
 
     public List<Teacher> GetByEducationId( int id ) => Entities.Where( t => t.EducationId == id ).ToList();
+    public void Update( Teacher teacher ) => Entities.Update( teacher );
+    public Teacher GetTeacherByName( string teacherName ) => Entities.Where( s => s.TeacherName == teacherName ).FirstOrDefault();
 }

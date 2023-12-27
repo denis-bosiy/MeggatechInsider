@@ -1,3 +1,4 @@
+using Domain.ReportEntities.SubdeanEntities;
 using Domain.TimetableEntities.LessonEntities;
 
 namespace Domain.TeacherEntities
@@ -22,6 +23,8 @@ namespace Domain.TeacherEntities
         public int Year { get; set; }
 
         public List<Lesson> Lessons { get; } = new List<Lesson>();
+        public List<MonthComment> MonthComments { get; } = new List<MonthComment>();
+        public List<YearComment> YearComments { get; } = new List<YearComment>();
 
         public Teacher(
             string teacherName,

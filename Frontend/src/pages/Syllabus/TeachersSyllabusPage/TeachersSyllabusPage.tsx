@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useContext, useState, useLayoutEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { TeachersSyllabusPageData, TeacherSyllabusData } from "./model/types";
 import { ActionBuilder } from "./model/actions";
@@ -20,6 +20,7 @@ import { Endpoint } from "../../../api/endpoints";
 import { SyllabusTeacherResponse } from "../../../api/Responses/SyllabusTeacherResponse";
 import { ResponseBuilder } from "../../../api/Responses/ResponseBuilder";
 import { HeaderData } from "../../../layouts/Header/model/types";
+import Loader from "../../../components/Loader/Loader";
 
 const TeachersSyllabusPage = () => {
   // TODO: Добавить вытягивание этих данных с бэкенда
@@ -35,6 +36,7 @@ const TeachersSyllabusPage = () => {
     { id: "1", content: "Степень к.н." },
     { id: "2", content: "Докторская степень" }
   ];
+  const [isDataLoading, setDataLoading] = useState<boolean>(true);
 
   const httpService = new HttpService();
   const { openModal } = useContext(ModalSettingsContext);
@@ -54,15 +56,16 @@ const TeachersSyllabusPage = () => {
   const teachersTable: CTable = teachersTableBuilder.getTable();
   const teachersTableManager: CTableManager = new CTableManager(teachersTable);
 
-  useEffect(() => {
+  useLayoutEffect(() => {
     const params: Map<string, string> = new Map<string, string>();
     if (currentYear) {
       params.set("year", currentYear.year.toString());
     }
-
+    setDataLoading(true);
     httpService
       .getByArbitraryUrl(Endpoint.SyllabusTeachers, params)
       .then((data: any) => {
+        setDataLoading(false);
         const teachersResponse: SyllabusTeacherResponse[] = ResponseBuilder.BuildSyllabusTeachersResponse(data);
         const teachers: TeacherSyllabusData[] = teachersResponse.map((teacherResponse: SyllabusTeacherResponse) => {
           return {
@@ -86,9 +89,10 @@ const TeachersSyllabusPage = () => {
         dispatch(ActionBuilder.saveTeachers(teachers));
         setTeachersTableData(structuredClone(teachers));
       })
-      .catch((e: any) => {
+      .catch(() => {
         dispatch(ActionBuilder.saveTeachers([]));
         setTeachersTableData([]);
+        setDataLoading(false);
       });
   }, [currentYear?.id]);
 
@@ -143,12 +147,16 @@ const TeachersSyllabusPage = () => {
     ]);
   };
 
+  if (isDataLoading) {
+    return <Loader />;
+  }
+
   return (
     <>
       <div className="toolbar">
         <div className="toolbar__buttons-wrapper">
           {isTeachersEditing.value ? (
-            <>
+            <div className="toolbar__buttons-box">
               <ActionButton
                 className="toolbar__button"
                 label="Сохранить"
@@ -161,7 +169,7 @@ const TeachersSyllabusPage = () => {
                 type={ActionButtonType.Negative}
                 onClick={handleResetTeachers}
               />
-            </>
+            </div>
           ) : (
             <ActionButton
               className="toolbar__button"

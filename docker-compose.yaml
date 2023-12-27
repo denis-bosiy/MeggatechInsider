@@ -1,0 +1,28 @@
+version: '3'
+
+services:
+  frontend:
+    image: darkmoonli/frontend:latest
+    container_name: frontend
+    restart: always
+    ports:
+      - "2000:3000"
+
+  backend:
+    image: darkmoonli/backend:latest
+    container_name: backend
+    restart: always
+    ports:
+      - "81:80"
+    depends_on:
+          - db
+
+  db:
+    image: "mcr.microsoft.com/mssql/server:2022-latest"
+    container_name: db
+    restart: always
+    ports:
+      - "1433:1433"
+    environment:
+      SA_PASSWORD: "S3cur3P@ssW0rd!"
+      ACCEPT_EULA: "Y"

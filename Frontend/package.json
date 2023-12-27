@@ -5,7 +5,6 @@
   "dependencies": {
     "@babel/core": "^7.16.0",
     "@pmmmwh/react-refresh-webpack-plugin": "^0.5.3",
-    "@types/node": "^16.18.58",
     "@types/react": "^18.2.25",
     "@types/react-dom": "^18.2.11",
     "axios": "^1.6.1",
@@ -69,13 +68,16 @@
     "start-js": "node scripts/start.js",
     "eject": "react-scripts eject",
     "watch-sass-js": "npm-watch",
-    "stylelint-dev": "stylelint src/**/*.scss --cache --cache-location ./.stylelintcache ; exit 0",
+    "stylelint-dev": "stylelint src/**/*.scss --cache --cache-location ./.stylelintcache --fix ; exit 0",
     "stylelint-build": "stylelint src/**/*.scss",
-    "stylelint-fix-sass": "stylelint --fix src/**/*.scss"
+    "stylelint-fix-sass": "stylelint src/**/*.scss --fix",
+    "test": "jest --transformIgnorePatterns \"node_modules/(?!@codemirror)/\" "
   },
   "devDependencies": {
     "@babel/plugin-proposal-private-property-in-object": "^7.21.11",
     "@svgr/webpack": "^8.1.0",
+    "@types/jest": "^29.5.11",
+    "@types/node": "^17.0.29",
     "@types/react-select": "^5.0.1",
     "eslint-config-prettier": "^9.0.0",
     "eslint-plugin-import": "^2.28.1",

@@ -1,0 +1,56 @@
+@import "../../vars";
+
+.schedule-navigation {
+    &-container {
+        display: flex;
+        flex-direction: row;
+    }
+
+    &__lesson-editing {
+        display: flex;
+        flex-direction: row;
+        gap: 25px;
+
+        &-actions {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+    }
+
+    &__control {
+        display: flex;
+        flex-direction: column;
+        gap: 15px;
+        padding: 15px;
+        background-color: $background-color;
+        border-radius: 6px;
+
+        &.-row {
+            flex-direction: row;
+            white-space: nowrap;
+        }
+    }
+
+    &__control-column {
+        display: flex;
+        flex-direction: column;
+        gap: 15px;
+    }
+
+    &__control-row {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        gap: 15px;
+    }
+
+    &__actions {
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-end;
+        max-width: 200px;
+        gap: 20px;
+        margin-top: 30px;
+    }
+}

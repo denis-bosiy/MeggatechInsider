@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useContext, useState, useLayoutEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { SubjectsSyllabusPageData, SubjectSyllabusData } from "./model/types";
 import { ActionBuilder } from "./model/actions";
@@ -20,6 +20,7 @@ import { HttpService } from "../../../api/http.service";
 import { Endpoint } from "../../../api/endpoints";
 import { SyllabusSubjectResponse } from "../../../api/Responses/SyllabusSubjectResponse";
 import { ResponseBuilder } from "../../../api/Responses/ResponseBuilder";
+import Loader from "../../../components/Loader/Loader";
 
 const SubjectsSyllabusPage = () => {
   // TODO: Добавить вытягивание этих данных с бэкенда
@@ -35,6 +36,7 @@ const SubjectsSyllabusPage = () => {
     { id: "1", content: "Физ." },
     { id: "2", content: "Ист." }
   ];
+  const [isDataLoading, setDataLoading] = useState<boolean>(true);
 
   const httpService = new HttpService();
   const { openModal } = useContext(ModalSettingsContext);
@@ -54,15 +56,16 @@ const SubjectsSyllabusPage = () => {
   const subjectsTable: CTable = subjectsTableBuilder.getTable();
   const subjectsTableManager: CTableManager = new CTableManager(subjectsTable);
 
-  useEffect(() => {
+  useLayoutEffect(() => {
     const params: Map<string, string> = new Map<string, string>();
     if (currentYear) {
       params.set("year", currentYear.year.toString());
     }
-
+    setDataLoading(true);
     httpService
       .getByArbitraryUrl(Endpoint.SyllabusSubjects, params)
       .then((data: any) => {
+        setDataLoading(false);
         const subjectsResponse: SyllabusSubjectResponse[] = ResponseBuilder.BuildSyllabusSubjectsResponse(data);
         const subjects: SubjectSyllabusData[] = subjectsResponse.map((subjectResponse: SyllabusSubjectResponse) => {
           return {
@@ -82,9 +85,10 @@ const SubjectsSyllabusPage = () => {
         dispatch(ActionBuilder.saveSubjects(subjects));
         setSubjectsTableData(structuredClone(subjects));
       })
-      .catch((e: any) => {
+      .catch(() => {
         dispatch(ActionBuilder.saveSubjects([]));
         setSubjectsTableData([]);
+        setDataLoading(false);
       });
   }, [currentYear?.id]);
 
@@ -135,12 +139,16 @@ const SubjectsSyllabusPage = () => {
     ]);
   };
 
+  if (isDataLoading) {
+    return <Loader />;
+  }
+
   return (
     <>
       <div className="toolbar">
         <div className="toolbar__buttons-wrapper">
           {isSubjectsEditing.value ? (
-            <>
+            <div className="toolbar__buttons-box">
               <ActionButton
                 className="toolbar__button"
                 label="Сохранить"
@@ -153,7 +161,7 @@ const SubjectsSyllabusPage = () => {
                 type={ActionButtonType.Negative}
                 onClick={handleResetSubjects}
               />
-            </>
+            </div>
           ) : (
             <ActionButton
               className="toolbar__button"
@@ -437,7 +445,7 @@ const SubjectsSyllabusPage = () => {
             <tr className="row">
               <td className="cell">
                 <Input
-                  placeholder="Наименование"
+                  placeholder="Предмет"
                   value={subjectsTableData[subjectsTableData.length - 1].subjectName}
                   onValueChange={(newLabel: string) => {
                     setSubjectsTableData(

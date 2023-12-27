@@ -76,9 +76,9 @@ const OffBudgetReportPage = (): JSX.Element => {
           teacher.id !== teacherId
             ? teacher
             : {
-              ...teacher,
-              offBudgetCategory: newOffBudgetCategoryContent
-            }
+                ...teacher,
+                offBudgetCategory: newOffBudgetCategoryContent
+              }
         )
       );
     }
@@ -121,6 +121,7 @@ const OffBudgetReportPage = (): JSX.Element => {
         </div>
 
         <Input
+          className="toolbar__search"
           placeholder="Поиск"
           value={searchQuery}
           onValueChange={setSearchQuery}

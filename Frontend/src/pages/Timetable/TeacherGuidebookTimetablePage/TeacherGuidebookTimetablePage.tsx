@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useLayoutEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { MultiValue } from "react-select";
 import {
@@ -25,11 +25,13 @@ import { ResponseBuilder } from "../../../api/Responses/ResponseBuilder";
 import { getWorkdayByCode } from "../../../utils/getWorkdayByCode";
 import { shortenWorkday } from "../../../utils/workdayShortener";
 import Multiselect from "../../../components/Multiselect/Multiselect";
+import Loader from "../../../components/Loader/Loader";
 
 const TeacherGuidebookTimetablePage = () => {
   const httpService: HttpService = new HttpService();
+  const [isDataLoading, setDataLoading] = useState<boolean>(true);
 
-  const { guidebook, totalAvailableHours } = useSelector(
+  const { guidebook } = useSelector(
     (state: { teacherGuidebookTimetablePageStore: TeacherGuidebookTimetablePageData }) =>
       state.teacherGuidebookTimetablePageStore
   );
@@ -45,19 +47,20 @@ const TeacherGuidebookTimetablePage = () => {
   const guidebookTable: CTable = guidebookTableBuilder.getTable();
   const guidebookTableManager: CTableManager = new CTableManager(guidebookTable);
 
-  useEffect(() => {
+  useLayoutEffect(() => {
     const params: Map<string, string> = new Map<string, string>();
     if (currentYear && currentWeek) {
       params.set("year", currentYear.year.toString());
       params.set("week", currentWeek.week.toString());
     }
-
+    setDataLoading(true);
     // httpService.getByArbitraryUrl(Endpoint.TimetableAvailableHours, params).then((data: any) => {
 
     // });
     httpService
       .getByArbitraryUrl(Endpoint.TimetableTeachers, params)
       .then((data: any) => {
+        setDataLoading(false);
         const teachersResponse: TimetableTeacherResponse[] = ResponseBuilder.BuildTimetableTeacherResponses(data);
         const teachers: Guidebook = teachersResponse.map((teacher: TimetableTeacherResponse) => {
           return {
@@ -83,7 +86,8 @@ const TeacherGuidebookTimetablePage = () => {
         dispatch(TeacherGuidebookTimetableActionBuilder.setTeachers(teachers));
         setGuidebookTableData(structuredClone(teachers));
       })
-      .catch((e: any) => {
+      .catch(() => {
+        setDataLoading(false);
         // dispatch(TeacherGuidebookTimetableActionBuilder.setTeachers([]));
         // setGuidebookTableData(structuredClone([]));
       });
@@ -106,24 +110,24 @@ const TeacherGuidebookTimetablePage = () => {
   const handleSort = (columnName: string): void => {
     guidebookTableManager.invokeFunction("sort", TableType.Default, [columnName, SortingOrder.Ascending]);
   };
-  const handlePickingAvailableHour = (teacherId: string, availableHourId: string): void => {
-    setGuidebookTableData(
-      guidebookTableData.map((teacher: TeacherGuidebookTimetableData) => {
-        if (teacher.id === teacherId) {
-          // const foundAvailablePickedHour: AvailableHour | undefined = teacher.availableHours.find(
-          //   (availableHour: AvailableHour) => availableHour.id === availableHourId
-          // );
-          // if (foundAvailablePickedHour) {
-          //   return {
-          //     ...teacher,
-          //     availableHours: [...teacher.pickedHours, foundAvailablePickedHour]
-          //   };
-          // }
-        }
-        return teacher;
-      })
-    );
-  };
+  // const handlePickingAvailableHour = (teacherId: string, availableHourId: string): void => {
+  //   setGuidebookTableData(
+  //     guidebookTableData.map((teacher: TeacherGuidebookTimetableData) => {
+  //       if (teacher.id === teacherId) {
+  //         // const foundAvailablePickedHour: AvailableHour | undefined = teacher.availableHours.find(
+  //         //   (availableHour: AvailableHour) => availableHour.id === availableHourId
+  //         // );
+  //         // if (foundAvailablePickedHour) {
+  //         //   return {
+  //         //     ...teacher,
+  //         //     availableHours: [...teacher.pickedHours, foundAvailablePickedHour]
+  //         //   };
+  //         // }
+  //       }
+  //       return teacher;
+  //     })
+  //   );
+  // };
 
   const getHoursOptions = (availableHours: AvailableHour[]): MultiValue<any> => {
     return availableHours.map((availableHour: AvailableHour) => {
@@ -138,6 +142,10 @@ const TeacherGuidebookTimetablePage = () => {
       };
     });
   };
+
+  if (isDataLoading) {
+    return <Loader />;
+  }
 
   return (
     <>
@@ -166,17 +174,16 @@ const TeacherGuidebookTimetablePage = () => {
               onClick={editGuidebookTable}
             />
           )}
-
-          <Input
-            className="toolbar__search"
-            value={guidebookSearchQuery}
-            type={InputType.Search}
-            placeholder="Поиск"
-            onValueChange={setGuidebookSearchQuery}
-            size={InputSize.Default}
-            onSearch={handleGuidebookSearch}
-          />
         </div>
+        <Input
+          className="toolbar__search"
+          value={guidebookSearchQuery}
+          type={InputType.Search}
+          placeholder="Поиск"
+          onValueChange={setGuidebookSearchQuery}
+          size={InputSize.Default}
+          onSearch={handleGuidebookSearch}
+        />
       </div>
       <table className="table -fill -list">
         <thead className="header">
@@ -234,14 +241,14 @@ const TeacherGuidebookTimetablePage = () => {
                               guidebookTableData.map((data: TeacherGuidebookTimetableData) =>
                                 data.id === teacher.id
                                   ? {
-                                    ...data,
-                                    availableHours: newValue.map((time: any) => ({
-                                      id: time.value,
-                                      weekDayCode: time.label.substring(0, 2),
-                                      startTime: time.label.substring(3, 7),
-                                      endTime: time.label.substring(8)
-                                    }))
-                                  }
+                                      ...data,
+                                      availableHours: newValue.map((time: any) => ({
+                                        id: time.value,
+                                        weekDayCode: time.label.substring(0, 2),
+                                        startTime: time.label.substring(3, 7),
+                                        endTime: time.label.substring(8)
+                                      }))
+                                    }
                                   : data
                               )
                             );

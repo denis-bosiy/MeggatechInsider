@@ -1,5 +1,7 @@
 @import "../../vars";
 
+// TODO: Вынести в общие стили, т.к. используется в ScheduleNavigation
+
 .page-navigation {
   background-color: #003fb3cc;
   display: flex;
@@ -10,7 +12,7 @@
     display: flex;
     max-width: $page-width;
     width: 100%;
-    flex-direction: column;
+    flex-direction: row;
     gap: 24px;
     position: relative;
     padding-bottom: 32px;

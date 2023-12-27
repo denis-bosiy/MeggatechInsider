@@ -46,6 +46,13 @@
   }
 }
 
+.checkbox-label-container {
+  display: flex;
+  flex-direction: row;
+  gap: 3px;
+  cursor: pointer;
+}
+
 .checkbox-label {
   @include square(20px);
 

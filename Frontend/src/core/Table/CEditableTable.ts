@@ -19,6 +19,10 @@ export class CEditableTable extends CTable {
   }
 
   public edit(): void {
+    if (this._isEditing.value) {
+      return;
+    }
+
     this._setIsEditing({ ...this._isEditing, value: true });
   }
 
@@ -27,7 +31,6 @@ export class CEditableTable extends CTable {
       return;
     }
     saveToStore(this.data);
-    console.log("Отправка запроса на бэкенд = " + url);
     // Использование RequestBuilder-a(прокидывается this.data)
     this._setIsEditing({ ...this._isEditing, value: false });
   }
@@ -37,6 +40,7 @@ export class CEditableTable extends CTable {
       return;
     }
     this.setData(storeData);
+    this.data = storeData;
     this._setIsEditing({ ...this._isEditing, value: false });
   }
 }

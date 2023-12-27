@@ -25,4 +25,6 @@ public class SubjectRepository : Repository<Subject>, ISubjectRepository
     public List<Subject> GetByTypeId( int id ) => Entities.Where( s => s.SubjectTypeId == id ).ToList();
 
     public List<Subject> GetByCategoryId( int id ) => Entities.Where( s => s.SubjectCategoryId == id ).ToList();
+
+    public Subject GetSubjectByName( string subjectName ) => Entities.Where( s => s.SubjectName == subjectName ).FirstOrDefault();
 }
