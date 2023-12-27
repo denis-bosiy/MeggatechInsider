@@ -66,7 +66,8 @@ const subjectsOptions: ISelectOption[] = [
   { id: guidGenerator(), content: "Геометрия" },
   { id: guidGenerator(), content: "Физика" },
   { id: guidGenerator(), content: "Английский язык" },
-  { id: guidGenerator(), content: "АиП" }
+  { id: guidGenerator(), content: "АиП" },
+  { id: guidGenerator(), content: "ОБЖ" }
 ];
 
 export enum ScheduleNavigationLessonType {

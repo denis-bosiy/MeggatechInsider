@@ -7,7 +7,7 @@ import { ScheduleLesson } from "./ScheduleLesson";
 import { SchedulePosition } from "./SchedulePosition";
 import { Time } from "./Time";
 import { Workday } from "./Workday";
-import {AbstractScheduleBuilder} from "./AbstractScheduleBuilder";
+import { AbstractScheduleBuilder } from "./AbstractScheduleBuilder";
 
 // TODO: Сделать стратегию для расписания (Абстрактный Builder с релизацией BuildLessonTimes, BuildLessons)
 // TODO: В ScheduleComponent прокинуть showHeader
@@ -70,7 +70,6 @@ export class CourseScheduleBuilder extends AbstractScheduleBuilder {
 
   private static BuildLessons(schedule: Schedule): Schedule {
     const courseMonday1: ScheduleLesson = new ScheduleLesson(
-      "random-string-0",
       new SchedulePosition(EnglishAlphabet.A, 0, EnglishAlphabet.A, 0),
       new SchedulePosition(EnglishAlphabet.A, 0, EnglishAlphabet.A, 0),
       "Математика",
@@ -79,7 +78,6 @@ export class CourseScheduleBuilder extends AbstractScheduleBuilder {
       LessonType.Default
     );
     const courseMonday2: ScheduleLesson = new ScheduleLesson(
-      "random-string-1",
       new SchedulePosition(EnglishAlphabet.A, 0, EnglishAlphabet.A, 1),
       new SchedulePosition(EnglishAlphabet.A, 0, EnglishAlphabet.A, 1),
       "Русский язык",
@@ -88,7 +86,6 @@ export class CourseScheduleBuilder extends AbstractScheduleBuilder {
       LessonType.Default
     );
     const courseMonday3: ScheduleLesson = new ScheduleLesson(
-      "random-string-2",
       new SchedulePosition(EnglishAlphabet.A, 0, EnglishAlphabet.A, 2),
       new SchedulePosition(EnglishAlphabet.A, 0, EnglishAlphabet.A, 2),
       "Английский язык",
@@ -97,7 +94,6 @@ export class CourseScheduleBuilder extends AbstractScheduleBuilder {
       LessonType.Default
     );
     const courseMonday4: ScheduleLesson = new ScheduleLesson(
-      "random-string-3",
       new SchedulePosition(EnglishAlphabet.B, 0, EnglishAlphabet.A, 2),
       new SchedulePosition(EnglishAlphabet.B, 0, EnglishAlphabet.A, 2),
       "Физика",
@@ -106,7 +102,6 @@ export class CourseScheduleBuilder extends AbstractScheduleBuilder {
       LessonType.Default
     );
     const courseMonday5: ScheduleLesson = new ScheduleLesson(
-      "random-string-4",
       new SchedulePosition(EnglishAlphabet.C, 0, EnglishAlphabet.A, 2),
       new SchedulePosition(EnglishAlphabet.C, 0, EnglishAlphabet.A, 2),
       "Русский язык",
@@ -116,7 +111,6 @@ export class CourseScheduleBuilder extends AbstractScheduleBuilder {
     );
 
     const courseWednesday1: ScheduleLesson = new ScheduleLesson(
-      "random-string-5",
       new SchedulePosition(EnglishAlphabet.A, 0, EnglishAlphabet.C, 0),
       new SchedulePosition(EnglishAlphabet.A, 0, EnglishAlphabet.C, 0),
       "Русский язык",
@@ -126,7 +120,6 @@ export class CourseScheduleBuilder extends AbstractScheduleBuilder {
     );
 
     const courseThursday1: ScheduleLesson = new ScheduleLesson(
-      "random-string-6",
       new SchedulePosition(EnglishAlphabet.A, 0, EnglishAlphabet.D, 1),
       new SchedulePosition(EnglishAlphabet.A, 0, EnglishAlphabet.D, 1),
       "Русский язык",
@@ -135,7 +128,6 @@ export class CourseScheduleBuilder extends AbstractScheduleBuilder {
       LessonType.Default
     );
     const courseThursday2: ScheduleLesson = new ScheduleLesson(
-      "random-string-7",
       new SchedulePosition(EnglishAlphabet.A, 0, EnglishAlphabet.D, 2),
       new SchedulePosition(EnglishAlphabet.A, 0, EnglishAlphabet.D, 2),
       "Английский язык",
@@ -145,7 +137,6 @@ export class CourseScheduleBuilder extends AbstractScheduleBuilder {
     );
 
     const courseSaturday1: ScheduleLesson = new ScheduleLesson(
-      "random-string-8",
       new SchedulePosition(EnglishAlphabet.A, 0, EnglishAlphabet.E, 0),
       new SchedulePosition(EnglishAlphabet.A, 0, EnglishAlphabet.E, 0),
       "Русский язык",
