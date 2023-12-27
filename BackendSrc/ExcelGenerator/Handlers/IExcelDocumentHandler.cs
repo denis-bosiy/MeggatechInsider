@@ -1,6 +1,6 @@
 using OfficeOpenXml;
 
-namespace MegatechExcelReportGenerator.Handlers
+namespace ExcelGenerator.Handlers
 {
     public interface IExcelDocumentHandler
     {

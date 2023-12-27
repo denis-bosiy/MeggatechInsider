@@ -1,7 +1,7 @@
-using MegatechExcelReportGeneratorApi.Builders;
-using MegatechExcelReportGeneratorApi.Data;
+using ExcelGenerator.Builders;
+using ExcelGenerator.Data;
 
-namespace MegatechExcelReportGeneratorApi.Factories
+namespace ExcelGenerator.Factories
 {
     public sealed class ReportBuilderFactory : IReportBuilderFactory
     {
@@ -12,9 +12,9 @@ namespace MegatechExcelReportGeneratorApi.Factories
             _reportTemplateFileInfoProvider = reportTemplateFileInfoProvider;
         }
 
-        public FirstReportBuilder GetFirstReportBuilder()
+        public YearActualAcademicHoursReportBuilder GetYearActualAcademicHoursReportBuilder()
         {
-            return new FirstReportBuilder( _reportTemplateFileInfoProvider );
+            return new YearActualAcademicHoursReportBuilder( _reportTemplateFileInfoProvider );
         }
     }
 }

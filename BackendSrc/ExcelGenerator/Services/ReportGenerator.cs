@@ -1,8 +1,8 @@
-using MegatechExcelReportGeneratorApi.Builders;
-using MegatechExcelReportGeneratorApi.Data;
-using MegatechExcelReportGeneratorApi.Factories;
+using ExcelGenerator.Builders;
+using ExcelGenerator.Data;
+using ExcelGenerator.Factories;
 
-namespace MegatechExcelReportGeneratorApi.Services
+namespace ExcelGenerator.Services
 {
     public sealed class ReportGenerator : IReportGenerator
     {
@@ -20,9 +20,9 @@ namespace MegatechExcelReportGeneratorApi.Services
             //
 
             // Данные через конструктор билдера (будут в приватном поле)
-            FirstReportBuilder firstReportBuilder = _reportBuilderFactory.GetFirstReportBuilder();
+            YearActualAcademicHoursReportBuilder yearActualAcademicHoursReportBuilder = _reportBuilderFactory.GetYearActualAcademicHoursReportBuilder();
 
-            return firstReportBuilder
+            return yearActualAcademicHoursReportBuilder
                 .Build()
                 .GetResult();
         }

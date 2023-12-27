@@ -1,6 +1,7 @@
 using OfficeOpenXml;
+using LicenseContext = OfficeOpenXml.LicenseContext;
 
-namespace MegatechExcelReportGenerator.Handlers
+namespace ExcelGenerator.Handlers
 {
     internal sealed class ExcelDocumentHandler : IExcelDocumentHandler
     {

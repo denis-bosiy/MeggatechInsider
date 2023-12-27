@@ -1,6 +1,6 @@
-﻿using MegatechExcelReportGeneratorApi.Data;
+﻿using ExcelGenerator.Data;
 
-namespace MegatechExcelReportGeneratorApi.Services
+namespace ExcelGenerator.Services
 {
     public interface IReportGenerator
     {

@@ -1,4 +1,4 @@
-namespace MegatechExcelReportGeneratorApi.Data
+namespace ExcelGenerator.Data
 {
     public class ReportResult
     {

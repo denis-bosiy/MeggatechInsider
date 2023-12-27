@@ -1,7 +1,7 @@
-using MegatechExcelReportGenerator.Handlers;
-using MegatechExcelReportGeneratorApi.Data;
+using ExcelGenerator.Data;
+using ExcelGenerator.Handlers;
 
-namespace MegatechExcelReportGeneratorApi.Builders
+namespace ExcelGenerator.Builders
 {
     public abstract class BaseReportBuilder
     {
