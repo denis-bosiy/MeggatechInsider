@@ -30,6 +30,9 @@ public class LessonRepository : Repository<Lesson>, ILessonRepository
         return Entities.Where( l => l.Date >= startingDate && l.Date <= finishingDate ).ToList();
     }
 
-    public List<Lesson> GetByMonth( int year, int month ) => 
-        Entities.Where( l => l.Date.Year == year && l.Date.Month == month ).ToList()
+    public List<Lesson> GetByMonth( int year, int month ) =>
+        Entities.Where( l => l.Date.Year == year && l.Date.Month == month ).ToList();
+
+    public List<Lesson> GetByYear( int year ) =>
+        Entities.Where( l => l.Date.Year == year ).ToList();
 }
