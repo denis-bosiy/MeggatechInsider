@@ -36,7 +36,7 @@ namespace Api.Controllers
                 .Map() );
         }
 
-        [HttpPut("teacher")]
+        [HttpPut( "teacher" )]
         [ProducesResponseType( StatusCodes.Status200OK )]
         [ProducesResponseType( StatusCodes.Status404NotFound )]
         public IActionResult UpdateCourseTeacher( CourseTeacherUpdateListRequestDto teacherUpdateRequestDto )
@@ -46,7 +46,7 @@ namespace Api.Controllers
                 return NotFound( "Не найдено такого года" );
             }
 
-            foreach (CourseTeacherUpdateRequestDto teacher in teacherUpdateRequestDto.Teachers )
+            foreach ( CourseTeacherUpdateRequestDto teacher in teacherUpdateRequestDto.Teachers )
             {
                 _teacherCourseService.UpdateTeacherCourse(
                     teacher.Year,
@@ -93,7 +93,7 @@ namespace Api.Controllers
         public IActionResult DeleteTeacher( CourseTeacherDeleteRequestDto courseTeacherDeleteRequestDto )
         {
 
-            if(_teacherCourseService.GetTeacherCourseById( courseTeacherDeleteRequestDto.Id ) is not null )
+            if ( _teacherCourseService.GetTeacherCourseById( courseTeacherDeleteRequestDto.Id ) is not null )
             {
                 _teacherCourseService.DeleteTeacherCourse( courseTeacherDeleteRequestDto.Id );
             }
