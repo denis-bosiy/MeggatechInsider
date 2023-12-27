@@ -4,6 +4,6 @@ namespace ExcelGenerator.Factories
 {
     public interface IReportBuilderFactory
     {
-        FirstReportBuilder GetFirstReportBuilder();
+        YearActualAcademicHoursReportBuilder GetYearActualAcademicHoursReportBuilder();
     }
 }

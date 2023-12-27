@@ -20,6 +20,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Infrastructure.Migrations",
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ExcelGenerator", "ExcelGenerator\ExcelGenerator.csproj", "{5F585916-A510-4B26-A036-7BEDFBFE9564}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{DF0E6250-743A-41A2-835F-709309325C74}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UnitTests", "UnitTests\UnitTests.csproj", "{FFDD45EE-20CF-4878-ABFF-13A5D76FF953}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -49,6 +53,10 @@ Global
 		{5F585916-A510-4B26-A036-7BEDFBFE9564}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{5F585916-A510-4B26-A036-7BEDFBFE9564}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{5F585916-A510-4B26-A036-7BEDFBFE9564}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FFDD45EE-20CF-4878-ABFF-13A5D76FF953}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FFDD45EE-20CF-4878-ABFF-13A5D76FF953}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FFDD45EE-20CF-4878-ABFF-13A5D76FF953}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FFDD45EE-20CF-4878-ABFF-13A5D76FF953}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -57,5 +65,6 @@ Global
 		SolutionGuid = {B53BA2EB-37CC-465D-B5E6-547E02B2E7C4}
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
+		{FFDD45EE-20CF-4878-ABFF-13A5D76FF953} = {DF0E6250-743A-41A2-835F-709309325C74}
 	EndGlobalSection
 EndGlobal

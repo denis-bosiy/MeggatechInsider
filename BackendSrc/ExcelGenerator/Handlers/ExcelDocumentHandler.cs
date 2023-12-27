@@ -1,4 +1,5 @@
-using System.ComponentModel;
+using OfficeOpenXml;
+using LicenseContext = OfficeOpenXml.LicenseContext;
 
 namespace ExcelGenerator.Handlers
 {

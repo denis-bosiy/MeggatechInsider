@@ -2,6 +2,7 @@ namespace ExcelGenerator.Data
 {
     public interface IReportTemplateFileInfoProvider
     {
-        FileInfo Get( ReportTemplateType reportTemplateType );
+        FileInfo GetTemplateFileInfo( ReportTemplateType reportTemplateType );
+        FileInfo GetOutputFileInfo( ReportTemplateType reportTemplateType );
     }
 }

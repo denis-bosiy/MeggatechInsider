@@ -20,9 +20,9 @@ namespace ExcelGenerator.Services
             //
 
             // Данные через конструктор билдера (будут в приватном поле)
-            FirstReportBuilder firstReportBuilder = _reportBuilderFactory.GetFirstReportBuilder();
+            YearActualAcademicHoursReportBuilder yearActualAcademicHoursReportBuilder = _reportBuilderFactory.GetYearActualAcademicHoursReportBuilder();
 
-            return firstReportBuilder
+            return yearActualAcademicHoursReportBuilder
                 .Build()
                 .GetResult();
         }

@@ -1,3 +1,5 @@
+using OfficeOpenXml;
+
 namespace ExcelGenerator.Handlers
 {
     public interface IExcelDocumentHandler

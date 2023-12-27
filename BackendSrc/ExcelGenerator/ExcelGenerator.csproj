@@ -7,7 +7,19 @@
     </PropertyGroup>
 
     <ItemGroup>
+      <PackageReference Include="EPPlus" Version="7.0.5" />
       <PackageReference Include="Microsoft.Extensions.Configuration.Abstractions" Version="8.0.0" />
+      <PackageReference Include="OfficeOpenXml.Core.ExcelPackage" Version="1.0.0" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <ProjectReference Include="..\Domain\Domain.csproj" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <None Update="Data\YearActualAcademicHoursReportTemplate.xlsx">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </None>
     </ItemGroup>
 
 </Project>

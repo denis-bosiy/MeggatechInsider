@@ -12,9 +12,9 @@ namespace ExcelGenerator.Factories
             _reportTemplateFileInfoProvider = reportTemplateFileInfoProvider;
         }
 
-        public FirstReportBuilder GetFirstReportBuilder()
+        public YearActualAcademicHoursReportBuilder GetYearActualAcademicHoursReportBuilder()
         {
-            return new FirstReportBuilder( _reportTemplateFileInfoProvider );
+            return new YearActualAcademicHoursReportBuilder( _reportTemplateFileInfoProvider );
         }
     }
 }
