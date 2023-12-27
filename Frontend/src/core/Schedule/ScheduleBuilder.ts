@@ -31,10 +31,23 @@ export class ScheduleBuilder extends AbstractScheduleBuilder {
 
   private static BuildSubgroups(schedule: Schedule): Schedule {
     schedule.subgroups.set("10-1", ["10-1-1", "10-1-2"]);
-    schedule.subgroups.set("10-2", ["10-2-3", "10-2-4"]);
+    schedule.subgroups.set("10-2", ["10-2-1", "10-2-2"]);
     schedule.subgroups.set("11-1", ["11-1-1", "11-1-2"]);
-    schedule.subgroups.set("11-2", ["11-2-3", "11-2-4"]);
-    schedule.subgroups.set("11-3", ["11-3-5", "11-3-6"]);
+    schedule.subgroups.set("11-2", ["11-2-1", "11-2-2"]);
+    schedule.subgroups.set("11-3", ["11-3-1", "11-3-2"]);
+
+    return schedule;
+  }
+
+  private static BuildWorkdays(schedule: Schedule): Schedule {
+    schedule.workdays = [
+      Workday.Monday,
+      Workday.Tuesday,
+      Workday.Wednesday,
+      Workday.Thursday,
+      Workday.Friday,
+      Workday.Saturday
+    ];
 
     return schedule;
   }
@@ -77,7 +90,6 @@ export class ScheduleBuilder extends AbstractScheduleBuilder {
 
   private static BuildLessons(schedule: Schedule): Schedule {
     const bigLesson1: ScheduleLesson = new ScheduleLesson(
-      "random-string-0",
       new SchedulePosition(EnglishAlphabet.A, 0, EnglishAlphabet.A, 0),
       new SchedulePosition(EnglishAlphabet.A, 1, EnglishAlphabet.A, 0),
       "Общелицейская линейка",
@@ -86,7 +98,6 @@ export class ScheduleBuilder extends AbstractScheduleBuilder {
       LessonType.Important
     );
     const bigLesson2: ScheduleLesson = new ScheduleLesson(
-      "random-string-1",
       new SchedulePosition(EnglishAlphabet.B, 0, EnglishAlphabet.A, 0),
       new SchedulePosition(EnglishAlphabet.B, 1, EnglishAlphabet.A, 0),
       "Общелицейская линейка",
@@ -95,7 +106,6 @@ export class ScheduleBuilder extends AbstractScheduleBuilder {
       LessonType.Important
     );
     const bigLesson3: ScheduleLesson = new ScheduleLesson(
-      "random-string-2",
       new SchedulePosition(EnglishAlphabet.C, 0, EnglishAlphabet.A, 0),
       new SchedulePosition(EnglishAlphabet.C, 1, EnglishAlphabet.A, 0),
       "Общелицейская линейка",
@@ -104,7 +114,6 @@ export class ScheduleBuilder extends AbstractScheduleBuilder {
       LessonType.Important
     );
     const bigLesson4: ScheduleLesson = new ScheduleLesson(
-      "random-string-3",
       new SchedulePosition(EnglishAlphabet.D, 0, EnglishAlphabet.A, 0),
       new SchedulePosition(EnglishAlphabet.D, 1, EnglishAlphabet.A, 0),
       "Общелицейская линейка",
@@ -113,7 +122,6 @@ export class ScheduleBuilder extends AbstractScheduleBuilder {
       LessonType.Important
     );
     const bigLesson5: ScheduleLesson = new ScheduleLesson(
-      "random-string-4",
       new SchedulePosition(EnglishAlphabet.E, 0, EnglishAlphabet.A, 0),
       new SchedulePosition(EnglishAlphabet.E, 1, EnglishAlphabet.A, 0),
       "Общелицейская линейка",
@@ -122,7 +130,6 @@ export class ScheduleBuilder extends AbstractScheduleBuilder {
       LessonType.Important
     );
     const standardLesson1: ScheduleLesson = new ScheduleLesson(
-      "random-string-5",
       new SchedulePosition(EnglishAlphabet.A, 0, EnglishAlphabet.A, 1),
       new SchedulePosition(EnglishAlphabet.A, 0, EnglishAlphabet.A, 2),
       "АиП",
@@ -131,7 +138,6 @@ export class ScheduleBuilder extends AbstractScheduleBuilder {
       LessonType.Default
     );
     const standardLesson2: ScheduleLesson = new ScheduleLesson(
-      "random-string-6",
       new SchedulePosition(EnglishAlphabet.A, 0, EnglishAlphabet.A, 3),
       new SchedulePosition(EnglishAlphabet.A, 1, EnglishAlphabet.A, 3),
       "Геометрия",
@@ -140,7 +146,6 @@ export class ScheduleBuilder extends AbstractScheduleBuilder {
       LessonType.Default
     );
     const standardLesson3: ScheduleLesson = new ScheduleLesson(
-      "random-string-7",
       new SchedulePosition(EnglishAlphabet.A, 0, EnglishAlphabet.B, 0),
       new SchedulePosition(EnglishAlphabet.A, 1, EnglishAlphabet.B, 1),
       "ОБЖ",
@@ -149,7 +154,6 @@ export class ScheduleBuilder extends AbstractScheduleBuilder {
       LessonType.Default
     );
     const miniLesson: ScheduleLesson = new ScheduleLesson(
-      "random-string-8",
       new SchedulePosition(EnglishAlphabet.B, 1, EnglishAlphabet.B, 1),
       new SchedulePosition(EnglishAlphabet.B, 1, EnglishAlphabet.B, 1),
       "Английский язык",

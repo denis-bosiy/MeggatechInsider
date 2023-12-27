@@ -75,7 +75,6 @@ const SubjectsCoursesSyllabusPage = () => {
     subjectsTableManager.invokeFunction("applyAdding", TableType.Managable, [
       (data: any[]) => {
         const addedSubject = data.at(-1) as SubjectCoursesSyllabusData;
-        console.log(addedSubject);
         httpService.postByArbitraryUrl(Endpoint.CoursesSyllabus, {
           year: currentYear?.year,
           ...addedSubject,

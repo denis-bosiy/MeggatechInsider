@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useLayoutEffect } from "react";
 import "./Schedule.scss";
 import { ISchedule } from "../../core/Schedule/ISchedule";
 import { Workday } from "../../core/Schedule/Workday";
@@ -12,6 +12,8 @@ import { ScheduleManager } from "../../core/Schedule/ScheduleManager";
 import { SchedulePosition } from "../../core/Schedule/SchedulePosition";
 import IconButton from "../IconButton/IconButton";
 import { GarbageIcon, PenIcon } from "../../icons";
+import { ScheduleNotifier } from "../../core/Schedule/ScheduleNotifier";
+import { ScheduleEvent } from "../../core/Schedule/ScheduleEvent";
 
 interface IScheduleProps {
   schedule: ISchedule;
@@ -53,6 +55,13 @@ export const ScheduleComponent = (props: IScheduleProps) => {
       </td>
     );
 
+    const handleEditingLesson = (lesson?: ScheduleLesson) => {
+      ScheduleNotifier.getInstance().notify(ScheduleEvent.StartedLessonEditing, {
+        lesson: lesson,
+        schedule: props.schedule
+      });
+    };
+
     return props.schedule
       .getLessonTimes()
       .get(workday)
@@ -66,7 +75,7 @@ export const ScheduleComponent = (props: IScheduleProps) => {
               lessonTime.startTime.hours +
               "." +
               lessonTime.startTime.minutes +
-              ":" +
+              "-" +
               lessonTime.endTime.hours +
               "." +
               lessonTime.endTime.minutes
@@ -136,7 +145,7 @@ export const ScheduleComponent = (props: IScheduleProps) => {
                           lesson.lessonType === LessonType.Important ? "-warning" : "",
                           cellCoordinate
                         )}
-                        key={cellCoordinate}
+                        key={subgroupIndex}
                         colSpan={colspan}
                         rowSpan={rowspan}
                       >
@@ -155,18 +164,18 @@ export const ScheduleComponent = (props: IScheduleProps) => {
                             small={true}
                             onClick={() => props.handleDeleteLesson(lesson.id)}
                           />
-                          <IconButton icon={<PenIcon />} small={true} onClick={() => alert("Редактирование урока")} />
+                          <IconButton icon={<PenIcon />} small={true} onClick={() => handleEditingLesson(lesson)} />
                         </div>
                       </td>
                     );
                   }
                   if (isPartOfTheLesson) {
-                    return <></>;
+                    return <React.Fragment key={subgroupIndex}></React.Fragment>;
                   }
                   return (
                     <td className="cell -controllable schedule__cell" key={cellCoordinate}>
                       <div className="cell__controls">
-                        <IconButton icon={<PenIcon />} small={true} onClick={() => alert("Редактирование урока")} />
+                        <IconButton icon={<PenIcon />} small={true} onClick={() => handleEditingLesson()} />
                       </div>
                     </td>
                   );

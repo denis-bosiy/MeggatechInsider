@@ -8,4 +8,12 @@ export class LessonTime {
     this.startTime = _startTime;
     this.endTime = _endTime;
   }
+
+  public equalsTo(lessonTime: LessonTime): boolean {
+    return this.startTime.equalsTo(lessonTime.startTime) && this.endTime.equalsTo(lessonTime.endTime);
+  }
+
+  public toString(): string {
+    return this.startTime.toString() + "-" + this.endTime.toString();
+  }
 }

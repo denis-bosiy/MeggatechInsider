@@ -1,5 +1,6 @@
 import { LessonType } from "./LessonType";
 import { SchedulePosition } from "./SchedulePosition";
+import { guidGenerator } from "../../utils/guidGenerator";
 
 export class ScheduleLesson {
   public id: string;
@@ -11,7 +12,6 @@ export class ScheduleLesson {
   public lessonType: LessonType;
 
   constructor(
-    _id: string,
     _startPosition: SchedulePosition,
     _endPosition: SchedulePosition,
     _lessonName: string,
@@ -19,7 +19,7 @@ export class ScheduleLesson {
     _lessonTeacher: string,
     _lessonType: LessonType
   ) {
-    this.id = _id;
+    this.id = guidGenerator();
     this.startPosition = _startPosition;
     this.endPosition = _endPosition;
     this.lessonName = _lessonName;

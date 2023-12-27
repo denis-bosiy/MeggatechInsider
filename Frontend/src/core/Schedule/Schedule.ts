@@ -45,11 +45,11 @@ export class Schedule implements ISchedule {
   }
 
   public saveToReportCard(): void {
-    console.log("save to report card");
+    //
   }
 
   public exportToExcel(): void {
-    console.log("make an request to api");
+    //
   }
 
   public clone(): Schedule {

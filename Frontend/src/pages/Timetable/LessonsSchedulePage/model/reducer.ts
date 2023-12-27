@@ -9,6 +9,8 @@ const lessonsSchedulePageReducer = (state = initScheduleData, action: Action) =>
     case LESSONS_SCHEDULE_PAGE_ACTIONS.LESSONS_SCHEDULE_PAGE_DELETE_LESSON:
       state.removeLesson(action.payload);
       return state.clone();
+    case LESSONS_SCHEDULE_PAGE_ACTIONS.LESSONS_SCHEDULE_PAGE_SET_SCHEDULE:
+      return action.payload.clone();
     default:
       return state;
   }

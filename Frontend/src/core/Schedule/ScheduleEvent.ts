@@ -1,3 +1,4 @@
 export enum ScheduleEvent {
-  StartedLessonEditing = "STARTED-LESSON-EDITING"
+  StartedLessonEditing = "STARTED-LESSON-EDITING",
+  StoppedLessonEditing = "STOPPED-LESSON-EDITING"
 }
